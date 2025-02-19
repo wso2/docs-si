@@ -13,8 +13,8 @@
     </div>
     <div class="section02">
         <div class="linkWrapper">
-            <div class="linkSet2" onclick="location.href='{{base_path}}/get-started/quick-start-guide';">
-                <a href="get-started/quick-start-guide"><h3>Quick Start Guide</h3></a>
+            <div class="linkSet2" onclick="location.href='{{base_path}}quick-start-guide/quick-start-guide/';">
+                <a href="quick-start-guide/quick-start-guide/"><h3>Quick Start Guide</h3></a>
                 <p>
                     Let's get started with WSO2 Streaming Integrator by running a simple integration use case in your local environment.
                 </p>
