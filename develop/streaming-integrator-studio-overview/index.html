@@ -1,0 +1,5139 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for WSO2 Streaming Integrator">
+      
+      
+        <meta name="author" content="WSO2">
+      
+      
+      
+        <link rel="prev" href="../developing-streaming-integration-solutions/">
+      
+      
+        <link rel="next" href="../working-with-the-Design-View/">
+      
+      <link rel="icon" href="../../images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+    
+    
+      
+        <title>Streaming Integrator Tooling Overview - WSO2 Streaming Integrator Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Added the font from google fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/lib/highlightjs/styles/vs.min.css">
+    
+      <link rel="stylesheet" href="../../assets/css/blue-palette-alt1.css">
+    
+      <link rel="stylesheet" href="../../assets/css/mitheme.css">
+    
+      <link rel="stylesheet" href="../../assets/lib/json-formatter/json-formatter.css">
+    
+      <link rel="stylesheet" href="../../assets/css/config-catalog.css">
+    
+      <link rel="stylesheet" href="../../assets/lib/fontawesome-free-6.3.0-web/css/all.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){
+    w[l]=w[l]||[];w[l].push({
+      'gtm.start':
+        new Date().getTime(),event:'gtm.js'
+    });var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.setAttributeNode(d.createAttribute('data-ot-ignore'));j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5CR98L58');</script>
+  <!-- End Google Tag Manager -->
+
+    
+    
+  <meta name="google-site-verification" content="pRwRUP0jDUECheRt5DziuVd3gSs2UTw6EhL4nud3NMk" />
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#streaming-integrator-tooling-overview" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+ * Copyright (c) 2024, WSO2 LLC. (http://www.wso2.com) All Rights Reserved.
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+-->
+
+
+
+
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header" id="page-header" data-url="" data-lang="en">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="WSO2 Streaming Integrator Documentation"
+       class="md-header__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
+      
+  <img src="../../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+             Streaming Integrator Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Streaming Integrator Tooling Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <form class="md-header__option" data-md-component="palette">
+      
+      
+      <input class="md-option" data-md-color-media="(prefers-color-scheme)"
+             data-md-color-scheme="default"
+             data-md-color-primary=""
+             data-md-color-accent="" 
+             aria-label="Switch to dark mode"  type="radio" name="__palette"
+             id="__palette_1">
+      
+      <label class="md-header__button md-icon" title="Switch to dark mode"
+             for="__palette_3" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+      
+      
+      
+      <input class="md-option" data-md-color-media="(prefers-color-scheme: light)"
+             data-md-color-scheme="default"
+             data-md-color-primary=""
+             data-md-color-accent="" 
+             aria-label="Switch to system preference"  type="radio" name="__palette"
+             id="__palette_2">
+      
+      <label class="md-header__button md-icon" title="Switch to system preference"
+             for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+      
+      
+      
+      <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)"
+             data-md-color-scheme="slate"
+             data-md-color-primary=""
+             data-md-color-accent="" 
+             aria-label="Switch to light mode"  type="radio" name="__palette"
+             id="__palette_3">
+      
+      <label class="md-header__button md-icon" title="Switch to light mode"
+             for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+      
+      
+    </form>
+    
+    
+    
+    <label class="md-header__button md-icon" for="__search">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+    </label>
+    <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    <div class="md-header__source">
+      <a href="https://github.com/wso2/docs-si" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wso2/docs-streaming-integrator
+  </div>
+</a>
+    </div>
+    
+  </nav>
+  
+  
+  
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../overview/overview/" class="md-tabs__link">
+        Get Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../guides/use-cases/" class="md-tabs__link">
+        Learn
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../setup/installing-si-in-vm/" class="md-tabs__link">
+        Setup and Install
+      </a>
+    </li>
+  
+
+  
+
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../developing-streaming-integration-solutions/" class="md-tabs__link md-tabs__link--active">
+        Develop
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../admin/setting-up-grafana-dashboards/" class="md-tabs__link">
+        Observability
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../connectors/connectors-overview/" class="md-tabs__link">
+        Connectors
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../ref/environment-compatibility/" class="md-tabs__link">
+        References
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../page-not-found/" class="md-tabs__link">
+      
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+  
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="WSO2 Streaming Integrator Documentation" class="md-nav__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
+      
+  <img src="../../images/logo.svg" alt="logo">
+
+    </a>
+    WSO2 Streaming Integrator Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/wso2/docs-si" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wso2/docs-streaming-integrator
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Get Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Get Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/overview/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/quick-start-guide/" class="md-nav__link">
+        Quick Start Guide
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Creating Your First Siddhi Application
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Creating Your First Siddhi Application
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/getting-started-guide-overview/" class="md-nav__link">
+        Streaming Integration Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/download-install-and-start-si/" class="md-nav__link">
+        Step 1: Download and Install Streaming Integrator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/create-the-siddhi-application/" class="md-nav__link">
+        Step 2: Create the Siddhi Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/deploy-siddhi-application/" class="md-nav__link">
+        Step 3: Deploy the Siddhi Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/test-siddhi-application/" class="md-nav__link">
+        Step 4: Run the Siddhi Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/update-the-siddhi-application/" class="md-nav__link">
+        Step 5: Update the Siddhi Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/handle-errors/" class="md-nav__link">
+        Step 6: Handle Errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/monitor-statistics/" class="md-nav__link">
+        Step 7: Monitor Statistics
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/architecture/" class="md-nav__link">
+        Architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/concepts/" class="md-nav__link">
+        Key Concepts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Learn
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Learn
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+          Use Cases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Use Cases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/use-cases/" class="md-nav__link">
+        Use Cases Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/extracting-data-from-static-sources-in-real-time/" class="md-nav__link">
+        Extracting Data from Static Sources in Real Time
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/receiving-data-in-transit/" class="md-nav__link">
+        Receiving Data in Transit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/loading-and-writing-date/" class="md-nav__link">
+        Loading and Writing Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/publishing-data-to-event-stream-consumers/" class="md-nav__link">
+        Publishing Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1_6" id="__nav_3_1_6_label" tabindex="0">
+          Stream Processing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          Stream Processing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/processing-data/" class="md-nav__link">
+        Stream Processing Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/cleansing-data/" class="md-nav__link">
+        Cleansing Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/transforming-data/" class="md-nav__link">
+        Transforming Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/enriching-data/" class="md-nav__link">
+        Enriching Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/summarizing-data/" class="md-nav__link">
+        Summarizing Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/correlating-data/" class="md-nav__link">
+        Correlating Data
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/handling-errors/" class="md-nav__link">
+        Handling Errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/performing-etl-tasks/" class="md-nav__link">
+        Performing ETL Operations
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          Tutorials
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/tutorials-overview/" class="md-nav__link">
+        Tutorials Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/performing-real-time-etl-with-mysql/" class="md-nav__link">
+        Performing Real-time ETL with MySQL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/performing-real-time-etl-with-files/" class="md-nav__link">
+        Performing Real-time ETL with Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/creating-etl-application-via-tooling/" class="md-nav__link">
+        Creating an ETL Application via SI Tooling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/working-with-kafka/" class="md-nav__link">
+        Working with Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/creating-business-rules-templates/" class="md-nav__link">
+        Working with Business Rules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/integrating-stores/" class="md-nav__link">
+        Integrating Data Stores in Streaming Integration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/exposing-processed-data-as-api/" class="md-nav__link">
+        Exposing Processed Data as API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/handling-requests-with-errors/" class="md-nav__link">
+        Error Handling with Data Streams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/triggering-integrations-via-micro-integrator/" class="md-nav__link">
+        Triggering Integrations via MI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/running-si-with-docker-and-kubernetes/" class="md-nav__link">
+        Running SI with Docker and Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          Examples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Examples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_1" id="__nav_3_3_1_label" tabindex="0">
+          Consuming Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Consuming Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveTCPinJSONFormat/" class="md-nav__link">
+        Receiving JSON Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishGooglePubSubMessagesInTextFormat/" class="md-nav__link">
+        Publishing Events to a Google Pub/Sub Topic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/CSVDefaultMapping/" class="md-nav__link">
+        Publishing and Receiving CSV Events via Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/CDCWithListeningMode/" class="md-nav__link">
+        Capturing MySQL Inserts via CDC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveGooglePubSubMessagesInTextFormat/" class="md-nav__link">
+        Receiving Messages from a Google Pub/Sub Topic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveMQTTInXMLFormat/" class="md-nav__link">
+        Receiving XML events via MQTT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveTCPinBinaryFormat/" class="md-nav__link">
+        Receiving Binary Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveKafkaInBinaryFormat/" class="md-nav__link">
+        Receiving Binary Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHTTPInXMLFormatWithDefaultMapping/" class="md-nav__link">
+        Receiving XML Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/store-influxdb/" class="md-nav__link">
+        Working with an influxDB Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/CDCWithPollingMode/" class="md-nav__link">
+        Capturing MySQL Inserts and Updates via CDC Polling Mode
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestWithRefreshToken/" class="md-nav__link">
+        Publishing HTTP Events to an OAuth-protected Endpoint while Using a Refresh Token Grant Type
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestResponse/" class="md-nav__link">
+        Publishing HTTP Events via an OAuth-protected Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-solr/" class="md-nav__link">
+        Receiving Events via Simulator and Persisting in SOLR Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveAndCount/" class="md-nav__link">
+        Receiving Events via HTTP Transport
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveEventsFromFile/" class="md-nav__link">
+        Receiving Events via File
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveEmailInXmlFormat/" class="md-nav__link">
+        Receiving XML Events via Email
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveRabbitmqInJSONFormat/" class="md-nav__link">
+        Receiving JSON Events via RabbitMQ
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-cassandra/" class="md-nav__link">
+        Receive Events via Simulator and Persist in Cassandra Store
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+          Transforming Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Transforming Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequest/" class="md-nav__link">
+        Publishing HTTP Events to to an OAuth-protected Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestWithoutAccessToken/" class="md-nav__link">
+        Publishing HTTP Events to to an OAuth-protected Endpoint without an Access Token
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHl7InER7Format/" class="md-nav__link">
+        Receiving ER7 Events via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/DataPreprocessing/" class="md-nav__link">
+        Preprocessing Data Received via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHl7InER7Format/" class="md-nav__link">
+        Publishing ER7 Events via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/SweetProductionDataPreprocessing/" class="md-nav__link">
+        Receiving Data via TCP and Preprocessing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/CSVCustomMapping/" class="md-nav__link">
+        Receiving and Publishing Events in Custom CSV Format
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHTTPInJsonFormatWithCustomMapping/" class="md-nav__link">
+        Sending Custom JSON Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishEmailInTextFormat/" class="md-nav__link">
+        Publishing Text Events via Email
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveKafkaInTextFormatWithCustomMapping/" class="md-nav__link">
+        Receiving Custom Text Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Script-js-sample/" class="md-nav__link">
+        Using Javascript Functions in Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishKafkaInCustomAvroFormat/" class="md-nav__link">
+        Publishing Custom Avro Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHl7InXmlFormat/" class="md-nav__link">
+        Receiving Custom XML Messages via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveTCPInTextFormatWithCustomMapping/" class="md-nav__link">
+        Receiving Custom Text Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/RegexExecutionSample/" class="md-nav__link">
+        Identifying Sub-sequences in Input Sequences
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHl7InXmlFormat/" class="md-nav__link">
+        Publishing XML messages via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishKafkaInJsonFormat/" class="md-nav__link">
+        Publishing JSON Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishEventsToFile/" class="md-nav__link">
+        Publishing JSON Events to Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHTTPinXMLFormatWithCustomMapping/" class="md-nav__link">
+        Receiving Custom XML Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishRabbitmqInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via RabbitMQ
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/MathExtensionSample/" class="md-nav__link">
+        Rounding up Amounts via the Math Function
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveTCPinTextFormat/" class="md-nav__link">
+        Receiving Text Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishEmailInXmlFormat/" class="md-nav__link">
+        Publishing Emails in XML Format
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/StringExtensionSample/" class="md-nav__link">
+        Converting String Values to Lowercase
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/TextMappingWithInmemoryTransport/" class="md-nav__link">
+        Text Mapping with In-memory Transport
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHTTPInJsonFormatWithDefaultMapping/" class="md-nav__link">
+        Receiving JSON Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/HelloKafka/" class="md-nav__link">
+        Consuming Events from a Kafka Topic and Publishing to Another Kafka Topic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpInXmlFormatWithCustomMapping/" class="md-nav__link">
+        Publishing Custom XML Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/SNMPSetRequestApp/" class="md-nav__link">
+        Sending Custom Keyvalue Events via SNMP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishTcpInJsonFormat/" class="md-nav__link">
+        Publishing JSON Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestWithOAuthUser/" class="md-nav__link">
+        Publishing HTTP Events to an OAuth-protected Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/MapExtensionSample/" class="md-nav__link">
+        Inserting and Accessing Data in a Map
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishJmsInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via JMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveJMSInJsonFormat/" class="md-nav__link">
+        Receiving JSON Events via JMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHTTPInJsonFormatWithCustomMapping/" class="md-nav__link">
+        Receiving Custom JSON Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+          Enriching Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Enriching Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ExtremaBottomK/" class="md-nav__link">
+        Counting the Frequency of Values with BottomK
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/GplNLPFindNameEntityType/" class="md-nav__link">
+        Extracting Values from a String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/JoinWithStoredData/" class="md-nav__link">
+        Joining Streaming Data with Stored Data in RDBMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Script-js-sample/" class="md-nav__link">
+        Using Javascript Functions in Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/store-hbase/" class="md-nav__link">
+        Receiving Events via Simulator and Persisting in a Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/HttpRequestResponseSample/" class="md-nav__link">
+        Publishing HTTP Requests, Receiving Responses, and Processing Them
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/UnitConversionExtentionSample/" class="md-nav__link">
+        Converting Units
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/execution-geo-sample/" class="md-nav__link">
+        Processing Geo Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ClusTreeTestApp/" class="md-nav__link">
+        Performing Streaming Learning Using a Clustree Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveWebSocketInXMLFormat/" class="md-nav__link">
+        Receiving XML Events via Websocket
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_4" id="__nav_3_3_4_label" tabindex="0">
+          Aggregating Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Aggregating Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/DataPreprocessing/" class="md-nav__link">
+        Preprocessing Data Received via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/SweetProductionDataPreprocessing/" class="md-nav__link">
+        Receiving Data via TCP and Preprocessing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishEmailInTextFormat/" class="md-nav__link">
+        Publishing Text Events via Email
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/AggregateOverTime/" class="md-nav__link">
+        Calculating Aggregations Over Time
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveAndCount/" class="md-nav__link">
+        Receiving Events via HTTP Transport
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/AggregateDataIncrementally/" class="md-nav__link">
+        Aggregating Data Incrementally
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-redis/" class="md-nav__link">
+        Receiving Events and Persisting Them in Redis Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/store-mongodb/" class="md-nav__link">
+        Receiving Events and Persisting in MongoDB Store
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_5" id="__nav_3_3_5_label" tabindex="0">
+          Correlating Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Correlating Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PmmlModelProcessor/" class="md-nav__link">
+        Making Predictions via PMML Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/StreamingRegressor/" class="md-nav__link">
+        Making Predictions via a Regressor Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/GplNLPFindNameEntityType/" class="md-nav__link">
+        Extracting Values from a String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/TensorFlowTestApp/" class="md-nav__link">
+        Performing Regression Tasks via an Imported Tensorflow Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishMqttInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via MQTT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PatternMatching/" class="md-nav__link">
+        Identifying Event Patterns Based On Order of Event Arrival
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/StreamingKMeansSample/" class="md-nav__link">
+        Using StreamingML Kmeans for Clustering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceivePrometheusMetrics/" class="md-nav__link">
+        Receiving Prometheus Metrics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/hoeffding-adaptive-tree-sample/" class="md-nav__link">
+        Making Predictions via Hoeffding Classifier Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/SNMPGetRequestApp/" class="md-nav__link">
+        Receiving Custom Key Value Events via SNMP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveJMSInKeyvalueFormat/" class="md-nav__link">
+        Receiving Key Value Events via JMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/IBMMessageQueue/" class="md-nav__link">
+        Consuming Messages from IBM Message Queues
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/AlertsAndThresholds/" class="md-nav__link">
+        Receiving Email Alerts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/streaming-perceptron-sample/" class="md-nav__link">
+        Making Predictions via a Streaming Perceptron Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/GeoDistanceCalculation/" class="md-nav__link">
+        Calculating the Distance Between Two Locations
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_6" id="__nav_3_3_6_label" tabindex="0">
+          Publishing Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Publishing Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishTcpInTextFormat/" class="md-nav__link">
+        Publishing Text Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHl7InER7Format/" class="md-nav__link">
+        Receiving ER7 Events via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishGooglePubSubMessagesInTextFormat/" class="md-nav__link">
+        Publishing Events to a Google Pub/Sub Topic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishTcpInBinaryFormat/" class="md-nav__link">
+        Publishing Binary Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishWebSocketInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via WebSocket
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishPrometheusMetricsHTTPServer/" class="md-nav__link">
+        Publishing Consumed Events to Prometheus Metrics and Exposing then via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/store-influxdb/" class="md-nav__link">
+        Working with an influxDB Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishKafkaInBinaryFormat/" class="md-nav__link">
+        Publishing Binary Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishJmsInKeyvalueFormat/" class="md-nav__link">
+        Publishing Key-value events via JMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestWithRefreshToken/" class="md-nav__link">
+        Publishing HTTP Events to an OAuth-protected Endpoint while Using a Refresh Token Grant Type
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestResponse/" class="md-nav__link">
+        Publishing HTTP Events via an OAuth-protected Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-solr/" class="md-nav__link">
+        Receiving Events via Simulator and Persisting in SOLR Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpInJsonFormat/" class="md-nav__link">
+        Publishing JSON Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-rdbms/" class="md-nav__link">
+        Receiving Events via Simulator and Persisting in RDBMS Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-cassandra/" class="md-nav__link">
+        Receive Events via Simulator and Persist in Cassandra Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishKafkaInAvroFormatUsingSchemaRegistry/" class="md-nav__link">
+        Publishing Avro Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/AmazonS3SinkSample/" class="md-nav__link">
+        Publishing Aggregated Events to the Amazon AWS S3 Bucket
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/GCSSinkSample/" class="md-nav__link">
+        Publishing Events to a GCS Bucket
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Setup and Install
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Setup and Install
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+          Install
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Install
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1_1" id="__nav_4_1_1_label" tabindex="0">
+          Installing the Streaming Integrator
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Installing the Streaming Integrator
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/installing-si-in-vm/" class="md-nav__link">
+        Installing via the Installer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/installing-si-binary/" class="md-nav__link">
+        Installing via the Binary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/installing-as-a-windows-service/" class="md-nav__link">
+        Installing as a Windows Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/installing-si-as-a-linux-service/" class="md-nav__link">
+        Installing as a Linux Service
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/downloading-and-Installing-Siddhi-Extensions/" class="md-nav__link">
+        Installing Siddhi Extensions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1_3" id="__nav_4_1_3_label" tabindex="0">
+          Running the Streaming Integrator in Containers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Running the Streaming Integrator in Containers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/installing-si-using-docker/" class="md-nav__link">
+        Installing in Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/installing-si-using-kubernetes/" class="md-nav__link">
+        Installing in Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          Migrate
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Migrate
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/upgrading-wso2-ei/" class="md-nav__link">
+        Upgrading WSO2 Enterprise Integrator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          Deploy
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Deploy
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/deploying-si-as-a-single-deployment/" class="md-nav__link">
+        Single Deployment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/deploying-si-as-minimum-ha-cluster/" class="md-nav__link">
+        Minimum HA Cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/deploying-si-as-an-active-active-deployment/" class="md-nav__link">
+        Active-Active Cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/deploying-si-as-a-scalable-cluster/" class="md-nav__link">
+        Scalable Cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/deploying-si-as-minimum-ha-cluster-in-aws-ecs/" class="md-nav__link">
+        Minimum HA Cluster in AWS ECS
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          Set-up
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Set-up
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/production-checklist/" class="md-nav__link">
+        Production Checklist
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/configuring-data-sources/" class="md-nav__link">
+        Configuring Datasources
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/configuring-business-rules-deployment/" class="md-nav__link">
+        Configuring Business Rules Deployment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/general-data-protection-regulations/" class="md-nav__link">
+        General Data Protection Regulations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/working-with-Keystores/" class="md-nav__link">
+        Working with Keystores
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/supporting-different-transports/" class="md-nav__link">
+        Supporting Different Transports
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/user-management/" class="md-nav__link">
+        User Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/configuring-Database-and-File-System-State-Persistence/" class="md-nav__link">
+        Configuring State Persistence
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/configuring-Cluster-Coordination/" class="md-nav__link">
+        Configuring Cluster Coordination
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/protecting-sensitive-data-via-the-secure-vault/" class="md-nav__link">
+        Protecting Sensitive Data via the Secure Vault
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/adding-third-party-non-osgi-libraries/" class="md-nav__link">
+        Adding Third Party Non OSGi Library
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/configuring-default-ports/" class="md-nav__link">
+        Configuring Default Ports
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/change-hostname-and-context-path/" class="md-nav__link">
+        Changing the Host Name and Context Path of Web UI Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/monitoring-received-events-count-via-logs/" class="md-nav__link">
+        Enabling Logs for Received Event Count
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Develop
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Develop
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developing-streaming-integration-solutions/" class="md-nav__link">
+        Developing Streaming Integrator Solutions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+          Streaming Integrator Tooling
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Streaming Integrator Tooling
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Streaming Integrator Tooling Overview
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Streaming Integrator Tooling Overview
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#starting-streaming-integrator-tooling" class="md-nav__link">
+    Starting Streaming Integrator Tooling
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#welcome-page" class="md-nav__link">
+    Welcome Page
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#menu-items" class="md-nav__link">
+    Menu items
+  </a>
+  
+    <nav class="md-nav" aria-label="Menu items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-menu-items" class="md-nav__link">
+    File menu Items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-menu-items" class="md-nav__link">
+    Edit menu Items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-menu-items" class="md-nav__link">
+    Run menu Items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools-menu-items" class="md-nav__link">
+    Tools menu items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-menu-items" class="md-nav__link">
+    Deploy menu items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export-menu-items" class="md-nav__link">
+    Export menu items
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#side-panel" class="md-nav__link">
+    Side Panel
+  </a>
+  
+    <nav class="md-nav" aria-label="Side Panel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#event-simulator" class="md-nav__link">
+    Event Simulator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-console" class="md-nav__link">
+    Output Console
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-finder" class="md-nav__link">
+    Operator Finder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-variables" class="md-nav__link">
+    Template Variables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#toolbar" class="md-nav__link">
+    Toolbar
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../working-with-the-Design-View/" class="md-nav__link">
+        Working with the Design View
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../creating-a-Siddhi-Application/" class="md-nav__link">
+        Creating Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installing-siddhi-extensions/" class="md-nav__link">
+        Installing Siddhi Extensions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing-a-Siddhi-Application/" class="md-nav__link">
+        Testing Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploying-Streaming-Applications/" class="md-nav__link">
+        Deploying Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exporting-Siddhi-Applications/" class="md-nav__link">
+        Exporting Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Observability
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Observability
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+          Monitoring SI via Dashboards
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Monitoring SI via Dashboards
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/setting-up-grafana-dashboards/" class="md-nav__link">
+        Configuring Dashboards
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/managing-grafana-dashboards/" class="md-nav__link">
+        Managing Dashboards
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1_3" id="__nav_6_1_3_label" tabindex="0">
+          Monitoring WSO2 SI
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Monitoring WSO2 SI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/monitoring-si-performance-via-grafana/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-overall-statistics/" class="md-nav__link">
+        Viewing Overall Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-server-statistics/" class="md-nav__link">
+        Viewing Server Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-stream-statistics/" class="md-nav__link">
+        Viewing Stream Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-source-statistics/" class="md-nav__link">
+        Viewing Source Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-sink-statistics/" class="md-nav__link">
+        Viewing Query Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-window-statistics/" class="md-nav__link">
+        Viewing Window Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-trigger-statistics/" class="md-nav__link">
+        Viewing Trigger Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-table-statistics/" class="md-nav__link">
+        Viewing Table Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-aggregation-statistics/" class="md-nav__link">
+        Viewing Aggregation Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-on-demand-query-statistics/" class="md-nav__link">
+        Viewing On Demand Query Statistics
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-dashboards/" class="md-nav__link">
+        Monitoring ETL Flows
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          Connectors
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Connectors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/connectors-overview/" class="md-nav__link">
+        Streaming Integrator Connectors Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/downloading-and-Installing-Siddhi-Extensions/" class="md-nav__link">
+        Downloading and Installing Siddhi Connectors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/writing-Custom-Siddhi-Extensions/" class="md-nav__link">
+        Writing Custom Siddhi Extensions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/configuring-System-Parameters-for-Siddhi-Extensions/" class="md-nav__link">
+        Configuring System Parameters for Siddhi Extensions
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          References
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          References
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/environment-compatibility/" class="md-nav__link">
+        Environment Compatibility
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+          Streaming Integration REST API Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          Streaming Integration REST API Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/rest-api-guide-overview/" class="md-nav__link">
+        REST API Guide Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/siddhi-Application-Management-APIs/" class="md-nav__link">
+        Siddhi Application Management APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/permission-apis/" class="md-nav__link">
+        Permission APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/business-Rules-APIs/" class="md-nav__link">
+        Business Rules APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/store-APIs/" class="md-nav__link">
+        Store APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/healthcheck-APIs/" class="md-nav__link">
+        Healthcheck APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/hTTP-Status-Codes/" class="md-nav__link">
+        HTTP Status Codes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/performance-analysis-results/" class="md-nav__link">
+        Performance Analysis Results
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../page-not-found/" class="md-nav__link">
+        
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#starting-streaming-integrator-tooling" class="md-nav__link">
+    Starting Streaming Integrator Tooling
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#welcome-page" class="md-nav__link">
+    Welcome Page
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#menu-items" class="md-nav__link">
+    Menu items
+  </a>
+  
+    <nav class="md-nav" aria-label="Menu items">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-menu-items" class="md-nav__link">
+    File menu Items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit-menu-items" class="md-nav__link">
+    Edit menu Items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-menu-items" class="md-nav__link">
+    Run menu Items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools-menu-items" class="md-nav__link">
+    Tools menu items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy-menu-items" class="md-nav__link">
+    Deploy menu items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export-menu-items" class="md-nav__link">
+    Export menu items
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#side-panel" class="md-nav__link">
+    Side Panel
+  </a>
+  
+    <nav class="md-nav" aria-label="Side Panel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#event-simulator" class="md-nav__link">
+    Event Simulator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output-console" class="md-nav__link">
+    Output Console
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operator-finder" class="md-nav__link">
+    Operator Finder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#template-variables" class="md-nav__link">
+    Template Variables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#toolbar" class="md-nav__link">
+    Toolbar
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+
+  
+    <a href="https://github.com/wso2/docs-si/edit/main/en/docs/develop/streaming-integrator-studio-overview.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/wso2/docs-si/raw/main/en/docs/develop/streaming-integrator-studio-overview.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"/></svg>
+    </a>
+  
+
+
+<h1 id="streaming-integrator-tooling-overview">Streaming Integrator Tooling Overview<a class="headerlink" href="#streaming-integrator-tooling-overview" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This page describes the latest publicly-available version of Streaming Integrator Tooling. If you cannot see some of the user interface elements described here, <a href="https://docs.wso2.com/display/updates/Getting+Continuous+Updates">update your Streaming Integrator Tooling installation</a>.</p>
+</div>
+<p>The Streaming Integrator Tooling is a developer tool that is shipped with
+the Streaming Integrator to develop Siddhi applications. It allows provides three
+interfaces to develop Siddhi applications</p>
+<ul>
+<li>
+<p><strong>Source View</strong> : This allows you to write Siddhi applications
+    in the Siddhi Query Language. This supports auto-completion and
+    tracking syntax errors.</p>
+</li>
+<li>
+<p><strong>Design View</strong> :This interface visualizes the event flow of a
+    Siddhi application, and allows you to compose the applications by
+    dragging and dropping Siddhi components to a graph.</p>
+</li>
+<li>
+<p><strong>Wizard View</strong>: This is a wizard with a page for each component of a Siddhi application that displays the relevant configuration parameters as fields. This wizard can be directly accessed from the <a href="#welcome-page">Welcome Page</a>. Only ETL (Extract, Transform, Load) applications can be created/viewed in this interface. For a Siddhi application to be considered an ETL application, it must include all of the following components:<br/><br/> - A source configuration<br/><br/> - A sink configuration (the sink type can be any of the <a href="https://siddhi.io/en/v5.1/docs/query-guide/#sink">supported sink types</a> other than <code>log</code>)<br/><br/> - A Siddhi query that performs a transformation. <br/><br/> For more information, see <a href="../../examples/creating-etl-application-via-tooling/">Creating an ETL Application via SI Tooling tutorial</a>.</p>
+</li>
+</ul>
+<p>Once a Siddhi application is created, you can simulate events via the
+Streaming Integrator Tooling to test whether it works as expected.</p>
+<h2 id="starting-streaming-integrator-tooling">Starting Streaming Integrator Tooling<a class="headerlink" href="#starting-streaming-integrator-tooling" title="Permanent link">&para;</a></h2>
+<p>To start and access the Streaming Integrator Tooling, follow the steps below:</p>
+<ol>
+<li>
+<p>Start the Streaming Integrator Tooling by issuing one of the following
+    commands from the <code>&lt;SI_HOME&gt;/bin</code> directory.</p>
+<ul>
+<li>For Windows: <code>streaming-integrator-tooling.bat</code></li>
+<li>For Linux: <code>./streaming-integrator-tooling.sh</code></li>
+</ul>
+</li>
+<li>
+<p>Access the Streaming Integrator Tooling via the <code>http://localhost:/editor</code>
+    URL. The Streaming Integrator Tooling opens as shown below.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The default URL is <code>http://localhost:9390/editor</code>. If required, you can change the host name (i.e., <code>localhost</code>) or the web UI application name (i.e., <code>editor</code>). For instructions, see <a href="../../setup/change-hostname-and-context-path/">Changing the Host Name and Context Path of SI Tooling</a>.</p>
+</div>
+</li>
+</ol>
+<h2 id="welcome-page">Welcome Page<a class="headerlink" href="#welcome-page" title="Permanent link">&para;</a></h2>
+<p><img alt="Streaming Integrator Tooling Welcome Page" src="http://localhost:8000//images/streaming-integrator-studio-overview/streaming-integrator-tooling-welcome-page.png" /></p>
+<p>The <strong>Welcome to the Streaming Integrator Tooling Tour Guide</strong> is open by
+default. You can take a tour by following the instructions on the dialog
+box, or close it and proceed to explore the Streaming Integrator Tooling on
+your own. You can also access this dialog box by clicking <strong>Tools</strong> -&gt;
+<strong>Tour Guide</strong> . Once you close the dialog box, you can try the
+following:</p>
+<ul>
+<li>
+<p><strong>New</strong>
+    Click this to open a new untitled Siddhi file.</p>
+</li>
+<li>
+<p><strong>Open</strong>
+    Click this to open a Siddhi file that is already saved in the <code>workspace</code> directory of the Streaming Integrator 
+    Tooling. If the file is already opened in a new tab, clicking <strong>Open</strong> does not open it again. The default path to 
+    the <code>workspace</code> directory is <code>&lt;SI_Home&gt;/wso2/server/deployment</code>.</p>
+</li>
+<li>
+<p><strong>New ETL Flow</strong>
+    Click this to open a wizard with which you can create a Siddhi application with ETL functionality by entering values for the required parameters instead of constructing Siddhi queries by writing code or via a graphical interface. To understand how this is done, follow the <a href="../../examples/creating-etl-application-via-tooling/">Creating an ETL Application via SI Tooling tutorial</a>.</p>
+</li>
+<li>
+<p><strong>Try out samples</strong><br />
+    The pre-created samples provided out of the box are listed in this
+    section. When you click on a sample, it opens in a new tab without a
+    title.</p>
+</li>
+<li>
+<p><strong>More Samples</strong><br />
+    Click this to view the complete list of samples in the samples
+    directory. This allows you to access samples other than the ones that
+    are displayed by default is the <strong>Try out samples</strong> section. When
+    you click on a sample, it opens in a new tab without a title.</p>
+</li>
+<li>
+<p><strong>Quick links</strong><br />
+    This section provides links to more resources.</p>
+</li>
+</ul>
+<h2 id="menu-items">Menu items<a class="headerlink" href="#menu-items" title="Permanent link">&para;</a></h2>
+<p>This section explains the options that are available in the <strong>File</strong> ,
+<strong>Edit</strong> and <strong>Run</strong> menus.</p>
+<h4 id="file-menu-items">File menu Items<a class="headerlink" href="#file-menu-items" title="Permanent link">&para;</a></h4>
+<p>The <strong>File</strong> menu includes the following options.</p>
+<p><img alt="File menu" src="http://localhost:8000//images/streaming-integrator-studio-overview/FileMenu.png" /></p>
+<ul>
+<li>
+<p><strong>New</strong><br />
+    Click this to open a new untitled Siddhi file. For more information, see the <a href="../../examples/creating-etl-application-via-tooling/">Creating an ETL Application via SI Tooling tutorial</a>.</p>
+</li>
+<li>
+<p><strong>New ETL Flow</strong>
+    Click this to create a new ETL application via the ETL wizard. For instructions, </p>
+</li>
+<li>
+<p><strong>Open File</strong> 
+    Click this to open a Siddhi file that is already saved in the <code>workspace</code> directory of the Streaming Integrator 
+    Tooling. If the file is already opened in a new tab, clicking <strong>Open</strong> does not open it again. The default path to 
+    the <code>workspace</code> directory is <code>&lt;SI_Home&gt;/wso2/server/deployment</code>.         ` .  </p>
+<p>When a Siddhi file is opened, its source view is displayed by default.<br />
+<img alt="The source view of a Siddhi application" src="http://localhost:8000//images/streaming-integrator-studio-overview/Siddhi-App-Source-View.png" /><br />
+To view a design view where the elements of the Siddhi application are graphically represented, click 
+<strong>Design View</strong>. As a result, a graphical view of the Siddhi application is displayed as shown in the following 
+example.<br />
+<img alt="The design view of Siddhi application" src="http://localhost:8000//images/streaming-integrator-studio-overview/Siddhi-App-Design-View.png" /></p>
+</li>
+<li>
+<p><strong>Import Sample</strong><br />
+    Click this to import a sample from the samples diretory to a new tab. The sample opens in an untitled Siddhi file.
+     Once you save it, it can be accessed from the <code>workspace</code> directory.  </p>
+</li>
+<li>
+<p><strong>Save</strong><br />
+    Click this to save an edited or new file to the <code>workspace</code> directory.  </p>
+</li>
+<li>
+<p><strong>Save As</strong><br />
+    Click this if you want to save an existing saved file with a different name. If you click this for an untitled 
+    Siddhi file, the normal save operation is executed (i.e., same operation carried out when you click <strong>Save</strong> ). </p>
+</li>
+<li>
+<p><strong>Import File</strong><br />
+    Click this to open a file from a system location. This file is opened in a new tab in the saved state with the same
+     file name with which it is imported. </p>
+</li>
+<li>
+<p><strong>Export File</strong> 
+    Click this to export a saved file to a system location. This is only applicable to Siddhi application tabs that are
+     in a saved state.</p>
+</li>
+<li>
+<p><strong>Close File</strong>
+    Click this to close a currently active Siddhi application that is already open in a tab.  </p>
+</li>
+<li>
+<p><strong>Close All Files</strong> 
+    Click this to close all the Siddhi files that are currently open. </p>
+</li>
+<li>
+<p><strong>Delete File</strong><br />
+    Click this to delete the currently active Siddhi file from the <code>workspace</code> directory. Only Siddhi files that are
+    already saved can be deleted.</p>
+</li>
+<li>
+<p><strong>Settings</strong><br />
+    Click this to change the theme and the font size used in the Streaming Integrator Tooling. The default theme is <strong>Twilight</strong> .</p>
+</li>
+</ul>
+<h4 id="edit-menu-items">Edit menu Items<a class="headerlink" href="#edit-menu-items" title="Permanent link">&para;</a></h4>
+<p>The <strong>Edit</strong> menu includes the following options.</p>
+<p><img alt="Edit menu" src="http://localhost:8000//images/streaming-integrator-studio-overview/Editor_Menu.png" /></p>
+<ul>
+<li>
+<p><strong>Undo</strong><br />
+    Click this to undo the last edit made to the Siddhi application that
+    you are currently editing. Only unsaved edits can be undone.</p>
+</li>
+<li>
+<p><strong>Redo</strong><br />
+    Click this to redo the edit that was last undone in the Siddhi
+    application that you are currently editing. The redo operation can
+    be carried out only if you have not saved the Siddhi application
+    after you undid the change.</p>
+</li>
+<li>
+<p><strong>Find</strong> 
+    Click this to search for a specific string in the currently
+    active Siddhi application tab.</p>
+</li>
+<li>
+<p><strong>Find and Replace</strong><br />
+    Click this to search for a specific string in the currently
+    active Siddhi application tab, and replace it with another string.</p>
+</li>
+<li>
+<p><strong>Reformat Code</strong><br />
+    Click this to reformat the Siddhi queries in the Siddhi
+    application that you are currently creating/editing in the <a href="#StreamProcessorStudioOverview-SourceView">source view</a>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This menu option is only visible when you are working in the <a href="#StreamProcessorStudioOverview-SourceView">source view</a>.</p>
+</div>
+</li>
+<li>
+<p><strong>Auto-Align</strong> <br/>
+    Click this to horizontally align all the Siddhi components in a
+    Siddhi application that you are creating/editing in the <a href="#StreamProcessorStudioOverview-DesignView">design view</a>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This menu option is only visible when you are working in the <a href="#StreamProcessorStudioOverview-DesignView">design view</a>.</p>
+</div>
+</li>
+</ul>
+<h4 id="run-menu-items">Run menu Items<a class="headerlink" href="#run-menu-items" title="Permanent link">&para;</a></h4>
+<p>The <strong>Run</strong> menu includes the following options.</p>
+<p><img alt="Run menu" src="http://localhost:8000//images/streaming-integrator-studio-overview/Run_Menu_Option.png" /></p>
+<ul>
+<li>
+<p><strong>Run</strong><br />
+    Click this to start the Siddhi application in the Run mode. Only
+    saved Siddhi applications can be run.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This menu option is enabled only when a Siddhi application is being created/edited in the <a href="#StreamProcessorStudioOverview-SourceView">source view</a>.</p>
+</div>
+</li>
+<li>
+<p><strong>Stop</strong><br />
+    Click this to stop a Siddhi application that is already running.</p>
+</li>
+</ul>
+<h4 id="tools-menu-items">Tools menu items<a class="headerlink" href="#tools-menu-items" title="Permanent link">&para;</a></h4>
+<p>The <strong>Tools</strong> menu provides access to the following tools that are shipped with the Streaming Integrator Tooling.</p>
+<p><img alt="Tools menu" src="http://localhost:8000//images/streaming-integrator-studio-overview/Tools_Menu.png" /></p>
+<ul>
+<li>
+<p><strong>File Explorer</strong> </p>
+<p>The file explorer. This is also avaible in the <a href="#StreamProcessorStudioOverview-SidePanel">Side Panel</a>.</p>
+</li>
+<li>
+<p><strong>Extension Installer</strong></p>
+<p>This opens the <strong>Extension Installer</strong> dialog box (shown below) where you can search for the required extension and install/uninstall it by clicking <strong>Install</strong> or <strong>Uninstall</strong> as appropriate. Once you install/uninstall an extension, you need to restart the Streaming Integrator Tooling. For detailed instructions, see <a href="../installing-siddhi-extensions/">Installing Siddhi Extensions</a>.</p>
+<p><img alt="Extension Installer" src="http://localhost:8000//images/streaming-integrator-studio-overview/extension-installer.png" />   </p>
+</li>
+<li>
+<p><strong>Event Simulator</strong>  </p>
+<p>Simulation can be carried out in two ways:</p>
+<ul>
+<li>Single Simulation</li>
+<li>Feed Simulation</li>
+</ul>
+<p>For detailed information about event simulation, see <a href="_Simulating_Events_">Simulating Events</a>.<br />
+The event simulator can also be accessed from the <a href="#StreamProcessorStudioOverview-SidePanel">Side Panel</a>.</p>
+</li>
+<li>
+<p><strong>Error Store Explorer</strong></p>
+<p>This opens the Error Store Explorer in which you can view, correct and replay the streaming events with errors that are stored in the error store.</p>
+<p>In order to use it, first you need to connect it to the SI server by clicking <strong>Connect to Server</strong> and then entering the server configurations in the dialog box that appears.</p>
+<p><img alt="Connect to Server" src="http://localhost:8000//images/streaming-integrator-studio-overview/connect-error-store-explorer.png" /></p>
+<p>Once the Error Store Explorer is connected to an SI server, you can get an overview of events with errors as shown in the example below.</p>
+<p><img alt="Error Store Explorer" src="http://localhost:8000//images/streaming-integrator-studio-overview/view-basic-error-info.png" /></p>
+<p>Here, you can do the following:</p>
+<ul>
+<li>
+<p><strong>Fetch Errors</strong>: At a given time, the Error Store Explorer displays the number of events with errors from the time it was last fetched/refreshed. To get the latest errors, select the required Siddhi application in the <strong>Siddhi app</strong> field and click <strong>Fetch</strong>.</p>
+</li>
+<li>
+<p><strong>View details</strong>: To view details of a specific error, click <strong>Detailed Info</strong> for the relevant event. Then the details of the error are displayed in the <strong>Error Entry</strong> dialog box as shown in the example below.
+       <img alt="Error Entry" src="http://localhost:8000//images/handling-requests-with-errors/error-entry.png" /></p>
+</li>
+<li>
+<p><strong>Replay events</strong>: This can be done in one of the following three methods:</p>
+<ul>
+<li>
+<p>To replay all the events for the selected Siddhi application without making any changes, click <strong>Replay All</strong>.</p>
+</li>
+<li>
+<p>To replay a single event without making any changes, click <strong>Replay</strong> for the specific event.</p>
+</li>
+<li>
+<p>To make any changes to the event before replaying, click <strong>Detailed Info</strong> for the relevant event and open the <strong>Error Entry</strong> dialog box. Then make the required changes to the event (which is displayed in an editable field) and click <strong>Replay</strong>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Note that only mapping errors can be corrected before replaying.</p>
+</div>
+<p><img alt="Correct and Replay Event" src="http://localhost:8000//images/handling-requests-with-errors/correct-and-replay-event.png" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Discard events</strong>: To discard all the erroneous events for the selected Siddhi application, click <strong>Discard All</strong>. To discard a specific erroneous event, click <strong>Discard</strong> for the relevant event.</p>
+</li>
+<li>
+<p><strong>Purge Events</strong>: To periodically purge events, click <strong>Purge</strong>. This opens the <strong>Purge Error Store</strong> dialog box. In the <strong>Retention Period (days)</strong> field, enter the number of past days for which you want to retain the erroneous events in the store and then click <strong>Purge</strong>. As a result, all the events except the ones stored in the specified number of past days are removed from the error store.</p>
+</li>
+</ul>
+<p>To understand how to save messages with errors in the error store, see <a href="http://localhost:8000//guides/handling-errors.md">Handling Errors</a>.</p>
+<p>To understand how to view and analyze events with errors in the Error Store Explorer, see <a href="../../examples/handling-requests-with-errors/">Handling Requests with Errors</a>.</p>
+</li>
+<li>
+<p><strong>Console</strong></p>
+<p>This is an output console that provides feedback on various user activities carried out on the Streaming Integration Tooling. It is accessible from the <a href="#StreamProcessorStudioOverview-SidePanel">Side Panel</a>.</p>
+</li>
+<li>
+<p><strong>Sample Event Generator</strong></p>
+<p>This opens the Sample Event Generator as follows.<br />
+<img alt="Sample event generator" src="http://localhost:8000//images/streaming-integrator-studio-overview/Sample_Event_Generator.png" /><br />
+Here, you can generate sample events for a selected stream within a selected Siddhi application in a specified format.  </p>
+</li>
+<li>
+<p><strong>On-Demand Query</strong></p>
+<p>This opens the <strong>On-Demand Query</strong> dialog box.</p>
+<p><img alt="Siddhi Store Query" src="http://localhost:8000//images/streaming-integrator-studio-overview/on-demand-query.png" />
+Here, you can select a Siddhi application, and then enter a query to
+manipulate the store in which that Siddhi Application saves data.
+You can enter queries that can update record, insert/update records,
+retrieve records and delete records. For more information about
+actions you can carry out for stores, see <a href="../examples/integrating-stores.md/#perform-crud-operations-via-rest-api">Storage Integration - Performing CRUD operations via REST API</a>.</p>
+</li>
+<li>
+<p><strong>Tour Guide</strong></p>
+<p>This opens a dialog box named <strong>Welcome to the Streaming Integrator
+Tooling Tour Guide</strong> which guides you to understand Streaming Integrator Tooling. When you start the Streaming Integrator Tooling and access it,
+this dialog box is open by default.</p>
+</li>
+</ul>
+<h4 id="deploy-menu-items">Deploy menu items<a class="headerlink" href="#deploy-menu-items" title="Permanent link">&para;</a></h4>
+<p>The <strong>Deploy</strong> menu has the following option to select one or more Siddhi applications and deploy them to one or more 
+Streaming Integrator servers. For more information, see <a href="../deploying-Streaming-Applications/">Deploying Siddhi Applications</a>.</p>
+<p><img alt="Deploy menu" src="http://localhost:8000//images/streaming-integrator-studio-overview/Deploy_Menu.png" /></p>
+<h4 id="export-menu-items">Export menu items<a class="headerlink" href="#export-menu-items" title="Permanent link">&para;</a></h4>
+<p>The <strong>Export</strong> menu has the following options that allow you to export Siddhi applications in a format that can be deployed in a containerized environment.</p>
+<p><img alt="Export menu" src="http://localhost:8000//images/streaming-integrator-studio-overview/Export_Menu.png" /></p>
+<ul>
+<li>
+<p><strong>For Docker</strong>
+    This opens the <strong>Export Siddhi Apps for Docker image</strong> wizard. For more information, see <a href="../exporting-Siddhi-Applications/#exporting-siddhi-applications-as-a-docker-image">Exporting Siddhi Applications - Exporting Siddhi applications as a Docker Image</a>.</p>
+</li>
+<li>
+<p><strong>For Kubernetes</strong>
+    This opens the <strong>Export Siddhi Apps For Kubernetes CRD</strong> wizard. For more information, see <a href="../exporting-Siddhi-Applications/#exporting-siddhi-applications-for-kubernetes">Exporting Siddhi Applications - Exporting Siddhi Applications for Kubernetes</a>.</p>
+</li>
+</ul>
+<h2 id="side-panel">Side Panel<a class="headerlink" href="#side-panel" title="Permanent link">&para;</a></h2>
+<p><strong>File Explorer</strong></p>
+<p><img alt="File Explorer menu" src="http://localhost:8000//images/streaming-integrator-studio-overview/File Explorer.png" /></p>
+<p>This provides a view of all the files saved as shown in the example above.</p>
+<h3 id="event-simulator">Event Simulator<a class="headerlink" href="#event-simulator" title="Permanent link">&para;</a></h3>
+<p><img alt="Event Simulator" src="http://localhost:8000//images/streaming-integrator-studio-overview/Event_Simulator.png" /></p>
+<p>Simulation can be carried out in two ways:</p>
+<ul>
+<li>Single Simulation</li>
+<li>Feed Simulation</li>
+</ul>
+<p>For detailed information about event simulation, see <a href="_Simulating_Events_">Simulating Events</a>.</p>
+<h3 id="output-console">Output Console<a class="headerlink" href="#output-console" title="Permanent link">&para;</a></h3>
+<p><img alt="Output Console" src="http://localhost:8000//images/streaming-integrator-studio-overview/outputConsole.png" /></p>
+<p>This provides feedback on various user activities carried out on the Streaming Integrator.</p>
+<h3 id="operator-finder">Operator Finder<a class="headerlink" href="#operator-finder" title="Permanent link">&para;</a></h3>
+<p><img alt="Operator Finder" src="http://localhost:8000//images/streaming-integrator-studio-overview/Operator_Finder.png" /></p>
+<p>Click the <strong>Operator Finder</strong> icon to search for the Siddhi extensions
+that you want to use in your Siddhi applications.</p>
+<ul>
+<li>For the complete list of Siddhi extensions that you can search for
+    via the Operator Finder, see <a href="http://siddhi-io.github.io/siddhi/extensions/">Siddhi Extensions</a>.</li>
+</ul>
+<h3 id="template-variables">Template Variables<a class="headerlink" href="#template-variables" title="Permanent link">&para;</a></h3>
+<p><img alt="Template Variables" src="http://localhost:8000//images/streaming-integrator-studio-overview/template_variables-icon.png" /></p>
+<p>Click this icon to open the <strong>Templated Variables</strong> side panel (shown below) where you can open the templated attributes in the currently saved Siddhi applications and provide variables to be applied when running the Siddhi applications.</p>
+<p><img alt="Templated Variables" src="http://localhost:8000//images/streaming-integrator-studio-overview/templated-variables.png" /></p>
+<p>For more information about templated variables, see <a href="https://siddhi.io/en/v5.1/docs/siddhi-as-a-local-microservice/#running-with-environmentalsystem-variables">Siddhi Documentation - Siddhi as a Local Microservice - Running with environmental/system variables</a>.</p>
+<h2 id="toolbar">Toolbar<a class="headerlink" href="#toolbar" title="Permanent link">&para;</a></h2>
+<p><img alt="Tool Bar menu" src="http://localhost:8000//images/streaming-integrator-studio-overview/Editor_Toolbar.png" /></p>
+<ul>
+<li>
+<p><strong>Run icon</strong><br />
+    Click this to start a currently open Siddhi application in the Run
+    mode. This icon is enabled only for saved Siddhi applications.  </p>
+</li>
+<li>
+<p><strong>Stop icon</strong><br />
+    Click this to stop a Siddhi application that is currently running.</p>
+</li>
+<li>
+<p><strong>Revert icon</strong><br />
+    Click this to revert the unsaved changes in the Siddhi application
+    that is currently being created/edited.</p>
+</li>
+</ul>
+
+
+
+
+
+                
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5CR98L58" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+      
+        <footer class="md-footer">
+  
+  
+  <nav class="md-footer__inner md-grid" aria-label="Footer" >
+    
+    
+    <a href="../developing-streaming-integration-solutions/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Developing Streaming Integrator Solutions" rel="prev">
+      <div class="md-footer__button md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </div>
+      <div class="md-footer__title">
+        <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Previous
+                </span>
+          Developing Streaming Integrator Solutions
+        </div>
+      </div>
+    </a>
+    
+    
+    
+    <a href="../working-with-the-Design-View/" class="md-footer__link md-footer__link--next" aria-label="Next: Working with the Design View" rel="next">
+      <div class="md-footer__title">
+        <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Next
+                </span>
+          Working with the Design View
+        </div>
+      </div>
+      <div class="md-footer__button md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+      </div>
+    </a>
+    
+  </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  <div class="footer-copyright-left">
+  
+    <div class="md-copyright__highlight">
+      WSO2 Streaming Integrator - Documentation
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+  </div>
+  <div class="footer-copyright-right">
+    <div class="footer-copyright-top">
+      Copyright &copy; <a href="https://wso2.com/">WSO2</a> LLC (2024)
+    </div>
+    <div class="footer-copyright-bottom">
+      Content licensed under <a href="https://creativecommons.org/licenses/by/4.0">CC By 4.0.</a> | Sample code
+      licensed under <a href="http://www.apache.org/licenses/">Apache 2.0</a>.
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      
+        <script src="../../assets/lib/highlightjs/highlight.min.js"></script>
+      
+        <script src="../../assets/lib/json-formatter/json-formatter.umd.js"></script>
+      
+        <script src="../../assets/js/mitheme.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,6217 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for WSO2 Streaming Integrator">
+      
+      
+        <meta name="author" content="WSO2">
+      
+      
+      
+        <link rel="prev" href="../permission-apis/">
+      
+      
+        <link rel="next" href="../store-APIs/">
+      
+      <link rel="icon" href="../../images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+    
+    
+      
+        <title>Business Rules APIs - WSO2 Streaming Integrator Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Added the font from google fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/lib/highlightjs/styles/vs.min.css">
+    
+      <link rel="stylesheet" href="../../assets/css/blue-palette-alt1.css">
+    
+      <link rel="stylesheet" href="../../assets/css/mitheme.css">
+    
+      <link rel="stylesheet" href="../../assets/lib/json-formatter/json-formatter.css">
+    
+      <link rel="stylesheet" href="../../assets/css/config-catalog.css">
+    
+      <link rel="stylesheet" href="../../assets/lib/fontawesome-free-6.3.0-web/css/all.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){
+    w[l]=w[l]||[];w[l].push({
+      'gtm.start':
+        new Date().getTime(),event:'gtm.js'
+    });var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.setAttributeNode(d.createAttribute('data-ot-ignore'));j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5CR98L58');</script>
+  <!-- End Google Tag Manager -->
+
+    
+    
+  <meta name="google-site-verification" content="pRwRUP0jDUECheRt5DziuVd3gSs2UTw6EhL4nud3NMk" />
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#business-rules-apis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+ * Copyright (c) 2024, WSO2 LLC. (http://www.wso2.com) All Rights Reserved.
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+-->
+
+
+
+
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header" id="page-header" data-url="" data-lang="en">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="WSO2 Streaming Integrator Documentation"
+       class="md-header__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
+      
+  <img src="../../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+             Streaming Integrator Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Business Rules APIs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <form class="md-header__option" data-md-component="palette">
+      
+      
+      <input class="md-option" data-md-color-media="(prefers-color-scheme)"
+             data-md-color-scheme="default"
+             data-md-color-primary=""
+             data-md-color-accent="" 
+             aria-label="Switch to dark mode"  type="radio" name="__palette"
+             id="__palette_1">
+      
+      <label class="md-header__button md-icon" title="Switch to dark mode"
+             for="__palette_3" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+      
+      
+      
+      <input class="md-option" data-md-color-media="(prefers-color-scheme: light)"
+             data-md-color-scheme="default"
+             data-md-color-primary=""
+             data-md-color-accent="" 
+             aria-label="Switch to system preference"  type="radio" name="__palette"
+             id="__palette_2">
+      
+      <label class="md-header__button md-icon" title="Switch to system preference"
+             for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+      
+      
+      
+      <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)"
+             data-md-color-scheme="slate"
+             data-md-color-primary=""
+             data-md-color-accent="" 
+             aria-label="Switch to light mode"  type="radio" name="__palette"
+             id="__palette_3">
+      
+      <label class="md-header__button md-icon" title="Switch to light mode"
+             for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+      
+      
+    </form>
+    
+    
+    
+    <label class="md-header__button md-icon" for="__search">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+    </label>
+    <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    <div class="md-header__source">
+      <a href="https://github.com/wso2/docs-si" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wso2/docs-streaming-integrator
+  </div>
+</a>
+    </div>
+    
+  </nav>
+  
+  
+  
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../overview/overview/" class="md-tabs__link">
+        Get Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../guides/use-cases/" class="md-tabs__link">
+        Learn
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../setup/installing-si-in-vm/" class="md-tabs__link">
+        Setup and Install
+      </a>
+    </li>
+  
+
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../develop/developing-streaming-integration-solutions/" class="md-tabs__link">
+        Develop
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../admin/setting-up-grafana-dashboards/" class="md-tabs__link">
+        Observability
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../connectors/connectors-overview/" class="md-tabs__link">
+        Connectors
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../environment-compatibility/" class="md-tabs__link md-tabs__link--active">
+        References
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../page-not-found/" class="md-tabs__link">
+      
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+  
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="WSO2 Streaming Integrator Documentation" class="md-nav__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
+      
+  <img src="../../images/logo.svg" alt="logo">
+
+    </a>
+    WSO2 Streaming Integrator Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/wso2/docs-si" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wso2/docs-streaming-integrator
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Get Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Get Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/overview/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/quick-start-guide/" class="md-nav__link">
+        Quick Start Guide
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Creating Your First Siddhi Application
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Creating Your First Siddhi Application
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/getting-started-guide-overview/" class="md-nav__link">
+        Streaming Integration Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/download-install-and-start-si/" class="md-nav__link">
+        Step 1: Download and Install Streaming Integrator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/create-the-siddhi-application/" class="md-nav__link">
+        Step 2: Create the Siddhi Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/deploy-siddhi-application/" class="md-nav__link">
+        Step 3: Deploy the Siddhi Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/test-siddhi-application/" class="md-nav__link">
+        Step 4: Run the Siddhi Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/update-the-siddhi-application/" class="md-nav__link">
+        Step 5: Update the Siddhi Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/handle-errors/" class="md-nav__link">
+        Step 6: Handle Errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/monitor-statistics/" class="md-nav__link">
+        Step 7: Monitor Statistics
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/architecture/" class="md-nav__link">
+        Architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/concepts/" class="md-nav__link">
+        Key Concepts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Learn
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Learn
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+          Use Cases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Use Cases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/use-cases/" class="md-nav__link">
+        Use Cases Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/extracting-data-from-static-sources-in-real-time/" class="md-nav__link">
+        Extracting Data from Static Sources in Real Time
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/receiving-data-in-transit/" class="md-nav__link">
+        Receiving Data in Transit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/loading-and-writing-date/" class="md-nav__link">
+        Loading and Writing Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/publishing-data-to-event-stream-consumers/" class="md-nav__link">
+        Publishing Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1_6" id="__nav_3_1_6_label" tabindex="0">
+          Stream Processing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          Stream Processing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/processing-data/" class="md-nav__link">
+        Stream Processing Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/cleansing-data/" class="md-nav__link">
+        Cleansing Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/transforming-data/" class="md-nav__link">
+        Transforming Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/enriching-data/" class="md-nav__link">
+        Enriching Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/summarizing-data/" class="md-nav__link">
+        Summarizing Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/correlating-data/" class="md-nav__link">
+        Correlating Data
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/handling-errors/" class="md-nav__link">
+        Handling Errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/performing-etl-tasks/" class="md-nav__link">
+        Performing ETL Operations
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          Tutorials
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/tutorials-overview/" class="md-nav__link">
+        Tutorials Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/performing-real-time-etl-with-mysql/" class="md-nav__link">
+        Performing Real-time ETL with MySQL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/performing-real-time-etl-with-files/" class="md-nav__link">
+        Performing Real-time ETL with Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/creating-etl-application-via-tooling/" class="md-nav__link">
+        Creating an ETL Application via SI Tooling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/working-with-kafka/" class="md-nav__link">
+        Working with Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/creating-business-rules-templates/" class="md-nav__link">
+        Working with Business Rules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/integrating-stores/" class="md-nav__link">
+        Integrating Data Stores in Streaming Integration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/exposing-processed-data-as-api/" class="md-nav__link">
+        Exposing Processed Data as API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/handling-requests-with-errors/" class="md-nav__link">
+        Error Handling with Data Streams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/triggering-integrations-via-micro-integrator/" class="md-nav__link">
+        Triggering Integrations via MI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/running-si-with-docker-and-kubernetes/" class="md-nav__link">
+        Running SI with Docker and Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          Examples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Examples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_1" id="__nav_3_3_1_label" tabindex="0">
+          Consuming Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Consuming Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveTCPinJSONFormat/" class="md-nav__link">
+        Receiving JSON Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishGooglePubSubMessagesInTextFormat/" class="md-nav__link">
+        Publishing Events to a Google Pub/Sub Topic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/CSVDefaultMapping/" class="md-nav__link">
+        Publishing and Receiving CSV Events via Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/CDCWithListeningMode/" class="md-nav__link">
+        Capturing MySQL Inserts via CDC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveGooglePubSubMessagesInTextFormat/" class="md-nav__link">
+        Receiving Messages from a Google Pub/Sub Topic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveMQTTInXMLFormat/" class="md-nav__link">
+        Receiving XML events via MQTT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveTCPinBinaryFormat/" class="md-nav__link">
+        Receiving Binary Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveKafkaInBinaryFormat/" class="md-nav__link">
+        Receiving Binary Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHTTPInXMLFormatWithDefaultMapping/" class="md-nav__link">
+        Receiving XML Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/store-influxdb/" class="md-nav__link">
+        Working with an influxDB Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/CDCWithPollingMode/" class="md-nav__link">
+        Capturing MySQL Inserts and Updates via CDC Polling Mode
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestWithRefreshToken/" class="md-nav__link">
+        Publishing HTTP Events to an OAuth-protected Endpoint while Using a Refresh Token Grant Type
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestResponse/" class="md-nav__link">
+        Publishing HTTP Events via an OAuth-protected Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-solr/" class="md-nav__link">
+        Receiving Events via Simulator and Persisting in SOLR Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveAndCount/" class="md-nav__link">
+        Receiving Events via HTTP Transport
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveEventsFromFile/" class="md-nav__link">
+        Receiving Events via File
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveEmailInXmlFormat/" class="md-nav__link">
+        Receiving XML Events via Email
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveRabbitmqInJSONFormat/" class="md-nav__link">
+        Receiving JSON Events via RabbitMQ
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-cassandra/" class="md-nav__link">
+        Receive Events via Simulator and Persist in Cassandra Store
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+          Transforming Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Transforming Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequest/" class="md-nav__link">
+        Publishing HTTP Events to to an OAuth-protected Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestWithoutAccessToken/" class="md-nav__link">
+        Publishing HTTP Events to to an OAuth-protected Endpoint without an Access Token
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHl7InER7Format/" class="md-nav__link">
+        Receiving ER7 Events via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/DataPreprocessing/" class="md-nav__link">
+        Preprocessing Data Received via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHl7InER7Format/" class="md-nav__link">
+        Publishing ER7 Events via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/SweetProductionDataPreprocessing/" class="md-nav__link">
+        Receiving Data via TCP and Preprocessing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/CSVCustomMapping/" class="md-nav__link">
+        Receiving and Publishing Events in Custom CSV Format
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHTTPInJsonFormatWithCustomMapping/" class="md-nav__link">
+        Sending Custom JSON Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishEmailInTextFormat/" class="md-nav__link">
+        Publishing Text Events via Email
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveKafkaInTextFormatWithCustomMapping/" class="md-nav__link">
+        Receiving Custom Text Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Script-js-sample/" class="md-nav__link">
+        Using Javascript Functions in Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishKafkaInCustomAvroFormat/" class="md-nav__link">
+        Publishing Custom Avro Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHl7InXmlFormat/" class="md-nav__link">
+        Receiving Custom XML Messages via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveTCPInTextFormatWithCustomMapping/" class="md-nav__link">
+        Receiving Custom Text Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/RegexExecutionSample/" class="md-nav__link">
+        Identifying Sub-sequences in Input Sequences
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHl7InXmlFormat/" class="md-nav__link">
+        Publishing XML messages via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishKafkaInJsonFormat/" class="md-nav__link">
+        Publishing JSON Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishEventsToFile/" class="md-nav__link">
+        Publishing JSON Events to Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHTTPinXMLFormatWithCustomMapping/" class="md-nav__link">
+        Receiving Custom XML Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishRabbitmqInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via RabbitMQ
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/MathExtensionSample/" class="md-nav__link">
+        Rounding up Amounts via the Math Function
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveTCPinTextFormat/" class="md-nav__link">
+        Receiving Text Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishEmailInXmlFormat/" class="md-nav__link">
+        Publishing Emails in XML Format
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/StringExtensionSample/" class="md-nav__link">
+        Converting String Values to Lowercase
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/TextMappingWithInmemoryTransport/" class="md-nav__link">
+        Text Mapping with In-memory Transport
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHTTPInJsonFormatWithDefaultMapping/" class="md-nav__link">
+        Receiving JSON Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/HelloKafka/" class="md-nav__link">
+        Consuming Events from a Kafka Topic and Publishing to Another Kafka Topic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpInXmlFormatWithCustomMapping/" class="md-nav__link">
+        Publishing Custom XML Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/SNMPSetRequestApp/" class="md-nav__link">
+        Sending Custom Keyvalue Events via SNMP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishTcpInJsonFormat/" class="md-nav__link">
+        Publishing JSON Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestWithOAuthUser/" class="md-nav__link">
+        Publishing HTTP Events to an OAuth-protected Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/MapExtensionSample/" class="md-nav__link">
+        Inserting and Accessing Data in a Map
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishJmsInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via JMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveJMSInJsonFormat/" class="md-nav__link">
+        Receiving JSON Events via JMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHTTPInJsonFormatWithCustomMapping/" class="md-nav__link">
+        Receiving Custom JSON Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+          Enriching Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Enriching Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ExtremaBottomK/" class="md-nav__link">
+        Counting the Frequency of Values with BottomK
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/GplNLPFindNameEntityType/" class="md-nav__link">
+        Extracting Values from a String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/JoinWithStoredData/" class="md-nav__link">
+        Joining Streaming Data with Stored Data in RDBMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Script-js-sample/" class="md-nav__link">
+        Using Javascript Functions in Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/store-hbase/" class="md-nav__link">
+        Receiving Events via Simulator and Persisting in a Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/HttpRequestResponseSample/" class="md-nav__link">
+        Publishing HTTP Requests, Receiving Responses, and Processing Them
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/UnitConversionExtentionSample/" class="md-nav__link">
+        Converting Units
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/execution-geo-sample/" class="md-nav__link">
+        Processing Geo Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ClusTreeTestApp/" class="md-nav__link">
+        Performing Streaming Learning Using a Clustree Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveWebSocketInXMLFormat/" class="md-nav__link">
+        Receiving XML Events via Websocket
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_4" id="__nav_3_3_4_label" tabindex="0">
+          Aggregating Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Aggregating Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/DataPreprocessing/" class="md-nav__link">
+        Preprocessing Data Received via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/SweetProductionDataPreprocessing/" class="md-nav__link">
+        Receiving Data via TCP and Preprocessing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishEmailInTextFormat/" class="md-nav__link">
+        Publishing Text Events via Email
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/AggregateOverTime/" class="md-nav__link">
+        Calculating Aggregations Over Time
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveAndCount/" class="md-nav__link">
+        Receiving Events via HTTP Transport
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/AggregateDataIncrementally/" class="md-nav__link">
+        Aggregating Data Incrementally
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-redis/" class="md-nav__link">
+        Receiving Events and Persisting Them in Redis Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/store-mongodb/" class="md-nav__link">
+        Receiving Events and Persisting in MongoDB Store
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_5" id="__nav_3_3_5_label" tabindex="0">
+          Correlating Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Correlating Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PmmlModelProcessor/" class="md-nav__link">
+        Making Predictions via PMML Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/StreamingRegressor/" class="md-nav__link">
+        Making Predictions via a Regressor Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/GplNLPFindNameEntityType/" class="md-nav__link">
+        Extracting Values from a String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/TensorFlowTestApp/" class="md-nav__link">
+        Performing Regression Tasks via an Imported Tensorflow Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishMqttInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via MQTT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PatternMatching/" class="md-nav__link">
+        Identifying Event Patterns Based On Order of Event Arrival
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/StreamingKMeansSample/" class="md-nav__link">
+        Using StreamingML Kmeans for Clustering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceivePrometheusMetrics/" class="md-nav__link">
+        Receiving Prometheus Metrics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/hoeffding-adaptive-tree-sample/" class="md-nav__link">
+        Making Predictions via Hoeffding Classifier Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/SNMPGetRequestApp/" class="md-nav__link">
+        Receiving Custom Key Value Events via SNMP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveJMSInKeyvalueFormat/" class="md-nav__link">
+        Receiving Key Value Events via JMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/IBMMessageQueue/" class="md-nav__link">
+        Consuming Messages from IBM Message Queues
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/AlertsAndThresholds/" class="md-nav__link">
+        Receiving Email Alerts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/streaming-perceptron-sample/" class="md-nav__link">
+        Making Predictions via a Streaming Perceptron Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/GeoDistanceCalculation/" class="md-nav__link">
+        Calculating the Distance Between Two Locations
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_6" id="__nav_3_3_6_label" tabindex="0">
+          Publishing Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Publishing Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishTcpInTextFormat/" class="md-nav__link">
+        Publishing Text Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHl7InER7Format/" class="md-nav__link">
+        Receiving ER7 Events via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishGooglePubSubMessagesInTextFormat/" class="md-nav__link">
+        Publishing Events to a Google Pub/Sub Topic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishTcpInBinaryFormat/" class="md-nav__link">
+        Publishing Binary Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishWebSocketInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via WebSocket
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishPrometheusMetricsHTTPServer/" class="md-nav__link">
+        Publishing Consumed Events to Prometheus Metrics and Exposing then via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/store-influxdb/" class="md-nav__link">
+        Working with an influxDB Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishKafkaInBinaryFormat/" class="md-nav__link">
+        Publishing Binary Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishJmsInKeyvalueFormat/" class="md-nav__link">
+        Publishing Key-value events via JMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestWithRefreshToken/" class="md-nav__link">
+        Publishing HTTP Events to an OAuth-protected Endpoint while Using a Refresh Token Grant Type
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestResponse/" class="md-nav__link">
+        Publishing HTTP Events via an OAuth-protected Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-solr/" class="md-nav__link">
+        Receiving Events via Simulator and Persisting in SOLR Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpInJsonFormat/" class="md-nav__link">
+        Publishing JSON Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-rdbms/" class="md-nav__link">
+        Receiving Events via Simulator and Persisting in RDBMS Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-cassandra/" class="md-nav__link">
+        Receive Events via Simulator and Persist in Cassandra Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishKafkaInAvroFormatUsingSchemaRegistry/" class="md-nav__link">
+        Publishing Avro Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/AmazonS3SinkSample/" class="md-nav__link">
+        Publishing Aggregated Events to the Amazon AWS S3 Bucket
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/GCSSinkSample/" class="md-nav__link">
+        Publishing Events to a GCS Bucket
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Setup and Install
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Setup and Install
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+          Install
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Install
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1_1" id="__nav_4_1_1_label" tabindex="0">
+          Installing the Streaming Integrator
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Installing the Streaming Integrator
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/installing-si-in-vm/" class="md-nav__link">
+        Installing via the Installer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/installing-si-binary/" class="md-nav__link">
+        Installing via the Binary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/installing-as-a-windows-service/" class="md-nav__link">
+        Installing as a Windows Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/installing-si-as-a-linux-service/" class="md-nav__link">
+        Installing as a Linux Service
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/downloading-and-Installing-Siddhi-Extensions/" class="md-nav__link">
+        Installing Siddhi Extensions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1_3" id="__nav_4_1_3_label" tabindex="0">
+          Running the Streaming Integrator in Containers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Running the Streaming Integrator in Containers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/installing-si-using-docker/" class="md-nav__link">
+        Installing in Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/installing-si-using-kubernetes/" class="md-nav__link">
+        Installing in Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          Migrate
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Migrate
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/upgrading-wso2-ei/" class="md-nav__link">
+        Upgrading WSO2 Enterprise Integrator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          Deploy
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Deploy
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/deploying-si-as-a-single-deployment/" class="md-nav__link">
+        Single Deployment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/deploying-si-as-minimum-ha-cluster/" class="md-nav__link">
+        Minimum HA Cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/deploying-si-as-an-active-active-deployment/" class="md-nav__link">
+        Active-Active Cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/deploying-si-as-a-scalable-cluster/" class="md-nav__link">
+        Scalable Cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/deploying-si-as-minimum-ha-cluster-in-aws-ecs/" class="md-nav__link">
+        Minimum HA Cluster in AWS ECS
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          Set-up
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Set-up
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/production-checklist/" class="md-nav__link">
+        Production Checklist
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/configuring-data-sources/" class="md-nav__link">
+        Configuring Datasources
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/configuring-business-rules-deployment/" class="md-nav__link">
+        Configuring Business Rules Deployment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/general-data-protection-regulations/" class="md-nav__link">
+        General Data Protection Regulations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/working-with-Keystores/" class="md-nav__link">
+        Working with Keystores
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/supporting-different-transports/" class="md-nav__link">
+        Supporting Different Transports
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/user-management/" class="md-nav__link">
+        User Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/configuring-Database-and-File-System-State-Persistence/" class="md-nav__link">
+        Configuring State Persistence
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/configuring-Cluster-Coordination/" class="md-nav__link">
+        Configuring Cluster Coordination
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/protecting-sensitive-data-via-the-secure-vault/" class="md-nav__link">
+        Protecting Sensitive Data via the Secure Vault
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/adding-third-party-non-osgi-libraries/" class="md-nav__link">
+        Adding Third Party Non OSGi Library
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuring-default-ports/" class="md-nav__link">
+        Configuring Default Ports
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/change-hostname-and-context-path/" class="md-nav__link">
+        Changing the Host Name and Context Path of Web UI Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/monitoring-received-events-count-via-logs/" class="md-nav__link">
+        Enabling Logs for Received Event Count
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Develop
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Develop
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/developing-streaming-integration-solutions/" class="md-nav__link">
+        Developing Streaming Integrator Solutions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+          Streaming Integrator Tooling
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Streaming Integrator Tooling
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/streaming-integrator-studio-overview/" class="md-nav__link">
+        Streaming Integrator Tooling Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/working-with-the-Design-View/" class="md-nav__link">
+        Working with the Design View
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/creating-a-Siddhi-Application/" class="md-nav__link">
+        Creating Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/installing-siddhi-extensions/" class="md-nav__link">
+        Installing Siddhi Extensions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/testing-a-Siddhi-Application/" class="md-nav__link">
+        Testing Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/deploying-Streaming-Applications/" class="md-nav__link">
+        Deploying Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/exporting-Siddhi-Applications/" class="md-nav__link">
+        Exporting Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Observability
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Observability
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+          Monitoring SI via Dashboards
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Monitoring SI via Dashboards
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/setting-up-grafana-dashboards/" class="md-nav__link">
+        Configuring Dashboards
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/managing-grafana-dashboards/" class="md-nav__link">
+        Managing Dashboards
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1_3" id="__nav_6_1_3_label" tabindex="0">
+          Monitoring WSO2 SI
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Monitoring WSO2 SI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/monitoring-si-performance-via-grafana/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-overall-statistics/" class="md-nav__link">
+        Viewing Overall Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-server-statistics/" class="md-nav__link">
+        Viewing Server Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-stream-statistics/" class="md-nav__link">
+        Viewing Stream Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-source-statistics/" class="md-nav__link">
+        Viewing Source Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-sink-statistics/" class="md-nav__link">
+        Viewing Query Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-window-statistics/" class="md-nav__link">
+        Viewing Window Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-trigger-statistics/" class="md-nav__link">
+        Viewing Trigger Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-table-statistics/" class="md-nav__link">
+        Viewing Table Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-aggregation-statistics/" class="md-nav__link">
+        Viewing Aggregation Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-on-demand-query-statistics/" class="md-nav__link">
+        Viewing On Demand Query Statistics
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-dashboards/" class="md-nav__link">
+        Monitoring ETL Flows
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          Connectors
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Connectors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/connectors-overview/" class="md-nav__link">
+        Streaming Integrator Connectors Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/downloading-and-Installing-Siddhi-Extensions/" class="md-nav__link">
+        Downloading and Installing Siddhi Connectors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/writing-Custom-Siddhi-Extensions/" class="md-nav__link">
+        Writing Custom Siddhi Extensions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/configuring-System-Parameters-for-Siddhi-Extensions/" class="md-nav__link">
+        Configuring System Parameters for Siddhi Extensions
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          References
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          References
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environment-compatibility/" class="md-nav__link">
+        Environment Compatibility
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+          Streaming Integration REST API Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          Streaming Integration REST API Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rest-api-guide-overview/" class="md-nav__link">
+        REST API Guide Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../siddhi-Application-Management-APIs/" class="md-nav__link">
+        Siddhi Application Management APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../permission-apis/" class="md-nav__link">
+        Permission APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Business Rules APIs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Business Rules APIs
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#listing-the-available-business-rule-instances" class="md-nav__link">
+    Listing the available business rule instances
+  </a>
+  
+    <nav class="md-nav" aria-label="Listing the available business rule instances">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-business-rule-with-given-uuid" class="md-nav__link">
+    Delete business rule with given UUID
+  </a>
+  
+    <nav class="md-nav" aria-label="Delete business rule with given UUID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_1" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description" class="md-nav__link">
+    Parameter Description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_1" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_1" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_1" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_1" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fetch-template-group-with-the-given-uuid" class="md-nav__link">
+    Fetch template group with the given UUID
+  </a>
+  
+    <nav class="md-nav" aria-label="Fetch template group with the given UUID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_2" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description_1" class="md-nav__link">
+    Parameter description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_2" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_2" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_2" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_2" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fetch-rule-templates-of-the-template-group-with-given-uuid" class="md-nav__link">
+    Fetch rule templates of the template group with given UUID
+  </a>
+  
+    <nav class="md-nav" aria-label="Fetch rule templates of the template group with given UUID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_3" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description_2" class="md-nav__link">
+    Parameter description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_3" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_3" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_3" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_3" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fetch-rule-template-of-specific-uuid-available-under-a-template-group-with-specific-uuid" class="md-nav__link">
+    Fetch rule template of specific UUID available under a template group with specific UUID
+  </a>
+  
+    <nav class="md-nav" aria-label="Fetch rule template of specific UUID available under a template group with specific UUID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_4" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description_3" class="md-nav__link">
+    Parameter description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_4" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_4" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_4" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_4" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fetch-available-template-groups" class="md-nav__link">
+    Fetch available template groups
+  </a>
+  
+    <nav class="md-nav" aria-label="Fetch available template groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_5" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_5" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_5" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_5" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_5" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fetch-business-rule-instance-with-given-uuid" class="md-nav__link">
+    Fetch business rule instance with given UUID
+  </a>
+  
+    <nav class="md-nav" aria-label="Fetch business rule instance with given UUID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_6" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description_4" class="md-nav__link">
+    Parameter description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_6" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_6" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_6" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_6" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-and-save-a-business-rule" class="md-nav__link">
+    Create and save a business rule
+  </a>
+  
+    <nav class="md-nav" aria-label="Create and save a business rule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_7" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description_5" class="md-nav__link">
+    Parameter description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_7" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_7" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_7" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_7" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-business-rules-instance-with-given-uuid" class="md-nav__link">
+    Update business rules instance with given UUID
+  </a>
+  
+    <nav class="md-nav" aria-label="Update business rules instance with given UUID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_8" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description_6" class="md-nav__link">
+    Parameter description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_8" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_8" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../store-APIs/" class="md-nav__link">
+        Store APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../healthcheck-APIs/" class="md-nav__link">
+        Healthcheck APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hTTP-Status-Codes/" class="md-nav__link">
+        HTTP Status Codes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance-analysis-results/" class="md-nav__link">
+        Performance Analysis Results
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../page-not-found/" class="md-nav__link">
+        
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#listing-the-available-business-rule-instances" class="md-nav__link">
+    Listing the available business rule instances
+  </a>
+  
+    <nav class="md-nav" aria-label="Listing the available business rule instances">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-business-rule-with-given-uuid" class="md-nav__link">
+    Delete business rule with given UUID
+  </a>
+  
+    <nav class="md-nav" aria-label="Delete business rule with given UUID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_1" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description" class="md-nav__link">
+    Parameter Description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_1" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_1" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_1" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_1" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fetch-template-group-with-the-given-uuid" class="md-nav__link">
+    Fetch template group with the given UUID
+  </a>
+  
+    <nav class="md-nav" aria-label="Fetch template group with the given UUID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_2" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description_1" class="md-nav__link">
+    Parameter description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_2" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_2" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_2" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_2" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fetch-rule-templates-of-the-template-group-with-given-uuid" class="md-nav__link">
+    Fetch rule templates of the template group with given UUID
+  </a>
+  
+    <nav class="md-nav" aria-label="Fetch rule templates of the template group with given UUID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_3" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description_2" class="md-nav__link">
+    Parameter description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_3" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_3" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_3" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_3" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fetch-rule-template-of-specific-uuid-available-under-a-template-group-with-specific-uuid" class="md-nav__link">
+    Fetch rule template of specific UUID available under a template group with specific UUID
+  </a>
+  
+    <nav class="md-nav" aria-label="Fetch rule template of specific UUID available under a template group with specific UUID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_4" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description_3" class="md-nav__link">
+    Parameter description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_4" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_4" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_4" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_4" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fetch-available-template-groups" class="md-nav__link">
+    Fetch available template groups
+  </a>
+  
+    <nav class="md-nav" aria-label="Fetch available template groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_5" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_5" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_5" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_5" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_5" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fetch-business-rule-instance-with-given-uuid" class="md-nav__link">
+    Fetch business rule instance with given UUID
+  </a>
+  
+    <nav class="md-nav" aria-label="Fetch business rule instance with given UUID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_6" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description_4" class="md-nav__link">
+    Parameter description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_6" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_6" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_6" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_6" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-and-save-a-business-rule" class="md-nav__link">
+    Create and save a business rule
+  </a>
+  
+    <nav class="md-nav" aria-label="Create and save a business rule">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_7" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description_5" class="md-nav__link">
+    Parameter description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#curl-command-syntax_7" class="md-nav__link">
+    curl command syntax
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_7" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-output_7" class="md-nav__link">
+    Sample output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_7" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-business-rules-instance-with-given-uuid" class="md-nav__link">
+    Update business rules instance with given UUID
+  </a>
+  
+    <nav class="md-nav" aria-label="Update business rules instance with given UUID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview_8" class="md-nav__link">
+    Overview
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameter-description_6" class="md-nav__link">
+    Parameter description
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sample-curl-command_8" class="md-nav__link">
+    Sample curl command
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response_8" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+
+  
+    <a href="https://github.com/wso2/docs-si/edit/main/en/docs/ref/business-Rules-APIs.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/wso2/docs-si/raw/main/en/docs/ref/business-Rules-APIs.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"/></svg>
+    </a>
+  
+
+
+<h1 id="business-rules-apis">Business Rules APIs<a class="headerlink" href="#business-rules-apis" title="Permanent link">&para;</a></h1>
+<h2 id="listing-the-available-business-rule-instances">Listing the available business rule instances<a class="headerlink" href="#listing-the-available-business-rule-instances" title="Permanent link">&para;</a></h2>
+<h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>Description</th>
+<td>Returns the list of business rule instances that are currently available.</td>
+</tr>
+<tr class="even">
+<th>API Context</th>
+<td><code>/business-rules/instances</code></td>
+</tr>
+<tr class="odd">
+<th>HTTP Method</th>
+<td><code>GET</code></td>
+</tr>
+<tr class="even">
+<th>Request/Response Format</th>
+<td>application/json</td>
+</tr>
+<tr class="odd">
+<th>Authentication</th>
+<td>Basic</td>
+</tr>
+<tr class="even">
+<th>Username</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="odd">
+<th>Password</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="even">
+<th>Runtime</th>
+<td>tooling</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="curl-command-syntax">curl command syntax<a class="headerlink" href="#curl-command-syntax" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="s">&quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/business-rules/instances&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-curl-command">Sample curl command<a class="headerlink" href="#sample-curl-command" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="s">&quot;https://localhost:9743/business-rules/instances&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-output">Sample output<a class="headerlink" href="#sample-output" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="w"> </span><span class="s">&quot;Found Business Rules&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Loaded available business rules&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;ruleTemplateUUID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;identifying-continuous-production-decrease&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;timeInterval&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;6&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;timeRangeInput&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;example@email.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;validateTimeRange&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;function validateTimeRange(number) {\n\tif (!isNaN(number) &amp;&amp; (number &gt; 0)) {\n\t\treturn number;\n\t} else {\n\t\tthrow &#39;A positive number expected for time range&#39;;\n\t}\n}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;getUsername&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;function getUsername(email) {\n\tif (email.match(/\\S+@\\S+/g)) {\n\t\tif (email.match(/\\S+@\\S+/g)[0] === email) {\n\t\t\treturn email.split(&#39;@&#39;)[0];\n\t\t}\n\t\tthrow &#39;Invalid email address provided&#39;;\n\t}\n\tthrow &#39;Invalid email address provided&#39;;\n}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;timeRange&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;example&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="s">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;samplesiddhiapp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SampleSiddhiApp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;templateGroupUUID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3432442&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;template&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">]</span>
+</code></pre></div>
+
+<h3 id="response">Response<a class="headerlink" href="#response" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>HTTP Status Code</th>
+<td><p>200 or 404</p>
+<p>For descriptions of the HTTP status codes, see <a href="https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/">HTTP Status Codes</a>.</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="delete-business-rule-with-given-uuid">Delete business rule with given UUID<a class="headerlink" href="#delete-business-rule-with-given-uuid" title="Permanent link">&para;</a></h2>
+<h3 id="overview_1">Overview<a class="headerlink" href="#overview_1" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>Description</th>
+<td>Deletes the business rule with the given UUID. </td>
+</tr>
+<tr class="even">
+<th>API Context</th>
+<td><code>/business-rules/instances/{businessRuleInstanceID}?force-delete=false</code></td>
+</tr>
+<tr class="odd">
+<th>HTTP Method</th>
+<td><code>DELETE</code></td>
+</tr>
+<tr class="even">
+<th>Request/Response Format</th>
+<td>application/json</td>
+</tr>
+<tr class="odd">
+<th>Authentication</th>
+<td>Basic</td>
+</tr>
+<tr class="even">
+<th>Username</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="odd">
+<th>Password</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="even">
+<th>Runtime</th>
+<td>tooling</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="parameter-description">Parameter Description<a class="headerlink" href="#parameter-description" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{businessRuleInstanceID}</code></td>
+<td>The UUID (Uniquely Identifiable ID) of the business rules instance to be deleted.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="curl-command-syntax_1">curl command syntax<a class="headerlink" href="#curl-command-syntax_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">DELETE</span><span class="w"> </span><span class="s">&quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/business-rules/instances/business-rule-1?force-delete=false&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">H</span><span class="w"> </span><span class="s">&quot;accept: application/json&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span>
+</code></pre></div>
+
+<h3 id="sample-curl-command_1">Sample curl command<a class="headerlink" href="#sample-curl-command_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">DELETE</span><span class="w"> </span><span class="s">&quot;https://localhost:9743/business-rules/instances/business-rule-1?force-delete=false&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">H</span><span class="w"> </span><span class="s">&quot;accept: application/json&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span>
+</code></pre></div>
+
+<h3 id="sample-output_1">Sample output<a class="headerlink" href="#sample-output_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="w"> </span><span class="s">&quot;Deletion Successful&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Successfully deleted the business rule&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="o">]</span>
+</code></pre></div>
+
+<h3 id="response_1">Response<a class="headerlink" href="#response_1" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>HTTP Status Code</th>
+<td><p>200 or 404</p>
+<p>For descriptions of the HTTP status codes, see <a href="https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/">HTTP Status Codes</a> .</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="fetch-template-group-with-the-given-uuid">Fetch template group with the given UUID<a class="headerlink" href="#fetch-template-group-with-the-given-uuid" title="Permanent link">&para;</a></h2>
+<h3 id="overview_2">Overview<a class="headerlink" href="#overview_2" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>Description</th>
+<td>Returns the template group that has the given UUID.</td>
+</tr>
+<tr class="even">
+<th>API Context</th>
+<td><code>/business-rules/template-groups/{templateGroupID}</code></td>
+</tr>
+<tr class="odd">
+<th>HTTP Method</th>
+<td><code>GET</code></td>
+</tr>
+<tr class="even">
+<td>Request/Response Format</td>
+<td>application/json
+</td>
+</tr>
+<tr class="odd">
+<td>Authentication</td>
+<td>Basic</td>
+</tr>
+<tr class="even">
+<td>Username</td>
+<td><code>admin</code></td>
+</tr>
+<tr class="odd">
+<td>Password</td>
+<td><code>admin</code></td>
+</tr>
+<tr class="even">
+<td>Runtime</td>
+<td>tooling</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="parameter-description_1">Parameter description<a class="headerlink" href="#parameter-description_1" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{templateGroupID}</code></td>
+<td>The UUID of the template group to be fetched.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="curl-command-syntax_2">curl command syntax<a class="headerlink" href="#curl-command-syntax_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="s">&quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/business-rules/template-groups/{templateGroupID}&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-curl-command_2">Sample curl command<a class="headerlink" href="#sample-curl-command_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="s">&quot;https://localhost:9743/business-rules/template-groups/sweet-factory&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-output_2">Sample output<a class="headerlink" href="#sample-output_2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="w"> </span><span class="s">&quot;Found Template Group&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Loaded template group with uuid &#39;3432442&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3432442&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Sweet Factory&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Configure Sweet Factory Rules&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ruleTemplates&quot;</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;identifying-continuous-production-decrease&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Identify Continuous Production Decrease&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;template&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;instanceCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;many&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;script&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;var timeRange = validateTimeRange(${timeRangeInput});\nvar username = getUsername(&#39;${email}&#39;);\n\n// Validates the input provided for time range\nfunction validateTimeRange(number) {\n\tif (!isNaN(number) &amp;&amp; (number &gt; 0)) {\n\t\treturn number;\n\t} else {\n\t\tthrow &#39;A positive number expected for time range&#39;;\n\t}\n}\n\n// Gets the username from provided email\nfunction getUsername(email) {\n\tif (email.match(/\\S+@\\S+/g)) {\n\t\tif (email.match(/\\S+@\\S+/g)[0] === email) {\n\t\t\treturn email.split(&#39;@&#39;)[0];\n\t\t}\n\t\tthrow &#39;Invalid email address provided&#39;;\n\t}\n\tthrow &#39;Invalid email address provided&#39;;\n}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alert factory managers if rate of production continuously decreases for `X` time period&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;templates&quot;</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;siddhiApp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;@App:name(&#39;SweetFactory-TrendAnalysis&#39;)\n\n@source(type=&#39;http&#39;, @map(type=&#39;json&#39;))\ndefine stream SweetProductionStream (name string, amount double, factoryId int);\n\n@sink(type=&#39;log&#39;, @map(type=&#39;text&#39;, @payload(\&quot;\&quot;\&quot;\nHi ${username},\nProduction at Factory {{ factoryId }} has gone\nfrom {{ initalamout }} to {{ finalAmount }} in ${timeInterval} seconds!\&quot;\&quot;\&quot;)))\ndefine stream ContinousProdReductionStream (factoryId int, initaltime long, finalTime long, initalamout double, finalAmount double);\n\nfrom </span>
+</code></pre></div>
+
+<h3 id="response_2">Response<a class="headerlink" href="#response_2" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>HTTP Status Code</th>
+<td><p>200 or 404</p>
+<p>For descriptions of the HTTP status codes, see <a href="https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/">HTTP Status Codes</a> .</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="fetch-rule-templates-of-the-template-group-with-given-uuid">Fetch rule templates of the template group with given UUID<a class="headerlink" href="#fetch-rule-templates-of-the-template-group-with-given-uuid" title="Permanent link">&para;</a></h2>
+<h3 id="overview_3">Overview<a class="headerlink" href="#overview_3" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>Description</th>
+<td>Returns the rule templates of the template group with the given UUID.</td>
+</tr>
+<tr class="even">
+<th>API Context</th>
+<td><code>/business-rules/template-groups/{templateGroupID}/templates</code></td>
+</tr>
+<tr class="odd">
+<th>HTTP Method</th>
+<td><code>GET</code></td>
+</tr>
+<tr class="even">
+<td>Request/Response Format</td>
+<td>application/json</td>
+</tr>
+<tr class="odd">
+<td>Authentication</td>
+<td>Basic</td>
+</tr>
+<tr class="even">
+<td>Username</td>
+<td><code>admin</code></td>
+</tr>
+<tr class="odd">
+<td>Password</td>
+<td><code>admin</code></td>
+</tr>
+<tr class="even">
+<td>Runtime</td>
+<td>Tooling</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="parameter-description_2">Parameter description<a class="headerlink" href="#parameter-description_2" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{templateGroupID}</code></td>
+<td>The UUID of the template group of which the rule templates need to be fetched.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="curl-command-syntax_3">curl command syntax<a class="headerlink" href="#curl-command-syntax_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="s">&quot;https://localhost:9643/business-rules/template-groups/{templateGroupID}/templates&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-curl-command_3">Sample curl command<a class="headerlink" href="#sample-curl-command_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="s">&quot;https://localhost:9743/business-rules/template-groups/sweet-factory/templates&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-output_3">Sample output<a class="headerlink" href="#sample-output_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"> </span><span class="s2">&quot;Found Rule Templates&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Loaded available rule templates for template group with uuid &#39;3432442&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;identifying-continuous-production-decrease&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Identify Continuous Production Decrease&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;template&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;instanceCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;many&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;script&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;var timeRange = validateTimeRange(${timeRangeInput});\nvar username = getUsername(&#39;${email}&#39;);\n\n// Validates the input provided for time range\nfunction validateTimeRange(number) {\n\tif (!isNaN(number) &amp;&amp; (number &gt; 0)) {\n\t\treturn number;\n\t} else {\n\t\tthrow &#39;A positive number expected for time range&#39;;\n\t}\n}\n\n// Gets the username from provided email\nfunction getUsername(email) {\n\tif (email.match(/\\S+@\\S+/g)) {\n\t\tif (email.match(/\\S+@\\S+/g)[0] === email) {\n\t\t\treturn email.split(&#39;@&#39;)[0];\n\t\t}\n\t\tthrow &#39;Invalid email address provided&#39;;\n\t}\n\tthrow &#39;Invalid email address provided&#39;;\n}&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alert factory managers if rate of production continuously decreases for `X` time period&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;templates&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;siddhiApp&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;@App:name(&#39;SweetFactory-TrendAnalysis&#39;)\n\n@source(type=&#39;http&#39;, @map(type=&#39;json&#39;))\ndefine stream SweetProductionStream (name string, amount double, factoryId int);\n\n@sink(type=&#39;log&#39;, @map(type=&#39;text&#39;, @payload(\&quot;\&quot;\&quot;\nHi ${username},\nProduction at Factory {{ factoryId }} has gone\nfrom {{ initalamout }} to {{ finalA }};&quot;</span><span class="p">}]}]]</span>
+</code></pre></div>
+
+<h3 id="response_3">Response<a class="headerlink" href="#response_3" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>HTTP Status Code</th>
+<td><p>200 or 404</p>
+<p>For descriptions of the HTTP status codes, see <a href="https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/">HTTP Status Codes</a> .</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="fetch-rule-template-of-specific-uuid-available-under-a-template-group-with-specific-uuid">Fetch rule template of specific UUID available under a template group with specific UUID<a class="headerlink" href="#fetch-rule-template-of-specific-uuid-available-under-a-template-group-with-specific-uuid" title="Permanent link">&para;</a></h2>
+<h3 id="overview_4">Overview<a class="headerlink" href="#overview_4" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>Description</th>
+<td>Returns the rule template with the specified UUID that is defined under the template group with the specified UUID.</td>
+</tr>
+<tr class="even">
+<th>API Context</th>
+<td><code>/business-rules/template-groups/{templateGroupID}/templates/{ruleTemplateID}</code></td>
+</tr>
+<tr class="odd">
+<th>HTTP Method</th>
+<td><code>GET</code></td>
+</tr>
+<tr class="even">
+<th>Request/Response Format</th>
+<td>application/json</td>
+</tr>
+<tr class="odd">
+<th>Authentication</th>
+<td>Basic</td>
+</tr>
+<tr class="even">
+<th>Username</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="odd">
+<th>Password</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="even">
+<th>Runtime</th>
+<td>Tooling</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="parameter-description_3">Parameter description<a class="headerlink" href="#parameter-description_3" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{templateGroupID}</code></td>
+<td>The UUID of the template group from which the specified rule template needs to be retrieved.</td>
+</tr>
+<tr>
+<td><code>{ruleTemplateID}</code></td>
+<td>The UUID of the rule template that needs to be retrieved from the specified template group.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="curl-command-syntax_4">curl command syntax<a class="headerlink" href="#curl-command-syntax_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="s">&quot;https://localhost:9743/business-rules/template-groups/{templateGroupID}/templates/{ruleTemplateID}&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-curl-command_4">Sample curl command<a class="headerlink" href="#sample-curl-command_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="s">&quot;https://localhost:9643/business-rules/template-groups/sweet-factory/templates/identifying-continuous-production-decrease&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-output_4">Sample output<a class="headerlink" href="#sample-output_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="w"> </span><span class="s">&quot;Found Rule Template&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Loaded rule template with uuid &#39;identifying-continuous-production-decrease&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;identifying-continuous-production-decrease&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Identify Continuous Production Decrease&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;template&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;instanceCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;many&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;script&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;var timeRange = validateTimeRange(${timeRangeInput});\nvar username = getUsername(&#39;${email}&#39;);\n\n// Validates the input provided for time range\nfunction validateTimeRange(number) {\n\tif (!isNaN(number) &amp;&amp; (number &gt; 0)) {\n\t\treturn number;\n\t} else {\n\t\tthrow &#39;A positive number expected for time range&#39;;\n\t}\n}\n\n// Gets the username from provided email\nfunction getUsername(email) {\n\tif (email.match(/\\S+@\\S+/g)) {\n\t\tif (email.match(/\\S+@\\S+/g)[0] === email) {\n\t\t\treturn email.split(&#39;@&#39;)[0];\n\t\t}\n\t\tthrow &#39;Invalid email address provided&#39;;\n\t}\n\tthrow &#39;Invalid email address provided&#39;;\n}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Alert factory managers if rate of production continuously decreases for `X` time period&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;templates&quot;</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;siddhiApp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;@App:name(&#39;SweetFactory-TrendAnalysis&#39;)\n\n@source(type=&#39;http&#39;, @map(type=&#39;json&#39;))\ndefine stream SweetProductionStream (name string, amount double, factoryId int);\n\n@sink(type=&#39;log&#39;, @map(type=&#39;text&#39;, @payload(\&quot;\&quot;\&quot;\nHi ${username},\nProduction at Factory {{ factoryId }} has gone\nfrom {{ initalamout }} to {{ finalAmount }} in ${timeInterval} seconds!\&quot;\&quot;\&quot;)))\ndefine stream ContinousProdReductionStream (factoryId int, initaltime long, finalTime long, initalamout do</span>
+</code></pre></div>
+
+<h3 id="response_4">Response<a class="headerlink" href="#response_4" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>HTTP Status Code</th>
+<td><p>200 or 404</p>
+<p>For descriptions of the HTTP status codes, see <a href="https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/">HTTP Status Codes</a> .</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="fetch-available-template-groups">Fetch available template groups<a class="headerlink" href="#fetch-available-template-groups" title="Permanent link">&para;</a></h2>
+<h3 id="overview_5">Overview<a class="headerlink" href="#overview_5" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<td>Description</td>
+<th>Returns all the template groups that are currently available in the SI setup.</th>
+</tr>
+<tr class="even">
+<th>API Context</th>
+<td><code>/business-rules/template-groups</code></td>
+</tr>
+<tr class="odd">
+<th>HTTP Method</th>
+<td><code>GET</code></td>
+</tr>
+<tr class="even">
+<th>Request/Response Format</th>
+<td>application/json</td>
+</tr>
+<tr class="odd">
+<th>Authentication</th>
+<td>Basic</td>
+</tr>
+<tr class="even">
+<th>Username</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="odd">
+<th>Password</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="even">
+<th>Runtime</th>
+<td>Tooling</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="curl-command-syntax_5">curl command syntax<a class="headerlink" href="#curl-command-syntax_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="s">&quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/business-rules/template-groups&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-curl-command_5">Sample curl command<a class="headerlink" href="#sample-curl-command_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="s">&quot;https://localhost:9743/business-rules/template-groups&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-output_5">Sample output<a class="headerlink" href="#sample-output_5" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="w"> </span><span class="s">&quot;Found Template Groups&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Loaded available template groups&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stock-exchange&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Stock Exchange&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Domain for stock exchange analytics&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ruleTemplates&quot;</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stock-exchange-input&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Stock Exchange Input&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;input&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;instanceCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;many&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;script&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;configured http source to receive stock exchange updates&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;templates&quot;</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;siddhiApp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;@App:name(&#39;appName1&#39;)\n@Source(type = &#39;http&#39;, receiver.url=&#39;${receiverUrl}&#39;,  basic.auth.enabled=&#39;false&#39;,\n@map(type=&#39;text&#39;))\ndefine stream StockInputStream(symbol string, price float, volume long, name string);&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;exposedStreamDefinition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;define stream StockInputStream(symbol string, price float, volume long, name string);&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;receiverUrl&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;fieldName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Receiver URL&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Enter the URL of the http receiver for text messages. One URL can only be used once&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;defaultValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://localhost:8005/stockInputStream&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stock-exchange-output&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Stock Exchange Output&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;output&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;instanceCount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;many&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;script&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;configured output to log the filtered stock exchange data&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;templates&quot;</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;siddhiApp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;@App:name(&#39;appName2&#39;)\n\ndefine stream StockOutputStream(companyName string, companySymbol string, sellingPrice float);\</span>
+</code></pre></div>
+
+<h3 id="response_5">Response<a class="headerlink" href="#response_5" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>HTTP Status Code</th>
+<td><p>200 or 404</p>
+<p>For descriptions of the HTTP status codes, see <a href="https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/">HTTP Status Codes</a>.</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="fetch-business-rule-instance-with-given-uuid">Fetch business rule instance with given UUID<a class="headerlink" href="#fetch-business-rule-instance-with-given-uuid" title="Permanent link">&para;</a></h2>
+<h3 id="overview_6">Overview<a class="headerlink" href="#overview_6" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<td>Description</td>
+<th>Returns the business rule instance with the given UUID.</th>
+</tr>
+<tr class="even">
+<th>API Context</th>
+<td><code>/business-rules/instances/{businessRuleInstanceID}</code></td>
+</tr>
+<tr class="odd">
+<th>HTTP Method</th>
+<td><code>GET</code></td>
+</tr>
+<tr class="even">
+<th>Request/Response Format</th>
+<td><code>application/json</code>
+</td>
+</tr>
+<tr class="odd">
+<th>Authentication</th>
+<td>Basic</td>
+</tr>
+<tr class="even">
+<th>Username</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="odd">
+<th>Password</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="even">
+<th>Runtime</th>
+<td>Tooling</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="parameter-description_4">Parameter description<a class="headerlink" href="#parameter-description_4" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{businessRuleInstanceID}</code></td>
+<td>The UUID of the business rules instance to be fetched.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="curl-command-syntax_6">curl command syntax<a class="headerlink" href="#curl-command-syntax_6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="s">&quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/business-rules/instances/{businessRuleInstanceID}&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">H</span><span class="w"> </span><span class="s">&quot;accept: application/json&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-curl-command_6">Sample curl command<a class="headerlink" href="#sample-curl-command_6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">GET</span><span class="w"> </span><span class="s">&quot;https://localhost:9743/business-rules/instances/business-rule-1&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">H</span><span class="w"> </span><span class="s">&quot;accept: application/json&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-output_6">Sample output<a class="headerlink" href="#sample-output_6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="o">[</span><span class="w"> </span><span class="s">&quot;Found Business Rule&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Loaded business rule with uuid &#39;sample&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;ruleTemplateUUID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;identifying-continuous-production-decrease&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;timeInterval&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;6&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;timeRangeInput&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;example@email.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;validateTimeRange&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;function validateTimeRange(number) {\n\tif (!isNaN(number) &amp;&amp; (number &gt; 0)) {\n\t\treturn number;\n\t} else {\n\t\tthrow &#39;A positive number expected for time range&#39;;\n\t}\n}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;getUsername&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;function getUsername(email) {\n\tif (email.match(/\\S+@\\S+/g)) {\n\t\tif (email.match(/\\S+@\\S+/g)[0] === email) {\n\t\t\treturn email.split(&#39;@&#39;)[0];\n\t\t}\n\t\tthrow &#39;Invalid email address provided&#39;;\n\t}\n\tthrow &#39;Invalid email address provided&#39;;\n}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;timeRange&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;example&quot;</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="s">&quot;uuid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sample&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Sample&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;templateGroupUUID&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;3432442&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;template&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">]</span>
+</code></pre></div>
+
+<h3 id="response_6">Response<a class="headerlink" href="#response_6" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>HTTP Status Code</th>
+<td><p>200 or 404</p>
+<p>For descriptions of the HTTP status codes, see <a href="https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/">HTTP Status Codes</a>.</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="create-and-save-a-business-rule">Create and save a business rule<a class="headerlink" href="#create-and-save-a-business-rule" title="Permanent link">&para;</a></h2>
+<h3 id="overview_7">Overview<a class="headerlink" href="#overview_7" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>Description</th>
+<th>Creates and saves a business rule.</th>
+</tr>
+<tr class="even">
+<th>API Context</th>
+<td><code>/business-rules/instances?deploy={deploymentStatus}</code></td>
+</tr>
+<tr class="odd">
+<th>HTTP Method</th>
+<td><code>POST</code></td>
+</tr>
+<tr class="even">
+<th>Request/Response Format</th>
+<td><code>application/json</code>
+</td>
+</tr>
+<tr class="odd">
+<th>Authentication</th>
+<td>Basic</td>
+</tr>
+<tr class="even">
+<th>Username</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="odd">
+<th>Password</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="even">
+<th>Runtime</th>
+<td>Tooling</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="parameter-description_5">Parameter description<a class="headerlink" href="#parameter-description_5" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>{deploymentStatus}</code></td>
+<td><br />
+</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="curl-command-syntax_7">curl command syntax<a class="headerlink" href="#curl-command-syntax_7" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+
+<h3 id="sample-curl-command_7">Sample curl command<a class="headerlink" href="#sample-curl-command_7" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">POST</span><span class="w"> </span><span class="s">&quot;https://localhost:9743/business-rules/instances?deploy=true&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">H</span><span class="w"> </span><span class="s">&quot;accept: application/json&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">H</span><span class="w"> </span><span class="s">&quot;content-type: multipart/form-data&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">F</span><span class="w"> </span><span class="err">&#39;</span><span class="n">businessRule</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="s">&quot;Business Rule 5&quot;</span><span class="p">,</span><span class="s">&quot;uuid&quot;</span><span class="p">:</span><span class="s">&quot;business-rule-5&quot;</span><span class="p">,</span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;template&quot;</span><span class="p">,</span><span class="s">&quot;templateGroupUUID&quot;</span><span class="p">:</span><span class="s">&quot;sweet-factory&quot;</span><span class="p">,</span><span class="s">&quot;ruleTemplateUUID&quot;</span><span class="p">:</span><span class="s">&quot;identifying-continuous-production-decrease&quot;</span><span class="p">,</span><span class="s">&quot;properties&quot;</span><span class="p">:{</span><span class="s">&quot;timeInterval&quot;</span><span class="p">:</span><span class="s">&quot;6&quot;</span><span class="p">,</span><span class="s">&quot;timeRangeInput&quot;</span><span class="p">:</span><span class="s">&quot;5&quot;</span><span class="p">,</span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="s">&quot;example@email.com&quot;</span><span class="p">}}</span><span class="err">&#39;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="sample-output_7">Sample output<a class="headerlink" href="#sample-output_7" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+
+<h3 id="response_7">Response<a class="headerlink" href="#response_7" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>HTTP Status Code</th>
+<td><p>200 or 404</p>
+<p>For descriptions of the HTTP status codes, see <a href="https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/">HTTP Status Codes</a> .</p></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="update-business-rules-instance-with-given-uuid">Update business rules instance with given UUID<a class="headerlink" href="#update-business-rules-instance-with-given-uuid" title="Permanent link">&para;</a></h2>
+<h3 id="overview_8">Overview<a class="headerlink" href="#overview_8" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>Description</th>
+<th>Updates the business rules instance with the given UUID. </th>
+</tr>
+<tr class="even">
+<th>API Context</th>
+<td><code>/business-rules/instances/{businessRuleInstanceID}?deploy={deploymentStatus}</code></td>
+</tr>
+<tr class="odd">
+<th>HTTP Method</th>
+<td><code>PUT</code></td>
+</tr>
+<tr class="even">
+<th>Request/Response Format</th>
+<td>application/json</td>
+</tr>
+<tr class="odd">
+<th>Authentication</th>
+<td>Basic</td>
+</tr>
+<tr class="even">
+<th>Username</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="odd">
+<th>Password</th>
+<td><code>admin</code></td>
+</tr>
+<tr class="even">
+<th>Runtime</th>
+<td>Tooling</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="parameter-description_6">Parameter description<a class="headerlink" href="#parameter-description_6" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>{businessRuleInstanceID}</code></td>
+<td>The UUID of the business rules instance to be updated.</td>
+</tr>
+<tr class="even">
+<td><code>{deploymentStatus}</code></td>
+<td><br />
+</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="sample-curl-command_8">Sample curl command<a class="headerlink" href="#sample-curl-command_8" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">curl</span><span class="w"> </span><span class="o">-</span><span class="n">X</span><span class="w"> </span><span class="n">PUT</span><span class="w"> </span><span class="s">&quot;https://localhost:9743/business-rules/instances/business-rule-5?deploy=true&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">H</span><span class="w"> </span><span class="s">&quot;accept: application/json&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">H</span><span class="w"> </span><span class="s">&quot;content-type: application/json&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="err">&#39;</span><span class="p">{</span><span class="s">&quot;name&quot;</span><span class="p">:</span><span class="s">&quot;Business Rule 5&quot;</span><span class="p">,</span><span class="s">&quot;uuid&quot;</span><span class="p">:</span><span class="s">&quot;business-rule-5&quot;</span><span class="p">,</span><span class="s">&quot;type&quot;</span><span class="p">:</span><span class="s">&quot;template&quot;</span><span class="p">,</span><span class="s">&quot;templateGroupUUID&quot;</span><span class="p">:</span><span class="s">&quot;sweet-factory&quot;</span><span class="p">,</span><span class="s">&quot;ruleTemplateUUID&quot;</span><span class="p">:</span><span class="s">&quot;identifying-continuous-production-decrease&quot;</span><span class="p">,</span><span class="s">&quot;properties&quot;</span><span class="p">:{</span><span class="s">&quot;timeInterval&quot;</span><span class="p">:</span><span class="s">&quot;9&quot;</span><span class="p">,</span><span class="s">&quot;timeRangeInput&quot;</span><span class="p">:</span><span class="s">&quot;8&quot;</span><span class="p">,</span><span class="s">&quot;email&quot;</span><span class="p">:</span><span class="s">&quot;newexample@email.com&quot;</span><span class="p">}}</span><span class="err">&#39;</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">admin</span><span class="p">:</span><span class="n">admin</span><span class="w"> </span><span class="o">-</span><span class="n">k</span>
+</code></pre></div>
+
+<h3 id="response_8">Response<a class="headerlink" href="#response_8" title="Permanent link">&para;</a></h3>
+<table>
+<tbody>
+<tr class="odd">
+<th>HTTP Status Code</th>
+<td><p>200 or 404</p>
+<p>For descriptions of the HTTP status codes, see <a href="https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/">HTTP Status Codes</a>.</p></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+                
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5CR98L58" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+      
+        <footer class="md-footer">
+  
+  
+  <nav class="md-footer__inner md-grid" aria-label="Footer" >
+    
+    
+    <a href="../permission-apis/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Permission APIs" rel="prev">
+      <div class="md-footer__button md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </div>
+      <div class="md-footer__title">
+        <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Previous
+                </span>
+          Permission APIs
+        </div>
+      </div>
+    </a>
+    
+    
+    
+    <a href="../store-APIs/" class="md-footer__link md-footer__link--next" aria-label="Next: Store APIs" rel="next">
+      <div class="md-footer__title">
+        <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Next
+                </span>
+          Store APIs
+        </div>
+      </div>
+      <div class="md-footer__button md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+      </div>
+    </a>
+    
+  </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  <div class="footer-copyright-left">
+  
+    <div class="md-copyright__highlight">
+      WSO2 Streaming Integrator - Documentation
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+  </div>
+  <div class="footer-copyright-right">
+    <div class="footer-copyright-top">
+      Copyright &copy; <a href="https://wso2.com/">WSO2</a> LLC (2024)
+    </div>
+    <div class="footer-copyright-bottom">
+      Content licensed under <a href="https://creativecommons.org/licenses/by/4.0">CC By 4.0.</a> | Sample code
+      licensed under <a href="http://www.apache.org/licenses/">Apache 2.0</a>.
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      
+        <script src="../../assets/lib/highlightjs/highlight.min.js"></script>
+      
+        <script src="../../assets/lib/json-formatter/json-formatter.umd.js"></script>
+      
+        <script src="../../assets/js/mitheme.js"></script>
+      
+    
+  </body>
+</html>

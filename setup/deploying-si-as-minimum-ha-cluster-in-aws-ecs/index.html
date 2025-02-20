@@ -1,0 +1,5544 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for WSO2 Streaming Integrator">
+      
+      
+        <meta name="author" content="WSO2">
+      
+      
+      
+        <link rel="prev" href="../deploying-si-as-a-scalable-cluster/">
+      
+      
+        <link rel="next" href="../production-checklist/">
+      
+      <link rel="icon" href="../../images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+    
+    
+      
+        <title>Minimum HA Cluster in AWS ECS - WSO2 Streaming Integrator Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7bf56d0a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Added the font from google fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/lib/highlightjs/styles/vs.min.css">
+    
+      <link rel="stylesheet" href="../../assets/css/blue-palette-alt1.css">
+    
+      <link rel="stylesheet" href="../../assets/css/mitheme.css">
+    
+      <link rel="stylesheet" href="../../assets/lib/json-formatter/json-formatter.css">
+    
+      <link rel="stylesheet" href="../../assets/css/config-catalog.css">
+    
+      <link rel="stylesheet" href="../../assets/lib/fontawesome-free-6.3.0-web/css/all.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){
+    w[l]=w[l]||[];w[l].push({
+      'gtm.start':
+        new Date().getTime(),event:'gtm.js'
+    });var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.setAttributeNode(d.createAttribute('data-ot-ignore'));j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5CR98L58');</script>
+  <!-- End Google Tag Manager -->
+
+    
+    
+  <meta name="google-site-verification" content="pRwRUP0jDUECheRt5DziuVd3gSs2UTw6EhL4nud3NMk" />
+  
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deploying-the-streaming-integrator-as-a-minimum-ha-cluster-in-aws-ecs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      <!--
+ * Copyright (c) 2024, WSO2 LLC. (http://www.wso2.com) All Rights Reserved.
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+-->
+
+
+
+
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header" id="page-header" data-url="" data-lang="en">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="WSO2 Streaming Integrator Documentation"
+       class="md-header__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
+      
+  <img src="../../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+             Streaming Integrator Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Minimum HA Cluster in AWS ECS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    <form class="md-header__option" data-md-component="palette">
+      
+      
+      <input class="md-option" data-md-color-media="(prefers-color-scheme)"
+             data-md-color-scheme="default"
+             data-md-color-primary=""
+             data-md-color-accent="" 
+             aria-label="Switch to dark mode"  type="radio" name="__palette"
+             id="__palette_1">
+      
+      <label class="md-header__button md-icon" title="Switch to dark mode"
+             for="__palette_3" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"/></svg>
+      </label>
+      
+      
+      
+      <input class="md-option" data-md-color-media="(prefers-color-scheme: light)"
+             data-md-color-scheme="default"
+             data-md-color-primary=""
+             data-md-color-accent="" 
+             aria-label="Switch to system preference"  type="radio" name="__palette"
+             id="__palette_2">
+      
+      <label class="md-header__button md-icon" title="Switch to system preference"
+             for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+      
+      
+      
+      <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)"
+             data-md-color-scheme="slate"
+             data-md-color-primary=""
+             data-md-color-accent="" 
+             aria-label="Switch to light mode"  type="radio" name="__palette"
+             id="__palette_3">
+      
+      <label class="md-header__button md-icon" title="Switch to light mode"
+             for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+      
+      
+    </form>
+    
+    
+    
+    <label class="md-header__button md-icon" for="__search">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+    </label>
+    <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+    <div class="md-header__source">
+      <a href="https://github.com/wso2/docs-si" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wso2/docs-streaming-integrator
+  </div>
+</a>
+    </div>
+    
+  </nav>
+  
+  
+  
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../overview/overview/" class="md-tabs__link">
+        Get Started
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../guides/use-cases/" class="md-tabs__link">
+        Learn
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../installing-si-in-vm/" class="md-tabs__link md-tabs__link--active">
+        Setup and Install
+      </a>
+    </li>
+  
+
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../develop/developing-streaming-integration-solutions/" class="md-tabs__link">
+        Develop
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../admin/setting-up-grafana-dashboards/" class="md-tabs__link">
+        Observability
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../connectors/connectors-overview/" class="md-tabs__link">
+        Connectors
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../ref/environment-compatibility/" class="md-tabs__link">
+        References
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../page-not-found/" class="md-tabs__link">
+      
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+  
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="WSO2 Streaming Integrator Documentation" class="md-nav__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
+      
+  <img src="../../images/logo.svg" alt="logo">
+
+    </a>
+    WSO2 Streaming Integrator Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/wso2/docs-si" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wso2/docs-streaming-integrator
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Get Started
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Get Started
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/overview/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/quick-start-guide/" class="md-nav__link">
+        Quick Start Guide
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+          Creating Your First Siddhi Application
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Creating Your First Siddhi Application
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/getting-started-guide-overview/" class="md-nav__link">
+        Streaming Integration Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/download-install-and-start-si/" class="md-nav__link">
+        Step 1: Download and Install Streaming Integrator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/create-the-siddhi-application/" class="md-nav__link">
+        Step 2: Create the Siddhi Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/deploy-siddhi-application/" class="md-nav__link">
+        Step 3: Deploy the Siddhi Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/test-siddhi-application/" class="md-nav__link">
+        Step 4: Run the Siddhi Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/update-the-siddhi-application/" class="md-nav__link">
+        Step 5: Update the Siddhi Application
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/handle-errors/" class="md-nav__link">
+        Step 6: Handle Errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start-guide/getting-started/monitor-statistics/" class="md-nav__link">
+        Step 7: Monitor Statistics
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/architecture/" class="md-nav__link">
+        Architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/concepts/" class="md-nav__link">
+        Key Concepts
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Learn
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Learn
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+          Use Cases
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Use Cases
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/use-cases/" class="md-nav__link">
+        Use Cases Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/extracting-data-from-static-sources-in-real-time/" class="md-nav__link">
+        Extracting Data from Static Sources in Real Time
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/receiving-data-in-transit/" class="md-nav__link">
+        Receiving Data in Transit
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/loading-and-writing-date/" class="md-nav__link">
+        Loading and Writing Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/publishing-data-to-event-stream-consumers/" class="md-nav__link">
+        Publishing Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_1_6" id="__nav_3_1_6_label" tabindex="0">
+          Stream Processing
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_1_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          Stream Processing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/processing-data/" class="md-nav__link">
+        Stream Processing Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/cleansing-data/" class="md-nav__link">
+        Cleansing Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/transforming-data/" class="md-nav__link">
+        Transforming Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/enriching-data/" class="md-nav__link">
+        Enriching Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/summarizing-data/" class="md-nav__link">
+        Summarizing Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/correlating-data/" class="md-nav__link">
+        Correlating Data
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/handling-errors/" class="md-nav__link">
+        Handling Errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/performing-etl-tasks/" class="md-nav__link">
+        Performing ETL Operations
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          Tutorials
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/tutorials-overview/" class="md-nav__link">
+        Tutorials Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/performing-real-time-etl-with-mysql/" class="md-nav__link">
+        Performing Real-time ETL with MySQL
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/performing-real-time-etl-with-files/" class="md-nav__link">
+        Performing Real-time ETL with Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/creating-etl-application-via-tooling/" class="md-nav__link">
+        Creating an ETL Application via SI Tooling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/working-with-kafka/" class="md-nav__link">
+        Working with Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/creating-business-rules-templates/" class="md-nav__link">
+        Working with Business Rules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/integrating-stores/" class="md-nav__link">
+        Integrating Data Stores in Streaming Integration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/exposing-processed-data-as-api/" class="md-nav__link">
+        Exposing Processed Data as API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/handling-requests-with-errors/" class="md-nav__link">
+        Error Handling with Data Streams
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/triggering-integrations-via-micro-integrator/" class="md-nav__link">
+        Triggering Integrations via MI
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/running-si-with-docker-and-kubernetes/" class="md-nav__link">
+        Running SI with Docker and Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          Examples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Examples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_1" id="__nav_3_3_1_label" tabindex="0">
+          Consuming Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Consuming Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveTCPinJSONFormat/" class="md-nav__link">
+        Receiving JSON Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishGooglePubSubMessagesInTextFormat/" class="md-nav__link">
+        Publishing Events to a Google Pub/Sub Topic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/CSVDefaultMapping/" class="md-nav__link">
+        Publishing and Receiving CSV Events via Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/CDCWithListeningMode/" class="md-nav__link">
+        Capturing MySQL Inserts via CDC
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveGooglePubSubMessagesInTextFormat/" class="md-nav__link">
+        Receiving Messages from a Google Pub/Sub Topic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveMQTTInXMLFormat/" class="md-nav__link">
+        Receiving XML events via MQTT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveTCPinBinaryFormat/" class="md-nav__link">
+        Receiving Binary Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveKafkaInBinaryFormat/" class="md-nav__link">
+        Receiving Binary Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHTTPInXMLFormatWithDefaultMapping/" class="md-nav__link">
+        Receiving XML Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/store-influxdb/" class="md-nav__link">
+        Working with an influxDB Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/CDCWithPollingMode/" class="md-nav__link">
+        Capturing MySQL Inserts and Updates via CDC Polling Mode
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestWithRefreshToken/" class="md-nav__link">
+        Publishing HTTP Events to an OAuth-protected Endpoint while Using a Refresh Token Grant Type
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestResponse/" class="md-nav__link">
+        Publishing HTTP Events via an OAuth-protected Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-solr/" class="md-nav__link">
+        Receiving Events via Simulator and Persisting in SOLR Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveAndCount/" class="md-nav__link">
+        Receiving Events via HTTP Transport
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveEventsFromFile/" class="md-nav__link">
+        Receiving Events via File
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveEmailInXmlFormat/" class="md-nav__link">
+        Receiving XML Events via Email
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveRabbitmqInJSONFormat/" class="md-nav__link">
+        Receiving JSON Events via RabbitMQ
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-cassandra/" class="md-nav__link">
+        Receive Events via Simulator and Persist in Cassandra Store
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+          Transforming Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Transforming Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequest/" class="md-nav__link">
+        Publishing HTTP Events to to an OAuth-protected Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestWithoutAccessToken/" class="md-nav__link">
+        Publishing HTTP Events to to an OAuth-protected Endpoint without an Access Token
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHl7InER7Format/" class="md-nav__link">
+        Receiving ER7 Events via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/DataPreprocessing/" class="md-nav__link">
+        Preprocessing Data Received via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHl7InER7Format/" class="md-nav__link">
+        Publishing ER7 Events via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/SweetProductionDataPreprocessing/" class="md-nav__link">
+        Receiving Data via TCP and Preprocessing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/CSVCustomMapping/" class="md-nav__link">
+        Receiving and Publishing Events in Custom CSV Format
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHTTPInJsonFormatWithCustomMapping/" class="md-nav__link">
+        Sending Custom JSON Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishEmailInTextFormat/" class="md-nav__link">
+        Publishing Text Events via Email
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveKafkaInTextFormatWithCustomMapping/" class="md-nav__link">
+        Receiving Custom Text Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Script-js-sample/" class="md-nav__link">
+        Using Javascript Functions in Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishKafkaInCustomAvroFormat/" class="md-nav__link">
+        Publishing Custom Avro Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHl7InXmlFormat/" class="md-nav__link">
+        Receiving Custom XML Messages via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveTCPInTextFormatWithCustomMapping/" class="md-nav__link">
+        Receiving Custom Text Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/RegexExecutionSample/" class="md-nav__link">
+        Identifying Sub-sequences in Input Sequences
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHl7InXmlFormat/" class="md-nav__link">
+        Publishing XML messages via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishKafkaInJsonFormat/" class="md-nav__link">
+        Publishing JSON Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishEventsToFile/" class="md-nav__link">
+        Publishing JSON Events to Files
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHTTPinXMLFormatWithCustomMapping/" class="md-nav__link">
+        Receiving Custom XML Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishRabbitmqInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via RabbitMQ
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/MathExtensionSample/" class="md-nav__link">
+        Rounding up Amounts via the Math Function
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveTCPinTextFormat/" class="md-nav__link">
+        Receiving Text Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishEmailInXmlFormat/" class="md-nav__link">
+        Publishing Emails in XML Format
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/StringExtensionSample/" class="md-nav__link">
+        Converting String Values to Lowercase
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/TextMappingWithInmemoryTransport/" class="md-nav__link">
+        Text Mapping with In-memory Transport
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHTTPInJsonFormatWithDefaultMapping/" class="md-nav__link">
+        Receiving JSON Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/HelloKafka/" class="md-nav__link">
+        Consuming Events from a Kafka Topic and Publishing to Another Kafka Topic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpInXmlFormatWithCustomMapping/" class="md-nav__link">
+        Publishing Custom XML Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/SNMPSetRequestApp/" class="md-nav__link">
+        Sending Custom Keyvalue Events via SNMP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishTcpInJsonFormat/" class="md-nav__link">
+        Publishing JSON Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestWithOAuthUser/" class="md-nav__link">
+        Publishing HTTP Events to an OAuth-protected Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/MapExtensionSample/" class="md-nav__link">
+        Inserting and Accessing Data in a Map
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishJmsInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via JMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveJMSInJsonFormat/" class="md-nav__link">
+        Receiving JSON Events via JMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHTTPInJsonFormatWithCustomMapping/" class="md-nav__link">
+        Receiving Custom JSON Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+          Enriching Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Enriching Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ExtremaBottomK/" class="md-nav__link">
+        Counting the Frequency of Values with BottomK
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/GplNLPFindNameEntityType/" class="md-nav__link">
+        Extracting Values from a String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/JoinWithStoredData/" class="md-nav__link">
+        Joining Streaming Data with Stored Data in RDBMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Script-js-sample/" class="md-nav__link">
+        Using Javascript Functions in Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/store-hbase/" class="md-nav__link">
+        Receiving Events via Simulator and Persisting in a Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/HttpRequestResponseSample/" class="md-nav__link">
+        Publishing HTTP Requests, Receiving Responses, and Processing Them
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/UnitConversionExtentionSample/" class="md-nav__link">
+        Converting Units
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/execution-geo-sample/" class="md-nav__link">
+        Processing Geo Data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ClusTreeTestApp/" class="md-nav__link">
+        Performing Streaming Learning Using a Clustree Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveWebSocketInXMLFormat/" class="md-nav__link">
+        Receiving XML Events via Websocket
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_4" id="__nav_3_3_4_label" tabindex="0">
+          Aggregating Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Aggregating Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/DataPreprocessing/" class="md-nav__link">
+        Preprocessing Data Received via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/SweetProductionDataPreprocessing/" class="md-nav__link">
+        Receiving Data via TCP and Preprocessing
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishEmailInTextFormat/" class="md-nav__link">
+        Publishing Text Events via Email
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/AggregateOverTime/" class="md-nav__link">
+        Calculating Aggregations Over Time
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveAndCount/" class="md-nav__link">
+        Receiving Events via HTTP Transport
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/AggregateDataIncrementally/" class="md-nav__link">
+        Aggregating Data Incrementally
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-redis/" class="md-nav__link">
+        Receiving Events and Persisting Them in Redis Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/store-mongodb/" class="md-nav__link">
+        Receiving Events and Persisting in MongoDB Store
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_5" id="__nav_3_3_5_label" tabindex="0">
+          Correlating Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Correlating Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PmmlModelProcessor/" class="md-nav__link">
+        Making Predictions via PMML Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/StreamingRegressor/" class="md-nav__link">
+        Making Predictions via a Regressor Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/GplNLPFindNameEntityType/" class="md-nav__link">
+        Extracting Values from a String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/TensorFlowTestApp/" class="md-nav__link">
+        Performing Regression Tasks via an Imported Tensorflow Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishMqttInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via MQTT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PatternMatching/" class="md-nav__link">
+        Identifying Event Patterns Based On Order of Event Arrival
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/StreamingKMeansSample/" class="md-nav__link">
+        Using StreamingML Kmeans for Clustering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceivePrometheusMetrics/" class="md-nav__link">
+        Receiving Prometheus Metrics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/hoeffding-adaptive-tree-sample/" class="md-nav__link">
+        Making Predictions via Hoeffding Classifier Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/SNMPGetRequestApp/" class="md-nav__link">
+        Receiving Custom Key Value Events via SNMP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveJMSInKeyvalueFormat/" class="md-nav__link">
+        Receiving Key Value Events via JMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/IBMMessageQueue/" class="md-nav__link">
+        Consuming Messages from IBM Message Queues
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/AlertsAndThresholds/" class="md-nav__link">
+        Receiving Email Alerts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/streaming-perceptron-sample/" class="md-nav__link">
+        Making Predictions via a Streaming Perceptron Model
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/GeoDistanceCalculation/" class="md-nav__link">
+        Calculating the Distance Between Two Locations
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3_6" id="__nav_3_3_6_label" tabindex="0">
+          Publishing Data
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          Publishing Data
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishTcpInTextFormat/" class="md-nav__link">
+        Publishing Text Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/ReceiveHl7InER7Format/" class="md-nav__link">
+        Receiving ER7 Events via HL7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishGooglePubSubMessagesInTextFormat/" class="md-nav__link">
+        Publishing Events to a Google Pub/Sub Topic
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishTcpInBinaryFormat/" class="md-nav__link">
+        Publishing Binary Events via TCP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishWebSocketInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via WebSocket
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishPrometheusMetricsHTTPServer/" class="md-nav__link">
+        Publishing Consumed Events to Prometheus Metrics and Exposing then via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/store-influxdb/" class="md-nav__link">
+        Working with an influxDB Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishKafkaInBinaryFormat/" class="md-nav__link">
+        Publishing Binary Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishJmsInKeyvalueFormat/" class="md-nav__link">
+        Publishing Key-value events via JMS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpInXmlFormat/" class="md-nav__link">
+        Publishing XML Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestWithRefreshToken/" class="md-nav__link">
+        Publishing HTTP Events to an OAuth-protected Endpoint while Using a Refresh Token Grant Type
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpOAuthRequestResponse/" class="md-nav__link">
+        Publishing HTTP Events via an OAuth-protected Endpoint
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-solr/" class="md-nav__link">
+        Receiving Events via Simulator and Persisting in SOLR Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishHttpInJsonFormat/" class="md-nav__link">
+        Publishing JSON Events via HTTP
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-rdbms/" class="md-nav__link">
+        Receiving Events via Simulator and Persisting in RDBMS Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/Store-cassandra/" class="md-nav__link">
+        Receive Events via Simulator and Persist in Cassandra Store
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/PublishKafkaInAvroFormatUsingSchemaRegistry/" class="md-nav__link">
+        Publishing Avro Events via Kafka
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/AmazonS3SinkSample/" class="md-nav__link">
+        Publishing Aggregated Events to the Amazon AWS S3 Bucket
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../samples/GCSSinkSample/" class="md-nav__link">
+        Publishing Events to a GCS Bucket
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Setup and Install
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Setup and Install
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+          Install
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Install
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1_1" id="__nav_4_1_1_label" tabindex="0">
+          Installing the Streaming Integrator
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          Installing the Streaming Integrator
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installing-si-in-vm/" class="md-nav__link">
+        Installing via the Installer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installing-si-binary/" class="md-nav__link">
+        Installing via the Binary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installing-as-a-windows-service/" class="md-nav__link">
+        Installing as a Windows Service
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installing-si-as-a-linux-service/" class="md-nav__link">
+        Installing as a Linux Service
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/downloading-and-Installing-Siddhi-Extensions/" class="md-nav__link">
+        Installing Siddhi Extensions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_1_3" id="__nav_4_1_3_label" tabindex="0">
+          Running the Streaming Integrator in Containers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Running the Streaming Integrator in Containers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installing-si-using-docker/" class="md-nav__link">
+        Installing in Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installing-si-using-kubernetes/" class="md-nav__link">
+        Installing in Kubernetes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          Migrate
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Migrate
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrading-wso2-ei/" class="md-nav__link">
+        Upgrading WSO2 Enterprise Integrator
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          Deploy
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Deploy
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploying-si-as-a-single-deployment/" class="md-nav__link">
+        Single Deployment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploying-si-as-minimum-ha-cluster/" class="md-nav__link">
+        Minimum HA Cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploying-si-as-an-active-active-deployment/" class="md-nav__link">
+        Active-Active Cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deploying-si-as-a-scalable-cluster/" class="md-nav__link">
+        Scalable Cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Minimum HA Cluster in AWS ECS
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Minimum HA Cluster in AWS ECS
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assigning-the-active-and-passive-statuses-to-nodes" class="md-nav__link">
+    Assigning the Active and Passive statuses to nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operating-the-nodes" class="md-nav__link">
+    Operating the nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handling-the-failure-of-the-active-node" class="md-nav__link">
+    Handling the failure of the active node
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-the-si-cluster-in-aws-ecs" class="md-nav__link">
+    Setting up the SI cluster in AWS ECS
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up the SI cluster in AWS ECS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-store-si-docker-images-in-ecr" class="md-nav__link">
+    Step 1: Store SI Docker images in ECR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-create-rds-for-persisting-and-clustering-requirements" class="md-nav__link">
+    STEP 2: Create RDS for persisting and clustering requirements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-set-up-ecs-cluster-tasks-and-services" class="md-nav__link">
+    Step 3: Set up ECS cluster, tasks and services
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          Set-up
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Set-up
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../production-checklist/" class="md-nav__link">
+        Production Checklist
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuring-data-sources/" class="md-nav__link">
+        Configuring Datasources
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuring-business-rules-deployment/" class="md-nav__link">
+        Configuring Business Rules Deployment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/general-data-protection-regulations/" class="md-nav__link">
+        General Data Protection Regulations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/working-with-Keystores/" class="md-nav__link">
+        Working with Keystores
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/supporting-different-transports/" class="md-nav__link">
+        Supporting Different Transports
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/user-management/" class="md-nav__link">
+        User Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/configuring-Database-and-File-System-State-Persistence/" class="md-nav__link">
+        Configuring State Persistence
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/configuring-Cluster-Coordination/" class="md-nav__link">
+        Configuring Cluster Coordination
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/protecting-sensitive-data-via-the-secure-vault/" class="md-nav__link">
+        Protecting Sensitive Data via the Secure Vault
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/adding-third-party-non-osgi-libraries/" class="md-nav__link">
+        Adding Third Party Non OSGi Library
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/configuring-default-ports/" class="md-nav__link">
+        Configuring Default Ports
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../change-hostname-and-context-path/" class="md-nav__link">
+        Changing the Host Name and Context Path of Web UI Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/monitoring-received-events-count-via-logs/" class="md-nav__link">
+        Enabling Logs for Received Event Count
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Develop
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Develop
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/developing-streaming-integration-solutions/" class="md-nav__link">
+        Developing Streaming Integrator Solutions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+          Streaming Integrator Tooling
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Streaming Integrator Tooling
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/streaming-integrator-studio-overview/" class="md-nav__link">
+        Streaming Integrator Tooling Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/working-with-the-Design-View/" class="md-nav__link">
+        Working with the Design View
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/creating-a-Siddhi-Application/" class="md-nav__link">
+        Creating Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/installing-siddhi-extensions/" class="md-nav__link">
+        Installing Siddhi Extensions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/testing-a-Siddhi-Application/" class="md-nav__link">
+        Testing Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/deploying-Streaming-Applications/" class="md-nav__link">
+        Deploying Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/exporting-Siddhi-Applications/" class="md-nav__link">
+        Exporting Siddhi Applications
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Observability
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Observability
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+          Monitoring SI via Dashboards
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Monitoring SI via Dashboards
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/setting-up-grafana-dashboards/" class="md-nav__link">
+        Configuring Dashboards
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/managing-grafana-dashboards/" class="md-nav__link">
+        Managing Dashboards
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1_3" id="__nav_6_1_3_label" tabindex="0">
+          Monitoring WSO2 SI
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_1_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_1_3">
+          <span class="md-nav__icon md-icon"></span>
+          Monitoring WSO2 SI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/monitoring-si-performance-via-grafana/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-overall-statistics/" class="md-nav__link">
+        Viewing Overall Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-server-statistics/" class="md-nav__link">
+        Viewing Server Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-stream-statistics/" class="md-nav__link">
+        Viewing Stream Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-source-statistics/" class="md-nav__link">
+        Viewing Source Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-sink-statistics/" class="md-nav__link">
+        Viewing Query Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-window-statistics/" class="md-nav__link">
+        Viewing Window Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-trigger-statistics/" class="md-nav__link">
+        Viewing Trigger Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-table-statistics/" class="md-nav__link">
+        Viewing Table Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-aggregation-statistics/" class="md-nav__link">
+        Viewing Aggregation Statistics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-on-demand-query-statistics/" class="md-nav__link">
+        Viewing On Demand Query Statistics
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../admin/viewing-dashboards/" class="md-nav__link">
+        Monitoring ETL Flows
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          Connectors
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Connectors
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/connectors-overview/" class="md-nav__link">
+        Streaming Integrator Connectors Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/downloading-and-Installing-Siddhi-Extensions/" class="md-nav__link">
+        Downloading and Installing Siddhi Connectors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/writing-Custom-Siddhi-Extensions/" class="md-nav__link">
+        Writing Custom Siddhi Extensions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../connectors/configuring-System-Parameters-for-Siddhi-Extensions/" class="md-nav__link">
+        Configuring System Parameters for Siddhi Extensions
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          References
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          References
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/environment-compatibility/" class="md-nav__link">
+        Environment Compatibility
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+          Streaming Integration REST API Guide
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          Streaming Integration REST API Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/rest-api-guide-overview/" class="md-nav__link">
+        REST API Guide Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/siddhi-Application-Management-APIs/" class="md-nav__link">
+        Siddhi Application Management APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/permission-apis/" class="md-nav__link">
+        Permission APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/business-Rules-APIs/" class="md-nav__link">
+        Business Rules APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/store-APIs/" class="md-nav__link">
+        Store APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/healthcheck-APIs/" class="md-nav__link">
+        Healthcheck APIs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/hTTP-Status-Codes/" class="md-nav__link">
+        HTTP Status Codes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ref/performance-analysis-results/" class="md-nav__link">
+        Performance Analysis Results
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../page-not-found/" class="md-nav__link">
+        
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assigning-the-active-and-passive-statuses-to-nodes" class="md-nav__link">
+    Assigning the Active and Passive statuses to nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operating-the-nodes" class="md-nav__link">
+    Operating the nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handling-the-failure-of-the-active-node" class="md-nav__link">
+    Handling the failure of the active node
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-the-si-cluster-in-aws-ecs" class="md-nav__link">
+    Setting up the SI cluster in AWS ECS
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up the SI cluster in AWS ECS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-store-si-docker-images-in-ecr" class="md-nav__link">
+    Step 1: Store SI Docker images in ECR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-create-rds-for-persisting-and-clustering-requirements" class="md-nav__link">
+    STEP 2: Create RDS for persisting and clustering requirements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-set-up-ecs-cluster-tasks-and-services" class="md-nav__link">
+    Step 3: Set up ECS cluster, tasks and services
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+
+  
+    <a href="https://github.com/wso2/docs-si/edit/main/en/docs/setup/deploying-si-as-minimum-ha-cluster-in-aws-ecs.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/wso2/docs-si/raw/main/en/docs/setup/deploying-si-as-minimum-ha-cluster-in-aws-ecs.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"/></svg>
+    </a>
+  
+
+
+<h1 id="deploying-the-streaming-integrator-as-a-minimum-ha-cluster-in-aws-ecs">Deploying the Streaming Integrator as a Minimum HA Cluster in AWS ECS<a class="headerlink" href="#deploying-the-streaming-integrator-as-a-minimum-ha-cluster-in-aws-ecs" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>This section explains how to run WSO2 Streaming Integrator as a minimum HA (High Availability) cluster in AWS (Amazon Web Services) ECS(Elastic Container Service).</p>
+<p>The minimum HA cluster typically has two nodes where one node operates as the active node and the other as the passive node. Each node maintains a communication link with the other node as well as with the database.</p>
+<h3 id="assigning-the-active-and-passive-statuses-to-nodes">Assigning the Active and Passive statuses to nodes<a class="headerlink" href="#assigning-the-active-and-passive-statuses-to-nodes" title="Permanent link">&para;</a></h3>
+<p><img alt="Assign Node Active or Passive Status" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/assigning-node-status.png" /></p>
+<p>When a node is started in the minimum HA cluster mode, it checks the tables in the <code>WSO2_CLUSTER_DB</code> database. This check covers checking whether there are existing members in the cluster. If other nodes already exist as members of the cluster, it checks whether there are heartbeats from the existing member(s) for the last time interval that is of the same length as the specified heartbeat interval. If no heartbeat exists for the specified time interval, the node is added to the cluster as the active node. If not, it is added as the passive node.</p>
+<p>Once a node becomes the active node, it performs the following:</p>
+<ul>
+<li>Inserts its own details in the <code>WSO2_CLUSTER_DB</code> database or updates them if they already exist. The details include <code>nodeId</code>, <code>clusterGroup</code>, <code>propertyMap</code>, and <code>heartbeatTimestamp</code>.<br/></li>
+<li>Periodically updates the appropriate table of the <code>WSO2_CLUSTER_DB</code> database with its heartbeat (timestamp).<br/></li>
+<li>Starts the Siddhi applications in runtime and opens all the ports mentioned in the Siddhi applications.<br/></li>
+<li>Starts the binary and thrift transports.<br/></li>
+<li>Starts the REST endpoints.<br/></li>
+<li>Once a new member (i.e., passive node) joins the cluster, the active node checks the <code>WSO2_CLUSTER_DB</code> database for the host and port of ther other member's event syncing server. Once this information is retrieved, it sends the input events received by the cluster to that event syncing server.</li>
+</ul>
+<h3 id="operating-the-nodes">Operating the nodes<a class="headerlink" href="#operating-the-nodes" title="Permanent link">&para;</a></h3>
+<p>When the cluster is running with both the nodes, the active node sends each event received by the cluster to the passive node's event sync server with the event timestamp. It also persists the state (windows, sequences, patterns, aggregations, etc.,) in the database named <code>PERSISTENSE_DB</code>.
+Each time the state is persisted, the active node sends a control message to the passive node.</p>
+<p>The passive node saves the events sent to its event sync server in a queue. When it receives the control message from the active node, it trims the queue to keep only the latest events that were not used by the active node to build the state of Siddhi applications at the time of persisting the state.</p>
+<h3 id="handling-the-failure-of-the-active-node">Handling the failure of the active node<a class="headerlink" href="#handling-the-failure-of-the-active-node" title="Permanent link">&para;</a></h3>
+<p>The passive node continuously monitors the heartbeat of the active node. If the active node fails, the passive node follows the process shown below to start functioning as the active node so that data is not lost due to node failure.</p>
+<p><img alt="Passive Node Becomes Active" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/passive-node-becomes-active-process.png" /></p>
+<p>The following table explains the above steps.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Step</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Start Siddhi Application Runtime</td>
+<td>This is done without opening any ports mentioned in Siddhi applications. This is because the Siddhi application statuses need to be restored to what they were before the node failure so that unprocessed events before the failure are not lost.</td>
+</tr>
+<tr>
+<td>2. Restore State</td>
+<td>This is done by retrieving the states persisted in the <code>PERSISTENSE_DB</code> database.</td>
+</tr>
+<tr>
+<td>3. Direct Events in Queue to Streams</td>
+<td>The unprocessed events that are currently in the queue of the event sync server are directed into the relevant streams of the Siddhi applications.</td>
+</tr>
+<tr>
+<td>4. Open Ports, Binary &amp; Thrift Transports,<br/> and REST Endpoints</td>
+<td>Once the above steps are completed, the previously passive and now active node opens the ports, starts the thrift and binary transports, and opens the REST endpoints.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="setting-up-the-si-cluster-in-aws-ecs">Setting up the SI cluster in AWS ECS<a class="headerlink" href="#setting-up-the-si-cluster-in-aws-ecs" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Before you begin:</p>
+<p>In order to deploy WSO2 Streaming Integrator in AWS ECS, you need to complete the following requisites:<br/>
+ - <a href="https://portal.aws.amazon.com">create an account in AWS</a>.
+ - <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">Download and install AWS CLI Version 2</a>.
+ - Download and install Docker. For instructions, see <a href="https://docs.docker.com/install/">Docker Documentation</a>.</p>
+</div>
+<h3 id="step-1-store-si-docker-images-in-ecr">Step 1: Store SI Docker images in ECR<a class="headerlink" href="#step-1-store-si-docker-images-in-ecr" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Generate an access key and a secret key.</p>
+<ol>
+<li>
+<p>Sign in to the IAM console via the AWS console. Under <strong>Access Management</strong>, click <strong>Users</strong>.</p>
+<p><img alt="AWS IAM console" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/aws-iam-console.png" /></p>
+<p>Then click <strong>Add User</strong> in the page that appears, and enter information as follows.</p>
+<ol>
+<li>
+<p>In the <strong>User name</strong> field, enter a valid email address. Under <strong>Access Type</strong>, select the <strong>Programmatic Access</strong> check box. Then click <strong>Next:Permissions</strong>.</p>
+<p><img src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/add-user.png" alt="Create Group" border="5"></p>
+</li>
+<li>
+<p>Add the user you are creating to a relevant group. In this example, let's create a new group. To do this, click <strong>Create Group</strong> and open the <strong>CreateGroup</strong> dialog box. Then enter a name for the group, select the <strong>AdministratorAccess</strong> check box, and then click <strong>Create Group</strong>.
+    <img alt="Create Group" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/create-group.png" /></p>
+<p>Click <strong>Next:Tags</strong>, and in the next page click <strong>Next:Review</strong>.</p>
+</li>
+<li>
+<p>Review the information you have entered for the user. If you want to change anything, go back to the relevant previous page. If not, click <strong>Create User</strong> to save the information and create the user.</p>
+<p>Once you create the user, you can get the access key and the secret key as shown below.</p>
+<p><img alt="Get access keys and secret key" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/get-access-key-and-secret-key.png" /></p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>Issue the following command in the terminal to configure AWS.</p>
+<p><code>aws configure</code></p>
+<p>You are prompted for the <code>AWS Access Key ID</code>, <code>AWS Secret Access Key</code>, <code>Default region name</code>, and <code>Default output format</code>. For this example, you can enter the following values.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Requested Information</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AWS Access Key ID</code></td>
+<td>Enter the access key that you generated when you created the AWS user.</td>
+</tr>
+<tr>
+<td><code>AWS Secret Access Key [None]</code></td>
+<td>Enter the secret key that you generated when you created the AWS user.</td>
+</tr>
+<tr>
+<td><code>Default region name</code></td>
+<td><code>us-east-2</code>.</td>
+</tr>
+<tr>
+<td><code>Default output format</code></td>
+<td><code>json</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Create a repository in the ECR (Elastic Container Registry).</p>
+<ol>
+<li>
+<p>Access AWS ECR (Elastic Container Registry) via the AWS Console.</p>
+</li>
+<li>
+<p>To create a new repository, click <strong>Create a repository</strong> -&gt; <strong>Get Started</strong>. The <strong>Create Repository</strong> page opens.</p>
+</li>
+<li>
+<p>For this example, enter <code>wso2</code> as the repository name and click <strong>Create repository</strong> to create the repository.</p>
+<p>The repository is created as shown below.</p>
+<p><img alt="Repository Created" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/created-repository.png" /></p>
+</li>
+<li>
+<p>To retrieve an authentication token and authenticate your Docker client to your registry, do the following:</p>
+<ol>
+<li>
+<p>In the <strong>Repositories</strong> page, click <strong>View push commands</strong>.</p>
+</li>
+<li>
+<p>Copy the command given under <strong>Retrieve an authentication token and authenticate your Docker client to your registry.</strong>. This command is similar to the following example.
+    <code>aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 627334729308.dkr.ecr.us-east-2.amazonaws.com/wso2</code></p>
+</li>
+<li>
+<p>Issue the command you copied in the AWS CLI. The following message appears in the CLI.</p>
+<p><code>Login Succeeded</code></p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>Build Docker images with SI configurations as follows:</p>
+<ol>
+<li>
+<p>Edit the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file as follows.</p>
+<ol>
+<li>
+<p>In the <code>state.persistence</code> section, update the following parameters.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Parameter</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>persistenceStore</code></td>
+<td><code>org.wso2.carbon.streaming.integrator.core.persistence.DBPersistenceStore</code></td>
+</tr>
+<tr>
+<td><code>datasource</code></td>
+<td><code>PERSISTENCE_DB</code></td>
+</tr>
+<tr>
+<td><code>table</code></td>
+<td><code>PERSISTENCE_TABLE</code></td>
+</tr>
+</tbody>
+</table>
+<details class="tip"><summary>Click here to view the updated <code>state.persistence</code> section.</summary><div class="highlight"><pre><span></span><code>state.persistence:
+  enabled: true
+  intervalInMin: 1
+  revisionsToKeep: 2
+  persistenceStore: org.wso2.carbon.streaming.integrator.core.persistence.DBPersistenceStore
+  config:
+    datasource: PERSISTENCE_DB
+    table: PERSISTENCE_TABLE
+</code></pre></div>
+
+</details>
+</li>
+<li>
+<p>In the <code>wso2.datasources:</code> section, add two data sources named <code>PERSISTENCE_DB</code> and <code>WSO2_CLUSTER_DB</code> as follows.</p>
+<div class="highlight"><pre><span></span><code>    - name: PERSISTENCE_DB
+      description: The MySQL datasource used for persistence
+      jndiConfig:
+        name: jdbc/PERSISTENCE_DB
+      definition:
+        type: RDBMS
+        configuration:
+          jdbcUrl: &#39;jdbc:mysql://wso2db.cxtsxcdgcayr.ap-south-1.rds.amazonaws.com:3306/persistencedb?useSSL=false&#39;
+          username: root
+          password: rootroot
+          driverClassName: com.mysql.jdbc.Driver
+          maxPoolSize: 50
+          idleTimeout: 60000
+          connectionTestQuery: SELECT 1
+          validationTimeout: 30000
+          isAutoCommit: false
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>    - name: WSO2_CLUSTER_DB
+      description: The MySQL datasource used for persistence
+      jndiConfig:
+        name: jdbc/WSO2_CLUSTER_DB
+      definition:
+        type: RDBMS
+        configuration:
+          jdbcUrl: &#39;jdbc:mysql://wso2db.cxtsxcdgcayr.ap-south-1.rds.amazonaws.com:3306/clusterdb?useSSL=false&#39;
+          username: root
+          password: rootroot
+          driverClassName: com.mysql.jdbc.Driver
+          maxPoolSize: 50
+          idleTimeout: 60000
+          connectionTestQuery: SELECT 1
+          validationTimeout: 30000
+          isAutoCommit: false
+</code></pre></div>
+
+</li>
+<li>
+<p>To enable clustering and update strategy configuration values, update the <code>cluster.config</code> section as follows:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Parameter</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>groupId</code></td>
+<td><code>si</code></td>
+</tr>
+<tr>
+<td><code>coordinationStrategyClass</code></td>
+<td><code>org.wso2.carbon.cluster.coordinator.rdbms.RDBMSCoordinationStrategy</code></td>
+</tr>
+<tr>
+<td><code>datasource</code></td>
+<td><code>WSO2_CLUSTER_DB</code></td>
+</tr>
+<tr>
+<td><code>heartbeatInterval</code></td>
+<td><code>5000</code></td>
+</tr>
+<tr>
+<td><code>heartbeatMaxRetry</code></td>
+<td><code>5</code></td>
+</tr>
+<tr>
+<td><code>eventPollingInterval</code></td>
+<td><code>5000</code></td>
+</tr>
+</tbody>
+</table>
+<details class="tip"><summary>Click here to view the updated <code>cluster.config:</code> section.</summary><div class="highlight"><pre><span></span><code>    cluster.config:
+      enabled: true
+      groupId:  si
+      coordinationStrategyClass: org.wso2.carbon.cluster.coordinator.rdbms.RDBMSCoordinationStrategy
+      strategyConfig:
+        datasource: WSO2_CLUSTER_DB
+        heartbeatInterval: 5000
+        heartbeatMaxRetry: 5
+        eventPollingInterval: 5000
+</code></pre></div>
+
+</details>
+</li>
+<li>
+<p>Uncomment the <code>deployment.config:</code> section and edit the parameters as follows:</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>Parameter</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>ha</code></td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td><code>localhost</code></td>
+</tr>
+<tr>
+<td><code>advertisedHost</code></td>
+<td><code>localhost</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Clone the <code>docker-ei</code> repository by issuing the following command.</p>
+<p><code>git clone https://github.com/wso2/docker-ei</code></p>
+</li>
+<li>
+<p>In the <code>docker-ei/alpine/streaming-integrator/docker-entrypoint.sh</code> file, enter the following code before the <code># start WSO2 server</code> comment.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>In this example, it is assumed that you are using <code>alpine</code>. You can also use <code>centos</code> or <code>ubuntu</code>.</p>
+</div>
+<div class="highlight"><pre><span></span><code>IP=$(ifconfig eth0 | grep &quot;inet addr&quot; | cut -d &#39;:&#39; -f 2 | cut -d &#39; &#39; -f 1)
+DEPLOYMENT_YAML=${WSO2_SERVER_HOME}/conf/server/deployment.yaml
+echo &quot;$IP&quot;
+sed -i &quot;s/localhost/$IP/&quot; &quot;$DEPLOYMENT_YAML&quot;
+</code></pre></div>
+
+<p>This gets the IP address of the host machine and replaces it in the HA configuration in the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file.</p>
+</li>
+<li>
+<p>Make a copy of the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file you edited and paste it in <code>docker-ei/dockerfiles/alpine/streaming-integrator</code> directory.</p>
+</li>
+<li>
+<p>In the <code>docker-ei/dockerfiles/alpine/streaming-integrator/deployment.yaml</code> file, under <code>wso2.carbon:</code>, change value for the <code>id</code> parameter to <code>wso2-si-1</code>.</p>
+<p><code>id: wso2-si-1</code></p>
+</li>
+<li>
+<p>To build the Docker image for node 1, navigate to the <code>docker-ei/dockerfiles/alpine/streaming-integrator</code> directory and issue the following command.</p>
+<p><code>docker build -t wso2si:1.0.0-alpine-ha1 .</code></p>
+<p>Once the build is successfully executed, a message similar to the following appears in the CLI.</p>
+<p><img alt="build 1 successfully executed" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/build-node-1-executed.png" /></p>
+</li>
+<li>
+<p>In the <code>docker-ei/dockerfiles/alpine/streaming-integrator/deployment.yaml</code> file, under <code>wso2.carbon</code>, change value for the <code>id</code> parameter to <code>wso2-si-2</code>.</p>
+<p><code>id: wso2-si-2</code></p>
+<p>This is because, now you are using the same repository to build the Docker image for node 2.</p>
+</li>
+<li>
+<p>To build the Docker image for node 2, navigate to the <code>docker-ei/dockerfiles/alpine/streaming-integrator</code> directory and issue the following command.</p>
+<p><code>docker build -t wso2si:1.0.0-alpine-ha2 .</code></p>
+<p>Once the build is successfully executed, a message similar to the following appears in the CLI.</p>
+<p><img alt="build 2 successfully executed" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/build-node-2-executed.png" /></p>
+</li>
+<li>
+<p>To tag the built images, issue the following commands.</p>
+<p><code>docker tag wso2si:1.0.0-alpine-ha2 &lt;AWS_ACCOUNT_NUMBER&gt;.dkr.ecr.us-east-2.amazonaws.com/wso2:ha1</code></p>
+<p><code>docker tag wso2si:1.0.0-alpine-ha1 &lt;AWS_ACCOUNT_NUMBER&gt;.dkr.ecr.us-east-2.amazonaws.com/wso2:ha2</code></p>
+</li>
+<li>
+<p>To push the images, issue the following commands.</p>
+<p><code>docker push &lt;AWS_ACCOUNT_NUMBER&gt;.dkr.ecr.us-east-2.amazonaws.com/wso2:ha1</code></p>
+<p><code>docker push &lt;AWS_ACCOUNT_NUMBER&gt;.dkr.ecr.us-east-2.amazonaws.com/wso2:ha2</code></p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="step-2-create-rds-for-persisting-and-clustering-requirements">STEP 2: Create RDS for persisting and clustering requirements<a class="headerlink" href="#step-2-create-rds-for-persisting-and-clustering-requirements" title="Permanent link">&para;</a></h3>
+<p>To create a Amazon RDS (Relational Database Service) for the purpose of persisting data handled by the cluster, follow the procedure below:</p>
+<ol>
+<li>
+<p>Access Amazon RDS via the AWS console.</p>
+</li>
+<li>
+<p>To add a parameter group and change the value for the <code>max_connections</code> parameter for it, follow the procedure below:</p>
+<ol>
+<li>
+<p>In the left navigator, click <strong>Parameter groups</strong>. Then, in the <strong>Parameter Groups</strong> page, click <strong>Create Parameter Group</strong> to create a new parameter group.</p>
+<p><img alt="Create New Parameter Group" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/create-new-parameter-group.png" /></p>
+<p>The <strong>Create parameter group</strong> page opens.</p>
+</li>
+<li>
+<p>Enter details in the <strong>Create parameter group</strong> page to create a new parameter group.</p>
+<p><img alt="Create New Parameter Group" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/create-parameter-group.png" /></p>
+<p>Then click <strong>Create</strong>. The newly created parameter group appears in the <strong>Parameter groups</strong> page as follows.</p>
+<p><img alt="Created Parameter Group" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/parameter-groups.png" /></p>
+</li>
+<li>
+<p>To edit the parameter group, click on it. Then search for the <strong>max_connections</strong> parameter, select it, and click <strong>Edit parameters</strong>. Change the value for the <code>max_connections</code> parameter to <code>300</code> and then click <strong>Save changes</strong>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Create an RDS instance as follows:</p>
+<ol>
+<li>
+<p>In the left navigator, click <strong>Databases</strong>. Then in the <strong>Databases</strong> page, click <strong>Create database</strong> to open the <strong>Create Database</strong> page.</p>
+<p><img alt="Create New Database" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/create-new-database.png" /></p>
+</li>
+<li>
+<p>In the <strong>Create Database</strong> page, enter details as follows.</p>
+<ol>
+<li>
+<p>Select <strong>Standard Create</strong>.</p>
+</li>
+<li>
+<p>Under <strong>Engine Type</strong>, select <strong>MySQL</strong>.</p>
+</li>
+<li>
+<p>Under <strong>Templates</strong>, select <strong>Free Tier</strong>.</p>
+</li>
+<li>
+<p>Under <strong>Settings</strong>, enter details as instructed within the user interface.</p>
+<p><img alt="RD Instance Settings" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/RD-instance-settings.png" /></p>
+</li>
+<li>
+<p>Under <strong>Connectivity</strong>, expand the <strong>Additional connectivity configuration</strong>. Under <strong>Publicly accessible</strong>, select <strong>Yes</strong>. This allows you to connect and create the database, and then check on the database values later.</p>
+<p><img alt="Additional Connectivity" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/additional-connectivity.png" /></p>
+</li>
+<li>
+<p>Expand the <strong>Additional Configurations</strong> section. In the <strong>DB parameter group</strong> field, select the parameter group that you previously created.</p>
+<p><img alt="Additional Configurations" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/additional-configurations.png" /></p>
+</li>
+<li>
+<p>Click <strong>Create database</strong>. The database you created appears in the <strong>Databases</strong> page.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Enable public access to the database as follows:</p>
+<ol>
+<li>
+<p>In the <strong>Databases</strong> page, click on the <strong>wso2</strong> database you created to view details of it in a separate page.</p>
+</li>
+<li>
+<p>In the <strong>Security</strong> section, click the VPC.</p>
+<p><img alt="Security VPC" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/database-vpc.png" /></p>
+</li>
+<li>
+<p>In the <strong>Security Groups</strong> page that opens, click on the relevant security group to view details of it in a separate page.</p>
+<p><img alt="Security Group" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/security-group.png" /></p>
+</li>
+<li>
+<p>In the page with details of your security group, click <strong>Edit Inbound Rules</strong>.</p>
+<p><img alt="Edit Inbound Rules" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/edit-inbound-rules.png" /></p>
+<p>This opens the <strong>Edit inbound rules</strong> page.</p>
+</li>
+<li>
+<p>In the <strong>Edit inbound rules</strong> page, add two rules as follows.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Type</strong></th>
+<th><strong>Source</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MYSQL/AURORA</strong></td>
+<td>Select <strong>Custom</strong> for the <strong>Source</strong> field and then select <strong>0.0.0.0/0</strong> as the value.</td>
+</tr>
+<tr>
+<td><strong>MYSQL/AURORA</strong></td>
+<td>Select <strong>Custom</strong> for the <strong>Source</strong> field and then select <strong>::/0</strong> as the value.</td>
+</tr>
+</tbody>
+</table>
+<p>Then click <strong>Save rules</strong>.</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="step-3-set-up-ecs-cluster-tasks-and-services">Step 3: Set up ECS cluster, tasks and services<a class="headerlink" href="#step-3-set-up-ecs-cluster-tasks-and-services" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>To create a VPC (Virtual Private Cloud), a subnet, and a security group, follow the procedure below:</p>
+<ol>
+<li>
+<p>Access the VPC Dashboard via the AWS Console.</p>
+</li>
+<li>
+<p>Click <strong>Launch VPC Wizard</strong>.</p>
+</li>
+<li>
+<p>In <strong>Step 1: Select a VPC Configuration</strong>, <strong>VPC with a Single Public Subnet</strong> is selected by default in the left pane. Click <strong>Select</strong> for it.</p>
+<p><img alt="Select VPC Type" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/edit-inbound-rules.png" /></p>
+</li>
+<li>
+<p>In <strong>Step 2: VPC with a Single Public Subnet</strong>, enter <code>si-ha-vpc</code> in the <strong>VPC name</strong> field. Then click <strong>Create VPC</strong>.</p>
+<p><img alt="Create VPC" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/create-vpc.png" /></p>
+</li>
+</ol>
+<p>After successfully creating the VPC, you can view it in the <strong>Your VPCs</strong> page as follows:</p>
+<p><img alt="Created VPC" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/created-vpc.png" /></p>
+<p>To view the public subnet created, click <strong>Subnets</strong> in the left navigator. The subnet connected to the VPC is displayed as shown below.</p>
+<p><img alt="Created subnet" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/created-subnet.png" /></p>
+<p>To view the security group of the VPC, click <strong>Security Groups</strong> in the left navigator. The security group is displayed as follows.</p>
+<p><img alt="security group" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/security-groups.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>When you select the security group and view details for it at the bottom of the <strong>Security Groups</strong> page, note that all incoming traffic is currently enabled for now in the <strong>Inbound Rules</strong> tab.</p>
+<p><img alt="Inbound Rules" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/inbound-rules.png" /></p>
+</div>
+</li>
+<li>
+<p>Set up the cluster as follows:</p>
+<p>To set up the cluster, follow the procedure below:</p>
+<ol>
+<li>
+<p>Access Amazon ECS via the AWS Console.</p>
+</li>
+<li>
+<p>In the left navigator, click <strong>Clusters</strong>. Then click <strong>Create Cluster</strong> in the <strong>Clusters</strong> page.</p>
+<p><img alt="clusters" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/clusters.png" /></p>
+</li>
+<li>
+<p>In the <strong>Create Cluster</strong> wizard that opens, select <strong>EC2 Linux + Networking</strong> and then click <strong>Next step</strong>.
+    <img alt="create cluster" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/create-cluster-step-1.png" /></p>
+</li>
+<li>
+<p>In <strong>Step 2: Configure Cluster</strong> of the <strong>Create Cluster</strong> wizard, enter information as follows:</p>
+<p><img alt="configure cluster" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/configure-cluster.png" /></p>
+<ol>
+<li>
+<p>In the <strong>Cluster name</strong> field, enter a name for your cluster. In this example, let's enter <code>si-ha-cluster</code> as the name.</p>
+</li>
+<li>
+<p>Select the <strong>Create an empty cluster</strong> check box.</p>
+</li>
+<li>
+<p>Click <strong>Create</strong> to create the cluster.</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>Create a task for Streaming Integrator node 1 as follows:</p>
+<ol>
+<li>
+<p>In the left navigator of Amazon ECS, click <strong>Task Definitions</strong>. Then in the <strong>Task Definitions</strong> window, click <strong>Create new Task Definition</strong>.</p>
+<p><img alt="Create New Task Definition" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/create-task-definition.png" /></p>
+</li>
+<li>
+<p>In the <strong>Select launch type compatibility</strong> page, click <strong>FARGATE</strong> and then click <strong>Next step</strong>.</p>
+<p><img alt="Select Launch Type" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/create-task-definition.png" /></p>
+</li>
+<li>
+<p>In <strong>Step 2: Configure task and container definitions</strong>, enter information in the <strong>Create new Task Definition</strong> wizard as follows:</p>
+<ol>
+<li>
+<p>In the <strong>Task Definition Name</strong> field, enter <code>ha-node-1-task</code> as the name of the task definition.</p>
+</li>
+<li>
+<p>In the <strong>Task Size</strong> section, enter values as follows:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Task memory (GB)</strong></td>
+<td><code>0.5GB</code></td>
+</tr>
+<tr>
+<td><strong>Task CPU (vCPU)</strong></td>
+<td><code>0.25vCPU</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>In the <strong>Container Definitions</strong> section, click <strong>Add container</strong>. Then enter information as follows:</p>
+<ol>
+<li>
+<p>In the <strong>Container name</strong> field, enter <code>node-1-ha-container</code> as the name of the container.</p>
+</li>
+<li>
+<p>In the <strong>Image</strong> field, enter the image URI.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To get the image URI, follow the steps below:<br/>
+1. Access Amazon ECR via the AWS Console.<br/>
+2. In the left navigator, click <strong>Repositories</strong> to open the <strong>Repositories</strong> window.<br/>
+3. Click on your repository (which is <code>wso2</code> in this example).<br/>
+The available docker images are displayed in the <strong>Images</strong> window.<br/>
+<img alt="Docker Images" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/docker-images.png" />                                   <br />
+        3. In the <strong>Port Mappings</strong> section, add the following ports. </p>
+</div>
+<table>
+<thead>
+<tr>
+<th><strong>Port</strong></th>
+<th><strong>Protocol</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9893</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>9090</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>9711</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>9611</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>7711</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>7611</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>7443</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>7070</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>9443</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>8006</td>
+<td>tcp</td>
+</tr>
+</tbody>
+</table>
+<p>To add each port, click <strong>Add Port Mapping</strong>.                        </p>
+</li>
+<li>
+<p>Click <strong>Add</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Create</strong> in the <strong>Configure task and container definitions</strong> page to create the task.</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>Create a task for Streaming Integrator node 2 as follows:</p>
+<ol>
+<li>
+<p>In the left navigator of Amazon ECS, click <strong>Task Definitions</strong>. Then in the <strong>Task Definitions</strong> window, click <strong>Create new Task Definition</strong>.</p>
+<p><img alt="Create New Task Definition" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/create-task-definition.png" /></p>
+</li>
+<li>
+<p>In the <strong>Select launch type compatibility</strong> page, click <strong>FARGATE</strong> and then click <strong>Next step</strong>.</p>
+<p><img alt="Select Launch Type" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/create-task-definition.png" /></p>
+</li>
+<li>
+<p>In <strong>Step 2: Configure task and container definitions</strong>, enter information in the <strong>Create new Task Definition</strong> wizard as follows:</p>
+<ol>
+<li>
+<p>In the <strong>Task Definition Name</strong> field, enter <code>ha-node-2-task</code> as the name of the task definition.</p>
+</li>
+<li>
+<p>In the <strong>Task Size</strong> section, enter values as follows:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Task memory (GB)</strong></td>
+<td><code>0.5GB</code></td>
+</tr>
+<tr>
+<td><strong>Task CPU (vCPU)</strong></td>
+<td><code>0.25vCPU</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>In the <strong>Container Definitions</strong> section, click <strong>Add container</strong>. Then enter information as follows:</p>
+<ol>
+<li>
+<p>In the <strong>Container name</strong> field, enter <code>node-2-ha-container</code> as the name of the container.</p>
+</li>
+<li>
+<p>In the <strong>Image</strong> field, enter the image URI.</p>
+</li>
+<li>
+<p>In the <strong>Port Mappings</strong> section, add the following ports. </p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>Port</strong></th>
+<th><strong>Protocol</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9893</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>9090</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>9711</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>9611</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>7711</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>7611</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>7443</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>7070</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>9443</td>
+<td>tcp</td>
+</tr>
+<tr>
+<td>8006</td>
+<td>tcp</td>
+</tr>
+</tbody>
+</table>
+<p>To add each port, click <strong>Add Port Mapping</strong>.                        </p>
+<ol>
+<li>
+<p>Click <strong>Add</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Create</strong> in the <strong>Configure task and container definitions</strong> page to create the task.</p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>Create a service for node 1 using the <code>ha-node1-task</code> task as follows:</p>
+<ol>
+<li>
+<p>In Amazon ECS, click <strong>Clusters</strong> in the left navigator. Then click on your cluster.</p>
+<p><img alt="Create Task for Cluster" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/create-task-for-cluster.png" /></p>
+<p>This opens the <strong>Create Service</strong> wizard.</p>
+</li>
+<li>
+<p>In the <strong>Step 1: Configure service</strong> page, select/enter information as follows:</p>
+<p><img alt="Configure Service" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/configure-service.png" /></p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Launch Type</strong></td>
+<td><strong>FARGATE</strong></td>
+</tr>
+<tr>
+<td><strong>Task Definition</strong></td>
+<td><strong>ha-node-1-task</strong></td>
+</tr>
+<tr>
+<td><strong>Service Name</strong></td>
+<td><code>ha-node1-service</code></td>
+</tr>
+<tr>
+<td><strong>Number of tasks</strong></td>
+<td><code>1</code></td>
+</tr>
+</tbody>
+</table>
+<p>Then click <strong>Next step</strong>.</p>
+</li>
+<li>
+<p>In the <strong>Step 2: Configure network</strong>, select/enter information as follows:</p>
+<p><img alt="Configure Network" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/configure-network.png" /></p>
+<ol>
+<li>
+<p>In the <strong>Cluster VPC</strong> field, select the VPC that you previously created.</p>
+</li>
+<li>
+<p>In the <strong>Subnets</strong> field, select the subnet that you previously created for your VPC.</p>
+</li>
+<li>
+<p>Click <strong>Edit</strong> to select the security group. </p>
+<p>When you click <strong>Edit</strong>, the <strong>Configure security groups</strong> dialog box opens. Here, select the <strong>Select existing security group</strong> option and then select the security group that you previously created and connected to your VPC. Then click <strong>Save</strong> to save he information you entered in this dialog box.</p>
+<p><img alt="Select security groups" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/select-security-group.png" /></p>
+<p>Once you are back in the <strong>Step 2: Configure network</strong> page of the <strong>Create Service</strong> wizard, click <strong>Next step</strong>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Skip <strong>Step 3: Set Auto Scaling (optional)</strong> by clicking <strong>Next step</strong> in the page without making any changes. In <strong>Step 4: Review</strong>, check the information, and click <strong>Create Service</strong>. </p>
+<p>Once the service is successfully created, click <strong>View Service</strong> to view it. You can also access it by clicking <strong>Clusters</strong> in the left navigator, and then clicking <strong>si-ha-cluster</strong> -&gt; <strong>Services</strong> tab -&gt; <strong>ha-node1-service</strong>.</p>
+</li>
+<li>
+<p>To view the running service and node logs, follow substeps below: </p>
+<ol>
+<li>
+<p>Click <strong>Clusters</strong> in the left navigator. Then click <strong>si-ha-cluster</strong> -&gt; <strong>Services</strong> tab -&gt; <strong>ha-node1-service</strong> to view the <code>ha-node1-service</code> service you created.</p>
+</li>
+<li>
+<p>Click on the <strong>Tasks</strong> tab. The task is displayed as shown below.</p>
+<p><img alt="View Task" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/view-task.png" /></p>
+</li>
+<li>
+<p>Click on the task to view it in a separate page. In that page, click on the <strong>View logs in CloudWatch</strong>. The following logs should be available to indicate that the node is started in the <strong>Active</strong> mode and it is persisting events.</p>
+<div class="highlight"><pre><span></span><code>    [2020-03-20 20:18:48,283]  INFO {org.wso2.carbon.streaming.integrator.core.ha.HAManager} - HA Deployment: Starting up as Active Node
+    [2020-03-20 20:18:52,261]  INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 44.893 sec
+    [2020-03-20 20:19:46,595]  INFO {org.wso2.carbon.streaming.integrator.core.persistence.PersistenceManager} - Siddhi apps persisted successfully
+</code></pre></div>
+
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>Create a service for node 2 using the <code>ha-node2-task</code> task by following the same procedure you followed in the previous step (i.e., step 5) to create a service for node 1. However, make sure that the task definition is <code>ha-node2-task</code>. The service name can be <code>ha-node2-service</code>.</p>
+<p><img alt="Service for node 2" src="http://localhost:8000//images/si-as-minimum-ha-cluster-in-aws-ecs/node2-service.png" /></p>
+<p>When you view logs in CloudWatch for node 2, the following is displayed.</p>
+<div class="highlight"><pre><span></span><code>    [2020-03-20 20:38:14,390]  INFO {org.wso2.carbon.streaming.integrator.core.ha.HAManager} - HA Deployment: Starting up as Passive Node
+    [2020-03-20 20:38:18,287]  INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 46.604 sec
+</code></pre></div>
+
+</li>
+<li>
+<p>To check whether the cluster is working, check logs for node 1 as well as the error trace nodes.</p>
+<p>Logs similar to the following should be printed for node 1.</p>
+<div class="highlight"><pre><span></span><code>    [2020-03-20 20:38:15,409]  INFO {org.wso2.carbon.streaming.integrator.core.ha.HAEventListener} - memberAdded event received for node id : wso2-si-2
+    [2020-03-20 20:38:15,455]  INFO {org.wso2.carbon.streaming.integrator.core.ha.HAEventListener} - Active node retrieved node details of passive node
+</code></pre></div>
+
+</li>
+</ol>
+<p>Also, the following log should be printed without errors by the Error traces.</p>
+<div class="highlight"><pre><span></span><code> [2020-03-20 20:38:46,587]  INFO {org.wso2.carbon.streaming.integrator.core.persistence.PersistenceManager} - Siddhi apps persisted successfully
+</code></pre></div>
+
+
+
+
+
+                
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5CR98L58" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+      
+        <footer class="md-footer">
+  
+  
+  <nav class="md-footer__inner md-grid" aria-label="Footer" >
+    
+    
+    <a href="../deploying-si-as-a-scalable-cluster/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Scalable Cluster" rel="prev">
+      <div class="md-footer__button md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </div>
+      <div class="md-footer__title">
+        <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Previous
+                </span>
+          Scalable Cluster
+        </div>
+      </div>
+    </a>
+    
+    
+    
+    <a href="../production-checklist/" class="md-footer__link md-footer__link--next" aria-label="Next: Production Checklist" rel="next">
+      <div class="md-footer__title">
+        <div class="md-ellipsis">
+                <span class="md-footer__direction">
+                  Next
+                </span>
+          Production Checklist
+        </div>
+      </div>
+      <div class="md-footer__button md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+      </div>
+    </a>
+    
+  </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  <div class="footer-copyright-left">
+  
+    <div class="md-copyright__highlight">
+      WSO2 Streaming Integrator - Documentation
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+  </div>
+  <div class="footer-copyright-right">
+    <div class="footer-copyright-top">
+      Copyright &copy; <a href="https://wso2.com/">WSO2</a> LLC (2024)
+    </div>
+    <div class="footer-copyright-bottom">
+      Content licensed under <a href="https://creativecommons.org/licenses/by/4.0">CC By 4.0.</a> | Sample code
+      licensed under <a href="http://www.apache.org/licenses/">Apache 2.0</a>.
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      
+        <script src="../../assets/lib/highlightjs/highlight.min.js"></script>
+      
+        <script src="../../assets/lib/json-formatter/json-formatter.umd.js"></script>
+      
+        <script src="../../assets/js/mitheme.js"></script>
+      
+    
+  </body>
+</html>
