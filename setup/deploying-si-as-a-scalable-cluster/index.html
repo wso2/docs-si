@@ -4504,7 +4504,7 @@ aggregations etc., that keep data in memory to carry out calculations.</p>
 <h2 id="stateless-scalable-high-availability-ha-deployment">Stateless scalable high availability (HA) deployment<a class="headerlink" href="#stateless-scalable-high-availability-ha-deployment" title="Permanent link">&para;</a></h2>
 <p>In stateless scenarios, the system does not work with any in-memory state. Thus in order to scale, you can keep adding Streaming Integrator servers to the system and front them with a load balancer that publishes the events in round robin manner.</p>
 <p>This is depicted in the diagram below.</p>
-<p><img alt="overview" src="http://localhost:8000//images/deploying-si-as-a-scalable-cluster/statelessDeploymentOverview.png" /></p>
+<p><img alt="overview" src="https://wso2.github.io/docs-si/images/deploying-si-as-a-scalable-cluster/statelessDeploymentOverview.png" /></p>
 <h2 id="stateful-scalable-high-availability-ha-deployment">Stateful scalable high availability (HA) deployment<a class="headerlink" href="#stateful-scalable-high-availability-ha-deployment" title="Permanent link">&para;</a></h2>
 <p>As described before, stateful operations keep state data in memory. Therefore, in order to scale such a system, you need to process
 specific data on the same node without processing same-state data in different servers. You can achieve this via data
@@ -4514,7 +4514,7 @@ partitioning where one bucket of partitioned data is processed only in one speci
 <p>In order to scale stateful operations, it is required to have some partitioning attribute available enabling the partitioned data to be processed independently.</p>
 </div>
 <p>The following is a high level diagram of event flow and components to achieve scalable, stateful, and highly available deployment.</p>
-<p><img alt="overview" src="http://localhost:8000//images/deploying-si-as-a-scalable-cluster/statefulDeploymentOverview.png" /></p>
+<p><img alt="overview" src="https://wso2.github.io/docs-si/images/deploying-si-as-a-scalable-cluster/statefulDeploymentOverview.png" /></p>
 <p>The following sections describe each component in detail and how to configure them with WSO2 Streaming Integrator.</p>
 <h3 id="partitioning-layer">Partitioning layer<a class="headerlink" href="#partitioning-layer" title="Permanent link">&para;</a></h3>
 <p>As shown in the above diagram, first you need to have a partitioning layer. Here, you are using an SI server to achieve it. The function of this layer is to consume events from output sources and then partition the events based on a partitioning condition.</p>

@@ -4578,9 +4578,9 @@
 </li>
 <li>
 <p>Click <strong>Tools</strong> menu option, and then click <strong>Extension Installer</strong>.</p>
-<p><img alt="Extensions Installer option in the Tools menu" src="http://localhost:8000//images/installing-siddhi-extensions/tools-menu.png" /></p>
+<p><img alt="Extensions Installer option in the Tools menu" src="https://wso2.github.io/docs-si/images/installing-siddhi-extensions/tools-menu.png" /></p>
 <p>The <strong>Extension Installer</strong> dialog box opens as shown below.</p>
-<p><img alt="Extension Installer" src="http://localhost:8000//images/streaming-integrator-studio-overview/extension-installer.png" /></p>
+<p><img alt="Extension Installer" src="https://wso2.github.io/docs-si/images/streaming-integrator-studio-overview/extension-installer.png" /></p>
 </li>
 <li>
 <p>Locate the extension that you want to install/un-install. You can enter the name, or a part of the name of the relevant extension in the <strong>Search</strong> field. It filters one or more extensions that match the entered key word.</p>
@@ -4598,25 +4598,25 @@
 <ol>
 <li>
 <p>To install an extension, click <strong>Install</strong> for it.</p>
-<p><img alt="Not Installed Extension" src="http://localhost:8000//images/installing-siddhi-extensions/a-not-installed-extension.png" /></p>
+<p><img alt="Not Installed Extension" src="https://wso2.github.io/docs-si/images/installing-siddhi-extensions/a-not-installed-extension.png" /></p>
 <p>Then click <strong>Install</strong> in the confirmation dialog box that appears to confirm whether you want to proceed with the installation.</p>
 </li>
 <li>
 <p>Once the installation is complete, restart Streaming Integrator Tooling.</p>
 <p>After restarting Streaming Integrator Tooling, you can open the Extension installer and view the extension you installed with the updated status.</p>
-<p><img alt="Status Change as Installed" src="http://localhost:8000//images/installing-siddhi-extensions/installed-status.png" /></p>
+<p><img alt="Status Change as Installed" src="https://wso2.github.io/docs-si/images/installing-siddhi-extensions/installed-status.png" /></p>
 </li>
 </ol>
 <h3 id="un-installing-an-extension">Un-installing an extension<a class="headerlink" href="#un-installing-an-extension" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p>To un-install an extension, click <strong>UnInstall</strong> for it.</p>
-<p><img alt="Installed Extension" src="http://localhost:8000//images/installing-siddhi-extensions/an-installed-extension.png" /></p>
+<p><img alt="Installed Extension" src="https://wso2.github.io/docs-si/images/installing-siddhi-extensions/an-installed-extension.png" /></p>
 <p>Then click <strong>UnInstall</strong> in the confirmation dialog box that appears to confirm whether you want to proceed to un-install the extension.</p>
 </li>
 <li>
 <p>If the extension you are un-installing has shared dependencies with one or more other extensions, a message appears with information as shown in the example below.</p>
-<p><img alt="Shared Dependencies Exist Dialog Box" src="http://localhost:8000//images/installing-siddhi-extensions/shared-dependencies-exist-dialog-box.png" /></p>
+<p><img alt="Shared Dependencies Exist Dialog Box" src="https://wso2.github.io/docs-si/images/installing-siddhi-extensions/shared-dependencies-exist-dialog-box.png" /></p>
 <p>The names of the other extensions are in bold. The dependencies each extension shares with the extension you are deleting are listed under the extension name. In this example, the extension being un-installed shares the <code>mysql-connector-java</code> dependency with the <code>rdbms-mysql</code> extension, and the <code>siddhi-io-cdc</code> dependency with the <code>cdc-oracle</code>, <code>cdc-postgresql</code>, <code>cdc-mssql</code>, and <code>cdc-mongodb</code> extensions.</p>
 <p>If you want to proceed, click <strong>Confirm</strong>.</p>
 <div class="admonition note">
@@ -4632,9 +4632,9 @@
 <h2 id="manually-installable-dependencies">Manually installable dependencies<a class="headerlink" href="#manually-installable-dependencies" title="Permanent link">&para;</a></h2>
 <p>Certain dependencies of some extensions cannot be automatically downloaded via the Extension Installer. These dependencies should be manually downloaded and installed in order to complete the installation of the extensions that use them.</p>
 <p>When there is at least one such dependency for an extension, an icon is displayed next to the status of the extension as shown below.</p>
-<p><img alt="Manually Installable Dependencies Available for Extension" src="http://localhost:8000//images/installing-siddhi-extensions/manually-installable-dependencies-available.png" /></p>
+<p><img alt="Manually Installable Dependencies Available for Extension" src="https://wso2.github.io/docs-si/images/installing-siddhi-extensions/manually-installable-dependencies-available.png" /></p>
 <p>Click this information to open a dialog box as shown below with information about the dependency.</p>
-<p><img alt="Manually Installable Dependency Instructions" src="http://localhost:8000//images/installing-siddhi-extensions/manually-installable-instructions.png" /></p>
+<p><img alt="Manually Installable Dependency Instructions" src="https://wso2.github.io/docs-si/images/installing-siddhi-extensions/manually-installable-instructions.png" /></p>
 <p>The dialog box displays all the dependencies that need to be manually installed. For each dependency, the dialog box provides the following information.</p>
 <ul>
 <li>
@@ -4668,7 +4668,7 @@
 </ul>
 <h2 id="configuring-extension-dependencies">Configuring Extension Dependencies<a class="headerlink" href="#configuring-extension-dependencies" title="Permanent link">&para;</a></h2>
 <p>Configurations of extensions are loaded from the <code>&lt;SI_HOME&gt;/wso2/server/resources/extensionsInstaller/extensionDependencies.json</code> configuration file.</p>
-<p>When you are working with <a href="http://localhost:8000//connectors/writing-Custom-Siddhi-Extensions.md#writing-custom-siddhi-extensions">custom extensions</a>, and if you want a custom extension to be installable from the Extension Installer, you need to add the configuration of the extension to this configuration file.</p>
+<p>When you are working with <a href="https://wso2.github.io/docs-si/connectors/writing-Custom-Siddhi-Extensions.md#writing-custom-siddhi-extensions">custom extensions</a>, and if you want a custom extension to be installable from the Extension Installer, you need to add the configuration of the extension to this configuration file.</p>
 <p>The configuration of an extension is a JSON object that looks as follows:</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">&quot;&lt;extension_name&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>

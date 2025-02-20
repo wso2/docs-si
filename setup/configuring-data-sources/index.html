@@ -4570,7 +4570,7 @@ each runtime are defined in the <code>&lt;SI_HOME&gt;|&lt;SI_TOOLING_HOME&gt;/co
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>If the database driver is not an OSGI bundle, then it should be converted to OSGI (using jartobundle.sh) before placing it in the
-<code>&lt;SI_HOME&gt;|&lt;SI_TOOLING_HOME&gt;/lib</code> directory. For detailed instructions,see <a href="http://localhost:8000//admin/adding-third-party-non-osgi-libraries.md">Adding Third Party Non OSGi Libraries</a>.</p>
+<code>&lt;SI_HOME&gt;|&lt;SI_TOOLING_HOME&gt;/lib</code> directory. For detailed instructions,see <a href="https://wso2.github.io/docs-si/admin/adding-third-party-non-osgi-libraries.md">Adding Third Party Non OSGi Libraries</a>.</p>
 <p>e.g., <code>sh WSO2_SI_HOME/bin/jartobundle.sh ojdbc6.jar WSO2_SI_HOME/lib/</code></p>
 <p>The database should be tuned to handle the total <strong>maxPoolSize</strong> (The maximum number of threads that should be reserved at any given time to handle events) that is defined in the <code>deployment.yaml</code> file.</p>
 </div>
@@ -4736,7 +4736,7 @@ Identifier (SID), use this (older) format:</p>
 </code></pre></div>
 
 <p>The Oracle driver need to be converted to OSGi (using <code>jartobundle.sh</code>) before put into <code>SI_HOME/lib</code> directory. For detailed
-instructions, see <a href="http://localhost:8000//admin/adding-third-party-non-osgi-libraries.md">Adding Third Party Non OSGi Libraries</a>.</p>
+instructions, see <a href="https://wso2.github.io/docs-si/admin/adding-third-party-non-osgi-libraries.md">Adding Third Party Non OSGi Libraries</a>.</p>
 <p>If you are using persisted aggregations, you can include the <code>connectionInitSql</code> parameter instead of <code>connectionTestQuery</code> as shown in the following sample configuration.</p>
 <div class="highlight"><pre><span></span><code>Sample datasource configuration -
 

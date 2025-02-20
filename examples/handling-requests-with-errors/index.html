@@ -4810,12 +4810,12 @@
       certPass: wso2carbon
 </code></pre></div></p>
 </div>
-<p><img alt="Adding a New Server" src="http://localhost:8000//images/handling-requests-with-errors/add-a-new-server.png" /></p>
+<p><img alt="Adding a New Server" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/add-a-new-server.png" /></p>
 <p>Then click <strong>Add</strong>.</p>
 </li>
 <li>
 <p>In the <strong>Siddhi Apps to Deploy</strong> section, select the check boxes for the <strong>MappingErrorTest.siddhi</strong> and <strong>SinkTransportErrorTest.siddhi</strong> applications. In the <strong>Servers</strong> section, select the check box for the server you added. Then click <strong>Deploy</strong>.</p>
-<p><img alt="Select Siddhi Application and Server" src="http://localhost:8000//images/handling-requests-with-errors/select-siddhi-app-and-server.png" /></p>
+<p><img alt="Select Siddhi Application and Server" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/select-siddhi-app-and-server.png" /></p>
 </li>
 </ol>
 </li>
@@ -4839,12 +4839,12 @@
 <li>
 <p>To open the Error Store Explorer, click <strong>Tools</strong> and then click <strong>Error Store Explorer</strong>.</p>
 <p>The Error Store Explorer opens as shown below. </p>
-<p><img alt="Access Error Store" src="http://localhost:8000//images/handling-requests-with-errors/error-store-explorer-without-server.png" /></p>
+<p><img alt="Access Error Store" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/error-store-explorer-without-server.png" /></p>
 </li>
 <li>
 <p>Click <strong>Connect to Server</strong>. Then enter information as follows:
    To check the port of the Streaming Integrator Server, Open <SI_HOME>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.</p>
-<p><img alt="Server Configuration" src="http://localhost:8000//images/handling-requests-with-errors/server-configurations.png" /></p>
+<p><img alt="Server Configuration" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/server-configurations.png" /></p>
 <table>
 <thead>
 <tr>
@@ -4895,18 +4895,18 @@ The event causes an error referred to as <code>MappingFailedException</code>. Th
 <ol>
 <li>
 <p>To open the Error Store Explorer, open Streaming Integrator Tooling, click <strong>Tools</strong> and then click <strong>Error Store Explorer</strong>.</p>
-<p><img alt="Access Error Store" src="http://localhost:8000//images/handling-requests-with-errors/access-error-store-explorer.png" /></p>
+<p><img alt="Access Error Store" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/access-error-store-explorer.png" /></p>
 <p>The Error Store Explorer opens as shown below.</p>
-<p><img alt="Error Store Explorer" src="http://localhost:8000//images/handling-requests-with-errors/error-store-explorer.png" /></p>
+<p><img alt="Error Store Explorer" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/error-store-explorer.png" /></p>
 <p>The single error displayed is the mapping error that you previously simulated.</p>
 </li>
 <li>
 <p>To view details of the error, click <strong>Detailed Info</strong>. The following is displayed.</p>
-<p><img alt="Error Entry" src="http://localhost:8000//images/handling-requests-with-errors/error-entry.png" /></p>
+<p><img alt="Error Entry" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/error-entry.png" /></p>
 </li>
 <li>
 <p>You can correct the mapping and replay the event. To do this, change <code>foo</code> in the event to <code>name</code> and click <code>replay</code>.</p>
-<p><img alt="Replay Error" src="http://localhost:8000//images/handling-requests-with-errors/replay-error.png" /></p>
+<p><img alt="Replay Error" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/replay-error.png" /></p>
 <p>As a result, the <strong>Error Entry</strong> dialog box closes, and the <strong>Error Store Explorer</strong> dialog box is displayed with no errors.</p>
 <p>At the same time the following is logged for the Streaming Integrator Server.</p>
 <div class="highlight"><pre><span></span><code>    INFO {io.siddhi.core.stream.output.sink.LogSink} - Successful mapping:  : Event{timestamp=1595574091411, data=[Cake, 20.02], isExpired=false}
@@ -4927,7 +4927,7 @@ However, because the <code>http://localhost:8007/testUnavailableEP</code> is una
 <h4 id="step-62-start-service-via-the-receiveandcount-siddhi-application">Step 6.2: Start service via the ReceiveAndCount Siddhi application<a class="headerlink" href="#step-62-start-service-via-the-receiveandcount-siddhi-application" title="Permanent link">&para;</a></h4>
 <p>In this step, let's start the service at <code>http://localhost:8007/testUnavailableEP</code> via the <code>ReceiveAndCount</code> Siddhi application</p>
 <p>In the <strong>Siddhi Apps to Deploy</strong> section, select the check box for the <strong>ReceiveAndCount.siddhi</strong> application. In the <strong>Servers</strong> section, select the check box for the server you added. Then click <strong>Deploy</strong>.</p>
-<p><img alt="Select ReceiveAndCount Siddhi Application and Server" src="http://localhost:8000//images/handling-requests-with-errors/select-receiveAndCount-app-and-server.png" /></p>
+<p><img alt="Select ReceiveAndCount Siddhi Application and Server" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/select-receiveAndCount-app-and-server.png" /></p>
 <p>The following log is displayed in the Streaming Integrator console.</p>
 <div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App ReceiveAndCount deployed successfully
 </code></pre></div>
@@ -4937,19 +4937,19 @@ However, because the <code>http://localhost:8007/testUnavailableEP</code> is una
 <ol>
 <li>
 <p>To open the Error Store Explorer, open Streaming Integrator Tooling, click <strong>Tools</strong> and then click <strong>Error Store Explorer</strong>.</p>
-<p><img alt="Access Error Store" src="http://localhost:8000//images/handling-requests-with-errors/access-error-store-explorer.png" /></p>
+<p><img alt="Access Error Store" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/access-error-store-explorer.png" /></p>
 </li>
 <li>
 <p>In the <strong>Siddhi app</strong> field, select <strong>SinkTransportErrorTest</strong> Siddhi application and then click <strong>Fetch</strong>.</p>
 <p>As a result, an error is displayed as follows.</p>
-<p><img alt="Error Store Explorer" src="http://localhost:8000//images/handling-requests-with-errors/error-store-explorer-with-SinkTransportErrorTest.png" /></p>
+<p><img alt="Error Store Explorer" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/error-store-explorer-with-SinkTransportErrorTest.png" /></p>
 <p>This indicates that the event was dropped because the end point was not available.</p>
 </li>
 <li>
 <p>To view details of the error, click <strong>Detailed Info</strong>. The following is displayed.</p>
-<p><img alt="Error Entry" src="http://localhost:8000//images/handling-requests-with-errors/error-entry-for-SinkTransportErrorTest.png" /></p>
+<p><img alt="Error Entry" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/error-entry-for-SinkTransportErrorTest.png" /></p>
 <p>Previously, you deployed the <code>ReceiveAndCount</code> Siddhi application. Therefore, you can send the event again by clicking <strong>Replay</strong>.</p>
-<p><img alt="Replay Error" src="http://localhost:8000//images/handling-requests-with-errors/replay-error-SinkTransportErrorTest.png" /></p>
+<p><img alt="Replay Error" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/replay-error-SinkTransportErrorTest.png" /></p>
 <p>As a result, the <strong>Error Entry</strong> dialog box closes, and the <strong>Error Store Explorer</strong> dialog box is displayed with no errors.</p>
 <p>At the same time the following is logged for the Streaming Integrator Server which is logged by the ReceiveAndCount Siddhi application.</p>
 <div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveAndCount : TotalCountStream : Event{timestamp=1597857170244, data=[1], isExpired=false}    

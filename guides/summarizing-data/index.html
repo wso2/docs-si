@@ -4757,7 +4757,7 @@ insert into ProductionSummaryStream;
 <li>
 <p>To retrieve the information you stored, simulate an event for the <code>ProductionSummaryRetrievalStream</code> stream with <code>brownie</code> as the value for `name'. For instructions to simulate events, see <a href="../../develop/testing-a-Siddhi-Application/">Testing Siddhi Applications</a>.</p>
 <p>The Streaming Integrator Tooling terminal displays the following logs.</p>
-<p><img alt="Aggregate Logs" src="http://localhost:8000//images/processing-data/aggregate-logs.png" /></p>
+<p><img alt="Aggregate Logs" src="https://wso2.github.io/docs-si/images/processing-data/aggregate-logs.png" /></p>
 </li>
 </ol>
 <h3 id="supported-extensions">Supported extensions<a class="headerlink" href="#supported-extensions" title="Permanent link">&para;</a></h3>
@@ -4788,7 +4788,7 @@ The window can apply to a batch of events or in a sliding manner. </p>
 <li>
 <p><strong>Performing a time-based summarization in a sliding manner</strong></p>
 <p>This involves selecting a subset of events based on a specified duration of time in a sliding manner as illustrated via an example in the diagram below.</p>
-<p><img alt="Time Sliding Window" src="http://localhost:8000//images/processing-data/time-sliding-window.png" /></p>
+<p><img alt="Time Sliding Window" src="https://wso2.github.io/docs-si/images/processing-data/time-sliding-window.png" /></p>
 <p>For example, consider that the factory foreman of a sweet factory wants to calculate the production total and average per product every four minutes in a sliding manner. To address this, you can write a query as follows.</p>
 <p><div class="highlight"><pre><span></span><code>from ProductionStream#window.time(4 min)
 select name, sum(amount) as pastFourMinTotal, avg(amount) as pastFourMinAvg
@@ -4800,7 +4800,7 @@ Here, <code>#window.time(4 min)</code> represents a sliding time window of four 
 <li>
 <p><strong>Performing a time-based summarization in a tumbling manner</strong></p>
 <p>This involves selecting a subset of events based on a specified duration of time in a tumbling manner as illustrated via an example in the diagram below.</p>
-<p><img alt="Time Batch Window" src="http://localhost:8000//images/processing-data/time-batch-window.png" /></p>
+<p><img alt="Time Batch Window" src="https://wso2.github.io/docs-si/images/processing-data/time-batch-window.png" /></p>
 <p>For example, consider that the factory foreman of a sweet factory wants to calculate the production total and average per product every four minutes in a tumbling manner. To address this, you can write a query as follows.</p>
 <p><div class="highlight"><pre><span></span><code>from ProductionStream#window.timeBatch(4 min)
 select name, sum(amount) as pastFourMinTotal, avg(amount) as pastFourMinAvg
@@ -4812,7 +4812,7 @@ Here, <code>#window.timeBatch(4 min)</code> represents a tumbling time window of
 <li>
 <p><strong>Performing a length-based summarization in a sliding manner</strong></p>
 <p>This involves selecting a batch of events based on the number of events specified in a sliding manner as illustrated via an example in the diagram below.</p>
-<p><img alt="Length Sliding Window" src="http://localhost:8000//images/processing-data/length-sliding-window.png" /></p>
+<p><img alt="Length Sliding Window" src="https://wso2.github.io/docs-si/images/processing-data/length-sliding-window.png" /></p>
 <p>For example, consider that the factory foreman of a sweet factory wants to calculate the production total and average per product for every three events in a sliding manner. To address this, you can write a query as follows.</p>
 <p><div class="highlight"><pre><span></span><code>from ProductionStream#window.length(3)
 select name, sum(amount) as lastBatchTotal, avg(amount) as lastBatchAvg
@@ -4824,7 +4824,7 @@ Here, <code>#window.length(3)</code> represents a sliding length window of 3 eve
 <li>
 <p><strong>Performing a length-based summarization to a batch of events</strong> </p>
 <p>This involves selecting a batch of events based on the number of events specified in a sliding manner as illustrated via an example in the diagram below.</p>
-<p><img alt="Length Batch Window" src="http://localhost:8000//images/processing-data/length-batch-window.png" /></p>
+<p><img alt="Length Batch Window" src="https://wso2.github.io/docs-si/images/processing-data/length-batch-window.png" /></p>
 <p>For example, consider that the factory foreman of a sweet factory wants to calculate the production total and average per product for every three events in a sliding manner. To address this, you can write a query as follows.</p>
 <p><div class="highlight"><pre><span></span><code>from ProductionStream#window.lengthBatch(3)
 select name, sum(amount) as lastBatchTotal, avg(amount) as lastBatchAvg
@@ -4946,7 +4946,7 @@ insert into LengthBatchOutputStream;
 </tbody>
 </table>
 <p>The above simulation results in the following logs.</p>
-<p><img alt="Summarization Logs" src="http://localhost:8000//images/processing-data/summary-logs.png" /></p>
+<p><img alt="Summarization Logs" src="https://wso2.github.io/docs-si/images/processing-data/summary-logs.png" /></p>
 </li>
 </ol>
 <h3 id="supported-methods-of-summarization">Supported methods of summarization<a class="headerlink" href="#supported-methods-of-summarization" title="Permanent link">&para;</a></h3>

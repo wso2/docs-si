@@ -4545,7 +4545,7 @@
 <span class="w">    </span><span class="k">on</span><span class="w"> </span><span class="n">PurchaseRecords</span><span class="p">.</span><span class="n">transNo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">transNo</span><span class="p">;</span>
 </code></pre></div>
 The following diagram summarizes the ETL flow of the above Siddhi application.</p>
-<p><img alt="Performing ETL in Real Time" src="http://localhost:8000//images/performing-etl-operations/performing-etl-in-real-time.png" /></p>
+<p><img alt="Performing ETL in Real Time" src="https://wso2.github.io/docs-si/images/performing-etl-operations/performing-etl-in-real-time.png" /></p>
 <p>Here, you are <strong>extracting</strong> the input by tailing the <code>SugarSupply.csv</code> and <code>FlourSupply.csv</code> files in which suppliers publish details of their supplies in real time. This is done via a <a href="https://siddhi-io.github.io/siddhi-io-file/api/latest/">file source</a>.</p>
 <p>To <strong>transform</strong> the input data, you are performing two cleansing activities. In the first query named <code>CleaningSugarSupplyData</code>, you are introducing a new attribute named <code>name</code> with <code>sugar</code> as the value for all the events received from the sugar supplier via the <code>SugarSupply.csv</code> file. In the second query, you are filtering the events received from the flour supplier to save only details of flour purchases (i.e., because the same supplier also supplies labels).</p>
 <p>You are <strong>loading</strong> the output by performing <code>update or insert</code> operations to insert events from both suppliers into the <code>PurchaseRecords</code> database table after carrying out the data cleansing described above. This enables the cleansed data to be used for further processing.</p>
@@ -4553,7 +4553,7 @@ The following diagram summarizes the ETL flow of the above Siddhi application.</
 <p>In the previous example, you extracted information from two sources of the same type (i.e., files). In real world business scenarios, you often need to extract data from multiple sources of different types. </p>
 <p>To understand how this requirement can be addressed via the WSO2 Streaming Integrator, let's try out consuming events from both a file and a database at the same time.</p>
 <p>Assume that the Head Office of the Sweet Factory also maintains a record of the current stock of each material in a database table named <code>StockRecords</code>. To keep the stock updated, each purchase of a raw material needs to be added to the existing stock, and each dispatch to the factory needs to be deducted from the existing stock. The material dispatches are recorded in a file. To achieve this, you need to create an ETL flow as shown in the below diagram.</p>
-<p><img alt="Integrating Heterogeneous Data Sources" src="http://localhost:8000//images/performing-etl-operations/integrating-heterogeneous-data-sources.png" /></p>
+<p><img alt="Integrating Heterogeneous Data Sources" src="https://wso2.github.io/docs-si/images/performing-etl-operations/integrating-heterogeneous-data-sources.png" /></p>
 <p>WSO2 Stream Processor needs to extract events from that file and the <code>PurchaseRecords</code> database table simultaneously to update the stock records. To do this, you can define two input streams and connect then to the relevant sources as follows:</p>
 <div class="highlight"><pre><span></span><code>@source(type = &#39;cdc&#39;, url = &#39;jdbc:mysql://localhost:3306/PurchaseRecords&#39;, username = &#39;root&#39;, password = &#39;root&#39;, table.name = &#39;PurchaseRecords&#39;, operation = &#39;insert&#39;,
     @map(type = &#39;keyvalue&#39;))
@@ -4669,7 +4669,7 @@ update or insert into StockRecords
 <h2 id="scalability">Scalability<a class="headerlink" href="#scalability" title="Permanent link">&para;</a></h2>
 <p>When there are rapid changes and growths in business, it is necessary to scale ETL applications in an agile manner to support it. WSO2 Streaming Integrator supports the need for scalability via the Siddhi logic. 
 This can be observed in the previous examples where the <code>ManagingStocksApp</code> Siddhi application which only captured purchase records in the <a href="#performing-ETL-in-real-time">Performing ETL in real time section</a> and with only two files and one database table (<code>SugarSupply.csv</code> file, <code>FlourSupply.csv</code> file and <code>PurchaseRecords</code> database table) in the ETL flow was scaled to perform stock updates by incorporating another file and a database (i.e., <code>MaterialDispatches.csv</code> file and <code>StockRecords</code> database table) to the ETL flow.</p>
-<p><img alt="Extended ETL Flow" src="http://localhost:8000//images/performing-etl-operations/extended-etl-flow.png" /></p>
+<p><img alt="Extended ETL Flow" src="https://wso2.github.io/docs-si/images/performing-etl-operations/extended-etl-flow.png" /></p>
 <p>When you extended the ETL flow to perform stock updates, it involved adding more ETL tasks to the flow. You can also scale your ETL applications without adding more ETL tasks. This is done by adding only more sources to extract data for the existing tasks or adding more destinations for the existing tasks to load the output. For example, if the Sweet Factory starts purchasing another ingredient (e.g., honey), you can define another stream to consume from a new source (e.g., a new file named `HoneySupply.xml) as follows:</p>
 <div class="highlight"><pre><span></span><code>@source(type=&#39;file&#39;, mode=&#39;LINE&#39;,
     file.uri=&#39;file:/Users/foo/HoneySupply.xml&#39;,
@@ -4686,7 +4686,7 @@ update or insert into PurchaseRecords
     on PurchaseRecords.transNo == transNo;
 </code></pre></div>
 The following diagram depicts how the above changes scaled the ETL flow.</p>
-<p><img alt="Adding a new source" src="http://localhost:8000//images/performing-etl-operations/adding-a-new-source.png" /></p>
+<p><img alt="Adding a new source" src="https://wso2.github.io/docs-si/images/performing-etl-operations/adding-a-new-source.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>As you scale your ETL operations, you may have all the related queries in a single application or create multiple Siddhi applications that function as components of the same ETL flow.</p>

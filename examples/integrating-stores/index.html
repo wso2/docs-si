@@ -4963,9 +4963,9 @@ insert into PurchasesTable;
 </li>
 <li>
 <p>Click the <strong>Event Simulator</strong> icon to open the event simulator.</p>
-<p><img alt="Event Simulation icon" src="http://localhost:8000//images/Testing-Siddhi-Applications/Event_Simulation_Icon.png" /></p>
+<p><img alt="Event Simulation icon" src="https://wso2.github.io/docs-si/images/Testing-Siddhi-Applications/Event_Simulation_Icon.png" /></p>
 <p>It opens the left panel for event simulation as follows.</p>
-<p><img alt="Event Simulation Panel" src="http://localhost:8000//images/Testing-Siddhi-Applications/Event_Simulation_Panel.png" /></p>
+<p><img alt="Event Simulation Panel" src="https://wso2.github.io/docs-si/images/Testing-Siddhi-Applications/Event_Simulation_Panel.png" /></p>
 </li>
 <li>
 <p>To simulate purchase events, select <code>StockManagementApp</code> for the <strong>Siddhi App Name</strong> field, and <code>MaterialPurchasesStream</code> for the <strong>Stream Name</strong> field.</p>
@@ -5021,7 +5021,7 @@ insert into PurchasesTable;
 </li>
 </ul>
 <p>The following table is displayed.</p>
-<p><img alt="Saved Purchase Records" src="http://localhost:8000//images/integrating-stores/saved-purchase-records.png" /></p>
+<p><img alt="Saved Purchase Records" src="https://wso2.github.io/docs-si/images/integrating-stores/saved-purchase-records.png" /></p>
 <ul>
 <li>
 <p>For the <code>dispatches</code> database:</p>
@@ -5034,7 +5034,7 @@ insert into PurchasesTable;
 </li>
 </ul>
 <p>The following table is displayed.</p>
-<p><img alt="Saved Dispatch Records" src="http://localhost:8000//images/integrating-stores/saved-dispatch-records.png" /></p>
+<p><img alt="Saved Dispatch Records" src="https://wso2.github.io/docs-si/images/integrating-stores/saved-dispatch-records.png" /></p>
 </li>
 </ul>
 <h4 id="retrieve-records">Retrieve Records<a class="headerlink" href="#retrieve-records" title="Permanent link">&para;</a></h4>
@@ -5135,7 +5135,7 @@ insert into SearchResultsStream;
 </code></pre></div>
 5. Open the Event Simulator and simulate an event for the <code>PurchaseRecordRetrievalStream</code> stream of the <code>StockManagementApp</code> Siddhi application with <code>honey</code> as the value for the <strong>name</strong> attribute.</p>
 <p>The following is logged in the terminal.</p>
-<p><img alt="Retrieved Event" src="http://localhost:8000//images/integrating-stores/retrieved-event.png" /></p>
+<p><img alt="Retrieved Event" src="https://wso2.github.io/docs-si/images/integrating-stores/retrieved-event.png" /></p>
 </li>
 </ul>
 <h4 id="update-or-insert-records">Update or insert records<a class="headerlink" href="#update-or-insert-records" title="Permanent link">&para;</a></h4>
@@ -5252,7 +5252,7 @@ update or insert into StockTable
 </code></pre></div>
 
 <p>The following is  displayed.</p>
-<p><img alt="Saved Stock Records" src="http://localhost:8000//images/integrating-stores/saved-stock-records.png" /></p>
+<p><img alt="Saved Stock Records" src="https://wso2.github.io/docs-si/images/integrating-stores/saved-stock-records.png" /></p>
 <p>Here, the single record displayed is the event you sent. This event is inserted as a new record because the <code>StockTable</code> table did not have any records.</p>
 </li>
 <li>
@@ -5281,7 +5281,7 @@ update or insert into StockTable
 </code></pre></div>
 
 <p>The following is  displayed.</p>
-<p><img alt="Updated Stock Records" src="http://localhost:8000//images/integrating-stores/updated-stock-records.png" /></p>
+<p><img alt="Updated Stock Records" src="https://wso2.github.io/docs-si/images/integrating-stores/updated-stock-records.png" /></p>
 <p>Again, a single record  is displayed. Although value for the <code>name</code> attribute is the same, the value for the <code>amount</code> attribute has been updated from <code>150</code> to <code>200</code>. This is because <code>name</code> is the primary key of the <code>StockTable</code> table and at any given time, there can be only one record with a specific name for the <code>name</code> attribute. Therefore, because you simulated two events with the same value for the <code>name</code> attribute, the second event updated the first one.</p>
 </li>
 </ol>
@@ -5404,7 +5404,7 @@ update StockTable
 </li>
 </ol>
 <p>The following is  displayed.</p>
-<p><img alt="Saved Stock Records" src="http://localhost:8000//images/integrating-stores/edited-stock-records.png" /></p>
+<p><img alt="Saved Stock Records" src="https://wso2.github.io/docs-si/images/integrating-stores/edited-stock-records.png" /></p>
 <p>Here, the single record displayed is the event you sent. This event is inserted as a new record because the <code>StockTable</code> table did not have any records. </p>
 </li>
 </ol>
@@ -5547,7 +5547,7 @@ delete StockTable
 </code></pre></div>
 
 <p>The following is displayed:</p>
-<p><img alt="Results for Insert operation" src="http://localhost:8000//images/integrating-stores/insert-operation-results.png" /></p>
+<p><img alt="Results for Insert operation" src="https://wso2.github.io/docs-si/images/integrating-stores/insert-operation-results.png" /></p>
 <h4 id="retrieve-records_1">Retrieve records<a class="headerlink" href="#retrieve-records_1" title="Permanent link">&para;</a></h4>
 <p>To retrieve a record from the <code>StockTable</code> table, issue the following CURL command:</p>
 <div class="highlight"><pre><span></span><code>curl -X POST http://localhost:7370/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#39;{&quot;appName&quot; : &quot;StockManagementApp&quot;, &quot;query&quot; : &quot;from StockTable on name == \&quot;sugar\&quot; select name, amount;  &quot; }&#39; -k
@@ -5570,7 +5570,7 @@ delete StockTable
 </code></pre></div>
 
 <p>The following is displayed:</p>
-<p><img alt="Results for Insert operation" src="http://localhost:8000//images/integrating-stores/upsert-operation-results-for-update.png" /></p>
+<p><img alt="Results for Insert operation" src="https://wso2.github.io/docs-si/images/integrating-stores/upsert-operation-results-for-update.png" /></p>
 <p>Now let's send an event where the value for the <code>name</code> attribute is different to that of the existing value in the <code>StockTable</code> table as follows:</p>
 <div class="highlight"><pre><span></span><code>curl -X POST http://localhost:7370/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#39;{&quot;appName&quot; : &quot;StockManagementApp&quot;, &quot;query&quot; : &quot;select \&quot;vanilla\&quot; as name, 100.0 as amount update or insert into StockTable  set amount = amount  on StockTable.name == name;&quot; }&#39; -k
 </code></pre></div>
@@ -5583,7 +5583,7 @@ delete StockTable
 </code></pre></div>
 
 <p>The following is displayed:</p>
-<p><img alt="Results for Insert operation" src="http://localhost:8000//images/integrating-stores/upsert-operation-results-for-insert.png" /></p>
+<p><img alt="Results for Insert operation" src="https://wso2.github.io/docs-si/images/integrating-stores/upsert-operation-results-for-insert.png" /></p>
 <h4 id="update-records_1">Update records<a class="headerlink" href="#update-records_1" title="Permanent link">&para;</a></h4>
 <p>To update an existing record in the <code>StockTable</code> table, issue the following CURL command:</p>
 <div class="highlight"><pre><span></span><code>curl -X POST http://localhost:7370/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#39;{&quot;appName&quot; : &quot;StockManagementApp&quot;, &quot;query&quot; : &quot;select \&quot;vanilla\&quot; as name, 127.0 as amount update StockTable  set amount = amount on StockTable.name == name;&quot; }&#39; -k
@@ -5597,7 +5597,7 @@ delete StockTable
 </code></pre></div>
 
 <p>The following is displayed:</p>
-<p><img alt="Results for Update operation" src="http://localhost:8000//images/integrating-stores/update-operation-results.png" /></p>
+<p><img alt="Results for Update operation" src="https://wso2.github.io/docs-si/images/integrating-stores/update-operation-results.png" /></p>
 <h4 id="delete-records_1">Delete records<a class="headerlink" href="#delete-records_1" title="Permanent link">&para;</a></h4>
 <p>To delete an existing record in the <code>StockTable</code> table, issue the following CURL command:</p>
 <div class="highlight"><pre><span></span><code>curl -X POST http://localhost:7370/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#39;{&quot;appName&quot; : &quot;StockManagementApp&quot;, &quot;query&quot; : &quot;select \&quot;vanilla\&quot; as name delete StockTable on StockTable.name == name;&quot; }&#39; -k
@@ -5611,7 +5611,7 @@ delete StockTable
 </code></pre></div>
 
 <p>The following is displayed:</p>
-<p><img alt="Results for Delete operation" src="http://localhost:8000//images/integrating-stores/delete-operation-results.png" />   </p>
+<p><img alt="Results for Delete operation" src="https://wso2.github.io/docs-si/images/integrating-stores/delete-operation-results.png" />   </p>
 <h3 id="manipulate-data-in-stores-via-sql-queries">Manipulate data in stores via SQL queries<a class="headerlink" href="#manipulate-data-in-stores-via-sql-queries" title="Permanent link">&para;</a></h3>
 <p>You can execute SQL queries via WSO2 Streaming Integrator to manipulate data in data stores. This is supported via the <a href="https://siddhi-io.github.io/siddhi-store-rdbms/">siddhi-store-rdbms extension</a>.</p>
 <div class="admonition tip">
@@ -5736,7 +5736,7 @@ insert into OutputStream
 </li>
 </ol>
 <p>The following is displayed:</p>
-<p><img alt="Updated Stock" src="http://localhost:8000//images/integrating-stores/updated-table-after-sql-query.png" /></p>
+<p><img alt="Updated Stock" src="https://wso2.github.io/docs-si/images/integrating-stores/updated-table-after-sql-query.png" /></p>
 
 
 

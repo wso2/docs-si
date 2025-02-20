@@ -4569,7 +4569,7 @@
 </ul>
 <h2 id="receiving-data-from-data-publishers">Receiving data from data publishers<a class="headerlink" href="#receiving-data-from-data-publishers" title="Permanent link">&para;</a></h2>
 <p>Data publishers are transports from which WSO2 SI can receive messages without subscribing for them. In a typical scenario, you are required to open a port in the WSO2 Streaming Integrator that is dedicated to listen to messages from the data publisher.</p>
-<p><img alt="receiving data from a data publisher" src="http://localhost:8000//images/receiving-data-in-transit/push-data-sources.png" /></p>
+<p><img alt="receiving data from a data publisher" src="https://wso2.github.io/docs-si/images/receiving-data-in-transit/push-data-sources.png" /></p>
 <p>To receive data from a data publisher, define an input <a href="https://siddhi.io/en/v5.1/docs/query-guide/#stream">stream</a> and connect a [source] annotation of a type that receives data from a data publisher as shown in the example below.</p>
 <p><div class="highlight"><pre><span></span><code>@source(type=&#39;http&#39;, 
     receiver.url=&#39;http://localhost:5005/StudentRegistrationEP&#39;, 
@@ -4608,7 +4608,7 @@ insert into StudentLogStream;
 </li>
 <li>
 <p>Start the Siddhi application by clicking on the play icon in the top panel.</p>
-<p><img alt="Play" src="http://localhost:8000//images/extracting-data-from-static-sources/play.png" /></p>
+<p><img alt="Play" src="https://wso2.github.io/docs-si/images/extracting-data-from-static-sources/play.png" /></p>
 </li>
 <li>
 <p>To simulate an event, issue the following two CURL commands.</p>
@@ -4715,7 +4715,7 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - New Student : Event{timestamp
 </table>
 <h2 id="receiving-data-from-messaging-systems">Receiving data from messaging systems<a class="headerlink" href="#receiving-data-from-messaging-systems" title="Permanent link">&para;</a></h2>
 <p>This section explains how to receive input data from messaging systems where WSO2 Streaming Integrator needs to subscribe to specific queues/topics in order to receive the required data.</p>
-<p><img alt="receiving data from a messaging system" src="http://localhost:8000//images/receiving-data-in-transit/pull-data-sources.png" /></p>
+<p><img alt="receiving data from a messaging system" src="https://wso2.github.io/docs-si/images/receiving-data-in-transit/pull-data-sources.png" /></p>
 <p>To receive data from a messaging system, define an input <a href="https://siddhi.io/en/v5.1/docs/query-guide/#stream">stream</a> and connect a [source] annotation of a type that receives data from a messaging system.</p>
 <p>For example, consider a weather broadcasting application that publishes the temperature and humidity for each region is monitors in a separate Kafka topic. The local weather broadcasting firm of Houston wants to subscribe to receive weather broadcasts for Houston.</p>
 <div class="highlight"><pre><span></span><code>@source(type=&#39;kafka&#39;,

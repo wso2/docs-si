@@ -4571,9 +4571,9 @@
 </li>
 <li>
 <p>In the Welcome screen, click <strong>New ETL Flow</strong>.</p>
-<p><img alt="Open New ETL Flow" src="http://localhost:8000//images/create-etl-application-via-tooling/open-new-etl-flow.png" /></p>
+<p><img alt="Open New ETL Flow" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/open-new-etl-flow.png" /></p>
 <p>This opens the wizard to create ETL task flows as follows.</p>
-<p><img alt="ETL Task Flow Wizard" src="http://localhost:8000//images/create-etl-application-via-tooling/etl-task-flow.png" /></p>
+<p><img alt="ETL Task Flow Wizard" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/etl-task-flow.png" /></p>
 </li>
 <li>
 <p>Change the title of the ETL task flow from <code>UntitledETLTaskFlow</code> to <code>SweetFactoryETLTaskFlow</code>.</p>
@@ -4583,7 +4583,7 @@
 <ol>
 <li>
 <p>Under <strong>Transport Properties</strong>, select <strong>CDC</strong> as the source. Then enter values for the properties relating to the CDC source as follows.</p>
-<p><img alt="Transport Properties" src="http://localhost:8000//images/create-etl-application-via-tooling/source-transport-properties.png" /></p>
+<p><img alt="Transport Properties" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/source-transport-properties.png" /></p>
 <table>
 <thead>
 <tr>
@@ -4624,7 +4624,7 @@
 </li>
 <li>
 <p>Under <strong>Enter input stream name</strong>, enter <code>InsertSweetProductionStream</code>. Then add two attributes as follows:</p>
-<p><img alt="Configure Schema" src="http://localhost:8000//images/create-etl-application-via-tooling/configure-schema.png" /></p>
+<p><img alt="Configure Schema" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/configure-schema.png" /></p>
 <ol>
 <li>
 <p>Move the cursor over the <strong>+</strong> sign next to <strong>input stream attributes</strong> and select <strong>STRING</strong>. As a result, a new row is created for the attribute. Enter <code>name</code> as the attribute name.</p>
@@ -4641,7 +4641,7 @@
 </li>
 <li>
 <p>In the <strong>Configure Input Mapping</strong> section, select <strong>keyvalue</strong> as the source mapper type.</p>
-<p><img alt="select-source-mapper-type" src="http://localhost:8000//images/create-etl-application-via-tooling/select-source-mapper-type.png" /></p>
+<p><img alt="select-source-mapper-type" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/select-source-mapper-type.png" /></p>
 <p>Then click <strong>Next</strong>.</p>
 </li>
 </ol>
@@ -4654,12 +4654,12 @@
 <ol>
 <li>
 <p>Under <strong>Transport Properties</strong>, select <strong>file</strong> as the sink type. Then enter the path to the <code>productioninserts.csv</code> file which you saved as an empty CSV file (in this example, <code>/Users/foo/productioninserts.csv</code>).</p>
-<p><img alt="Transport Properties" src="http://localhost:8000//images/create-etl-application-via-tooling/sink-transport-properties.png" /></p>
+<p><img alt="Transport Properties" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/sink-transport-properties.png" /></p>
 <p>Then click <strong>Next</strong>.</p>
 </li>
 <li>
 <p>In the <strong>Configure Schema</strong> section, enter information as follows to create an output stream that defines the schema of the outgoing events.</p>
-<p><img alt="Configure output schema" src="http://localhost:8000//images/create-etl-application-via-tooling/configure-output-event-schema.png" /></p>
+<p><img alt="Configure output schema" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/configure-output-event-schema.png" /></p>
 <ol>
 <li>
 <p>Click the tick (<strong>✓</strong>) for the <strong>Add log sink for testing</strong> parameter in order to log the output events in the console.</p>
@@ -4680,14 +4680,14 @@
 </li>
 <li>
 <p>In the <strong>Configure Output Mapping</strong> section, select <strong>text</strong> as the sink mapper type.</p>
-<p><img alt="Configure Output Mapping" src="http://localhost:8000//images/create-etl-application-via-tooling/configure-output-mapping.png" /></p>
+<p><img alt="Configure Output Mapping" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/configure-output-mapping.png" /></p>
 <p>Then click <strong>Next</strong>.</p>
 </li>
 </ol>
 </li>
 <li>
 <p>In <strong>Step 4 Process Output Data</strong>, move the cursor over the <strong>+</strong> sign under <strong>Group Output by Fields</strong>, and then click <strong>name</strong>. This groups the output events by the name of the product.</p>
-<p><img alt="Group Events By" src="http://localhost:8000//images/create-etl-application-via-tooling/group-by.png" /></p>
+<p><img alt="Group Events By" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/group-by.png" /></p>
 <p>Then click <strong>Next</strong>.</p>
 </li>
 <li>
@@ -4695,48 +4695,48 @@
 <ol>
 <li>
 <p>Click the following button to map all the attributes.</p>
-<p><img alt="Select all attributes" src="http://localhost:8000//images/create-etl-application-via-tooling/select-atributes.png" /></p>
+<p><img alt="Select all attributes" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/select-atributes.png" /></p>
 <p>As a result, the attributes in the input stream and the output stream are joined together by lines as shown below.</p>
-<p><img alt="Matched attributes" src="http://localhost:8000//images/create-etl-application-via-tooling/matched-attributes.png" /></p>
+<p><img alt="Matched attributes" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/matched-attributes.png" /></p>
 <p>This indicates that the value for each input attribute is directed to the output stream without any further processing to be published. However, since you need to do a simple conversion for the <code>name</code> attribute. Therefore, remove the matching for that attribute by clicking the following icon for it under <strong>Output Attributes</strong>. Move the cursor to the right of the attribute to make this icon appear.</p>
-<p><img alt="Remove Matching" src="http://localhost:8000//images/create-etl-application-via-tooling/remove-matching.png" /></p>
+<p><img alt="Remove Matching" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/remove-matching.png" /></p>
 </li>
 <li>
 <p>Click on <strong>name</strong> under <strong>Output Attributes</strong>.</p>
-<p><img alt="Select Name Attribute" src="http://localhost:8000//images/create-etl-application-via-tooling/select-name-attribute.png" /></p>
+<p><img alt="Select Name Attribute" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/select-name-attribute.png" /></p>
 <p>This opens a dialog box named <strong>Create expression for name of ProductionUpdatesStream</strong>. </p>
 </li>
 <li>
 <p>In the <strong>Create expression for name of ProductionUpdatesStream</strong> dialog box, click <strong>Function</strong>. Scroll to find the <strong>str.upper()</strong> function, and then click on it to select it.</p>
-<p><img alt="Select Function" src="http://localhost:8000//images/create-etl-application-via-tooling/select-function.png" /></p>
+<p><img alt="Select Function" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/select-function.png" /></p>
 <p>Once select the function, it is displayed as follows. Click on the selected function again.</p>
-<p><img alt="Click Selected Function" src="http://localhost:8000//images/create-etl-application-via-tooling/click-selected-function.png" /></p>
+<p><img alt="Click Selected Function" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/click-selected-function.png" /></p>
 </li>
 <li>
 <p>When the function is added as shown below, click on it again.</p>
-<p><img alt="Click Selected Expression" src="http://localhost:8000//images/create-etl-application-via-tooling/configure-function-parameters.png" /></p>
+<p><img alt="Click Selected Expression" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/configure-function-parameters.png" /></p>
 <p>Another bar appears below the selected function with the function expression in the clickable mode between the brackets.</p>
 </li>
 <li>
 <p>To specify the attribute to which the function should be applied, click on the dots between the brackets.</p>
-<p><img alt="Select Attribute for Function" src="http://localhost:8000//images/create-etl-application-via-tooling/select-attribute-for-function.png" /></p>
+<p><img alt="Select Attribute for Function" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/select-attribute-for-function.png" /></p>
 </li>
 <li>
 <p>Click on <strong>name</strong> attribute to select it as the attribute to which the function applies.</p>
-<p><img alt="Select Attribute for Function" src="http://localhost:8000//images/create-etl-application-via-tooling/select-attribute.png" /></p>
+<p><img alt="Select Attribute for Function" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/select-attribute.png" /></p>
 </li>
 <li>
 <p>Once the <code>name</code> attribute is selected and displayed, click the arrow pointing upwards to the right of the attribute. This adds the <code>name</code> attribute to the function expression.</p>
-<p><img alt="Add Attribute to function expression" src="http://localhost:8000//images/create-etl-application-via-tooling/add-attribute-to-function-expression.png" /></p>
+<p><img alt="Add Attribute to function expression" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/add-attribute-to-function-expression.png" /></p>
 </li>
 <li>
 <p>Once the function is displayed with both the expression and the attribute, click the arrow pointing upwards to the right of it. This completes the function configuration.</p>
-<p><img alt="Complete Function Configuration" src="http://localhost:8000//images/create-etl-application-via-tooling/complete-function-configuration.png" /></p>
+<p><img alt="Complete Function Configuration" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/complete-function-configuration.png" /></p>
 </li>
 <li>
 <p>Click <strong>Submit</strong>.</p>
 <p>Now both the attributes appear matched again, and the function expression is displayed for the <strong>name</strong> attribute.</p>
-<p><img alt="Matched Attributes" src="http://localhost:8000//images/create-etl-application-via-tooling/joined-attributes.png" /></p>
+<p><img alt="Matched Attributes" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/joined-attributes.png" /></p>
 </li>
 <li>
 <p>Click <strong>Save</strong>.</p>
@@ -4745,17 +4745,17 @@
 </li>
 <li>
 <p>In <strong>Step 6 Finalize</strong>, deploy the Siddhi application you just completed by clicking <strong>Deploy to Worker</strong>.</p>
-<p><img alt="Complete ETL Application" src="http://localhost:8000//images/create-etl-application-via-tooling/deploy-etl-app-to-worker.png" /></p>
+<p><img alt="Complete ETL Application" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/deploy-etl-app-to-worker.png" /></p>
 <p>This opens the <strong>Deploy Siddhi Apps to Server</strong> dialog box.</p>
 <ol>
 <li>
 <p>In the <strong>Add New Server</strong> section, enter the host, port, user name and the password of your Streaming Integrator server as shown below.</p>
-<p><img alt="Adding a New Server" src="http://localhost:8000//images/create-etl-application-via-tooling/add-a-new-server.png" /></p>
+<p><img alt="Adding a New Server" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/add-a-new-server.png" /></p>
 <p>Then click <strong>Add</strong>.</p>
 </li>
 <li>
 <p>In the <strong>Siddhi Apps to Deploy</strong> section, select the checkbox for the <strong>SweetFactoryETLTaskFlow.siddhi</strong> application. In the <strong>Servers</strong> section, select the check box for the server you added. Then click <strong>Deploy</strong>.</p>
-<p><img alt="Select Siddhi Application and Server" src="http://localhost:8000//images/create-etl-application-via-tooling/select-siddhi-app-and-server.png" /></p>
+<p><img alt="Select Siddhi Application and Server" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/select-siddhi-app-and-server.png" /></p>
 <p>The following message appears in the <strong>Deploy Siddhi Apps to Server</strong> dialog box.</p>
 <p><code>SweetFactoryETLTaskFlow.siddhi was successfully deployed to 0.0.0.0:9444</code></p>
 </li>
@@ -4770,7 +4770,7 @@
 </code></pre></div>
 
 <p>If you open the <code>/Users/foo/productions.csv</code> file, the <code>Chocalate, 100.0</code> record is displayed as shown below.</p>
-<p><img alt="Updated File" src="http://localhost:8000//images/create-etl-application-via-tooling/updated-file.png" /></p>
+<p><img alt="Updated File" src="https://wso2.github.io/docs-si/images/create-etl-application-via-tooling/updated-file.png" /></p>
 <h2 id="whats-next">What's Next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
 <p>Once you develop an ETL application, you may need to carry out following tasks:</p>
 <ul>

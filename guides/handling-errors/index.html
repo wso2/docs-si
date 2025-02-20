@@ -4602,7 +4602,7 @@ This capability is released as a product update on 01/10/2021. If you don't alre
 <ul>
 <li>
 <p>Siddhi Streams</p>
-<p><img alt="Store Stream Errors" src="http://localhost:8000//images/handling-errors/store-stream-error.png" /></p>
+<p><img alt="Store Stream Errors" src="https://wso2.github.io/docs-si/images/handling-errors/store-stream-error.png" /></p>
 <p>This on-error action can be specified for a  stream via the <code>@OnError()</code> annotation. </p>
 <p>The Siddhi query uses the <code>cast("abc", "double")</code> which intentionally generates an error for testing purposes. </p>
 <div class="highlight"><pre><span></span><code>@OnError(action=&#39;STORE&#39;)
@@ -4618,7 +4618,7 @@ insert into StreamB;
 <ul>
 <li>
 <p>Sinks</p>
-<p><img alt="Store Sink Errors" src="http://localhost:8000//images/handling-errors/store-sink-error.png" /></p>
+<p><img alt="Store Sink Errors" src="https://wso2.github.io/docs-si/images/handling-errors/store-sink-error.png" /></p>
 <p>You can specify an on-error action by including the <code>on-error</code> parameter within the sink configuration as shown below.</p>
 <div class="highlight"><pre><span></span><code>@sink(type = &#39;http&#39;, on.error=&#39;STORE&#39;, blocking.io=&#39;true&#39;, 
       publisher.url = &quot;http://localhost:8090/unavailableEndpoint&quot;, 
@@ -4722,12 +4722,12 @@ insert into CopyProductionStream;
 <li>
 <p>To open the Error Store Explorer, click <strong>Tools</strong> and then click <strong>Error Store Explorer</strong>.</p>
 <p>The Error Store Explorer opens as shown below. </p>
-<p><img alt="Access Error Store" src="http://localhost:8000//images/handling-requests-with-errors/error-store-explorer-without-server.png" /></p>
+<p><img alt="Access Error Store" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/error-store-explorer-without-server.png" /></p>
 </li>
 <li>
 <p>Click <strong>Connect to Server</strong>. Then enter information as follows:</p>
 <p>To check the port of the Streaming Integrator Server, Open <SI_HOME>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.</p>
-<p><img alt="Server Configuration" src="http://localhost:8000//images/quick-start-guide-101/connect-error-store.png" /></p>
+<p><img alt="Server Configuration" src="https://wso2.github.io/docs-si/images/quick-start-guide-101/connect-error-store.png" /></p>
 <table>
 <thead>
 <tr>
@@ -4769,7 +4769,7 @@ insert into CopyProductionStream;
 </li>
 <li>
 <p>Access Streaming Integrator Tooling and click <strong>Tools</strong> -&gt; <strong>Error Store Explorer</strong>. Then in the <strong>Siddhi App</strong> section, select <strong>CopyingProductionStatsApp</strong> Siddhi application from the drop down list. The error store displays the sink error as follows.</p>
-<p>![Sink Error](http://localhost:8000//images/handling-errors/sink-error.png</p>
+<p>![Sink Error](https://wso2.github.io/docs-si/images/handling-errors/sink-error.png</p>
 </li>
 <li>
 <p>To correct the error and replay it, follow the procedure below:</p>
@@ -4793,14 +4793,14 @@ insert into CopyProductionStream;
 </li>
 <li>
 <p>Access Streaming Integrator Tooling and click <strong>Tools</strong> -&gt; <strong>Error Store Explorer</strong>. Then in the <strong>Siddhi App</strong> section, select <strong>CopyingProductionStatsApp</strong> Siddhi application from the drop down list. The error store displays the mapping error as follows.</p>
-<p><img alt="Mapping Error" src="http://localhost:8000//images/handling-errors/mapping-error.png" /></p>
+<p><img alt="Mapping Error" src="https://wso2.github.io/docs-si/images/handling-errors/mapping-error.png" /></p>
 </li>
 <li>
 <p>To correct this error and replay the event, follow the procedure below:</p>
 <ol>
 <li>
 <p>Click <strong>Detailed Info</strong>. This opens the <strong>Error Entry</strong> dialog box where the event is displayed in a text field as shown below.</p>
-<p><img alt="Mapping Error Details" src="http://localhost:8000//images/handling-errors/mapping-error-details.png" /></p>
+<p><img alt="Mapping Error Details" src="https://wso2.github.io/docs-si/images/handling-errors/mapping-error-details.png" /></p>
 </li>
 <li>
 <p>In the text field, edit the event and correct the format by removing one of the string values.</p>
@@ -4816,7 +4816,7 @@ insert into CopyProductionStream;
 <ul>
 <li>
 <p>Siddhi Streams</p>
-<p><img alt="Log Stream Errors" src="http://localhost:8000//images/handling-errors/log-stream-error.png" /></p>
+<p><img alt="Log Stream Errors" src="https://wso2.github.io/docs-si/images/handling-errors/log-stream-error.png" /></p>
 <p>You can specify this on-error action for streams via the <code>@OnError</code> annotation as shown below.</p>
 <p><div class="highlight"><pre><span></span><code>@OnError(action=&#39;LOG&#39;)
 define stream StreamA (symbol string, volume long);
@@ -4825,7 +4825,7 @@ If you do not specify the on-error action for a stream  via the <code>@OnError()
 </li>
 <li>
 <p>Sinks</p>
-<p><img alt="Log Sink Errors" src="http://localhost:8000//images/handling-errors/log-sink-error.png" /></p>
+<p><img alt="Log Sink Errors" src="https://wso2.github.io/docs-si/images/handling-errors/log-sink-error.png" /></p>
 <p>You can specify this on-error action by including the <code>on-error</code> parameter within the sink configuration as shown below.
 <div class="highlight"><pre><span></span><code>@sink(type = &#39;http&#39;, on.error=&#39;LOG&#39;, blocking.io=&#39;true&#39;, 
       publisher.url = &quot;http://localhost:8090/unavailableEndpoint&quot;, 
@@ -4888,7 +4888,7 @@ insert into CopyProductionStream;
 <ul>
 <li>
 <p>Siddhi Streams</p>
-<p><img alt="Stream Stream Errors" src="http://localhost:8000//images/handling-errors/stream-stream-error.png" /></p>
+<p><img alt="Stream Stream Errors" src="https://wso2.github.io/docs-si/images/handling-errors/stream-stream-error.png" /></p>
 <p>This on-error action can be specified for a  stream via the <code>@OnError()</code> annotation. </p>
 <p>In the following example, the Siddhi query uses the <code>cast("abc", "double")</code> function that intentionally generates an error for testing purposes.</p>
 <p><div class="highlight"><pre><span></span><code>@OnError(action=&#39;STREAM&#39;)
@@ -4906,7 +4906,7 @@ If you do not specify the on-error action for a stream  via the <code>@OnError()
 </li>
 <li>
 <p>Sinks</p>
-<p><img alt="Stream Sink Errors" src="http://localhost:8000//images/handling-errors/log-sink-error.png" /></p>
+<p><img alt="Stream Sink Errors" src="https://wso2.github.io/docs-si/images/handling-errors/log-sink-error.png" /></p>
 <p>You can specify this on-error action by including the <code>on-error</code> parameter within the sink configuration as shown below.</p>
 <div class="highlight"><pre><span></span><code>@OnError(action=&#39;STREAM&#39;)
 @sink(type = &#39;http&#39;, on.error=&#39;STREAM&#39;, blocking.io=&#39;true&#39;, 
