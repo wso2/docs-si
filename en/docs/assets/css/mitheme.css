@@ -119,6 +119,7 @@
 
 .banner-link {
     background: var(--md-banner);
+    width: 465px;
     display: inline-block;
 }
 
