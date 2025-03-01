@@ -1,32 +1,51 @@
+## Purpose
 
-## Purpose:
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send Hl7 events in XML format via MLLP protocol and log the events in hl7Stream and the acknowledgment message to the output console.
+This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send Hl7 events in XML format via MLLP protocol and log the events in `hl7Stream` and the acknowledgment message to the output console.
 
-## Prerequisites:
-1. Install the HAPI testpanel. (Reference: https://hapifhir.github.io/hapi-hl7v2/hapi-testpanel/install.html)
+## Prerequisites
+
+1. Install the [HAPI testpanel](https://hapifhir.github.io/hapi-hl7v2/hapi-testpanel/install.html)
 2. Save this sample. If there is no syntax error, the following message is shown on the console:
-    - Siddhi App PublishHl7InXmlFormat successfully deployed.
+    - `Siddhi App PublishHl7InXmlFormat successfully deployed.`
 
-## Executing the Sample:
-1. In the HAPI testpanel create a receiving connection with port that provided in the siddhi app.
+## Executing the Sample
+
+1. In the HAPI testpanel create a receiving connection with the port that is provided in the Siddhi app.
 2. Start the listener.
 3. Start the Siddhi application by clicking on 'Run'.
 4. If the Siddhi application starts successfully, the following messages are shown on the console:
-    * PublishHl7InXmlFormat.siddhi - Started Successfully!
-    * 'Hl7' sink at 'hl7Stream' stream successfully connected to 'localhost:4000'.
+    - `PublishHl7InXmlFormat.siddhi - Started Successfully!`
+    - `'Hl7' sink at 'hl7Stream' stream successfully connected to 'localhost:4000'.`
 
-## Testing the Sample:
-1. Open the event simulator by clicking on the second icon or pressing Ctrl+Shift+I.
-2. In the Single Simulation tab of the panel, specifiy the values as follows:
-    * Siddhi App Name   :   PublishHl7InXmlFormat
-    * Stream Name   :   xmlStream
-3. In the MSH1, MSH2, MSH3HD1,MSH4HD1, MSH5HD1, MSH6HD1, MSH7, MSH8, CM_MSG1, CM_MSG2, MSH10, MSH11, MSH12 fields enter '|', '^~\&amp;', 'sendingSystemA', 'senderFacilityA', 'receivingSystemB' , 'receivingFacilityB', '20080925161613', ' ', 'ADT', 'A01', 'S123456789', 'P', '2.3' respectively and then click Send to send the event.
+## Testing the Sample
+
+1. Open the event simulator by clicking the second icon or pressing Ctrl+Shift+I.
+2. In the Single Simulation tab of the panel, specify the values as follows:
+    - `Siddhi App Name`   :   `PublishHl7InXmlFormat`
+    - `Stream Name`   :   `xmlStream`
+3. Use the following data for the fields and click `Send`.
+
+    | Field       | Value              |
+    |------------|---------------------|
+    | MSH1       | `|`                 |
+    | MSH2       | `^~\&amp;`          |
+    | MSH3HD1    | `sendingSystemA`    |
+    | MSH4HD1    | `senderFacilityA`   |
+    | MSH5HD1    | `receivingSystemB`  |
+    | MSH6HD1    | `receivingFacilityB`|
+    | MSH7       | `20080925161613`    |
+    | MSH8       | ` `                 |
+    | CM_MSG1    | `ADT`               |
+    | CM_MSG2    | `A01`               |
+    | MSH10      | `S123456789`        |
+    | MSH11      | `P`                 |
+    | MSH12      | `2.3`               |
+
 4. Send more events as desired.
 
 ```sql
 @App:name('PublishHl7InXmlFormat')
 @App:description('This publishes the HL7 messages in XML format, receives and logs the acknowledgement message in the console using MLLP protocol and custom xml mapping.')
-
 
 define stream xmlStream(MSH1 string, MSH2 string, MSH3HD1 string, MSH4HD1 string, MSH5HD1 string, MSH6HD1 string, MSH7 string, MSH8 string, CM_MSG1 string, CM_MSG2 string,MSH10 string,MSH11 string, MSH12 string);
 
