@@ -1,4 +1,3 @@
-
 ## Purpose
 
 This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send HTTP events to an OAuth-protected endpoint.
