@@ -5,11 +5,11 @@ This application demonstrates how to configure WSO2 Streaming Integrator Tooling
 ## Prerequisites
 
 1. Replace the Sink configuration values for the following options.
-    - publisher.url : publisher URL (Ex:- 'https://localhost:8005/abc')
-    - consumer.key  : consumer key for the http request (Ex:- 'abcdef')
-    - consumer.secret: consumer secret for the http request (Ex:- 'abcdef')
-    - token.url     : URL of the token end point (Ex:- 'https://localhost:8005/token')
-    - method        : method type (Eg:- `POST`)
+    - `publisher.url` : Publisher URL (Ex:- 'https://localhost:8005/abc')
+    - `consumer.key`  : Consumer key for the http request (Ex:- 'abcdef')
+    - `consumer.secret`: Consumer secret for the http request (Ex:- 'abcdef')
+    - `token.url`     : URL of the token end point (Ex:- 'https://localhost:8005/token')
+    - `method`        : Method type (Eg:- `POST`)
 
     Optional (You can fill this if it is different from default values)
 
@@ -83,13 +83,13 @@ If you get the message `Error when pushing events to Siddhi debugger engine`, it
 1. Stop this Siddhi application (Click 'Run' on the menu bar -> 'Stop').
 2. Start the application and check whether the expected output appears on the console.
 
-If you get the message `400`, it could be due to passing invalid parameter problem, do the following:
+If you get the status code `400`, it could be due to passing invalid parameter problem, do the following:
 
 1. Stop this Siddhi application (Click 'Run' on the menu bar -> 'Stop').
 2. Recheck all the parameter you are passing and change the correct parameter
 3. Start the application and check whether the expected output appears on the console.
 
-If you get the message `500`, it could be due to Internal server error problem, do the following:
+If you get the status code `500`, it could be due to Internal server error problem, do the following:
 
 1. Stop this Siddhi application (Click 'Run' on the menu bar -> 'Stop').
 2. Start the application again and check whether the expected output appears on the console.
