@@ -137,8 +137,8 @@ nav:
         - 'Receiving JSON Events via RabbitMQ': 'samples/ReceiveRabbitmqInJSONFormat.md'
         - 'Receive Events via Simulator and Persist in Cassandra Store': 'samples/Store-cassandra.md'
       - 'Transforming Data':
-        - 'Publishing HTTP Events to to an OAuth-protected Endpoint': 'samples/PublishHttpOAuthRequest.md'
-        - 'Publishing HTTP Events to to an OAuth-protected Endpoint without an Access Token': 'samples/PublishHttpOAuthRequestWithoutAccessToken.md'
+        - 'Publishing HTTP Events to an OAuth-protected Endpoint': 'samples/PublishHttpOAuthRequest.md'
+        - 'Publishing HTTP Events to an OAuth-protected Endpoint without an Access Token': 'samples/PublishHttpOAuthRequestWithoutAccessToken.md'
         - 'Receiving ER7 Events via HL7': 'samples/ReceiveHl7InER7Format.md'
         - 'Preprocessing Data Received via TCP': 'samples/DataPreprocessing.md'
         - 'Publishing ER7 Events via HL7': 'samples/PublishHl7InER7Format.md'
