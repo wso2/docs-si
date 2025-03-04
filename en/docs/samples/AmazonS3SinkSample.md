@@ -80,7 +80,6 @@ Once the events are sent, check the S3 bucket. Objects are created with 3 events
 @App:name("AmazonS3SinkSample")
 @App:description("Publish events to Amazon AWS S3")
 
-
 define window StockQuoteWindow(symbol string, price double, quantity int) lengthBatch(3) output all events;
 
 define stream StockQuoteStream(symbol string, price double, quantity int);
