@@ -1704,21 +1704,21 @@
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample
+    Testing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results
+    Viewing the results
   </a>
   
 </li>
@@ -4427,21 +4427,21 @@
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample
+    Testing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results
+    Viewing the results
   </a>
   
 </li>
@@ -4484,92 +4484,77 @@
 <div class="admonition info">
 <p class="admonition-title">Before executing the sample:</p>
 <p>Save the sample Siddhi application. Is there is no syntax error, the following message appears in the console.<br/>
-<code>- Siddhi App PublishHTTPInJsonFormatWithCustomMapping successfully deployed.</code></p>
+<code>Siddhi App PublishHTTPInJsonFormatWithCustomMapping successfully deployed.</code></p>
 </div>
-<h2 id="executing-the-sample">Executing the Sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
-<li>
-<p>Start the Siddhi application by clicking <strong>Run</strong> =&gt; <strong>Run</strong>.</p>
-</li>
-<li>
-<p>If the Siddhi application starts successfully, the following messages are shown on the console.</p>
-<ul>
-<li>
-<p><code>PublishHTTPInJsonFormatWithCustomMapping.siddhi - Started Successfully!</code></p>
-</li>
-<li>
-<p><code>'http' sink at 'LowProductionAlertStream' has successfully connected to http://localhost:8080/abc</code></p>
-</li>
+<li>Start the Siddhi application by clicking <strong>Run</strong> =&gt; <strong>Run</strong>.</li>
+<li>If the Siddhi application starts successfully, the following messages are shown on the console.<ul>
+<li><code>PublishHTTPInJsonFormatWithCustomMapping.siddhi - Started Successfully!</code></li>
+<li><code>'http' sink at 'LowProductionAlertStream' has successfully connected to http://localhost:8080/abc</code></li>
 </ul>
 </li>
 </ol>
-<h2 id="testing-the-sample">Testing the Sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="testing-the-sample">Testing the sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p>Open a terminal and navigate to <code>&lt;SI_HOME&gt;/samples/sample-clients/http-server</code>.  Then run the <code>ant</code> command without any arguments.</p>
+<p>Open a terminal and navigate to <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/http-server</code>.  Then run the <code>ant</code> command without any arguments.</p>
 </li>
 <li>
 <p>To send events, follow one or more of the following methods.</p>
 <ul>
 <li>
-<p><strong>Send events with http server through the event simulator:</strong></p>
+<p><strong>Send events with http server through the event simulator</strong></p>
 <p>a. Open the event simulator by clicking on the second icon or pressing Ctrl+Shift+I.</p>
 <p>b. In the <strong>Single Simulation</strong> tab of the panel, specify the values as follows.</p>
-<pre class="codehilite"><code class="linenums">- Siddhi App Name`: `PublishHttpInJsonFormatWithCustomMapping
-- Stream Name`: `SweetProductionStream</code></pre>
-
-
+<ul>
+<li><code>Siddhi App Name</code>: <code>PublishHttpInJsonFormatWithCustomMapping</code></li>
+<li><code>Stream Name</code>: <code>SweetProductionStream</code></li>
+</ul>
 <p>c. In the <strong>id</strong> and <strong>amount</strong> fields, enter <code>toffees</code> and <code>123.5</code> respectively and then click <strong>Send</strong> to send the event.</p>
 <p>d.  Send more events as required.</p>
 </li>
 <li>
-<p><strong>Send events to the http endpoint defined by 'publish.url' in the Sink configuration through the curl command:</strong></p>
+<p><strong>Send events to the http endpoint defined by 'publish.url' in the Sink configuration through the curl command</strong></p>
 <p>a. Open a new terminal and issue the following command</p>
-<pre class="codehilite"><code class="linenums">curl -X POST -d '{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishHTTPInJsonFormatWithCustomMapping&quot;,&quot;data&quot;: ['toffees', 123.5]}' http://localhost:9390/simulation/single -H 'content-type: text/plain'</code></pre>
-
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishHTTPInJsonFormatWithCustomMapping&quot;,&quot;data&quot;: [&#39;</span>toffees<span class="s1">&#39;, 123.5]}&#39;</span><span class="w"> </span>http://localhost:9390/simulation/single<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;content-type: text/plain&#39;</span>
+</code></pre></div>
 
 <p>b. If there is no error, the following message appears in the terminal.</p>
-<pre class="codehilite"><code class="linenums">{&quot;status&quot;:&quot;OK&quot;,&quot;message&quot;:&quot;Single Event simulation started successfully&quot;}</code></pre>
-
-
+<p><code>{"status":"OK","message":"Single Event simulation started successfully"}</code></p>
 </li>
 <li>
-<p><strong>Publish events with Postman:</strong></p>
-<p>a. Install the 'Postman' application from Chrome web store.</p>
-<p>b. Launch the application.</p>
-<p>c. Make a 'Post' request to the 'http://localhost:9390/simulation/single' endpoint. Set the Content-Type to 'text/plain' and set the request body in text as follows.</p>
-<pre class="codehilite"><code class="linenums">{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishHTTPInJsonFormatWithCustomMapping&quot;,&quot;data&quot;: ['toffees', 75.6]}</code></pre>
-
-
+<p><strong>Publish events with Postman</strong></p>
+<p>a. Launch the 'Postman' application.</p>
+<p>b. Make a 'Post' request to the 'http://localhost:9390/simulation/single' endpoint. Set the Content-Type to 'text/plain' and set the request body in text as follows.</p>
+<p><code>{"streamName": "SweetProductionStream", "siddhiAppName": "PublishHTTPInJsonFormatWithCustomMapping","data": ['toffees', 75.6]}</code></p>
 <p>d. Click <strong>Send</strong>. If there is no error, the following messages appear in the terminal.</p>
-<pre class="codehilite"><code class="linenums">* &quot;status&quot;: &quot;OK&quot;
-
-* &quot;message&quot;: &quot;Single Event simulation started successfully&quot;</code></pre>
-
-
+<ul>
+<li><code>"status": "OK"</code></li>
+<li><code>"message": "Single Event simulation started successfully"</code></li>
+</ul>
 </li>
 </ul>
 </li>
 </ol>
-<h2 id="viewing-the-results">Viewing the Results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
-<p><strong>See the output on the terminal:</strong></p>
-<div class="highlight"><pre><span></span><code>[java] [org.wso2.si.http.server.HttpServerListener] : Event Name Arrived: {&quot;event&quot;:{&quot;id&quot;:&quot;toffees&quot;,&quot;amount&quot;:123.5}}
-[java] [org.wso2.si.http.server.HttpServerMain] : Received Event Names:{&quot;event&quot;:{&quot;id&quot;:&quot;toffees&quot;,&quot;amount&quot;:123.5}} ,
-[java] [org.wso2.si.http.server.HttpServerMain] : Received Event Headers key set:[Http_method, Content-type, Content-length]
-[java] [org.wso2.si.http.server.HttpServerMain] : Received Event Headers value set:[[POST], [application/json], [43]]
+<h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<p>See the output on the terminal</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.http.server.HttpServerListener<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>Event<span class="w"> </span>Name<span class="w"> </span>Arrived:<span class="w"> </span><span class="o">{</span><span class="s2">&quot;event&quot;</span>:<span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;toffees&quot;</span>,<span class="s2">&quot;amount&quot;</span>:123.5<span class="o">}}</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.http.server.HttpServerMain<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>Received<span class="w"> </span>Event<span class="w"> </span>Names:<span class="o">{</span><span class="s2">&quot;event&quot;</span>:<span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;toffees&quot;</span>,<span class="s2">&quot;amount&quot;</span>:123.5<span class="o">}}</span><span class="w"> </span>,
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.http.server.HttpServerMain<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>Received<span class="w"> </span>Event<span class="w"> </span>Headers<span class="w"> </span>key<span class="w"> </span>set:<span class="o">[</span>Http_method,<span class="w"> </span>Content-type,<span class="w"> </span>Content-length<span class="o">]</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.http.server.HttpServerMain<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>Received<span class="w"> </span>Event<span class="w"> </span>Headers<span class="w"> </span>value<span class="w"> </span>set:<span class="o">[[</span>POST<span class="o">]</span>,<span class="w"> </span><span class="o">[</span>application/json<span class="o">]</span>,<span class="w"> </span><span class="o">[</span><span class="m">43</span><span class="o">]]</span>
 </code></pre></div>
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If the message "'HTTP' sink at 'LowProductionAlertStream' has successfully connected to http://localhost:8080/abc" does not appear, it could be due to port 8080 defined in the Siddhi application is already being used by a different program. To resolve this issue, do the following:<br/>
+<p>If the message "'HTTP' sink at 'LowProductionAlertStream' has successfully connected to http://localhost:8080/abc" does not appear, it could be due to the port 8080 defined in the Siddhi application is already being used by a different program. To resolve this issue, do the following:<br/>
     1. Stop this Siddhi application (Click 'Run' on menu bar -&gt; 'Stop').<br/>
     2. In this Siddhi application's source configuration, change the port from 8080 to an unused port.<br/>
     3. Start the application and check whether the specified messages appear on the console.</p>
 </div>
-<details class="info"><summary>Click here to view the complete sample Siddhi application</summary><div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;PublishHTTPInJsonFormatWithCustomMapping&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;PublishHTTPInJsonFormatWithCustomMapping&quot;</span><span class="p">)</span>
 
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Send events via HTTP transport in JSON format with custom mapping.&#39;</span><span class="p">)</span>
-
 
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
@@ -4582,8 +4567,6 @@
 <span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">LowProductionAlertStream</span><span class="p">;</span>
 </code></pre></div>
-
-</details>
 
 
 

@@ -1984,21 +1984,41 @@
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample
+    Testing the sample
   </a>
+  
+    <nav class="md-nav" aria-label="Testing the sample">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#send-events-with-the-http-server-through-the-event-simulator" class="md-nav__link">
+    Send events with the HTTP server through the event simulator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-events-using-the-curl-command" class="md-nav__link">
+    Send events using the CURL command
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results
+    Viewing the results
   </a>
   
 </li>
@@ -4427,21 +4447,41 @@
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample
+    Testing the sample
   </a>
+  
+    <nav class="md-nav" aria-label="Testing the sample">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#send-events-with-the-http-server-through-the-event-simulator" class="md-nav__link">
+    Send events with the HTTP server through the event simulator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-events-using-the-curl-command" class="md-nav__link">
+    Send events using the CURL command
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results
+    Viewing the results
   </a>
   
 </li>
@@ -4480,13 +4520,13 @@
 
 <h1 id="publishing-custom-xml-events-via-http">Publishing Custom XML Events via HTTP<a class="headerlink" href="#publishing-custom-xml-events-via-http" title="Permanent link">&para;</a></h1>
 <h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
-<p>This application demonstrates how to configure WSO2 Streaming Integrator to send sweet production events via HTTP transport in XML format using custom mapping. Map the input events($.item.id) to stream events(name) and log the events in the <code>LowProducitonAlertStream</code> stream on the output console.</p>
+<p>This application demonstrates how to configure WSO2 Streaming Integrator to send sweet production events via HTTP transport in XML format using custom mapping. Map the input events(<code>$.item.id</code>) to stream events(<code>name</code>) and log the events in the <code>LowProducitonAlertStream</code> stream on the output console.</p>
 <div class="admonition info">
 <p class="admonition-title">Before executing the sample:</p>
 <p>Save the sample Siddhi application. Is there is no syntax error, the following message appears in the console.<br/>
-<code>- Siddhi App PublishHTTPInJsonFormatWithCustomMapping successfully deployed.</code></p>
+<code>Siddhi App PublishHttpInXmlFormatWithCustomMapping successfully deployed.</code></p>
 </div>
-<h2 id="executing-the-sample">Executing the Sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
 <p>Start the Siddhi application by clicking <strong>Run</strong> =&gt; <strong>Run</strong>.</p>
@@ -4498,63 +4538,65 @@
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you edit this application while it's running, save the application and then click <strong>Run</strong> =&gt; <strong>Run</strong>.<br/>
-If the <code>PublishHttpInXmlFormatWithCustomMapping.siddhi - Started Successfully!</code> message does not appear, it could be due to port 8080 which is defined in the Siddhi application already being used by a different program. To resolve this issue, do the following:<br/>
-    * Stop this Siddhi application (click 'Run' on the menu bar -&gt; 'Stop')..<br/>
-    * Change the port 8080 to an unused port in this Siddhi application's source configuration..<br/>
-    * Start the application and check whether the specified messages appear on the console.</p>
-</div>
-<h2 id="testing-the-sample">Testing the Sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
-<ol>
-<li>
-<p>Open a terminal and navigate to <code>&lt;SI_HOME&gt;/samples/sample-clients/http-server</code>.  Then run the <code>ant</code> command without any arguments.</p>
-</li>
-<li>
-<p>Send events using one or more of the following methods:</p>
 <ul>
 <li>
-<p><strong>Send events with the HTTP server through the event simulator:</strong></p>
-<p>a. Open event simulator by clicking on the second icon or press Ctrl+Shift+I.</p>
-<p>b. In the <strong>Single Simulation</strong> tab of the panel, select values as follows:<br/>
-    - <strong>Siddhi App Name</strong>: <code>PublishHttpInXmlFormatWithCustomMapping</code><br/>
-    - <strong>Stream Name</strong>: <code>SweetProductionStream</code></p>
-<p>c. In the name <strong>field</strong> and <strong>amount</strong> fields, enter <code>toffee</code> and <code>50.0</code> respectively. Then click <strong>Send</strong> to send the event.</p>
-<p>d. Send more events.</p>
+<p>If you edit this application while it's running, save the application and then click <strong>Run</strong> =&gt; <strong>Run</strong>.<br/></p>
 </li>
 <li>
-<p>**Send events to the HTTP endpoint defined via the <code>publish.url</code> in the Sink configuration by issuing the following CURL command:</p>
-<p><code>curl -X POST -d '{"streamName": "SweetProductionStream", "siddhiAppName": "PublishHttpInXmlFormatWithCustomMapping","data": ['toffee', 67.43]}' http://localhost:9390/simulation/single -H 'content-type: text/plain'</code></p>
+<p>If the <code>PublishHttpInXmlFormatWithCustomMapping.siddhi - Started Successfully!</code> message does not appear, it could be due to the port 8080 which is defined in the Siddhi application already being used by a different program. To resolve this issue, do the following:<br/></p>
+<ul>
+<li>Stop this Siddhi application (click 'Run' on the menu bar -&gt; 'Stop')..<br/></li>
+<li>Change the port 8080 to an unused port in this Siddhi application's source configuration..<br/></li>
+<li>Start the application and check whether the specified messages appear on the console.</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="testing-the-sample">Testing the sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<p>Open a terminal and navigate to <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/http-server</code>.  Then run the <code>ant</code> command without any arguments. Send events using one or more of the following methods:</p>
+<h5 id="send-events-with-the-http-server-through-the-event-simulator">Send events with the HTTP server through the event simulator<a class="headerlink" href="#send-events-with-the-http-server-through-the-event-simulator" title="Permanent link">&para;</a></h5>
+<ol>
+<li>Open event simulator by clicking on the second icon or press Ctrl+Shift+I.</li>
+<li>In the <strong>Single Simulation</strong> tab of the panel, select values as follows:<br/><ul>
+<li><code>Siddhi App Name</code>: <code>PublishHttpInXmlFormatWithCustomMapping</code><br/></li>
+<li><code>Stream Name</code>: <code>SweetProductionStream</code></li>
+</ul>
+</li>
+<li>In the name <strong>field</strong> and <strong>amount</strong> fields, enter <code>toffee</code> and <code>50.0</code> respectively. Then click <strong>Send</strong> to send the event.</li>
+<li>Send more events.</li>
+</ol>
+<h5 id="send-events-using-the-curl-command">Send events using the CURL command<a class="headerlink" href="#send-events-using-the-curl-command" title="Permanent link">&para;</a></h5>
+<p>Send event to the HTTP endpoint defined via the <code>publish.url</code> in the Sink configuration by issuing the following CURL command</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishHttpInXmlFormatWithCustomMapping&quot;,&quot;data&quot;: [&#39;</span>toffee<span class="s1">&#39;, 67.43]}&#39;</span><span class="w"> </span>http://localhost:9390/simulation/single<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;content-type: text/plain&#39;</span>
+</code></pre></div>
+
 <p>If there is no error, the following message appears in the terminal:</p>
 <p><code>{"status":"OK","message":"Single Event simulation started successfully"}</code></p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="viewing-the-results">Viewing the Results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>If you send events through the event simulator, the following output is logged.
-[java] [org.wso2.si.http.server.HttpServerListener]: <code>Event Name Arrived: &lt;events&gt;&lt;event&gt;&lt;name&gt;toffee&lt;/name&gt;&lt;amount&gt;50.0&lt;/amount&gt;&lt;/event&gt;&lt;/events&gt;</code>
-[java] [org.wso2.si.http.server.HttpServerMain]: <code>Received Event Names:&lt;events&gt;&lt;event&gt;&lt;name&gt;toffee&lt;/name&gt;&lt;amount&gt;50.0&lt;/amount&gt;&lt;/event&gt;&lt;/events&gt; ,</code>
-[java] [org.wso2.si.http.server.HttpServerMain]: <code>Received Event Headers key set:[Http_method, Transfer-encoding, Content-type]</code>
-[java] [org.wso2.si.http.server.HttpServerMain]: <code>Received Event Headers value set:[[POST], [chunked], [application/xml]]</code></p>
-</li>
-<li>
-<p>If you send events through event CURL commands, the following output is logged:
-[java] [org.wso2.si.http.server.HttpServerListener]: <code>Event Name Arrived: &lt;events&gt;&lt;event&gt;&lt;name&gt;toffee&lt;/name&gt;&lt;amount&gt;67.43&lt;/amount&gt;&lt;/event&gt;&lt;/events&gt;</code>
-[java] [org.wso2.si.http.server.HttpServerMain]: <code>Received Event Names:&lt;events&gt;&lt;event&gt;&lt;name&gt;toffee&lt;/name&gt;&lt;amount&gt;67.43&lt;/amount&gt;&lt;/event&gt;&lt;/events&gt; ,</code>
-[java] [org.wso2.si.http.server.HttpServerMain]: <code>Received Event Headers key set:[Http_method, Transfer-encoding, Content-type]</code>
-[java] [org.wso2.si.http.server.HttpServerMain]: <code>Received Event Headers value set:[[POST], [chunked], [application/xml]]</code></p>
-</li>
+<li>If you send events through the event simulator, the following output is logged.</li>
 </ul>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.http.server.HttpServerListener<span class="o">]</span>:<span class="w"> </span><span class="sb">`</span>Event<span class="w"> </span>Name<span class="w"> </span>Arrived:<span class="w"> </span>&lt;events&gt;&lt;event&gt;&lt;name&gt;toffee&lt;/name&gt;&lt;amount&gt;50.0&lt;/amount&gt;&lt;/event&gt;&lt;/events&gt;<span class="sb">`</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.http.server.HttpServerMain<span class="o">]</span>:<span class="w"> </span><span class="sb">`</span>Received<span class="w"> </span>Event<span class="w"> </span>Names:&lt;events&gt;&lt;event&gt;&lt;name&gt;toffee&lt;/name&gt;&lt;amount&gt;50.0&lt;/amount&gt;&lt;/event&gt;&lt;/events&gt;<span class="w"> </span>,<span class="sb">`</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.http.server.HttpServerMain<span class="o">]</span>:<span class="w"> </span><span class="sb">`</span>Received<span class="w"> </span>Event<span class="w"> </span>Headers<span class="w"> </span>key<span class="w"> </span>set:<span class="o">[</span>Http_method,<span class="w"> </span>Transfer-encoding,<span class="w"> </span>Content-type<span class="o">]</span><span class="sb">`</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.http.server.HttpServerMain<span class="o">]</span>:<span class="w"> </span><span class="sb">`</span>Received<span class="w"> </span>Event<span class="w"> </span>Headers<span class="w"> </span>value<span class="w"> </span>set:<span class="o">[[</span>POST<span class="o">]</span>,<span class="w"> </span><span class="o">[</span>chunked<span class="o">]</span>,<span class="w"> </span><span class="o">[</span>application/xml<span class="o">]]</span><span class="sb">`</span>
+</code></pre></div>
+
+<ul>
+<li>If you send events through event CURL commands, the following output is logged:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.http.server.HttpServerListener<span class="o">]</span>:<span class="w"> </span><span class="sb">`</span>Event<span class="w"> </span>Name<span class="w"> </span>Arrived:<span class="w"> </span>&lt;events&gt;&lt;event&gt;&lt;name&gt;toffee&lt;/name&gt;&lt;amount&gt;67.43&lt;/amount&gt;&lt;/event&gt;&lt;/events&gt;<span class="sb">`</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.http.server.HttpServerMain<span class="o">]</span>:<span class="w"> </span><span class="sb">`</span>Received<span class="w"> </span>Event<span class="w"> </span>Names:&lt;events&gt;&lt;event&gt;&lt;name&gt;toffee&lt;/name&gt;&lt;amount&gt;67.43&lt;/amount&gt;&lt;/event&gt;&lt;/events&gt;<span class="w"> </span>,<span class="sb">`</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.http.server.HttpServerMain<span class="o">]</span>:<span class="w"> </span><span class="sb">`</span>Received<span class="w"> </span>Event<span class="w"> </span>Headers<span class="w"> </span>key<span class="w"> </span>set:<span class="o">[</span>Http_method,<span class="w"> </span>Transfer-encoding,<span class="w"> </span>Content-type<span class="o">]</span><span class="sb">`</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.http.server.HttpServerMain<span class="o">]</span>:<span class="w"> </span><span class="sb">`</span>Received<span class="w"> </span>Event<span class="w"> </span>Headers<span class="w"> </span>value<span class="w"> </span>set:<span class="o">[[</span>POST<span class="o">]</span>,<span class="w"> </span><span class="o">[</span>chunked<span class="o">]</span>,<span class="w"> </span><span class="o">[</span>application/xml<span class="o">]]</span><span class="sb">`</span>
+</code></pre></div>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Stop this Siddhi application once you are done with the execution.</p>
 </div>
-<details class="info"><summary>Click here to view the complete sample Siddhi application</summary><div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;PublishHttpInXmlFormatWithCustomMapping&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;PublishHttpInXmlFormatWithCustomMapping&quot;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Send events via HTTP transport using xml formatwith custom mapping&#39;</span><span class="p">)</span>
-
-
 
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
@@ -4562,13 +4604,10 @@ If the <code>PublishHttpInXmlFormatWithCustomMapping.siddhi - Started Successful
 <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;xml&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">payload</span><span class="p">(</span><span class="w"> </span><span class="ss">&quot;&lt;StockData&gt;&lt;Symbol&gt;{{ name }}&lt;/Symbol&gt;&lt;Price&gt;{{ amount }}&lt;/Price&gt;&lt;/StockData&gt;&quot;</span><span class="p">)))</span>
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">LowProductionAlertStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-
 <span class="k">from</span><span class="w"> </span><span class="n">SweetProductionStream</span>
 <span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">LowProductionAlertStream</span><span class="p">;</span>
 </code></pre></div>
-
-</details>
 
 
 

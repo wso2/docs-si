@@ -1341,21 +1341,21 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample
+    Testing the sample
   </a>
   
 </li>
@@ -4420,21 +4420,21 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample
+    Testing the sample
   </a>
   
 </li>
@@ -4479,25 +4479,26 @@
 
 
 <h1 id="capturing-mysql-inserts-via-cdc">Capturing MySQL Inserts via CDC<a class="headerlink" href="#capturing-mysql-inserts-via-cdc" title="Permanent link">&para;</a></h1>
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This sample demonstrates how to capture change data from MySQL using Siddhi. The change events that can be captured include <code>INSERT</code>, <code>UPDATE</code>, and <code>DELETE</code>.</p>
 <div class="admonition info">
 <p class="admonition-title">Before you begin:</p>
 <ol>
 <li>Ensure that MySQL is installed on your computer.<br/></li>
-<li>Add the MySQL JDBC driver to the <code>&lt;SI_TOOLING_HOME&gt;/lib</code> directory as follows:<br/><ol>
+<li>Add the MySQL JDBC driver to the <code>&lt;SI_Tooling_Home&gt;/lib</code> directory as follows:<br/><ol>
 <li>Download the JDBC driver from the <a href="https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.45.tar.gz">MySQL website</a>.<br/></li>
 <li>Unzip the archive.<br/></li>
-<li>Copy the <code>mysql-connector-java-5.1.45-bin.jar</code> JAR and place it in the <code>&lt;SI_TOOLING_HOME&gt;/lib</code> directory.<br/></li>
+<li>Download and copy the <code>mysql-connector-j-8.3.0.jar</code> JAR and place it in the <code>&lt;SI_Tooling_Home&gt;/lib</code> directory.<br/></li>
 </ol>
 </li>
 <li>Configure MySQL to <a href="https://debezium.io/docs/connectors/mysql/#enabling-the-binlog">enable binary logging</a>.<br/><br/>
-        If you are using MySQL 8.0, use the following query to check the binlog status:<br/><br/>
-        <code>SELECT variable_value as "BINARY LOGGING STATUS (log-bin) ::"
-        FROM performance_schema.global_variables WHERE variable_name='log_bin';</code><br/><br/></li>
-<li>Enable state persistence in siddhi applications. To do this, open the <code>&lt;SI_TOOLING_HOME&gt;/conf/server/deployment.yaml</code> file and set the <code>state.persistence enabled=true</code> property.<br/></li>
+        If you are using MySQL 8.0, use the following query to check the binlog status:<br/>
+        <div class="highlight"><pre><span></span><code>SELECT<span class="w"> </span>variable_value<span class="w"> </span>as<span class="w"> </span><span class="s2">&quot;BINARY LOGGING STATUS (log-bin) ::&quot;</span>
+FROM<span class="w"> </span>performance_schema.global_variables<span class="w"> </span>WHERE<span class="w"> </span><span class="nv">variable_name</span><span class="o">=</span><span class="s1">&#39;log_bin&#39;</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Enable state persistence in siddhi applications. To do this, open the <code>&lt;SI_Tooling_Home&gt;/conf/server/deployment.yaml</code> file and set the <code>state.persistence enabled=true</code> property.<br/></li>
 <li>Create a database named <code>production</code> by issuing the following command.<br/>
-    <code>create database production;</code><br/></li>
+    <code>CREATE DATABASE production;</code><br/></li>
 <li>Create a user named <code>wso2sp</code> with <code>wso2</code> as the password, and with <code>SELECT</code>, <code>RELOAD</code>, <code>SHOW DATABASES</code>, <code>REPLICATION SLAVE</code>, <code>REPLICATION CLIENT</code> privileges. To do this, issue the following command.<br/>
     <code>GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2sp' IDENTIFIED BY 'wso2';</code><br/></li>
 <li>Change the database by issuing the following command.<br/>
@@ -4507,28 +4508,29 @@
 <li>Save the sample Siddhi application in Streaming Integrator Tooling.</li>
 </ol>
 </div>
-<h2 id="executing-the-sample">Executing the Sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
-<p>To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the <strong>Start</strong> button (shown below) or by clicking <strong>Run</strong> =&gt; <strong>Run</strong>.</p>
-<p><img alt="Start button" src="https://wso2.github.io/docs-si/images/amazon-s3-sink-sample/start.png" /></p>
+<h2 id="executing-the-sample">Executing the sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<p>To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the <strong>Start</strong> button or by clicking <strong>Run</strong> =&gt; <strong>Run</strong>.</p>
 <p>If the Siddhi application starts successfully, the following message appears in the console.</p>
 <p><code>CDCWithListeningMode.siddhi -  Started Successfully!</code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you want to edit the Siddhi application after you have started it, stop it first, make your edits, save it and then start it again.</p>
 </div>
-<h2 id="testing-the-sample">Testing the Sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="testing-the-sample">Testing the sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
 <p>To test the sample Siddhi application, insert a record to the <code>SweetProductionTable</code> table you created by issuing the following command:</p>
-<p><code>insert into SweetProductionTable values('chocolate',100.0);</code></p>
+<p><code>INSERT into SweetProductionTable values('chocolate',100.0);</code></p>
 <h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
 <p>This insert is logged in the Streaming Integrator console as follows.</p>
 <p><img alt="Insert Log" src="https://wso2.github.io/docs-si/images/cdc-with-listening-mode-sample/insert-log.png" /></p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>Optionally, you can use this sample to also capture <code>update</code> and <code>delete</code> operations.<br/>
-- delete operation events include <code>before_name</code> and <code>before amount</code> keys.<br/>
-- update operation events include the <code>before_name</code>, <code>name</code>, <code>before_amount</code>, <code>amount</code> keys.</p>
+<p>Optionally, you can use this sample to also capture <code>update</code> and <code>delete</code> operations.<br/></p>
+<ul>
+<li>delete operation events include <code>before_name</code> and <code>before amount</code> keys.<br/></li>
+<li>update operation events include the <code>before_name</code>, <code>name</code>, <code>before_amount</code>, <code>amount</code> keys.</li>
+</ul>
 </div>
-<details class="info"><summary>Click here to view the sample Siddhi application.</summary><div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;CDCWithListeningMode&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;CDCWithListeningMode&#39;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Capture MySQL Inserts using cdc source listening mode.&#39;</span><span class="p">)</span>
 
 
@@ -4544,8 +4546,6 @@
 <span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span>
 <span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">logStream</span><span class="p">;</span>
 </code></pre></div>
-
-</details>
 
 
 
