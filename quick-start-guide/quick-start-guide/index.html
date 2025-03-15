@@ -4551,16 +4551,16 @@
 <p>The following is the outline of this quick start guide.</p>
 <p><img alt="Quick Start Guide Outline" src="https://wso2.github.io/docs-si/images/qsg/qsg-outline.png" /></p>
 <h2 id="step-1-download-the-streaming-integrator">Step 1: Download the Streaming Integrator<a class="headerlink" href="#step-1-download-the-streaming-integrator" title="Permanent link">&para;</a></h2>
-<p>Download the Streaming Integrator distribution from <a href="https://wso2.com/integration/streaming-integrator/">WSO2 Streaming Integrator site</a> and extract it to a location of your choice. Hereafter, the extracted location is referred to as <code>&lt;SI_HOME&gt;</code>.</p>
+<p>Download the Streaming Integrator distribution from <a href="https://wso2.com/integration/streaming-integrator/">WSO2 Streaming Integrator site</a> and extract it to a location of your choice. Hereafter, the extracted location is referred to as <code>&lt;SI-Home&gt;</code>.</p>
 <h2 id="step-2-start-the-streaming-integrator">Step 2: Start the Streaming Integrator<a class="headerlink" href="#step-2-start-the-streaming-integrator" title="Permanent link">&para;</a></h2>
-<p>To start WSO2 Streaming Integrator, navigate to the <code>&lt;SI_HOME&gt;/bin</code> directory from the CLI, and issue the appropriate command based on your operating system:</p>
+<p>To start WSO2 Streaming Integrator, navigate to the <code>&lt;SI-Home&gt;/bin</code> directory from the CLI, and issue the appropriate command based on your operating system:</p>
 <ul>
 <li><strong>For Linux</strong>: <code>./server.sh</code></li>
 <li><strong>For Windows</strong>: <code>server.bat --run</code></li>
 </ul>
 <h2 id="step-3-download-kafka">Step 3: Download Kafka<a class="headerlink" href="#step-3-download-kafka" title="Permanent link">&para;</a></h2>
-<p>Download the Kafka broker from <a href="https://www.apache.org/dyn/closer.cgi?path=/kafka/2.3.0/kafka_2.12-2.3.0.tgz">the Apache site</a> and extract it.
-This directory is referred to as <code>&lt;KAFKA_HOME&gt;</code> from here on.</p>
+<p>Download the Kafka broker from <a href="https://archive.apache.org/dist/kafka/2.5.0/kafka_2.12-2.5.0.tgz">the Apache site</a> and extract it.
+This directory is referred to as <code>&lt;Kafka_Home&gt;</code> from here on.</p>
 <h2 id="step-4-create-and-deploy-a-simple-siddhi-application">Step 4: Create and deploy a simple Siddhi application<a class="headerlink" href="#step-4-create-and-deploy-a-simple-siddhi-application" title="Permanent link">&para;</a></h2>
 <p>Let's create a simple Siddhi application that reads data from a CSV file, does a simple transformation to the data, and then publishes the results to a Kafka topic so that multiple subscriber applications can have access to that data.</p>
 <p><img alt="Scenario" src="https://wso2.github.io/docs-si/images/qsg/quick-start.png" /></p>
@@ -4573,34 +4573,34 @@ This directory is referred to as <code>&lt;KAFKA_HOME&gt;</code> from here on.</
 </div>
 </li>
 <li>
-<p>Open a text file and copy-paste following Siddhi application into it.</p>
+<p>Open a text file and copy-paste the following Siddhi application into it.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Here, you are instructed to use a text editor to deploy a Siddhi Application that is already tested in order to minimize the time you spend to follow this guide. It is recommended to design Siddhi application via Streaming Integration Tooling that offers features such as syntax checking, event simulation for testing purposes, reformatting code, the option to design applications in a graphical interface or by writing code, and many more. For more information, see <a href="../../develop/streaming-integrator-studio-overview/">Streaming Integrator Tooling Overview</a>.</p>
+<p>Here, you are instructed to use a text editor to deploy a Siddhi Application that has already been tested in order to minimize the time you spend to follow this guide. It is recommended to design Siddhi application via Streaming Integration Tooling that offers features such as syntax checking, event simulation for testing purposes, reformatting code, the option to design applications in a graphical interface or by writing code, and many more. For more information, see <a href="../../develop/streaming-integrator-studio-overview/">Streaming Integrator Tooling Overview</a>.</p>
 </div>
-<div class="highlight"><pre><span></span><code>@App:name(&#39;ManageProductionStats&#39;)
-@App:description(&#39;Receive events via file and publish to Kafka topic&#39;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;ManageProductionStats&#39;</span><span class="p">)</span>
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Receive events via file and publish to Kafka topic&#39;</span><span class="p">)</span>
 
-@source(type = &#39;file&#39;, mode = &quot;LINE&quot;, file.uri = &quot;file:/Users/foo/productions.csv&quot;, tailing = &quot;true&quot;,
-    @map(type = &#39;csv&#39;))
-define stream SweetProductionStream (name string, amount double);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;LINE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;file:/Users/foo/productions.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tailing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;true&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;csv&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-@sink(type = &#39;kafka&#39;, bootstrap.servers = &quot;localhost:9092&quot;, topic = &quot;total_production&quot;, is.binary.message = &quot;false&quot;, partition.no = &quot;0&quot;,
-    @map(type = &#39;json&#39;))
-define stream TotalProductionStream (name string, amount double);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;kafka&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">bootstrap</span><span class="p">.</span><span class="n">servers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;localhost:9092&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">topic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;total_production&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">is</span><span class="p">.</span><span class="nb">binary</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;false&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">partition</span><span class="p">.</span><span class="k">no</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">TotalProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
--- Simple Siddhi query to calculate production totals.
-@info(name = &#39;query1&#39;)
-from SweetProductionStream 
-select name, sum(amount) as amount 
-group by name
-insert into TotalProductionStream;
+<span class="c1">-- Simple Siddhi query to calculate production totals.</span>
+<span class="o">@</span><span class="n">info</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;query1&#39;</span><span class="p">)</span>
+<span class="k">from</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span>
+<span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span>
+<span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">name</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">TotalProductionStream</span><span class="p">;</span>
 </code></pre></div>
 
 <p>The above Siddhi application reads input data from a file named <code>production.csv</code> in the CSV format, processes it and publishes the resulting output in a Kafka topic named <code>total_production</code>. As a result, any application that cannot read streaming data, but is capable of subscribing to a Kafka topic can access the output. The each input event reports the amount of a specific sweet produced in a production run. The Streaming Integrator calculates the total produced of each sweet with each event. Therefore, each output event reports the total amount produced for a sweet from the time you started running the Siddhi application. </p>
 </li>
 <li>
-<p>Save this file as <code>ManageProductionStats.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
+<p>Save this file as <code>ManageProductionStats.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
 <p>This deploys the <code>ManageProductionStats</code> in the Streaming Integrator. The following message appears to indicate that the Siddhi application is successfully installed.</p>
 <p><code>INFO {org.wso2.carbon.siddhi.editor.core.internal.WorkspaceDeployer} - Siddhi App ManageProductionStats.siddhi successfully deployed.</code></p>
 </li>
@@ -4609,7 +4609,7 @@ insert into TotalProductionStream;
 <p>The <code>ManageProductionStats</code> Siddhi application uses a Kafka sink. However, the Siddhi extension for Kafka is not installed by default. To install it so that the Siddi application can integrate with Kafka as expected, follow the steps below:</p>
 <ol>
 <li>
-<p>Navigate to the <code>&lt;SI_HOME&gt;/bin</code> directory and issue the appropriate command based on your operating system:</p>
+<p>Navigate to the <code>&lt;SI-Home&gt;/bin</code> directory and issue the appropriate command based on your operating system:</p>
 <ul>
 <li><strong>For Linux</strong>: <code>./extension-installer.sh install</code></li>
 <li><strong>For Windows</strong>: <code>extension-installer.bat install</code></li>
@@ -4629,18 +4629,18 @@ insert into TotalProductionStream;
 <p>To start Kafka:</p>
 <ol>
 <li>
-<p>Navigate to the <code>&lt;KAFKA_HOME&gt;</code> directory and start a zookeeper node by issuing the following command.</p>
+<p>Navigate to the <code>&lt;Kafka_Home&gt;</code> directory and start a zookeeper node by issuing the following command.</p>
 <p><code>sh bin/zookeeper-server-start.sh config/zookeeper.properties</code></p>
 </li>
 <li>
-<p>Navigate to the <code>&lt;KAFKA_HOME&gt;</code> directory and start Kafka server node by issuing the following command.</p>
+<p>Navigate to the <code>&lt;Kafka_Home&gt;</code> directory and start Kafka server node by issuing the following command.</p>
 <p><code>sh bin/kafka-server-start.sh config/server.properties</code></p>
 </li>
 </ol>
 <p>To create a Kafka topic named <code>total_production</code>:</p>
 <ol>
 <li>
-<p>Navigate to <code>&lt;KAFKA_HOME&gt;</code> directory and issue the following command:</p>
+<p>Navigate to <code>&lt;Kafka_Home&gt;</code> directory and issue the following command:</p>
 <p><code>bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic total_production</code></p>
 </li>
 </ol>
@@ -4648,16 +4648,14 @@ insert into TotalProductionStream;
 <p>To test the <code>ManageProductionStats</code> Siddhi application you created, follow the steps below.</p>
 <ol>
 <li>
-<p>Open the <code>/Users/foo/productions.csv</code> file and add five rows in it as follows:</p>
-<p><code>Toffee,40.0</code><br/><br/>
-<code>Almond cookie, 70.0</code><br/><br/>
-<code>Baked alaska, 30.0</code><br/><br/>
-<code>Toffee, 60.0</code><br/><br/>
-<code>Baked alaska, 20.0</code></p>
-<p>Save your changes.</p>
-</li>
-<li>
-<p>To observe the messages in the <code>total_production</code> topic, navigate to the <code>&lt;KAFKA_HOME&gt;</code> directory and issue the following command:</p>
+<p>Open the <code>/Users/foo/productions.csv</code> file and add five rows in it as follows and save your changes.</p>
+<p><div class="highlight"><pre><span></span><code>Toffee,40.0
+Almond cookie, 70.0
+Baked alaska, 30.0
+Toffee, 60.0
+Baked alaska, 20.0
+</code></pre></div>
+2. To observe the messages in the <code>total_production</code> topic, navigate to the <code>&lt;Kafka_Home&gt;</code> directory and issue the following command:</p>
 <p><code>bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic total_production --from-beginning</code></p>
 </li>
 </ol>
