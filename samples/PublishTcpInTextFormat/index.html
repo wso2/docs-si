@@ -2683,28 +2683,21 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
-    Notes:
+    Notes
   </a>
   
 </li>
@@ -4414,28 +4407,21 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
-    Notes:
+    Notes
   </a>
   
 </li>
@@ -4474,38 +4460,45 @@
 
   <h1>Publishing Text Events via TCP</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via TCP transport in text format, and view the output on the server terminal.</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<p>Save this sample.</p>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Open a terminal and navigate to the <code>{WSO2SIHome}/samples/sample-clients/tcp-server</code> directory. Run the <code>ant</code> command with argument <code>-Dtype=text</code>.</li>
+<li>Open a terminal and navigate to the <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/tcp-server</code> directory. Run the <code>ant -Dtype=text</code> command.</li>
 <li>Start the Siddhi application by clicking 'Run'.</li>
-<li>If the Siddhi application starts successfully, the following messages appear on the console.
-    <div class="highlight"><pre><span></span><code>* PublishTcpInTextFormat.siddhi - Started Successfully!
-* &#39;tcp&#39; sink at &#39;LowProductionAlertStream&#39; stream successfully connected to &#39;localhost:9892&#39;.
-</code></pre></div></li>
-<li>Open event simulator by clicking on the second icon or press Ctrl+Shift+I.</li>
+<li>
+<p>If the Siddhi application starts successfully, the following messages appear on the console.</p>
+<ul>
+<li><code>PublishTcpInTextFormat.siddhi - Started Successfully!</code></li>
+<li><code>'tcp' sink at 'LowProductionAlertStream' stream successfully connected to 'localhost:9892'.</code></li>
+</ul>
+</li>
+<li>
+<p>Open event simulator by clicking on the second icon or press Ctrl+Shift+I.</p>
+</li>
 <li>In the Single Simulation tab of the panel, select values as follows:<ul>
-<li>Siddhi App Name: PublishTcpInTextFormat</li>
-<li>Stream Name: SweetProductionStream</li>
+<li><code>Siddhi App Name</code>: <code>PublishTcpInTextFormat</code></li>
+<li><code>Stream Name</code>: <code>SweetProductionStream</code></li>
 </ul>
 </li>
 <li>In the 'name' field and 'amount' field, enter 'toffee' and '45.24' respectively and click Send to send the event.</li>
 <li>Send some more events.</li>
-<li>See the output in the terminal of <code>{WSO2SIHome}/samples/sample-clients/tcp-server</code>. You can see output similar to the following:
-    <div class="highlight"><pre><span></span><code>[java] [org.wso2.si.tcp.server.TCPServer] : Event{timestamp=1512446413468, data=[toffee, 45.25], isExpired=false}
-[java] [org.wso2.si.tcp.server.TCPServer] : Event{timestamp=1512446425113, data=[coffee, 9.78], isExpired=false}
-[java] [org.wso2.si.tcp.server.TCPServer] : Event{timestamp=1512446442300, data=[chocolate, 78.23], isExpired=false}
-</code></pre></div></li>
+<li>
+<p>See the output in the terminal of <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/tcp-server</code>. You can see output similar to the following:</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.tcp.server.TCPServer<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512446413468</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>toffee,<span class="w"> </span><span class="m">45</span>.25<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.tcp.server.TCPServer<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512446425113</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>coffee,<span class="w"> </span><span class="m">9</span>.78<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.si.tcp.server.TCPServer<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512446442300</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>chocolate,<span class="w"> </span><span class="m">78</span>.23<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+</code></pre></div>
+
+</li>
 </ol>
-<h2 id="notes">Notes:<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
-<p>If you need to edit this application while it is running, stop the application -&gt; Save -&gt; Start.
-If you see the message <code>'LowProductionAlertStream' stream could not connect to 'localhost:9892'</code>, it could be due to port 9892, defined in the Siddhi application. This port is already being used by a different program. To resolve this issue, please do the following:
-* Stop this Siddhi application (click 'Run' on menu bar -&gt; 'Stop').
-* Change the port 9893 to an unused port in this Siddhi application's source configuration and also change the port number in the tcp-server file.
-* Start the application and check whether the expected output appears on the console.</p>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<p>If you need to edit this application while it is running, stop the application -&gt; Save -&gt; Start. If you see the message <code>'LowProductionAlertStream' stream could not connect to 'localhost:9892'</code>, it could be due to the port 9892, defined in the Siddhi application. This port is already being used by a different program. To resolve this issue, please do the following:</p>
+<ul>
+<li>Stop this Siddhi application (click 'Run' on menu bar -&gt; 'Stop').</li>
+<li>Change the port 9893 to an unused port in this Siddhi application's source configuration and also change the port number in the tcp-server file.</li>
+<li>Start the application and check whether the expected output appears on the console.</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;PublishTcpInTextFormat&quot;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Send events via TCP transport using text format&#39;</span><span class="p">)</span>
 
