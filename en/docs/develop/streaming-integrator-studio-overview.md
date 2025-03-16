@@ -1,7 +1,7 @@
 # Streaming Integrator Tooling Overview
 
 !!! info
-    This page describes the latest publicly-available version of Streaming Integrator Tooling. If you cannot see some of the user interface elements described here, [update your Streaming Integrator Tooling installation](https://docs.wso2.com/display/updates/Getting+Continuous+Updates).
+    This page describes the latest publicly-available version of Streaming Integrator Tooling.
 
 The Streaming Integrator Tooling is a developer tool that is shipped with
 the Streaming Integrator to develop Siddhi applications. It allows provides three
@@ -15,7 +15,11 @@ interfaces to develop Siddhi applications
     Siddhi application, and allows you to compose the applications by
     dragging and dropping Siddhi components to a graph.
     
--   **Wizard View**: This is a wizard with a page for each component of a Siddhi application that displays the relevant configuration parameters as fields. This wizard can be directly accessed from the [Welcome Page](#welcome-page). Only ETL (Extract, Transform, Load) applications can be created/viewed in this interface. For a Siddhi application to be considered an ETL application, it must include all of the following components:<br/><br/> - A source configuration<br/><br/> - A sink configuration (the sink type can be any of the [supported sink types](https://siddhi.io/en/v5.1/docs/query-guide/#sink) other than `log`)<br/><br/> - A Siddhi query that performs a transformation. <br/><br/> For more information, see [Creating an ETL Application via SI Tooling tutorial](../examples/creating-etl-application-via-tooling.md).
+-   **Wizard View**: This is a wizard with a page for each component of a Siddhi application that displays the relevant configuration parameters as fields. This wizard can be directly accessed from the [Welcome Page](#welcome-page). Only ETL (Extract, Transform, Load) applications can be created/viewed in this interface. For a Siddhi application to be considered an ETL application, it must include all of the following components:
+    - A source configuration
+    - A sink configuration (the sink type can be any of the [supported sink types](https://siddhi.io/en/v5.1/docs/query-guide/#sink) other than `log`)
+    - A Siddhi query that performs a transformation.
+For more information, see [Creating an ETL Application via SI Tooling tutorial](../examples/creating-etl-application-via-tooling.md).
 
 Once a Siddhi application is created, you can simulate events via the
 Streaming Integrator Tooling to test whether it works as expected.
@@ -25,17 +29,17 @@ Streaming Integrator Tooling to test whether it works as expected.
 To start and access the Streaming Integrator Tooling, follow the steps below:
 
 1.  Start the Streaming Integrator Tooling by issuing one of the following
-    commands from the `<SI_HOME>/bin` directory.
+    commands from the `<SI-Tooling-Home>/bin` directory.
 
-    -   For Windows: `streaming-integrator-tooling.bat`
-    -   For Linux: `./streaming-integrator-tooling.sh           `
+    -   For Windows: `tooling.bat`
+    -   For Linux: `./tooling.sh`
 
 2.  Access the Streaming Integrator Tooling via the `http://localhost:/editor`
     URL. The Streaming Integrator Tooling opens as shown below.
 
     !!! info
-        The default URL is `http://localhost:9390/editor`. If required, you can change the host name (i.e., `localhost`) or the web UI application name (i.e., `editor`). For instructions, see [Changing the Host Name and Context Path of SI Tooling](../setup/change-hostname-and-context-path.md).
-    
+        The default URL is `http://localhost:9390/editor`. If required, you can change the host name (i.e., `localhost`) or the web UI application name (i.e., `editor`).
+        For instructions, see [Changing the Host Name and Context Path of SI Tooling](../setup/change-hostname-and-context-path.md).
 
 ## Welcome Page
 
@@ -149,8 +153,9 @@ The **Edit** menu includes the following options.
     application that you are currently editing. The redo operation can
     be carried out only if you have not saved the Siddhi application
     after you undid the change.
-    
--   **Find** 
+
+-   **Find**
+
     Click this to search for a specific string in the currently
     active Siddhi application tab.
       
@@ -215,9 +220,8 @@ The **Tools** menu provides access to the following tools that are shipped with 
     -   Single Simulation
     -   Feed Simulation
 
-    For detailed information about event simulation, see [Simulating Events](_Simulating_Events_).  
-    The event simulator can also be accessed from the [Side Panel](#StreamProcessorStudioOverview-SidePanel).
-    
+    The event simulator can also be accessed from the Side Panel.
+
 - **Error Store Explorer**
 
     This opens the Error Store Explorer in which you can view, correct and replay the streaming events with errors that are stored in the error store.
@@ -248,7 +252,7 @@ The **Tools** menu provides access to the following tools that are shipped with 
             !!!info
                 Note that only mapping errors can be corrected before replaying.
         
-            ![Correct and Replay Event]({{base_path}}/images/handling-requests-with-errors/correct-and-replay-event.png)
+            ![Correct and Replay Event]({{base_path}}/images/streaming-integrator-studio-overview/correct-and-replay-event.png)
             
     - **Discard events**: To discard all the erroneous events for the selected Siddhi application, click **Discard All**. To discard a specific erroneous event, click **Discard** for the relevant event.
     
