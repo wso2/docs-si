@@ -30,7 +30,7 @@ events to the active node. To achieve this, you can use a load balancing mechani
       - Download, install and start a working RDBMS instance to be used for clustering the two nodes.<br/>
       <br/>
       - Download the MySQL connector from <a target="_blank" href="https://dev.mysql.com/downloads/connector/j/">here</a>.
-        Extract and find the `mysql-connector-java-5.*.*-bin.jar`, and place it in the `<SI_HOME>/lib` directory of both nodes.<br/>
+        Extract and find the `mysql-connector-java-5.*.*-bin.jar`, and place it in the `<SI-Home>/lib` directory of both nodes.<br/>
         <br/>
       - In order to retrieve the state of the Siddhi Applications deployed in the system (in case of a scenario where both the
         nodes fail), enable state persistence for both the nodes by specifying the same datasource/file location.
@@ -51,7 +51,7 @@ There are three main configurations that are required to setup a minimum HA clus
 - HA configuration
 
 !!! note
-    - The configurations given below need to be done in the `<SI_HOME>/conf/server/deployment.yaml` file for both
+    - The configurations given below need to be done in the `<SI-Home>/conf/server/deployment.yaml` file for both
       the WSO2 SI nodes in the cluster.<br/><br/>
     - If you need to run both SI instances in the same host, make sure that you do a port offset to change the default 
       ports in one of the hosts. For more information about the default ports, see [Configuring Default Ports](../ref/configuring-default-ports.md).
@@ -78,7 +78,7 @@ To configure the HA cluster, follow the steps below:
            table: PERSISTENCE_TABLE
     ```
           
-    The datasource named `PERSISTENCE_DB` in the above configuration can be defined in the `<SI_HOME>/conf/server/deployment.yaml`
+    The datasource named `PERSISTENCE_DB` in the above configuration can be defined in the `<SI-Home>/conf/server/deployment.yaml`
      file under `wso2.datasources`. The following is a sample datasource configuration.
 
      ```
@@ -101,7 +101,7 @@ To configure the HA cluster, follow the steps below:
      ```
 
 
-3. To allow the two nodes in the cluster to coordinate effectively, configure carbon coordination by updating the `cluster.config` section of the `<SI_HOME>/conf/server/deployment.yaml` as follows:
+3. To allow the two nodes in the cluster to coordinate effectively, configure carbon coordination by updating the `cluster.config` section of the `<SI-Home>/conf/server/deployment.yaml` as follows:
 
     !!! info
         This step covers cluster configuration.
@@ -120,7 +120,7 @@ To configure the HA cluster, follow the steps below:
 
         Enter the name of the configured datasource shared by the nodes in the cluster as shown in the example below. Data handled by the cluster are persisted here.
 
-        The following is a sample datasource configuration for a MySQL datasource that should appear under the `dataSources` subsection of the `wso2.datasources` section in the  `<SI_HOME>/conf/server/deployment.yaml` file.
+        The following is a sample datasource configuration for a MySQL datasource that should appear under the `dataSources` subsection of the `wso2.datasources` section in the  `<SI-Home>/conf/server/deployment.yaml` file.
 
         ```
         Sample MySQL datasource
@@ -172,7 +172,7 @@ To configure the HA cluster, follow the steps below:
      ```
 
 
-4. Next, add the `deployment.config` section to the `<SI_HOME>/conf/server/deployment.yaml` file with the following configurations. (HA configuration)
+4. Next, add the `deployment.config` section to the `<SI-Home>/conf/server/deployment.yaml` file with the following configurations. (HA configuration)
 
     !!! info
         This step covers HA configuration.
@@ -220,40 +220,40 @@ To configure the HA cluster, follow the steps below:
         !!! info
             In a container environment, you can use an advertised host and an advertised port to avoid exposing the actual host and port.
 
-       The following is sample HA configuration.
+        The following is sample HA configuration.
 
-        ```
-            - deployment.config:
-                type: ha
-                passiveNodeDetailsWaitTimeOutMillis: 300000
-                passiveNodeDetailsRetrySleepTimeMillis: 500
-                eventByteBufferQueueCapacity: 20000
-                byteBufferExtractorThreadPoolSize: 5
-                eventSyncServer:
-                    host: localhost
-                    port: 9893
-                    advertisedHost: localhost
-                    advertisedPort: 9893
-                    bossThreads: 10
-                    workerThreads: 10
-                eventSyncClientPool:
-                    maxActive: 10
-                    maxTotal: 10
-                    maxIdle: 10
-                    maxWait: 60000
-                    minEvictableIdleTimeMillis: 120000
+        ```yaml
+        - deployment.config:
+            type: ha
+            passiveNodeDetailsWaitTimeOutMillis: 300000
+            passiveNodeDetailsRetrySleepTimeMillis: 500
+            eventByteBufferQueueCapacity: 20000
+            byteBufferExtractorThreadPoolSize: 5
+            eventSyncServer:
+                host: localhost
+                port: 9893
+                advertisedHost: localhost
+                advertisedPort: 9893
+                bossThreads: 10
+                workerThreads: 10
+            eventSyncClientPool:
+                maxActive: 10
+                maxTotal: 10
+                maxIdle: 10
+                maxWait: 60000
+                minEvictableIdleTimeMillis: 120000`
         ```
 
 ## Starting the cluster
 
 To start the minimum HA cluster you configured, follow the steps below:
 
-1. Save the required Siddhi applications in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory of
+1. Save the required Siddhi applications in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory of
 both nodes. In order to ensure that the Siddhi applications are completely synchronized between the active and 
 the passive node, they must be added to the `siddhi-files` directory before the server startup. However, the
 synchronization can take place effectively even if the Siddhi applications are added while the server is running. 
     
-2. Start both servers by navigating to the `<SI_HOME>/bin` directory and issuing one of the following commands (depending on your operating system:
+2. Start both servers by navigating to the `<SI-Home>/bin` directory and issuing one of the following commands (depending on your operating system:
     - For Windows: `server.bat`
     - For Linux/Mac OS : `./server.sh`
         
@@ -277,9 +277,9 @@ If the cluster is correctly configured, the following CLI logs can be viewed wit
     When deploying Siddhi applications in a two node minimum HA cluster, it is recommended to use a content
     synchronization mechanism since Siddhi applications must be deployed to both server nodes. You can use a common
     shared file system such as Network File System (NFS).
-    You need to mount the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory of the two nodes to the shared file system.
+    You need to mount the `<SI-Home>/wso2/server/deployment/siddhi-files` directory of the two nodes to the shared file system.
         
 !!! info
-    To start two WSO2 SI Nodes in the same machine, `<SI_HOME>/conf/server/deployment.yaml` file -> `wso2.transport.http` namespace -> `listenerConfigurations` section must be updated
-    to listen to different ports. The `offset` property in the `<SI_HOME>/conf/server/deployment.yaml` -> `wso2.carbon section` section -> `ports` subsection should also
+    To start two WSO2 SI Nodes in the same machine, `<SI-Home>/conf/server/deployment.yaml` file -> `wso2.transport.http` namespace -> `listenerConfigurations` section must be updated
+    to listen to different ports. The `offset` property in the `<SI-Home>/conf/server/deployment.yaml` -> `wso2.carbon section` section -> `ports` subsection should also
     be changed in one SI instance to avoid conflicts when starting both servers.

@@ -15,7 +15,7 @@ loosing any data. Streaming integrator has the capability to achieve the above v
 certain checkpoint. Kafka is one such broker that you can configure with WSO2 Streaming Integrator to achieve this. The only additional configuration that you need to do in WSO2 Streaming Integrator is state persistence. For detailed
 instructions, see [Configuring Database and File System State Persistence](../admin/configuring-Database-and-File-System-State-Persistence.md).
 
-##![overview]({{base_path}}/singleNodeDeployment.jpg?)
+##![overview]({{base_path}}/images/singleNodeDeployment.jpg)
 
 If the single Streaming Integrator node fails to receive incoming events and if you have configured state persistence, the single node is able to retrieve the latest snapshot from the database and request the broker to send the events that it was unable to process due to the failure
 
