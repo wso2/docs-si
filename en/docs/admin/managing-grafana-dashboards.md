@@ -18,12 +18,11 @@ To import dashboards, follow the procedure below:
 
 6. Click **Import**.
 
-
 ## Organizing dashboards in folders
 
-!!! Before you begin:
+!!!tip "Before you begin:"
     Download the related JSON file(s) of one or more dashboards from [here](https://github.com/wso2/streaming-integrator/tree/master/modules/distribution/carbon-home/resources/dashboards), and import them to Grafana. For instructions, see [Importing dashboards](#importing-dashboards).
-    
+
 The dashboards you import are saved in the **General** folder by default. If required, you can create a design a folder structure that matches your requirement and save the dashboards in the different folders of the structure based on your categorization of the dashboards.
 
 **Creating new folders**
@@ -45,11 +44,11 @@ To create a new folder, follow the procedure below:
 4. Navigate back to the **Dashboards**/**Manage** tab. You can do this by clicking **Manage Dashboards** in the message that appears in the page of your new folder.
 
     ![New Folder]({{base_path}}/images/managing-grafana-dashboard/new-folder-page.png)
-    
+
     The new folder you created appears as shown in the following image.
-    
+
     ![View New Folder]({{base_path}}/images/managing-grafana-dashboard/view-new-folder.png)
-    
+
 **Moving dashboards between folders**
 
 To move selected dashboards to a specific folder, follow the procedure below:
@@ -57,17 +56,16 @@ To move selected dashboards to a specific folder, follow the procedure below:
 1. In the **Dashboards**/**Manage** tab, select the dashboards you want to move. Then click **Move**.
 
     ![Move dashboards]({{base_path}}/images/managing-grafana-dashboard/move-dashboard.png)
-    
-2. In the **Choose Dashboard Folder** dialog box that appears, select the folder to which you want to move the selected dashboards.
-    
-    ![Select Dashboard Folder]({{base_path}}/images/managing-grafana-dashboard/select-dashboard-folder.png)
-    
-3. Click **Move** to move the selected dashboards. A message appears to inform that the selected dashboards are successfully moved, and the **Dashboards**/**Manage** tab displays the selected dashboards under the folder you selected to move them.
 
+2. In the **Choose Dashboard Folder** dialog box that appears, select the folder to which you want to move the selected dashboards.
+
+    ![Select Dashboard Folder]({{base_path}}/images/managing-grafana-dashboard/select-dashboard-folder.png)
+
+3. Click **Move** to move the selected dashboards. A message appears to inform that the selected dashboards are successfully moved, and the **Dashboards**/**Manage** tab displays the selected dashboards under the folder you selected to move them.
 
 ## Deleting dashboards
 
-!!! Before you begin:
+!!!tip "Before you begin:"
     Download the related JSON file(s) of one or more dashboards from [here](https://github.com/wso2/streaming-integrator/tree/master/modules/distribution/carbon-home/resources/dashboards), and import them to Grafana. For instructions, see [Importing dashboards](#importing-dashboards).
 
 In the **Dashboards**/**Manage** tab, select the dashboard(s) you want to delete. Then click **Delete**.
@@ -93,8 +91,7 @@ To view a dashboard, follow the procedure below:
 4. Once the dashboard opens, click on the bar shown below to expand it and specify the time range for which you want to view statistics.
 
     ![Select Time Range]({{base_path}}/images/managing-grafana-dashboard/view-dashboard.png)
-    
+
     Once you expand the time range bar, you can select the required time interval or specify a custom time interval.
-    
+
     ![Select or Specify Time Range]({{base_path}}/images/managing-grafana-dashboard/select-or-specify-time-range.png)
-    

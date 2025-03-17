@@ -3,7 +3,7 @@
 Streaming Integrator Tooling uses Siddhi extensions to connect with various data sources. Siddhi extensions can be installed or un-installed using the Extension Installer.
 
 !!!Tip
-    The Extension Installer can install/un-install extensions within Streaming Integrator Tooling. When deploying Siddhi applications in Streaming Integrator Server, these have to be manually done. For more information, see [Downloading and Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
+    The Extension Installer can install/un-install extensions within Streaming Integrator Tooling. When deploying Siddhi applications in Streaming Integrator Server, `extension-installer` CLI command in the `<SI-Home>/bin` folder can be used or this can be manually done. For more information, see [Downloading and Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
 
 ## Managing Siddhi extensions
 
@@ -13,7 +13,7 @@ The following topics cover how to manage Siddhi extensions in Streaming Integrat
 
 To access the Extension installer and find the extensions you need to install/uninstall, follow the steps below:
 
-1. To start Streaming Integrator Tooling, navigate to the `<SI_TOOLING_HOME>/bin` directory and issue the appropriate command out of the following based on your operating system:
+1. To start Streaming Integrator Tooling, navigate to the `<SI_Tooling_Home>/bin` directory and issue the appropriate command out of the following based on your operating system:
 
     - For Windows: `tooling.bat`
 
@@ -103,14 +103,14 @@ The dialog box displays all the dependencies that need to be manually installed.
 
     |**Installation Location**|**Directory**|
     |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-    |**bundle in runtime**|Place the OSGi bundle you downloaded/converted in either the `<SI_HOME>/lib` or the `<SI_HOME>/bundles` directory based on the instructions.|
-    |**jar in runtime**   |Place the non-OSGi bundle you downloaded in the `<SI_HOME>/jars` directory.                                                                 |
-    |**jar in samples**   |Place the non-OSGi bundle you dowloaded in the `<SI_HOME>/samples/sample-clients/lib` directory.                                            |
+    |**bundle in runtime**|Place the OSGi bundle you downloaded/converted in either the `<SI-Home>/lib` or the `<SI-Home>/bundles` directory based on the instructions.|
+    |**jar in runtime**   |Place the non-OSGi bundle you downloaded in the `<SI-Home>/jars` directory.                                                                 |
+    |**jar in samples**   |Place the non-OSGi bundle you dowloaded in the `<SI-Tooling-Home>/samples/sample-clients/lib` directory.                                            |
 
 
 ## Configuring Extension Dependencies
 
-Configurations of extensions are loaded from the `<SI_HOME>/wso2/server/resources/extensionsInstaller/extensionDependencies.json` configuration file.
+Configurations of extensions are loaded from the `<SI-Home>/wso2/server/resources/extensionsInstaller/extensionDependencies.json` configuration file.
 
 When you are working with [custom extensions]({{base_path}}/connectors/writing-Custom-Siddhi-Extensions.md#writing-custom-siddhi-extensions), and if you want a custom extension to be installable from the Extension Installer, you need to add the configuration of the extension to this configuration file.
 
