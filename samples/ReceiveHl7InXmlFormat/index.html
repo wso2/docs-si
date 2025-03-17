@@ -1763,35 +1763,35 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
@@ -4421,35 +4421,35 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
@@ -4488,36 +4488,37 @@
 
   <h1>Receiving Custom XML Messages via HL7</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This application demonstrates how to configure WSO2 Streaming Integrator Tooling to receive Hl7 events in XML format to the hl7Stream via MLLP protocol and log the events in xmlStream to the output console.</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Install the HAPI testpanel. (Reference: https://hapifhir.github.io/hapi-hl7v2/hapi-testpanel/install.html)</li>
+<li>Install the <a href="https://hapifhir.github.io/hapi-hl7v2/hapi-testpanel/install.html">HAPI testpanel</a></li>
 <li>Save this sample. If there is no syntax error, the following message is shown on the console:<ul>
-<li>Siddhi App ReceiveHl7InXmlFormat successfully deployed.</li>
+<li><code>Siddhi App ReceiveHl7InXmlFormat successfully deployed.</code></li>
 </ul>
 </li>
 </ol>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the Sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Start the Siddhi application by clicking on 'Run'.</li>
-<li>If the Siddhi application starts successfully, the following messages would be shown on the console.<ul>
-<li>Starting SimpleServer running on port 4000</li>
-<li>ReceiveHl7InXmlFormat.siddhi - Started Successfully!</li>
+<li>If the Siddhi application starts successfully, the following messages will be shown on the console.<ul>
+<li><code>Starting SimpleServer running on port 4000</code></li>
+<li><code>ReceiveHl7InXmlFormat.siddhi - Started Successfully!</code></li>
 </ul>
 </li>
 </ol>
-<h2 id="testing-the-sample">Testing the Sample:<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="testing-the-sample">Testing the Sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
-<li>In the HAPI testpanel create a sending connection with port that provided in the siddhi app.</li>
-<li>Send this message 'MSH|<sup>~\&amp;|sendingSystemA|senderFacilityA|receivingSystemB|receivingFacilityB|20080925161613||ADT</sup>A01|589888ADT30502184808|P|2.3' from the testpanel</li>
+<li>In the HAPI testpanel create a sending connection with the port that is provided in the Siddhi app.</li>
+<li>Send the following message from the HAPI testpanel.
+<code>MSH|^~\&amp;|sendingSystemA|senderFacilityA|receivingSystemB|receivingFacilityB|20080925161613||ADT^A01|589888ADT30502184808|P|2.3</code></li>
 </ol>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
-<p>See the output. Following message would be shown on the console if you publish events.
-ReceiveHl7InXmlFormat : er7Stream : Event{timestamp=1552532452870, data=[589888ADT30502184808, sendingSystemA], isExpired=false}</p>
+<h2 id="viewing-the-results">Viewing the Results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<p>See the output.</p>
+<p>The following message will be shown on the console if you publish events.</p>
+<p><code>ReceiveHl7InXmlFormat : er7Stream : Event{timestamp=1552532452870, data=[589888ADT30502184808, sendingSystemA], isExpired=false}</code></p>
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;ReceiveHl7InXmlFormat&#39;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;This receives the HL7 messages and sends the acknowledgement message to the client using the MLLP protocol and custom xml mapping.&#39;</span><span class="p">)</span>
-
 
 <span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;hl7&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;4000&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">hl7</span><span class="p">.</span><span class="k">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;xml&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;xml&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">namespaces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;ns=urn:hl7-org:v2xml&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">attributes</span><span class="p">(</span><span class="n">MSH10</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ns:MSH/ns:MSH.10&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MSH3HD1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;ns:MSH/ns:MSH.3/ns:HD.1&quot;</span><span class="p">)))</span>
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">hl7stream</span><span class="w"> </span><span class="p">(</span><span class="n">MSH10</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">MSH3HD1</span><span class="w"> </span><span class="n">string</span><span class="p">);</span>
