@@ -1661,35 +1661,35 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
@@ -2370,35 +2370,35 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
@@ -4470,35 +4470,35 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
@@ -4537,41 +4537,43 @@
 
   <h1>Receiving Data via TCP and Preprocessing</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
-<p>This application demonstrates how to receive events via TCP transport and carryout data pre-processing with numerous Siddhi extensions (eg. string extension, time extension). For more information on Siddhi extensions please refer to "https://wso2.github.io/siddhi/extensions/". In this sample, a composite ID is obtained using string concatenation and the time format of the incoming event</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>This application demonstrates how to receive events via TCP transport and carryout data pre-processing with numerous Siddhi extensions (eg. string extension, time extension). For more information on Siddhi extensions please refer <a href="https://wso2.github.io/siddhi/extensions/">siddhi-extensions</a>. In this sample, a composite ID is obtained using string concatenation and the time format of the incoming event</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Ensure that MySQL is installed on your machine.</li>
 <li>Add the MySQL JDBC driver into <code>{WSO2_SI_HOME}/lib</code> as follows:<ol>
-<li>Download the JDBC driver from: https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.45.tar.gz.</li>
-<li>Unzip the archive.</li>
-<li>Copy <code>mysql-connector-java-5.1.45-bin.jar</code> to <code>{WSO2_SI_Home}/lib</code> directory.</li>
+<li>Download and copy the <code>mysql-connector-j-8.3.0.jar</code> to the <code>{WSO2_SI_Home}/lib</code> directory.</li>
 </ol>
 </li>
 <li>Create a database named <code>sampleDB</code> in MySQL. This database is referred to with <code>jdbc:mysql://localhost:3306/sampleDB</code> url.</li>
-<li>In the store configuration of this application, replace 'username' and 'password' values with your MySQL credentials.</li>
+<li>In the store configuration of this application, replace <code>username</code> and <code>password</code> values with your MySQL credentials.</li>
 <li>Save this sample.</li>
 </ol>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the Sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Start the Siddhi application by clicking on 'Run'.</li>
-<li>If the Siddhi application starts successfully, the following messages would be shown on the console.
-    <div class="highlight"><pre><span></span><code>* Tcp Server started in 0.0.0.0:9892
-* SweetProductionDataPreprocessing.siddhi - Started Successfully!
-</code></pre></div></li>
+<li>
+<p>If the Siddhi application starts successfully, the following messages would be shown on the console.</p>
+<div class="highlight"><pre><span></span><code>*<span class="w"> </span>Tcp<span class="w"> </span>Server<span class="w"> </span>started<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">0</span>.0.0.0:9892
+*<span class="w"> </span>SweetProductionDataPreprocessing.siddhi<span class="w"> </span>-<span class="w"> </span>Started<span class="w"> </span>Successfully!
+</code></pre></div>
+
+</li>
 </ol>
-<h2 id="testing-the-sample">Testing the Sample:<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
-<p>Navigate to <code>{WSO2SIHome}/samples/sample-clients/tcp-client</code> and run the <code>ant</code> command as follows.
+<h2 id="testing-the-sample">Testing the Sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<p>Navigate to <code>{WSO2SIHome}/samples/sample-clients/tcp-client</code> and run the <code>ant</code> command as follows.</p>
 <div class="highlight"><pre><span></span><code>ant<span class="w"> </span>-Dtype<span class="o">=</span>binary
-</code></pre></div></p>
-<p>If you want to publish custom number of events, you need to run <code>ant</code> command as follows.
+</code></pre></div>
+
+<p>If you want to publish custom number of events, you need to run <code>ant</code> command as follows.</p>
 <div class="highlight"><pre><span></span><code>ant<span class="w"> </span>-Dtype<span class="o">=</span>binary<span class="w"> </span>-DnoOfEventsToSend<span class="o">=</span><span class="m">5</span>
-</code></pre></div></p>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+</code></pre></div>
+
+<h2 id="viewing-the-results">Viewing the Results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
 <p>Check the <code>ProcessedSweetProductionTable</code> created in <code>sampleDB</code>. You would be able to see the pre-processed data written to the table</p>
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;SweetProductionDataPreprocessing&quot;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Collect data via TCP transport and pre-process&#39;</span><span class="p">)</span>
-
 
 <span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;tcp&#39;</span><span class="p">,</span>
 <span class="w">        </span><span class="n">context</span><span class="o">=</span><span class="s1">&#39;SweetProductionStream&#39;</span><span class="p">,</span>
@@ -4580,7 +4582,7 @@
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
 <span class="o">@</span><span class="n">Store</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="ss">&quot;rdbms&quot;</span><span class="p">,</span>
-<span class="w">       </span><span class="n">jdbc</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="ss">&quot;jdbc:mysql://localhost:3306/sampleDB&quot;</span><span class="p">,</span>
+<span class="w">       </span><span class="n">jdbc</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="ss">&quot;jdbc:mysql://localhost:3306/sampleDB?useSSL=false&quot;</span><span class="p">,</span>
 <span class="w">       </span><span class="n">username</span><span class="o">=</span><span class="ss">&quot;root&quot;</span><span class="p">,</span>
 <span class="w">       </span><span class="n">password</span><span class="o">=</span><span class="ss">&quot;mysql&quot;</span><span class="w"> </span><span class="p">,</span>
 <span class="w">       </span><span class="n">jdbc</span><span class="p">.</span><span class="n">driver</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;com.mysql.jdbc.Driver&quot;</span><span class="p">)</span>

@@ -2029,35 +2029,35 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
@@ -4407,35 +4407,35 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
@@ -4474,39 +4474,46 @@
 
   <h1>Inserting and Accessing Data in a Map</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This function creates a map and added values and checks whether values are available</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Save this sample. If there is no syntax error, the following messages would be shown on the console<ul>
-<li>Siddhi App MapExtensionSample successfully deployed.</li>
+<li><code>Siddhi App MapExtensionSample successfully deployed.</code></li>
 </ul>
 </li>
 </ul>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the Sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Start the Siddhi application by clicking on 'Run'</li>
 <li>If the Siddhi application starts successfully, the following messages would be shown on the console<ul>
-<li>MapExtensionSample.siddhi - Started Successfully!</li>
+<li><code>MapExtensionSample.siddhi - Started Successfully!</code></li>
 </ul>
 </li>
 </ol>
-<h2 id="testing-the-sample">Testing the Sample:<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
-<p>You can publish data event to the file, through event simulator
-1. Open event simulator by clicking on the second icon or press Ctrl+Shift+I.
-2. In the Single Simulation tab of the panel, select values as follows:
-    * Siddhi App Name  : MapExtensionSample
-    * Stream Name     : SweetProductionStream
-3. Enter following values in the fields and send
-    * name: chocolate cake
-    * amount: 50.50</p>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
-<p>Messages similar to the following would be shown on the console.<br/><br/>
-INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - MapExtensionSample: Event: , StreamEvent{ timestamp=1513384974698, beforeWindowData=null, onAfterWindowData=null, outputData=[true, false], type=CURRENT, next=null}</p>
-<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">APP</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;MapExtensionSample&quot;</span><span class="p">)</span>
+<h2 id="testing-the-sample">Testing the Sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<p>You can publish data event to the file, through event simulator</p>
+<ol>
+<li>Open event simulator by clicking on the second icon or press Ctrl+Shift+I.</li>
+<li>In the Single Simulation tab of the panel, select values as follows:<ul>
+<li><code>Siddhi App Name</code>  : <code>MapExtensionSample</code></li>
+<li><code>Stream Name</code>     : <code>SweetProductionStream</code></li>
+</ul>
+</li>
+<li>Enter following values in the fields and send<ul>
+<li>name: chocolate cake</li>
+<li>amount: 50.50</li>
+</ul>
+</li>
+</ol>
+<h2 id="viewing-the-results">Viewing the Results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<p>Messages similar to the following would be shown on the console.</p>
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.query.processor.stream.LogStreamProcessor<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>MapExtensionSample:<span class="w"> </span>Event:<span class="w"> </span>,<span class="w"> </span>StreamEvent<span class="o">{</span><span class="w"> </span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1513384974698</span>,<span class="w"> </span><span class="nv">beforeWindowData</span><span class="o">=</span>null,<span class="w"> </span><span class="nv">onAfterWindowData</span><span class="o">=</span>null,<span class="w"> </span><span class="nv">outputData</span><span class="o">=[</span>true,<span class="w"> </span>false<span class="o">]</span>,<span class="w"> </span><span class="nv">type</span><span class="o">=</span>CURRENT,<span class="w"> </span><span class="nv">next</span><span class="o">=</span>null<span class="o">}</span>
+</code></pre></div>
 
-<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Insert values into a map and access&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">app</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;MapExtensionSample&quot;</span><span class="p">)</span>
 
+<span class="o">@</span><span class="n">app</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Insert values into a map and access&#39;</span><span class="p">)</span>
 
 <span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">CheckedMapStream</span><span class="p">(</span><span class="n">isMap1</span><span class="w"> </span><span class="n">bool</span><span class="p">,</span><span class="w"> </span><span class="n">isMap2</span><span class="w"> </span><span class="n">bool</span><span class="p">);</span>
