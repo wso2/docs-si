@@ -15,6 +15,8 @@ This application demonstrates how to perform CRUD operations using Siddhi querie
 2. If auth is not enabled in the MongoDB instance, skip steps 3 and 4.
 3. Create a data store named `production` in MongoDB with relevant access privileges.
 4. Create a collection named `SweetProductionTable` and insert values into `SweetProductionTable`.
+5. Download and convert the `bson-4.9.1.jar` to an OSGI bundle using the `jartobundle` tool in the `<SI-Home>/bin/` directory by invoking the following command.
+`<SI-Tooling-Home>/bin/jartobundle.bat <{Source} Directory Path> <{Destination} Directory Path>`
 5. Save this sample.
 
 ## Executing the Sample
