@@ -2495,42 +2495,42 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
-    Notes:
+    Notes
   </a>
   
 </li>
@@ -4428,42 +4428,42 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
-    Notes:
+    Notes
   </a>
   
 </li>
@@ -4502,74 +4502,98 @@
 
   <h1>Publishing XML Events via MQTT</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via MQTT transport in XML format and view the output on the mqtt-consumer.</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Save this sample. The following message appears on the console.
-    <div class="highlight"><pre><span></span><code>Siddhi App PublishMqttInXmlFormat successfully deployed.
-</code></pre></div></li>
-<li>Setting up MQTT Mosquitto broker in Ubuntu Linux.<ol>
-<li>Add the mosquitto repository using the following commands.
-    <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-add-repository<span class="w"> </span>ppa:mosquitto-dev/mosquitto-ppa
+<li>
+<p>Save this sample. The following message appears on the console.</p>
+<div class="highlight"><pre><span></span><code>Siddhi<span class="w"> </span>App<span class="w"> </span>PublishMqttInXmlFormat<span class="w"> </span>successfully<span class="w"> </span>deployed.
+</code></pre></div>
+
+</li>
+<li>
+<p>Setting up MQTT Mosquitto broker in Ubuntu Linux.</p>
+<ol>
+<li>
+<p>Add the <code>mosquitto</code> repository using the following commands.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-add-repository<span class="w"> </span>ppa:mosquitto-dev/mosquitto-ppa
 sudo<span class="w"> </span>apt-get<span class="w"> </span>update
-</code></pre></div></li>
-<li>Execute the following command to install the Mosquitto broker package.
-    ```bash
-    sudo apt-get install mosquitto
-    ````</li>
-<li>Install Mosquitto developer libraries to develop MQTT clients.
-    <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>libmosquitto-dev
-</code></pre></div></li>
-<li>Execute the following command to install Mosquitto client packages.
-    <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>mosquitto-clients
-</code></pre></div></li>
-<li>Ensure that the Mosquitto broker is running.
-    <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>service<span class="w"> </span>mosquitto<span class="w"> </span>status
-</code></pre></div></li>
+</code></pre></div>
+
+</li>
+<li>
+<p>Execute the following command to install the <code>Mosquitto</code> broker package.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>mosquitto
+</code></pre></div>
+
+</li>
+<li>
+<p>Install <code>Mosquitto</code> developer libraries to develop MQTT clients.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>libmosquitto-dev
+</code></pre></div>
+
+</li>
+<li>
+<p>Execute the following command to install <code>Mosquitto</code> client packages.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>mosquitto-clients
+</code></pre></div>
+
+</li>
+<li>
+<p>Ensure that the <code>Mosquitto</code> broker is running.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>service<span class="w"> </span>mosquitto<span class="w"> </span>status
+</code></pre></div>
+
+</li>
 </ol>
 </li>
 </ol>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the Sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Open a terminal, navigate to the <code>{WSO2SIHome}/samples/sample-clients/mqtt-consumer</code> directory and run the <code>ant</code> command.<ul>
+<li>Open a terminal, navigate to the <code>{SI-Tooling-Home}/samples/sample-clients/mqtt-consumer</code> directory, and run the <code>ant</code> command.<ul>
 <li>If you use the default topic <code>mqtt_topic</code> and URL <code>tcp://localhost:1883</code>, in your program use the <code>ant</code> command without any arguments.</li>
 <li>However, if you use a different topic, run the <code>ant</code> command with appropriate argument.
 e.g. <code>ant -Dtopic=mqttTest</code></li>
 </ul>
 </li>
 <li>Start the Siddhi application by clicking 'Run'.</li>
-<li>If the Siddhi application starts successfully, the following messages appear on the console
-    <div class="highlight"><pre><span></span><code>PublishMqttInXmlFormat.siddhi - Started Successfully!
-</code></pre></div></li>
+<li>
+<p>If the Siddhi application starts successfully, the following messages appear on the console</p>
+<div class="highlight"><pre><span></span><code>PublishMqttInXmlFormat.siddhi<span class="w"> </span>-<span class="w"> </span>Started<span class="w"> </span>Successfully!
+</code></pre></div>
+
+</li>
 </ol>
-<h2 id="testing-the-sample">Testing the Sample:<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="testing-the-sample">Testing the Sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Open the event simulator by clicking on the second icon or press Ctrl+Shift+I.</li>
 <li>In the Single Simulation tab of the panel, select values as follows:<ul>
-<li>Siddhi App Name: PublishMqttInXmlFormat</li>
-<li>Stream Name: SweetProductionStream</li>
+<li><code>Siddhi App Name</code>: <code>PublishMqttInXmlFormat</code></li>
+<li><code>Stream Name</code>: <code>SweetProductionStream</code></li>
 </ul>
 </li>
-<li>In the name field and amount fields, enter 'toffee' and '45.24' respectively. Then click Send to send the event.</li>
+<li>In the <code>name</code> field and <code>amount</code> fields, enter 'toffee' and '45.24' respectively. Then click Send to send the event.</li>
 <li>Send some more events.</li>
 </ol>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
-<p>See the output in the terminal of <code>{WSO2SIHome}/samples/sample-clients/mqtt-consumer</code>. You will get the output as follows (example for 3 events):</p>
-<div class="highlight"><pre><span></span><code>[java] [org.apache.axiom.om.util.StAXUtils] : XMLStreamReader is org.apache.axiom.util.stax.dialect.SJSXPStreamReaderWrapper
-[java] [io.siddhi.core.stream.output.sink.LogSink] : PublishMqttInXmlFormatTest : logStream : Event{timestamp=1512462478777, data=[chocolate, 78.34], isExpired=false}
-[java] [org.apache.axiom.om.util.StAXUtils] : XMLStreamReader is org.apache.axiom.util.stax.dialect.SJSXPStreamReaderWrapper
-[java] [io.siddhi.core.stream.output.sink.LogSink] : PublishMqttInXmlFormatTest : logStream : Event{timestamp=1512462520264, data=[sweets, 34.57], isExpired=false}
-[java] [org.apache.axiom.om.util.StAXUtils] : XMLStreamReader is org.apache.axiom.util.stax.dialect.SJSXPStreamReaderWrapper
-[java] [io.siddhi.core.stream.output.sink.LogSink] : PublishMqttInXmlFormatTest : logStream : Event{timestamp=1512462534053, data=[coffee, 12.7], isExpired=false}
+<h2 id="viewing-the-results">Viewing the Results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<p>See the output in the terminal of <code>{SI-Tooling-Home}/samples/sample-clients/mqtt-consumer</code>. You will get the output as follows (example for 3 events):</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.apache.axiom.om.util.StAXUtils<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>XMLStreamReader<span class="w"> </span>is<span class="w"> </span>org.apache.axiom.util.stax.dialect.SJSXPStreamReaderWrapper
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>PublishMqttInXmlFormatTest<span class="w"> </span>:<span class="w"> </span>logStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512462478777</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>chocolate,<span class="w"> </span><span class="m">78</span>.34<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.apache.axiom.om.util.StAXUtils<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>XMLStreamReader<span class="w"> </span>is<span class="w"> </span>org.apache.axiom.util.stax.dialect.SJSXPStreamReaderWrapper
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>PublishMqttInXmlFormatTest<span class="w"> </span>:<span class="w"> </span>logStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512462520264</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>sweets,<span class="w"> </span><span class="m">34</span>.57<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.apache.axiom.om.util.StAXUtils<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>XMLStreamReader<span class="w"> </span>is<span class="w"> </span>org.apache.axiom.util.stax.dialect.SJSXPStreamReaderWrapper
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>PublishMqttInXmlFormatTest<span class="w"> </span>:<span class="w"> </span>logStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512462534053</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>coffee,<span class="w"> </span><span class="m">12</span>.7<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
 </code></pre></div>
 
-<h2 id="notes">Notes:<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
-<p>If you need to edit this application while it is running, stop the application -&gt; Save -&gt; Start.
-If the message "LowProductionAlertStream' stream could not connect to 'localhost:1883", it could be due to port 1883, which is defined in the Siddhi application. This port is already being used by a different program. To resolve this issue, please do the following:
-* Stop this Siddhi application (click 'Run' on the menu bar -&gt; 'Stop').
-* Change the port 1883 to an unused port. To do this you need to add a new listener in mosquitto.conf (e.g., listener port 1884,listener port 1885).
-* Start the application and check whether the expected output appears on the console.</p>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<p>If you need to edit this application while it is running, stop the application, <code>Save</code> -&gt; <code>Start</code>.</p>
+<p>If the message <code>"LowProductionAlertStream' stream could not connect to 'localhost:1883"</code> is logged, it could be due to port 1883, which is defined in the Siddhi application. This port is already being used by a different program. To resolve this issue, please do the following:</p>
+<ul>
+<li>Stop this Siddhi application (click 'Run' on the menu bar -&gt; 'Stop').</li>
+<li>Change the port 1883 to an unused port. To do this you need to add a new listener in mosquitto.conf (e.g., listener port 1884,listener port 1885).</li>
+<li>Start the application and check whether the expected output appears on the console.</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;PublishMqttInXmlFormat&quot;</span><span class="p">)</span>
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
