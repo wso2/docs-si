@@ -1777,42 +1777,35 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
-    Notes:
+    Notes
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
@@ -4428,42 +4421,35 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
-    Notes:
+    Notes
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
@@ -4502,48 +4488,52 @@
 
   <h1>Receiving Custom Text Events via TCP</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This application demonstrates how to configure WSO2 Streaming Integrator to receive events to the SweetProductionStream via TCP transport in Text default format and log the events in LowProductionAlertStream to the  output  console.</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<p>Save this sample.</p>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Start the Siddhi application by clicking on 'Run'.</li>
-<li>If the Siddhi application starts successfully, the following messages would be shown on the console.
-    <div class="highlight"><pre><span></span><code>* Tcp Server started in 0.0.0.0:9892
-* ReceiveTCPInTextFormatWithCustomMapping.siddhi - Started Successfully!
-</code></pre></div></li>
+<li>
+<p>If the Siddhi application starts successfully, the following messages would be shown on the console.</p>
+<ul>
+<li><code>Tcp Server started in 0.0.0.0:9892</code></li>
+<li><code>ReceiveTCPInTextFormatWithCustomMapping.siddhi - Started Successfully!</code></li>
+</ul>
+</li>
 </ol>
-<h2 id="testing-the-sample">Testing the Sample:<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
-<p>Navigate to <code>{WSO2SIHome}/samples/sample-clients/tcp-client</code> and run <code>ant</code> command as follows:
-Run <code>ant</code> command in the terminal as follows:
+<h2 id="testing-the-sample">Testing the sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<p>Navigate to <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/tcp-client</code> and run <code>ant</code> command as follows:
+Run <code>ant</code> command in the terminal as follows:</p>
 <div class="highlight"><pre><span></span><code>ant<span class="w"> </span>-Dtype<span class="o">=</span>text<span class="w"> </span>-DcustomMapping<span class="o">=</span><span class="nb">true</span>
 </code></pre></div>
-If you want to publish custom number of events, you need to run <code>ant</code> command as follows.
+
+<p>If you want to publish custom number of events, you need to run <code>ant</code> command as follows.</p>
 <div class="highlight"><pre><span></span><code>ant<span class="w"> </span>-Dtype<span class="o">=</span>text<span class="w"> </span>-DcustomMapping<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-DnoOfEventsToSend<span class="o">=</span><span class="m">5</span>
-</code></pre></div></p>
-<h2 id="notes">Notes:<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
-<p>If the message <code>Source Listener has created for url tcp://localhost:9892/SweetProductionStream</code> does not appear, it could be due to port 9892, defined in the Siddhi application is already being used by a different program. To resolve this issue, please do the following.
-* Stop this Siddhi application (Click 'Run' on menu bar -&gt; 'Stop').
-* Change the port 9892 to an unused port, in this Siddhi application's source configuration.
-* Start the application and check whether the specified messages appear on the console.</p>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
-<p>See the output. Following messages would be shown on the console continuousely.
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971370311, data=[&quot;Eclair&quot;, 132.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971371299, data=[&quot;Ice&quot;, 6733.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971372300, data=[&quot;Lollipop&quot;, 742.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971373300, data=[&quot;Marshmallow&quot;, 8781.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971374301, data=[&quot;Marshmallow&quot;, 5105.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971375301, data=[&quot;Froyo&quot;, 5531.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971376301, data=[&quot;Gingerbread&quot;, 2193.0], isExpired=false}
-</code></pre></div></p>
+</code></pre></div>
+
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<p>If the message <code>Source Listener has created for url tcp://localhost:9892/SweetProductionStream</code> does not appear, it could be due to the port 9892, defined in the Siddhi application is already being used by a different program. To resolve this issue, please do the following.</p>
+<ul>
+<li>Stop this Siddhi application (Click 'Run' on menu bar -&gt; 'Stop').</li>
+<li>Change the port 9892 to an unused port, in this Siddhi application's source configuration.</li>
+<li>Start the application and check whether the specified messages appear on the console.</li>
+</ul>
+<h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<p>See the output. Following messages would be shown on the console continuousely.</p>
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveTCPInTextFormatWithCustomMapping<span class="w"> </span>:<span class="w"> </span>LowProductionAlertStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512971370311</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="s2">&quot;Eclair&quot;</span>,<span class="w"> </span><span class="m">132</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveTCPInTextFormatWithCustomMapping<span class="w"> </span>:<span class="w"> </span>LowProductionAlertStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512971371299</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="s2">&quot;Ice&quot;</span>,<span class="w"> </span><span class="m">6733</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveTCPInTextFormatWithCustomMapping<span class="w"> </span>:<span class="w"> </span>LowProductionAlertStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512971372300</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="s2">&quot;Lollipop&quot;</span>,<span class="w"> </span><span class="m">742</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveTCPInTextFormatWithCustomMapping<span class="w"> </span>:<span class="w"> </span>LowProductionAlertStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512971373300</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="s2">&quot;Marshmallow&quot;</span>,<span class="w"> </span><span class="m">8781</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveTCPInTextFormatWithCustomMapping<span class="w"> </span>:<span class="w"> </span>LowProductionAlertStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512971374301</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="s2">&quot;Marshmallow&quot;</span>,<span class="w"> </span><span class="m">5105</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveTCPInTextFormatWithCustomMapping<span class="w"> </span>:<span class="w"> </span>LowProductionAlertStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512971375301</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="s2">&quot;Froyo&quot;</span>,<span class="w"> </span><span class="m">5531</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveTCPInTextFormatWithCustomMapping<span class="w"> </span>:<span class="w"> </span>LowProductionAlertStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1512971376301</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="s2">&quot;Gingerbread&quot;</span>,<span class="w"> </span><span class="m">2193</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+</code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;ReceiveTCPInTextFormatWithCustomMapping&quot;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Receive events via TCP transport in text format with custom mapping and view the output on the console.&#39;</span><span class="p">)</span>
 
-
 <span class="o">@</span><span class="k">Source</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;tcp&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="o">=</span><span class="s1">&#39;SweetProductionStream&#39;</span><span class="p">,</span>
-<span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">fail</span><span class="p">.</span><span class="k">on</span><span class="p">.</span><span class="k">unknown</span><span class="p">.</span><span class="n">attribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">regex</span><span class="p">.</span><span class="n">A</span><span class="o">=</span><span class="s1">&#39;((?&lt;=id:)(.*)(?=</span>
-<span class="s1">))&#39;</span><span class="p">,</span><span class="n">regex</span><span class="p">.</span><span class="n">B</span><span class="o">=</span><span class="s1">&#39;([-0-9]+)&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">attributes</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="n">amount</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">)))</span>
+<span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">fail</span><span class="p">.</span><span class="k">on</span><span class="p">.</span><span class="k">unknown</span><span class="p">.</span><span class="n">attribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">regex</span><span class="p">.</span><span class="n">A</span><span class="o">=</span><span class="s1">&#39;((?&lt;=id:)(.*)(?=))&#39;</span><span class="p">,</span><span class="n">regex</span><span class="p">.</span><span class="n">B</span><span class="o">=</span><span class="s1">&#39;([-0-9]+)&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">attributes</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="n">amount</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">)))</span>
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
 <span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>

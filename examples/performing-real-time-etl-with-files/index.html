@@ -4671,18 +4671,16 @@
 <div class="admonition info">
 <p class="admonition-title">Before you begin:</p>
 <ul>
-<li>Start the SI server by navigating to the <code>&lt;SI_HOME&gt;/bin</code> directory and issuing one of the following commands as appropriate, based on your operating system:<br/>
+<li>Start the SI server by navigating to the <code>&lt;SI-Home&gt;/bin</code> directory and issuing one of the following commands as appropriate, based on your operating system:<br/>
   <br/><ul>
-<li>For Windows: <code>streaming-integrator.bat</code><br/>
-  <br/></li>
+<li>For Windows: <code>server.bat</code><br/></li>
 <li>For Linux:  <code>sh server.sh</code><br/>
-  <br/>
-The following log appears in the Streaming Integrator console once you have successfully started the server. <br/>
-<br/>
-<code>INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 4.240 sec</code>
-<br/></li>
+  <br/></li>
 </ul>
 </li>
+<li>The following log appears in the Streaming Integrator console once you have successfully started the server. <br/>
+    <code>INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 4.240 sec</code>
+  <br/></li>
 </ul>
 </div>
 <h2 id="tutorial-steps">Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Permanent link">&para;</a></h2>
@@ -4696,41 +4694,36 @@ The following log appears in the Streaming Integrator console once you have succ
 </li>
 <li>
 <p>Open a text file and copy-paste following Siddhi application to it.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&#39;TailFileLineByLine&#39;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;TailFileLineByLine&#39;</span><span class="p">)</span>
 
-@App:description(&#39;Tails a file line by line and does a simple transformation.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Tails a file line by line and does a simple transformation.&#39;</span><span class="p">)</span>
 
-@source(type=&#39;file&#39;, mode=&#39;LINE&#39;,
-    file.uri=&#39;file:/Users/foo/productions.csv&#39;,
-    tailing=&#39;true&#39;,
-    @map(type=&#39;csv&#39;))
-define stream SweetProductionStream (name string, amount double);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">mode</span><span class="o">=</span><span class="s1">&#39;LINE&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;file:/Users/foo/productions.csv&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">tailing</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-@sink(type = &#39;log&#39;)
-define stream LogStream (name string, amount double);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">LogStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-from SweetProductionStream
-select str:upper(name) as name, amount
-insert into LogStream;
+<span class="k">from</span><span class="w"> </span><span class="n">SweetProductionStream</span>
+<span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="k">upper</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">LogStream</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Change the  value of the <code>file.uri</code> parameter in the above Siddhi application to the file path to which you downloaded <code>productions.csv</code> file in step 1.</p>
 </li>
 <li>
-<p>Save this file as <code>TailFileLineByLine.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory.   </p>
+<p>Save this file as <code>TailFileLineByLine.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This Siddhi application tails the file <code>productions.csv</code> line by line. Each line is converted to an event in the <code>SweetProductionStream</code> stream. After that, a simple transformation is carried out for the sweet production runs. The transformation involves converting the value for the <code>name</code> attribute to upper case. Finally, the output is logged in the Streaming Integrator console.</p>
 </div>
 <p>Upon successful deployment, following log appears in the SI console:</p>
-<p><div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App TailFileLineByLine deployed successfully
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>TailFileLineByLine<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
-4. To install the extensions required for the <code>TailFileLineByLine</code> Siddhi application you deployed, open a new terminal window and navigate to the <code>&lt;SI_HOME&gt;/bin</code> directory and issue one of the following commands as appropriate, based on your operating system:
-<br/>
-- For Windows: <code>extension-installer.bat</code><br/>
-<br/>
-- For Linux:  <code>sh extension-installer.sh</code><br/>
-<br/></p>
+
 </li>
 <li>
 <p>Now the Siddhi application starts to process the <code>productions.csv</code> file. The file contains the following entries.</p>
@@ -4739,8 +4732,8 @@ Baked alaska,20.0
 </code></pre></div>
 
 <p>As a result, the following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveEventsFromFile : LogStream : Event{timestamp=1564490830652, data=[ALMOND COOKIE, 100.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveEventsFromFile : LogStream : Event{timestamp=1564490830657, data=[BAKED ALASKA, 20.0], isExpired=false}
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveEventsFromFile<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564490830652</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>ALMOND<span class="w"> </span>COOKIE,<span class="w"> </span><span class="m">100</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveEventsFromFile<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564490830657</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>BAKED<span class="w"> </span>ALASKA,<span class="w"> </span><span class="m">20</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
 </code></pre></div>
 
 </li>
@@ -4752,7 +4745,7 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveEventsFromFile : LogSt
 </li>
 <li>
 <p>The following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveEventsFromFile : LogStream : Event{timestamp=1564490869579, data=[CUP CAKE, 300.0], isExpired=false}
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveEventsFromFile<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564490869579</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>CUP<span class="w"> </span>CAKE,<span class="w"> </span><span class="m">300</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
 </code></pre></div>
 
 </li>
@@ -4765,57 +4758,57 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveEventsFromFile : LogSt
 </li>
 <li>
 <p>Open a text file and copy-paste following Siddhi application to it.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&#39;TailFileRegex&#39;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;TailFileRegex&#39;</span><span class="p">)</span>
 
-@App:description(&#39;Tails a file using a regex and does a simple transformation.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Tails a file using a regex and does a simple transformation.&#39;</span><span class="p">)</span>
 
-@source(type=&#39;file&#39;, mode=&#39;REGEX&#39;,
-    file.uri=&#39;file:/Users/foo/noisy_data.txt&#39;,
-    begin.regex=&#39;\&lt;&#39;, end.regex=&#39;\&gt;&#39;,
-    tailing=&#39;true&#39;,
-    @map(type=&#39;text&#39;, fail.on.missing.attribute = &#39;false&#39;, regex.A=&#39;(\w+)\s([-0-9]+)&#39;,regex.B=&#39;volume\s([-0-9]+)&#39;, @attributes(symbol = &#39;A[1]&#39;,price = &#39;A[2]&#39;,volume = &#39;B&#39;)))
-define stream StockStream (symbol string, price float, volume long);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">mode</span><span class="o">=</span><span class="s1">&#39;REGEX&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;file:/Users/foo/noisy_data.txt&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="k">begin</span><span class="p">.</span><span class="n">regex</span><span class="o">=</span><span class="s1">&#39;\&lt;&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">end</span><span class="p">.</span><span class="n">regex</span><span class="o">=</span><span class="s1">&#39;\&gt;&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">tailing</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">fail</span><span class="p">.</span><span class="k">on</span><span class="p">.</span><span class="n">missing</span><span class="p">.</span><span class="n">attribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;false&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">regex</span><span class="p">.</span><span class="n">A</span><span class="o">=</span><span class="s1">&#39;(\w+)\s([-0-9]+)&#39;</span><span class="p">,</span><span class="n">regex</span><span class="p">.</span><span class="n">B</span><span class="o">=</span><span class="s1">&#39;volume\s([-0-9]+)&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">attributes</span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;A[1]&#39;</span><span class="p">,</span><span class="n">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;A[2]&#39;</span><span class="p">,</span><span class="n">volume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">)))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">StockStream</span><span class="w"> </span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="nb">float</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="n">long</span><span class="p">);</span>
 
-@sink(type = &#39;log&#39;)
-define stream LogStream (symbol string, price float, volume long);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">LogStream</span><span class="w"> </span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="nb">float</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="n">long</span><span class="p">);</span>
 
-from StockStream[NOT(symbol is null)]
-select str:upper(symbol) as symbol, price, volume  
-insert into LogStream;
+<span class="k">from</span><span class="w"> </span><span class="n">StockStream</span><span class="p">[</span><span class="k">NOT</span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span><span class="p">)]</span>
+<span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="k">upper</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">symbol</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w">  </span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">LogStream</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Change the  value of the <code>file.uri</code> parameter in the above Siddhi application to the file path to which you downloaded <code>noisy_data.txt</code> file in step 1.</p>
 </li>
 <li>
-<p>Save this file as <code>TailFileRegex.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
+<p>Save this file as <code>TailFileRegex.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This Siddhi application tails the <code>noisy_data.txt</code> file to find matches according to the regular expressions given: <code>begin.regex</code> and <code>end.regex</code>. Each match is converted to an event in the <code>StockStream</code> stream. After that, a simple transformation is carried out on the <code>StockStream</code> stream where the value for the <code>symbol</code> attribute from the event is converted to upper case. Finally, the output is logged in the SI console.</p>
 </div>
 <p>Once the Siddhi application is successfully deployed, the following log appears in the SI console.</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App TailFileRegex deployed successfully
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>TailFileRegex<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
 
 </li>
 <li>
-<p>Now the Siddhi application starts to process the <code>noisy_data.txt</code> file. </p>
+<p>Now the Siddhi application starts to process the <code>noisy_data.txt</code> file.</p>
 <p>As a result, the following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - TailFileRegex : LogStream : Event{timestamp=1564583307974, data=[WSO2, 75.0, 100], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - TailFileRegex : LogStream : Event{timestamp=1564583307975, data=[ORCL, 95.0, 200], isExpired=false}
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>TailFileRegex<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564583307974</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>WSO2,<span class="w"> </span><span class="m">75</span>.0,<span class="w"> </span><span class="m">100</span><span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>TailFileRegex<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564583307975</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>ORCL,<span class="w"> </span><span class="m">95</span>.0,<span class="w"> </span><span class="m">200</span><span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
 </code></pre></div>
 
 </li>
 <li>
 <p>Now append the following text to <code>noisy_data.txt</code> file and save the file.</p>
-<div class="highlight"><pre><span></span><code>IBM &lt;ibm 88 volume 150&gt; 1 New Orchard Rd  Armonk, NY 10504 
-Phone Number: (914) 499-1900
-Fax Number: (914) 765-6021
+<div class="highlight"><pre><span></span><code>IBM<span class="w"> </span>&lt;ibm<span class="w"> </span><span class="m">88</span><span class="w"> </span>volume<span class="w"> </span><span class="m">150</span>&gt;<span class="w"> </span><span class="m">1</span><span class="w"> </span>New<span class="w"> </span>Orchard<span class="w"> </span>Rd<span class="w">  </span>Armonk,<span class="w"> </span>NY<span class="w"> </span><span class="m">10504</span><span class="w"> </span>
+Phone<span class="w"> </span>Number:<span class="w"> </span><span class="o">(</span><span class="m">914</span><span class="o">)</span><span class="w"> </span><span class="m">499</span>-1900
+Fax<span class="w"> </span>Number:<span class="w"> </span><span class="o">(</span><span class="m">914</span><span class="o">)</span><span class="w"> </span><span class="m">765</span>-6021
 </code></pre></div>
 
 </li>
 <li>
 <p>The following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - TailFileRegex : LogStream : Event{timestamp=1564588585214, data=[IBM, 88.0, 150], isExpired=false}
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>TailFileRegex<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564588585214</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>IBM,<span class="w"> </span><span class="m">88</span>.0,<span class="w"> </span><span class="m">150</span><span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
 </code></pre></div>
 
 </li>
@@ -4832,22 +4825,22 @@ Fax Number: (914) 765-6021
 </li>
 <li>
 <p>Open a text file and copy-paste following Siddhi application to it.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&#39;TextFullFileProcessing&#39;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;TextFullFileProcessing&#39;</span><span class="p">)</span>
 
-@App:description(&#39;Reads a text file and moves it after processing.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Reads a text file and moves it after processing.&#39;</span><span class="p">)</span>
 
-@source(type=&#39;file&#39;, mode=&#39;TEXT.FULL&#39;,
-    file.uri=&quot;ftp://&lt;username&gt;:&lt;password&gt;@&lt;ftp_hostname&gt;:&lt;ftp_port&gt;/Users/foo/portfolio.txt&quot;,
-    action.after.process=&#39;MOVE&#39;, move.after.process=&quot;ftp://&lt;username&gt;:&lt;password&gt;@&lt;ftp_hostname&gt;:&lt;ftp_port&gt;/Users/foo/move.after.process&quot;, 
-    @map(type=&#39;json&#39;, enclosing.element=&quot;$.portfolio&quot;, @attributes(symbol = &quot;stock.company.symbol&quot;, price = &quot;stock.price&quot;, volume = &quot;stock.volume&quot;)))
-define stream StockStream (symbol string, price float, volume long);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">mode</span><span class="o">=</span><span class="s1">&#39;TEXT.FULL&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="ss">&quot;ftp://&lt;username&gt;:&lt;password&gt;@&lt;ftp_hostname&gt;:&lt;ftp_port&gt;/Users/foo/portfolio.txt&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">action</span><span class="p">.</span><span class="k">after</span><span class="p">.</span><span class="n">process</span><span class="o">=</span><span class="s1">&#39;MOVE&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">move</span><span class="p">.</span><span class="k">after</span><span class="p">.</span><span class="n">process</span><span class="o">=</span><span class="ss">&quot;ftp://&lt;username&gt;:&lt;password&gt;@&lt;ftp_hostname&gt;:&lt;ftp_port&gt;/Users/foo/move.after.process&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">enclosing</span><span class="p">.</span><span class="n">element</span><span class="o">=</span><span class="ss">&quot;$.portfolio&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">attributes</span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;stock.company.symbol&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;stock.price&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;stock.volume&quot;</span><span class="p">)))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">StockStream</span><span class="w"> </span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="nb">float</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="n">long</span><span class="p">);</span>
 
-@sink(type = &#39;log&#39;)
-define stream LogStream (symbol string, price float, volume long);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">LogStream</span><span class="w"> </span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="nb">float</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="n">long</span><span class="p">);</span>
 
-from StockStream
-select str:upper(symbol) as symbol, price, volume   
-insert into LogStream;
+<span class="k">from</span><span class="w"> </span><span class="n">StockStream</span>
+<span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="k">upper</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">symbol</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w">   </span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">LogStream</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Change the value of the <code>file.uri</code> parameter in the above Siddhi application to the remote file path to which you uploaded the <code>portfolio.txt</code> file in step 1.
@@ -4855,20 +4848,20 @@ In addition to that, change <code>move.after.process</code> so that it points to
 When configuring both of the above parameters, change the values for <code>&lt;username&gt;</code>, <code>&lt;password&gt;</code>, <code>&lt;ftp_hostname&gt;</code>, and <code>&lt;ftp_port&gt;</code> parameters accordingly.</p>
 </li>
 <li>
-<p>Save this file as <code>TextFullFileProcessing.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
+<p>Save this file as <code>TextFullFileProcessing.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This Siddhi application reads the complete <code>portfolio.txt</code> remote file to create a <code>StockStream</code> event. After that, a simple transformation is carried out on the <code>StockStream</code> stream where the value for the <code>symbol</code> attribute in each event is converted ito upper case. Finally, the output is logged in the SI console.</p>
 </div>
 <p>Once the Siddhi application is successfully deployed, following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App TextFullFileProcessing deployed successfully
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>TextFullFileProcessing<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
 
 </li>
 <li>
 <p>Now the Siddhi application starts to process the <code>portfolio.txt</code> file. </p>
 <p>As a result, the following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - TextFullFileProcessing :  LogStream : Event{timestamp=1564660443519, data=[WSO2, 55.6, 100], isExpired=false} 
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>TextFullFileProcessing<span class="w"> </span>:<span class="w">  </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564660443519</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>WSO2,<span class="w"> </span><span class="m">55</span>.6,<span class="w"> </span><span class="m">100</span><span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span><span class="w"> </span>
 </code></pre></div>
 
 </li>
@@ -4885,41 +4878,41 @@ When configuring both of the above parameters, change the values for <code>&lt;u
 </li>
 <li>
 <p>Open a text file and copy-paste following Siddhi application to it.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&#39;BinaryFullFileProcessing&#39;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;BinaryFullFileProcessing&#39;</span><span class="p">)</span>
 
-@App:description(&#39;Reads a binary file and moves it after processing.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Reads a binary file and moves it after processing.&#39;</span><span class="p">)</span>
 
-@source(type=&#39;file&#39;, mode=&#39;TEXT.FULL&#39;,
-    file.uri=&#39;file:/Users/foo/wso2.bin&#39;,
-    action.after.process=&#39;MOVE&#39;, move.after.process=&#39;file:/Users/foo/move.after.process&#39;, 
-    @map(type=&#39;json&#39;, enclosing.element=&quot;$.portfolio&quot;, @attributes(symbol = &quot;stock.company.symbol&quot;, price = &quot;stock.price&quot;, volume = &quot;stock.volume&quot;)))
-define stream StockStream (symbol string, price float, volume long);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">mode</span><span class="o">=</span><span class="s1">&#39;BINARY.FULL&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;file:/Users/foo/wso2.bin&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">action</span><span class="p">.</span><span class="k">after</span><span class="p">.</span><span class="n">process</span><span class="o">=</span><span class="s1">&#39;MOVE&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">move</span><span class="p">.</span><span class="k">after</span><span class="p">.</span><span class="n">process</span><span class="o">=</span><span class="s1">&#39;file:/Users/foo/move.after.process&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">enclosing</span><span class="p">.</span><span class="n">element</span><span class="o">=</span><span class="ss">&quot;$.portfolio&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">attributes</span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;stock.company.symbol&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;stock.price&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;stock.volume&quot;</span><span class="p">)))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">StockStream</span><span class="w"> </span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="nb">float</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="n">long</span><span class="p">);</span>
 
-@sink(type = &#39;log&#39;)
-define stream LogStream (symbol string, price float, volume long);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">LogStream</span><span class="w"> </span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="nb">float</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="n">long</span><span class="p">);</span>
 
-from StockStream
-select str:upper(symbol) as symbol, price, volume   
-insert into LogStream;
+<span class="k">from</span><span class="w"> </span><span class="n">StockStream</span>
+<span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="k">upper</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">symbol</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w">   </span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">LogStream</span><span class="p">;</span>
 </code></pre></div>
 
 <p>In the above Siddhi application, change the value for the <code>file.uri</code> parameter to the file path to which you downloaded the <code>wso2.bin</code> file in step 1.</p>
 </li>
 <li>
-<p>Save this file as <code>BinaryFullFileProcessing.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
+<p>Save this file as <code>BinaryFullFileProcessing.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This Siddhi application reads the file <code>wso2.bin</code> fully to create a <code>StockStream</code> event. After that, a simple transformation is carried out for the <code>StockStream</code> stream where the value for the <code>symbol</code> attribute is converted to upper case. Finally, the output is logged in the SI console.</p>
 </div>
 <p>Once the Siddhi application is successfully deployed, following log appears in the SI console.</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App BinaryFullFileProcessing deployed successfully
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>BinaryFullFileProcessing<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
 
 </li>
 <li>
 <p>Now the Siddhi application starts to process the <code>wso2.bin</code> file.</p>
 <p>As a result, the following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - BinaryFullFileProcessing :  LogStream : Event{timestamp=1564660553623, data=[WSO2, 55.6, 100], isExpired=false} 
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>BinaryFullFileProcessing<span class="w"> </span>:<span class="w">  </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564660553623</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>WSO2,<span class="w"> </span><span class="m">55</span>.6,<span class="w"> </span><span class="m">100</span><span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span><span class="w"> </span>
 </code></pre></div>
 
 </li>
@@ -4932,34 +4925,34 @@ insert into LogStream;
 </li>
 <li>
 <p>Open a text file and copy-paste following Siddhi application to it.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&#39;ReadFileLineByLine&#39;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;ReadFileLineByLine&#39;</span><span class="p">)</span>
 
-@App:description(&#39;Reads a file line by line and does a simple transformation.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Reads a file line by line and does a simple transformation.&#39;</span><span class="p">)</span>
 
-@source(type=&#39;file&#39;, mode=&#39;LINE&#39;,
-    file.uri=&#39;file:/Users/foo/productions.csv&#39;,
-    tailing=&#39;false&#39;,
-    @map(type=&#39;csv&#39;))
-define stream SweetProductionStream (name string, amount double);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">mode</span><span class="o">=</span><span class="s1">&#39;LINE&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;file:/Users/foo/productions.csv&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">tailing</span><span class="o">=</span><span class="s1">&#39;false&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-@sink(type = &#39;log&#39;)
-define stream LogStream (name string, amount double);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">LogStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-from SweetProductionStream
-select str:upper(name) as name, amount
-insert into LogStream;
+<span class="k">from</span><span class="w"> </span><span class="n">SweetProductionStream</span>
+<span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="k">upper</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">LogStream</span><span class="p">;</span>
 </code></pre></div>
 
 <p>In the above Siddhi application, change the value for the <code>file.uri</code> parameter to the file path to which you downloaded the <code>productions.csv</code> file in step 1.</p>
 </li>
 <li>
-<p>Save this file as <code>ReadFileLineByLine.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory.   </p>
+<p>Save this file as <code>ReadFileLineByLine.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This Siddhi application tails the <code>productions.csv</code> file line by line. Each line is converted to an event in the <code>SweetProductionStream</code> stream. After that, a simple transformation is carried out for the sweet production runs where the value for the <code>name</code> attribute from the event is converted into upper case. Finally, the output is logged in the SI console.</p>
 </div>
 <p>Once the Siddhi application is successfully deployed, the following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App ReadFileLineByLine deployed successfully
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>ReadFileLineByLine<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
 
 </li>
@@ -5002,42 +4995,42 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - ReadFileLineByLine : LogStrea
 </li>
 <li>
 <p>Open a text file and copy-paste following Siddhi application to it.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&#39;ReadFileRegex&#39;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;ReadFileRegex&#39;</span><span class="p">)</span>
 
-@App:description(&#39;Reads a file using a regex and does a simple transformation.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Reads a file using a regex and does a simple transformation.&#39;</span><span class="p">)</span>
 
-@source(type=&#39;file&#39;, mode=&#39;REGEX&#39;,
-    file.uri=&#39;file:/Users/foo/noisy_data.txt&#39;,
-    begin.regex=&#39;\&lt;&#39;, end.regex=&#39;\&gt;&#39;,
-    tailing=&#39;false&#39;,
-    @map(type=&#39;text&#39;, fail.on.missing.attribute = &#39;false&#39;, regex.A=&#39;(\w+)\s([-0-9]+)&#39;,regex.B=&#39;volume\s([-0-9]+)&#39;, @attributes(symbol = &#39;A[1]&#39;,price = &#39;A[2]&#39;,volume = &#39;B&#39;)))
-define stream StockStream (symbol string, price float, volume long);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">mode</span><span class="o">=</span><span class="s1">&#39;REGEX&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;file:/Users/foo/noisy_data.txt&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="k">begin</span><span class="p">.</span><span class="n">regex</span><span class="o">=</span><span class="s1">&#39;\&lt;&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">end</span><span class="p">.</span><span class="n">regex</span><span class="o">=</span><span class="s1">&#39;\&gt;&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">tailing</span><span class="o">=</span><span class="s1">&#39;false&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">fail</span><span class="p">.</span><span class="k">on</span><span class="p">.</span><span class="n">missing</span><span class="p">.</span><span class="n">attribute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;false&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">regex</span><span class="p">.</span><span class="n">A</span><span class="o">=</span><span class="s1">&#39;(\w+)\s([-0-9]+)&#39;</span><span class="p">,</span><span class="n">regex</span><span class="p">.</span><span class="n">B</span><span class="o">=</span><span class="s1">&#39;volume\s([-0-9]+)&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">attributes</span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;A[1]&#39;</span><span class="p">,</span><span class="n">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;A[2]&#39;</span><span class="p">,</span><span class="n">volume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;B&#39;</span><span class="p">)))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">StockStream</span><span class="w"> </span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="nb">float</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="n">long</span><span class="p">);</span>
 
-@sink(type = &#39;log&#39;)
-define stream LogStream (symbol string, price float, volume long);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">LogStream</span><span class="w"> </span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="nb">float</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="n">long</span><span class="p">);</span>
 
-from StockStream[NOT(symbol is null)]
-select str:upper(symbol) as symbol, price, volume  
-insert into LogStream;
+<span class="k">from</span><span class="w"> </span><span class="n">StockStream</span><span class="p">[</span><span class="k">NOT</span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span><span class="p">)]</span>
+<span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="k">upper</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">symbol</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w">  </span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">LogStream</span><span class="p">;</span>
 </code></pre></div>
 
 <p>In the above Siddhi application, change the value of the <code>file.uri</code> parameter to the file path to which you downloaded the <code>noisy_data.txt</code> file in step 1.</p>
 </li>
 <li>
-<p>Save this file as <code>ReadFileRegex.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
+<p>Save this file as <code>ReadFileRegex.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This Siddhi application tails the <code>noisy_data.txt</code> file to find matches based on the <code>begin.regex</code> and <code>end.regex</code> regular expressions. Each match is converted to an event in the <code>StockStream</code> stream. After that, a simple transformation is carried out for the <code>StockStream</code> stream where value for the <code>symbol</code> attribute converted to upper case. Finally, the output is logged in the SI console.</p>
 </div>
 <p>Once the Siddhi application is successfully deployed, following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App ReadFileRegex deployed successfully
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>ReadFileRegex<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
 
 </li>
 <li>
-<p>Now the Siddhi application starts to process the <code>noisy_data.txt</code> file. </p>
+<p>Now the Siddhi application starts to process the <code>noisy_data.txt</code> file.</p>
 <p>As a result, the following log appears in the SI console.</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - ReadFileRegex : LogStream : Event{timestamp=1564906475623, data=[WSO2, 75.0, 100], isExpired=false}
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReadFileRegex<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564906475623</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>WSO2,<span class="w"> </span><span class="m">75</span>.0,<span class="w"> </span><span class="m">100</span><span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
 </code></pre></div>
 
 <p>Note that <code>noisy_data.txt</code> file is not present in the <code>file.uri</code> location.</p>
@@ -5045,14 +5038,14 @@ insert into LogStream;
 <li>
 <p>Next, let's create a new <code>noisy_data.txt</code> file in the <code>file.uri</code> location that includes the latest set of productions. Download <code>noisy_data.txt</code> file from <a href="https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/noisy_data.txt">here</a> and save it in the <code>file.uri</code> location.</p>
 <p>Now the Siddhi application starts to process the new content in the <code>noisy_data.txt</code> file. The file has the following content.</p>
-<div class="highlight"><pre><span></span><code>Oracle Corporation &lt;orcl 95 volume 200&gt; 500 Oracle Parkway.
-Redwood Shores CA, 94065.
-Corporate Phone: 650.506.7000.
-HQ-Security: 650.506.5555
+<div class="highlight"><pre><span></span><code>Oracle<span class="w"> </span>Corporation<span class="w"> </span>&lt;orcl<span class="w"> </span><span class="m">95</span><span class="w"> </span>volume<span class="w"> </span><span class="m">200</span>&gt;<span class="w"> </span><span class="m">500</span><span class="w"> </span>Oracle<span class="w"> </span>Parkway.
+Redwood<span class="w"> </span>Shores<span class="w"> </span>CA,<span class="w"> </span><span class="m">94065</span>.
+Corporate<span class="w"> </span>Phone:<span class="w"> </span><span class="m">650</span>.506.7000.
+HQ-Security:<span class="w"> </span><span class="m">650</span>.506.5555
 </code></pre></div>
 
 <p>As a result, the following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - ReadFileRegex : LogStream : Event{timestamp=1564906713176, data=[ORCL, 95.0, 200], isExpired=false}
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReadFileRegex<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564906713176</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>ORCL,<span class="w"> </span><span class="m">95</span>.0,<span class="w"> </span><span class="m">200</span><span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
 </code></pre></div>
 
 </li>
@@ -5066,41 +5059,42 @@ HQ-Security: 650.506.5555
 </li>
 <li>
 <p>Open a text file and copy-paste following Siddhi application to it.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&#39;ProcessFolder&#39;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;ProcessFolder&#39;</span><span class="p">)</span>
 
-@App:description(&#39;Process all files in the folder and delete files after processing.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Process all files in the folder and delete files after processing.&#39;</span><span class="p">)</span>
 
-@source(type=&#39;file&#39;, mode=&#39;text.full&#39;,
-    dir.uri=&#39;file:/Users/foo/productions&#39;,  
-    @map(type=&#39;json&#39;, enclosing.element=&quot;$.portfolio&quot;, @attributes(symbol = &quot;stock.company.symbol&quot;, price = &quot;stock.price&quot;, volume = &quot;stock.volume&quot;)))
-define stream StockStream (symbol string, price float, volume long);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">mode</span><span class="o">=</span><span class="s1">&#39;text.full&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">dir</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;file:/Users/foo/productions&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">enclosing</span><span class="p">.</span><span class="n">element</span><span class="o">=</span><span class="ss">&quot;$.portfolio&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">attributes</span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;stock.company.symbol&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;stock.price&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;stock.volume&quot;</span><span class="p">)))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">StockStream</span><span class="w"> </span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="nb">float</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="n">long</span><span class="p">);</span>
 
-@sink(type = &#39;log&#39;)
-define stream LogStream (symbol string, price float, volume long);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">LogStream</span><span class="w"> </span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="nb">float</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w"> </span><span class="n">long</span><span class="p">);</span>
 
-from StockStream
-select str:upper(symbol) as symbol, price, volume    
-insert into LogStream;
+<span class="k">from</span><span class="w"> </span><span class="n">StockStream</span>
+<span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="k">upper</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">symbol</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="p">,</span><span class="w"> </span><span class="n">volume</span><span class="w">    </span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">LogStream</span><span class="p">;</span>
 </code></pre></div>
 
 <p>In the above Siddhi application, change the value for the <code>dir.uri</code> parameter so that it points to the <code>productions</code> folder you created in step 1.</p>
 </li>
 <li>
-<p>Save this file as <code>ProcessFolder.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
+<p>Save this file as <code>ProcessFolder.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This Siddhi application processes each file in <code>productions</code> folder. Each file generates an event in the <code>StockStream</code> stream. After that, a simple transformation is carried out for the <code>StockStream</code> stream where the value for the <code>symbol</code> attribute is converted to upper case. Finally, the output is logged in the SI console.</p>
 </div>
 <p>Once the Siddhi application is successfully deployed, following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App ProcessFolder deployed successfully
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>ProcessFolder<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
 
 <p>Now the Siddhi application starts to process each file in the <code>productions</code> directory.</p>
-<p>As a result, the following logs appear in the SI console:
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - ProcessFolder : LogStream : Event{timestamp=1564932255417, data=[WSO2, 75.0, 100], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - ProcessFolder : LogStream : Event{timestamp=1564932255417, data=[ORCL, 95.0, 200], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - ProcessFolder : LogStream : Event{timestamp=1564932255417, data=[IBM, 88.0, 150], isExpired=false}
-</code></pre></div></p>
+<p>As a result, the following logs appear in the SI console:</p>
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ProcessFolder<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564932255417</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>WSO2,<span class="w"> </span><span class="m">75</span>.0,<span class="w"> </span><span class="m">100</span><span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ProcessFolder<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564932255417</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>ORCL,<span class="w"> </span><span class="m">95</span>.0,<span class="w"> </span><span class="m">200</span><span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ProcessFolder<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1564932255417</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>IBM,<span class="w"> </span><span class="m">88</span>.0,<span class="w"> </span><span class="m">150</span><span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+</code></pre></div>
+
 </li>
 </ol>
 <div class="admonition info">
@@ -5108,52 +5102,52 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - ProcessFolder : LogStream : E
 <p>In this scenario, you deleted each file in the folder after processing. You can choose to move the files instead of deleting them. To do this, set the <code>action.after.process</code> parameter to <code>MOVE</code> and specify the directory to which the files should be moved via the <code>move.after.process</code> parameter. For more information about these parameters, see <a href="https://siddhi-io.github.io/siddhi-io-file/api/latest/#file-source">Siddhi File Source documentation</a>.</p>
 </div>
 <h3 id="loading-data-into-a-file">Loading data into a file<a class="headerlink" href="#loading-data-into-a-file" title="Permanent link">&para;</a></h3>
-<p>In this section of the tutorial, you are exploring the different ways in which you could load data into a file.  </p>
+<p>In this section of the tutorial, you are exploring the different ways in which you could load data into a file.</p>
 <h4 id="appending-or-over-writing-events-to-a-file">Appending or over-writing events to a file<a class="headerlink" href="#appending-or-over-writing-events-to-a-file" title="Permanent link">&para;</a></h4>
 <p>In this scenario, you are appending a stream of events to the end of a file.</p>
 <ol>
 <li>
 <p>Open a text file and copy-paste following Siddhi application to it.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&#39;AppendToFile&#39;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;AppendToFile&#39;</span><span class="p">)</span>
 
-@App:description(&#39;Append incoming events in to a file.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Append incoming events in to a file.&#39;</span><span class="p">)</span>
 
-@Source(type = &#39;http&#39;, receiver.url=&#39;http://localhost:8006/SweetProductionStream&#39;, basic.auth.enabled=&#39;false&#39;,
-        @map(type=&#39;json&#39;))
-define stream SweetProductionStream (name string, amount double);
+<span class="o">@</span><span class="k">Source</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;http&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">receiver</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8006/SweetProductionStream&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">enabled</span><span class="o">=</span><span class="s1">&#39;false&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-@sink(type=&#39;file&#39;, @map(type=&#39;json&#39;), file.uri=&#39;/Users/foo/low_productions.txt&#39;)
-define stream LowProductionStream (name string, amount double);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;/Users/foo/low_productions.txt&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">LowProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
--- Query to filter productions which have amount &lt; 500.0
-@info(name=&#39;query1&#39;) 
-from SweetProductionStream[amount &lt; 500.0]
-select *
-insert into LowProductionStream;
+<span class="c1">-- Query to filter productions which have amount &lt; 500.0</span>
+<span class="o">@</span><span class="n">info</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;query1&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="k">from</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="p">[</span><span class="n">amount</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">500</span><span class="p">.</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">LowProductionStream</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Create an empty file and specify the location of the file as the value for the <code>file.uri</code> parameter. If this file does not exist, it is created at runtime.</p>
 </li>
 <li>
-<p>Save this file as <code>AppendToFile.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
+<p>Save this file as <code>AppendToFile.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This Siddhi application filters incoming <code>SweetProductionStream</code> events, selects the production runs of which the value for the <code>amount</code> attribute is less than <code>500.0</code>, and inserts the results into the <code>LowProductionStream</code>. Finally, all the events in the <code>LowProductionStream</code> events are appended to the file specified via the <code>file.uri</code> parameter in the Siddhi application.</p>
 </div>
 <p>Once the Siddhi application is successfully deployed, the following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App AppendToFile deployed successfully
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>AppendToFile<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
 
 </li>
 <li>
 <p>To insert a few events into <code>SweetProductionStream</code>,  let's issue the following <code>CURL</code> commands:</p>
-<div class="highlight"><pre><span></span><code>curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Almond cookie\&quot;,\&quot;amount\&quot;: 100.0}}&quot;  http://localhost:8006/SweetProductionStream --header &quot;Content-Type:application/json&quot;
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Almond cookie\&quot;,\&quot;amount\&quot;: 100.0}}&quot;</span><span class="w">  </span>http://localhost:8006/SweetProductionStream<span class="w"> </span>--header<span class="w"> </span><span class="s2">&quot;Content-Type:application/json&quot;</span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Baked alaska\&quot;,\&quot;amount\&quot;: 20.0}}&quot;  http://localhost:8006/SweetProductionStream --header &quot;Content-Type:application/json&quot;
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Baked alaska\&quot;,\&quot;amount\&quot;: 20.0}}&quot;</span><span class="w">  </span>http://localhost:8006/SweetProductionStream<span class="w"> </span>--header<span class="w"> </span><span class="s2">&quot;Content-Type:application/json&quot;</span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Cup cake\&quot;,\&quot;amount\&quot;: 300.0}}&quot;  http://localhost:8006/SweetProductionStream --header &quot;Content-Type:application/json&quot;
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Cup cake\&quot;,\&quot;amount\&quot;: 300.0}}&quot;</span><span class="w">  </span>http://localhost:8006/SweetProductionStream<span class="w"> </span>--header<span class="w"> </span><span class="s2">&quot;Content-Type:application/json&quot;</span>
 </code></pre></div>
 
 </li>
@@ -5169,15 +5163,15 @@ insert into LowProductionStream;
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>Instead of appending each event to the end of the file, you can configure your Siddhi application to over-write the file. To do this, set the <code>append='false'</code> configuration in the Siddhi application as shown in the sample <code>file</code> sink configuration below.</p>
-<div class="highlight"><pre><span></span><code>@sink(type=&#39;file&#39;, append=&#39;false&#39;,  @map(type=&#39;json&#39;), file.uri=&#39;/Users/foo/low_productions.txt&#39;)
-   define stream LowProductionAlertStream (name string, amount double);
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">append</span><span class="o">=</span><span class="s1">&#39;false&#39;</span><span class="p">,</span><span class="w">  </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">),</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;/Users/foo/low_productions.txt&#39;</span><span class="p">)</span>
+<span class="w">   </span><span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">LowProductionAlertStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 </code></pre></div>
 
 <p>For other configuration options, see <a href="https://siddhi-io.github.io/siddhi-io-file/api/latest/#file-sink">Siddhi File Sink documentation</a>.</p>
 </div>
 <h4 id="preserving-the-state-of-the-application-through-a-system-failure">Preserving the state of the application through a system failure<a class="headerlink" href="#preserving-the-state-of-the-application-through-a-system-failure" title="Permanent link">&para;</a></h4>
 <p>Let's try out a scenario where you deploy a Siddhi application to count the total number of production runs of a sweet factory.</p>
-<p>The production data is updated in a file and therefore you have to keep tailing this file, in order to get updates on the productions. </p>
+<p>The production data is updated in a file and therefore you have to keep tailing this file, in order to get updates on the productions.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>In this scenario, the Streaming Integrator server needs to <em>remember</em> the current count through system failures so that when the system is restored, the count is not reset to zero.
@@ -5185,26 +5179,26 @@ To achieve this, you can use the state persistence capability in the Streaming I
 </div>
 <ol>
 <li>
-<p>Enable state persistence feature in SI server as follows. Open the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file on a text editor and locate the <code>state.persistence</code> section.  </p>
-<div class="highlight"><pre><span></span><code>  # Periodic Persistence Configuration
-state.persistence:
-  enabled: true
-  intervalInMin: 1
-  revisionsToKeep: 2
-  persistenceStore: org.wso2.carbon.streaming.integrator.core.persistence.FileSystemPersistenceStore
-  config:
-    location: siddhi-app-persistence
+<p>Enable state persistence feature in SI server as follows. Open the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file on a text editor and locate the <code>state.persistence</code> section.  </p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="c1"># Periodic Persistence Configuration</span>
+<span class="nt">state.persistence</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">intervalInMin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">revisionsToKeep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">persistenceStore</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.wso2.carbon.streaming.integrator.core.persistence.FileSystemPersistenceStore</span>
+<span class="w">  </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">siddhi-app-persistence</span>
 </code></pre></div>
 
 <p>Set <code>enabled</code> parameter to <code>true</code> and save the file. </p>
 </li>
 <li>
-<p>To enable the state persistence debug logs, open the <code>&lt;SI_HOME&gt;/conf/server/log4j2.xml</code> file on a text editor and locate following line in it.</p>
-<div class="highlight"><pre><span></span><code> &lt;Logger name=&quot;com.zaxxer.hikari&quot; level=&quot;error&quot;/&gt;
+<p>To enable the state persistence debug logs, open the <code>&lt;SI-Home&gt;/conf/server/log4j2.xml</code> file on a text editor and locate following line in it.</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="nt">&lt;Logger</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;com.zaxxer.hikari&quot;</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;error&quot;</span><span class="nt">/&gt;</span>
 </code></pre></div>
 
 <p>Then add following <code>&lt;Logger&gt;</code> element below that line.</p>
-<div class="highlight"><pre><span></span><code>&lt;Logger name=&quot;org.wso2.carbon.streaming.integrator.core.persistence&quot; level=&quot;debug&quot;/&gt;
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Logger</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;org.wso2.carbon.streaming.integrator.core.persistence&quot;</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;debug&quot;</span><span class="nt">/&gt;</span>
 </code></pre></div>
 
 <p>Save the file.</p>
@@ -5217,36 +5211,36 @@ state.persistence:
 </li>
 <li>
 <p>Open a text file and copy-paste following Siddhi application to it.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&#39;CountProductions&#39;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;CountProductions&#39;</span><span class="p">)</span>
 
-@App:description(&#39;Siddhi application to count the total number of orders.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Siddhi application to count the total number of orders.&#39;</span><span class="p">)</span>
 
-@source(type=&#39;file&#39;, mode=&#39;LINE&#39;,
-    file.uri=&#39;file:/Users/foo/productions.csv&#39;,
-    tailing=&#39;true&#39;,
-    @map(type=&#39;csv&#39;))
-define stream SweetProductionStream (name string, amount double);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">mode</span><span class="o">=</span><span class="s1">&#39;LINE&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">file</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;file:/Users/foo/productions.csv&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">tailing</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-@sink(type = &#39;log&#39;)
-define stream LogStream (totalProductions double);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">LogStream</span><span class="w"> </span><span class="p">(</span><span class="n">totalProductions</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
--- Following query counts the number of sweet productions.
-@info(name = &#39;query&#39;)
-from SweetProductionStream
-select sum(amount) as totalProductions
-insert into LogStream;
+<span class="c1">-- Following query counts the number of sweet productions.</span>
+<span class="o">@</span><span class="n">info</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;query&#39;</span><span class="p">)</span>
+<span class="k">from</span><span class="w"> </span><span class="n">SweetProductionStream</span>
+<span class="k">select</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">totalProductions</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">LogStream</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Change the <code>file.uri</code> parameter in the above Siddhi application to the file path to which you downloaded the <code>productions.csv</code> file in step 4.</p>
 </li>
 <li>
-<p>Save this file as <code>CountProductions.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory.   </p>
+<p>Save this file as <code>CountProductions.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This Siddhi application tails the file <code>productions.csv</code> line by line. Each line is converted to an event in the <code>SweetProductionStream</code> stream. After that, a simple transformation is carried out for the sweet production runs. This transformation involves converting the value for the <code>name</code> attribute to upper case. Finally, the output is logged in the SI console.</p>
 </div>
 <p>Once the Siddhi application is successfully deployed, the following log appears in the SI console.</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App CountProductions deployed successfully
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>CountProductions<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
 
 </li>
@@ -5257,15 +5251,15 @@ Baked alaska,20.0
 </code></pre></div>
 
 <p>As a result, the following log appears in the SI console.</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1565097506866, data=[100.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1565097506866, data=[120.0], isExpired=false}
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>CountProductions<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1565097506866</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="m">100</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>CountProductions<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1565097506866</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="m">120</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
 </code></pre></div>
 
 <p>These logs print the sweet production count. Note that the current count of sweet productions is being printed as <code>120</code> in the second log. This is because the factory has so far produced <code>120</code> sweets: <code>100</code> Almond cookies and <code>20</code> Baked alaskas.</p>
 </li>
 <li>
 <p>Now wait for following log to appear in the SI console.</p>
-<div class="highlight"><pre><span></span><code>DEBUG {org.wso2.carbon.streaming.integrator.core.persistence.FileSystemPersistenceStore} - Periodic persistence of CountProductions persisted successfully
+<div class="highlight"><pre><span></span><code>DEBUG<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.persistence.FileSystemPersistenceStore<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Periodic<span class="w"> </span>persistence<span class="w"> </span>of<span class="w"> </span>CountProductions<span class="w"> </span>persisted<span class="w"> </span>successfully
 </code></pre></div>
 
 <p>This log indicates that the current state of the Siddhi application is successfully persisted. The Siddhi application state is persisted every minute. Therefore, you can see this log appearing every minute.</p>
@@ -5292,8 +5286,8 @@ Croutons,100.0
 <li>
 <p>Restart the SI server and wait for about one minute.</p>
 <p>The following log appears in the SI console:</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1565097846807, data=[220.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1565097846812, data=[320.0], isExpired=false}
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>CountProductions<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1565097846807</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="m">220</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>CountProductions<span class="w"> </span>:<span class="w"> </span>LogStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1565097846812</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="m">320</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
 </code></pre></div>
 
 </li>

@@ -4621,47 +4621,41 @@
 <p>Prepare the server to consume from or to publish to Kafka, follow the steps below:<br/>
 <br/>
     1. Download the Kafka broker from <a href="https://www.apache.org/dyn/closer.cgi?path=/kafka/2.3.0/kafka_2.12-2.3.0.tgz">the Apache site</a> and extract it.
-    From here onwards, this directory is referred to as <code>&lt;KAFKA_HOME&gt;</code>. <br/>
-    <br/>
-    2. Create a directory named <code>Source</code> in a preferred location in your machine and copy the following JARs to it from the <code>&lt;KAFKA_HOME&gt;/libs</code> directory.<br/>
+    From here onwards, this directory is referred to as <code>&lt;Kafka_Home&gt;</code>. <br/>
+    2. Create a directory named <code>Source</code> in a preferred location in your machine and copy the following JARs to it from the <code>&lt;Kafka_Home&gt;/libs</code> directory.<br/>
     <br/>
         - <code>kafka_2.12-2.3.0.jar</code><br/>
-        <br/>
         - <code>kafka-clients-2.3.0.jar</code><br/>
-        <br/>
         - <code>metrics-core-2.2.0.jar</code><br/>
-        <br/>
         - <code>scala-library-2.12.8.jar</code><br/>
-        <br/>
         - <code>zkclient-0.11.jar</code><br/>
-        <br/>
         - <code>zookeeper-3.4.14.jar</code><br/>
         <br/>
     3. Create another directory named <code>Destination</code> in a preferred location in your machine.<br/>
     <br/>
     4. To convert the Kafka JARS you copied to the <code>Source</code> directory, issue the following command:<br/>
-       <code>sh &lt;SI_HOME&gt;/bin/jartobundle.sh &lt;{Source}_Directory_Path&gt; &lt;{Destination}_Directory_Path&gt;</code><br/>
+       <code>sh &lt;SI-Home&gt;/bin/jartobundle.sh &lt;{Source}_Directory_Path&gt; &lt;{Destination}_Directory_Path&gt;</code><br/>
        <br/>
-    5. Copy all the jars from the <code>Destination</code> directory to the <code>&lt;SI_HOME&gt;/lib</code> directory.</p>
+    5. Copy all the jars from the <code>Destination</code> directory to the <code>&lt;SI-Home&gt;/lib</code> directory.</p>
 </div>
 <h2 id="tutorial-steps">Tutorial steps<a class="headerlink" href="#tutorial-steps" title="Permanent link">&para;</a></h2>
 <h3 id="consuming-data-from-kafka">Consuming data from Kafka<a class="headerlink" href="#consuming-data-from-kafka" title="Permanent link">&para;</a></h3>
 <h3 id="start-kafka">Start Kafka<a class="headerlink" href="#start-kafka" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
-<p>Navigate to the <code>&lt;KAFKA_HOME&gt;</code> directory and start a zookeeper node by issuing the following command.</p>
+<p>Navigate to the <code>&lt;Kafka_Home&gt;</code> directory and start a zookeeper node by issuing the following command.</p>
 <p><code>sh bin/zookeeper-server-start.sh config/zookeeper.properties</code></p>
 </li>
 <li>
-<p>Navigate to the <code>&lt;KAFKA_HOME&gt;</code> directory and start Kafka server node by issuing the following command.</p>
+<p>Navigate to the <code>&lt;Kafka_Home&gt;</code> directory and start Kafka server node by issuing the following command.</p>
 <p><code>sh bin/kafka-server-start.sh config/server.properties</code></p>
 </li>
 </ol>
 <h3 id="start-the-streaming-integrator">Start the Streaming Integrator<a class="headerlink" href="#start-the-streaming-integrator" title="Permanent link">&para;</a></h3>
-<p>Navigate to the <code>&lt;SI_HOME&gt;/bin</code> directory and issue the following command. 
+<p>Navigate to the <code>&lt;SI-Home&gt;/bin</code> directory and issue the following command. 
 <code>sh server.sh</code></p>
 <p>The following log appears on the SI console when the server is started successfully.</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 4.240 sec
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.kernel.internal.CarbonStartupHandler<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>WSO2<span class="w"> </span>Streaming<span class="w"> </span>Integrator<span class="w"> </span>started<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">4</span>.240<span class="w"> </span>sec
 </code></pre></div>
 
 <h3 id="consume-from-a-kafka-topic">Consume from a Kafka topic<a class="headerlink" href="#consume-from-a-kafka-topic" title="Permanent link">&para;</a></h3>
@@ -4669,32 +4663,31 @@
 <ol>
 <li>
 <p>Open a text file and copy-paste following Siddhi application to it.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&quot;HelloKafka&quot;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;HelloKafka&quot;</span><span class="p">)</span>
 
-@App:description(&#39;Consume events from a Kafka Topic and log the messages on the console.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Consume events from a Kafka Topic and log the messages on the console.&#39;</span><span class="p">)</span>
 
-@source(type=&#39;kafka&#39;,
-        topic.list=&#39;productions&#39;,
-        threading.option=&#39;single.thread&#39;,
-        group.id=&quot;group1&quot;,
-        bootstrap.servers=&#39;localhost:9092&#39;,
-        @map(type=&#39;json&#39;))
-define stream SweetProductionStream (name string, amount double);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;kafka&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">topic</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;productions&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">threading</span><span class="p">.</span><span class="k">option</span><span class="o">=</span><span class="s1">&#39;single.thread&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">group</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;group1&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">bootstrap</span><span class="p">.</span><span class="n">servers</span><span class="o">=</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-@sink(type=&#39;log&#39;)
-define stream OutputStream (name string, amount double);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">OutputStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
--- Query to transform the name to upper case.
-from SweetProductionStream
-select str:upper(name) as name, amount
-insert into OutputStream;
+<span class="c1">-- Query to transform the name to upper case.</span>
+<span class="k">from</span><span class="w"> </span><span class="n">SweetProductionStream</span>
+<span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="k">upper</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">OutputStream</span><span class="p">;</span>
 </code></pre></div>
 
 </li>
 <li>
-<p>Save this file as <code>HelloKafka.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory.</p>
-<p>The following log appears on the SI console.</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App HelloKafka deployed successfully
+<p>Save this file as <code>HelloKafka.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory. The following log appears on the SI console.</p>
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>HelloKafka<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
 
 </li>
@@ -4707,60 +4700,60 @@ insert into OutputStream;
 <p>Now let's generate some Kafka messages that the Streaming Integrator can receive. </p>
 <ol>
 <li>
-<p>First, let's create a topic named <code>productions</code> in the Kafka server. To do this, navigate to <code>&lt;KAFKA_HOME&gt;</code> and run following command:</p>
-<div class="highlight"><pre><span></span><code>bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic productions
+<p>First, let's create a topic named <code>productions</code> in the Kafka server. To do this, navigate to <code>&lt;Kafka_Home&gt;</code> and run following command:</p>
+<div class="highlight"><pre><span></span><code>bin/kafka-topics.sh<span class="w"> </span>--create<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--replication-factor<span class="w"> </span><span class="m">1</span><span class="w"> </span>--partitions<span class="w"> </span><span class="m">1</span><span class="w"> </span>--topic<span class="w"> </span>productions
 </code></pre></div>
 
 </li>
 <li>
 <p>Now let's run the Kafka command line client to push a few messages to the Kafka server.</p>
-<div class="highlight"><pre><span></span><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic productions
+<div class="highlight"><pre><span></span><code>bin/kafka-console-producer.sh<span class="w"> </span>--broker-list<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span>productions
 </code></pre></div>
 
 </li>
 <li>
 <p>Now you are prompted to type messages in the console. Type the following in the command prompt:</p>
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Almond cookie&quot;, &quot;amount&quot;:100.0}}
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;cookie&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">100.0</span><span class="p">}}</span>
 </code></pre></div>
 
 </li>
 </ol>
 <p>This pushes a message to the Kafka Server. Then, the Siddhi application you deployed in the Streaming Integrator consumes this message. As a result, the Streaming Integrator log displays the following:</p>
-<pre class="codehilite"><code class="linenums">```
-INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562069868006, data=[ALMOND COOKIE, 100.0], isExpired=false}
-```</code></pre>
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>HelloKafka<span class="w"> </span>:<span class="w"> </span>OutputStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1562069868006</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>ALMOND<span class="w"> </span>COOKIE,<span class="w"> </span><span class="m">100</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+</code></pre></div>
 
-
-<p>You may notice that the output message has an uppercase name: <code>ALMOND COOKIE</code>. This is because of the simple message transformation done in the Siddhi application.   </p>
+<p>You may notice that the output message has an uppercase name: <code>ALMOND COOKIE</code>. This is because of the simple message transformation done in the Siddhi application.</p>
 <h3 id="consuming-with-an-offset">Consuming with an offset<a class="headerlink" href="#consuming-with-an-offset" title="Permanent link">&para;</a></h3>
 <p>Previously, you consumed messages from the <code>productions</code> topic <em>without specifying an offset</em>. In other words, the Kafka offset was zero. In this section, instead of consuming with a zero offset, you specify an offset value and consume messages from that offset onwards.</p>
-<p>For this purpose, you can configure the <code>topic.offsets.map</code> parameter. Let's modify our previous Siddhi application to specify an offset value. Specify an offset value <code>2</code> so that the Siddhi application consumes messages with index <code>2</code> and above. </p>
+<p>For this purpose, you can configure the <code>topic.offsets.map</code> parameter. Let's modify our previous Siddhi application to specify an offset value. Specify an offset value <code>2</code> so that the Siddhi application consumes messages with index <code>2</code> and above.</p>
 <ol>
 <li>
-<p>Open the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files/HelloKafka.siddhi</code> file and add the following new configuration parameter.</p>
-<div class="highlight"><pre><span></span><code>topic.offsets.map=&#39;productions=2&#39;
+<p>Open the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files/HelloKafka.siddhi</code> file and add the following new configuration parameters.</p>
+<div class="highlight"><pre><span></span><code><span class="n">topic</span><span class="p">.</span><span class="n">offsets</span><span class="p">.</span><span class="k">map</span><span class="o">=</span><span class="s1">&#39;productions=2&#39;</span><span class="p">,</span>
+<span class="n">partition</span><span class="p">.</span><span class="k">no</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;0&#39;</span>
 </code></pre></div>
 
 <p>Now the complete Siddhi application is as follows.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&quot;HelloKafka&quot;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;HelloKafka&quot;</span><span class="p">)</span>
 
-@App:description(&#39;Consume events from a Kafka Topic and log the messages on the console.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Consume events from a Kafka Topic and log the messages on the console.&#39;</span><span class="p">)</span>
 
-@source(type=&#39;kafka&#39;,
-        topic.list=&#39;productions&#39;,
-        threading.option=&#39;single.thread&#39;,
-        group.id=&quot;group1&quot;,
-        bootstrap.servers=&#39;localhost:9092&#39;,
-        topic.offsets.map=&#39;productions=2&#39;,
-        @map(type=&#39;json&#39;))
-define stream SweetProductionStream (name string, amount double);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;kafka&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">topic</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;productions&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">threading</span><span class="p">.</span><span class="k">option</span><span class="o">=</span><span class="s1">&#39;single.thread&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">group</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;group1&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">bootstrap</span><span class="p">.</span><span class="n">servers</span><span class="o">=</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">partition</span><span class="p">.</span><span class="k">no</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">topic</span><span class="p">.</span><span class="n">offsets</span><span class="p">.</span><span class="k">map</span><span class="o">=</span><span class="s1">&#39;productions=2&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-@sink(type=&#39;log&#39;)
-define stream OutputStream (name string, amount double);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">OutputStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-from SweetProductionStream
-select str:upper(name) as name, amount
-insert into OutputStream;
+<span class="k">from</span><span class="w"> </span><span class="n">SweetProductionStream</span>
+<span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="k">upper</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">OutputStream</span><span class="p">;</span>
 </code></pre></div>
 
 </li>
@@ -4769,61 +4762,59 @@ insert into OutputStream;
 </li>
 <li>
 <p>Push the following message to the Kafka server.</p>
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Baked alaska&quot;, &quot;amount&quot;:20.0}}
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Baked alaska&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">20.0</span><span class="p">}}</span>
 </code></pre></div>
 
 <p>Note that this is the second message that you pushed (hence bearing index 1), and therefore it is not consumed by the Streaming Integrator.</p>
 </li>
 <li>
 <p>Let's push another message (bearing index 2) to the Kafka server.</p>
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Cup cake&quot;, &quot;amount&quot;:300.0}}
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Cup cake&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">300.0</span><span class="p">}}</span>
 </code></pre></div>
 
 </li>
 </ol>
 <p>Now you can see the following log in the Streaming Integrator Studio console.</p>
-<pre class="codehilite"><code class="linenums">```
-INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562676477785, data=[CUP CAKE, 300.0], isExpired=false}
-```</code></pre>
-
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>HelloKafka<span class="w"> </span>:<span class="w"> </span>OutputStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1562676477785</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>CUP<span class="w"> </span>CAKE,<span class="w"> </span><span class="m">300</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+</code></pre></div>
 
 <p>As you configured your Siddhi application to consume messages with offset <code>2</code>, all messages bearing index <code>2</code> or above are consumed.</p>
 <h3 id="adding-more-consumers-to-the-consumer-group">Adding more consumers to the consumer group<a class="headerlink" href="#adding-more-consumers-to-the-consumer-group" title="Permanent link">&para;</a></h3>
-<p>In our <code>HelloKafka</code> Siddhi application, note the <code>group.id</code> parameter. This parameter defines the Kafka consumer group. </p>
+<p>In our <code>HelloKafka</code> Siddhi application, note the <code>group.id</code> parameter. This parameter defines the Kafka consumer group.</p>
 <p>Let's add another Siddhi application <code>HelloKafka_2</code>, to add another Kafka consumer to the same consumer group.</p>
 <ol>
 <li>
 <p>Open a text file and copy-paste following Siddhi application to it.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&quot;HelloKafka_2&quot;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;HelloKafka_2&quot;</span><span class="p">)</span>
 
-@App:description(&#39;Consume events from a Kafka Topic and log the messages on the console.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Consume events from a Kafka Topic and log the messages on the console.&#39;</span><span class="p">)</span>
 
-@source(type=&#39;kafka&#39;,
-        topic.list=&#39;productions&#39;,
-        threading.option=&#39;single.thread&#39;,
-        group.id=&quot;group1&quot;,
-        bootstrap.servers=&#39;localhost:9092&#39;,
-        @map(type=&#39;json&#39;))        
-define stream SweetProductionStream (name string, amount double);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;kafka&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">topic</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;productions&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">threading</span><span class="p">.</span><span class="k">option</span><span class="o">=</span><span class="s1">&#39;single.thread&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">group</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;group1&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">bootstrap</span><span class="p">.</span><span class="n">servers</span><span class="o">=</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span><span class="w">        </span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-@sink(type=&#39;log&#39;)
-define stream OutputStream (name string, amount double);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">OutputStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-from SweetProductionStream
-select str:upper(name) as name, amount   
-insert into OutputStream;
+<span class="k">from</span><span class="w"> </span><span class="n">SweetProductionStream</span>
+<span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="k">upper</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w">   </span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">OutputStream</span><span class="p">;</span>
 </code></pre></div>
 
 </li>
 <li>
-<p>Save this file as <code>HelloKafka_2.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory. When the Siddhi application is successfully deployed, the following <code>INFO</code> log appears in the Streaming Integrator console.</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.stream.processor.core.internal.StreamProcessorService} - Siddhi App HelloKafka_2 deployed successfully
+<p>Save this file as <code>HelloKafka_2.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory. When the Siddhi application is successfully deployed, the following <code>INFO</code> log appears in the Streaming Integrator console.</p>
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.stream.processor.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>HelloKafka_2<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
 
 </li>
 <li>
-<p>Navigate to the <code>&lt;KAFKA_HOME&gt;</code> directory and run following command.</p>
-<div class="highlight"><pre><span></span><code>bin/kafka-topics.sh --alter --bootstrap-server localhost:9092 --partitions 2 --topic productions
+<p>Navigate to the <code>&lt;Kafka_Home&gt;</code> directory and run following command.</p>
+<div class="highlight"><pre><span></span><code>bin/kafka-topics.sh<span class="w"> </span>--alter<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--partitions<span class="w"> </span><span class="m">2</span><span class="w"> </span>--topic<span class="w"> </span>productions
 </code></pre></div>
 
 </li>
@@ -4832,16 +4823,16 @@ insert into OutputStream;
 <ol>
 <li>
 <p>Push following messages to the Kafka server using the Kafka Console Producer.</p>
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Doughnut&quot;, &quot;amount&quot;:500.0}} 
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Doughnut&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">500.0</span><span class="p">}}</span><span class="w"> </span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Danish pastry&quot;, &quot;amount&quot;:200.0}} 
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Danish pastry&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">200.0</span><span class="p">}}</span><span class="w"> </span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Eclair&quot;, &quot;amount&quot;:400.0}} 
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Eclair&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">400.0</span><span class="p">}}</span><span class="w"> </span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Eclair toffee&quot;, &quot;amount&quot;:100.0}} 
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Eclair toffee&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">100.0</span><span class="p">}}</span><span class="w"> </span>
 </code></pre></div>
 
 </li>
@@ -4859,7 +4850,7 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : E
 <p>Let's alter your topic to have three partitions. After that, you can assign two partitions to <code>consumer-1</code>, and the remaining partition to <code>consumer-2</code>.</p>
 <ol>
 <li>
-<p>Navigate to the <code>&lt;KAFKA_HOME&gt;</code> directory and issue following command.</p>
+<p>Navigate to the <code>&lt;Kafka_Home&gt;</code> directory and issue following command.</p>
 <div class="highlight"><pre><span></span><code>bin/kafka-topics.sh --alter --bootstrap-server localhost:9092 --partitions 3 --topic productions
 </code></pre></div>
 
@@ -4869,73 +4860,73 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : E
 <ol>
 <li>
 <p>To assign partitions to the consumers, add the <code>partition.no.list</code> parameter as shown below.</p>
-<div class="highlight"><pre><span></span><code>@App:name(&quot;HelloKafka&quot;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;HelloKafka&quot;</span><span class="p">)</span>
 
-@App:description(&#39;Consume events from a Kafka Topic and log the messages on the console.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Consume events from a Kafka Topic and log the messages on the console.&#39;</span><span class="p">)</span>
 
--- consumer-1
-@source(type=&#39;kafka&#39;,
-        topic.list=&#39;productions&#39;,
-        threading.option=&#39;single.thread&#39;,
-        group.id=&quot;group1&quot;,
-        bootstrap.servers=&#39;localhost:9092&#39;,
-        partition.no.list=&#39;0,1&#39;,
-        @map(type=&#39;json&#39;))
-define stream SweetProductionStream1 (name string, amount double);
+<span class="c1">-- consumer-1</span>
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;kafka&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">topic</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;productions&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">threading</span><span class="p">.</span><span class="k">option</span><span class="o">=</span><span class="s1">&#39;single.thread&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">group</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;group1&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">bootstrap</span><span class="p">.</span><span class="n">servers</span><span class="o">=</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">partition</span><span class="p">.</span><span class="k">no</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;0,1&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream1</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
--- consumer-2
-@source(type=&#39;kafka&#39;,
-        topic.list=&#39;productions&#39;,
-        threading.option=&#39;single.thread&#39;,
-        group.id=&quot;group1&quot;,
-        bootstrap.servers=&#39;localhost:9092&#39;,
-        partition.no.list=&#39;2&#39;,
-        @map(type=&#39;json&#39;))
-define stream SweetProductionStream2 (name string, amount double);
+<span class="c1">-- consumer-2</span>
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;kafka&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">topic</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;productions&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">threading</span><span class="p">.</span><span class="k">option</span><span class="o">=</span><span class="s1">&#39;single.thread&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">group</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;group1&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">bootstrap</span><span class="p">.</span><span class="n">servers</span><span class="o">=</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">partition</span><span class="p">.</span><span class="k">no</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream2</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-@sink(type=&#39;log&#39;)
-define stream OutputStream (name string, amount double, id string);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">OutputStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="n">string</span><span class="p">);</span>
 
-from SweetProductionStream1
-select str:upper(name) as name, amount, &#39;consumer-1&#39; as id
-insert into OutputStream;
+<span class="k">from</span><span class="w"> </span><span class="n">SweetProductionStream1</span>
+<span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="k">upper</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;consumer-1&#39;</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">OutputStream</span><span class="p">;</span>
 
-from SweetProductionStream2
-select str:upper(name) as name, amount, &#39;consumer-2&#39; as id
-insert into OutputStream;
+<span class="k">from</span><span class="w"> </span><span class="n">SweetProductionStream2</span>
+<span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="k">upper</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;consumer-2&#39;</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">OutputStream</span><span class="p">;</span>
 </code></pre></div>
 
-<p>Note that <code>consumer-1</code> is assigned partitions <code>0</code> and <code>1</code>, while <code>consumer-2</code> is assigned partition <code>2</code>. </p>
+<p>Note that <code>consumer-1</code> is assigned partitions <code>0</code> and <code>1</code>, while <code>consumer-2</code> is assigned partition <code>2</code>.</p>
 </li>
 <li>
 <p>Now let's publish some messages as follows, and see how the load is distributed among the consumers with the new partition assignments.</p>
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Fortune cookie&quot;, &quot;amount&quot;:100.0}} 
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Fortune cookie&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">100.0</span><span class="p">}}</span><span class="w"> </span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Frozen yogurt&quot;, &quot;amount&quot;:350.0}} 
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Frozen yogurt&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">350.0</span><span class="p">}}</span><span class="w"> </span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Gingerbread&quot;, &quot;amount&quot;:450.0}} 
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Gingerbread&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">450.0</span><span class="p">}}</span><span class="w"> </span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Hot-fudge sundae&quot;, &quot;amount&quot;:150.0}} 
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Hot-fudge sundae&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">150.0</span><span class="p">}}</span><span class="w"> </span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Hot-chocolate pudding&quot;, &quot;amount&quot;:200.0}} 
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Hot-chocolate pudding&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">200.0</span><span class="p">}}</span><span class="w"> </span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Ice cream cake&quot;, &quot;amount&quot;:250.0}} 
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Ice cream cake&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">250.0</span><span class="p">}}</span><span class="w"> </span>
 </code></pre></div>
 
 </li>
 <li>
 <p>Now observe the Streaming Integrator logs. The following is displayed.</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562851086792, data=[FORTUNE COOKIE, 100.0, consumer-1], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562851092100, data=[FROZEN YOGURT, 350.0, consumer-1], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562851094459, data=[GINGERBREAD, 450.0, consumer-2], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562851096434, data=[HOT-FUDGE SUNDAE, 150.0, consumer-1], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562851098328, data=[HOT-CHOCOLATE PUDDING, 200.0, consumer-1], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562851100309, data=[ICE CREAM CAKE, 250.0, consumer-2], isExpired=false}
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>HelloKafka<span class="w"> </span>:<span class="w"> </span>OutputStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1562851086792</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>FORTUNE<span class="w"> </span>COOKIE,<span class="w"> </span><span class="m">100</span>.0,<span class="w"> </span>consumer-1<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>HelloKafka<span class="w"> </span>:<span class="w"> </span>OutputStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1562851092100</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>FROZEN<span class="w"> </span>YOGURT,<span class="w"> </span><span class="m">350</span>.0,<span class="w"> </span>consumer-1<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>HelloKafka<span class="w"> </span>:<span class="w"> </span>OutputStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1562851094459</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>GINGERBREAD,<span class="w"> </span><span class="m">450</span>.0,<span class="w"> </span>consumer-2<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>HelloKafka<span class="w"> </span>:<span class="w"> </span>OutputStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1562851096434</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>HOT-FUDGE<span class="w"> </span>SUNDAE,<span class="w"> </span><span class="m">150</span>.0,<span class="w"> </span>consumer-1<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>HelloKafka<span class="w"> </span>:<span class="w"> </span>OutputStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1562851098328</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>HOT-CHOCOLATE<span class="w"> </span>PUDDING,<span class="w"> </span><span class="m">200</span>.0,<span class="w"> </span>consumer-1<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>HelloKafka<span class="w"> </span>:<span class="w"> </span>OutputStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1562851100309</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>ICE<span class="w"> </span>CREAM<span class="w"> </span>CAKE,<span class="w"> </span><span class="m">250</span>.0,<span class="w"> </span>consumer-2<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
 </code></pre></div>
 
 </li>
@@ -4949,41 +4940,41 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : E
 </li>
 <li>
 <p>To publish the filtered messages to the <code>bulk-orders</code> Kafka topic you created, issue the following command.</p>
-<div class="highlight"><pre><span></span><code>bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic bulk-orders
+<div class="highlight"><pre><span></span><code>bin/kafka-topics.sh<span class="w"> </span>--create<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--replication-factor<span class="w"> </span><span class="m">1</span><span class="w"> </span>--partitions<span class="w"> </span><span class="m">1</span><span class="w"> </span>--topic<span class="w"> </span>bulk-orders
 </code></pre></div>
 
 </li>
 <li>
 <p>Next, let's create the Siddhi application. Open a text file, and copy-paste following Siddhi application into it.</p>
-<div class="highlight"><pre><span></span><code>    @App:name(&quot;PublishToKafka&quot;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;PublishToKafka&quot;</span><span class="p">)</span>
 
-    @App:description(&#39;Consume events from a Kafka Topic, do basic filtering and publish filtered messages to a Kafka topic.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Consume events from a Kafka Topic, do basic filtering and publish filtered messages to a Kafka topic.&#39;</span><span class="p">)</span>
 
-    @source(type=&#39;kafka&#39;,
-            topic.list=&#39;productions&#39;,
-            threading.option=&#39;single.thread&#39;,
-            group.id=&quot;group2&quot;,
-            bootstrap.servers=&#39;localhost:9092&#39;,
-            @map(type=&#39;json&#39;))
-    define stream SweetProductionStream (name string, amount double);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;kafka&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">topic</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;productions&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">threading</span><span class="p">.</span><span class="k">option</span><span class="o">=</span><span class="s1">&#39;single.thread&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">group</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;group2&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">bootstrap</span><span class="p">.</span><span class="n">servers</span><span class="o">=</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-    @sink(type=&#39;kafka&#39;,
-          topic=&#39;bulk-orders&#39;,
-          bootstrap.servers=&#39;localhost:9092&#39;,
-          partition.no=&#39;0&#39;,
-          @map(type=&#39;json&#39;))
-    define stream BulkOrdersStream (name string, amount double);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;kafka&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">topic</span><span class="o">=</span><span class="s1">&#39;bulk-orders&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">bootstrap</span><span class="p">.</span><span class="n">servers</span><span class="o">=</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">partition</span><span class="p">.</span><span class="k">no</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">BulkOrdersStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-    from SweetProductionStream[amount &gt; 50]
-    select *
-    insert into BulkOrdersStream;
+<span class="k">from</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="p">[</span><span class="n">amount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">50</span><span class="p">]</span>
+<span class="k">select</span><span class="w"> </span><span class="o">*</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">BulkOrdersStream</span><span class="p">;</span>
 </code></pre></div>
 
 </li>
 <li>
-<p>Save this file as <code>PublishToKafka.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory. When the 
+<p>Save this file as <code>PublishToKafka.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory. When the 
    Siddhi application is successfully deployed, the following <code>INFO</code> log appears in the Streaming Integrator console.</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App PublishToKafka deployed successfully
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>PublishToKafka<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
 
 <div class="admonition info">
@@ -4992,15 +4983,18 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : E
 </div>
 </li>
 <li>
-<p>To observe the messages in the <code>bulk-orders</code> topic, run a Kafka Console Consumer. Then navigate to the <code>&lt;KAFKA_HOME&gt;</code> directory and issue the following command.
-    <div class="highlight"><pre><span></span><code>bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic bulk-orders --from-beginning
-</code></pre></div>
-   You can see the following message in the Kafka Consumer log. These indicate the production runs of which the amount is greater than 50.</p>
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Almond cookie&quot;, &quot;amount&quot;:100.0}}
+<p>To observe the messages in the <code>bulk-orders</code> topic, run a Kafka Console Consumer. Then navigate to the <code>&lt;Kafka_Home&gt;</code> directory and issue the following command.</p>
+<div class="highlight"><pre><span></span><code>bin/kafka-console-consumer.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span>bulk-orders<span class="w"> </span>--from-beginning
 </code></pre></div>
 
 </li>
 </ol>
+<p>You can see the following message in the Kafka Consumer log. These indicate the production runs of which the amount is greater than 50.</p>
+<pre class="codehilite"><code class="linenums">```json
+{&quot;event&quot;:{ &quot;name&quot;:&quot;Almond cookie&quot;, &quot;amount&quot;:100.0}}
+```</code></pre>
+
+
 <h3 id="preserving-the-state-of-the-application-through-a-system-failure">Preserving the state of the application through a system failure<a class="headerlink" href="#preserving-the-state-of-the-application-through-a-system-failure" title="Permanent link">&para;</a></h3>
 <p>Let's try out a scenario in which you deploy a Siddhi application to count the total number of productions.</p>
 <div class="admonition info">
@@ -5010,26 +5004,26 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : E
 </div>
 <ol>
 <li>
-<p>Enable state persistence feature in SI server as follows. Open the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file on a text editor and locate the <code>state.persistence</code> section.  </p>
-<div class="highlight"><pre><span></span><code>  # Periodic Persistence Configuration
-state.persistence:
-  enabled: true
-  intervalInMin: 1
-  revisionsToKeep: 2
-  persistenceStore: org.wso2.carbon.streaming.integrator.core.persistence.FileSystemPersistenceStore
-  config:
-    location: siddhi-app-persistence
+<p>Enable state persistence feature in SI server as follows. Open the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file on a text editor and locate the <code>state.persistence</code> section.  </p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="c1"># Periodic Persistence Configuration</span>
+<span class="nt">state.persistence</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">intervalInMin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">revisionsToKeep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">  </span><span class="nt">persistenceStore</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">org.wso2.carbon.streaming.integrator.core.persistence.FileSystemPersistenceStore</span>
+<span class="w">  </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">location</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">siddhi-app-persistence</span>
 </code></pre></div>
 
-<p>Set <code>enabled</code> parameter to <code>true</code> and save the file. </p>
+<p>Set <code>enabled</code> parameter to <code>true</code> and save the file.</p>
 </li>
 <li>
-<p>Enable state persistence debug logs as follows. Open the <code>&lt;SI_HOME&gt;/conf/server/log4j2.xml</code> file on a text editor and locate following line in it.</p>
-<div class="highlight"><pre><span></span><code> &lt;Logger name=&quot;com.zaxxer.hikari&quot; level=&quot;error&quot;/&gt;
+<p>Enable state persistence debug logs as follows. Open the <code>&lt;SI-Home&gt;/conf/server/log4j2.xml</code> file on a text editor and locate following line in it.</p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="nt">&lt;Logger</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;com.zaxxer.hikari&quot;</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;error&quot;</span><span class="nt">/&gt;</span>
 </code></pre></div>
 
 <p>Add following <code>&lt;Logger&gt;</code> element below that.</p>
-<div class="highlight"><pre><span></span><code>&lt;Logger name=&quot;org.wso2.carbon.streaming.integrator.core.persistence&quot; level=&quot;debug&quot;/&gt;
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;Logger</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;org.wso2.carbon.streaming.integrator.core.persistence&quot;</span><span class="w"> </span><span class="na">level=</span><span class="s">&quot;debug&quot;</span><span class="nt">/&gt;</span>
 </code></pre></div>
 
 <p>Save the file.</p>
@@ -5038,66 +5032,67 @@ state.persistence:
 <p>Restart the Streaming Integrator server for above change to be effective.</p>
 </li>
 <li>
-<p>Let's create a new topic named <code>sandwich_productions</code> in the Kafka server. To do this, navigate to <code>&lt;KAFKA_HOME&gt;</code> and run following command:</p>
-<div class="highlight"><pre><span></span><code>bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic sandwich_productions
+<p>Let's create a new topic named <code>sandwich_productions</code> in the Kafka server. To do this, navigate to <code>&lt;Kafka_Home&gt;</code> and run following command:</p>
+<div class="highlight"><pre><span></span><code>bin/kafka-topics.sh<span class="w"> </span>--create<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--replication-factor<span class="w"> </span><span class="m">1</span><span class="w"> </span>--partitions<span class="w"> </span><span class="m">1</span><span class="w"> </span>--topic<span class="w"> </span>sandwich_productions
 </code></pre></div>
 
 </li>
 <li>
 <p>Open a text file and copy-paste following Siddhi application to it.</p>
-<div class="highlight"><pre><span></span><code>    @App:name(&quot;CountProductions&quot;)
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;CountProductions&quot;</span><span class="p">)</span>
 
-    @App:description(&#39;Siddhi application to count the total number of orders.&#39;)
+<span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Siddhi application to count the total number of orders.&#39;</span><span class="p">)</span>
 
-    @source(type=&#39;kafka&#39;,
-            topic.list=&#39;sandwich_productions&#39;,
-            threading.option=&#39;single.thread&#39;,
-            group.id=&quot;group3&quot;,
-            bootstrap.servers=&#39;localhost:9092&#39;,
-            partition.no.list=&#39;0&#39;,
-            @map(type=&#39;json&#39;))
-    define stream SandwichProductionStream (name string, amount double);
+<span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;kafka&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">topic</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;sandwich_productions&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">threading</span><span class="p">.</span><span class="k">option</span><span class="o">=</span><span class="s1">&#39;single.thread&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="k">group</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;group3&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">bootstrap</span><span class="p">.</span><span class="n">servers</span><span class="o">=</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">partition</span><span class="p">.</span><span class="k">no</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SandwichProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-    @sink(type=&#39;log&#39;)
-    define stream OutputStream (totalProductions double);
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">OutputStream</span><span class="w"> </span><span class="p">(</span><span class="n">totalProductions</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-    from SandwichProductionStream
-    select sum(amount) as totalProductions
-    insert into OutputStream;
+<span class="k">from</span><span class="w"> </span><span class="n">SandwichProductionStream</span>
+<span class="k">select</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">totalProductions</span>
+<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">OutputStream</span><span class="p">;</span>
 </code></pre></div>
 
 </li>
 <li>
-<p>Save this file as <code>CountProductions.siddhi</code> in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory. When the Siddhi application is successfully deployed, the following <code>INFO</code> log appears in the Streaming Integrator console.</p>
-<div class="highlight"><pre><span></span><code>INFO {org.wso2.carbon.stream.processor.core.internal.StreamProcessorService} - Siddhi App CountProductions deployed successfully
+<p>Save this file as <code>CountProductions.siddhi</code> in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory. When the Siddhi application is successfully deployed, the following <code>INFO</code> log appears in the Streaming Integrator console.</p>
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>org.wso2.carbon.stream.processor.core.internal.StreamProcessorService<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>CountProductions<span class="w"> </span>deployed<span class="w"> </span>successfully
 </code></pre></div>
 
 </li>
 <li>
-<p>Now let's run the Kafka command line client to push a few messages to the Kafka server. Navigate to <code>&lt;KAFKA_HOME&gt;</code> and run following command:</p>
-<div class="highlight"><pre><span></span><code>bin/kafka-console-producer.sh --broker-list localhost:9092 --topic sandwich_productions
+<p>Now let's run the Kafka command line client to push a few messages to the Kafka server. Navigate to <code>&lt;Kafka_Home&gt;</code> and run following command:</p>
+<div class="highlight"><pre><span></span><code>bin/kafka-console-producer.sh<span class="w"> </span>--broker-list<span class="w"> </span>localhost:9092<span class="w"> </span>--topic<span class="w"> </span>sandwich_productions
 </code></pre></div>
 
 </li>
 <li>
 <p>Now you are prompted to type the messages in the console. Type following in the command prompt:</p>
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Bagel&quot;, &quot;amount&quot;:100.0}}
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Bagel&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">100.0</span><span class="p">}}</span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Buterbrod&quot;, &quot;amount&quot;:100.0}} 
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Buterbrod&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">100.0</span><span class="p">}}</span><span class="w"> </span>
 </code></pre></div>
 
 <p>Now the following logs appear on the SI console.</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : OutputStream : Event{timestamp=1563903034768, data=[100.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : OutputStream : Event{timestamp=1563903034768, data=[200.0], isExpired=false}
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>CountProductions<span class="w"> </span>:<span class="w"> </span>OutputStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1563903034768</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="m">100</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>CountProductions<span class="w"> </span>:<span class="w"> </span>OutputStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1563903034768</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="m">200</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
 </code></pre></div>
 
 <p>These logs print the sandwich production count. Note that the current count of sandwich productions is being printed as <code>200</code> in the second log. This is because the production count up to now is <code>200</code> sandwiches: <code>100</code> bagels and <code>100</code> buterbrods.</p>
 </li>
 <li>
-<p>Now wait for following log to appear on the SI console
-    <div class="highlight"><pre><span></span><code>DEBUG {org.wso2.carbon.streaming.integrator.core.persistence.FileSystemPersistenceStore} - Periodic persistence of CountProductions persisted successfully
-</code></pre></div></p>
+<p>Now wait for following log to appear on the SI console</p>
+<div class="highlight"><pre><span></span><code>DEBUG<span class="w"> </span><span class="o">{</span>org.wso2.carbon.streaming.integrator.core.persistence.FileSystemPersistenceStore<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>Periodic<span class="w"> </span>persistence<span class="w"> </span>of<span class="w"> </span>CountProductions<span class="w"> </span>persisted<span class="w"> </span>successfully
+</code></pre></div>
+
 <p>This log indicates that the current state of the Siddhi application is successfully persisted. Siddhi application state is persisted every minute. Therefore, you can notice this log appearing every minute.</p>
 <p>Next, let's push two sandwich production messages to the Kafka server and shutdown the SI server before state persistence happens (i.e., before the above log appears).</p>
 <div class="admonition tip">
@@ -5107,10 +5102,10 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : OutputStre
 </li>
 <li>
 <p>Now push following messages to the Kafka server using the Kafka Console Producer:</p>
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Croissant&quot;, &quot;amount&quot;:100.0}}
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Croissant&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">100.0</span><span class="p">}}</span>
 </code></pre></div>
 
-<div class="highlight"><pre><span></span><code>{&quot;event&quot;:{ &quot;name&quot;:&quot;Croutons&quot;, &quot;amount&quot;:100.0}} 
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;event&quot;</span><span class="p">:{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Croutons&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;amount&quot;</span><span class="p">:</span><span class="mf">100.0</span><span class="p">}}</span><span class="w"> </span>
 </code></pre></div>
 
 </li>
@@ -5123,8 +5118,8 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : OutputStre
 </li>
 <li>
 <p>Restart the SI server and wait for about one minute to observe the following logs.</p>
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : OutputStream : Event{timestamp=1563904912073, data=[300.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : OutputStream : Event{timestamp=1563904912076, data=[400.0], isExpired=false}
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>CountProductions<span class="w"> </span>:<span class="w"> </span>OutputStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1563904912073</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="m">300</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>CountProductions<span class="w"> </span>:<span class="w"> </span>OutputStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1563904912076</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="m">400</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
 </code></pre></div>
 
 </li>

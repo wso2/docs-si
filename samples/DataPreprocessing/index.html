@@ -1644,21 +1644,21 @@
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample
+    Testing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results
+    Viewing the results
   </a>
   
 </li>
@@ -2364,21 +2364,21 @@
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample
+    Testing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results
+    Viewing the results
   </a>
   
 </li>
@@ -4487,21 +4487,21 @@
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample
+    Testing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results
+    Viewing the results
   </a>
   
 </li>
@@ -4546,7 +4546,7 @@
 <p class="admonition-title">Before you begin:</p>
 <p>Save the sample Siddhi application in Streaming Integrator Tooling.</p>
 </div>
-<h2 id="executing-the-sample">Executing the Sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <p>To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the <strong>Start</strong> button (shown below) or by clicking <strong>Run</strong> =&gt; <strong>Run</strong>.</p>
 <p><img alt="Start button" src="https://wso2.github.io/docs-si/images/amazon-s3-sink-sample/start.png" /></p>
 <p>If the Siddhi application starts successfully, the following messages appear in the console.</p>
@@ -4562,17 +4562,20 @@
 <p class="admonition-title">Note</p>
 <p>If you want to edit the Siddhi application after you have started it, stop it first, make your edits, save it and then start it again.</p>
 </div>
-<h2 id="testing-the-sample">Testing the Sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="testing-the-sample">Testing the sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
 <p>To test this Siddhi application, navigate to the <code>&lt;SI_TOOLING_HOME&gt;/samples/sample-clients/tcp-client</code> directory and run the <code>ant</code> command as follows.</p>
-<p><code>ant -Dtype=json -DfilePath={WSO2SIHome}/samples/artifacts/DataPreprocessing/data_preprocessing_events.txt
--DeventDefinition='{"event":{"id":"{0}","value":{1},"property":{2},"plugId":{3},"householdId":{4},"houseId":{5},"currentTime":"{6}"}}' -Durl=tcp://localhost:9892/SmartHomeStream</code></p>
-<h2 id="viewing-the-results">Viewing the Results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>ant<span class="w"> </span>-Dtype<span class="o">=</span>json<span class="w"> </span>-DfilePath<span class="o">=</span>&lt;SI-Tooling-Home&gt;/samples/artifacts/DataPreprocessing/data_preprocessing_events.txt<span class="w"> </span>-DeventDefinition<span class="o">=</span><span class="s1">&#39;{&quot;event&quot;:{&quot;id&quot;:&quot;{0}&quot;,&quot;value&quot;:{1},&quot;property&quot;:{2},&quot;plugId&quot;:{3},&quot;householdId&quot;:{4},&quot;houseId&quot;:{5},&quot;currentTime&quot;:&quot;{6}&quot;}}&#39;</span><span class="w"> </span>-Durl<span class="o">=</span>tcp://localhost:9892/SmartHomeStream
+</code></pre></div>
+
+<h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
 <p>Once the <code>DataProcessing</code> Siddhi application receives events from the TCP client, the following messages are displayed in the Streaming Integrator Tooling console:</p>
-<p>INFO {io.siddhi.core.stream.output.sink.LogSink} - DataPreprocessing : ProcessedStream : Event{timestamp=1513621173211, data=[HouseholdID:1::UniqueID:0001, 12.12, 13-08-2001 23:49:33], isExpired=false}<br/><br/>
-INFO {io.siddhi.core.stream.output.sink.LogSink} - DataPreprocessing : ProcessedStream : Event{timestamp=1513621174202, data=[HouseholdID:2::UniqueID:0002, 13.12, 13-08-2004 23:49:34], isExpired=false}<br/><br/>
-INFO {io.siddhi.core.stream.output.sink.LogSink} - DataPreprocessing : ProcessedStream : Event{timestamp=1513621175208, data=[HouseholdID:3::UniqueID:0003, 13.12, 13-08-2006 23:49:35], isExpired=false}<br/><br/>
-INFO {io.siddhi.core.stream.output.sink.LogSink} - DataPreprocessing : ProcessedStream : Event{timestamp=1513621176214, data=[HouseholdID:4::UniqueID:0004, 14.12, 13-08-2008 23:49:36], isExpired=false}<br/><br/></p>
-<details class="info"><summary>Click here to view the sample Siddhi application.</summary><div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;DataPreprocessing&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>DataPreprocessing<span class="w"> </span>:<span class="w"> </span>ProcessedStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1513621173211</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>HouseholdID:1::UniqueID:0001,<span class="w"> </span><span class="m">12</span>.12,<span class="w"> </span><span class="m">13</span>-08-2001<span class="w"> </span><span class="m">23</span>:49:33<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>&lt;br/&gt;&lt;br/&gt;
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>DataPreprocessing<span class="w"> </span>:<span class="w"> </span>ProcessedStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1513621174202</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>HouseholdID:2::UniqueID:0002,<span class="w"> </span><span class="m">13</span>.12,<span class="w"> </span><span class="m">13</span>-08-2004<span class="w"> </span><span class="m">23</span>:49:34<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>&lt;br/&gt;&lt;br/&gt;
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>DataPreprocessing<span class="w"> </span>:<span class="w"> </span>ProcessedStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1513621175208</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>HouseholdID:3::UniqueID:0003,<span class="w"> </span><span class="m">13</span>.12,<span class="w"> </span><span class="m">13</span>-08-2006<span class="w"> </span><span class="m">23</span>:49:35<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>&lt;br/&gt;&lt;br/&gt;
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>DataPreprocessing<span class="w"> </span>:<span class="w"> </span>ProcessedStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1513621176214</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>HouseholdID:4::UniqueID:0004,<span class="w"> </span><span class="m">14</span>.12,<span class="w"> </span><span class="m">13</span>-08-2008<span class="w"> </span><span class="m">23</span>:49:36<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>&lt;br/&gt;&lt;br/&gt;
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;DataPreprocessing&quot;</span><span class="p">)</span>
 
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Collect data via TCP transport and pre-process&#39;</span><span class="p">)</span>
 
@@ -4591,8 +4594,6 @@ INFO {io.siddhi.core.stream.output.sink.LogSink} - DataPreprocessing : Processed
 <span class="k">select</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="n">concat</span><span class="p">(</span><span class="ss">&quot;HouseholdID:&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">convert</span><span class="p">(</span><span class="n">householdId</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;string&quot;</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;::&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;UniqueID:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">compositeID</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">:</span><span class="n">concat</span><span class="p">(</span><span class="n">currentTime</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="k">time</span><span class="p">:</span><span class="n">currentTime</span><span class="p">())</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">formattedTime</span>
 <span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">ProcessedStream</span><span class="p">;</span>
 </code></pre></div>
-
-</details>
 
 
 

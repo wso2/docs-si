@@ -1323,28 +1323,28 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-testing-the-sample" class="md-nav__link">
-    Executing &amp; testing the Sample:
+    Executing &amp; testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
@@ -4414,28 +4414,28 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-testing-the-sample" class="md-nav__link">
-    Executing &amp; testing the Sample:
+    Executing &amp; testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
@@ -4474,58 +4474,60 @@
 
   <h1>Publishing and Receiving CSV Events via Files</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This application demonstrates how to configure WSO2 Streaming Integrator Tooling to Publish and receive data events processed within Siddhi to files in CSV default format.</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p>Edit the uri '{WSO2SIHome}/samples/artifacts/CSVMappingWithFile/new/example.csv' by replacing {WSO2SIHome} with the absolute path of your WSO2SP home directory. You can also change the path for 'file.uri' in the sink, if you want to publish your event file to a different location.</p>
+<p>Edit the uri <code>&lt;SI-Tooling-Home&gt;/samples/artifacts/CSVMappingWithFile/new/example.csv</code> by replacing <code>&lt;SI-Tooling-Home&gt;</code> with the absolute path of your WSO2 SI Tooling home directory.</p>
+</li>
+<li>
+<p>You can also change the path for <code>file.uri</code> in the sink, if you want to publish your event file to a different location.</p>
 </li>
 <li>
 <p>Save this sample. If there is no syntax error, the following messages would be shown on the console:</p>
 <ul>
-<li>CSVDefaultMapping.siddhi successfully deployed.</li>
+<li><code>CSVDefaultMapping.siddhi successfully deployed.</code></li>
 </ul>
 </li>
 </ul>
-<h2 id="executing-testing-the-sample">Executing &amp; testing the Sample:<a class="headerlink" href="#executing-testing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-testing-the-sample">Executing &amp; testing the Sample<a class="headerlink" href="#executing-testing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Start the Siddhi application by clicking on 'Run'.</li>
 <li>If the Siddhi application starts successfully, the following messages are shown on the console:<ul>
-<li>CSVDefaultMapping.siddhi - Started Successfully!</li>
+<li><code>CSVDefaultMapping.siddhi - Started Successfully!</code></li>
 </ul>
 </li>
 </ol>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Source takes input from the '{WSO2SP-HOME}/samples/artifacts/CSVMappingWithFile/new/example.csv' then produce the event.
-example.csv has data in below format<br/>
-        1,WSO2,23.5<br/>
-        2,IBM,2.5<br/></li>
-<li>Sink takes input from source output and produces the output to outputOfCustom.csv in CSV custom format.
-    outputOfCustom.csv's data appear in below format<br/>
-        1,WSO2,100.0<br/>
-        2,IBM,2.5<br/></li>
+<li>
+<p>Source takes input from the <code>&lt;SI-Tooling-Home&gt;/samples/artifacts/CSVMappingWithFile/new/example.csv</code> then produce the event. example.csv has data in below format.<br/></p>
+<p><code>1,WSO2,23.5</code><br/>
+<code>2,IBM,2.5</code><br/></p>
+</li>
+<li>
+<p>Sink takes input from source output and produces the output to outputOfCustom.csv in CSV custom format.outputOfCustom.csv's data appear in below format.<br/></p>
+<p><code>1,WSO2,100.0</code><br/>
+<code>2,IBM,2.5</code><br/></p>
+</li>
 </ul>
-<details class="info"><summary>Click here to view the sample Siddhi application.</summary><div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;CSVDefaultMapping&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;CSVDefaultMapping&quot;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Publish and receive data events processed within Siddhi to files in CSV default format.&#39;</span><span class="p">)</span>
 
-
 <span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span>
-<span class="n">dir</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;file://{WSO2SIHome}/samples/artifacts/CSVMappingWithFile/new&#39;</span><span class="p">,</span>
+<span class="n">dir</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;file://&lt;SI-Tooling-Home&gt;/samples/artifacts/CSVMappingWithFile/new&#39;</span><span class="p">,</span>
 <span class="n">action</span><span class="p">.</span><span class="k">after</span><span class="p">.</span><span class="n">process</span><span class="o">=</span><span class="s1">&#39;NONE&#39;</span><span class="p">,</span>
 <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">))</span>
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">InputStream</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;/{WSO2SIHome}/samples/artifacts/CSVMappingWithFile/new/outputOfDefault.csv&#39;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">))</span>
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;/&lt;SI-Tooling-Home&gt;/samples/artifacts/CSVMappingWithFile/new/outputOfDefault.csv&#39;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">))</span>
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">OutputStream</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
 <span class="k">from</span><span class="w"> </span><span class="n">InputStream</span>
 <span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">OutputStream</span><span class="p">;</span>
 </code></pre></div>
-
-</details>
 
 
 

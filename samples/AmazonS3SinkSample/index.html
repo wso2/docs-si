@@ -2925,14 +2925,21 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
@@ -4420,14 +4427,21 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
@@ -4479,18 +4493,31 @@
 
 
 <h1 id="publishing-aggregated-events-to-the-amazon-aws-s3-bucket">Publishing Aggregated Events to the Amazon AWS S3 Bucket<a class="headerlink" href="#publishing-aggregated-events-to-the-amazon-aws-s3-bucket" title="Permanent link">&para;</a></h1>
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
-<p>This application demonstrates how to publish aggregated events to Amazon AWS S3 bucket via the <a href="https://siddhi-io.github.io/siddhi-io-s3/">siddhi-io-s3 sink
-extension</a>. In this sample the events received to the <code>StockQuoteStream</code> stream are aggregated by the
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>This application demonstrates how to publish aggregated events to Amazon AWS S3 bucket via the <a href="https://siddhi-io.github.io/siddhi-io-s3/">siddhi-io-s3 sink</a> extension. In this sample the events received to the <code>StockQuoteStream</code> stream are aggregated by the
 <code>StockQuoteWindow</code> window, and then published to the Amazon S3 bucket specified via the <code>bucket.name</code> parameter.</p>
 <div class="admonition info">
 <p class="admonition-title">Before you begin:</p>
 <ul>
-<li>Create an AWS account and set the credentials following the instructions in the <a href="https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html">AWS Developer Guide</a>.<br/></li>
-<li>Save the sample Siddhi application in Streaming Integrator Tooling.<br/></li>
+<li>Create an AWS account and set the credentials following the instructions in the <a href="https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html">AWS Developer Guide</a>.</li>
+<li>Save the sample Siddhi application in Streaming Integrator Tooling.</li>
 </ul>
 </div>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Download the following files.<ul>
+<li><code>woodstox-core-7.1.0.jar</code></li>
+<li><code>woodstox-osgi-3.2.1.1.jar</code></li>
+</ul>
+</li>
+<li>Navigate to {SI-Home}/bin and issue the following command to convert the <code>woodstox-osgi-3.2.1.1.jar</code> to OSGi Bundle.<ul>
+<li>For Linux: <code>./jartobundle.sh &lt;source-path&gt; &lt;destination-path&gt;</code></li>
+<li>For Windows: <code>./jartobundle.bat &lt;source-path&gt; &lt;destination-path&gt;</code></li>
+</ul>
+</li>
+<li>Copy the above two bundles to the <code>&lt;SI-Tooling-Home&gt;/lib</code> directory.</li>
+</ol>
+<h2 id="executing-the-sample">Executing the Sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <p>To execute the sample, follow the procedure below:</p>
 <ol>
 <li>
@@ -4500,7 +4527,10 @@ extension</a>. In this sample the events received to the <code>StockQuoteStream<
 <p>Enter the credential.provider class name as the value for the <code>credential.provider</code> parameter. If the class is not specified, the default credential provider chain is used.</p>
 </li>
 <li>
-<p>For the <code>bucket.name</code> parameter, enter <code>AWSBUCKET</code> as the value.</p>
+<p>Update the value of the <code>bucket.name</code> parameter in the <code>sink</code> annotation. This refers to the name of the Amazon S3 bucket.</p>
+</li>
+<li>
+<p>Insert the value for the <code>aws.region</code> parameter.</p>
 </li>
 <li>
 <p>Save the Siddhi application.</p>
@@ -4509,7 +4539,6 @@ extension</a>. In this sample the events received to the <code>StockQuoteStream<
 </li>
 <li>
 <p>Start the Siddhi application by clicking the <strong>Start</strong> button (shown below) or by clicking by clicking <strong>Run</strong> =&gt; <strong>Run</strong>.</p>
-<p><img alt="Start button" src="https://wso2.github.io/docs-si/images/amazon-s3-sink-sample/start.png" /></p>
 <p>If the Siddhi application starts successfully, the following message appears in the console.</p>
 <p><code>AmazonS3SinkSample.siddhi - Started Successfully!.</code></p>
 </li>
@@ -4519,7 +4548,6 @@ extension</a>. In this sample the events received to the <code>StockQuoteStream<
 <ol>
 <li>
 <p>To open the Event Simulator, click the <strong>Event Simulator</strong> icon.</p>
-<p><img alt="Event Simulator Icon" src="https://wso2.github.io/docs-si/images/Testing-Siddhi-Applications/Event_Simulation_Icon.png" /></p>
 </li>
 <li>
 <p>In the Event Simulator panel, click <strong>Feed Simulation</strong> -&gt; <strong>Create</strong>.</p>
@@ -4531,18 +4559,10 @@ extension</a>. In this sample the events received to the <code>StockQuoteStream<
 <p>In the new panel that opens, enter information as follows.</p>
 <p><img alt="Feed Simulation" src="https://wso2.github.io/docs-si/images/amazon-s3-sink-sample/AmazonS3SinkSample-feed-simulation.png" /></p>
 <ol>
-<li>
-<p>In the <strong>Simulation Name</strong> field, enter <code>AmazonS3SinkSample</code> as the name for the simulation.</p>
-</li>
-<li>
-<p>Select <strong>Random</strong> as the simulation source and then click <strong>Add Simulation Source</strong>.</p>
-</li>
-<li>
-<p>In the <strong>Siddhi App Name</strong> field, select <strong>AmazonS3SinkSample</strong>.</p>
-</li>
-<li>
-<p>In the <strong>Stream Name</strong> field, select <strong>StockQuoteStream</strong>.</p>
-</li>
+<li>In the <strong>Simulation Name</strong> field, enter <code>AmazonS3SinkSample</code> as the name for the simulation.</li>
+<li>Select <strong>Random</strong> as the simulation source and then click <strong>Add Simulation Source</strong>.</li>
+<li>In the <strong>Siddhi App Name</strong> field, select <strong>AmazonS3SinkSample</strong>.</li>
+<li>In the <strong>Stream Name</strong> field, select <strong>StockQuoteStream</strong>.</li>
 <li>
 <p>In the <strong>symbol(STRING)</strong> field, select <strong>Regex based</strong>. Then in the <strong>Pattern</strong> field that appears, enter <code>(IBM|WSO2|Dell)</code> as the pattern.</p>
 <div class="admonition tip">
@@ -4568,16 +4588,15 @@ extension</a>. In this sample the events received to the <code>StockQuoteStream<
 </ol>
 <h2 id="viewing-results">Viewing results<a class="headerlink" href="#viewing-results" title="Permanent link">&para;</a></h2>
 <p>Once the events are sent, check the S3 bucket. Objects are created with 3 events in each.</p>
-<details class="info"><summary>Click here to view the sample Siddhi application.</summary><div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;AmazonS3SinkSample&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;AmazonS3SinkSample&quot;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="ss">&quot;Publish events to Amazon AWS S3&quot;</span><span class="p">)</span>
-
 
 <span class="n">define</span><span class="w"> </span><span class="n">window</span><span class="w"> </span><span class="n">StockQuoteWindow</span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="n">double</span><span class="p">,</span><span class="w"> </span><span class="n">quantity</span><span class="w"> </span><span class="nb">int</span><span class="p">)</span><span class="w"> </span><span class="n">lengthBatch</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="n">events</span><span class="p">;</span>
 
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">StockQuoteStream</span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="n">double</span><span class="p">,</span><span class="w"> </span><span class="n">quantity</span><span class="w"> </span><span class="nb">int</span><span class="p">);</span>
 
-<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;s3&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">bucket</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;&lt;BUCKET_NAME&gt;&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">object</span><span class="p">.</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;stocks&#39;</span><span class="p">,</span>
-<span class="w">      </span><span class="n">credential</span><span class="p">.</span><span class="n">provider</span><span class="o">=</span><span class="s1">&#39;com.amazonaws.auth.profile.ProfileCredentialsProvider&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;zeus&#39;</span><span class="p">,</span>
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;s3&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">bucket</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;&lt;bucket-name&gt;&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">object</span><span class="p">.</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;stocks&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">aws</span><span class="p">.</span><span class="n">region</span><span class="o">=</span><span class="s1">&#39;&lt;aws-region&gt;&#39;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">credential</span><span class="p">.</span><span class="n">provider</span><span class="o">=</span><span class="s1">&#39;com.amazonaws.auth.profile.ProfileCredentialsProvider&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;zeus&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">enclosing</span><span class="p">.</span><span class="n">element</span><span class="o">=</span><span class="s1">&#39;$.stocks&#39;</span><span class="p">,</span>
 <span class="w">        </span><span class="o">@</span><span class="n">payload</span><span class="p">(</span><span class="ss">&quot;&quot;&quot;{&quot;</span><span class="n">symbol</span><span class="ss">&quot;: &quot;</span><span class="err">{{</span><span class="w"> </span><span class="n">symbol</span><span class="w"> </span><span class="err">}}</span><span class="ss">&quot;, &quot;</span><span class="n">price</span><span class="ss">&quot;: &quot;</span><span class="err">{{</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="err">}}</span><span class="ss">&quot;, &quot;</span><span class="n">quantity</span><span class="ss">&quot;: &quot;</span><span class="err">{{</span><span class="w"> </span><span class="n">quantity</span><span class="w"> </span><span class="err">}}</span><span class="ss">&quot;}&quot;&quot;&quot;</span><span class="p">)))</span>
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">StorageOutputStream</span><span class="w"> </span><span class="p">(</span><span class="n">symbol</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">price</span><span class="w"> </span><span class="n">double</span><span class="p">,</span><span class="w"> </span><span class="n">quantity</span><span class="w"> </span><span class="nb">int</span><span class="p">);</span>
@@ -4589,8 +4608,6 @@ extension</a>. In this sample the events received to the <code>StockQuoteStream<
 <span class="k">select</span><span class="w"> </span><span class="o">*</span>
 <span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">StorageOutputStream</span><span class="p">;</span>
 </code></pre></div>
-
-</details>
 
 
 

@@ -1505,35 +1505,35 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#note" class="md-nav__link">
-    Note:
+    Note
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
@@ -4421,35 +4421,35 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#note" class="md-nav__link">
-    Note:
+    Note
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
@@ -4488,40 +4488,46 @@
 
   <h1>Receiving Events via File</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This application demonstrates how to use <code>siddhi-io-file</code> for receiving.</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Edit this sample file by replacing <code>{WSO2SIHome}</code> with the absolute path of your WSO2SI home directory.</li>
+<li>Edit this sample file by replacing <code>&lt;SI-Tooling-Home&gt;</code> with the absolute path of your WSO2SI Tooling home directory.</li>
 <li>Save this sample.</li>
 </ol>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Start the Siddhi application by clicking on 'Run'.</li>
-<li>If the Siddhi application starts successfully, the following messages would be shown on the console.
-    <div class="highlight"><pre><span></span><code>ReceiveEventsFromFile.siddhi - Started Successfully!
-</code></pre></div></li>
-<li>Check the directories <code>{WSO2SIHome}/samples/artifacts/ReceiveEventsFromFile/files/consumed</code> and <code>new</code>.</li>
+<li>
+<p>If the Siddhi application starts successfully, the following messages would be shown on the console.</p>
+<div class="highlight"><pre><span></span><code>ReceiveEventsFromFile.siddhi<span class="w"> </span>-<span class="w"> </span>Started<span class="w"> </span>Successfully!
+</code></pre></div>
+
+</li>
+<li>
+<p>Check the directories <code>&lt;SI-Tooling-Home&gt;/samples/artifacts/ReceiveEventsFromFile/files/consumed</code> and <code>new</code>.</p>
+</li>
 <li>All the files which were in the directory <code>new</code> should have been moved to <code>consumed</code> directory.</li>
 </ol>
-<h2 id="note">Note:<a class="headerlink" href="#note" title="Permanent link">&para;</a></h2>
-<p>If the sample is not running and producing output, do the following first.
-* Move all the files in <code>{WSO2SIHome}/samples/artifacts/ReceiveEventsFromFile/files/consumed</code> directory to
-<code>{WSO2SIHome}/samples/artifacts/ReceiveEventsFromFile/files/new</code>.
-* Delete all the files in consumed and sink directories.</p>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
-<p>Processed output events will be logged in the console as follows:
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - ReceiveEventsFromFile: event, StreamEvent{ timestamp=1513847875990, beforeWindowData=null, onAfterWindowData=null, outputData=[apache, 80.0, 2.0], type=CURRENT, next=null}
-INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - ReceiveEventsFromFile: event, StreamEvent{ timestamp=1513847876004, beforeWindowData=null, onAfterWindowData=null, outputData=[cloudbees, 134.4, 2.0], type=CURRENT, next=null}
-</code></pre></div></p>
+<h2 id="note">Note<a class="headerlink" href="#note" title="Permanent link">&para;</a></h2>
+<p>If the sample is not running and producing output, do the following first.</p>
+<ul>
+<li>Move all the files in <code>&lt;SI-Tooling-Home&gt;/samples/artifacts/ReceiveEventsFromFile/files/consumed</code> directory to <code>&lt;SI-Tooling-Home&gt;/samples/artifacts/ReceiveEventsFromFile/files/new</code>.</li>
+<li>Delete all the files in consumed and sink directories.</li>
+</ul>
+<h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<p>Processed output events will be logged in the console as follows:</p>
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.query.processor.stream.LogStreamProcessor<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveEventsFromFile:<span class="w"> </span>event,<span class="w"> </span>StreamEvent<span class="o">{</span><span class="w"> </span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1513847875990</span>,<span class="w"> </span><span class="nv">beforeWindowData</span><span class="o">=</span>null,<span class="w"> </span><span class="nv">onAfterWindowData</span><span class="o">=</span>null,<span class="w"> </span><span class="nv">outputData</span><span class="o">=[</span>apache,<span class="w"> </span><span class="m">80</span>.0,<span class="w"> </span><span class="m">2</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">type</span><span class="o">=</span>CURRENT,<span class="w"> </span><span class="nv">next</span><span class="o">=</span>null<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.query.processor.stream.LogStreamProcessor<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveEventsFromFile:<span class="w"> </span>event,<span class="w"> </span>StreamEvent<span class="o">{</span><span class="w"> </span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1513847876004</span>,<span class="w"> </span><span class="nv">beforeWindowData</span><span class="o">=</span>null,<span class="w"> </span><span class="nv">onAfterWindowData</span><span class="o">=</span>null,<span class="w"> </span><span class="nv">outputData</span><span class="o">=[</span>cloudbees,<span class="w"> </span><span class="m">134</span>.4,<span class="w"> </span><span class="m">2</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">type</span><span class="o">=</span>CURRENT,<span class="w"> </span><span class="nv">next</span><span class="o">=</span>null<span class="o">}</span>
+</code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;ReceiveEventsFromFile&#39;</span><span class="p">)</span>
 
-
 <span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">mode</span><span class="o">=</span><span class="s1">&#39;text.full&#39;</span><span class="p">,</span>
-<span class="n">dir</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;file:/{WSO2SIHome}/samples/artifacts/ReceiveEventsFromFile/files/new&#39;</span><span class="p">,</span>
+<span class="n">dir</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;file:/&lt;SI-Tooling-Home&gt;/samples/artifacts/ReceiveEventsFromFile/files/new&#39;</span><span class="p">,</span>
 <span class="n">action</span><span class="p">.</span><span class="k">after</span><span class="p">.</span><span class="n">process</span><span class="o">=</span><span class="s1">&#39;move&#39;</span><span class="p">,</span>
 <span class="n">tailing</span><span class="o">=</span><span class="s1">&#39;false&#39;</span><span class="p">,</span>
-<span class="k">move</span><span class="p">.</span><span class="k">after</span><span class="p">.</span><span class="n">process</span><span class="o">=</span><span class="s1">&#39;file:/{WSO2SIHome}/samples/artifacts/ReceiveEventsFromFile/files/consumed&#39;</span><span class="p">,</span>
+<span class="k">move</span><span class="p">.</span><span class="k">after</span><span class="p">.</span><span class="n">process</span><span class="o">=</span><span class="s1">&#39;file:/&lt;SI-Tooling-Home&gt;/samples/artifacts/ReceiveEventsFromFile/files/consumed&#39;</span><span class="p">,</span>
 <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
