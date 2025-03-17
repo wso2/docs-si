@@ -3016,21 +3016,7 @@
   
     <li class="md-nav__item">
       <a href="../../setup/installing-si-in-vm/" class="md-nav__link">
-        Installing via the Installer
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../setup/installing-si-binary/" class="md-nav__link">
-        Installing via the Binary
+        Install SI
       </a>
     </li>
   
@@ -4558,7 +4544,7 @@
 <p>Streaming Integrator Tooling uses Siddhi extensions to connect with various data sources. Siddhi extensions can be installed or un-installed using the Extension Installer.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>The Extension Installer can install/un-install extensions within Streaming Integrator Tooling. When deploying Siddhi applications in Streaming Integrator Server, these have to be manually done. For more information, see <a href="../../connectors/downloading-and-Installing-Siddhi-Extensions/">Downloading and Installing Siddhi Extensions</a>.</p>
+<p>The Extension Installer can install/un-install extensions within Streaming Integrator Tooling. When deploying Siddhi applications in Streaming Integrator Server, <code>extension-installer</code> CLI command in the <code>&lt;SI-Home&gt;/bin</code> folder can be used or this can be manually done. For more information, see <a href="../../connectors/downloading-and-Installing-Siddhi-Extensions/">Downloading and Installing Siddhi Extensions</a>.</p>
 </div>
 <h2 id="managing-siddhi-extensions">Managing Siddhi extensions<a class="headerlink" href="#managing-siddhi-extensions" title="Permanent link">&para;</a></h2>
 <p>The following topics cover how to manage Siddhi extensions in Streaming Integrator Tooling</p>
@@ -4566,7 +4552,7 @@
 <p>To access the Extension installer and find the extensions you need to install/uninstall, follow the steps below:</p>
 <ol>
 <li>
-<p>To start Streaming Integrator Tooling, navigate to the <code>&lt;SI_TOOLING_HOME&gt;/bin</code> directory and issue the appropriate command out of the following based on your operating system:</p>
+<p>To start Streaming Integrator Tooling, navigate to the <code>&lt;SI_Tooling_Home&gt;/bin</code> directory and issue the appropriate command out of the following based on your operating system:</p>
 <ul>
 <li>
 <p>For Windows: <code>tooling.bat</code></p>
@@ -4652,22 +4638,22 @@
 <tbody>
 <tr>
 <td><strong>bundle in runtime</strong></td>
-<td>Place the OSGi bundle you downloaded/converted in either the <code>&lt;SI_HOME&gt;/lib</code> or the <code>&lt;SI_HOME&gt;/bundles</code> directory based on the instructions.</td>
+<td>Place the OSGi bundle you downloaded/converted in either the <code>&lt;SI-Home&gt;/lib</code> or the <code>&lt;SI-Home&gt;/bundles</code> directory based on the instructions.</td>
 </tr>
 <tr>
 <td><strong>jar in runtime</strong></td>
-<td>Place the non-OSGi bundle you downloaded in the <code>&lt;SI_HOME&gt;/jars</code> directory.</td>
+<td>Place the non-OSGi bundle you downloaded in the <code>&lt;SI-Home&gt;/jars</code> directory.</td>
 </tr>
 <tr>
 <td><strong>jar in samples</strong></td>
-<td>Place the non-OSGi bundle you dowloaded in the <code>&lt;SI_HOME&gt;/samples/sample-clients/lib</code> directory.</td>
+<td>Place the non-OSGi bundle you dowloaded in the <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/lib</code> directory.</td>
 </tr>
 </tbody>
 </table>
 </li>
 </ul>
 <h2 id="configuring-extension-dependencies">Configuring Extension Dependencies<a class="headerlink" href="#configuring-extension-dependencies" title="Permanent link">&para;</a></h2>
-<p>Configurations of extensions are loaded from the <code>&lt;SI_HOME&gt;/wso2/server/resources/extensionsInstaller/extensionDependencies.json</code> configuration file.</p>
+<p>Configurations of extensions are loaded from the <code>&lt;SI-Home&gt;/wso2/server/resources/extensionsInstaller/extensionDependencies.json</code> configuration file.</p>
 <p>When you are working with <a href="https://wso2.github.io/docs-si/connectors/writing-Custom-Siddhi-Extensions.md#writing-custom-siddhi-extensions">custom extensions</a>, and if you want a custom extension to be installable from the Extension Installer, you need to add the configuration of the extension to this configuration file.</p>
 <p>The configuration of an extension is a JSON object that looks as follows:</p>
 <div class="highlight"><pre><span></span><code><span class="w">    </span><span class="nt">&quot;&lt;extension_name&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>

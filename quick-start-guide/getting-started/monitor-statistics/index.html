@@ -3102,21 +3102,7 @@
   
     <li class="md-nav__item">
       <a href="../../../setup/installing-si-in-vm/" class="md-nav__link">
-        Installing via the Installer
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../setup/installing-si-binary/" class="md-nav__link">
-        Installing via the Binary
+        Install SI
       </a>
     </li>
   
@@ -4556,7 +4542,7 @@
 <p>Extract the downloaded file. The directory that opens as a result is referred to as the <code>&lt;PROMETHEUS_HOME&gt;</code> from here on.</p>
 </li>
 <li>
-<p>To enable statistics for the Prometheus reporter, open the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file and set the <code>enabled</code> parameter in the <code>wso2.metrics</code> section to <code>true</code>, and update the other parameters in the section as shown below. You also need to add the <code>metrics.prometheus:</code> as shown.</p>
+<p>To enable statistics for the Prometheus reporter, open the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file and set the <code>enabled</code> parameter in the <code>wso2.metrics</code> section to <code>true</code>, and update the other parameters in the section as shown below. You also need to add the <code>metrics.prometheus:</code> as shown.</p>
 <div class="highlight"><pre><span></span><code> wso2.metrics:
    # Enable Metrics
    enabled: true
@@ -4605,7 +4591,7 @@
 that can be followed to overcome this issue.</p>
 <p><strong>Option 1</strong></p>
 <ol>
-<li>Open the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file.</li>
+<li>Open the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file.</li>
 <li>Set the <code>Enable JDBC Reporter</code> parameter to false. Note that after you disable this, only the real-time metrics are displayed and information relating to metrics history is not displayed.
 <div class="highlight"><pre><span></span><code><span class="c1"># Enable JDBC Reporter</span>
 <span class="w">    </span><span class="n">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
@@ -4614,7 +4600,7 @@ that can be followed to overcome this issue.</p>
 </ol>
 <p><strong>Option 2</strong></p>
 <ol>
-<li>Open the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file.</li>
+<li>Open the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file.</li>
 <li>Enable scheduled cleanup of the database under the <code>wso2.metrics.jdbc</code> parameter.
 <div class="highlight"><pre><span></span><code>wso2.metrics.jdbc:
 # Data Source Configurations for JDBC Reporters
@@ -4721,16 +4707,15 @@ dataSource:
 </li>
 <li>
 <p>Under <strong>Overview Statistics</strong>, click <strong>SweetFactoryApp</strong>. The <strong>overview-statistics / WSO2 Streaming Integrator App Statistics</strong> dashboard opens.</p>
-<p><img alt="app-statistics" src="https://wso2.github.io/docs-si/images/quick-start-guide-101/app-staistics.png" /></p>
 </li>
 <li>
 <p>Scroll down to the <strong>Sources</strong> section. The following is displayed.</p>
-<p><img alt="source-statistics" src="https://wso2.github.io/docs-si/images/quick-start-guide-101/sources.png" /></p>
+<p><img alt="source-statistics" src="https://wso2.github.io/docs-si/images/quick-start-guide-101/file-source-statistics.png" /></p>
 <p>The two entries displayed above represent the <code>file</code> source and the <code>cdc</code> source used in the <code>SweetFactoryApp</code> Siddhi application.</p>
 </li>
 <li>
 <p>Scroll down further to the <strong>Destinations</strong> section. The <code>file</code> sink in the <code>SweetFactoryApp</code> Siddhi application is displayed as shown below.</p>
-<p><img alt="destination-statistics" src="https://wso2.github.io/docs-si/images/quick-start-guide-101/destination.png" /></p>
+<p><img alt="destination-statistics" src="https://wso2.github.io/docs-si/images/quick-start-guide-101/file-sink-statistics.png" /></p>
 </li>
 <li>
 <p>Under <strong>Sources</strong>, click on the link to the <code>productioninserts.csv</code> file. The <strong>WSO2 Streaming Integrator - File Statistics</strong> dashboard opens. The contents of the <code>productioninserts.csv</code> file is the output of one query and the input of another. Therefore, it is a source as well as a destination, statistics are displayed for it under <strong>Source</strong> and <strong>Sink</strong> as shown below.</p>

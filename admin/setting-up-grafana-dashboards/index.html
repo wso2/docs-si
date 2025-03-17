@@ -3016,21 +3016,7 @@
   
     <li class="md-nav__item">
       <a href="../../setup/installing-si-in-vm/" class="md-nav__link">
-        Installing via the Installer
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../setup/installing-si-binary/" class="md-nav__link">
-        Installing via the Binary
+        Install SI
       </a>
     </li>
   
@@ -4450,7 +4436,7 @@
 <p><strong>Configure Prometheus reporter in Streaming Integrator</strong></p>
 <p>Enable statistics for the Prometheus reporter as follows.</p>
 <ul>
-<li>To enable statistics for the Prometheus reporter, open the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file and set the <code>enabled</code> parameter in the <code>wso2.metrics</code> section to <code>true</code>, and update the other parameters in the section as shown below. You also need to add the <code>metrics.prometheus:</code> as shown.</li>
+<li>To enable statistics for the Prometheus reporter, open the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file and set the <code>enabled</code> parameter in the <code>wso2.metrics</code> section to <code>true</code>, and update the other parameters in the section as shown below. You also need to add the <code>metrics.prometheus:</code> as shown.</li>
 </ul>
 <p><div class="highlight"><pre><span></span><code><span class="w"> </span><span class="nt">wso2.metrics</span><span class="p">:</span>
 <span class="w">   </span><span class="c1"># Enable Metrics</span>
@@ -4483,7 +4469,7 @@
 </li>
 <li>
 <p><strong>Start Streaming Integrator server</strong></p>
-<p>To start the Streaming runtime, navigate to the <code>&lt;SI_HOME&gt;/bin</code> directory and issue the appropriate command based on your operating system.</p>
+<p>To start the Streaming runtime, navigate to the <code>&lt;SI-Home&gt;/bin</code> directory and issue the appropriate command based on your operating system.</p>
 <ul>
 <li><strong>For Windows</strong>: <code>server.bat --run</code><br/></li>
 <li><strong>For Linux/MacOS</strong>: <code>./server.sh</code></li>
@@ -4525,14 +4511,18 @@
 <li>
 <p>In the <strong>Add data source</strong> page -&gt; <strong>Settings</strong> tab, update the configurations for Prometheus as follows.</p>
 <p><img alt="prometheus configuration" src="https://wso2.github.io/docs-si/images/cdc-monitoring/prometheus-configurations.png" /></p>
-<pre class="codehilite"><code class="linenums">1. Click **Default** to make Prometheus the default data source.
-
-2. Under **HTTP**, enter `http://localhost:9090` as the URL.
-
-3. Click **Save &amp; Test**. If the data source is successfully configured, it is indicated via a message.
-    ![Save and Test](https://wso2.github.io/docs-si/images/cdc-monitoring/save-and-test.png)</code></pre>
-
-
+<ol>
+<li>
+<p>Click <strong>Default</strong> to make Prometheus the default data source.</p>
+</li>
+<li>
+<p>Under <strong>HTTP</strong>, enter <code>http://localhost:9090</code> as the URL.</p>
+</li>
+<li>
+<p>Click <strong>Save &amp; Test</strong>. If the data source is successfully configured, it is indicated via a message.
+    <img alt="Save and Test" src="https://wso2.github.io/docs-si/images/cdc-monitoring/save-and-test.png" /></p>
+</li>
+</ol>
 </li>
 </ol>
 </li>

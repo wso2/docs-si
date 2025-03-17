@@ -3016,21 +3016,7 @@
   
     <li class="md-nav__item">
       <a href="../../setup/installing-si-in-vm/" class="md-nav__link">
-        Installing via the Installer
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../setup/installing-si-binary/" class="md-nav__link">
-        Installing via the Binary
+        Install SI
       </a>
     </li>
   
@@ -4657,7 +4643,7 @@
 <h1 id="streaming-integrator-tooling-overview">Streaming Integrator Tooling Overview<a class="headerlink" href="#streaming-integrator-tooling-overview" title="Permanent link">&para;</a></h1>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>This page describes the latest publicly-available version of Streaming Integrator Tooling. If you cannot see some of the user interface elements described here, <a href="https://docs.wso2.com/display/updates/Getting+Continuous+Updates">update your Streaming Integrator Tooling installation</a>.</p>
+<p>This page describes the latest publicly-available version of Streaming Integrator Tooling.</p>
 </div>
 <p>The Streaming Integrator Tooling is a developer tool that is shipped with
 the Streaming Integrator to develop Siddhi applications. It allows provides three
@@ -4674,7 +4660,13 @@ interfaces to develop Siddhi applications</p>
     dragging and dropping Siddhi components to a graph.</p>
 </li>
 <li>
-<p><strong>Wizard View</strong>: This is a wizard with a page for each component of a Siddhi application that displays the relevant configuration parameters as fields. This wizard can be directly accessed from the <a href="#welcome-page">Welcome Page</a>. Only ETL (Extract, Transform, Load) applications can be created/viewed in this interface. For a Siddhi application to be considered an ETL application, it must include all of the following components:<br/><br/> - A source configuration<br/><br/> - A sink configuration (the sink type can be any of the <a href="https://siddhi.io/en/v5.1/docs/query-guide/#sink">supported sink types</a> other than <code>log</code>)<br/><br/> - A Siddhi query that performs a transformation. <br/><br/> For more information, see <a href="../../examples/creating-etl-application-via-tooling/">Creating an ETL Application via SI Tooling tutorial</a>.</p>
+<p><strong>Wizard View</strong>: This is a wizard with a page for each component of a Siddhi application that displays the relevant configuration parameters as fields. This wizard can be directly accessed from the <a href="#welcome-page">Welcome Page</a>. Only ETL (Extract, Transform, Load) applications can be created/viewed in this interface. For a Siddhi application to be considered an ETL application, it must include all of the following components:</p>
+<ul>
+<li>A source configuration</li>
+<li>A sink configuration (the sink type can be any of the <a href="https://siddhi.io/en/v5.1/docs/query-guide/#sink">supported sink types</a> other than <code>log</code>)</li>
+<li>A Siddhi query that performs a transformation.
+For more information, see <a href="../../examples/creating-etl-application-via-tooling/">Creating an ETL Application via SI Tooling tutorial</a>.</li>
+</ul>
 </li>
 </ul>
 <p>Once a Siddhi application is created, you can simulate events via the
@@ -4684,10 +4676,10 @@ Streaming Integrator Tooling to test whether it works as expected.</p>
 <ol>
 <li>
 <p>Start the Streaming Integrator Tooling by issuing one of the following
-    commands from the <code>&lt;SI_HOME&gt;/bin</code> directory.</p>
+    commands from the <code>&lt;SI-Tooling-Home&gt;/bin</code> directory.</p>
 <ul>
-<li>For Windows: <code>streaming-integrator-tooling.bat</code></li>
-<li>For Linux: <code>./streaming-integrator-tooling.sh</code></li>
+<li>For Windows: <code>tooling.bat</code></li>
+<li>For Linux: <code>./tooling.sh</code></li>
 </ul>
 </li>
 <li>
@@ -4695,7 +4687,8 @@ Streaming Integrator Tooling to test whether it works as expected.</p>
     URL. The Streaming Integrator Tooling opens as shown below.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>The default URL is <code>http://localhost:9390/editor</code>. If required, you can change the host name (i.e., <code>localhost</code>) or the web UI application name (i.e., <code>editor</code>). For instructions, see <a href="../../setup/change-hostname-and-context-path/">Changing the Host Name and Context Path of SI Tooling</a>.</p>
+<p>The default URL is <code>http://localhost:9390/editor</code>. If required, you can change the host name (i.e., <code>localhost</code>) or the web UI application name (i.e., <code>editor</code>).
+For instructions, see <a href="../../setup/change-hostname-and-context-path/">Changing the Host Name and Context Path of SI Tooling</a>.</p>
 </div>
 </li>
 </ol>
@@ -4826,9 +4819,9 @@ example.<br />
     after you undid the change.</p>
 </li>
 <li>
-<p><strong>Find</strong> 
-    Click this to search for a specific string in the currently
-    active Siddhi application tab.</p>
+<p><strong>Find</strong></p>
+<p>Click this to search for a specific string in the currently
+active Siddhi application tab.</p>
 </li>
 <li>
 <p><strong>Find and Replace</strong><br />
@@ -4892,8 +4885,7 @@ example.<br />
 <li>Single Simulation</li>
 <li>Feed Simulation</li>
 </ul>
-<p>For detailed information about event simulation, see <a href="_Simulating_Events_">Simulating Events</a>.<br />
-The event simulator can also be accessed from the <a href="#StreamProcessorStudioOverview-SidePanel">Side Panel</a>.</p>
+<p>The event simulator can also be accessed from the Side Panel.</p>
 </li>
 <li>
 <p><strong>Error Store Explorer</strong></p>
@@ -4926,7 +4918,7 @@ The event simulator can also be accessed from the <a href="#StreamProcessorStudi
 <p class="admonition-title">Info</p>
 <p>Note that only mapping errors can be corrected before replaying.</p>
 </div>
-<p><img alt="Correct and Replay Event" src="https://wso2.github.io/docs-si/images/handling-requests-with-errors/correct-and-replay-event.png" /></p>
+<p><img alt="Correct and Replay Event" src="https://wso2.github.io/docs-si/images/streaming-integrator-studio-overview/correct-and-replay-event.png" /></p>
 </li>
 </ul>
 </li>

@@ -3016,21 +3016,7 @@
   
     <li class="md-nav__item">
       <a href="../../setup/installing-si-in-vm/" class="md-nav__link">
-        Installing via the Installer
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../setup/installing-si-binary/" class="md-nav__link">
-        Installing via the Binary
+        Install SI
       </a>
     </li>
   
@@ -4490,13 +4476,13 @@ view of the Streaming Integrator Tooling.</p>
 <p>To create a Siddhi application via the source view of the Streaming Integrator Tooling, follow the steps below:</p>
 <ol>
 <li>
-<p>Start the Streaming Integrator Tooling by navigating to the <code>&lt;SI_TOOLING_HOME&gt;/bin</code> directory and issue one of the following commands:</p>
+<p>Start the Streaming Integrator Tooling by navigating to the <code>&lt;SI_Tooling_Home&gt;/bin</code> directory and issue one of the following commands:</p>
 <ul>
 <li>
-<p>For Windows: <code>streaming-integrator-tooling.bat</code></p>
+<p>For Windows: <code>tooling.bat</code></p>
 </li>
 <li>
-<p>For Linux: <code>./streaming-integrator-tooling.sh</code></p>
+<p>For Linux: <code>./tooling.sh</code></p>
 </li>
 </ul>
 </li>
@@ -4541,7 +4527,7 @@ view of the Streaming Integrator Tooling.</p>
                <p>This stream contains two stream configurations:</p>
                <ul>
                   <li>
-                     <p><code>                   SweetProductionStream                  </code></p>
+                     <p><code>                SweetProductionStream                  </code></p>
                      <div class="code panel pdl" style="border-width: 1px;">
                         <div class="codeContent panelContent pdl">
                            <div class="sourceCode" id="cb1" data-syntaxhighlighter-params="brush: sql; gutter: false; theme: Confluence" data-theme="Confluence" style="brush: sql; gutter: false; theme: Confluence">
@@ -4666,7 +4652,7 @@ view of the Streaming Integrator Tooling.</p>
 </div>
 </li>
 <li>
-<p>To save this Siddhi application, click <strong>File</strong>, and then click <strong>Save</strong>. By default siddhi applications are saved in the  <code>&lt;SI_HOME&gt;/wso2/editor/deployment/workspace</code> directory.</p>
+<p>To save this Siddhi application, click <strong>File</strong>, and then click <strong>Save</strong>. By default siddhi applications are saved in the  <code>&lt;SI-Home&gt;/wso2/editor/deployment/workspace</code> directory.</p>
 </li>
 <li>
 <p>To export the Siddhi application to your preferred location, click
@@ -4684,7 +4670,7 @@ view of the Streaming Integrator Tooling.</p>
 <p>To create a Siddhi application via the design view of the Streaming Integrator Tooling, follow the steps below:</p>
 <ol>
 <li>
-<p>Start the Streaming Integrator Tooling by navigating to the <code>&lt;SI_TOOLING_HOME&gt;/bin</code> directory and issue one of the following commands:</p>
+<p>Start the Streaming Integrator Tooling by navigating to the <code>&lt;SI_Tooling_Home&gt;/bin</code> directory and issue one of the following commands:</p>
 <ul>
 <li>For Windows: <code>streaming-integrator-tooling.bat</code></li>
 <li>For Linux: <code>./streaming-integrator-tooling.sh</code></li>
@@ -4773,19 +4759,17 @@ it, and then click on the settings icon as shown below.</p>
     the <strong>SweetProductionStream</strong> input stream component. Therefore,
     place this source component to the left of the input stream
     component in the grid.<br/>
-    <img alt="Source Icon" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Source_Icon.png" /> 
-    Once you add the source component, draw a line from it to the
-    <strong>SweetProductionStream</strong> input stream component by dragging the
-    cursor as demonstrated below.<br />
-<img alt="Connect source" src="https://wso2.github.io/docs-si/Creating-Siddhi-Applications/Connect-Source-Component.gif" /><br />
-    Click the settings icon on the source component you added to open
-    the <strong>Source Configuration</strong> form. Then enter information as
-    follows.<br />
-<img alt="Source Configuration form" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Source_Configuration.png" /></p>
+    <img alt="Source Icon" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Source_Icon.png" /></p>
+<p>Once you add the source component, draw a line from it to the
+<strong>SweetProductionStream</strong> input stream component by dragging the
+cursor as demonstrated below.<br />
+<img alt="Connect source" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Connect-Source-Component.gif" /><br />
+Click the settings icon on the source component you added to open
+the <strong>Source Configuration</strong> form. Then enter information as
+follows.<br />
+<img alt="Source Configuration form" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Source_Configuration.png" />
+1.  In the <strong>Source Type</strong> field, select <strong>tcp</strong> .</p>
 <ol>
-<li>
-<p>In the <strong>Source Type</strong> field, select <strong>tcp</strong> .</p>
-</li>
 <li>
 <p>For this example, assume that events are received in the <code>binary</code> format. To indicate that
     events are expected to be converted from this format, select
@@ -4805,7 +4789,7 @@ it, and then click on the settings icon as shown below.</p>
     The query uses the events in the <code>SweetProductionStream</code> input stream as inputs and directs the 
     processed events (which are its output) to the <code>ProductionAlertStream</code> output stream. Therefore,
     create two connections as demonstrated below.<br />
-<img alt="Connecting the projection query" src="https://wso2.github.io/docs-si/Creating-Siddhi-Applications/Connect-Projection-Query.gif" /></p>
+<img alt="Connecting the projection query" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Connect-Projection-Query.gif" /></p>
 </li>
 <li>
 <p>To define the execution logic, move the cursor over the query in the

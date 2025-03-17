@@ -16,14 +16,14 @@
         <link rel="prev" href="../../samples/GCSSinkSample/">
       
       
-        <link rel="next" href="../installing-si-binary/">
+        <link rel="next" href="../installing-as-a-windows-service/">
       
       <link rel="icon" href="../../img/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
     
     
       
-        <title>Installing via the Installer - WSO2 Streaming Integrator Documentation</title>
+        <title>Install SI - WSO2 Streaming Integrator Documentation</title>
       
     
     
@@ -101,7 +101,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installing-via-the-installer" class="md-skip">
+        <a href="#install-si" class="md-skip">
           Skip to content
         </a>
       
@@ -154,7 +154,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Installing via the Installer
+              Install SI
             
           </span>
         </div>
@@ -3031,12 +3031,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Installing via the Installer
+          Install SI
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Installing via the Installer
+        Install SI
       </a>
       
         
@@ -3069,42 +3069,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-the-si-server" class="md-nav__link">
-    Running the SI server
-  </a>
-  
-    <nav class="md-nav" aria-label="Running the SI server">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#starting-the-si-server" class="md-nav__link">
     Starting the SI server
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#stopping-the-si-server" class="md-nav__link">
     Stopping the SI server
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#accessing-the-home-directory" class="md-nav__link">
-    Accessing the HOME directory
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#uninstalling-the-product" class="md-nav__link">
-    Uninstalling the product
   </a>
   
 </li>
@@ -3113,20 +3086,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../installing-si-binary/" class="md-nav__link">
-        Installing via the Binary
-      </a>
     </li>
   
 
@@ -4460,42 +4419,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-the-si-server" class="md-nav__link">
-    Running the SI server
-  </a>
-  
-    <nav class="md-nav" aria-label="Running the SI server">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#starting-the-si-server" class="md-nav__link">
     Starting the SI server
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#stopping-the-si-server" class="md-nav__link">
     Stopping the SI server
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#accessing-the-home-directory" class="md-nav__link">
-    Accessing the HOME directory
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#uninstalling-the-product" class="md-nav__link">
-    Uninstalling the product
   </a>
   
 </li>
@@ -4532,8 +4464,8 @@
   
 
 
-<h1 id="installing-via-the-installer">Installing via the Installer<a class="headerlink" href="#installing-via-the-installer" title="Permanent link">&para;</a></h1>
-<p>Follow the steps given below to install the WSO2 Streaming Integrator runtime.</p>
+<h1 id="install-si">Install SI<a class="headerlink" href="#install-si" title="Permanent link">&para;</a></h1>
+<p>Follow the steps given below to install the WSO2 Streaming Integrator.</p>
 <h2 id="system-requirements">System requirements<a class="headerlink" href="#system-requirements" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -4558,136 +4490,75 @@
 </tbody>
 </table>
 <h2 id="download-and-install">Download and install<a class="headerlink" href="#download-and-install" title="Permanent link">&para;</a></h2>
-<p>Go to the WSO2 Enterprise Integrator <a href="https://wso2.com/integration/#">product page</a>, click <strong>Download</strong>, and then click the <strong>Installer</strong>.</p>
-<p>The <strong>product installer</strong> that is compatible with your operating system is downloaded.</p>
-<p>Double-click to open the installation wizard that guides you through the installation. Once you finish, all the runtimes of WSO2 Enterprise Integrator are installed and ready for use.</p>
-<h2 id="running-the-si-server">Running the SI server<a class="headerlink" href="#running-the-si-server" title="Permanent link">&para;</a></h2>
-<p>If you installed the product using the installer, use the following instructions to start and stop the SI server.</p>
-<h3 id="starting-the-si-server">Starting the SI server<a class="headerlink" href="#starting-the-si-server" title="Permanent link">&para;</a></h3>
-<p>On <strong>MacOS/Linux/CentOS</strong>, open a terminal and execute one of the commands given below.</p>
+<p>Go to the WSO2 Streaming Integrator <a href="https://wso2.com/streaming-integrator/">product page</a>, click <strong>Download</strong>, and then click Zip Archive to download the Streaming Integrator as a ZIP file.</p>
+<p>Extract the archive file to a dedicated directory for the Steaming Integrator, which will hereafter be referred to as <code>&lt;SI_HOME&gt;</code>.</p>
+<p>You must set your <code>JAVA_HOME</code> environment variable to point to the directory where the Java Development Kit (JDK) is installed on the computer.</p>
+<h2 id="starting-the-si-server">Starting the SI server<a class="headerlink" href="#starting-the-si-server" title="Permanent link">&para;</a></h2>
+<p>Follow the steps given below to start the server.</p>
+<ol>
+<li>Open a command prompt as explained below.</li>
+<li>Navigate to the <code>&lt;SI_HOME&gt;/bin</code> folder from your command line.</li>
+<li>
+<p>Execute one of the commands given below.</p>
 <ul>
 <li>
-<p>To <b>start</b> the Streaming Integrator as a <b>standalone application</b>:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>wso2si
+<p>To start the server:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">On macOS/Linux</label><label for="__tabbed_1_2">On Windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>sh<span class="w"> </span>server.sh
 </code></pre></div>
 
-</li>
-<li>
-<p>To <b>start</b> the Streaming Integrator as a <b>service</b>:</p>
-<p>```bash tab='On MacOS'
-  sudo wso2si-service start
-  <div class="highlight"><pre><span></span><code>```bash tab=&#39;On Linux&#39;
-sudo service wso2si start
-</code></pre></div></p>
-<p><code>bash tab='On Centos'
-  sudo wso2si start</code></p>
-</li>
-</ul>
-<p>On <strong>Windows</strong></p>
-<ul>
-<li>Go to <strong>Start Menu -&gt; WSO2 -&gt; Enterprise Integrator 7.1.0 Streaming Integrator</strong>. This opens a terminal and starts the Streaming Integrator.</li>
-</ul>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>If you have <strong>installed the product using the installer</strong> and you want to manually run the product startup script from the <code>&lt;SI_HOME&gt;/bin</code> directory, you need to use the following command:<br/><br/>
-<code>bash
-sudo sh launcher_streaming-integrator.sh</code><br/><br/>
-This script automatically assigns the JAVA HOME of your VM to the root user of your Streaming Integrator instance.</p>
 </div>
-<h3 id="stopping-the-si-server">Stopping the SI server<a class="headerlink" href="#stopping-the-si-server" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p>To <b>stop</b> the Streaming Integrator standalone application, go to the terminal and press <i>Ctrl+C</i>.</p>
-</li>
-<li>
-<p>To <b>stop</b> the Streaming Integrator service:</p>
-<p>```bash tab='On MacOS'
-  sudo wso2si-service stop
-  <div class="highlight"><pre><span></span><code>```bash tab=&#39;On Linux&#39;
-sudo service wso2si stop
-</code></pre></div></p>
-<p>```bash tab='On CentOS'
-  sudo wso2si stop</p>
-</li>
-</ul>
-<h2 id="accessing-the-home-directory">Accessing the HOME directory<a class="headerlink" href="#accessing-the-home-directory" title="Permanent link">&para;</a></h2>
-<p>Let's call the installation location of your product the <strong><code>&lt;SI_HOME&gt;</code></strong> directory.</p>
-<p>If you used the <strong>installer</strong> to install the product, this is located in a place specific to your OS as shown below:</p>
-<table style="width:100%;">
-   <colgroup>
-      <col style="width: 9%" />
-      <col style="width: 90%" />
-   </colgroup>
-   <thead>
-      <tr class="header">
-         <th>OS</th>
-         <th>Home directory</th>
-      </tr>
-   </thead>
-   <tbody>
-      <tr class="odd">
-         <td>Mac OS</td>
-         <td><code>/Library/WSO2/EnterpriseIntegrator/7.1.0/streaming-integrator</code></td>
-      </tr>
-      <tr class="even">
-         <td>Windows</td>
-         <td><code>C:\Program Files\WSO2\Enterprise Integrator\7.1.0\streaming-integrator</code></td>
-      </tr>
-      <tr class="odd">
-         <td>Ubuntu</td>
-         <td><code>/usr/lib/wso2/wso2ei/7.1.0/streaming-integrator</code></td>
-      </tr>
-      <tr class="even">
-         <td>CentOS</td>
-         <td><code>/usr/lib64/wso2/wso2ei/7.1.0/streaming-integrator</code></td>
-      </tr>
-   </tbody>
-</table>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>server.bat
+</code></pre></div>
 
-<h2 id="uninstalling-the-product">Uninstalling the product<a class="headerlink" href="#uninstalling-the-product" title="Permanent link">&para;</a></h2>
-<p>If you used the <strong>installer</strong> to install WSO2 Enterprise Integrator, you can uninstall by following the steps given below:</p>
-<table>
-<thead>
-<tr class="header">
-<th>OS</th>
-<th>Instructions</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Mac OS</td>
-<td><div class="content-wrapper">
-<p>Open a terminal and run the following command as the root user:</p>
-  <code>sudo bash /Library/WSO2/wso2ei/7.1.0/uninstall.sh</code>
 </div>
 </div>
-</div></td>
-</tr>
-<tr class="even">
-<td>Windows</td>
-<td>Go to <strong>Start Menu -&gt; WSO2 -&gt; Uninstall Enterprise Integrator 7.1.0</strong> or search <strong>Uninstall Enterprise Integrator 7.1.0</strong> and click the shortcut icon. This uninstalls the product from your computer.</td>
-</tr>
-<tr class="odd">
-<td>Linux</td>
-<td><div class="content-wrapper">
-<p>Open a terminal and run the following command:</p>
-<code>sudo dpkg --purge wso2ei-7.1.0</code>
 </div>
-</div>
-</div></td>
-</tr>
-<tr class="even">
-<td>CentOS</td>
-<td><div class="content-wrapper">
-<p>Open a terminal and run the following command:</p>
-<code>sudo rpm -e wso2ei-7.1.0-1.el7.x86_64</code>
-</div>
-</div>
-</div></td>
-</tr>
-</tbody>
-</table>
+</li>
+<li>
+<p>To start the server in background mode:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">"On macOS/Linux</label><label for="__tabbed_2_2">On Windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>sh<span class="w"> </span>server.sh<span class="w"> </span>start
+</code></pre></div>
 
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>server.bat<span class="w"> </span>--start
+</code></pre></div>
+
+</div>
+</div>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="stopping-the-si-server">Stopping the SI server<a class="headerlink" href="#stopping-the-si-server" title="Permanent link">&para;</a></h2>
+<ul>
+<li>To stop the Streaming Integrator standalone application, go to the terminal and press <i>Ctrl+C</i>.</li>
+<li>
+<p>To stop the Micro Integrator in background mode:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">On macOS/Linux</label><label for="__tabbed_3_2">On Windows</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>sh<span class="w"> </span>server.sh<span class="w"> </span>stop
+</code></pre></div>
+
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>server.bat<span class="w"> </span>--stop
+</code></pre></div>
+
+</div>
+</div>
+</div>
+</li>
+</ul>
 <div class="admonition tip">
 <p class="admonition-title">What's Next?</p>
 <p>Once you have successfully downloaded and installed WSO2 Streaming Integrator, you can proceed to do any of the following:<br/><br/>
@@ -4737,13 +4608,13 @@ sudo service wso2si stop
     
     
     
-    <a href="../installing-si-binary/" class="md-footer__link md-footer__link--next" aria-label="Next: Installing via the Binary" rel="next">
+    <a href="../installing-as-a-windows-service/" class="md-footer__link md-footer__link--next" aria-label="Next: Installing as a Windows Service" rel="next">
       <div class="md-footer__title">
         <div class="md-ellipsis">
                 <span class="md-footer__direction">
                   Next
                 </span>
-          Installing via the Binary
+          Installing as a Windows Service
         </div>
       </div>
       <div class="md-footer__button md-icon">

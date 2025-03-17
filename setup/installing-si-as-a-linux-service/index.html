@@ -3022,21 +3022,7 @@
   
     <li class="md-nav__item">
       <a href="../installing-si-in-vm/" class="md-nav__link">
-        Installing via the Installer
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../installing-si-binary/" class="md-nav__link">
-        Installing via the Binary
+        Install SI
       </a>
     </li>
   
@@ -3095,20 +3081,6 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#before-you-begin" class="md-nav__link">
-    Before you begin
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#download-and-install-the-streaming-integrator" class="md-nav__link">
-    Download and install the Streaming Integrator
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#running-wso2-streaming-integrator-as-a-linux-service" class="md-nav__link">
@@ -4412,20 +4384,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#before-you-begin" class="md-nav__link">
-    Before you begin
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#download-and-install-the-streaming-integrator" class="md-nav__link">
-    Download and install the Streaming Integrator
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#running-wso2-streaming-integrator-as-a-linux-service" class="md-nav__link">
     Running WSO2 Streaming Integrator as a Linux Service
   </a>
@@ -4465,34 +4423,28 @@
 
 
 <h1 id="installing-streaming-integrator-as-a-linux-service">Installing Streaming Integrator as a Linux Service<a class="headerlink" href="#installing-streaming-integrator-as-a-linux-service" title="Permanent link">&para;</a></h1>
-<p>WSO2 Streaming Integrator can be run as a Linux service.</p>
-<h2 id="before-you-begin">Before you begin<a class="headerlink" href="#before-you-begin" title="Permanent link">&para;</a></h2>
-<p>Install JDK version 1.8.0_144 and set the <code>JAVA_HOME</code> variable.</p>
-<h2 id="download-and-install-the-streaming-integrator">Download and install the Streaming Integrator<a class="headerlink" href="#download-and-install-the-streaming-integrator" title="Permanent link">&para;</a></h2>
-<p>Go to the WSO2 Streaming Integrator <a href="https://wso2.com/integration/streaming-integrator/">product page</a>, click <strong>Download</strong>, and then click <strong>Zip Archive</strong> to download the product distribution as a ZIP file.</p>
-<p>Extract the download ZIP file to a location on your computer. The <b>streaming-integrator</b> folder inside the extracted ZIP file will be your <b>SI_HOME</b> directory.</p>
-<p>For more information, see <a href="../installing-si-binary/">Installing via the Binary</a></p>
+<p>WSO2 Streaming Integrator can be run as a Linux service. Before you begin follow the instructions on <a href="https://wso2.github.io/docs-si/setup/installing-si-in-vm/">installing the WSO2 Streaming Integrator</a> if you have not done already.</p>
 <h2 id="running-wso2-streaming-integrator-as-a-linux-service">Running WSO2 Streaming Integrator as a Linux Service<a class="headerlink" href="#running-wso2-streaming-integrator-as-a-linux-service" title="Permanent link">&para;</a></h2>
 <p>To run WSO2 Streaming Integrator as a Linux service, follow the steps below:</p>
 <ol>
 <li>
 <p>To run the product as a service, create a startup script and add it to the boot sequence. The basic structure of the startup script has three parts (i.e., start, stop and restart) as follows:</p>
-<div class="highlight"><pre><span></span><code>#!/bin/bash
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
-case “$1″ in
-start)
-   echo “Starting Service”
-;;
-stop)
-   echo “Stopping Service”
-;;
-restart)
-   echo “Restarting Service”
-;;
-*)
-   echo $”Usage: $0 {start|stop|restart}”
-exit 1
-esac
+<span class="k">case</span><span class="w"> </span>“<span class="nv">$1</span>″<span class="w"> </span><span class="k">in</span>
+start<span class="o">)</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span>“Starting<span class="w"> </span>Service”
+<span class="p">;;</span>
+stop<span class="o">)</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span>“Stopping<span class="w"> </span>Service”
+<span class="p">;;</span>
+restart<span class="o">)</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span>“Restarting<span class="w"> </span>Service”
+<span class="p">;;</span>
+*<span class="o">)</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span>$”Usage:<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="o">{</span>start<span class="p">|</span>stop<span class="p">|</span>restart<span class="o">}</span>”
+<span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">esac</span>
 </code></pre></div>
 
 </li>
@@ -4501,56 +4453,59 @@ esac
 <ul>
 <li>
 <p>Streaming Integrator Server</p>
-<p><div class="highlight"><pre><span></span><code>#! /bin/sh
-export JAVA_HOME=&quot;/usr/lib/jvm/jdk1.7.0_07&quot;
+<div class="highlight"><pre><span></span><code><span class="ch">#! /bin/sh</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">JAVA_HOME</span><span class="o">=</span><span class="s2">&quot;&lt;Java-Home&gt;&quot;</span>
 
-startcmd=&#39;/opt/WSO2/wso2si-1.1.0/bin/server.sh start &gt; /dev/null &amp;&#39;
-restartcmd=&#39;/opt/WSO2/wso2si-1.1.0/bin/server.sh restart &gt; /dev/null &amp;&#39;
-stopcmd=&#39;/opt/WSO2/wso2si-1.1.0/bin/server.sh stop &gt; /dev/null &amp;&#39;
+<span class="nv">startcmd</span><span class="o">=</span><span class="s1">&#39;&lt;SI-Home&gt;/bin/server.sh start &gt; /dev/null &amp;&#39;</span>
+<span class="nv">restartcmd</span><span class="o">=</span><span class="s1">&#39;&lt;SI-Home&gt;/bin/server.sh restart &gt; /dev/null &amp;&#39;</span>
+<span class="nv">stopcmd</span><span class="o">=</span><span class="s1">&#39;&lt;SI-Home&gt;/bin/server.sh stop &gt; /dev/null &amp;&#39;</span>
 
-case &quot;$1&quot; in
-start)
-   echo &quot;Starting WSO2 Streaming Integrator ...&quot;
-   su -c &quot;${startcmd}&quot; user1
-;;
-restart)
-   echo &quot;Re-starting WSO2 Streaming Integrator ...&quot;
-   su -c &quot;${restartcmd}&quot; user1
-;;
-stop)
-   echo &quot;Stopping WSO2 Streaming Integrator ...&quot;
-   su -c &quot;${stopcmd}&quot; user1
-;;
-*)
-   echo &quot;Usage: $0 {start|stop|restart}&quot;
-exit 1
-esac
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+start<span class="o">)</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Starting WSO2 Streaming Integrator ...&quot;</span>
+<span class="w">   </span>su<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">startcmd</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>user1
+<span class="p">;;</span>
+restart<span class="o">)</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Re-starting WSO2 Streaming Integrator ...&quot;</span>
+<span class="w">   </span>su<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">restartcmd</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>user1
+<span class="p">;;</span>
+stop<span class="o">)</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Stopping WSO2 Streaming Integrator ...&quot;</span>
+<span class="w">   </span>su<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">stopcmd</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>user1
+<span class="p">;;</span>
+*<span class="o">)</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$0</span><span class="s2"> {start|stop|restart}&quot;</span>
+<span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">esac</span>
 </code></pre></div>
-- Streaming Integrator Tooling</p>
-<div class="highlight"><pre><span></span><code>#! /bin/sh
-export JAVA_HOME=&quot;/usr/lib/jvm/jdk1.7.0_07&quot;
 
-startcmd=&#39;/opt/WSO2/wso2si-tooling-1.1.0/bin/tooling.sh start &gt; /dev/null &amp;&#39;
-restartcmd=&#39;/opt/WSO2/wso2si-tooling-1.1.0/bin/tooling.sh restart &gt; /dev/null &amp;&#39;
-stopcmd=&#39;/opt/WSO2/wso2si-tooling-1.1.0/bin/tooling.sh stop &gt; /dev/null &amp;&#39;
+<ul>
+<li>Streaming Integrator Tooling</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="ch">#! /bin/sh</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">JAVA_HOME</span><span class="o">=</span><span class="s2">&quot;&lt;Java-Home&gt;&quot;</span>
 
-case &quot;$1&quot; in
-start)
-   echo &quot;WSO2 Streaming Integrator Tooling ...&quot;
-   su -c &quot;${startcmd}&quot; user1
-;;
-restart)
-   echo &quot;Re-starting WSO2 Streaming Integrator Tooling ...&quot;
-   su -c &quot;${restartcmd}&quot; user1
-;;
-stop)
-   echo &quot;Stopping WSO2 Streaming Integrator Tooling ...&quot;
-   su -c &quot;${stopcmd}&quot; user1
-;;
-*)
-   echo &quot;Usage: $0 {start|stop|restart}&quot;
-exit 1
-esac
+<span class="nv">startcmd</span><span class="o">=</span><span class="s1">&#39;&lt;SI-Tooling-Home&gt;/bin/tooling.sh start &gt; /dev/null &amp;&#39;</span>
+<span class="nv">restartcmd</span><span class="o">=</span><span class="s1">&#39;&lt;SI-Tooling-Home&gt;/bin/tooling.sh restart &gt; /dev/null &amp;&#39;</span>
+<span class="nv">stopcmd</span><span class="o">=</span><span class="s1">&#39;&lt;SI-Tooling-Home&gt;/bin/tooling.sh stop &gt; /dev/null &amp;&#39;</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+start<span class="o">)</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;WSO2 Streaming Integrator Tooling ...&quot;</span>
+<span class="w">   </span>su<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">startcmd</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>user1
+<span class="p">;;</span>
+restart<span class="o">)</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Re-starting WSO2 Streaming Integrator Tooling ...&quot;</span>
+<span class="w">   </span>su<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">restartcmd</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>user1
+<span class="p">;;</span>
+stop<span class="o">)</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Stopping WSO2 Streaming Integrator Tooling ...&quot;</span>
+<span class="w">   </span>su<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">stopcmd</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>user1
+<span class="p">;;</span>
+*<span class="o">)</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$0</span><span class="s2"> {start|stop|restart}&quot;</span>
+<span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">esac</span>
 </code></pre></div>
 
 </li>
@@ -4561,7 +4516,7 @@ esac
 <p>Add the script to the <code>/etc/init.d/</code> directory.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>If you want to keep the scripts in a location other than <code>/etc/init.d/</code> directory , you can add a symbolic link to the script in the <code>/etc/init.d/</code> and keep the actual script in a separate location. e.g., If your script name is siserver and it is in the <code>/opt/WSO2/</code> directory, then the commands for adding a link to <code>/etc/init.d/</code> are as follows:<br/><br/>
+<p>If you want to keep the scripts in a location other than <code>/etc/init.d/</code> directory , you can add a symbolic link to the script in the <code>/etc/init.d/</code> and keep the actual script in a separate location. e.g., If your script name is <code>siserver</code> and it is in the <code>/opt/WSO2/</code> directory, then the commands for adding a link to <code>/etc/init.d/</code> are as follows:<br/><br/>
 - To make the script executable: <code>sudo chmod a+x /opt/WSO2/appserver</code><br/>
 - To add a link to <code>/etc/init.d/</code>: <code>sudo ln -snf /opt/WSO2/appserver /etc/init.d/appserver</code></p>
 </div>
