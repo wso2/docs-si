@@ -116,7 +116,7 @@ The following table explains the above steps.
 
 3. Build Docker images with SI configurations as follows:
 
-    1. Edit the `<SI_HOME>/conf/server/deployment.yaml` file as follows.
+    1. Edit the `<SI-Home>/conf/server/deployment.yaml` file as follows.
 
         1. In the `state.persistence` section, update the following parameters.
 
@@ -228,9 +228,9 @@ The following table explains the above steps.
         sed -i "s/localhost/$IP/" "$DEPLOYMENT_YAML"
         ```
 
-        This gets the IP address of the host machine and replaces it in the HA configuration in the `<SI_HOME>/conf/server/deployment.yaml` file.
+        This gets the IP address of the host machine and replaces it in the HA configuration in the `<SI-Home>/conf/server/deployment.yaml` file.
 
-    4. Make a copy of the `<SI_HOME>/conf/server/deployment.yaml` file you edited and paste it in `docker-ei/dockerfiles/alpine/streaming-integrator` directory.
+    4. Make a copy of the `<SI-Home>/conf/server/deployment.yaml` file you edited and paste it in `docker-ei/dockerfiles/alpine/streaming-integrator` directory.
 
     5. In the `docker-ei/dockerfiles/alpine/streaming-integrator/deployment.yaml` file, under `wso2.carbon:`, change value for the `id` parameter to `wso2-si-1`.
 
