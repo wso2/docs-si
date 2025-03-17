@@ -1533,36 +1533,29 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the sample
   </a>
   
-    <nav class="md-nav" aria-label="Testing the Sample:">
+    <nav class="md-nav" aria-label="Testing the sample">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#publish-events-with-rabbitmq-sample-publisher" class="md-nav__link">
-    Publish events with rabbitmq sample publisher:
+    Publish events with rabbitmq sample publisher
   </a>
   
 </li>
@@ -1574,7 +1567,7 @@
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
@@ -4434,36 +4427,29 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the sample
   </a>
   
-    <nav class="md-nav" aria-label="Testing the Sample:">
+    <nav class="md-nav" aria-label="Testing the sample">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#publish-events-with-rabbitmq-sample-publisher" class="md-nav__link">
-    Publish events with rabbitmq sample publisher:
+    Publish events with rabbitmq sample publisher
   </a>
   
 </li>
@@ -4475,7 +4461,7 @@
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
@@ -4514,42 +4500,54 @@
 
   <h1>Receiving JSON Events via RabbitMQ</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This application demonstrates how to configure WSO2 Streaming Integrator Tooling to receive events to the <code>SweetProductionStream</code> via rabbitmq broker in JSON format using default mapping and log the events in <code>LowProductionAlertStream</code> to the output console.</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Save this sample.</li>
-<li>Install the rabbitmq server using the following command
-    <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>rabbitmq-server.
-</code></pre></div></li>
-<li>To enable RabbitMQ Management Console, run the following:
-    <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>rabbitmq-plugins<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>rabbitmq_management.
-</code></pre></div></li>
-<li>To start the service, issue the following command:
-    <div class="highlight"><pre><span></span><code>invoke-rc.d<span class="w"> </span>rabbitmq-server<span class="w"> </span>start
-</code></pre></div></li>
+<li>
+<p>Install the rabbitmq server using the following command</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>rabbitmq-server.
+</code></pre></div>
+
+</li>
+<li>
+<p>To enable RabbitMQ Management Console, run the following:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>rabbitmq-plugins<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>rabbitmq_management.
+</code></pre></div>
+
+</li>
+<li>
+<p>To start the service, issue the following command:</p>
+<div class="highlight"><pre><span></span><code>invoke-rc.d<span class="w"> </span>rabbitmq-server<span class="w"> </span>start
+</code></pre></div>
+
+</li>
 </ol>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Start the Siddhi application by clicking on 'Run'.</li>
-<li>If the Siddhi application starts successfully, the following messages would be shown on the console.
-    <div class="highlight"><pre><span></span><code>* ReceiveRabbitmqInJSONFormat.siddhi - Started Successfully!
+<li>
+<p>If the Siddhi application starts successfully, the following messages would be shown on the console.</p>
+<div class="highlight"><pre><span></span><code>*<span class="w"> </span>ReceiveRabbitmqInJSONFormat.siddhi<span class="w"> </span>-<span class="w"> </span>Started<span class="w"> </span>Successfully!
 </code></pre></div>
-Check whether the exchange 'rabbitmq_sample' is created in the rabbitmq server or not. To check that you can visit http://localhost:15672/.</li>
+
+</li>
 </ol>
-<h2 id="testing-the-sample">Testing the Sample:<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
-<h5 id="publish-events-with-rabbitmq-sample-publisher">Publish events with rabbitmq sample publisher:<a class="headerlink" href="#publish-events-with-rabbitmq-sample-publisher" title="Permanent link">&para;</a></h5>
-<p>Open a terminal and issue command from the <code>{WSO2SIHome}/samples/sample-clients/rabbitmq-producer</code> and run <code>ant</code> command.
-If you want to publish custom number of events, you need to run <code>ant</code> command as follows:
+<p>Check whether the exchange 'rabbitmq_sample' is created in the rabbitmq server or not. To check that you can visit http://localhost:15672/.</p>
+<h2 id="testing-the-sample">Testing the sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<h5 id="publish-events-with-rabbitmq-sample-publisher">Publish events with rabbitmq sample publisher<a class="headerlink" href="#publish-events-with-rabbitmq-sample-publisher" title="Permanent link">&para;</a></h5>
+<p>Open a terminal and issue command from the <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/rabbitmq-producer</code> and run <code>ant</code> command.
+If you want to publish custom number of events, you need to run <code>ant</code> command as follows:</p>
 <div class="highlight"><pre><span></span><code>ant<span class="w"> </span>-DnoOfEventsToPublish<span class="o">=</span><span class="m">5</span>
-</code></pre></div></p>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
-<p>See the output. Following message would be shown on the console.
-<div class="highlight"><pre><span></span><code>INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveRabbitmqInJSONFormat : LowProducitonAlertStream : Event{timestamp=1513233900122, data=[Lollipop, 6186.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveRabbitmqInJSONFormat : LowProducitonAlertStream : Event{timestamp=1513233901122, data=[Donut, 7904.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveRabbitmqInJSONFormat : LowProducitonAlertStream : Event{timestamp=1513233902124, data=[Honeycomb, 4495.0], isExpired=false}
-INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveRabbitmqInJSONFormat : LowProducitonAlertStream : Event{timestamp=1513233903125, data=[Donut, 1393.0], isExpired=false}
-</code></pre></div></p>
+</code></pre></div>
+
+<h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<p>See the output. Following message would be shown on the console.</p>
+<div class="highlight"><pre><span></span><code>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveRabbitmqInJSONFormat<span class="w"> </span>:<span class="w"> </span>LowProducitonAlertStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1513233900122</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>Lollipop,<span class="w"> </span><span class="m">6186</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveRabbitmqInJSONFormat<span class="w"> </span>:<span class="w"> </span>LowProducitonAlertStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1513233901122</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>Donut,<span class="w"> </span><span class="m">7904</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveRabbitmqInJSONFormat<span class="w"> </span>:<span class="w"> </span>LowProducitonAlertStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1513233902124</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>Honeycomb,<span class="w"> </span><span class="m">4495</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveRabbitmqInJSONFormat<span class="w"> </span>:<span class="w"> </span>LowProducitonAlertStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1513233903125</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>Donut,<span class="w"> </span><span class="m">1393</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+</code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;ReceiveRabbitmqInJSONFormat&quot;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">app</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="ss">&quot;Receives the events from the rabbitmq broker using the AMQP protocol.&quot;</span><span class="p">)</span>
 
