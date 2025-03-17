@@ -18,7 +18,7 @@
       
         <link rel="next" href="../deploying-si-as-minimum-ha-cluster/">
       
-      <link rel="icon" href="../../images/favicon.png">
+      <link rel="icon" href="../../img/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
     
     
@@ -138,7 +138,7 @@
     <a href="../.." title="WSO2 Streaming Integrator Documentation"
        class="md-header__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
       
-  <img src="../../images/logo.svg" alt="logo">
+  <img src="../../img/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -459,7 +459,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="WSO2 Streaming Integrator Documentation" class="md-nav__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
       
-  <img src="../../images/logo.svg" alt="logo">
+  <img src="../../img/logo.svg" alt="logo">
 
     </a>
     WSO2 Streaming Integrator Documentation
@@ -4462,7 +4462,7 @@ However, single node deployment too allows you to achieve resilient deployment a
 loosing any data. Streaming integrator has the capability to achieve the above via a broker that can replay data from a
 certain checkpoint. Kafka is one such broker that you can configure with WSO2 Streaming Integrator to achieve this. The only additional configuration that you need to do in WSO2 Streaming Integrator is state persistence. For detailed
 instructions, see <a href="../../admin/configuring-Database-and-File-System-State-Persistence/">Configuring Database and File System State Persistence</a>.</p>
-<h2 id="_1"><img alt="overview" src="https://wso2.github.io/docs-si/singleNodeDeployment.jpg?" /><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="_1"><img alt="overview" src="https://wso2.github.io/docs-si/images/singleNodeDeployment.jpg" /><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>If the single Streaming Integrator node fails to receive incoming events and if you have configured state persistence, the single node is able to retrieve the latest snapshot from the database and request the broker to send the events that it was unable to process due to the failure</p>
 <p>The only disadvantage of this approach is that you need to ensure that there is a reliable mechanism to restart the server once it fails.</p>
 

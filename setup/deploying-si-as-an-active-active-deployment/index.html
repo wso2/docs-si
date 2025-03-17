@@ -18,7 +18,7 @@
       
         <link rel="next" href="../deploying-si-as-a-scalable-cluster/">
       
-      <link rel="icon" href="../../images/favicon.png">
+      <link rel="icon" href="../../img/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
     
     
@@ -138,7 +138,7 @@
     <a href="../.." title="WSO2 Streaming Integrator Documentation"
        class="md-header__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
       
-  <img src="../../images/logo.svg" alt="logo">
+  <img src="../../img/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -459,7 +459,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="WSO2 Streaming Integrator Documentation" class="md-nav__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
       
-  <img src="../../images/logo.svg" alt="logo">
+  <img src="../../img/logo.svg" alt="logo">
 
     </a>
     WSO2 Streaming Integrator Documentation
@@ -4461,7 +4461,7 @@ Robin manner to ensure better fault tolerance. The publishing of events can be c
 <p>Distributed aggregations partially process aggregations in different nodes. This allows you to assign one node to process only a part of an aggregation (regional
 scaling, etc.). In order to do this all the aggregations must have a physical database and must be linked to the same database.</p>
 <p>Partitioning aggregations can be enabled at aggregation level and also at a global level. To enable it at the global level, add the following section with the
-<code>@PartitionById</code> annotation set to <code>true</code> in the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file.</p>
+<code>@PartitionById</code> annotation set to <code>true</code> in the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file.</p>
 <div class="highlight"><pre><span></span><code>    siddhi:
      properties:
        partitionById: true
@@ -4539,7 +4539,7 @@ data store defined in the <code>&lt;SI_WORKER_HOME&gt;/conf/server/deployment.ya
 <p>Here, node 1 calculates an hourly total of 30, and node 2 calculates an hourly total of 40. When you retrieve the total for this hour via a retrieval query, the result is 70.</p>
 <p>You can find the steps to enable aggregation partitioning within the next subsection.</p>
 <h2 id="configuring-an-active-active-cluster">Configuring an active-active cluster<a class="headerlink" href="#configuring-an-active-active-cluster" title="Permanent link">&para;</a></h2>
-<p>To configure the Streaming Integrator nodes and deploy them as an active-active cluster, edit the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file as follows:</p>
+<p>To configure the Streaming Integrator nodes and deploy them as an active-active cluster, edit the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file as follows:</p>
 <div class="admonition tip">
 <p class="admonition-title">Before you begin:</p>
 <ul>

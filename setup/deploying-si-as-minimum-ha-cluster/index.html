@@ -18,7 +18,7 @@
       
         <link rel="next" href="../deploying-si-as-an-active-active-deployment/">
       
-      <link rel="icon" href="../../images/favicon.png">
+      <link rel="icon" href="../../img/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
     
     
@@ -138,7 +138,7 @@
     <a href="../.." title="WSO2 Streaming Integrator Documentation"
        class="md-header__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
       
-  <img src="../../images/logo.svg" alt="logo">
+  <img src="../../img/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -459,7 +459,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="WSO2 Streaming Integrator Documentation" class="md-nav__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
       
-  <img src="../../images/logo.svg" alt="logo">
+  <img src="../../img/logo.svg" alt="logo">
 
     </a>
     WSO2 Streaming Integrator Documentation
@@ -4476,7 +4476,7 @@ events to the active node. To achieve this, you can use a load balancing mechani
   - Download, install and start a working RDBMS instance to be used for clustering the two nodes.<br/>
   <br/>
   - Download the MySQL connector from <a target="_blank" href="https://dev.mysql.com/downloads/connector/j/">here</a>.
-    Extract and find the <code>mysql-connector-java-5.*.*-bin.jar</code>, and place it in the <code>&lt;SI_HOME&gt;/lib</code> directory of both nodes.<br/>
+    Extract and find the <code>mysql-connector-java-5.*.*-bin.jar</code>, and place it in the <code>&lt;SI-Home&gt;/lib</code> directory of both nodes.<br/>
     <br/>
   - In order to retrieve the state of the Siddhi Applications deployed in the system (in case of a scenario where both the
     nodes fail), enable state persistence for both the nodes by specifying the same datasource/file location.
@@ -4501,7 +4501,7 @@ events to the active node. To achieve this, you can use a load balancing mechani
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul>
-<li>The configurations given below need to be done in the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file for both
+<li>The configurations given below need to be done in the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file for both
   the WSO2 SI nodes in the cluster.<br/><br/></li>
 <li>If you need to run both SI instances in the same host, make sure that you do a port offset to change the default 
   ports in one of the hosts. For more information about the default ports, see <a href="../../ref/configuring-default-ports/">Configuring Default Ports</a>.</li>
@@ -4528,7 +4528,7 @@ events to the active node. To achieve this, you can use a load balancing mechani
        table: PERSISTENCE_TABLE
 </code></pre></div>
 
-<p>The datasource named <code>PERSISTENCE_DB</code> in the above configuration can be defined in the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code>
+<p>The datasource named <code>PERSISTENCE_DB</code> in the above configuration can be defined in the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code>
  file under <code>wso2.datasources</code>. The following is a sample datasource configuration.</p>
 <div class="highlight"><pre><span></span><code>- name: PERSISTENCE_DB
       description: The MySQL datasource used for persistence
@@ -4550,7 +4550,7 @@ events to the active node. To achieve this, you can use a load balancing mechani
 
 </li>
 <li>
-<p>To allow the two nodes in the cluster to coordinate effectively, configure carbon coordination by updating the <code>cluster.config</code> section of the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> as follows:</p>
+<p>To allow the two nodes in the cluster to coordinate effectively, configure carbon coordination by updating the <code>cluster.config</code> section of the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> as follows:</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This step covers cluster configuration.</p>
@@ -4566,7 +4566,7 @@ events to the active node. To achieve this, you can use a load balancing mechani
 <li>
 <p><code>datasource</code>:</p>
 <p>Enter the name of the configured datasource shared by the nodes in the cluster as shown in the example below. Data handled by the cluster are persisted here.</p>
-<p>The following is a sample datasource configuration for a MySQL datasource that should appear under the <code>dataSources</code> subsection of the <code>wso2.datasources</code> section in the  <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file.</p>
+<p>The following is a sample datasource configuration for a MySQL datasource that should appear under the <code>dataSources</code> subsection of the <code>wso2.datasources</code> section in the  <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file.</p>
 <div class="highlight"><pre><span></span><code>Sample MySQL datasource
 - name: WSO2_CLUSTER_DB
   description: The MySQL datasource used for Cluster Coordination
@@ -4615,7 +4615,7 @@ events to the active node. To achieve this, you can use a load balancing mechani
 
 </li>
 <li>
-<p>Next, add the <code>deployment.config</code> section to the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file with the following configurations. (HA configuration)</p>
+<p>Next, add the <code>deployment.config</code> section to the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file with the following configurations. (HA configuration)</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>This step covers HA configuration.</p>
@@ -4684,45 +4684,43 @@ events to the active node. To achieve this, you can use a load balancing mechani
 <p class="admonition-title">Info</p>
 <p>In a container environment, you can use an advertised host and an advertised port to avoid exposing the actual host and port.</p>
 </div>
+<p>The following is sample HA configuration.</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">deployment.config</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ha</span>
+<span class="w">    </span><span class="nt">passiveNodeDetailsWaitTimeOutMillis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300000</span>
+<span class="w">    </span><span class="nt">passiveNodeDetailsRetrySleepTimeMillis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500</span>
+<span class="w">    </span><span class="nt">eventByteBufferQueueCapacity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20000</span>
+<span class="w">    </span><span class="nt">byteBufferExtractorThreadPoolSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">    </span><span class="nt">eventSyncServer</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">        </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9893</span>
+<span class="w">        </span><span class="nt">advertisedHost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">        </span><span class="nt">advertisedPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9893</span>
+<span class="w">        </span><span class="nt">bossThreads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">        </span><span class="nt">workerThreads</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">    </span><span class="nt">eventSyncClientPool</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">maxActive</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">        </span><span class="nt">maxTotal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">        </span><span class="nt">maxIdle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">        </span><span class="nt">maxWait</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60000</span>
+<span class="w">        </span><span class="nt">minEvictableIdleTimeMillis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">120000`</span>
+</code></pre></div>
+
 </li>
 </ul>
-<p>The following is sample HA configuration.</p>
-<pre class="codehilite"><code class="linenums">```
-    - deployment.config:
-        type: ha
-        passiveNodeDetailsWaitTimeOutMillis: 300000
-        passiveNodeDetailsRetrySleepTimeMillis: 500
-        eventByteBufferQueueCapacity: 20000
-        byteBufferExtractorThreadPoolSize: 5
-        eventSyncServer:
-            host: localhost
-            port: 9893
-            advertisedHost: localhost
-            advertisedPort: 9893
-            bossThreads: 10
-            workerThreads: 10
-        eventSyncClientPool:
-            maxActive: 10
-            maxTotal: 10
-            maxIdle: 10
-            maxWait: 60000
-            minEvictableIdleTimeMillis: 120000
-```</code></pre>
-
-
 </li>
 </ol>
 <h2 id="starting-the-cluster">Starting the cluster<a class="headerlink" href="#starting-the-cluster" title="Permanent link">&para;</a></h2>
 <p>To start the minimum HA cluster you configured, follow the steps below:</p>
 <ol>
 <li>
-<p>Save the required Siddhi applications in the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory of
+<p>Save the required Siddhi applications in the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory of
 both nodes. In order to ensure that the Siddhi applications are completely synchronized between the active and 
 the passive node, they must be added to the <code>siddhi-files</code> directory before the server startup. However, the
 synchronization can take place effectively even if the Siddhi applications are added while the server is running. </p>
 </li>
 <li>
-<p>Start both servers by navigating to the <code>&lt;SI_HOME&gt;/bin</code> directory and issuing one of the following commands (depending on your operating system:</p>
+<p>Start both servers by navigating to the <code>&lt;SI-Home&gt;/bin</code> directory and issuing one of the following commands (depending on your operating system:</p>
 <ul>
 <li>For Windows: <code>server.bat</code></li>
 <li>For Linux/Mac OS : <code>./server.sh</code></li>
@@ -4751,12 +4749,12 @@ synchronization can take place effectively even if the Siddhi applications are a
 <p>When deploying Siddhi applications in a two node minimum HA cluster, it is recommended to use a content
 synchronization mechanism since Siddhi applications must be deployed to both server nodes. You can use a common
 shared file system such as Network File System (NFS).
-You need to mount the <code>&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files</code> directory of the two nodes to the shared file system.</p>
+You need to mount the <code>&lt;SI-Home&gt;/wso2/server/deployment/siddhi-files</code> directory of the two nodes to the shared file system.</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>To start two WSO2 SI Nodes in the same machine, <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file -&gt; <code>wso2.transport.http</code> namespace -&gt; <code>listenerConfigurations</code> section must be updated
-to listen to different ports. The <code>offset</code> property in the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> -&gt; <code>wso2.carbon section</code> section -&gt; <code>ports</code> subsection should also
+<p>To start two WSO2 SI Nodes in the same machine, <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file -&gt; <code>wso2.transport.http</code> namespace -&gt; <code>listenerConfigurations</code> section must be updated
+to listen to different ports. The <code>offset</code> property in the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> -&gt; <code>wso2.carbon section</code> section -&gt; <code>ports</code> subsection should also
 be changed in one SI instance to avoid conflicts when starting both servers.</p>
 </div>
 

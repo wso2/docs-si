@@ -18,7 +18,7 @@
       
         <link rel="next" href="../production-checklist/">
       
-      <link rel="icon" href="../../images/favicon.png">
+      <link rel="icon" href="../../img/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
     
     
@@ -138,7 +138,7 @@
     <a href="../.." title="WSO2 Streaming Integrator Documentation"
        class="md-header__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
       
-  <img src="../../images/logo.svg" alt="logo">
+  <img src="../../img/logo.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -459,7 +459,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="WSO2 Streaming Integrator Documentation" class="md-nav__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
       
-  <img src="../../images/logo.svg" alt="logo">
+  <img src="../../img/logo.svg" alt="logo">
 
     </a>
     WSO2 Streaming Integrator Documentation
@@ -4709,7 +4709,7 @@ Each time the state is persisted, the active node sends a control message to the
 <p>Build Docker images with SI configurations as follows:</p>
 <ol>
 <li>
-<p>Edit the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file as follows.</p>
+<p>Edit the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file as follows.</p>
 <ol>
 <li>
 <p>In the <code>state.persistence</code> section, update the following parameters.</p>
@@ -4886,10 +4886,10 @@ echo &quot;$IP&quot;
 sed -i &quot;s/localhost/$IP/&quot; &quot;$DEPLOYMENT_YAML&quot;
 </code></pre></div>
 
-<p>This gets the IP address of the host machine and replaces it in the HA configuration in the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file.</p>
+<p>This gets the IP address of the host machine and replaces it in the HA configuration in the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file.</p>
 </li>
 <li>
-<p>Make a copy of the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file you edited and paste it in <code>docker-ei/dockerfiles/alpine/streaming-integrator</code> directory.</p>
+<p>Make a copy of the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file you edited and paste it in <code>docker-ei/dockerfiles/alpine/streaming-integrator</code> directory.</p>
 </li>
 <li>
 <p>In the <code>docker-ei/dockerfiles/alpine/streaming-integrator/deployment.yaml</code> file, under <code>wso2.carbon:</code>, change value for the <code>id</code> parameter to <code>wso2-si-1</code>.</p>
