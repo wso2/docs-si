@@ -2739,35 +2739,28 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
-    Notes:
+    Notes
   </a>
   
 </li>
@@ -4421,35 +4414,28 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
-    Notes:
+    Notes
   </a>
   
 </li>
@@ -4488,48 +4474,53 @@
 
   <h1>Publishing XML Events via WebSocket</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via WebSocket transport in XML default format and log the events in <code>LowProductionAlertStream</code> to the output console.</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<p>Save this sample. If there is no syntax error, the following message is shown on the console:
-<div class="highlight"><pre><span></span><code>Siddhi App PublishWebSocketInXmlFormat successfully deployed.
-</code></pre></div></p>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<p>If there is no syntax error, the following message is shown on the console:</p>
+<div class="highlight"><pre><span></span><code>Siddhi<span class="w"> </span>App<span class="w"> </span>PublishWebSocketInXmlFormat<span class="w"> </span>successfully<span class="w"> </span>deployed.
+</code></pre></div>
+
+<h2 id="executing-the-sample">Executing the sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Open a terminal and navigate to the <code>{WSO2SIHome}/samples/sample-clients/websocket-receiver</code> directory and run the <code>ant</code> command.<ul>
+<li>Open a terminal and navigate to the <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/websocket-receiver</code> directory and run the <code>ant</code> command.<ul>
 <li>If you use the default host 'localhost' and port '8025' in your program use <code>ant</code> command without any arguments.</li>
 <li>However, if you use different host or port, run the <code>ant</code> command with appropriate arguments.
 e.g., <code>ant -Dport=9025</code></li>
 </ul>
 </li>
 <li>Start the Siddhi application by clicking on 'Run'.</li>
-<li>If the Siddhi application starts successfully, the following messages are shown on the console:
-    <div class="highlight"><pre><span></span><code>PublishWebSocketInXmlFormat.siddhi - Started Successfully!
-</code></pre></div></li>
-<li>Open the event simulator by clicking on the second icon or press Ctrl+Shift+I.</li>
+<li>
+<p>If the Siddhi application starts successfully, the following messages are shown on the console:</p>
+<div class="highlight"><pre><span></span><code>PublishWebSocketInXmlFormat.siddhi<span class="w"> </span>-<span class="w"> </span>Started<span class="w"> </span>Successfully!
+</code></pre></div>
+
+</li>
+<li>
+<p>Open the event simulator by clicking on the second icon or press Ctrl+Shift+I.</p>
+</li>
 <li>In the Single Simulation tab of the panel, select values as follows:<ul>
-<li>Siddhi App Name: PublishWebSocketInXmlFormat</li>
-<li>Stream Name: SweetProductionStream</li>
+<li><code>Siddhi App Name</code>: PublishWebSocketInXmlFormat</li>
+<li><code>Stream Name</code>: <code>SweetProductionStream</code></li>
 </ul>
 </li>
 <li>In the 'name' and 'amount' fields, enter 'toffee' and '45.24' respectively, and then click Send to send the event.</li>
 <li>Send some more events.</li>
-<li>Check the output in the terminal of <code>{WSO2SIHome}/samples/sample-clients/websocket-receiver</code>. You will see output similar to the following:
-<div class="highlight"><pre><span></span><code>WebSocketSample : logStream : Event{timestamp=1517982716368, data=[toffee, 45.25], isExpired=false}
-WebSocketSample : logStream : Event{timestamp=1517982792293, data=[coffee, 9.78], isExpired=false}
-WebSocketSample : logStream : Event{timestamp=1517982828856, data=[chocolate, 78.23], isExpired=false}
-</code></pre></div></li>
+<li>Check the output in the terminal of <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/websocket-receiver</code>. You will see output similar to the following:</li>
 </ol>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>WebSocketSample<span class="w"> </span>:<span class="w"> </span>logStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1517982716368</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>toffee,<span class="w"> </span><span class="m">45</span>.25<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+WebSocketSample<span class="w"> </span>:<span class="w"> </span>logStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1517982792293</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>coffee,<span class="w"> </span><span class="m">9</span>.78<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+WebSocketSample<span class="w"> </span>:<span class="w"> </span>logStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1517982828856</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>chocolate,<span class="w"> </span><span class="m">78</span>.23<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+</code></pre></div>
+
+<h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
 <p>See the output on the terminal.</p>
-<h2 id="notes">Notes:<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
-<p>If the message <code>'LowProductionAlertStream' stream could not connect to 'localhost:8025'</code>, it could be due to port 8025 defined in the Siddhi application is already being used by a different program. To resolve this issue, do the following:
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<p>If the message <code>'LowProductionAlertStream' stream could not connect to 'localhost:8025'</code>, it could be due to the port 8025 defined in the Siddhi application is already being used by a different program. To resolve this issue, do the following:
 1. Stop this Siddhi application (Click 'Run' on menu bar -&gt; 'Stop').
 2. Change the port from 8025 to an unused port in this Siddhi application's source configuration and in the websocket-receiver file.
 3. Start the application and check whether the expected output appears on the console.</p>
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;PublishWebSocketInXmlFormat&quot;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Send events via WebSocket transport using XML format&#39;</span><span class="p">)</span>
-
 
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
