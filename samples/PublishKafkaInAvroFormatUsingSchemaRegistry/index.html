@@ -2911,35 +2911,62 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
+  
+    <nav class="md-nav" aria-label="Testing the Sample">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#send-events-to-the-kafka-sink-via-the-event-simulator" class="md-nav__link">
+    Send events to the kafka sink via the Event Simulator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publish-events-with-curl-to-the-simulator-http-endpoint" class="md-nav__link">
+    Publish events with Curl to the simulator HTTP endpoint
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publish-events-with-postman-to-the-simulator-http-endpoint" class="md-nav__link">
+    Publish events with Postman to the simulator HTTP endpoint:**
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
@@ -4427,35 +4454,62 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
+  
+    <nav class="md-nav" aria-label="Testing the Sample">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#send-events-to-the-kafka-sink-via-the-event-simulator" class="md-nav__link">
+    Send events to the kafka sink via the Event Simulator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publish-events-with-curl-to-the-simulator-http-endpoint" class="md-nav__link">
+    Publish events with Curl to the simulator HTTP endpoint
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publish-events-with-postman-to-the-simulator-http-endpoint" class="md-nav__link">
+    Publish events with Postman to the simulator HTTP endpoint:**
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
@@ -4493,12 +4547,12 @@
 
 
 <h1 id="publishing-avro-events-via-kafka">Publishing Avro Events via Kafka<a class="headerlink" href="#publishing-avro-events-via-kafka" title="Permanent link">&para;</a></h1>
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via the Kafka transport in Avro format using Confluent Schema Registry.</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p>To install Kafka, follow the steps below:</p>
+<p>To install Kafka, follow the steps below</p>
 <ol>
 <li>
 <p>In Streaming Integrator Tooling, click <strong>Tools</strong>, and then click <strong>Extension Installer</strong>.</p>
@@ -4512,25 +4566,25 @@
 </ol>
 </li>
 <li>
-<p>Download confluent-5.2.1 from the <a href="https://www.confluent.io/download/">Confluent website</a>. Then unzip the file you downloaded.</p>
+<p>Download <code>confluent-5.2.1</code> from the <a href="https://www.confluent.io/download/">Confluent website</a>. Then unzip the file you downloaded.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Download the product Confluent PLatform. For this sample, the deployment type selected was <strong>Manual</strong>.</p>
+<p>Download the product Confluent Platform. For this sample, the deployment type selected was <strong>Manual</strong>.</p>
 </div>
 </li>
 <li>
 <p>Save the sample <code>PublishKafkaInAvroFormatUsingSchemaRegistry</code> Siddhi application.</p>
 <p>If there is no syntax error, the following message is logged in the terminal.</p>
-<div class="highlight"><pre><span></span><code>* -Siddhi App PublishKafkaInAvroFormatUsingSchemaRegistry successfully deployed.
+<div class="highlight"><pre><span></span><code>Siddhi<span class="w"> </span>App<span class="w"> </span>PublishKafkaInAvroFormatUsingSchemaRegistry<span class="w"> </span>successfully<span class="w"> </span>deployed.
 </code></pre></div>
 
 </li>
 </ol>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the Sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <p>To execute the sample, follow the steps below:</p>
 <ol>
 <li>
-<p>First, start a zoo keeper node. To do this, navigate to the <code>&lt;KAFKA_HOME&gt;</code> directory and issue the following command.</p>
+<p>First, start a Zoo Keeper node. To do this, navigate to the <code>&lt;Kafka-Home&gt;</code> directory and issue the following command.</p>
 <p><code>sh bin/zookeeper-server-start.sh config/zookeeper.properties</code></p>
 </li>
 <li>
@@ -4538,45 +4592,37 @@
 <p><code>sh bin/kafka-server-start.sh config/server.properties</code></p>
 </li>
 <li>
-<p>Start the schema registry node by navigating to the <code>&lt;CONFLUENT_HOME&gt;</code> directory and issuing the following command:</p>
+<p>Start the schema registry node by navigating to the <code>&lt;Confluent-Home&gt;</code> directory and issuing the following command:</p>
 <p><code>sh bin/schema-registry-start ./etc/schema-registry/schema-registry.properties</code></p>
 <p>This starts the Confluent client in <code>localhost:8081</code> port.</p>
 </li>
 <li>
-<p>Post the avro schema to the schema registry by issuing the following CURL command.</p>
-<div class="highlight"><pre><span></span><code>curl -X POST -H &quot;Content-Type: application/json&quot; --data &#39;{ &quot;schema&quot;: &quot;{ \&quot;type\&quot;: \&quot;record\&quot;, \&quot;name\&quot;: \&quot;sweetProduction\&quot;,\&quot;namespace\&quot;: \&quot;sweetProduction\&quot;, \&quot;fields\&quot;:[{ \&quot;name\&quot;: \&quot;name\&quot;, \&quot;type\&quot;: \&quot;string\&quot; },{ \&quot;name\&quot;: \&quot;amount\&quot;, \&quot;type\&quot;: \&quot;double\&quot; }]}&quot;}&#39; http://localhost:8081/subjects/sweet-production/versions
+<p>Post the Avro schema to the schema registry by issuing the following CURL command.</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span>--data<span class="w"> </span><span class="s1">&#39;{ &quot;schema&quot;: &quot;{ \&quot;type\&quot;: \&quot;record\&quot;, \&quot;name\&quot;: \&quot;sweetProduction\&quot;,\&quot;namespace\&quot;: \&quot;sweetProduction\&quot;, \&quot;fields\&quot;:[{ \&quot;name\&quot;: \&quot;name\&quot;, \&quot;type\&quot;: \&quot;string\&quot; },{ \&quot;name\&quot;: \&quot;amount\&quot;, \&quot;type\&quot;: \&quot;double\&quot; }]}&quot;}&#39;</span><span class="w"> </span>http://localhost:8081/subjects/sweet-production/versions
 </code></pre></div>
 
 </li>
 </ol>
-<p>The sample Siddhi application specifies <code>http://localhost:8081/subjects/sweet-production/versions</code> as the URI of the schema registry. The above CURL command defines the Avro schema and posts it to this schema registry so that the schema is applied to the output events generated in the <code>LowProductionAlertStream</code> when they are published to the <code>kafka_result_topic</code> kafka topic.</p>
+<p>The sample Siddhi application specifies <code>http://localhost:8081/subjects/sweet-production/versions</code> as the URI of the schema registry. The above CURL command defines the Avro schema and posts it to this schema registry so that the schema is applied to the output events generated in the <code>LowProductionAlertStream</code> when they are published to the <code>kafka_result_topic</code> Kafka topic.</p>
 <p>For more information about how to configure an Avro mapper, see <a href="https://siddhi-io.github.io/siddhi-map-avro/api/latest/#avro-sink-mapper">Siddhi Documentation - Avro Sink Mapper</a></p>
 <ol>
 <li>
-<p>Navigate to the <code>&lt;SI_TOOLING_HOME&gt;/samples/sample-clients/kafka-avro-consumer</code> directory and run the <code>ant</code> command without arguments.</p>
+<p>Navigate to the <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/kafka-avro-consumer</code> directory and run the <code>ant</code> command without arguments.</p>
 </li>
 <li>
 <p>Start the <code>PublishKafkaInAvroFormatUsingSchemaRegistry</code> Siddhi application you saved by opening it in Streaming Integrator Tooling and clicking the <strong>Start</strong> button in the toolbar.</p>
 <p>If the Siddhi application starts successfully, the following messages are logged in the terminal:</p>
 <ul>
-<li>
-<p><code>PublishKafkaInAvroFormatUsingSchemaRegistry.siddhi - Started Successfully!</code></p>
-</li>
-<li>
-<p><code>Kafka version : 2.2.0</code></p>
-</li>
-<li>
-<p><code>Kafka commitId : 05fcfde8f69b0349</code></p>
-</li>
-<li>
-<p><code>Kafka producer created.</code></p>
-</li>
+<li><code>PublishKafkaInAvroFormatUsingSchemaRegistry.siddhi - Started Successfully!</code></li>
+<li><code>Kafka version : 2.2.0</code></li>
+<li><code>Kafka commitId : 05fcfde8f69b0349</code></li>
+<li><code>Kafka producer created.</code></li>
 </ul>
 </li>
 </ol>
-<h2 id="testing-the-sample">Testing the Sample:<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="testing-the-sample">Testing the Sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
 <p>To test this sample, send events following one or more of the methods given below:</p>
-<p><strong>Option 1 - Send events to the kafka sink via the Event Simulator:</strong></p>
+<h3 id="send-events-to-the-kafka-sink-via-the-event-simulator">Send events to the kafka sink via the Event Simulator<a class="headerlink" href="#send-events-to-the-kafka-sink-via-the-event-simulator" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p>In Streaming Integrator Studio, open the Event Simulator by clicking on the <strong>Event Simulator</strong> icon in the left panel or pressing Ctrl+Shift+I.</p>
@@ -4609,29 +4655,22 @@
 <p>Simulate a few more events for the <code>SweetProductionStream</code> stream by repeating the above steps.</p>
 </li>
 </ol>
-<p><strong>Option 2 - Publish events with Curl to the simulator HTTP endpoint:</strong></p>
-<ol>
-<li>
+<h3 id="publish-events-with-curl-to-the-simulator-http-endpoint">Publish events with Curl to the simulator HTTP endpoint<a class="headerlink" href="#publish-events-with-curl-to-the-simulator-http-endpoint" title="Permanent link">&para;</a></h3>
 <p>Open a new terminal and issue the following command:</p>
-<div class="highlight"><pre><span></span><code>curl -X POST -d &#39;{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishKafkaInAvroFormatUsingSchemaRegistry&quot;,&quot;data&quot;: [&quot;chocolate cake&quot;, 50.50]}&#39; http://localhost:9390/simulation/single -H &#39;content-type: text/plain&#39;
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishKafkaInAvroFormatUsingSchemaRegistry&quot;,&quot;data&quot;: [&quot;chocolate cake&quot;, 50.50]}&#39;</span><span class="w"> </span>http://localhost:9390/simulation/single<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;content-type: text/plain&#39;</span>
 </code></pre></div>
 
 <p>When the message is successfully sent, the following message is logged in the terminal:</p>
-<div class="highlight"><pre><span></span><code>&quot;status&quot;:&quot;OK&quot;,&quot;message&quot;:&quot;Single Event simulation started successfully&quot;
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;status&quot;</span>:<span class="s2">&quot;OK&quot;</span>,<span class="s2">&quot;message&quot;</span>:<span class="s2">&quot;Single Event simulation started successfully&quot;</span>
 </code></pre></div>
 
-</li>
-</ol>
-<p><strong>Option 3 - Publish events with Postman to the simulator HTTP endpoint:</strong></p>
+<h3 id="publish-events-with-postman-to-the-simulator-http-endpoint">Publish events with Postman to the simulator HTTP endpoint:**<a class="headerlink" href="#publish-events-with-postman-to-the-simulator-http-endpoint" title="Permanent link">&para;</a></h3>
 <ol>
-<li>
-<p>Install the Postman application from the Chrome web store.</p>
-</li>
 <li>
 <p>Launch the Postman application.</p>
 </li>
 <li>
-<p>Make a 'Post' request to the 'http://localhost:9390/simulation/single' endpoint. Set the Content-Type to <code>text/plain</code> and set the request body in text as follows:</p>
+<p>Make a 'Post' request to the <code>http://localhost:9390/simulation/single</code> endpoint. Set the Content-Type to <code>text/plain</code> and set the request body in text as follows:</p>
 <p><code>{"streamName": "SweetProductionStream", "siddhiAppName": "PublishKafkaInAvroFormatUsingSchemaRegistry","data": ['chocolate cake', 50.50]}</code></p>
 </li>
 <li>
@@ -4642,15 +4681,16 @@
 </ul>
 </li>
 </ol>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
-<p>You can view the following output in the terminal in which you ran the ant build for <code>&lt;SI_HOME&gt;/samples/sample-clients/kafka-avro-consumer</code>.
-<div class="highlight"><pre><span></span><code>[java] [org.wso2.extension.siddhi.io.kafka.source.KafkaConsumerThread] : Event received in Kafka Event Adaptor with offSet: 2, key: null, topic: kafka_result_topic, partition: 0
-[java] [io.siddhi.core.stream.output.sink.LogSink] : KafkaSample : logStream : Event{timestamp=1546973831995, data=[chocolate cake, 50.5], isExpired=false}
-</code></pre></div></p>
+<h2 id="viewing-the-results">Viewing the Results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<p>You can view the following output in the terminal in which you ran the ant build for <code>&lt;SI-Home&gt;/samples/sample-clients/kafka-avro-consumer</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>org.wso2.extension.siddhi.io.kafka.source.KafkaConsumerThread<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>Event<span class="w"> </span>received<span class="w"> </span><span class="k">in</span><span class="w"> </span>Kafka<span class="w"> </span>Event<span class="w"> </span>Adaptor<span class="w"> </span>with<span class="w"> </span>offSet:<span class="w"> </span><span class="m">2</span>,<span class="w"> </span>key:<span class="w"> </span>null,<span class="w"> </span>topic:<span class="w"> </span>kafka_result_topic,<span class="w"> </span>partition:<span class="w"> </span><span class="m">0</span>
+<span class="o">[</span>java<span class="o">]</span><span class="w"> </span><span class="o">[</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">]</span><span class="w"> </span>:<span class="w"> </span>KafkaSample<span class="w"> </span>:<span class="w"> </span>logStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1546973831995</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span>chocolate<span class="w"> </span>cake,<span class="w"> </span><span class="m">50</span>.5<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+</code></pre></div>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If the message <code>'Kafka' sink at 'LowProductionAlertStream' has successfully connected to http://localhost:9092</code> does not appear, the reason can be that port 9092 defined in the Siddhi application is already being used by a different program. To resolve this issue, do as follows:<br/><br/>
-1. Stop the Siddhi application (i.e., by clicking the stop button for the Siddhi application in the top panel).<br/><br/>
+1. Stop the Siddhi application (i.e., by clicking the Stop button for the Siddhi application in the top panel).<br/><br/>
 2. In the source configuration of the Siddhi application, change port 9092 to an unused port.<br/><br/>
 3. Start the Siddhi application and check whether the specified messages appear in the terminal.</p>
 </div>
@@ -4658,7 +4698,6 @@
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;PublishKafkaInAvroFormatUsingSchemaRegistry&quot;</span><span class="p">)</span>
 
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Send events via Kafka transport using Avro format&#39;</span><span class="p">)</span>
-
 
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">SweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 

@@ -2391,49 +2391,49 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#note" class="md-nav__link">
-    Note:
+    Note
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
-    Notes:
+    Notes
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
@@ -4435,49 +4435,49 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#note" class="md-nav__link">
-    Note:
+    Note
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
-    Notes:
+    Notes
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the Results
   </a>
   
 </li>
@@ -4516,50 +4516,57 @@
 
   <h1>Receiving Events and Persisting in MongoDB Store</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
-<p>This application demonstrates how to perform CRUD operations using Siddhi queries in MongoDB stores. The sample depicts a scenario in a sweet production factory. The sweet production details, such as name of the raw material and amount used for production, can be stored using <code>insertSweetProductionStream</code>. The following streams can be used to insert, update, search, delete and update or insert the existing data in the store.
-* Search - <code>searchSweetProductionStream</code>
-* insert - <code>insertSweetProductionStream``
-* delete -</code>deleteSweetProductionStream<code>* update -</code>updateSweetProductionStream<code>* update or insert -</code>updateOrInsertSweetProductionStream<code>* contains -</code>containsSweetProductionStream` (verifies whether all the attributes that enter in the stream exists in the store).</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>This application demonstrates how to perform CRUD operations using Siddhi queries in MongoDB stores. The sample depicts a scenario in a sweet production factory. The sweet production details, such as the name of the raw material and the amount used for production, can be stored using <code>insertSweetProductionStream</code>. The following streams can be used to insert, update, search, delete, and update or insert the existing data in the store.</p>
+<ul>
+<li>Search - <code>searchSweetProductionStream</code></li>
+<li>insert - <code>insertSweetProductionStream</code></li>
+<li>delete - <code>deleteSweetProductionStream</code></li>
+<li>update - <code>updateSweetProductionStream</code></li>
+<li>update or insert - <code>updateOrInsertSweetProductionStream</code></li>
+<li>contains - <code>containsSweetProductionStream</code> (verifies whether all the attributes that enter in the stream exist in the store).</li>
+</ul>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Ensure that MongoDB is installed on your machine. (https://docs.mongodb.com/manual/administration/install-community/).</li>
+<li>Ensure that <a href="https://docs.mongodb.com/manual/administration/install-community/">MongoDB</a> is installed on your machine.</li>
 <li>If auth is not enabled in the MongoDB instance, skip steps 3 and 4.</li>
-<li>Create a data store named <code>production</code> in MongoD with relevant access privileges.</li>
+<li>Create a data store named <code>production</code> in MongoDB with relevant access privileges.</li>
 <li>Create a collection named <code>SweetProductionTable</code> and insert values into <code>SweetProductionTable</code>.</li>
 <li>Save this sample.</li>
 </ol>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the Sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Start the Siddhi application by clicking on 'Run'.</li>
-<li>If the Siddhi application starts successfully, the following message is shown on the console:
-    <div class="highlight"><pre><span></span><code>store-mongodb.siddhi - Started Successfully!
-</code></pre></div></li>
+<li>
+<p>If the Siddhi application starts successfully, the following message is shown on the console:</p>
+<div class="highlight"><pre><span></span><code>store-mongodb.siddhi<span class="w"> </span>-<span class="w"> </span>Started<span class="w"> </span>Successfully!
+</code></pre></div>
+
+</li>
 </ol>
-<h2 id="note">Note:<a class="headerlink" href="#note" title="Permanent link">&para;</a></h2>
+<h2 id="note">Note<a class="headerlink" href="#note" title="Permanent link">&para;</a></h2>
 <p>If you want to edit this application, stop the application, make your edits and save, and then start the application again.</p>
-<h2 id="testing-the-sample">Testing the Sample:<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="testing-the-sample">Testing the Sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Simulate single events as follows:<ol>
 <li>Click on Event Simulator (double arrows on left tab) and then 'Single Simulation'.</li>
-<li>For the Siddhi App Name, select 'store-mongodb'.</li>
-<li>For the Stream Name, select 'searchSweetProductionStream'.</li>
+<li>For the Siddhi App Name, select <code>store-mongodb</code>.</li>
+<li>For the Stream Name, select <code>searchSweetProductionStream</code>.</li>
 <li>Enter attribute values and click Send.</li>
 </ol>
 </li>
 <li>Send an event where the name matches a name value in the data you just inserted to the <code>SweetProductionTable</code>. This will satisfy the <code>on</code> condition of the join query.</li>
 </ol>
-<h2 id="notes">Notes:<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>You can send events to the other corresponding streams to add, delete, update, insert, and search events.</li>
 <li>The Primary Key constraint in <code>SweetProductionTable</code> is disabled, because the name cannot be used as a <code>PrimaryKey</code> in a <code>ProductionTable</code>.</li>
-<li>You can use Siddhi functions to create a unique ID for the received events, which you can then use to apply the Primary Key constraint on the data store records. (http://wso2.github.io/siddhi/documentation/siddhi-4.0/#function)</li>
+<li>You can use <a href="http://wso2.github.io/siddhi/documentation/siddhi-4.0/#function">Siddhi functions</a> to create a unique ID for the received events, which you can then use to apply the Primary Key constraint on the data store records.</li>
 </ul>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<h2 id="viewing-the-results">Viewing the Results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
 <p>See the output for raw materials on the console. You can use <code>searchSweetProductionStream</code> to check for inserted, deleted, and updated events.</p>
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;store-mongodb.siddhi&quot;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Receive events via simulator and persist the received data in the store.&#39;</span><span class="p">)</span>
-
 
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">insertSweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">deleteSweetProductionStream</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">);</span>
@@ -4571,7 +4578,7 @@
 <span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">logStream</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>
 
-<span class="o">@</span><span class="n">Store</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="ss">&quot;mongodb&quot;</span><span class="p">,</span><span class="n">mongodb</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;mongodb://localhost/production&#39;</span><span class="p">)</span>
+<span class="o">@</span><span class="n">Store</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="ss">&quot;mongodb&quot;</span><span class="p">,</span><span class="n">mongodb</span><span class="p">.</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;mongodb://localhost:27017/production&#39;</span><span class="p">)</span>
 <span class="c1">--@PrimaryKey(&quot;name&quot;)</span>
 <span class="o">@</span><span class="n">IndexBy</span><span class="p">(</span><span class="ss">&quot;amount {background:true}&quot;</span><span class="p">)</span>
 <span class="n">define</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">SweetProductionTable</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span><span class="n">double</span><span class="p">);</span>

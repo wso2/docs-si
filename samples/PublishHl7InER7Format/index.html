@@ -1651,28 +1651,28 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
@@ -4414,28 +4414,28 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the Sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the Sample
   </a>
   
 </li>
@@ -4474,42 +4474,41 @@
 
   <h1>Publishing ER7 Events via HL7</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
-<p>This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send Hl7 events in ER7 format via MLLP protocol and log the events in hl7Stream and the acknowledgement message to the output console.</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<p>This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send Hl7 events in ER7 format via MLLP protocol and log the events in <code>hl7Stream</code> and the acknowledgement message to the output console.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Install the HAPI testpanel. (Reference: https://hapifhir.github.io/hapi-hl7v2/hapi-testpanel/install.html)</li>
-<li>Save this sample. If there is no syntax error, the following message is shown on the console:<ul>
-<li>Siddhi App PublishHl7InER7Format successfully deployed.</li>
+<li>Install the <a href="https://hapifhir.github.io/hapi-hl7v2/hapi-testpanel/install.html">HAPI testpanel</a>.</li>
+<li>Save this sample. If there are no syntax errors, the following message will be shown on the console:<ul>
+<li><code>Siddhi App PublishHl7InER7Format successfully deployed.</code></li>
 </ul>
 </li>
 </ol>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="executing-the-sample">Executing the Sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
-<li>In the HAPI testpanel create a receiving connection with port that provided in the siddhi app.</li>
+<li>In the HAPI testpanel create a receiving connection with the port that is provided in the Siddhi app.</li>
 <li>Start the listener.</li>
 <li>Start the Siddhi application by clicking on 'Run'.</li>
 <li>If the Siddhi application starts successfully, the following messages are shown on the console:<ul>
-<li>PublishHl7InER7Format.siddhi - Started Successfully!</li>
-<li>'Hl7' sink at 'hl7Stream' stream successfully connected to 'localhost:4000'.</li>
-<li>Executing HL7Sender: HOST: localhost, PORT: 4000 for stream PublishHl7InER7Format:hl7Stream.</li>
+<li><code>PublishHl7InER7Format.siddhi - Started Successfully!</code></li>
+<li><code>'Hl7' sink at 'hl7Stream' stream successfully connected to 'localhost:4000'.</code></li>
+<li><code>Executing HL7Sender: HOST: localhost, PORT: 4000 for stream PublishHl7InER7Format:hl7Stream.</code></li>
 </ul>
 </li>
 </ol>
-<h2 id="testing-the-sample">Testing the Sample:<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="testing-the-sample">Testing the Sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Open the event simulator by clicking on the second icon or pressing Ctrl+Shift+I.</li>
 <li>In the Single Simulation tab of the panel, specify the values as follows:<ul>
-<li>Siddhi App Name  : PublishHl7InER7Format</li>
-<li>Stream Name      : er7Stream</li>
+<li><code>Siddhi App Name</code>  : <code>PublishHl7InER7Format</code></li>
+<li><code>Stream Name</code>      : <code>er7Stream</code></li>
 </ul>
 </li>
-<li>In the payload, enter 'MSH|<sup>~\&amp;|||||20190211145413.131+0530||ADT</sup>A01|10601|T|2.3' and then click Send to send the event.</li>
+<li>In the payload, enter <code>MSH|^~\&amp;|||||20190211145413.131+0530||ADT^A01|10601|T|2.3</code> and then click <code>Send</code> to send the event.</li>
 <li>Send more events as desired.</li>
 </ol>
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;PublishHl7InER7Format&#39;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;This publishes the HL7 messages in ER7 format, receives and logs the acknowledgement message in the console using MLLP protocol and custom text mapping.&#39;</span><span class="p">)</span>
-
 
 <span class="n">define</span><span class="w"> </span><span class="n">stream</span><span class="w"> </span><span class="n">er7Stream</span><span class="w"> </span><span class="p">(</span><span class="n">payload</span><span class="w"> </span><span class="n">string</span><span class="p">);</span>
 
