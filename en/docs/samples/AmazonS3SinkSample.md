@@ -27,7 +27,7 @@ To execute the sample, follow the procedure below:
 
     1. Enter the credential.provider class name as the value for the `credential.provider` parameter. If the class is not specified, the default credential provider chain is used.
 
-    2. Update the value of the `bucket.name` parameter.
+    2. Update the value of the `bucket.name` parameter in the `sink` annotation. This refers to the name of the Amazon S3 bucket.
 
     3. Insert the value for the `aws.region` parameter.
 
