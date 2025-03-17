@@ -2781,57 +2781,57 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#note" class="md-nav__link">
-    Note:
+    Note
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the sample
   </a>
   
-    <nav class="md-nav" aria-label="Testing the Sample:">
+    <nav class="md-nav" aria-label="Testing the sample">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#send-events-with-kafka-server-through-event-simulator" class="md-nav__link">
-    Send events with kafka server, through event simulator:
+    Send events with kafka server, through event simulator
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#publish-events-with-curl-command" class="md-nav__link">
-    Publish events with curl command:
+    Publish events with curl command
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#publish-events-with-postman" class="md-nav__link">
-    Publish events with Postman:
+    Publish events with Postman
   </a>
   
 </li>
@@ -2843,14 +2843,14 @@
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
-    Notes:
+    Notes
   </a>
   
 </li>
@@ -4448,57 +4448,57 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#note" class="md-nav__link">
-    Note:
+    Note
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the sample
   </a>
   
-    <nav class="md-nav" aria-label="Testing the Sample:">
+    <nav class="md-nav" aria-label="Testing the sample">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#send-events-with-kafka-server-through-event-simulator" class="md-nav__link">
-    Send events with kafka server, through event simulator:
+    Send events with kafka server, through event simulator
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#publish-events-with-curl-command" class="md-nav__link">
-    Publish events with curl command:
+    Publish events with curl command
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#publish-events-with-postman" class="md-nav__link">
-    Publish events with Postman:
+    Publish events with Postman
   </a>
   
 </li>
@@ -4510,14 +4510,14 @@
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#notes" class="md-nav__link">
-    Notes:
+    Notes
   </a>
   
 </li>
@@ -4556,9 +4556,9 @@
 
   <h1>Publishing Binary Events via Kafka</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via Kafka transport in Binary format.</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Setup Kafka.<ul>
 <li>Kafka libs to be added and converted to OSGI from {KafkaHome}/libs are as follows.<ul>
@@ -4570,8 +4570,8 @@
 <li>zookeeper-3.4.6.jar</li>
 </ul>
 </li>
-<li>Add the OSGI converted kafka libs to <code>{WSO2SIHome}/lib</code>.</li>
-<li>Add the kafka libs to <code>{WSO2SIHome}/samples/sample-clients/lib</code>.</li>
+<li>Add the OSGI converted kafka libs to <code>&lt;SI-Tooling-Home&gt;/lib</code>.</li>
+<li>Add the kafka libs to <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/lib</code>.</li>
 </ul>
 </li>
 <li>Save this sample.</li>
@@ -4579,75 +4579,111 @@
     <div class="highlight"><pre><span></span><code>Siddhi App PublishKafkaInBinaryFormat successfully deployed.
 </code></pre></div></li>
 </ol>
-<h2 id="note">Note:<a class="headerlink" href="#note" title="Permanent link">&para;</a></h2>
-<p>To convert Kafka libs to OSGI,
-1. Create a folder (Eg: Kafka) and copy Kafka libs to be added from <code>{KafkaHome}/libs</code>.
-2. Create another folder(Eg: Kafka-osgi, This folder will have the libs that converted to OSGI).
-3. Navigate to <code>{WSO2SIHome}/bin</code> and issue the follwing command.
-    * For Linux:
-        <div class="highlight"><pre><span></span><code>./jartobundle.sh<span class="w"> </span>&lt;path/kafka&gt;<span class="w"> </span>&lt;path/kafka-osgi&gt;
-</code></pre></div>
-    * For Windows:
-        <div class="highlight"><pre><span></span><code>./jartobundle.bat<span class="w"> </span>&lt;path/kafka&gt;<span class="w"> </span>&lt;path/kafka-osgi&gt;
-</code></pre></div>
-4. If converted successfully then for each lib, following messages would be shown on the terminal.
-    <div class="highlight"><pre><span></span><code>- INFO: Created the OSGi bundle &lt;kafka-lib-name&gt;.jar for JAR file &lt;absolute_path&gt;/kafka/&lt;kafka-lib-name&gt;.jar
-</code></pre></div>
-5. You can find the osgi converted libs in kafka-osgi folder. You can copy that to <code>{WSO2SIHome}/lib</code>.</p>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="note">Note<a class="headerlink" href="#note" title="Permanent link">&para;</a></h2>
+<p>To convert Kafka libs to OSGI,</p>
 <ol>
-<li>Navigate to <code>{KafkaHome}</code> and start zookeeper node using following command.
-    <div class="highlight"><pre><span></span><code>bin/zookeeper-server-start.sh<span class="w"> </span>config/zookeeper.properties
-</code></pre></div></li>
-<li>Navigate to <code>{KafkaHome}</code> and start kafka server node using following command.
-    <div class="highlight"><pre><span></span><code>bin/kafka-server-start.sh<span class="w"> </span>config/server.properties
-</code></pre></div></li>
-<li>Navigate to <code>{WSO2SIHome}/samples/sample-clients/kafka-consumer</code> and run <code>ant</code> command with following arguments.
-    <div class="highlight"><pre><span></span><code>ant<span class="w"> </span>-DisBinaryMessage<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-DtopicList<span class="o">=</span>kafka_result_topic<span class="w"> </span>-Dtype<span class="o">=</span>binary
-</code></pre></div></li>
-<li>Start the Siddhi application by clicking on 'Run'.</li>
-<li>If the Siddhi application starts successfully, the following messages would be shown on the console.
-    <div class="highlight"><pre><span></span><code>- PublishKafkaInBinaryFormat.siddhi - Started Successfully!
-- Kafka version : 0.10.0.0
-- Kafka commitId : 23c69d62a0cabf06
-- Kafka producer created.
-</code></pre></div></li>
+<li>Create a folder (Eg: Kafka) and copy Kafka libs to be added from <code>{KafkaHome}/libs</code>.</li>
+<li>Create another folder(Eg: Kafka-osgi, This folder will have the libs that converted to OSGI).</li>
+<li>
+<p>Navigate to <code>&lt;SI-Tooling-Home&gt;/bin</code> and issue the follwing command.</p>
+<ul>
+<li>
+<p>For Linux:</p>
+<div class="highlight"><pre><span></span><code>./jartobundle.sh<span class="w"> </span>&lt;path/kafka&gt;<span class="w"> </span>&lt;path/kafka-osgi&gt;
+</code></pre></div>
+
+</li>
+<li>
+<p>For Windows:</p>
+<div class="highlight"><pre><span></span><code>./jartobundle.bat<span class="w"> </span>&lt;path/kafka&gt;<span class="w"> </span>&lt;path/kafka-osgi&gt;
+</code></pre></div>
+
+</li>
+</ul>
+</li>
+<li>
+<p>If converted successfully then for each lib, following messages would be shown on the terminal.</p>
+<div class="highlight"><pre><span></span><code>-<span class="w"> </span>INFO:<span class="w"> </span>Created<span class="w"> </span>the<span class="w"> </span>OSGi<span class="w"> </span>bundle<span class="w"> </span>&lt;kafka-lib-name&gt;.jar<span class="w"> </span><span class="k">for</span><span class="w"> </span>JAR<span class="w"> </span>file<span class="w"> </span>&lt;absolute_path&gt;/kafka/&lt;kafka-lib-name&gt;.jar
+</code></pre></div>
+
+</li>
+<li>
+<p>You can find the osgi converted libs in kafka-osgi folder. You can copy that to <code>&lt;SI-Tooling-Home&gt;/lib</code>.</p>
+</li>
 </ol>
-<h2 id="testing-the-sample">Testing the Sample:<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
-<h5 id="send-events-with-kafka-server-through-event-simulator">Send events with kafka server, through event simulator:<a class="headerlink" href="#send-events-with-kafka-server-through-event-simulator" title="Permanent link">&para;</a></h5>
+<h2 id="executing-the-sample">Executing the sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p>Navigate to <code>{KafkaHome}</code> and start zookeeper node using following command.</p>
+<div class="highlight"><pre><span></span><code>bin/zookeeper-server-start.sh<span class="w"> </span>config/zookeeper.properties
+</code></pre></div>
+
+</li>
+<li>
+<p>Navigate to <code>{KafkaHome}</code> and start kafka server node using following command.</p>
+<p><div class="highlight"><pre><span></span><code>bin/kafka-server-start.sh<span class="w"> </span>config/server.properties
+</code></pre></div>
+3. Navigate to <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/kafka-consumer</code> and run <code>ant</code> command with following arguments.</p>
+<div class="highlight"><pre><span></span><code>ant<span class="w"> </span>-DisBinaryMessage<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-DtopicList<span class="o">=</span>kafka_result_topic<span class="w"> </span>-Dtype<span class="o">=</span>binary
+</code></pre></div>
+
+</li>
+<li>
+<p>Start the Siddhi application by clicking on 'Run'.</p>
+</li>
+<li>
+<p>If the Siddhi application starts successfully, the following messages would be shown on the console.</p>
+<div class="highlight"><pre><span></span><code>-<span class="w"> </span>PublishKafkaInBinaryFormat.siddhi<span class="w"> </span>-<span class="w"> </span>Started<span class="w"> </span>Successfully!
+-<span class="w"> </span>Kafka<span class="w"> </span>version<span class="w"> </span>:<span class="w"> </span><span class="m">0</span>.10.0.0
+-<span class="w"> </span>Kafka<span class="w"> </span>commitId<span class="w"> </span>:<span class="w"> </span>23c69d62a0cabf06
+-<span class="w"> </span>Kafka<span class="w"> </span>producer<span class="w"> </span>created.
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="testing-the-sample">Testing the sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<h5 id="send-events-with-kafka-server-through-event-simulator">Send events with kafka server, through event simulator<a class="headerlink" href="#send-events-with-kafka-server-through-event-simulator" title="Permanent link">&para;</a></h5>
 <ol>
 <li>To open event simulator by clicking on the second icon or press Ctrl+Shift+I.</li>
 <li>In the Single Simulation tab of the panel, select values as follows:<ul>
-<li>Siddhi App Name: PublishKafkaInBinaryFormat</li>
-<li>Stream Name: SweetProductionStream</li>
+<li><code>Siddhi App Name</code>: PublishKafkaInBinaryFormat</li>
+<li><code>Stream Name</code>: <code>SweetProductionStream</code></li>
 </ul>
 </li>
 <li>In the batchNumber field and lowTotal fields, enter '1', '85.5' respectively and then click Send to send the event.</li>
 <li>Send some more events.</li>
 </ol>
-<h5 id="publish-events-with-curl-command">Publish events with curl command:<a class="headerlink" href="#publish-events-with-curl-command" title="Permanent link">&para;</a></h5>
-<p>Open a new terminal and issue the following command.
+<h5 id="publish-events-with-curl-command">Publish events with curl command<a class="headerlink" href="#publish-events-with-curl-command" title="Permanent link">&para;</a></h5>
+<p>Open a new terminal and issue the following command.</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishKafkaInBinaryFormat&quot;, &quot;data&quot;: [1, 85.5]}&#39;</span><span class="w"> </span>http://localhost:9390/simulation/single<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;content-type: text/plain&#39;</span>
-</code></pre></div></p>
-<h5 id="publish-events-with-postman">Publish events with Postman:<a class="headerlink" href="#publish-events-with-postman" title="Permanent link">&para;</a></h5>
+</code></pre></div>
+
+<h5 id="publish-events-with-postman">Publish events with Postman<a class="headerlink" href="#publish-events-with-postman" title="Permanent link">&para;</a></h5>
 <ol>
-<li>Install 'Postman' application from Chrome web store.</li>
-<li>Launch the application.</li>
-<li>Make a 'Post' request to 'http://localhost:9390/simulation/single' endpoint. Set the Content-Type to 'text/plain' and set the request body in json format as follows,
-    <div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;streamName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SweetProductionStream&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;siddhiAppName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PublishKafkaInBinaryFormat&quot;</span><span class="p">,</span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">85.5</span><span class="p">]}</span>
-</code></pre></div></li>
-<li>Click 'send'. If there is no error, the following messages would be shown on the console.
-    <div class="highlight"><pre><span></span><code>&quot;status&quot;: &quot;OK&quot;,
-&quot;message&quot;: &quot;Single Event simulation started successfully&quot;
-</code></pre></div></li>
+<li>Launch the 'Postman' application.</li>
+<li>
+<p>Make a <code>Post</code> request to 'http://localhost:9390/simulation/single' endpoint. Set the Content-Type to 'text/plain' and set the request body in json format as follows,</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="nt">&quot;streamName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SweetProductionStream&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;siddhiAppName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PublishKafkaInBinaryFormat&quot;</span><span class="p">,</span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">85.5</span><span class="p">]}</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Click 'send'. If there is no error, the following messages would be shown on the console.</p>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;status&quot;</span>:<span class="w"> </span><span class="s2">&quot;OK&quot;</span>,
+<span class="s2">&quot;message&quot;</span>:<span class="w"> </span><span class="s2">&quot;Single Event simulation started successfully&quot;</span>
+</code></pre></div>
+
+</li>
 </ol>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
 <p>It will print the results in binary format.</p>
-<h2 id="notes">Notes:<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
-<p>If the message "'Kafka' sink at <code>'LowProducitonAlertStream' has successfully connected to 'http://localhost:9092'</code> does not appear, it could be due to port 9092, defined in the Siddhi application is already being used by a different program. To resolve this issue, please do the following,
-* Stop this Siddhi application (Click 'Run' on menu bar -&gt; 'Stop')
-* Change the port 9092 to an unused port, in this Siddhi application's source configuration.
-* Start the application and check whether the specified messages appear on the console.</p>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<p>If the message "'Kafka' sink at <code>'LowProducitonAlertStream' has successfully connected to 'http://localhost:9092'</code> does not appear, it could be due to the port 9092, defined in the Siddhi application is already being used by a different program. To resolve this issue, please do the following,</p>
+<ul>
+<li>Stop this Siddhi application (Click 'Run' on menu bar -&gt; 'Stop')</li>
+<li>Change the port 9092 to an unused port, in this Siddhi application's source configuration.</li>
+<li>Start the application and check whether the specified messages appear on the console.</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;PublishKafkaInBinaryFormat&quot;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Send events via Kafka transport using Binary format&#39;</span><span class="p">)</span>
 

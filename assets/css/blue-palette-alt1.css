@@ -54,6 +54,7 @@
 .banner-link {
     width: 800px;
     height: 363px;
+    margin-left: 100px;
 }
 .md-header__button {
     color: var(--md-primary-heder-fg-color);

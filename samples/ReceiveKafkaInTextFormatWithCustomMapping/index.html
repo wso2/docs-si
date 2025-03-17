@@ -1721,49 +1721,49 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#note" class="md-nav__link">
-    Note:
+    Note
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#note_1" class="md-nav__link">
-    Note:
+    Note
   </a>
   
 </li>
@@ -4421,49 +4421,49 @@
       
         <li class="md-nav__item">
   <a href="#purpose" class="md-nav__link">
-    Purpose:
+    Purpose
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#prerequisites" class="md-nav__link">
-    Prerequisites:
+    Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#note" class="md-nav__link">
-    Note:
+    Note
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#executing-the-sample" class="md-nav__link">
-    Executing the Sample:
+    Executing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#testing-the-sample" class="md-nav__link">
-    Testing the Sample:
+    Testing the sample
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#viewing-the-results" class="md-nav__link">
-    Viewing the Results:
+    Viewing the results
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#note_1" class="md-nav__link">
-    Note:
+    Note
   </a>
   
 </li>
@@ -4502,9 +4502,9 @@
 
   <h1>Receiving Custom Text Events via Kafka</h1>
 
-<h2 id="purpose">Purpose:<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h2>
 <p>This application demonstrates how to configure WSO2 Streaming Integrator to receive events to the <code>SweetProductionStream</code> via Kafka transport in Text format using custom mapping and log the events in <code>LowProductionAlertStream</code> to the output console.</p>
-<h2 id="prerequisites">Prerequisites:<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Setup Kafka.<ul>
 <li>Kafka libs to be added and converted to OSGI from <code>{KafkaHome}/libs</code> are as follows.<ul>
@@ -4516,62 +4516,84 @@
 <li>zookeeper-3.4.6.jar</li>
 </ul>
 </li>
-<li>Add the OSGI converted kafka libs to <code>{WSO2SIHome}/lib</code>.</li>
-<li>Add the kafka libs to <code>{WSO2SIHome}/samples/sample-clients/lib</code>.</li>
+<li>Add the OSGI converted kafka libs to <code>&lt;SI-Tooling-Home&gt;/lib</code>.</li>
+<li>Add the kafka libs to <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/lib</code>.</li>
 </ul>
 </li>
 <li>Save this sample.</li>
-<li>If there is no syntax error, the following message is shown on the console:
-    <div class="highlight"><pre><span></span><code>* Siddhi App PublishKafkaInJsonFormat successfully deployed.
-</code></pre></div></li>
+<li>
+<p>If there is no syntax error, the following message is shown on the console:</p>
+<div class="highlight"><pre><span></span><code>*<span class="w"> </span>Siddhi<span class="w"> </span>App<span class="w"> </span>PublishKafkaInJsonFormat<span class="w"> </span>successfully<span class="w"> </span>deployed.
+</code></pre></div>
+
+</li>
 </ol>
-<h2 id="note">Note:<a class="headerlink" href="#note" title="Permanent link">&para;</a></h2>
-<p>To convert Kafka libs to OSGI,
-1. Create a folder (eg: kafka) and copy Kafka libs to be added from <code>{KafkaHome}/libs</code>.
-2. Create another folder (eg: kafka-osgi, This folder will have the libs that converted to OSGI).
-3. Navigate to <code>{WSO2SIHome}/bin</code> and issue the following command.
-    - For Linux:
-        <div class="highlight"><pre><span></span><code>./jartobundle.sh<span class="w"> </span>&lt;path/kafka&gt;<span class="w"> </span>&lt;path/kafka-osgi&gt;
-</code></pre></div>
-    - For Windows:
-        <div class="highlight"><pre><span></span><code>./jartobundle.bat<span class="w"> </span>&lt;path/kafka&gt;<span class="w"> </span>&lt;path/kafka-osgi&gt;
-</code></pre></div>
-4. If converted successfully then for each lib, following messages would be shown on the terminal.
-    <div class="highlight"><pre><span></span><code>- INFO: Created the OSGi bundle &lt;kafka-lib-name&gt;.jar for JAR file &lt;absolute_path&gt;/kafka/&lt;kafka-lib-name&gt;.jar
-</code></pre></div>
-5. You can find the osgi converted libs in kafka-osgi folder. You can copy that to <code>{WSO2SIHome}/lib</code>.</p>
-<h2 id="executing-the-sample">Executing the Sample:<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<h2 id="note">Note<a class="headerlink" href="#note" title="Permanent link">&para;</a></h2>
+<p>To convert Kafka libs to OSGI,</p>
 <ol>
-<li>Navigate to <code>{KafkaHome}</code> and start zookeeper node using <code>bin/zookeeper-server-start.sh config/zookeeper.properties</code>.</li>
+<li>Create a folder (eg: kafka) and copy Kafka libs to be added from <code>{KafkaHome}/libs</code>.</li>
+<li>Create another folder (eg: kafka-osgi, This folder will have the libs that converted to OSGI).</li>
+<li>
+<p>Navigate to <code>&lt;SI-Tooling-Home&gt;/bin</code> and issue the following command.</p>
+<ul>
+<li>For Linux:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>./jartobundle.sh<span class="w"> </span>&lt;path/kafka&gt;<span class="w"> </span>&lt;path/kafka-osgi&gt;
+</code></pre></div>
+
+<ul>
+<li>For Windows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>./jartobundle.bat<span class="w"> </span>&lt;path/kafka&gt;<span class="w"> </span>&lt;path/kafka-osgi&gt;
+</code></pre></div>
+
+</li>
+<li>
+<p>If converted successfully then for each lib, following messages would be shown on the terminal.</p>
+<div class="highlight"><pre><span></span><code>-<span class="w"> </span>INFO:<span class="w"> </span>Created<span class="w"> </span>the<span class="w"> </span>OSGi<span class="w"> </span>bundle<span class="w"> </span>&lt;kafka-lib-name&gt;.jar<span class="w"> </span><span class="k">for</span><span class="w"> </span>JAR<span class="w"> </span>file<span class="w"> </span>&lt;absolute_path&gt;/kafka/&lt;kafka-lib-name&gt;.jar
+</code></pre></div>
+
+</li>
+<li>
+<p>You can find the osgi converted libs in kafka-osgi folder. You can copy that to <code>&lt;SI-Tooling-Home&gt;/lib</code>.</p>
+</li>
+</ol>
+<h2 id="executing-the-sample">Executing the sample<a class="headerlink" href="#executing-the-sample" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Navigate to <code>{KafkaHome}</code> and start zookeeper node using the <code>bin/zookeeper-server-start.sh config/zookeeper.properties</code>.</li>
 <li>Navigate to <code>{KafkaHome}</code> and start kafka server node using <code>bin/kafka-server-start.sh config/server.properties</code>.</li>
 <li>Start the Siddhi application by clicking on 'Run'.</li>
-<li>If the Siddhi application starts successfully, the following messages are shown on the console:
-    <div class="highlight"><pre><span></span><code>- ReceiveKafkaInTextFormatWithCustomMapping.siddhi - Started Successfully!
-- Kafka version : 0.10.0.0
-- Kafka commitId : b8642491e78c5a13
-- Adding partition 0 for topic: kafka_sample_topic
-- Adding partitions [0] for topic: kafka_sample_topic
-- Subscribed for topics: [kafka_sample_topic]
-- Kafka Consumer thread starting to listen on topic/s: [kafka_sample_topic] with partition/s: [0]
-- Discovered coordinator 10.100.7.56:9092 (id: 2147483647 rack: null) for group group
-</code></pre></div></li>
+<li>
+<p>If the Siddhi application starts successfully, the following messages are shown on the console:</p>
+<div class="highlight"><pre><span></span><code>-<span class="w"> </span>ReceiveKafkaInTextFormatWithCustomMapping.siddhi<span class="w"> </span>-<span class="w"> </span>Started<span class="w"> </span>Successfully!
+-<span class="w"> </span>Kafka<span class="w"> </span>version<span class="w"> </span>:<span class="w"> </span><span class="m">0</span>.10.0.0
+-<span class="w"> </span>Kafka<span class="w"> </span>commitId<span class="w"> </span>:<span class="w"> </span>b8642491e78c5a13
+-<span class="w"> </span>Adding<span class="w"> </span>partition<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>topic:<span class="w"> </span>kafka_sample_topic
+-<span class="w"> </span>Adding<span class="w"> </span>partitions<span class="w"> </span><span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>topic:<span class="w"> </span>kafka_sample_topic
+-<span class="w"> </span>Subscribed<span class="w"> </span><span class="k">for</span><span class="w"> </span>topics:<span class="w"> </span><span class="o">[</span>kafka_sample_topic<span class="o">]</span>
+-<span class="w"> </span>Kafka<span class="w"> </span>Consumer<span class="w"> </span>thread<span class="w"> </span>starting<span class="w"> </span>to<span class="w"> </span>listen<span class="w"> </span>on<span class="w"> </span>topic/s:<span class="w"> </span><span class="o">[</span>kafka_sample_topic<span class="o">]</span><span class="w"> </span>with<span class="w"> </span>partition/s:<span class="w"> </span><span class="o">[</span><span class="m">0</span><span class="o">]</span>
+-<span class="w"> </span>Discovered<span class="w"> </span>coordinator<span class="w"> </span><span class="m">10</span>.100.7.56:9092<span class="w"> </span><span class="o">(</span>id:<span class="w"> </span><span class="m">2147483647</span><span class="w"> </span>rack:<span class="w"> </span>null<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>group<span class="w"> </span>group
+</code></pre></div>
+
+</li>
 </ol>
-<h2 id="testing-the-sample">Testing the Sample:<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
-<p>Navigate to <code>{WSO2SIHome}/samples/sample-clients/kafka-producer</code> and run <code>ant</code> command as follows:
+<h2 id="testing-the-sample">Testing the sample<a class="headerlink" href="#testing-the-sample" title="Permanent link">&para;</a></h2>
+<p>Navigate to <code>&lt;SI-Tooling-Home&gt;/samples/sample-clients/kafka-producer</code> and run <code>ant</code> command as follows:</p>
 <div class="highlight"><pre><span></span><code>ant<span class="w"> </span>-Dtype<span class="o">=</span>text<span class="w"> </span>-DcustomMapping<span class="o">=</span><span class="nb">true</span>
-</code></pre></div></p>
-<h2 id="viewing-the-results">Viewing the Results:<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
-<p>Messages similar to the following would be shown on the console.
-<div class="highlight"><pre><span></span><code>- INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveKafkaInTextFormatWithCustomMapping: LowProductionAlertStream : Event{timestamp=1513282182570, data=[&quot;Cupcake&quot;, 1665.0], isExpired=false}
-</code></pre></div></p>
-<h2 id="note_1">Note:<a class="headerlink" href="#note_1" title="Permanent link">&para;</a></h2>
+</code></pre></div>
+
+<h2 id="viewing-the-results">Viewing the results<a class="headerlink" href="#viewing-the-results" title="Permanent link">&para;</a></h2>
+<p>Messages similar to the following would be shown on the console.</p>
+<div class="highlight"><pre><span></span><code>-<span class="w"> </span>INFO<span class="w"> </span><span class="o">{</span>io.siddhi.core.stream.output.sink.LogSink<span class="o">}</span><span class="w"> </span>-<span class="w"> </span>ReceiveKafkaInTextFormatWithCustomMapping:<span class="w"> </span>LowProductionAlertStream<span class="w"> </span>:<span class="w"> </span>Event<span class="o">{</span><span class="nv">timestamp</span><span class="o">=</span><span class="m">1513282182570</span>,<span class="w"> </span><span class="nv">data</span><span class="o">=[</span><span class="s2">&quot;Cupcake&quot;</span>,<span class="w"> </span><span class="m">1665</span>.0<span class="o">]</span>,<span class="w"> </span><span class="nv">isExpired</span><span class="o">=</span>false<span class="o">}</span>
+</code></pre></div>
+
+<h2 id="note_1">Note<a class="headerlink" href="#note_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Stop this Siddhi application, once you are done with the execution.</li>
 <li>Stop Kafka server and Zookeeper server individually by executing Ctrl+C.</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="ss">&quot;ReceiveKafkaInTextFormatWithCustomMapping&quot;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">description</span><span class="p">(</span><span class="s1">&#39;Receive events via Kafka transport in Text format with custom mapping and view the output on the console&#39;</span><span class="p">)</span>
-
 
 <span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;kafka&#39;</span><span class="p">,</span>
 <span class="w">        </span><span class="n">topic</span><span class="p">.</span><span class="n">list</span><span class="o">=</span><span class="s1">&#39;kafka_sample_topic&#39;</span><span class="p">,</span>
