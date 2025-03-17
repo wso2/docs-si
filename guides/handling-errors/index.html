@@ -4566,7 +4566,7 @@
 <p>This section explains the different types of errors that can occur and how they can be handled.</p>
 <h2 id="storing-and-replaying-events-with-errors">Storing and replaying events with errors<a class="headerlink" href="#storing-and-replaying-events-with-errors" title="Permanent link">&para;</a></h2>
 <p>This involves storing the events with errors in the error store and then replaying them. </p>
-<p>To do this, you need to enable the error store in the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file by adding the following configuration.</p>
+<p>To do this, you need to enable the error store in the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file by adding the following configuration.</p>
 <p><div class="highlight"><pre><span></span><code>error.store:
   enabled: true
   bufferSize: 1024
@@ -4578,7 +4578,7 @@
 </code></pre></div>
 - <code>bufferSize</code> denotes the size of the ring buffer that is used in the disruptor when publishing events to the error store. This has to be a power of two. If not, it throws an exception during initialization. The default buffer size is <code>1024</code>.
 - If the <code>dropWhenBufferFull</code> is set to <code>true</code>, the event is dropped when the capacity of the ring buffer is insufficient.</p>
-<p>Once the error store is enabled, you need to add a configuration for the data source you are connecting to the error store (in the above example <code>ERROR_STORE_DB</code>) in the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file. Then you can create the database in which you want to store the events with errors and link to it from the data source.</p>
+<p>Once the error store is enabled, you need to add a configuration for the data source you are connecting to the error store (in the above example <code>ERROR_STORE_DB</code>) in the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file. Then you can create the database in which you want to store the events with errors and link to it from the data source.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you are configuring an Oracle datasource where the Oracle server version is less than 12 ,then you need to create corresponding table (e.g., <code>ERROR_STORE_TABLE</code>) with the following syntax before starting the server.
@@ -4631,7 +4631,7 @@ define stream StreamA (name string, volume long);
 <p>Source mappers</p>
 </li>
 </ul>
-<p>If the <code>error.store</code> is enabled in the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file, mapping errors are automatically added to the error store.</p>
+<p>If the <code>error.store</code> is enabled in the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file, mapping errors are automatically added to the error store.</p>
 <h3 id="try-it-out">Try it out<a class="headerlink" href="#try-it-out" title="Permanent link">&para;</a></h3>
 <p>To understand how you can store erroneous events in a real world scenario, consider a sweet factory where production statistics are written into a file. The same file content needs to be copied into another file for the factory manager. In order to make sure that none of the production records is missed in the manager's copy, the factory foreman needs the erroneous events saved in the error store so that he can check the errors, correct than and then replay them.</p>
 <p>To try out storing errors in the store, follow the steps below:</p>
@@ -4651,7 +4651,7 @@ define stream StreamA (name string, volume long);
 <p><code>mysql&gt; use siddhierrorstoredb;</code></p>
 </li>
 <li>
-<p>To enable the error store, open the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file and add a configuration as follows:</p>
+<p>To enable the error store, open the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file and add a configuration as follows:</p>
 <p><div class="highlight"><pre><span></span><code>error.store:
   enabled: true
   bufferSize: 1024
@@ -4661,7 +4661,7 @@ define stream StreamA (name string, volume long);
     datasource: SIDDHI_ERROR_STORE_DB
     table: SIDDHI_ERROR_STORE_TABLE
 </code></pre></div>
-    5. The above configuration refers to a data source named <code>SIDDHI_ERROR_STORE_DB</code>. Define this data source as follows under <code>Data sources</code> in the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file.</p>
+    5. The above configuration refers to a data source named <code>SIDDHI_ERROR_STORE_DB</code>. Define this data source as follows under <code>Data sources</code> in the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file.</p>
 <div class="highlight"><pre><span></span><code>- name: SIDDHI_ERROR_STORE_DB
   description: The datasource used for Siddhi error handling feature
   jndiConfig:
@@ -4726,7 +4726,7 @@ insert into CopyProductionStream;
 </li>
 <li>
 <p>Click <strong>Connect to Server</strong>. Then enter information as follows:</p>
-<p>To check the port of the Streaming Integrator Server, Open <SI_HOME>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.</p>
+<p>To check the port of the Streaming Integrator Server, Open <SI-Home>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.</p>
 <p><img alt="Server Configuration" src="https://wso2.github.io/docs-si/images/quick-start-guide-101/connect-error-store.png" /></p>
 <table>
 <thead>
@@ -4769,7 +4769,7 @@ insert into CopyProductionStream;
 </li>
 <li>
 <p>Access Streaming Integrator Tooling and click <strong>Tools</strong> -&gt; <strong>Error Store Explorer</strong>. Then in the <strong>Siddhi App</strong> section, select <strong>CopyingProductionStatsApp</strong> Siddhi application from the drop down list. The error store displays the sink error as follows.</p>
-<p>![Sink Error](https://wso2.github.io/docs-si/images/handling-errors/sink-error.png</p>
+<p><img alt="Sink Error" src="https://wso2.github.io/docs-si/images/handling-errors/sink-error.png" /></p>
 </li>
 <li>
 <p>To correct the error and replay it, follow the procedure below:</p>
@@ -4836,7 +4836,7 @@ define stream TestPublisherStream (symbol string, volume long);
 </li>
 <li>
 <p>Source mappers </p>
-<p>Logging is the default on-error action for source mappers when the error store is not enabled in the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file.</p>
+<p>Logging is the default on-error action for source mappers when the error store is not enabled in the <code>&lt;SI-Home&gt;/conf/server/deployment.yaml</code> file.</p>
 </li>
 </ul>
 <h3 id="try-it-out_1">Try it out<a class="headerlink" href="#try-it-out_1" title="Permanent link">&para;</a></h3>
