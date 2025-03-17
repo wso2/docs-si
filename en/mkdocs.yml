@@ -231,8 +231,7 @@ nav:
   - Setup and Install:
     - 'Install':
       - 'Installing the Streaming Integrator':
-        - 'Installing via the Installer': 'setup/installing-si-in-vm.md'
-        - 'Installing via the Binary': 'setup/installing-si-binary.md'
+        - 'Install SI': 'setup/installing-si-in-vm.md'
         - 'Installing as a Windows Service': 'setup/installing-as-a-windows-service.md'
         - 'Installing as a Linux Service': 'setup/installing-si-as-a-linux-service.md'
       - 'Installing Siddhi Extensions': 'connectors/downloading-and-Installing-Siddhi-Extensions.md'

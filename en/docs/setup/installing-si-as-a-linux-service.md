@@ -1,18 +1,6 @@
 # Installing Streaming Integrator as a Linux Service
 
-WSO2 Streaming Integrator can be run as a Linux service.
-
-## Before you begin
-
-Install JDK version 1.8.0_144 and set the `JAVA_HOME` variable.
-
-## Download and install the Streaming Integrator
-
-Go to the WSO2 Streaming Integrator [product page](https://wso2.com/integration/streaming-integrator/), click **Download**, and then click **Zip Archive** to download the product distribution as a ZIP file.
-
-Extract the download ZIP file to a location on your computer. The <b>streaming-integrator</b> folder inside the extracted ZIP file will be your <b>SI_HOME</b> directory.
-
-For more information, see [Installing via the Binary](installing-si-binary.md)
+WSO2 Streaming Integrator can be run as a Linux service. Before you begin follow the instructions on [installing the WSO2 Streaming Integrator]({{base_path}}/setup/installing-si-in-vm/) if you have not done already.
 
 ## Running WSO2 Streaming Integrator as a Linux Service
 
@@ -20,7 +8,7 @@ To run WSO2 Streaming Integrator as a Linux service, follow the steps below:
 
 1. To run the product as a service, create a startup script and add it to the boot sequence. The basic structure of the startup script has three parts (i.e., start, stop and restart) as follows:
 
-    ```
+    ```bash
     #!/bin/bash
       
     case “$1″ in
@@ -43,13 +31,13 @@ To run WSO2 Streaming Integrator as a Linux service, follow the steps below:
 
    - Streaming Integrator Server
 
-    ```    
+    ```bash
     #! /bin/sh
-    export JAVA_HOME="/usr/lib/jvm/jdk1.7.0_07"
+    export JAVA_HOME="<Java-Home>"
      
-    startcmd='/opt/WSO2/wso2si-1.1.0/bin/server.sh start > /dev/null &'
-    restartcmd='/opt/WSO2/wso2si-1.1.0/bin/server.sh restart > /dev/null &'
-    stopcmd='/opt/WSO2/wso2si-1.1.0/bin/server.sh stop > /dev/null &'
+    startcmd='<SI-Home>/bin/server.sh start > /dev/null &'
+    restartcmd='<SI-Home>/bin/server.sh restart > /dev/null &'
+    stopcmd='<SI-Home>/bin/server.sh stop > /dev/null &'
      
     case "$1" in
     start)
@@ -69,15 +57,16 @@ To run WSO2 Streaming Integrator as a Linux service, follow the steps below:
     exit 1
     esac
     ```
+
     - Streaming Integrator Tooling
 
-    ```    
+    ```bash
     #! /bin/sh
-    export JAVA_HOME="/usr/lib/jvm/jdk1.7.0_07"
+    export JAVA_HOME="<Java-Home>"
      
-    startcmd='/opt/WSO2/wso2si-tooling-1.1.0/bin/tooling.sh start > /dev/null &'
-    restartcmd='/opt/WSO2/wso2si-tooling-1.1.0/bin/tooling.sh restart > /dev/null &'
-    stopcmd='/opt/WSO2/wso2si-tooling-1.1.0/bin/tooling.sh stop > /dev/null &'
+    startcmd='<SI-Tooling-Home>/bin/tooling.sh start > /dev/null &'
+    restartcmd='<SI-Tooling-Home>/bin/tooling.sh restart > /dev/null &'
+    stopcmd='<SI-Tooling-Home>/bin/tooling.sh stop > /dev/null &'
      
     case "$1" in
     start)
@@ -102,8 +91,8 @@ To run WSO2 Streaming Integrator as a Linux service, follow the steps below:
 
 2. Add the script to the ` /etc/init.d/` directory.
 
-    !!! info       
-        If you want to keep the scripts in a location other than `/etc/init.d/` directory , you can add a symbolic link to the script in the `/etc/init.d/` and keep the actual script in a separate location. e.g., If your script name is siserver and it is in the `/opt/WSO2/` directory, then the commands for adding a link to `/etc/init.d/` are as follows:<br/><br/>
+    !!! info
+        If you want to keep the scripts in a location other than `/etc/init.d/` directory , you can add a symbolic link to the script in the `/etc/init.d/` and keep the actual script in a separate location. e.g., If your script name is `siserver` and it is in the `/opt/WSO2/` directory, then the commands for adding a link to `/etc/init.d/` are as follows:<br/><br/>
         - To make the script executable: `sudo chmod a+x /opt/WSO2/appserver`<br/>
         - To add a link to `/etc/init.d/`: `sudo ln -snf /opt/WSO2/appserver /etc/init.d/appserver`
 
