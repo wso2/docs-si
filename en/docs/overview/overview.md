@@ -1,7 +1,7 @@
 
 # Introduction
 
-WSO2 Streaming Integrator(SI) is a streaming data processing server that integrates streaming data and takes action based on streaming data. The streaming integration capabilities of EI are delivered via this runtime
+WSO2 Streaming Integrator(SI) is a streaming data processing server that integrates streaming data and takes action based on streaming data.
 
 WSO2 SI can be effectively used for:
 
@@ -10,13 +10,12 @@ WSO2 SI can be effectively used for:
 - **Streaming data Integration**: Allows you to treat all data sources as streams and connect them with any destination.
 - **Execute complex integrations based on streaming data**: SI has native support to work hand-in-hand with WSO2 Micro integrator to trigger complex integration flows based on decisions derived via stateful stream processing logic.
 
-
 !!! info "Try it out!"
     To try out each of the above use cases with SI, see [Tutorials](../examples/tutorials-overview.md)
 
 ## Key Features
 
-WSO2 SI is powered by [Siddhi.io](https://siddhi.io/), a well known cloud native open source stream processing engine. Siddhi allows you to write complex stream processing logic using an intuitive SQL-like language known as [SiddhiQL](https://siddhi.io/en/v5.1/docs/). You can perform the following actions on the fly using Siddhi queries and constructs.
+WSO2 SI is powered by [Siddhi.io](https://siddhi.io/), a well-known cloud native open source stream processing engine. Siddhi allows you to write complex stream processing logic using an intuitive SQL-like language known as [SiddhiQL](https://siddhi.io/en/v5.1/docs/). You can perform the following actions on the fly using Siddhi queries and constructs.
 
 - [**Extracting data from static sources in real time**](../guides/extracting-data-from-static-sources-in-real-time.md).
 - [**Loading and writing data**](../guides/loading-and-writing-date.md) to databases, files and cloud based storages.
@@ -27,7 +26,7 @@ WSO2 SI is powered by [Siddhi.io](https://siddhi.io/), a well known cloud native
  
  ![Streaming Integrator/ Workflow]({{base_path}}/images/overview/streaming-integrator.png)
 
-With 60+ prebuilt and well tested collection of connectors, WSO2 SI allows you to connect any data source with any destination regardless of the different protocols and data formats used by the different endpoints.
+With 60+ prebuilt and well-tested collection of connectors, WSO2 SI allows you to connect any data source with any destination regardless of the different protocols and data formats used by the different endpoints.
 
 The SI Store API exposes aggregated and collected data streams to in-memory and persistence storages via a REST API, allowing you to execute queries and generate summarized information on demand.
 
@@ -51,4 +50,3 @@ Deploying SI as a highly available [minimum HA cluster](../setup/deploying-si-as
 !!! tip "What's Next"
     - [Quick Start Guide](../quick-start-guide/quick-start-guide.md)<br/>
     - [Create Your First Siddhi Application](../quick-start-guide/getting-started/getting-started-guide-overview.md)
-

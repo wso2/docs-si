@@ -24,66 +24,44 @@
     <div class="section03">
         <h3>What can WSO2 Streaming Integrator do?</h3>
         <div class="linkWrapper">
-            <div class="linkSet3" onclick="location.href='{{base_path}}/learn/integration-use-case/message-routing-overview';">
-                <a href="learn/integration-use-case/message-routing-overview"><h3>Routing and Transformation</h3></a>
+            <div class="linkSet3" onclick="location.href='{{base_path}}/guides/extracting-data-from-static-sources-in-real-time/';">
+                <a href="guides/extracting-data-from-static-sources-in-real-time/"><h3>Streaming ETL with CDC</h3></a>
                 <p>
-                    Supports content-based routing, header-based routing, and policy-based routing. Transforms the message to different formats.
+                    Treats data sources as streams, supports Debezium-based CDC, offers a wizard-based ETL designer, error handling, integrations with multiple systems, and provides hierarchical monitoring dashboards.
                 </p>
             </div>
-            <div class="linkSet3 middle" onclick="location.href='{{base_path}}learn/integration-use-case/service-orchestration-overview';">
-                <a href="learn/integration-use-case/service-orchestration-overview"><h3>Service Orchestration</h3></a>
+            <div class="linkSet3 middle" onclick="location.href='{{base_path}}/guides/loading-and-writing-date/';">
+                <a href="guides/loading-and-writing-date/"><h3>Loading and Writing Data</h3></a>
                 <p>
-                    Has the ability to present multiple fine-grained services using a single coarse-grained service.
+                    Enable loading, processing, and writing data in multiple formats to databases, files, and cloud storages for further processing in complex enterprise scenarios.
                 </p>
             </div>
-            <div class="linkSet3 last" onclick="location.href='{{base_path}}/learn/integration-use-case/asynchronous-message-overview';">
-                <a href="learn/integration-use-case/asynchronous-message-overview"><h3>Asynchronous Messaging</h3></a>
+            <div class="linkSet3 last" onclick="location.href='{{base_path}}/guides/processing-data/';">
+                <a href="guides/processing-data/"><h3>Stream Processing</h3></a>
                 <p>
-                    Messages can be queued and do not require an immediate response to continue processing.
+                    Offers built-in connectors for various event sources and sinks, ensures at-least-once delivery with exactly-once processing, and supports transforming, enriching, cleansing, aggregating, and correlating event streams for insights.
                 </p>
             </div>
         </div>
     </div>
 <div class="section04">
         <div class="linkWrapper">
-            <div class="linkSet4" onclick="location.href='{{base_path}}/learn/integration-use-case/connectors';">
-                <a href="learn/integration-use-case/connectors"><h3>SaaS Integration</h3></a>
+            <div class="linkSet4 middle" onclick="location.href='{{base_path}}/develop/streaming-integrator-studio-overview';">
+                <a href="develop/streaming-integrator-studio-overview"><h3>Visual Tooling</h3></a>
                 <p>
-                    Connectors are available across various categories such as payments, CRM, ERP, social networks, and legacy systems.
+                    Provides capabilities to design, develop, test, and deploy streaming integration flows with a drag-and-drop flow designer, event and feed simulation, and configurable connectors for integrating various event sources and sinks.
                 </p>
             </div>
-            <div class="linkSet4 middle" onclick="location.href='{{base_path}}/get-started/introduction';">
-                <a href="get-started/introduction"><h3>Microservices Integration</h3></a>
+            <div class="linkSet4 last" onclick="location.href='{{base_path}}/{{base_path}}/admin/monitoring-si-performance-via-grafana/';">
+                <a href="admin/monitoring-si-performance-via-grafana/"><h3>Monitoring</h3></a>
                 <p>
-                    Lightweight runtime for container-based deployments. Native integration with container-management platforms.
+                    Offers monitoring metrics for CDC, file, and database interactions. Provide real-time insights into performance, usage, and errors, along with built-in chart visualizations.
                 </p>
             </div>
-            <div class="linkSet4 last" onclick="location.href='{{base_path}}/{{base_path}}/learn/integration-use-case/data-integration-overview';">
-                <a href="learn/integration-use-case/data-integration-overview"><h3>Data Integration</h3></a>
+            <div class="linkSet4" onclick="location.href='{{base_path}}/guides/handling-errors/';">
+                <a href="guides/handling-errors/"><h3>Handling Errors</h3></a>
                 <p>
-                    Decouples the data from the datasource layer and exposes them as data services.
-                </p>
-            </div>
-        </div>
-    </div>
-<div class="section05">
-        <div class="linkWrapper">
-            <div class="linkSet5" onclick="location.href='{{base_path}}/learn/integration-use-case/file-processing-overview';">
-                <a href="learn/integration-use-case/file-processing-overview"><h3>File Integration</h3></a>
-                <p>
-                    Supports processing of files with large amounts of data.
-                </p>
-            </div>
-            <div class="linkSet5 middle" onclick="location.href='https://mi.docs.wso2.com/en/latest/learn/enterprise-integration-patterns/eip-overview';">
-                <a href="https://mi.docs.wso2.com/en/latest/learn/enterprise-integration-patterns/eip-overview"><h3>Enterprise Integration Patterns</h3></a>
-                <p>
-                    Support for all enterprise integration patterns (EIPs) and common enterprise messaging scenarios.
-                </p>
-            </div>
-            <div class="linkSet5 last" onclick="location.href='{{base_path}}/learn/integration-use-case/scheduled-task-overview';">
-                <a href="learn/integration-use-case/scheduled-task-overview"><h3>Periodic Execution of Integration Processes</h3></a>
-                <p>
-                    Execute an integration process at a specified time.
+                   Enable handling of errors that may occur when processing streaming data in a graceful manner.
                 </p>
             </div>
         </div>
@@ -106,6 +84,7 @@ header.md-header .md-header__button:not([hidden]) {
 }
 .about-home {
     display: flex;
+    align-items: center;
 }
 .about-home div:first-child {
     width: 50%;
