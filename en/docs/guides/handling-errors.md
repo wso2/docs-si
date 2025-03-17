@@ -15,7 +15,7 @@ This section explains the different types of errors that can occur and how they 
 
 This involves storing the events with errors in the error store and then replaying them. 
 
-To do this, you need to enable the error store in the `<SI_HOME>/conf/server/deployment.yaml` file by adding the following configuration.
+To do this, you need to enable the error store in the `<SI-Home>/conf/server/deployment.yaml` file by adding the following configuration.
 
 ```
 error.store:
@@ -30,7 +30,7 @@ error.store:
 - `bufferSize` denotes the size of the ring buffer that is used in the disruptor when publishing events to the error store. This has to be a power of two. If not, it throws an exception during initialization. The default buffer size is `1024`.
 - If the `dropWhenBufferFull` is set to `true`, the event is dropped when the capacity of the ring buffer is insufficient.
 
-Once the error store is enabled, you need to add a configuration for the data source you are connecting to the error store (in the above example `ERROR_STORE_DB`) in the `<SI_HOME>/conf/server/deployment.yaml` file. Then you can create the database in which you want to store the events with errors and link to it from the data source.
+Once the error store is enabled, you need to add a configuration for the data source you are connecting to the error store (in the above example `ERROR_STORE_DB`) in the `<SI-Home>/conf/server/deployment.yaml` file. Then you can create the database in which you want to store the events with errors and link to it from the data source.
 
 !!! note
     If you are configuring an Oracle datasource where the Oracle server version is less than 12 ,then you need to create corresponding table (e.g., `ERROR_STORE_TABLE`) with the following syntax before starting the server.
@@ -87,7 +87,7 @@ This can be used with the following:
 
 - Source mappers
 
-   If the `error.store` is enabled in the `<SI_HOME>/conf/server/deployment.yaml` file, mapping errors are automatically added to the error store.
+   If the `error.store` is enabled in the `<SI-Home>/conf/server/deployment.yaml` file, mapping errors are automatically added to the error store.
    
 ### Try it out
 
@@ -107,7 +107,7 @@ To try out storing errors in the store, follow the steps below:
     
         `mysql> use siddhierrorstoredb;`
         
-    4. To enable the error store, open the `<SI_HOME>/conf/server/deployment.yaml` file and add a configuration as follows:
+    4. To enable the error store, open the `<SI-Home>/conf/server/deployment.yaml` file and add a configuration as follows:
     
         ```
         error.store:
@@ -119,7 +119,7 @@ To try out storing errors in the store, follow the steps below:
             datasource: SIDDHI_ERROR_STORE_DB
             table: SIDDHI_ERROR_STORE_TABLE
         ```
-    5. The above configuration refers to a data source named `SIDDHI_ERROR_STORE_DB`. Define this data source as follows under `Data sources` in the `<SI_HOME>/conf/server/deployment.yaml` file.
+    5. The above configuration refers to a data source named `SIDDHI_ERROR_STORE_DB`. Define this data source as follows under `Data sources` in the `<SI-Home>/conf/server/deployment.yaml` file.
     
         ```
         - name: SIDDHI_ERROR_STORE_DB
@@ -173,14 +173,14 @@ To try out storing errors in the store, follow the steps below:
 5. Access and open the Streaming Integrator Tooling.
 
 6. To open the Error Store Explorer, click **Tools** and then click **Error Store Explorer**.
-   
+
     The Error Store Explorer opens as shown below. 
-      
+
     ![Access Error Store]({{base_path}}/images/handling-requests-with-errors/error-store-explorer-without-server.png)
-    
+
 7. Click **Connect to Server**. Then enter information as follows:
 
-    To check the port of the Streaming Integrator Server, Open <SI_HOME>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.
+    To check the port of the Streaming Integrator Server, Open <SI-Home>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.
    
     ![Server Configuration]({{base_path}}/images/quick-start-guide-101/connect-error-store.png)
     
@@ -205,7 +205,7 @@ To try out storing errors in the store, follow the steps below:
         
     3. Access Streaming Integrator Tooling and click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the sink error as follows.
     
-        ![Sink Error]({{base_path}}/images/handling-errors/sink-error.png
+        ![Sink Error]({{base_path}}/images/handling-errors/sink-error.png)
     
     4. To correct the error and replay it, follow the procedure below:
     
@@ -269,7 +269,7 @@ This involves logging the event with details of the error and then dropping it. 
    
 - Source mappers 
 
-    Logging is the default on-error action for source mappers when the error store is not enabled in the `<SI_HOME>/conf/server/deployment.yaml` file.
+    Logging is the default on-error action for source mappers when the error store is not enabled in the `<SI-Home>/conf/server/deployment.yaml` file.
     
 ### Try it out
 
