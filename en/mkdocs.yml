@@ -87,6 +87,7 @@ nav:
       - 'Step 7: Monitor Statistics': 'quick-start-guide/getting-started/monitor-statistics.md'
     - 'Architecture': 'overview/architecture.md'
     - 'Key Concepts': 'concepts/concepts.md'
+    - 'About this Release' : 'get-started/about-this-release.md'
   - 'Learn':
     - 'Use Cases':
       - 'Use Cases Overview': 'guides/use-cases.md'
