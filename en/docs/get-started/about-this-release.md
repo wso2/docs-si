@@ -6,6 +6,10 @@
 
     This will allow users to view, manage, and control SI artifacts within the [ICP](https://wso2.com/integrator/integration-control-plane/). The integration will also enable log access and operational controls similar to other WSO2 integration components. This feature will be available in the next release of the ICP (v1.1.0).
 
+## Download the latest release
+
+- Get the latest version of WSO2 Streaming Integrator 4.3.0: [Download Here](https://wso2.com/streaming-integrator/)
+
 ## Fixed issues
 
 - [Publishing HTTP Events to to an OAuth-protected Endpoint without an Access Token](https://si.docs.wso2.com/samples/PublishHttpOAuthRequestWithoutAccessToken/)
