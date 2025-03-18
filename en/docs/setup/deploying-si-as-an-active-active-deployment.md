@@ -19,7 +19,7 @@ Distributed aggregations partially process aggregations in different nodes. This
 scaling, etc.). In order to do this all the aggregations must have a physical database and must be linked to the same database.
 
 Partitioning aggregations can be enabled at aggregation level and also at a global level. To enable it at the global level, add the following section with the
-`@PartitionById` annotation set to `true` in the `<SI_HOME>/conf/server/deployment.yaml` file.
+`@PartitionById` annotation set to `true` in the `<SI-Home>/conf/server/deployment.yaml` file.
 
 ```
     siddhi:
@@ -71,7 +71,7 @@ You can find the steps to enable aggregation partitioning within the next subsec
 
 ## Configuring an active-active cluster
 
-To configure the Streaming Integrator nodes and deploy them as an active-active cluster, edit the `<SI_HOME>/conf/server/deployment.yaml` file as follows:
+To configure the Streaming Integrator nodes and deploy them as an active-active cluster, edit the `<SI-Home>/conf/server/deployment.yaml` file as follows:
 
 !!! tip "Before you begin:"
     - Download two binary packs of the WSO2 Streaming Integrator.

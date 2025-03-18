@@ -14,7 +14,7 @@ In order to configure a Grafana dashboard, follow the steps below:
 
     Enable statistics for the Prometheus reporter as follows.
    
-    - To enable statistics for the Prometheus reporter, open the `<SI_HOME>/conf/server/deployment.yaml` file and set the `enabled` parameter in the `wso2.metrics` section to `true`, and update the other parameters in the section as shown below. You also need to add the `metrics.prometheus:` as shown.
+    - To enable statistics for the Prometheus reporter, open the `<SI-Home>/conf/server/deployment.yaml` file and set the `enabled` parameter in the `wso2.metrics` section to `true`, and update the other parameters in the section as shown below. You also need to add the `metrics.prometheus:` as shown.
     
     ```yaml
      wso2.metrics:
@@ -49,7 +49,7 @@ In order to configure a Grafana dashboard, follow the steps below:
 
 2. **Start Streaming Integrator server**
 
-    To start the Streaming runtime, navigate to the `<SI_HOME>/bin` directory and issue the appropriate command based on your operating system.
+    To start the Streaming runtime, navigate to the `<SI-Home>/bin` directory and issue the appropriate command based on your operating system.
     
     - **For Windows**: `server.bat --run`<br/>
     - **For Linux/MacOS**: `./server.sh`
@@ -87,12 +87,12 @@ In order to configure a Grafana dashboard, follow the steps below:
     
         ![prometheus configuration]({{base_path}}/images/cdc-monitoring/prometheus-configurations.png)
     
-            1. Click **Default** to make Prometheus the default data source.
-            
-            2. Under **HTTP**, enter `http://localhost:9090` as the URL.
-            
-            3. Click **Save & Test**. If the data source is successfully configured, it is indicated via a message.
-                ![Save and Test]({{base_path}}/images/cdc-monitoring/save-and-test.png)
+        1. Click **Default** to make Prometheus the default data source.
+        
+        2. Under **HTTP**, enter `http://localhost:9090` as the URL.
+        
+        3. Click **Save & Test**. If the data source is successfully configured, it is indicated via a message.
+            ![Save and Test]({{base_path}}/images/cdc-monitoring/save-and-test.png)
 
 5. **Load dashboards into Grafana**
 
@@ -109,12 +109,3 @@ In order to configure a Grafana dashboard, follow the steps below:
     5. If required, change the unique identifier displayed in the **Unique Identifier (uid)**.
     
     6. Click **Import**.
-    
-
-    
-
-    
-
-
-
-  

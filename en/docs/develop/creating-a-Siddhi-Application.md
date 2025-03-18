@@ -46,11 +46,11 @@ view of the Streaming Integrator Tooling.
 
 To create a Siddhi application via the source view of the Streaming Integrator Tooling, follow the steps below:
 
-1. Start the Streaming Integrator Tooling by navigating to the `<SI_TOOLING_HOME>/bin` directory and issue one of the following commands:
+1. Start the Streaming Integrator Tooling by navigating to the `<SI_Tooling_Home>/bin` directory and issue one of the following commands:
 
-    - For Windows: `streaming-integrator-tooling.bat`
+    - For Windows: `tooling.bat`
 
-    - For Linux: `./streaming-integrator-tooling.sh`
+    - For Linux: `./tooling.sh`
 
  The Streaming Integrator Tooling opens as shown below.
 
@@ -93,7 +93,7 @@ To create a Siddhi application via the source view of the Streaming Integrator T
                        <p>This stream contains two stream configurations:</p>
                        <ul>
                           <li>
-                             <p><code>                   SweetProductionStream                  </code></p>
+                             <p><code>                SweetProductionStream                  </code></p>
                              <div class="code panel pdl" style="border-width: 1px;">
                                 <div class="codeContent panelContent pdl">
                                    <div class="sourceCode" id="cb1" data-syntaxhighlighter-params="brush: sql; gutter: false; theme: Confluence" data-theme="Confluence" style="brush: sql; gutter: false; theme: Confluence">
@@ -219,7 +219,7 @@ To create a Siddhi application via the source view of the Streaming Integrator T
 
 
 
-4. To save this Siddhi application, click **File**, and then click **Save**. By default siddhi applications are saved in the  `<SI_HOME>/wso2/editor/deployment/workspace` directory.
+4. To save this Siddhi application, click **File**, and then click **Save**. By default siddhi applications are saved in the  `<SI-Home>/wso2/editor/deployment/workspace` directory.
 
 5.  To export the Siddhi application to your preferred location, click
     **File**, and then click **Export File**.
@@ -237,7 +237,7 @@ To create a Siddhi application via the source view of the Streaming Integrator T
 
 To create a Siddhi application via the design view of the Streaming Integrator Tooling, follow the steps below:
 
-1.  Start the Streaming Integrator Tooling by navigating to the `<SI_TOOLING_HOME>/bin` directory and issue one of the following commands:
+1.  Start the Streaming Integrator Tooling by navigating to the `<SI_Tooling_Home>/bin` directory and issue one of the following commands:
 
     - For Windows: `streaming-integrator-tooling.bat`
     - For Linux: `./streaming-integrator-tooling.sh`
@@ -296,11 +296,12 @@ To create a Siddhi application via the design view of the Streaming Integrator T
     the **SweetProductionStream** input stream component. Therefore,
     place this source component to the left of the input stream
     component in the grid.<br/>
-    ![Source Icon]({{base_path}}/images/Creating-Siddhi-Applications/Source_Icon.png) 
+    ![Source Icon]({{base_path}}/images/Creating-Siddhi-Applications/Source_Icon.png)
+
     Once you add the source component, draw a line from it to the
     **SweetProductionStream** input stream component by dragging the
     cursor as demonstrated below.  
-    ![Connect source]({{base_path}}/Creating-Siddhi-Applications/Connect-Source-Component.gif)  
+    ![Connect source]({{base_path}}/images/Creating-Siddhi-Applications/Connect-Source-Component.gif)  
     Click the settings icon on the source component you added to open
     the **Source Configuration** form. Then enter information as
     follows.  
@@ -321,7 +322,7 @@ To create a Siddhi application via the design view of the Streaming Integrator T
     The query uses the events in the `SweetProductionStream` input stream as inputs and directs the 
     processed events (which are its output) to the `ProductionAlertStream` output stream. Therefore,
     create two connections as demonstrated below.  
-    ![Connecting the projection query]({{base_path}}/Creating-Siddhi-Applications/Connect-Projection-Query.gif)
+    ![Connecting the projection query]({{base_path}}/images/Creating-Siddhi-Applications/Connect-Projection-Query.gif)
 8.  To define the execution logic, move the cursor over the query in the
     grid, and click on the settings icon that appears. This opens the
     **Query Configuration** form. Enter information in it as follows:  

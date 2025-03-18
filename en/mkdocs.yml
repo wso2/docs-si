@@ -33,8 +33,8 @@ copyright: WSO2 Streaming Integrator - Documentation
 theme:
   name: material
   custom_dir: theme/material
-  logo: images/logo.svg
-  favicon: images/favicon.png
+  logo: img/logo.svg
+  favicon: img/favicon.png
   features:
     - content.code.copy
     - navigation.tabs
@@ -137,8 +137,8 @@ nav:
         - 'Receiving JSON Events via RabbitMQ': 'samples/ReceiveRabbitmqInJSONFormat.md'
         - 'Receive Events via Simulator and Persist in Cassandra Store': 'samples/Store-cassandra.md'
       - 'Transforming Data':
-        - 'Publishing HTTP Events to to an OAuth-protected Endpoint': 'samples/PublishHttpOAuthRequest.md'
-        - 'Publishing HTTP Events to to an OAuth-protected Endpoint without an Access Token': 'samples/PublishHttpOAuthRequestWithoutAccessToken.md'
+        - 'Publishing HTTP Events to an OAuth-protected Endpoint': 'samples/PublishHttpOAuthRequest.md'
+        - 'Publishing HTTP Events to an OAuth-protected Endpoint without an Access Token': 'samples/PublishHttpOAuthRequestWithoutAccessToken.md'
         - 'Receiving ER7 Events via HL7': 'samples/ReceiveHl7InER7Format.md'
         - 'Preprocessing Data Received via TCP': 'samples/DataPreprocessing.md'
         - 'Publishing ER7 Events via HL7': 'samples/PublishHl7InER7Format.md'
@@ -231,8 +231,7 @@ nav:
   - Setup and Install:
     - 'Install':
       - 'Installing the Streaming Integrator':
-        - 'Installing via the Installer': 'setup/installing-si-in-vm.md'
-        - 'Installing via the Binary': 'setup/installing-si-binary.md'
+        - 'Install SI': 'setup/installing-si-in-vm.md'
         - 'Installing as a Windows Service': 'setup/installing-as-a-windows-service.md'
         - 'Installing as a Linux Service': 'setup/installing-si-as-a-linux-service.md'
       - 'Installing Siddhi Extensions': 'connectors/downloading-and-Installing-Siddhi-Extensions.md'

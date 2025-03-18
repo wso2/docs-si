@@ -35,7 +35,7 @@ WSO2 Streaming Integrator uses Perometheus to expose its statistics to Grafana. 
 
 2. Extract the downloaded file. The directory that opens as a result is referred to as the `<PROMETHEUS_HOME>` from here on.
 
-3. To enable statistics for the Prometheus reporter, open the `<SI_HOME>/conf/server/deployment.yaml` file and set the `enabled` parameter in the `wso2.metrics` section to `true`, and update the other parameters in the section as shown below. You also need to add the `metrics.prometheus:` as shown.
+3. To enable statistics for the Prometheus reporter, open the `<SI-Home>/conf/server/deployment.yaml` file and set the `enabled` parameter in the `wso2.metrics` section to `true`, and update the other parameters in the section as shown below. You also need to add the `metrics.prometheus:` as shown.
 
     ```
      wso2.metrics:
@@ -83,7 +83,7 @@ WSO2 Streaming Integrator uses Perometheus to expose its statistics to Grafana. 
     
     **Option 1**
 
-    1. Open the `<SI_HOME>/conf/server/deployment.yaml` file.
+    1. Open the `<SI-Home>/conf/server/deployment.yaml` file.
     2. Set the `Enable JDBC Reporter` parameter to false. Note that after you disable this, only the real-time metrics are displayed and information relating to metrics history is not displayed.
     ```toml
     # Enable JDBC Reporter
@@ -93,7 +93,7 @@ WSO2 Streaming Integrator uses Perometheus to expose its statistics to Grafana. 
 
     **Option 2**
 
-    1. Open the `<SI_HOME>/conf/server/deployment.yaml` file.
+    1. Open the `<SI-Home>/conf/server/deployment.yaml` file.
     2. Enable scheduled cleanup of the database under the `wso2.metrics.jdbc` parameter.
     ```
     wso2.metrics.jdbc:
@@ -187,17 +187,15 @@ To generate some statistics and view them, follow the procedure below.
     
 5. Under **Overview Statistics**, click **SweetFactoryApp**. The **overview-statistics / WSO2 Streaming Integrator App Statistics** dashboard opens.
 
-    ![app-statistics]({{base_path}}/images/quick-start-guide-101/app-staistics.png)
-    
 6. Scroll down to the **Sources** section. The following is displayed.
 
-    ![source-statistics]({{base_path}}/images/quick-start-guide-101/sources.png)
+    ![source-statistics]({{base_path}}/images/quick-start-guide-101/file-source-statistics.png)
     
     The two entries displayed above represent the `file` source and the `cdc` source used in the `SweetFactoryApp` Siddhi application.
     
 7. Scroll down further to the **Destinations** section. The `file` sink in the `SweetFactoryApp` Siddhi application is displayed as shown below.
 
-    ![destination-statistics]({{base_path}}/images/quick-start-guide-101/destination.png)
+    ![destination-statistics]({{base_path}}/images/quick-start-guide-101/file-sink-statistics.png)
     
 8. Under **Sources**, click on the link to the `productioninserts.csv` file. The **WSO2 Streaming Integrator - File Statistics** dashboard opens. The contents of the `productioninserts.csv` file is the output of one query and the input of another. Therefore, it is a source as well as a destination, statistics are displayed for it under **Source** and **Sink** as shown below.
 

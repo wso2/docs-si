@@ -1,28 +1,34 @@
-## Purpose:
+## Purpose
+
 This application demonstrates how to configure WSO2 Streaming Integrator Tooling to receive events to the `SweetProductionStream` via WebSocket transport in XML default format and log the events in `LowProductionAlertStream` to the output console.
 
-## Prerequisites:
-Save this sample.
+## Executing the sample
 
-## Executing the Sample:
-1. Navigate to `{WSO2SIHome}/samples/sample-clients/websocket-producer` and run `ant` command as follows:
+1. Navigate to `<SI-Tooling-Home>/samples/sample-clients/websocket-producer` and run `ant` command as follows:
     Run `ant` command in the terminal.
+
     ```bash
     ant
     ```
+
     If you want to publish custom number of events, you need to run `ant` command as follows.
+
     ```bash
     ant -DnoOfEventsToSend=5
     ```
+
 2. Start the Siddhi application by clicking on 'Run'.
 3. If the Siddhi application starts successfully, the following messages would be shown on the console.
-    ```
+
+    ```bash
     * ReceiveWebSocketInXMLFormat.siddhi - Started Successfully!
     ```
 
-## Viewing the Results:
+## Viewing the results
+
 See the output. Following message would be shown on the console.
-```
+
+```bash
 INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveWebSocketInXMLFormat : LowProductionAlertStream : Event{timestamp=1517985540005, data=[Honeycomb, 2700.3555330804284], isExpired=false}
 INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveWebSocketInXMLFormat : LowProductionAlertStream : Event{timestamp=1517985541009, data=[Froyo, 4195.429933118964], isExpired=false}
 INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveWebSocketInXMLFormat : LowProductionAlertStream : Event{timestamp=1517985542006, data=[Donut, 9625.837679695496], isExpired=false}

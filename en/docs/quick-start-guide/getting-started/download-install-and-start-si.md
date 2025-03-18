@@ -20,7 +20,7 @@ This section shows how to prepare your production environment for the scenario d
 
 In this scenario, the Streaming Integrator reads input data from a MySQL database table. Therefore, let's download and install MySQL and define the database and the database table as follows:
 
-1. Download MySQL 5.1.49 from [MySQL Community Downloads](https://dev.mysql.com/downloads/connector/j/5.1.html).
+1. Download MySQL 8.3.0 from [MySQL Community Downloads](https://downloads.mysql.com/archives/c-j/).
 
 2. Enable binary logging in the MySQL server. For detailed instructions, see [Debezium documentation - Enabling the binlog](https://debezium.io/docs/connectors/mysql/#enabling-the-binlog).  
 
