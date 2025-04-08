@@ -276,6 +276,7 @@ nav:
     - 'Deploying Siddhi Applications': 'develop/deploying-Streaming-Applications.md'
     - 'Exporting Siddhi Applications': 'develop/exporting-Siddhi-Applications.md'
   - 'Observability':
+    - 'Integration Control Plane': 'admin/working-with-integration-control-plane.md'
     - 'Monitoring SI via Dashboards':
       - 'Configuring Dashboards': 'admin/setting-up-grafana-dashboards.md'
       - 'Managing Dashboards': 'admin/managing-grafana-dashboards.md'
