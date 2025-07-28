@@ -274,6 +274,8 @@ nav:
     - 'Testing Siddhi Applications': 'develop/testing-a-Siddhi-Application.md'
     - 'Deploying Siddhi Applications': 'develop/deploying-Streaming-Applications.md'
     - 'Exporting Siddhi Applications': 'develop/exporting-Siddhi-Applications.md'
+    - 'Overview WSO2 Integrator: SI for VS Code': 'develop/si-for-vscode-overview.md'
+    - 'Install WSO2 Integrator: SI for VS Code': 'develop/install-si-for-vscode.md'
   - 'Observability':
     - 'Integration Control Plane': 'admin/working-with-integration-control-plane.md'
     - 'Monitoring SI via Dashboards':
