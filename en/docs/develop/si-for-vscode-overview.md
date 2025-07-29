@@ -15,11 +15,7 @@ This page provides a quick overview of the interface of the SI for VS Code exten
 !!! info
     See [Install Streaming Integrator for VS Code]({{base_path}}/develop/install-si-for-vscode/) for a complete installation guide of the SI for VS Code extension.
 
-When you open the extension for the first time, you'll see the **Welcome View** that guides you through the setup process and provides quick access to key features.
-
-<a href="{{base_path}}/images/si-for-vscode/welcome-view.png"><img src="{{base_path}}/images/si-for-vscode/welcome-view.png" alt="Welcome View" width="80%"></a>
-
-To get started, you need to first ensure that the required prerequisites (Java and WSO2 SI runtime) are properly configured. The extension will automatically detect and guide you through the setup process. You can then create a new Siddhi application by selecting [**Create New Siddhi Application**]({{base_path}}/develop/creating-siddhi-applications) or explore the provided samples that demonstrate common streaming integration patterns.
+To get started, you need to first ensure that the required prerequisites (Java and WSO2 SI runtime) are properly configured. The extension will automatically detect and guide you through the setup process when you open a Siddhi application after installing the extension for the first time. You can then create a new Siddhi application by selecting **Create New Siddhi Application** or explore the provided samples that demonstrate common streaming integration patterns.
 
 ## Environment Setup
 
@@ -27,11 +23,15 @@ The **Environment Setup** view helps you configure the necessary prerequisites f
 
 <a href="{{base_path}}/images/si-for-vscode/environment-setup.png"><img src="{{base_path}}/images/si-for-vscode/environment-setup.png" alt="Environment Setup" width="80%"></a>
 
-The extension automatically detects your system configuration and provides:
+The extension automatically detects your system configuration after opening a Siddhi application and provides:
 
 - **Java Runtime Status**: Verification and automatic download of compatible JDK versions
 - **SI Runtime Status**: Detection and setup of WSO2 Streaming Integrator
 - **Quick Setup Buttons**: One-click installation for missing components
+
+After the environment setup is done, you'll see the **Welcome View** that gives you an overview of the extension.
+
+<a href="{{base_path}}/images/si-for-vscode/welcome-view.png"><img src="{{base_path}}/images/si-for-vscode/welcome-view.png" alt="Welcome View" width="80%"></a>
 
 ## Siddhi Application Development
 
@@ -39,7 +39,7 @@ The extension automatically detects your system configuration and provides:
 
 The SI extension provides a rich code editing experience for Siddhi applications with comprehensive language support:
 
-<a href="{{base_path}}/assets/images/si-for-vscode/siddhi-editor.png"><img src="{{base_path}}images/si-for-vscode/siddhi-editor.png" alt="Siddhi Editor" width="80%"></a>
+<a href="{{base_path}}/images/si-for-vscode/siddhi-editor.png"><img src="{{base_path}}/images/si-for-vscode/siddhi-editor.png" alt="Siddhi Editor" width="80%"></a>
 
 **Key Features:**
 
