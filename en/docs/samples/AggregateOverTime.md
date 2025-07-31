@@ -4,12 +4,12 @@
 This application demonstrates how to simulate random events via Feed Simulation and calculate running aggregates such as `avg`, `min`, `max`, etc. The aggregation is executed on events within a time window. A sliding time window of 10 seconds is used in this sample. For more information on windows see [Siddhi Query Guide - Window](https://wso2.github.io/siddhi/documentation/siddhi-4.0/#window). The `group by` clause helps to perform aggregation on events grouped by a certain attribute. In this sample, the trading information per trader is aggregated and summarized, for a window of 10 seconds.
 
 !!!info "Before you begin:"
-    In the Streaming Integrator Tooling, save the sample Siddhi application.
+    In the WSO2 Integrator: SI Tooling, save the sample Siddhi application.
 
 
 ## Executing the Sample
 
-To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
 
 ![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
 
@@ -19,7 +19,7 @@ If the Siddhi application starts successfully, the following message appears in 
 
 ## Testing the Sample
 
-To test the sample Siddhi application, simulate random events for it via the Streaming Integrator Tooling as follows:
+To test the sample Siddhi application, simulate random events for it via the WSO2 Integrator: SI Tooling as follows:
 
 1. To open the Event Simulator, click the **Event Simulator** icon.
 

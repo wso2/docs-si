@@ -8,7 +8,7 @@
 
 ## Download the latest release
 
-- Get the latest version of WSO2 Streaming Integrator 4.3.0: [Download Here](https://wso2.com/streaming-integrator/)
+- Get the latest version of WSO2 Integrator: SI 4.3.0: [Download Here](https://wso2.com/streaming-integrator/)
 
 ## Fixed issues
 
@@ -21,4 +21,4 @@
 
 ## Known issues
 
-- [Streaming Integrator Issues](https://github.com/wso2/streaming-integrator/issues?q=is%3Aissue+is%3Aopen)
+- [WSO2 Integrator: SI Issues](https://github.com/wso2/streaming-integrator/issues?q=is%3Aissue+is%3Aopen)

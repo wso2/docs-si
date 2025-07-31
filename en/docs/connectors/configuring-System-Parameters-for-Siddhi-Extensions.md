@@ -1,6 +1,6 @@
 # Configuring System Parameters for Siddhi Extensions
 
-The pre-written Siddhi extensions supported by the Streaming Integrator are configured with default values for system 
+The pre-written Siddhi extensions supported by the WSO2 Integrator: SI are configured with default values for system 
 parameters. If you need to override those values, you can refer to those extensions from the 
 `<SI_HOME>/conf/<RUNTIME>/deployment.yaml` file and add the system parameters with the required values as key-value 
 pairs. To do this, follow the procedure below:

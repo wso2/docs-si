@@ -9,7 +9,7 @@
  
 ### Total Inputs
 
-This indicates all the streaming events received by WSO2 Streaming Integrator via CDC and file related Siddhi extensions.
+This indicates all the streaming events received by WSO2 Integrator: SI via CDC and file related Siddhi extensions.
 
 ### Total Outputs
 

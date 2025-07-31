@@ -1,10 +1,10 @@
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to receive events to the SweetProductionStream via Kafka transport in Binary Format and log the events in LowProductionAlertStream to the output console.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to receive events to the SweetProductionStream via Kafka transport in Binary Format and log the events in LowProductionAlertStream to the output console.
 
 ## Prerequisites
 
-1. The following steps must be executed to enable WSO2 SI to receive events via the Kafka transport. Since you need to shut down the server to execute these steps, get a copy of these instructions prior to proceeding.
+1. The following steps must be executed to enable SI to receive events via the Kafka transport. Since you need to shut down the server to execute these steps, get a copy of these instructions prior to proceeding.
 
     1. Download the Kafka broker from [here](https://archive.apache.org/dist/kafka/0.10.0.0/kafka_2.11-0.10.0.0.tgz).
     2. Convert and copy the Kafka client jars from the `{KafkaHome}/libs` directory to the `<SI-Tooling-Home>/libs` directory as follows.

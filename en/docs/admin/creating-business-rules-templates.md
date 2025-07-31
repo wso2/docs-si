@@ -17,7 +17,7 @@ Creating business rules from an existing template allows you to use sources, sin
 
 To create a business rule from a template, follow the procedure below:
 
-1. Navigate to the `<SI_TOOLING_HOME>` directory from the terminal and start the Streaming Integrator Tooling by issuing one of the following commands:
+1. Navigate to the `<SI_TOOLING_HOME>` directory from the terminal and start the WSO2 Integrator: SI Tooling by issuing one of the following commands:
     - On Windows: `tooling.bat --run`
     - On Linux/Mac OS:  `./tooling.sh`
 
@@ -36,7 +36,7 @@ To create a business rule from a template, follow the procedure below:
 
 4. Then click **From Template** to open the **Select a Template Group** page, where the available templates are displayed.
 
-5. Click on the template group that contains the required template to create a business rule from it. In this example, the business rule is created based on a template in the `Sweet Factory` template group that is packed with the Streaming Integrator by default. Therefore, click **Sweet Factory** to open this template group.
+5. Click on the template group that contains the required template to create a business rule from it. In this example, the business rule is created based on a template in the `Sweet Factory` template group that is packed with the WSO2 Integrator: SI by default. Therefore, click **Sweet Factory** to open this template group.
 
     ![Select template group]({{base_path}}/images/working-with-business-rules/select-template-group.png)
 
@@ -67,7 +67,7 @@ Creating a business rule from scratch allows you to define the filter logic for 
 
 To create a business rule from scratch, follow the procedure below:
 
-1. Navigate to the `<SI_TOOLING_HOME>` directory from the terminal and start the Streaming Integrator Tooling by issuing one of the following commands:
+1. Navigate to the `<SI_TOOLING_HOME>` directory from the terminal and start the WSO2 Integrator: SI Tooling by issuing one of the following commands:
     - On Windows: `tooling.bat --run`
     - On Linux/Mac OS:  `./tooling.sh`
 
@@ -186,7 +186,7 @@ Modify values for the parameters displayed as required and click **Save**.
 ### Deploying business rules
 
 !!!tip "Before you begin:"
-    Start the Streaming Integrator server by navigating to the `<SI_HOME>/bin` directory from the CLI, and issuing one of the following commands:<br/><br/>
+    Start the WSO2 Integrator: SI server by navigating to the `<SI_HOME>/bin` directory from the CLI, and issuing one of the following commands:<br/><br/>
     - On Windows: `server.bat --run`<br/>
     - On Linux/Mac OS:  `./server.sh`
 
@@ -211,13 +211,13 @@ As a result, the deployment information including the host and port of the nodes
 
 Possible deployment statuses are as follows:
 
-- **Saved**: The business rule is created, but not yet deployed in any Streaming Integrator node.
+- **Saved**: The business rule is created, but not yet deployed in any WSO2 Integrator: SI node.
 
-- **Deployed**: The business rule is created and deployed in all the required nodes in the Streaming Integrator cluster.
+- **Deployed**: The business rule is created and deployed in all the required nodes in the WSO2 Integrator: SI cluster.
 
-- **Partially Deployed:** The business rule is created and deployed only in some of the required nodes in the Streaming Integrator cluster.
+- **Partially Deployed:** The business rule is created and deployed only in some of the required nodes in the WSO2 Integrator: SI cluster.
 
-- **Partially Undeployed:** The business rule has been previously deployed, and then un-deployed only in some of the nodes in the Streaming Integrator cluster.
+- **Partially Undeployed:** The business rule has been previously deployed, and then un-deployed only in some of the nodes in the WSO2 Integrator: SI cluster.
 
 !!!info
     **Required nodes** are configured with respect to a rule template. For detailed instructions, see [Deploying business rules in SI server](#deploying-business-rules-in-si-server).
@@ -235,7 +235,7 @@ As a result, another message appears to inform you that the rule is successfully
 
 To create a business template using the Business Rules Template editor, follow the procedure below:
 
-1. If you have not already started the Streaming Integrator tooling, navigate to the `<SI_TOOLING_HOME>/bin` directory from the terminal and start the Streaming Integrator Tooling as mentioned below.
+1. If you have not already started the WSO2 Integrator: SI tooling, navigate to the `<SI_TOOLING_HOME>/bin` directory from the terminal and start the WSO2 Integrator: SI Tooling as mentioned below.
     - On Windows: `tooling.bat --run`
     - On Linux/Mac OS: `./ tooling.sh`
 
@@ -433,9 +433,9 @@ When you click **Recover**, the code view is reset to the latest detected valid 
 
 ## Editing a Business Rules Template
 
-WSO2 SI allows you to make edits to a business rules template that you have already created and saved. To edit a template via the Template Editor tool, follow the steps below.
+SI allows you to make edits to a business rules template that you have already created and saved. To edit a template via the Template Editor tool, follow the steps below.
 
-1. Start the WSO2 SI Tooling profile by issuing one of the following commands.
+1. Start the SI Tooling profile by issuing one of the following commands.
     - For Windows: `tooling.bat`
     - For Linux: `./tooling.sh`
 
@@ -664,10 +664,10 @@ for the templated parameters.</p></td>
 
 ### Deploying business rules in SI server
 
-To deploy a business rule in the Streaming Integrator server, follow the procedure below.
+To deploy a business rule in the WSO2 Integrator: SI server, follow the procedure below.
 
 !!!tip "Before you begin:"
-    Both the Streaming Integrator server(s) and Streaming Integrator tooling must be up and running.
+    Both the WSO2 Integrator: SI server(s) and WSO2 Integrator: SI tooling must be up and running.
 
 1. Save the template group you created as a `.json` file in the `<SI_TOOLING_HOME>/wso2/server/resources/businessRules/templates` directory.
 
@@ -686,7 +686,7 @@ To deploy a business rule in the Streaming Integrator server, follow the procedu
     ```
 
     !!! info
-        Specify the value for `nodeURL1` in the `IP:Port` format. If you add this configuration, a business rule which is derived from this rule template (when you run the Streaming Integrator Tooling and the Streaming Integrator servers of your SI setup) is deployed only in the nodes under which - this rule template has been specified. If you do not specifically add business rule template IDs in the configuration, business rules are deployed in all the available Streaming Integrator servers.
+        Specify the value for `nodeURL1` in the `IP:Port` format. If you add this configuration, a business rule which is derived from this rule template (when you run the WSO2 Integrator: SI Tooling and the WSO2 Integrator: SI servers of your SI setup) is deployed only in the nodes under which - this rule template has been specified. If you do not specifically add business rule template IDs in the configuration, business rules are deployed in all the available WSO2 Integrator: SI servers.
 
 ## Configuring Business Rules Manager Permissions
 

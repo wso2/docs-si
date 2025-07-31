@@ -5,7 +5,7 @@
 
 ![Query statistics dashboard]({{base_path}}/images/streaming-integrator-grafana-dashboard/query_statistics_dashboard.png)
 
-This dashboard displays the following information for your current WSO2 Streaming Integrator deployment:
+This dashboard displays the following information for your current WSO2 Integrator: SI deployment:
 
 - The throughput of each query
 - The total query count

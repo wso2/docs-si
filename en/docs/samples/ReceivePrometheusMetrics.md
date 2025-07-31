@@ -5,9 +5,9 @@ This application demonstrates how  to retrieve Prometheus metrics that are expor
 
 ## Prerequisites:
 
-The following steps must be executed to enable WSO2 Streaming Integrator to publish and retrieve events via Prometheus.
+The following steps must be executed to enable WSO2 Integrator: SI to publish and retrieve events via Prometheus.
 
-1. To complete the installation of the Prometheus extension in WSO2 Streaming Integrator Tooling, follow the steps below:
+1. To complete the installation of the Prometheus extension in WSO2 Integrator: SI Tooling, follow the steps below:
 
     1. Download the following JARs.
     
@@ -21,14 +21,14 @@ The following steps must be executed to enable WSO2 Streaming Integrator to publ
         
     2. Place the JARs you downloaded in the `<SI_TOOLING_HOME>/lib` directory.
 		    
-2. Start WSO2 Streaming Integrator Tooling, navigate to the `<SI_TOOLING_HOME>/bin` directory and issue the appropriate command based on your operating system.
+2. Start WSO2 WSO2 Integrator: SI Tooling, navigate to the `<SI_TOOLING_HOME>/bin` directory and issue the appropriate command based on your operating system.
 
     - **For Windows**: `server.bat --run`
     - **For Linux/MacOS**: `./server.sh`
 
 3. Save the sample `EnergyAlertApp` Siddhi application.
 
-    When the Siddhi application is successfully deployed in Streaming Integrator Tooling, the following message is logged in the console.
+    When the Siddhi application is successfully deployed in WSO2 Integrator: SI Tooling, the following message is logged in the console.
 
     `"Siddhi App EnergyAlertApp successfully deployed"`
     

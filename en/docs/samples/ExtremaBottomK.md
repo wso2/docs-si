@@ -4,11 +4,11 @@
 This application demonstrates how to use the `siddhi-execution-extrema` extension with the `bottomK` function.
 
 !!!info "Before you begin:"
-    Save the sample Siddhi application in Streaming Integrator Tooling.
+    Save the sample Siddhi application in WSO2 Integrator: SI Tooling.
 
 ## Executing the Sample
 
-To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
 
 ![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
 
@@ -53,7 +53,7 @@ Navigate to the `<WSO2SIHome>/samples/sample-clients/http-client` directory and 
 
 ## Viewing the Results
 
-The output is logged in the Streaming Integrator Tooling console as follows.
+The output is logged in the WSO2 Integrator: SI Tooling console as follows.
 
 ```
 INFO {io.siddhi.core.stream.output.sink.LogSink} - ExtremaBottomK : outputStream : [Event{timestamp=1529498254202, data=[sugar, 20, sugar, 1, null, null, null, null], isExpired=false}, Event{timestamp=1529498254202, data=[cake, 10, cake, 1, sugar, 1, null, null], isExpired=false}]<br/><br/>

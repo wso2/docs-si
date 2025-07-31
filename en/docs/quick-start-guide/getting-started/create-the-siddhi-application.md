@@ -8,7 +8,7 @@ The following image depicts the procedure to be followed by the Siddhi applicati
 
 ![Siddhi Application Flow]({{base_path}}/images/quick-start-guide-101/scenario.png)
 
-1. Extract the Streaming Integrator Tooling pack to a preferred location. Hereafter, the extracted location is referred to as `<SI_TOOLING_HOME>`.
+1. Extract the WSO2 Integrator: SI Tooling pack to a preferred location. Hereafter, the extracted location is referred to as `<SI_TOOLING_HOME>`.
 
 2. Navigate to the `<SI_TOOLING_HOME>/bin` directory and issue the appropriate command depending on your operating system to start the Streaming Integration tooling.
 
@@ -99,25 +99,25 @@ insert  into ProductionUpdatesStream;
 
 ## Installing the required extensions
 
-The Streaming Integrator is by default shipped with most of the available Siddhi extensions by default. If a Siddhi extension you require is not shipped by default, you can download and install it via the Extension Installer tool. The `SweetFactoryApp` Siddhi application you created uses a source of the `cdc` type. The `cdc-mysql` extension that is required for this source is not shipped with WSO2 Streaming Integrator by default. Therefore, let's install it as follows.
+The WSO2 Integrator: SI is by default shipped with most of the available Siddhi extensions by default. If a Siddhi extension you require is not shipped by default, you can download and install it via the Extension Installer tool. The `SweetFactoryApp` Siddhi application you created uses a source of the `cdc` type. The `cdc-mysql` extension that is required for this source is not shipped with WSO2 Integrator: SI by default. Therefore, let's install it as follows.
 
 
-1. In Streaming Integrator Tooling, click **Tools**, and then click **Extension Installer**. The **Extension Installer** dialog box opens.
+1. In WSO2 Integrator: SI Tooling, click **Tools**, and then click **Extension Installer**. The **Extension Installer** dialog box opens.
 
     ![Extension Installer Dialog Box]({{base_path}}/images/quick-start-guide-101/extension-installer-dialog.png)
     
     Click **Install** for **Change Data Capture - MySQL**.
     
-2. Restart Streaming Integrator Tooling.
+2. Restart WSO2 Integrator: SI Tooling.
 
 ## Testing the Siddhi application
 
-Before deploying the `SweetFactoryApp` Siddhi application to the Streaming Integrator Server, you need to test it to check whether the Siddhi queries you wrote work as expected. For this purpose, you can simulate events via the Event Simulator in Streaming Integrator Tooling as follows:
+Before deploying the `SweetFactoryApp` Siddhi application to the WSO2 Integrator: SI Server, you need to test it to check whether the Siddhi queries you wrote work as expected. For this purpose, you can simulate events via the Event Simulator in WSO2 Integrator: SI Tooling as follows:
 
 !!! tip
     Although you are using the Event Simulateor instead of performing an insert operation in the MySQL database table you created, you need to start the MySQL server before following the steps below.
 
-1. In Streaming Integrator Tooling, click the **Event Simulator** icon in the left pane of the editor to open the **Single Simulation** panel.
+1. In WSO2 Integrator: SI Tooling, click the **Event Simulator** icon in the left pane of the editor to open the **Single Simulation** panel.
 
     ![Event Simulation icon]({{base_path}}/images/Testing-Siddhi-Applications/Event_Simulation_Icon.png)
 

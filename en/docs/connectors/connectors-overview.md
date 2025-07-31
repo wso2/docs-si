@@ -1,6 +1,6 @@
-# Streaming Integrator Connectors Overview
+# WSO2 Integrator: SI Connectors Overview
 
-WSO2 Streaming Integrator is powered by Siddhi. Siddhi supports an extension architecture to enhance its functionality by incorporating other libraries in a seamless manner.
+WSO2 Integrator: SI is powered by Siddhi. Siddhi supports an extension architecture to enhance its functionality by incorporating other libraries in a seamless manner.
 
 ## Purpose
 
@@ -143,4 +143,4 @@ For the complete list of pre-written Siddhi extensions that are currently availa
 ## Further References
 
 - For instructions to download and install a Siddhi extension, see [Downloading and Installing Siddhi Extensions](downloading-and-Installing-Siddhi-Extensions.md).
-- If you want to install/uninstall one or more Siddhi extensions in Streaming Integrator Tooling, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
+- If you want to install/uninstall one or more Siddhi extensions in WSO2 Integrator: SI Tooling, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).

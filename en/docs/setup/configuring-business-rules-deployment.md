@@ -1,13 +1,13 @@
 ## Configuring Business Rules Deployment
 
 The Business Rules Manager derives business rules from the rule templates within template groups. Each rule template has a UUID(Universally Unique Identifier) for the purpose of uniquely identifying it.
-When you configure a Streaming Integrator node to use a specific rule template, Siddhi applications deployed in the node are derived from the business rules created from that rule template.
+When you configure a WSO2 Integrator: SI node to use a specific rule template, Siddhi applications deployed in the node are derived from the business rules created from that rule template.
 
-To configure a Streaming Integrator node to use specific rules templates, follow the steps below:
+To configure a WSO2 Integrator: SI node to use specific rules templates, follow the steps below:
 
 1. Open the `<SI_TOOLING_HOME>/conf/server/deployment.yaml` file.
 
-2. In the `wso2.business.rules.manager` -> `deployment_configs:` section, provide the URL(s) of  the Streaming Integrator node(s) in which you want to deploy Siddhi applications. The required format is `<HOST_NAME>:<PORT>`.
+2. In the `wso2.business.rules.manager` -> `deployment_configs:` section, provide the URL(s) of  the WSO2 Integrator: SI node(s) in which you want to deploy Siddhi applications. The required format is `<HOST_NAME>:<PORT>`.
     
     ```yaml
      deployment_configs:
@@ -67,9 +67,9 @@ To configure a Streaming Integrator node to use specific rules templates, follow
                 - identifying-continuous-production-decrease
                 - sweet-production-kpi-analysis
        ```<br/><br/>
-       In the above example, the `sweet-production-kpi-analysis` UUID is configured under two Streaming Integrator nodes. Therefore, if you derive a business rule from the `sweet-production-kpi-analysis` template, the Siddhi applications created from it are deployed in both the nodes.
+       In the above example, the `sweet-production-kpi-analysis` UUID is configured under two WSO2 Integrator: SI nodes. Therefore, if you derive a business rule from the `sweet-production-kpi-analysis` template, the Siddhi applications created from it are deployed in both the nodes.
        
-4. Specify the username and password that are common for all the Streaming Integrator nodes.
+4. Specify the username and password that are common for all the WSO2 Integrator: SI nodes.
 
     ```yaml
      username: admin

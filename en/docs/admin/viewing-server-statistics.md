@@ -37,7 +37,7 @@ The information displayed is as follows.
 This allows you to get an overall understanding of the level of activity carried out by the currently active servers.
 
 !!! tip "Recommended action"
-    If the Siddhi application count is relatively high, you can check the throughput for each Siddhi application to identify the Siddhi applications that you can remove from your Streaming Integrator deployment to reduce the system overhead. To do this, you can filter statistics for each individual Siddhi application in the following dashboards:<br/><br/>
+    If the Siddhi application count is relatively high, you can check the throughput for each Siddhi application to identify the Siddhi applications that you can remove from your WSO2 Integrator: SI deployment to reduce the system overhead. To do this, you can filter statistics for each individual Siddhi application in the following dashboards:<br/><br/>
     - [Siddhi Stream Statistics](viewing-stream-statistics.md)<br/>
     - [Siddhi Source Statistics](viewing-source-statistics.md)<br/>
     - [Siddhi Sink Statistics](viewing-sink-statistics.md)<br/>
@@ -52,7 +52,7 @@ This allows you to get an overall understanding of the level of activity carried
 
 ![Server statistics summary]({{base_path}}/images/streaming-integrator-grafana-dashboard/server_statistics_summary.png)
 
- This lists the currently active Streaming Integrator servers and displays the following for each server:
+ This lists the currently active WSO2 Integrator: SI servers and displays the following for each server:
   - The total events received by the server
   - The system load average
   - The total memory used by each server.
@@ -65,26 +65,26 @@ To evaluate the performance of each server as follows:
 - By comparing the events received, system load average and the memory usage of each server with that of other servers.
 
 !!! tip "Recommended action"
-    Once you analyze the performance of each server, you can make changes to your Streaming Integrator deployment to use server resources in a more optimum manner (e.g., by removing low performing servers, adding better performing servers, etc.)
+    Once you analyze the performance of each server, you can make changes to your WSO2 Integrator: SI deployment to use server resources in a more optimum manner (e.g., by removing low performing servers, adding better performing servers, etc.)
  
 ## Overall Throughput
 
 ![Overall throughput]({{base_path}}/images/streaming-integrator-grafana-dashboard/overall_throughput_graph.png)
 
- This shows the overall throughput of all the servers in your current Streaming Integrator deployment. 
+ This shows the overall throughput of all the servers in your current WSO2 Integrator: SI deployment. 
 
 **Purpose**
 
 To monitor the overall throughput and evaluate it against other statistics such as the system load average, memory used, the number of Siddhi applications deployed in the system etc.
  
 !!! tip "Recommended action"
-    Determine whether the overall throughput of your Streaming Integrator server is sufficient based on the system resources allocated, and identify ways in which you can improve it (e.g., reducing Siddhi elements that are deployed, but do not generate a sufficient throughput, making adjustments to the system resources allocated. etc.)
+    Determine whether the overall throughput of your WSO2 Integrator: SI server is sufficient based on the system resources allocated, and identify ways in which you can improve it (e.g., reducing Siddhi elements that are deployed, but do not generate a sufficient throughput, making adjustments to the system resources allocated. etc.)
  
 ## System Load Average
 
 ![System load average]({{base_path}}/images/streaming-integrator-grafana-dashboard/system_load_average_graph.png)
 
- This shows the average system load of your current Streaming Integrator deployment.
+ This shows the average system load of your current WSO2 Integrator: SI deployment.
  
 **Purpose**
 
@@ -97,34 +97,34 @@ To monitor the system load average and compare it with other statistics such as 
 
 ![CPU usage]({{base_path}}/images/streaming-integrator-grafana-dashboard/cpu_usage_graph.png)
 
-  This shows the CPU usage of your current Streaming Integrator deployment.
+  This shows the CPU usage of your current WSO2 Integrator: SI deployment.
   
 **Purpose**
 
-To monitor the CPU usage of your current Streaming Integrator deployment and to identify scenarios where you may need to make changes to the CPU resource allocation.
+To monitor the CPU usage of your current WSO2 Integrator: SI deployment and to identify scenarios where you may need to make changes to the CPU resource allocation.
 
 !!! tip "Recommended action"
-    If there is a spike in the CPU usage, you can identify whether you need to allocate more CPU resources to your deployment or redeploy some of the Siddhi elements with high throughputs to a different Streaming Integrator deployment. <br/><br/> Similarly, if there is a fall in the CPU usage, you can determine whether some of the CPU resources can be removed from the WSO2 Streaming Integrator deployment.
+    If there is a spike in the CPU usage, you can identify whether you need to allocate more CPU resources to your deployment or redeploy some of the Siddhi elements with high throughputs to a different WSO2 Integrator: SI deployment. <br/><br/> Similarly, if there is a fall in the CPU usage, you can determine whether some of the CPU resources can be removed from the WSO2 Integrator: SI deployment.
  
 ## Memory Usage
 
 ![Memory usage]({{base_path}}/images/streaming-integrator-grafana-dashboard/memory_usage_graph.png)
 
- This shows the memory usage of your current Streaming Integrator deployment.
+ This shows the memory usage of your current WSO2 Integrator: SI deployment.
 
 **Purpose**
 
-To monitor the memory usage of your Streaming Integrator deployment and allocate more memory when needed.
+To monitor the memory usage of your WSO2 Integrator: SI deployment and allocate more memory when needed.
  
 !!! tip "Recommended action"
-    If there is a spike in the memory usage, you can identify whether you need to allocate more memory resources to your deployment or redeploy some of the Siddhi elements with high throughputs to a different Streaming Integrator deployment. <br/><br/> Similarly, if there is a fall in the memory usage, you can determine whether some of the memory resources can be removed from the WSO2 Streaming Integrator deployment.
+    If there is a spike in the memory usage, you can identify whether you need to allocate more memory resources to your deployment or redeploy some of the Siddhi elements with high throughputs to a different WSO2 Integrator: SI deployment. <br/><br/> Similarly, if there is a fall in the memory usage, you can determine whether some of the memory resources can be removed from the WSO2 Integrator: SI deployment.
  
 
 ## JVM Physical Memory
 
 ![JVM physical memory]({{base_path}}/images/streaming-integrator-grafana-dashboard/jvm_physical_memory_usage.png)
 
-The amount of JVM physical memory consumed by your WSO2 Streaming Integrator deployment over time.
+The amount of JVM physical memory consumed by your WSO2 Integrator: SI deployment over time.
 
 **Purpose**
 

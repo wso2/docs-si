@@ -1,6 +1,6 @@
-# Setting up Dashboards to Display WSO2 SI Statistics
+# Setting up Dashboards to Display SI Statistics
 
-This section explains how WSO2 Streaming Integrator servers can be configured to publish data to Prometheus and display statistics in Grafana dashboards.
+This section explains how WSO2 Integrator: SI servers can be configured to publish data to Prometheus and display statistics in Grafana dashboards.
 
 !!! tip "Before you begin:"
     - Download and install Prometheus. For instructions, see [the Prometheus Getting Started Guide](https://prometheus.io/docs/prometheus/latest/getting_started/). <br/>
@@ -10,7 +10,7 @@ This section explains how WSO2 Streaming Integrator servers can be configured to
 
 In order to configure a Grafana dashboard, follow the steps below:
 
-1. **Configure Prometheus reporter in Streaming Integrator**
+1. **Configure Prometheus reporter in WSO2 Integrator: SI**
 
     Enable statistics for the Prometheus reporter as follows.
    
@@ -47,7 +47,7 @@ In order to configure a Grafana dashboard, follow the steps below:
         define stream TestStream (message string);
       ```
 
-2. **Start Streaming Integrator server**
+2. **Start WSO2 Integrator: SI server**
 
     To start the Streaming runtime, navigate to the `<SI-Home>/bin` directory and issue the appropriate command based on your operating system.
     
@@ -96,7 +96,7 @@ In order to configure a Grafana dashboard, follow the steps below:
 
 5. **Load dashboards into Grafana**
 
-    WSO2 Streaming Integrator offers pre-built dashboards for monitoring streaming data flows and server statistics. To load them, follow the procedure below:
+    WSO2 Integrator: SI offers pre-built dashboards for monitoring streaming data flows and server statistics. To load them, follow the procedure below:
     
     1. Download the required JSON file (i.e., based on the statistics you need to view) from [here](https://github.com/wso2/streaming-integrator/tree/master/modules/distribution/carbon-home/resources/dashboards).
     

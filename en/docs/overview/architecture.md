@@ -10,12 +10,12 @@ Stream integration refers to collecting, processing and, integrate or acting on 
 
 - **Acting**: Taking actions based on the results and findings done via processing the data. The action can be executing some random code, calling an external service, or triggering a complex integration. 
  
-The Streaming Integrator architecture reflects this natural flow in its design as illustrated below.
+The WSO2 Integrator: SI architecture reflects this natural flow in its design as illustrated below.
 
-![Streaming Integrator/ Architecture]({{base_path}}/images/overview/si-architecture.png)
+![WSO2 Integrator: SI/ Architecture]({{base_path}}/images/overview/si-architecture.png)
 
 
-The Streaming Integrator contains Siddhi.io as its core to collect, and 60+ connectors to connect with various sources and destinations. The following are the major components and constructs of the Streaming Integrator.
+The WSO2 Integrator: SI contains Siddhi.io as its core to collect, and 60+ connectors to connect with various sources and destinations. The following are the major components and constructs of the WSO2 Integrator: SI.
  
 #### Source
 

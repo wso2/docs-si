@@ -7,7 +7,7 @@ This application demonstrates how to publish aggregated events to Amazon AWS S3 
 
 !!!info "Before you begin:"
     - Create an AWS account and set the credentials following the instructions in the [AWS Developer Guide](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html).
-    - Save the sample Siddhi application in Streaming Integrator Tooling.
+    - Save the sample Siddhi application in WSO2 Integrator: SI Tooling.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ This application demonstrates how to publish aggregated events to Amazon AWS S3 
 
 To execute the sample, follow the procedure below:
 
-1. In Streaming Integrator Tooling, click Open and then click **AmazonS3SinkSample.siddhi** in the **workspace** directory. Then update it as follows:
+1. In WSO2 Integrator: SI Tooling, click Open and then click **AmazonS3SinkSample.siddhi** in the **workspace** directory. Then update it as follows:
 
     1. Enter the credential.provider class name as the value for the `credential.provider` parameter. If the class is not specified, the default credential provider chain is used.
 
@@ -41,7 +41,7 @@ To execute the sample, follow the procedure below:
 
 ## Testing the Sample
 
-To test the sample Siddhi application, simulate random events for it via the Streaming Integrator Tooling as follows:
+To test the sample Siddhi application, simulate random events for it via the WSO2 Integrator: SI Tooling as follows:
 
 1. To open the Event Simulator, click the **Event Simulator** icon.
 

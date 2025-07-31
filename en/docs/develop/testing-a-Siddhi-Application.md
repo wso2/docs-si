@@ -1,11 +1,11 @@
-# Testing Siddhi Applications
+# Running and Testing Siddhi Applications
 
-The Streaming Integrator allows the following tasks to be carried
+The WSO2 Integrator: SI allows the following tasks to be carried
 out to ensure that the Siddhi applications you create and deploy are
 validated before they are run in an actual production environment.
 
--   Validate Siddhi applications that are written in the Streaming Integrator Tooling.
--   Run Siddhi applications that were written in the Streaming Integrator Tooling.
+-   Validate Siddhi applications that are written using the WSO2 Integrator: SI VSCode extension.
+-   Run Siddhi applications that were written using the WSO2 Integrator: SI VSCode extension.
 -   Simulate events to test the Siddhi applications and analyze events
     that are received and sent. This allows you to analyze the status of
     each query within a Siddhi application at different execution
@@ -15,13 +15,37 @@ validated before they are run in an actual production environment.
 
 To validate a Siddhi application, follow the procedure below:
 
-1.  Start and access the Streaming Integrator Tooling. For detailed
-    instructions, see [Starting Streaming Integrator Tooling](streaming-integrator-studio-overview.md#Starting-Streaming-Integration-Studio).
+1.  Open the VSCode within the workspace that contains the Siddhi application.
 
-2.  In this example, let's use an existing sample as an example. Click
-    on the **ReceiveAndCount** sample to open it.
+2.  In this example, we are using the **ReceiveAndCount** sample from [Siddhi Application Overview](./siddhi-Application-Overview.md). Copy the entire Siddhi application code
+    and paste it in a new file. Save the file with a `.siddhi` extension.
+    ```sql
+        @App:name("ReceiveAndCount")
+    @App:description('Receive events via HTTP transport and view the output on the console')
 
-3.  Sample opens in a new tab. This sample does not have errors, and
+    /* 
+        Sample Siddhi App block comment
+    */
+
+    -- Sample Siddhi App line comment
+
+    @Source(type = 'http',
+            receiver.url='http://localhost:8006/productionStream',
+            basic.auth.enabled='false',
+            @map(type='json'))
+    define stream SweetProductionStream (name string, amount double);
+
+    @sink(type='log')
+    define stream TotalCountStream (totalCount long);
+
+    -- Count the incoming events
+    @info(name='query1')
+    from SweetProductionStream
+    select count() as totalCount
+    insert into TotalCountStream;
+    ```
+
+3.  This sample does not have errors, and
     therefore, no errors are displayed in the editor. To create an error
     for demonstration purposes, change the `count()` function in the `query1` query to
     `countNew()` as shown below.
@@ -36,7 +60,7 @@ To validate a Siddhi application, follow the procedure below:
     Now, the editor indicates that there is a syntax error. If you move
     the cursor over the error icon, it indicates that
     `countNew` is an invalid function name as shown
-    below.  
+    below.
     ![Source View indicates a syntax error]({{base_path}}/images/Testing-Siddhi-Applications/Syntax_Error_Indicated.png)
 
 ## Running a Siddhi application
@@ -44,34 +68,16 @@ To validate a Siddhi application, follow the procedure below:
 You can run a Siddhi application to verify whether the logic
 you have written is correct. To start a Siddhi application, follow the procedure below:
 
-1.  Start and access the Streaming Integrator Tooling. For detailed
-    instructions, see [Starting Stream Integration Tooling](streaming-integrator-studio-overview.md#Starting-Streaming-Integration-Studio).
-    
-2.  For this example, click the **existing** sample **ReceiveAndCount**. It opens in a new untitled tab.
+1.  Open the application in VSCode.
 
-3.  Save the Siddhi file so that you can run it. To save it, click **File** -> **Save**. Once the file is saved,
-    you can see the **Run** -> **Run** menu option enabled as shown
-    below.
+2.  In the editor, click the **Run** button (▶️) in the toolbar.
 
-    ![Run and Debug options enabled]({{base_path}}/images/Testing-Siddhi-Applications/Enable_Run_Debug.png)
-
-    To start the application, click the **Run** menu option. This logs the following output in the console.
-
-        ![Run log]({{base_path}}/images/Testing-Siddhi-Applications/Run-Log.png)
-
-5.  To create an error for demonstration purposes, change the `count()` function in the
-    `query1` query to `countNew()`, and save. Then click **Run** -> **Run**. As a result, the
-    following output is logged in the console.
-
-    ![Siddhi application in a faulty state]({{base_path}}/images/Testing-Siddhi-Applications/Faulty_Siddhi_Application_Message.png)
+    ![Run button]({{base_path}}/images/Testing-Siddhi-Applications/Run-Button.png)
 
 <a name="simulate"></a>
 ## Simulating events
 
-This section demonstrates how to test a Siddhi application via event simulation. Event simulation involves simulating 
-predefined event streams. These event stream definitions have stream attributes. You can use event simulator to create 
-events by assigning values to the defined stream attributes and send them as events. This is useful for testing Siddhi 
-applications in order to evaluate whether they function as expected
+This section demonstrates how to test a Siddhi application via event simulation. Event simulation involves simulating predefined event streams. These event stream definitions have stream attributes. You can use event simulator to create events by assigning values to the defined stream attributes and send them as events. This is useful for testing Siddhi applications in order to evaluate whether they function as expected.
 
 
 Events can be simulated in the following methods:
@@ -82,35 +88,22 @@ Events can be simulated in the following methods:
 - [Generating random events](#Generating-random-events)
 
 !!! tip
-    Before you simulate events for a Siddhi application, you need to run it. Therefore, before you try this section, see
-    [Running a Siddhi application](testing-a-Siddhi-Application.md#running-a-siddhi-application).
+    Before you simulate events for a Siddhi application, you need to run it. Therefore, before you try this section, see [Running a Siddhi application](testing-a-Siddhi-Application.md#running-a-siddhi-application).
 
 ### Simulating a single event
 
 This section demonstrates how to simulate a single event to be processed
-via the Streaming Integrator.
+via the WSO2 Integrator: SI.
 
-!!! tip
-    Before simulating events, a Siddhi application should be deployed.
-    
 To simulate a single event, follow the steps given below.
 
-1.  Access the Streaming Integrator Tooling via the `http://localhost:/editor`
-    URL. The Streaming Integrator Tooling opens as shown below.
+1.  Run the Siddhi application from the VSCode editor. It will pop up the **WSO2 Integrator: SI Event Simulator** panel.
     
-    !!! info
-        The default URL is`http://localhost:9090/editor`.
-
-    ![Welcome Page]({{base_path}}/images/Creating-Siddhi-Applications/Welcome-Page.png)
-
-2.  Click the **Event Simulator** icon in the left pane of the editor to
-    open the **Single Simulation** panel.
-
-    ![Event Simulation icon]({{base_path}}/images/Testing-Siddhi-Applications/Event_Simulation_Icon.png)
-
+2.  Click the **Single Simulation** panel.
     It opens the left panel for event simulation as follows.
 
-    ![Event Simulation Panel]({{base_path}}/images/Testing-Siddhi-Applications/Event_Simulation_Panel.png)
+    <img src="{{base_path}}/images/Testing-Siddhi-Applications/Single-Event-Simulation-Panel.png" alt="Single Simulation Panel" width="50%">
+    <!-- ![Event Simulation Panel]({{base_path}}/images/Testing-Siddhi-Applications/Single-Event-Simulation-Panel.png) -->
 
 3.  Enter Information in the **Single Simulation** panel as described
      below.
@@ -134,7 +127,7 @@ To simulate a single event, follow the steps given below.
 
 ### Simulating multiple events via CSV files
 This section explains how to generate multiple events via CSV files to
-be analyzed via the Streaming Integrator.
+be analyzed via the WSO2 Integrator: SI.
 
 !!! tip
     Before simulating events, a Siddhi application should be deployed.
@@ -142,28 +135,17 @@ be analyzed via the Streaming Integrator.
 To simulate multiple events from a CSV file, follow the steps given
 below.
 
-1. Access the Streaming Integrator Tooling via the `http://localhost:/editor`
-   URL. The Streaming Integrator Tooling opens as shown below.
-   
-    !!! info
-        The default URL is`http://localhost:9090/editor`.
+1.  Run the Siddhi application from the VSCode editor. It will pop up the **WSO2 Integrator: SI Event Simulator** panel.
+    
+2.  Click the **Feed Simulation** panel.
+    It opens the left panel for event simulation as follows.
+    <img src="{{base_path}}/images/Testing-Siddhi-Applications/Feed-Simulation-Panel.png" alt="Feed Simulation Panel" width="50%">
 
-    ![Welcome Page]({{base_path}}/images/Creating-Siddhi-Applications/Welcome-Page.png)
-
-2.  Click the **Event Simulator** icon in the left pane of the editor.
-
-    ![Event Simulator Icon]({{base_path}}/images/Testing-Siddhi-Applications/Event_Simulation_Icon.png)
-
-3.  In the event simulation left panel that opens, click on the **Feed Simulation** tab.
-
-    ![Feed Simulation tab]({{base_path}}/images/Testing-Siddhi-Applications/Feed_Simulation_Tab.png)  
-      
-4.  To create a new simulation, click **Create** . This opens the
+3.  To create a new simulation, click **Create** . This opens the
     following panel.
+    <img src="{{base_path}}/images/Testing-Siddhi-Applications/Feed-Simulation.png" alt="New feed simulation" width="50%">
 
-    ![New feed simulatioin]({{base_path}}/images/Testing-Siddhi-Applications/Feed_Simulation.png)
-
-5.  Enter values for the displayed fields as follows.
+4.  Enter values for the displayed fields as follows.
 
     1.  In the **Simulation Name** field, enter a name for the event simulation.
 
@@ -218,35 +200,26 @@ below.
 
 ### Simulating multiple events via databases
 
-This section explains how to generate multiple events via databases to be analyzed via the Streaming Integrator.
+This section explains how to generate multiple events via databases to be analyzed via the WSO2 Integrator: SI.
 
 !!! tip
     Before simulating events via databases:<br/>
     -   A Siddhi application must be created.<br/>
-    -   The database from which you want to simulate events must be already configured for the Streaming Integrator.
+    -   The database from which you want to simulate events must be already configured for the WSO2 Integrator: SI.
     
 To simulate multiple events from a database, follow the procedure below:
 
-1. Access the Streaming Integrator Tooling via the `http://localhost:/editor` URL. The Streaming Integrator Tooling opens as shown below.
-   
-    !!! info
-        The default URL is`http://localhost:9090/editor`.
+1. Run the Siddhi application from the VSCode editor. It will pop up the **WSO2 Integrator: SI Event Simulator** panel.
 
-    ![Welcome Page]({{base_path}}/images/Creating-Siddhi-Applications/Welcome-Page.png)
-     
-2.  Click the **Event Simulator** icon in the left pane of the editor.
+2.  Click the **Feed Simulation** panel.
+    It opens the left panel for event simulation as follows.
+    <img src="{{base_path}}/images/Testing-Siddhi-Applications/Feed-Simulation-Panel.png" alt="Feed Simulation Panel" width="50%">
 
-    ![Event Simulator Icon]({{base_path}}/images/Testing-Siddhi-Applications/Event_Simulation_Icon.png)
+3.  To create a new simulation, click **Create** . This opens the
+    following panel.
+    <img src="{{base_path}}/images/Testing-Siddhi-Applications/Feed-Simulation.png" alt="New feed simulation" width="50%">
 
-3.  Click the **Feed** tab to open the **Feed Simulation** panel.
-
-    ![Feed Simulation tab]({{base_path}}/images/Testing-Siddhi-Applications/Feed_Simulation.png)
-
-4.  To create a new simulation, click **Create**. This opens the following panel.
-
-    ![New Simulation]({{base_path}}/images/Testing-Siddhi-Applications/Database_Simulation.png)
-
-5.  Enter values for the displayed fields as follows.
+4.  Enter values for the displayed fields as follows.
 
     1.  In the **Simulation Name** field, enter a name for the event simulation.
 
@@ -283,7 +256,7 @@ To simulate multiple events from a database, follow the procedure below:
         | **Username**        | The username that must be used to access the database.                                                                                                      |
         | **Password**        | The password that must be used to access the database.                                                                                                      |
 
-    6.  Once you have entered the above information, click **Connect to Database**. If the datasource is correctly configured, the following is displayed to indicate that Streaming Integrator can successfully connect to the database.
+    6.  Once you have entered the above information, click **Connect to Database**. If the datasource is correctly configured, the following is displayed to indicate that WSO2 Integrator: SI can successfully connect to the database.
 
         ![Successfully connected to database]({{base_path}}/images/Testing-Siddhi-Applications/Successfully_Connected_Message.png)
 
@@ -293,46 +266,34 @@ To simulate multiple events from a database, follow the procedure below:
 
 6.  Click **Save**. This adds the fed simulation you created as an active simulation in the **Feed Simulation** tab of the left panel as shown below.
 
-    ![Feed simulation added]({{base_path}}/images/Testing-Siddhi-Applications/Created_Feed_Simulation.png)
+    ![Feed simulation added]({{base_path}}/images/Testing-Siddhi-Applications/Created_Feed-Simulation.png)
 
 7.  Click on the play button of this simulation to open the **Start the Siddhi Application** dialog box.
 
     ![Start the Siddhi Application dialog box]({{base_path}}/images/Testing-Siddhi-Applications/start-siddhi-application.png)
 
 8.  Click **Start Simulation**. A message appears to inform you that the feed simulation started successfully. Similarly, when the simulation is completed, a message appears to inform you that the event simulation has finished.
- 
-
 
 ### Generating random events
 
-This section explains how to generate random data to be analyzed via the Streaming Integrator.
+This section explains how to generate random data to be analyzed via the WSO2 Integrator: SI.
 
 !!! tip
     Before simulating events, a Siddhi application should be deployed.
     
 To simulate random events, follow the steps given below:
 
-1. Access the Streaming Integrator Tooling via the `http://localhost:/editor`
-   URL. The Streaming Integrator Tooling opens as shown below.
-   
-    !!! info
-        The default URL is`http://localhost:9090/editor`.
+1. Run the Siddhi application from the VSCode editor. It will pop up the **WSO2 Integrator: SI Event Simulator** panel.
 
-    ![Welcome Page]({{base_path}}/images/Creating-Siddhi-Applications/Welcome-Page.png)
+2.  Click the **Feed Simulation** panel.
+    It opens the left panel for event simulation as follows.
+    <img src="{{base_path}}/images/Testing-Siddhi-Applications/Feed-Simulation-Panel.png" alt="Feed Simulation Panel" width="50%">
 
-2.  Click the **Event Simulator** icon in the left pane of the editor.
+3.  To create a new simulation, click **Create** . This opens the
+    following panel.
+    <img src="{{base_path}}/images/Testing-Siddhi-Applications/Feed-Simulation.png" alt="New feed simulation" width="50%">
 
-    ![Event Simulator Icon]({{base_path}}/images/Testing-Siddhi-Applications/Event_Simulation_Icon.png)
-
-3. Click the **Feed** tab to open the **Feed Simulation** panel.
-
-    ![Feed Simulation]({{base_path}}/images/Testing-Siddhi-Applications/Feed_Simulation_Panel.png)
-
-4.  To create a new simulation, click **Create** . This opens the following panel.
-
-    ![Create feed simulation]({{base_path}}/images/Testing-Siddhi-Applications/WSO2_Feed_Simulation.png)
-
-5.  Enter values for the displayed fields as follows.
+4.  Enter values for the displayed fields as follows.
 
     1.  In the **Simulation Name** field, enter a name for the event simulation.
 

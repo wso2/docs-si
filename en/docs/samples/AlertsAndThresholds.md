@@ -1,7 +1,7 @@
 # Receiving Email Alerts
 
 ## Purpose:
-This application demonstrates how to send a single event via Single Simulation, and to generate alerts using filters when the threshold value is exceeded. Furthermore, it shows how to configure WSO2 Streaming Integrator Tooling to publish an alerts via e-mail. An alert is generated as an email when a high value transaction (i.e., where the value is over 5000) takes place.
+This application demonstrates how to send a single event via Single Simulation, and to generate alerts using filters when the threshold value is exceeded. Furthermore, it shows how to configure WSO2 Integrator: SI Tooling to publish an alerts via e-mail. An alert is generated as an email when a high value transaction (i.e., where the value is over 5000) takes place.
 
 !!!info "Before you begin:"
     - Enable access to less  secure apps in the gmail account you are using for this example via the [Less SecureApps](https://myaccount.google.com/lesssecureapps) link.<br/>
@@ -16,7 +16,7 @@ This application demonstrates how to send a single event via Single Simulation, 
 
 ## Executing the Sample
 
-To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
 
 ![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
 
@@ -26,7 +26,7 @@ If the Siddhi application starts successfully, the following message appears in 
 
 ## Testing the Sample
 
-To test the sample Siddhi application, simulate a single event for it via the Streaming Integrator Tooling as follows:
+To test the sample Siddhi application, simulate a single event for it via the WSO2 Integrator: SI Tooling as follows:
 
 1. To open the Event Simulator, click the **Event Simulator** icon.
 

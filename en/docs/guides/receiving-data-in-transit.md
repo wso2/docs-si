@@ -10,7 +10,7 @@ The sources from which data in transit/flight are received can be classified int
 
 ## Receiving data from data publishers
 
-Data publishers are transports from which WSO2 SI can receive messages without subscribing for them. In a typical scenario, you are required to open a port in the WSO2 Streaming Integrator that is dedicated to listen to messages from the data publisher.
+Data publishers are transports from which SI can receive messages without subscribing for them. In a typical scenario, you are required to open a port in the WSO2 Integrator: SI that is dedicated to listen to messages from the data publisher.
 
 ![receiving data from a data publisher]({{base_path}}/images/receiving-data-in-transit/push-data-sources.png)
 
@@ -29,7 +29,7 @@ In this example, an online student registration results in an HTTP request in JS
 
 To try out the example given above, let's include the source configuration in a Siddhi application and simulate an event to it.
 
-1. Open and access Streaming Integrator Tooling. For instructions, see [Streaming Integrator Tooling Overview - Starting Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+1. Open and access WSO2 Integrator: SI Tooling. For instructions, see [WSO2 Integrator: SI Tooling Overview - Starting WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
 
 2. Open a new file and add the following Siddhi application to it.
 
@@ -122,7 +122,7 @@ The following are the supported mappers when you receive data from data publishe
 
 ## Receiving data from messaging systems
 
-This section explains how to receive input data from messaging systems where WSO2 Streaming Integrator needs to subscribe to specific queues/topics in order to receive the required data.
+This section explains how to receive input data from messaging systems where WSO2 Integrator: SI needs to subscribe to specific queues/topics in order to receive the required data.
 
 ![receiving data from a messaging system]({{base_path}}/images/receiving-data-in-transit/pull-data-sources.png)
 
@@ -163,9 +163,9 @@ To try the above example, follow the steps below.
     
         `bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic houston`
         
-3. Prepare WSO2 Streaming Integrator Tooling to consume Kafka messages as follows:
+3. Prepare WSO2 Integrator: SI Tooling to consume Kafka messages as follows:
 
-    1. Start and access [WSO2 Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md). 
+    1. Start and access [WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md). 
     
     2. Download and install the Kafka extension to it. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
     
@@ -205,9 +205,9 @@ To try the above example, follow the steps below.
     
         `{"event":{ "temperature":23, "humidity":99}}`
         
-        This pushes a message to the Kafka Server. Then, the Siddhi application you deployed in the Streaming Integrator consumes this message. As a result, the Streaming Integrator log displays the following:
+        This pushes a message to the Kafka Server. Then, the Siddhi application you deployed in the WSO2 Integrator: SI consumes this message. As a result, the WSO2 Integrator: SI log displays the following:
         
-5. Check the logs of Streaming Integrator Tooling. The Kafka message you generated is logged as follows:
+5. Check the logs of WSO2 Integrator: SI Tooling. The Kafka message you generated is logged as follows:
 
     ```
     INFO {io.siddhi.core.stream.output.sink.LogSink} - Temperature Update : Event{timestamp=1603339705244, data=[23, 99], isExpired=false}

@@ -1,10 +1,10 @@
 # Environment Compatibility
 
-This section describes the environment compatibilities of WSO2 Streaming Integrator.
+This section describes the environment compatibilities of WSO2 Integrator: SI.
 
 ## Tested Operating Systems
 
-WSO2 SI is tested with the following operating systems:
+SI is tested with the following operating systems:
 
 |**Operating System**|**Versions**|
 |--------------------|-----------|
@@ -14,7 +14,7 @@ WSO2 SI is tested with the following operating systems:
 
 ## Tested JDKs
 
-WSO2 SI is tested with the following JDKs
+SI is tested with the following JDKs
 
 |**JDK**             |**Version**|
 |--------------------|-----------|
@@ -23,7 +23,7 @@ WSO2 SI is tested with the following JDKs
 
 ## Tested DBMSs (Database Management Systems)
 
-WSO2 SI is tested with the following DBMSs
+SI is tested with the following DBMSs
 
 |**DBMS**            |**Version**|
 |--------------------|-----------|
@@ -35,7 +35,7 @@ WSO2 SI is tested with the following DBMSs
 
 ## Tested Web Browsers
 
-WSO2 SI is tested with the following web browsers.
+SI is tested with the following web browsers.
 
 - Firefox (56.0 and later)
 - Google Chrome
@@ -43,7 +43,7 @@ WSO2 SI is tested with the following web browsers.
 
 ## Known Incompatibilities
 
-Given below are the OS and JDK incompatibilities we have come across while testing WSO2 Streaming Integrator
+Given below are the OS and JDK incompatibilities we have come across while testing WSO2 Integrator: SI
 
 |**Operating System**|**Operating System Version**|**JDK Version**|
 |--------------------|----------------------------|---------------|

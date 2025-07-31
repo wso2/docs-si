@@ -1,7 +1,7 @@
 
 
 ## Purpose:
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling using googlepubsub sink in Siddhi to publish events. Events which are in TEXT format are published to a googlepubsub topic.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling using googlepubsub sink in Siddhi to publish events. Events which are in TEXT format are published to a googlepubsub topic.
 
 ## Prerequisites:
 1. Create a Google Cloud Platform account.

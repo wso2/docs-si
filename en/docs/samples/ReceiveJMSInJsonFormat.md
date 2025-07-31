@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to receive events to the `SweetProductionStream` via Jms transport in Json format using default mapping and log the events in `LowProductionAlertStream` to the output console.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to receive events to the `SweetProductionStream` via Jms transport in Json format using default mapping and log the events in `LowProductionAlertStream` to the output console.
 
 ## Prerequisites
 

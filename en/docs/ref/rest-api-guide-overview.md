@@ -1,6 +1,6 @@
 # REST API Guide Overview
 
-The following REST API categories are supported for WSO2 Streaming Integrator:
+The following REST API categories are supported for WSO2 Integrator: SI:
 
 - [**Siddhi Application Management APIs**](siddhi-Application-Management-APIs.md)
 
@@ -20,4 +20,4 @@ The following REST API categories are supported for WSO2 Streaming Integrator:
 
 - [**Healthcheck APIs**](healthcheck-APIs.md)
 
-    This category allows you to retrieve information relating to the health of your streaming integrator deployment.
+    This category allows you to retrieve information relating to the health of your WSO2 Integrator: SI deployment.

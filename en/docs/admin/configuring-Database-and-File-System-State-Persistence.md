@@ -1,7 +1,7 @@
 # Configuring Database and File System State Persistence
 
 This section explains how to prevent the loss of data that can result
-from a system failure by persisting the state of WSO2 SI periodically
+from a system failure by persisting the state of SI periodically
 either into a database system or into the file system.
 
 ### Prerequisites
@@ -9,15 +9,15 @@ either into a database system or into the file system.
 Before configuring RDBMS database persistence, the following prerequisites
 must be completed.
 
--   One or more Siddhi Applications must be running in the WSO2 SI
+-   One or more Siddhi Applications must be running in the SI
     server.
 -   A working RDBMS instance that can be used for data persistence must
     exist.
 -   The requirements of the datasource must be already defined.
 
 -   Database persistence involves updating the databases connected to
-    WSO2 Streaming Integrator with the latest information relating to the
-    events that are being processed by WSO2 SI at a given time.
+    WSO2 Integrator: SI with the latest information relating to the
+    events that are being processed by SI at a given time.
 
 ### Configuring database system persistence
 
