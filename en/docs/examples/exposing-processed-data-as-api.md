@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Siddhi query API is the REST API exposed by the Streaming Integrator (SI). It gives you a set of APIs to perform all of the essential operations relating to Siddhi applications, including developing, testing, and querying them.
+Siddhi query API is the REST API exposed by the WSO2 Integrator: SI (SI). It gives you a set of APIs to perform all of the essential operations relating to Siddhi applications, including developing, testing, and querying them.
 
 Siddhi query API provides APIs related to:
 - Siddhi application management (such as creating, updating, deleting a Siddhi application; Listing all running Siddhi applications etc.)
@@ -117,7 +117,7 @@ This tutorial demonstrates how you can use the Siddhi query API to perform essen
 
 You can use `Siddhi Store Query API` to execute queries on Siddhi Store tables.
 
-In this section shows you how to execute a simple store query via the REST API in order to fetch all records from the `SweetProductionTable` Siddhi Store table. To learn about other types of queries, see [Streaming Integrator REST API Guide](https://ei.docs.wso2.com/en/next/streaming-integrator/ref/si-rest-api-guide/).
+In this section shows you how to execute a simple store query via the REST API in order to fetch all records from the `SweetProductionTable` Siddhi Store table. To learn about other types of queries, see [WSO2 Integrator: SI REST API Guide](https://ei.docs.wso2.com/en/next/streaming-integrator/ref/si-rest-api-guide/).
 
 Execute following `CURL` command on the console:
 ```
@@ -162,7 +162,7 @@ In this section, deploy a stateful Siddhi application and use the REST API to ta
 
     As shown above, set `enabled` parameter to `true` and set the `intervalInMin` to `5`. Then save the file.
 
-2. Restart the Streaming Integrator server for the above change to be effective.
+2. Restart the WSO2 Integrator: SI server for the above change to be effective.
 
 3. Open a text file and copy-paste following application into it.
     ```

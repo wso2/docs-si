@@ -1,10 +1,10 @@
 # Protecting Sensitive Data via the Secure Vault
 
-The Streaming Integrator uses several artifacts for its functionality including deployment configurations for tuning its operation as well as deployable artifacts for extending its functionality. In each of these scenarios, there can be situations where the data specified is of a sensitive nature e.g., access tokens, passwords, etc.
+The WSO2 Integrator: SI uses several artifacts for its functionality including deployment configurations for tuning its operation as well as deployable artifacts for extending its functionality. In each of these scenarios, there can be situations where the data specified is of a sensitive nature e.g., access tokens, passwords, etc.
 
 ## Securing sensitive data in deployment configurations
 
-The Streaming Integrator offers the Cipher tool to encrypt sensitive data in deployment configurations. This tool works in conjunction with WSO2 Secure Vault to replace sensitive data that is in plain text with an alias. The actual value is then encrypted and securely stored in the SecureVault. At runtime, the actual value is retrieved from the alias and used. For more information, see [WSO2 Secure Vault](https://github.com/wso2/carbon-secvault/blob/master/README.md).
+The WSO2 Integrator: SI offers the Cipher tool to encrypt sensitive data in deployment configurations. This tool works in conjunction with WSO2 Secure Vault to replace sensitive data that is in plain text with an alias. The actual value is then encrypted and securely stored in the SecureVault. At runtime, the actual value is retrieved from the alias and used. For more information, see [WSO2 Secure Vault](https://github.com/wso2/carbon-secvault/blob/master/README.md).
 
 1. Open the `<SI_HOME>|<SI_TOOLING_HOME>/conf/server/secrets.properties` file and enter the following information:
 
@@ -20,7 +20,7 @@ The Streaming Integrator offers the Cipher tool to encrypt sensitive data in dep
 
 ## Protecting sensitive data in Siddhi applications
 
-A parameter named ref is used to secure sensitive information in Siddhi applications that are deployed in the Streaming Integrator. For Siddhi applications that use storage technologies supported by [Carbon Data sources](configuring-datasources), it is also possible to use Carbon data sources instead of specifying the connection parameters directly on the Siddhi file.
+A parameter named ref is used to secure sensitive information in Siddhi applications that are deployed in the WSO2 Integrator: SI. For Siddhi applications that use storage technologies supported by [Carbon Data sources](configuring-datasources), it is also possible to use Carbon data sources instead of specifying the connection parameters directly on the Siddhi file.
 
 ### Using the ref parameter
 

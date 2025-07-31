@@ -1,2 +1,2 @@
 
-# Concepts in Streaming Integrator
+# Concepts in WSO2 Integrator: SI

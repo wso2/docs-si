@@ -23,9 +23,9 @@ events to the active node. To achieve this, you can use a load balancing mechani
 
 !!! info "Before you begin:"
     Before configuring a minimum HA cluster, you need to complete the following prerequisites:<br/>
-      - For each WSO2 SI instance, you need a CPU with four cores, and a total memory of 4GB. For more information, see [Installing the Streaming Integrator in a Virtual Machine](installing-si-in-vm.md).<br/>
+      - For each SI instance, you need a CPU with four cores, and a total memory of 4GB. For more information, see [Installing the WSO2 Integrator: SI in a Virtual Machine](installing-si-in-vm.md).<br/>
       <br/>
-      - Download and install two binary packs of WSO2 SI..<br/>
+      - Download and install two binary packs of SI..<br/>
       <br/>
       - Download, install and start a working RDBMS instance to be used for clustering the two nodes.<br/>
       <br/>
@@ -52,7 +52,7 @@ There are three main configurations that are required to setup a minimum HA clus
 
 !!! note
     - The configurations given below need to be done in the `<SI-Home>/conf/server/deployment.yaml` file for both
-      the WSO2 SI nodes in the cluster.<br/><br/>
+      the SI nodes in the cluster.<br/><br/>
     - If you need to run both SI instances in the same host, make sure that you do a port offset to change the default 
       ports in one of the hosts. For more information about the default ports, see [Configuring Default Ports](../ref/configuring-default-ports.md).
       
@@ -262,14 +262,14 @@ If the cluster is correctly configured, the following CLI logs can be viewed wit
 - In the active node:
 
     ```
-        [2018-09-09 23:56:54,272]  INFO {org.wso2.carbon.streaming.integrator.core.internal.ServiceComponent} - WSO2 Streaming Integrator Starting in Two Node Minimum HA Deployment
+        [2018-09-09 23:56:54,272]  INFO {org.wso2.carbon.streaming.integrator.core.internal.ServiceComponent} - WSO2 Integrator: SI Starting in Two Node Minimum HA Deployment
         [2018-09-09 23:56:54,294]  INFO {org.wso2.carbon.streaming.integrator.core.ha.HAManager} - HA Deployment: Starting up as Active Node
     ```
 
 - In the passive node:
 
     ```
-        [2018-09-09 23:58:44,178]  INFO {org.wso2.carbon.streaming.integrator.core.internal.ServiceComponent} - WSO2 Streaming Integrator Starting in Two Node Minimum HA Deployment
+        [2018-09-09 23:58:44,178]  INFO {org.wso2.carbon.streaming.integrator.core.internal.ServiceComponent} - WSO2 Integrator: SI Starting in Two Node Minimum HA Deployment
         [2018-09-09 23:58:44,199]  INFO {org.wso2.carbon.streaming.integrator.core.ha.HAManager} - HA Deployment: Starting up as Passive Node
     ```
         
@@ -280,6 +280,6 @@ If the cluster is correctly configured, the following CLI logs can be viewed wit
     You need to mount the `<SI-Home>/wso2/server/deployment/siddhi-files` directory of the two nodes to the shared file system.
         
 !!! info
-    To start two WSO2 SI Nodes in the same machine, `<SI-Home>/conf/server/deployment.yaml` file -> `wso2.transport.http` namespace -> `listenerConfigurations` section must be updated
+    To start two SI Nodes in the same machine, `<SI-Home>/conf/server/deployment.yaml` file -> `wso2.transport.http` namespace -> `listenerConfigurations` section must be updated
     to listen to different ports. The `offset` property in the `<SI-Home>/conf/server/deployment.yaml` -> `wso2.carbon section` section -> `ports` subsection should also
     be changed in one SI instance to avoid conflicts when starting both servers.

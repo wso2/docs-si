@@ -1,4 +1,4 @@
-# Installing Streaming Integrator Using Docker
+# Installing WSO2 Integrator: SI Using Docker
 
 !!!tip "Before you begin:"
     - The system requirements are as follows:
@@ -9,20 +9,20 @@
     - Install Docker by following the instructions provided in [here](https://docs.docker.com/install/).
 
 
-WSO2 provides open source Docker images to run WSO2 Streaming Integrator in
+WSO2 provides open source Docker images to run WSO2 Integrator: SI in
 Docker Hub. You can view these images [In Docker Hub - WSO2](https://hub.docker.com/u/wso2/).
 
-## Downloading and installing WSO2 Streaming Integrator
+## Downloading and installing WSO2 Integrator: SI
 
-To pull the required WSO2 Streaming Integrator distribution with updates from the Docker image, issue the following command.
+To pull the required WSO2 Integrator: SI distribution with updates from the Docker image, issue the following command.
 
 ```
 docker pull wso2/streaming-integrator:4.3.0
 ```
 
-## Running WSO2 Streaming Integrator
+## Running WSO2 Integrator: SI
 
-To run WSO2 Streaming Integrator, issue the following command.
+To run WSO2 Integrator: SI, issue the following command.
 
 ```
 docker run -it wso2/streaming-integrator/4.3.0
@@ -43,4 +43,4 @@ docker run -it wso2/streaming-integrator/4.3.0
         wso2/streaming-integrator
     ```
 
-   For more details about the ports in Streaming Integrator, see [Configuring Default Ports](../ref/configuring-default-ports.md)
+   For more details about the ports in WSO2 Integrator: SI, see [Configuring Default Ports](../ref/configuring-default-ports.md)

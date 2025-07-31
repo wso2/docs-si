@@ -1,6 +1,6 @@
 
 ## Purpose:
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to perform binary classification using a streaming Perceptron.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to perform binary classification using a streaming Perceptron.
 
 ## Prerequisites:
 1. Save this sample.

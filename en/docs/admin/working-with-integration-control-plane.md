@@ -1,12 +1,12 @@
 # Monitoring SI Artifacts and Logs
 
-The WSO2 Integration Control Plane (ICP) monitors WSO2 Streaming Integrator (SI) instances in a deployment. This can be a single SI instance or multiple instances in a group. It provides a graphical view of the artifacts deployed in the SI runtime. You can also perform monitoring and limited management tasks using the ICP server. This feature is available from the Streaming Integrator version 4.3.0 or higher.
+The WSO2 Integration Control Plane (ICP) monitors WSO2 Integrator: SI instances in a deployment. This can be a single SI instance or multiple instances in a group. It provides a graphical view of the artifacts deployed in the SI runtime. You can also perform monitoring and limited management tasks using the ICP server. This feature is available from the WSO2 Integrator: SI version 4.3.0 or higher.
 
 The ICP server communicates with the SI instances via the ICP reporter module to collect runtime artifact and system data.
 
 ## Capabilities of the ICP Server
 
-You can use the ICP server to perform the following tasks related to your Streaming Integrator deployment:
+You can use the ICP server to perform the following tasks related to your WSO2 Integrator: SI deployment:
 
 !!! tip
     You can search for certain artifacts using the specific name of the artifact if there are many such items in the list.
@@ -46,18 +46,18 @@ You can use the ICP server to perform the following tasks related to your Stream
 
 ## Using the Integration Control Plane
 
-Follow the steps given below to configure and use the WSO2 Integration Control Plane with WSO2 Streaming Integrator.
+Follow the steps given below to configure and use the WSO2 Integration Control Plane with WSO2 Integrator: SI.
 
 ### Step 1 - Download the Integration Control Plane
 
-Download the binary distribution of the product, and then follow the instructions to start the Streaming Integrator and the ICP server.
+Download the binary distribution of the product, and then follow the instructions to start the WSO2 Integrator: SI and the ICP server.
 
-- [Install the Streaming Integrator]({{base_path}}/setup/installing-si-in-vm).
+- [Install the WSO2 Integrator: SI]({{base_path}}/setup/installing-si-in-vm).
 - [Install the Integration Control Plane](https://mi.docs.wso2.com/en/latest/install-and-setup/install/installing-integration-control-plane/).
 
 !!! note
 
-    Make sure get the latest update the of the Streaming Integrator 4.3.0 or higher.
+    Make sure get the latest update the of the WSO2 Integrator: SI 4.3.0 or higher.
     After updating check the JAR file `org.wso2.carbon.si.management.icp_<version>.jar` located in the `<SI_HOME>/wso2/lib/plugins/` directory is version 3.0.75 or above. If an earlier version is present, follow the steps below:
 
     1. Download the required version from this [link](https://mvnrepository.com/artifact/org.wso2.carbon.analytics/org.wso2.carbon.si.management.icp).
@@ -90,7 +90,7 @@ Follow the steps given below to configure the SI servers to publish data to the 
         enabled: true
     ```
 
-    If the Streaming Integrator server is deployed in a Kubernetes environment, add the following configuration to the `deployment.yaml` file.
+    If the WSO2 Integrator: SI server is deployed in a Kubernetes environment, add the following configuration to the `deployment.yaml` file.
 
     If communicating via Ingress, use the following configuration:
 
@@ -112,7 +112,7 @@ Follow the steps given below to configure the SI servers to publish data to the 
                 heartbeatInterval
             </th>
             <td>
-                <b>Optional</b>. The time interval (in seconds) between two heartbeats sent from the Streaming Integrator to the ICP server. By default, the heartbeatInterval is set to `5`. 
+                <b>Optional</b>. The time interval (in seconds) between two heartbeats sent from the WSO2 Integrator: SI to the ICP server. By default, the heartbeatInterval is set to `5`. 
             </td>
         </tr>
         <tr>
@@ -120,7 +120,7 @@ Follow the steps given below to configure the SI servers to publish data to the 
                 groupID
             </th>
             <td>
-                <b>Optional</b>. In a clustered deployment, the group ID should be the same in all Streaming Integrator Instances. 
+                <b>Optional</b>. In a clustered deployment, the group ID should be the same in all WSO2 Integrator: SI Instances. 
                 The ICP server displays information from one group at a time. By default, the groupID is set to `si_dev`. 
             </td>
         </tr>
@@ -179,7 +179,7 @@ Follow the steps given below.
 Once you have [set up and started the ICP server](#using-the-integration-control-plane), you can access the ICP server URL.
 
 !!! Note "Before you begin"
-    Be sure to have at least one Streaming Integrator server connected to the ICP server before attempting to sign in to it. This can be verified by checking the presence of the following log.
+    Be sure to have at least one WSO2 Integrator: SI server connected to the ICP server before attempting to sign in to it. This can be verified by checking the presence of the following log.
     ```
     New node <node_id> in group : <group_id> is registered. Inserting heartbeat information
     ```
@@ -201,7 +201,7 @@ Once you have [set up and started the ICP server](#using-the-integration-control
             </th>
             <td>
                 The user name to sign in.</br></br>
-                <b>Note</b>: This should be a valid username that is saved in the Streaming Integrator server's user store. By default, the 'admin' user name is configured in the default user store.</br></br>
+                <b>Note</b>: This should be a valid username that is saved in the WSO2 Integrator: SI server's user store. By default, the 'admin' user name is configured in the default user store.</br></br>
             </td>
         </tr>
         <tr>

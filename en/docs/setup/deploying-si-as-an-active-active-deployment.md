@@ -1,7 +1,7 @@
 # Active-Active Deployment
 
-The recommended deployment for WSO2 Streaming Integrator (SI) is the Minimum HA Deployment. However, that deployment pattern involves using only two nodes and it is
-not scalable beyond that. If you want to configure WSO2 SI as a scalable deployment, you can use the Active-Active deployment pattern. This section provides an
+The recommended deployment for WSO2 Integrator: SI (SI) is the Minimum HA Deployment. However, that deployment pattern involves using only two nodes and it is
+not scalable beyond that. If you want to configure SI as a scalable deployment, you can use the Active-Active deployment pattern. This section provides an
 overview of the Active-Active deployment pattern and instructions to configure it.
 
 
@@ -71,11 +71,11 @@ You can find the steps to enable aggregation partitioning within the next subsec
 
 ## Configuring an active-active cluster
 
-To configure the Streaming Integrator nodes and deploy them as an active-active cluster, edit the `<SI-Home>/conf/server/deployment.yaml` file as follows:
+To configure the WSO2 Integrator: SI nodes and deploy them as an active-active cluster, edit the `<SI-Home>/conf/server/deployment.yaml` file as follows:
 
 !!! tip "Before you begin:"
-    - Download two binary packs of the WSO2 Streaming Integrator.
-    - Set up a working RDBMS instance to be used by the WSO2 Streaming Integrator cluster.
+    - Download two binary packs of the WSO2 Integrator: SI.
+    - Set up a working RDBMS instance to be used by the WSO2 Integrator: SI cluster.
 
 1. For each node, enter a unique ID for the `id` property under the `wso2.carbon` section. This is used to identify each node within a cluster. For example, you can add IDs as shown below.
 
@@ -121,5 +121,5 @@ To configure the Streaming Integrator nodes and deploy them as an active-active 
 3. Configure a database, and then update the default configuration for the `TEST_DB` data source with parameter values suitable for your requirements.
 
 !!! warning
-    As explained in above the events are processed in multiple active nodes. Eventhough this is usually a stateful operation, you can overcome the node-dependent calculations via distributed aggregation. This allows WSO2 SI to execute scripts that depend on incremental distributed aggregation.<br/><br/>
+    As explained in above the events are processed in multiple active nodes. Eventhough this is usually a stateful operation, you can overcome the node-dependent calculations via distributed aggregation. This allows SI to execute scripts that depend on incremental distributed aggregation.<br/><br/>
     However, an active-active deployment can affect alerts because alerts also depend on some in-memory stateful operations such as windows. Due to this, alerts can be generated based on the events received by specific node. Thus the alerts are node-dependent, and you need to disable them to run scripts with distributed incremental aggregation.

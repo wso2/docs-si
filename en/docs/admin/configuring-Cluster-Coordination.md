@@ -1,6 +1,6 @@
 # Configuring Cluster Coordination
 
-Multiple WSO2 SI nodes can be configured to work together by configuring
+Multiple SI nodes can be configured to work together by configuring
 a cluster coordination strategy that is used in various deployments such
 as the <a target="_blank" href="minimum-ha-deployment">Minimum High Available(HA) Deployment</a>
 and <a target="_blank" href="scalable-ha-deployment">Scalable High Available(HA) Deployment</a>
@@ -23,7 +23,7 @@ the cluster re-elects a new leader.
 In order to configure a cluster, the following prerequisites must be
 completed:
 
--   A minimum of two binary packs of WSO2 SI must be available.
+-   A minimum of two binary packs of SI must be available.
 -   A working RDBMS instance must be available to be shared among the
     nodes of the cluster.
     

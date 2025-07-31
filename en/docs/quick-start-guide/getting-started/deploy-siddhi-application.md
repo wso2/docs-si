@@ -1,19 +1,19 @@
 # Step 3: Deploy the Siddhi Application
 
-The `SweetFactoryApp` that you created in [Step 2: Create the Siddhi Application](create-the-siddhi-application.md) is now ready to be deployed in the Streaming Integrator server, exported as a Docker image, or deployed in Kubernetes.
+The `SweetFactoryApp` that you created in [Step 2: Create the Siddhi Application](create-the-siddhi-application.md) is now ready to be deployed in the WSO2 Integrator: SI server, exported as a Docker image, or deployed in Kubernetes.
 
-## Deploying in Streaming Integrator server
+## Deploying in WSO2 Integrator: SI server
 
-To deploy your Siddhi application in the Streaming Integrator server, follow the procedure below:
+To deploy your Siddhi application in the WSO2 Integrator: SI server, follow the procedure below:
 
 !!!info
-    To deploy the Siddhi application, you need to run both the Streaming Integrator server and Streaming Integrator Tooling. The home directories of the Streaming Integrator server is referred to as `<SI_HOME>` and the home directory of Streaming Integrator Tooling is referred to as `<SI_TOOLING_HOME>`.
+    To deploy the Siddhi application, you need to run both the WSO2 Integrator: SI server and WSO2 Integrator: SI Tooling. The home directories of the WSO2 Integrator: SI server is referred to as `<SI_HOME>` and the home directory of WSO2 Integrator: SI Tooling is referred to as `<SI_TOOLING_HOME>`.
 
-1. Start the Streaming Integrator server by navigating to the `<SI_HOME>/bin` directory from the CLI, and issuing the appropriate command based on your operating system:</br>
+1. Start the WSO2 Integrator: SI server by navigating to the `<SI_HOME>/bin` directory from the CLI, and issuing the appropriate command based on your operating system:</br>
    - For Windows: `server.bat --run`</br>
    - For Linux/Mac OS:  `./server.sh`
 
-2. In the Streaming Integrator Tooling, click **Deploy** and then click **Deploy to Server**.
+2. In the WSO2 Integrator: SI Tooling, click **Deploy** and then click **Deploy to Server**.
 
     ![Deploy to Server Menu Option]({{base_path}}/images/quick-start-guide-101/deploy-to-server-menu.png)
 
@@ -49,7 +49,7 @@ To deploy your Siddhi application in the Streaming Integrator server, follow the
 
 To export the `SweetFactoryApp` Siddhi application as a Docker artifact, follow the procedure below:
 
-1. Open the Streaming Integrator Tooling.
+1. Open the WSO2 Integrator: SI Tooling.
 
 2. Click **Export** in the top menu, and then click **For Docker**.
 
@@ -70,9 +70,9 @@ To export the `SweetFactoryApp` Siddhi application as a Docker artifact, follow 
     !!!info
         For detailed information about templating the values of a Siddhi Application, see [Exporting Siddhi Apps for Docker Image](../../develop/exporting-Siddhi-Applications.md#exporting-siddhi-apps-for-docker-image).
     
-5. In **Step 3**, you can update configurations of the Streaming Integrator.
+5. In **Step 3**, you can update configurations of the WSO2 Integrator: SI.
     
-    ![Update Streaming Integrator Configurations dialog box]({{base_path}}/images/quick-start-guide-101/update-streaming-integrator-configurations-dialog-box.png)
+    ![Update WSO2 Integrator: SI Configurations dialog box]({{base_path}}/images/quick-start-guide-101/update-streaming-integrator-configurations-dialog-box.png)
     
     Leave the default configurations, and click **Next**.
     
@@ -90,4 +90,4 @@ To export the `SweetFactoryApp` Siddhi application as a Docker artifact, follow 
     Click **Export**. The Siddhi application is exported as a Docker artifact in a zip file to the default location in your machine, based on your operating system and browser settings.
     
 !!! tip "What's Next?"
-    Now you can run the `SweetFactoryApp` in the Streaming Integrator server. To do this, proceed to [Step 4: Running the Siddhi Application](test-siddhi-application.md)
+    Now you can run the `SweetFactoryApp` in the WSO2 Integrator: SI server. To do this, proceed to [Step 4: Running the Siddhi Application](test-siddhi-application.md)

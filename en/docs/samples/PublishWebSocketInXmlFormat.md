@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via WebSocket transport in XML default format and log the events in `LowProductionAlertStream` to the output console.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to send sweet production events via WebSocket transport in XML default format and log the events in `LowProductionAlertStream` to the output console.
 
  If there is no syntax error, the following message is shown on the console:
 

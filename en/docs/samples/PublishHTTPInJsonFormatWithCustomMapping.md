@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This application demonstrates how to configure the Streaming Integrator to send sweet production events via HTTP transport in JSON format using custom mapping.
+This application demonstrates how to configure the WSO2 Integrator: SI to send sweet production events via HTTP transport in JSON format using custom mapping.
 
 !!!info "Before executing the sample:"
     Save the sample Siddhi application. Is there is no syntax error, the following message appears in the console.<br/>

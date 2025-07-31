@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator to send sweet production events via HTTP transport in XML format using custom mapping. Map the input events(`$.item.id`) to stream events(`name`) and log the events in the `LowProducitonAlertStream` stream on the output console.
+This application demonstrates how to configure WSO2 Integrator: SI to send sweet production events via HTTP transport in XML format using custom mapping. Map the input events(`$.item.id`) to stream events(`name`) and log the events in the `LowProducitonAlertStream` stream on the output console.
 
 !!!info "Before executing the sample:"
     Save the sample Siddhi application. Is there is no syntax error, the following message appears in the console.<br/>

@@ -1,6 +1,6 @@
 # Install SI
 
-Follow the steps given below to install the WSO2 Streaming Integrator.
+Follow the steps given below to install the WSO2 Integrator: SI.
 
 ## System requirements
 
@@ -12,7 +12,7 @@ Follow the steps given below to install the WSO2 Streaming Integrator.
 
 ## Download and install
 
-Go to the WSO2 Streaming Integrator [product page](https://wso2.com/streaming-integrator/), click **Download**, and then click Zip Archive to download the Streaming Integrator as a ZIP file.
+Go to the WSO2 Integrator: SI [product page](https://wso2.com/streaming-integrator/), click **Download**, and then click Zip Archive to download the WSO2 Integrator: SI as a ZIP file.
 
 Extract the archive file to a dedicated directory for the Steaming Integrator, which will hereafter be referred to as `<SI_HOME>`.
 
@@ -50,8 +50,8 @@ Follow the steps given below to start the server.
 
 ## Stopping the SI server
 
-- To stop the Streaming Integrator standalone application, go to the terminal and press <i>Ctrl+C</i>.
-- To stop the Micro Integrator in background mode:
+- To stop the WSO2 Integrator: SI standalone application, go to the terminal and press <i>Ctrl+C</i>.
+- To stop the WSO2 Integrator: MI in background mode:
 
     === "On macOS/Linux"
         ```bash
@@ -63,8 +63,8 @@ Follow the steps given below to start the server.
         ```
 
 !!! tip "What's Next?"
-    Once you have successfully downloaded and installed WSO2 Streaming Integrator, you can proceed to do any of the following:<br/><br/>
-    - If you were previously using WSO2 Stream Processor and want to migrate to WSO2 Streaming Integrator, follow the instructions in [Migrating from WSO2 Stream Processor](migrating-from-stream-processor.md).<br/><br/>
-    - To deploy WSO2 Streaming Integrator as a single-node deployment or a cluster (based on your requirements), see [Deploying Streaming Integrator](deployment-guide.md).<br/><br/>
-    - To set up WSO2 Streaming Integrator and make it ready to run in a production environment, see the [Production Checklist](production-checklist.md).<br/><br/>
+    Once you have successfully downloaded and installed WSO2 Integrator: SI, you can proceed to do any of the following:<br/><br/>
+    - If you were previously using WSO2 Stream Processor and want to migrate to WSO2 Integrator: SI, follow the instructions in [Migrating from WSO2 Stream Processor](migrating-from-stream-processor.md).<br/><br/>
+    - To deploy WSO2 Integrator: SI as a single-node deployment or a cluster (based on your requirements), see [Deploying WSO2 Integrator: SI](deployment-guide.md).<br/><br/>
+    - To set up WSO2 Integrator: SI and make it ready to run in a production environment, see the [Production Checklist](production-checklist.md).<br/><br/>
     

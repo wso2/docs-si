@@ -1,9 +1,9 @@
 # Deployment
 
-WSO2 Streaming Integrator(SI) is designed to deploy enterprise grade critical systems which demands high 
-reliability, availability and performance. Thus, WSO2 SI is designed with support for deployment options which can 
+WSO2 Integrator: SI(SI) is designed to deploy enterprise grade critical systems which demands high 
+reliability, availability and performance. Thus, SI is designed with support for deployment options which can 
 handle increasing system loads (scalability) and provide near-zero downtime and by eliminate single point of failure 
-(high availability). Furthermore, some of the key characteristics of WSO2 SI deployment architecture are ease of 
+(high availability). Furthermore, some of the key characteristics of SI deployment architecture are ease of 
 installation and deployment, high maintainability and DevOps friendliness.
 
 Mainly following deployment options can be followed, 

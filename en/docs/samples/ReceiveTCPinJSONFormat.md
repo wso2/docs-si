@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator to receive events to the `SweetProductionStream` via `TCP` transport in `JSON` format using default mapping and log the events in `LowProductionAlertStream` to the output console.
+This application demonstrates how to configure WSO2 Integrator: SI to receive events to the `SweetProductionStream` via `TCP` transport in `JSON` format using default mapping and log the events in `LowProductionAlertStream` to the output console.
 
 ## Executing the sample
 

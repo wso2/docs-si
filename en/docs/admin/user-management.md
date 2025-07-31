@@ -1,7 +1,7 @@
 # User Management
 
 !!! info
-    User management in WSO2 Streaming Integrator has the following features,
+    User management in WSO2 Integrator: SI has the following features,
 
     -   The concept of single user store, which is either local or external.
 
@@ -65,8 +65,8 @@ granting multiple permissions to each and every user individually.
 A user store is a persistent storage where information of the users
 and/or user roles is stored. User information includes log-in name,
 password, fist name, last name, e-mail etc. It can be either file based
-or a database maintained within WSO2 Streaming Integrator or externally to it. User stores used
-in WSO2 Streaming Integrator differs based on the interface(IdP Client) used to interact with
+or a database maintained within WSO2 Integrator: SI or externally to it. User stores used
+in WSO2 Integrator: SI differs based on the interface(IdP Client) used to interact with
 the user store. By default, a file based user store maintained in the
 `<SI_HOME>>/conf/server/deployment.yaml` file interfaced through
 'Local' IdP Client is enabled.
@@ -74,7 +74,7 @@ the user store. By default, a file based user store maintained in the
 
 ## User Management via the IdP Client Interface
 
-In WSO2 Streaming Integrator, user management is carried out through the
+In WSO2 Integrator: SI, user management is carried out through the
 Identity Provider Client (IdP Client) interface that can be switched as
 required for the user scenario. Furthermore, a custom IdP Client can be
 written to encompass the required user store connection and
@@ -92,7 +92,7 @@ IdP clients can be switched by specifying te required IdP client in the
 
 The active IdP client is `local` by default.
 
-Following are the IdP Clients available for WSO2 Streaming Integrator:
+Following are the IdP Clients available for WSO2 Integrator: SI:
 
 - [Local IdP Client](#UserManagementviatheIdPClientInterface-LocalIdPClient)
 - [External IdP Client](#UserManagementviatheIdPClientInterface-ExternalIdPClient)
@@ -265,14 +265,14 @@ Client is as follows:
 
 External IdP Client authenticates users by interacting with an external
 identity provider via OAuth2 and SCIM2 protocols. The user store is
-maintained by the external identity provider. WSO2 Streaming Integrator authenticates by
+maintained by the external identity provider. WSO2 Integrator: SI authenticates by
 requesting an access token from the identity provider using the password
 grant type.
 
 !!! note
 
-The identity provider with which WSO2 Streaming Integrator interacts with to authenticate
-users must be started before the Streaming Integrator server.
+The identity provider with which WSO2 Integrator: SI interacts with to authenticate
+users must be started before the WSO2 Integrator: SI server.
 
 
 The auth manager must be configured under the
@@ -381,17 +381,17 @@ Description
 <tr class="odd">
 <td><p><code>              portalAppContext             </code></p></td>
 <td><code>             portal            </code></td>
-<td>The application context of the Dashboard Portal application in WSO2 Streaming Integrator.</td>
+<td>The application context of the Dashboard Portal application in WSO2 Integrator: SI.</td>
 </tr>
 <tr class="even">
 <td><code>             statusDashboardAppContext            </code></td>
 <td><code>             monitoring            </code></td>
-<td>The application context of the Status Dashboard application in WSO2 Streaming Integrator.</td>
+<td>The application context of the Status Dashboard application in WSO2 Integrator: SI.</td>
 </tr>
 <tr class="odd">
 <td><p><code>              businessRulesAppContext             </code></p></td>
 <td><code>             business-rules            </code></td>
-<td>The application context of the Business Rules application in WSO2 Streaming Integrator.</td>
+<td>The application context of the Business Rules application in WSO2 WSO2 Integrator: SI.</td>
 </tr>
 <tr class="even">
 <td><code>             databaseName            </code></td>

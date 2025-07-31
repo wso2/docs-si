@@ -25,11 +25,11 @@ This sample demonstrates how to capture change data from MySQL using Siddhi. The
         `use production;`<br/>
     8. Create a table named `SweetProductionTable`.<br/>
         `CREATE TABLE SweetProductionTable (name VARCHAR(20),amount double(10,2));`<br/>
-    9. Save the sample Siddhi application in Streaming Integrator Tooling.
+    9. Save the sample Siddhi application in WSO2 Integrator: SI Tooling.
 
 ## Executing the sample
 
-To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the **Start** button or by clicking **Run** => **Run**.
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button or by clicking **Run** => **Run**.
 
 If the Siddhi application starts successfully, the following message appears in the console.
 
@@ -46,7 +46,7 @@ To test the sample Siddhi application, insert a record to the `SweetProductionTa
 
 ## Viewing the results
 
-This insert is logged in the Streaming Integrator console as follows.
+This insert is logged in the WSO2 Integrator: SI console as follows.
 
 ![Insert Log]({{base_path}}/images/cdc-with-listening-mode-sample/insert-log.png)
 

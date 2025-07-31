@@ -1,10 +1,10 @@
 # Supporting Different Transports
 
-Follow the relevant section for the steps that need to be carried out before using the required transport to receive and publish events via the Streaming Integrator.
+Follow the relevant section for the steps that need to be carried out before using the required transport to receive and publish events via the WSO2 Integrator: SI.
 
 ## Kafka transport
 
-To enable the Streaming Integrator to receive and publish events via the Kafka transport, follow the steps below:
+To enable the WSO2 Integrator: SI to receive and publish events via the Kafka transport, follow the steps below:
 
 1. Download the Kafka broker from [the Kafka site](https://kafka.apache.org).
 
@@ -36,7 +36,7 @@ To enable the Streaming Integrator to receive and publish events via the Kafka t
 
     5. Copy the jars that are not converted from the `<SOURCE_DIRECTORY>` to the `<SI_TOOLING_HOME>/samples/sample-clients/lib` directory.
 
-3. The Kafka server should be started before sending events from the Streaming Integrator to a Kafka consumer.
+3. The Kafka server should be started before sending events from the WSO2 Integrator: SI to a Kafka consumer.
 
 ## JMS transport
 

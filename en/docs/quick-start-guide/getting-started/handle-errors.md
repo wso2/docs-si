@@ -117,15 +117,15 @@ For testing purposes, let's generate an error with a mapping error as follows:
 
     `ECLAIRS,TOFFEE,40.0`
     
-    Here, you are creating a file event with values for three attributes whereas the event schema (as defined via the `FilterStream` stream) has only two attributes. This results in a mapping error which is logged as follows in the terminal window in which you are running the Streaming Integrator server.
+    Here, you are creating a file event with values for three attributes whereas the event schema (as defined via the `FilterStream` stream) has only two attributes. This results in a mapping error which is logged as follows in the terminal window in which you are running the WSO2 Integrator: SI server.
     
-2. If you have not already started the Streaming Integrator Tooling server, start it by navigating to the `<SI_TOOLING_HOME>/bin` directory and issuing one of the following commands as appropriate, based on your operating system:
+2. If you have not already started the WSO2 Integrator: SI Tooling server, start it by navigating to the `<SI_TOOLING_HOME>/bin` directory and issuing one of the following commands as appropriate, based on your operating system:
                                                  
      - For Windows: `streaming-integrator-tooling.bat`
     
      - For Linux: `./streaming-integrator-tooling.sh`
      
-    Then Access the Streaming Integrator Tooling via the URL that appears in the start up log with the text `Editor Started on:`.
+    Then Access the WSO2 Integrator: SI Tooling via the URL that appears in the start up log with the text `Editor Started on:`.
     
 3. To open the Error Store Explorer, click **Tools** and then click **Error Store Explorer**.
    
@@ -135,7 +135,7 @@ For testing purposes, let's generate an error with a mapping error as follows:
     
 4. Click **Connect to Server**. Then enter information as follows:
 
-    To check the port of the Streaming Integrator Server, Open <SI_HOME>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.
+    To check the port of the WSO2 Integrator: SI Server, Open <SI_HOME>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.
    
     ![Server Configuration]({{base_path}}/images/quick-start-guide-101/connect-error-store.png)
     

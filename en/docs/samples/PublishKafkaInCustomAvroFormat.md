@@ -1,7 +1,7 @@
 
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via Kafka transport in Avro format with custom mapping.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to send sweet production events via Kafka transport in Avro format with custom mapping.
 
 ## Prerequisites
 

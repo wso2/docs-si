@@ -1,11 +1,11 @@
 # Changing the Host Name and Context Path of Web UI Applications
 
-When you start any web application of the WSO2 Streaming Integrator (i.e., [Streaming Integrator Tooling]({{base_path}}/develop/streaming-integrator-studio-overview.md), the [Template Editor](../admin/creating-business-rules-templates.md/#creating-a-business-rules-template), [Business Rules](../admin/creating-business-rules-templates.md), or Policies) the URL to access its user interface is displayed in the start up logs as follows.
+When you start any web application of the WSO2 Integrator: SI (i.e., [WSO2 Integrator: SI Tooling]({{base_path}}/develop/streaming-integrator-studio-overview.md), the [Template Editor](../admin/creating-business-rules-templates.md/#creating-a-business-rules-template), [Business Rules](../admin/creating-business-rules-templates.md), or Policies) the URL to access its user interface is displayed in the start up logs as follows.
 
 ```text
 INFO {org.wso2.carbon.siddhi.editor.core.internal.StartupComponent} - Editor Started on : http://<IP_ADDRESS>:<PORT>/<WEB_UI_APPLICATION_NAME>
 ```
-e.g., The URL to access the Streaming Integrator Tooling is logged as follows:
+e.g., The URL to access the WSO2 Integrator: SI Tooling is logged as follows:
 
 ```text
 INFO {org.wso2.carbon.siddhi.editor.core.internal.StartupComponent} - Editor Started on : http://<IP_ADDRESS>:9390/editor
@@ -35,9 +35,9 @@ To change the IP address displayed in the URL to a host name:
                port: 9387
     ```
    
-Once you change the host to `streaming-integrator` as shown in the above example, the `http` URLs to access the Streaming Integrator Tooling and the Template Editor display `streaming-integrator` as the host name.
+Once you change the host to `streaming-integrator` as shown in the above example, the `http` URLs to access the WSO2 Integrator: SI Tooling and the Template Editor display `streaming-integrator` as the host name.
 
-e.g., the URL to access the Streaming Integrator Tooling is displayed as follows:
+e.g., the URL to access the WSO2 Integrator: SI Tooling is displayed as follows:
 
 ```text
     INFO {org.wso2.carbon.siddhi.editor.core.internal.StartupComponent} - Editor Started on : http://streaming-integrator:9390/editor
@@ -53,7 +53,7 @@ apps:
  # configurations for the Editor app "editor": 
     contextPath: "/tooling"
 ```
-Here, the context path for the editor webUI application (i.e., the Streaming Integrator Studio) is specified as `tooling`. Therefore, when you start the Streaming Integrator Tooling server, the URL  for the Streaming Integrator Tooling appears as follows.
+Here, the context path for the editor webUI application (i.e., the WSO2 Integrator: SI Studio) is specified as `tooling`. Therefore, when you start the WSO2 Integrator: SI Tooling server, the URL  for the WSO2 Integrator: SI Tooling appears as follows.
 
 ```text
 INFO {org.wso2.carbon.siddhi.editor.core.internal.StartupComponent} - Editor Started on : http://<IP_ADDRESS>:9390/tooling

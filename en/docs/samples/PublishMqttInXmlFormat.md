@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via MQTT transport in XML format and view the output on the mqtt-consumer.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to send sweet production events via MQTT transport in XML format and view the output on the mqtt-consumer.
 
 ## Prerequisites
 

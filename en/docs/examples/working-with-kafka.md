@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Streaming Integrator can consume from a Kafka topic as well as to publish to a Kafka topic in a streaming manner.
+The WSO2 Integrator: SI can consume from a Kafka topic as well as to publish to a Kafka topic in a streaming manner.
 
 This tutorial takes you through consuming from a Kafka topic, processing the messages, and finally, publishing output to a Kafka topic.
 
@@ -43,7 +43,7 @@ This tutorial takes you through consuming from a Kafka topic, processing the mes
 
     `sh bin/kafka-server-start.sh config/server.properties`
 
-### Start the Streaming Integrator
+### Start the WSO2 Integrator: SI
 
 Navigate to the `<SI-Home>/bin` directory and issue the following command. 
 `sh server.sh`
@@ -51,7 +51,7 @@ Navigate to the `<SI-Home>/bin` directory and issue the following command.
 The following log appears on the SI console when the server is started successfully.
 
 ```bash
-INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 4.240 sec
+INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Integrator: SI started in 4.240 sec
 ```
 
 ### Consume from a Kafka topic
@@ -93,7 +93,7 @@ Let's create a basic Siddhi application to consume messages from a Kafka topic.
 
 #### Generate Kafka messages
 
-Now let's generate some Kafka messages that the Streaming Integrator can receive. 
+Now let's generate some Kafka messages that the WSO2 Integrator: SI can receive. 
 
 1. First, let's create a topic named `productions` in the Kafka server. To do this, navigate to `<Kafka_Home>` and run following command:
 
@@ -113,7 +113,7 @@ Now let's generate some Kafka messages that the Streaming Integrator can receive
     {"event":{ "name":"cookie", "amount":100.0}}
     ```
 
-   This pushes a message to the Kafka Server. Then, the Siddhi application you deployed in the Streaming Integrator consumes this message. As a result, the Streaming Integrator log displays the following:
+   This pushes a message to the Kafka Server. Then, the Siddhi application you deployed in the WSO2 Integrator: SI consumes this message. As a result, the WSO2 Integrator: SI log displays the following:
 
 ```bash
 INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562069868006, data=[ALMOND COOKIE, 100.0], isExpired=false}
@@ -167,7 +167,7 @@ For this purpose, you can configure the `topic.offsets.map` parameter. Let's mod
     {"event":{ "name":"Baked alaska", "amount":20.0}}
     ```
 
-    Note that this is the second message that you pushed (hence bearing index 1), and therefore it is not consumed by the Streaming Integrator.
+    Note that this is the second message that you pushed (hence bearing index 1), and therefore it is not consumed by the WSO2 Integrator: SI.
 
 4. Let's push another message (bearing index 2) to the Kafka server.
 
@@ -175,7 +175,7 @@ For this purpose, you can configure the `topic.offsets.map` parameter. Let's mod
     {"event":{ "name":"Cup cake", "amount":300.0}}
     ```
 
-   Now you can see the following log in the Streaming Integrator Studio console.
+   Now you can see the following log in the WSO2 Integrator: SI Studio console.
 
 ```bash
 INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562676477785, data=[CUP CAKE, 300.0], isExpired=false}
@@ -212,7 +212,7 @@ Let's add another Siddhi application `HelloKafka_2`, to add another Kafka consum
     insert into OutputStream;
     ```
 
-2. Save this file as `HelloKafka_2.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. When the Siddhi application is successfully deployed, the following `INFO` log appears in the Streaming Integrator console.
+2. Save this file as `HelloKafka_2.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. When the Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
 
     ```bash
     INFO {org.wso2.carbon.stream.processor.core.internal.StreamProcessorService} - Siddhi App HelloKafka_2 deployed successfully
@@ -337,7 +337,7 @@ Let's alter your topic to have three partitions. After that, you can assign two 
     {"event":{ "name":"Ice cream cake", "amount":250.0}} 
     ```
 
-4. Now observe the Streaming Integrator logs. The following is displayed.
+4. Now observe the WSO2 Integrator: SI logs. The following is displayed.
 
     ```bash
     INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562851086792, data=[FORTUNE COOKIE, 100.0, consumer-1], isExpired=false}
@@ -390,7 +390,7 @@ Now let's create a new Siddhi application to consume from the `productions` topi
     ```
 
 4. Save this file as `PublishToKafka.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. When the 
-   Siddhi application is successfully deployed, the following `INFO` log appears in the Streaming Integrator console.
+   Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
 
     ```bash
     INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App PublishToKafka deployed successfully
@@ -418,7 +418,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
 !!!info
     In this scenario, the SI server is required to *remember* the current count through system failures so that when the system is restored, the count is not reset to zero.
 
-    To achieve this, you can use the state persistence capability in the Streaming Integrator.
+    To achieve this, you can use the state persistence capability in the WSO2 Integrator: SI.
 
 1. Enable state persistence feature in SI server as follows. Open the `<SI-Home>/conf/server/deployment.yaml` file on a text editor and locate the `state.persistence` section.  
 
@@ -449,7 +449,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
 
     Save the file.
 
-3. Restart the Streaming Integrator server for above change to be effective.
+3. Restart the WSO2 Integrator: SI server for above change to be effective.
 
 4. Let's create a new topic named `sandwich_productions` in the Kafka server. To do this, navigate to `<Kafka_Home>` and run following command:
 
@@ -481,7 +481,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
     insert into OutputStream;
     ```
 
-6. Save this file as `CountProductions.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. When the Siddhi application is successfully deployed, the following `INFO` log appears in the Streaming Integrator console.
+6. Save this file as `CountProductions.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. When the Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
 
     ```bash
     INFO {org.wso2.carbon.stream.processor.core.internal.StreamProcessorService} - Siddhi App CountProductions deployed successfully
@@ -538,7 +538,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
 11. Shutdown SI server. Here you are deliberately creating a scenario where the server crashes before the SI server could persist the latest production count.
 
     !!!info
-        Here the SI server crashes before the state is persisted. Therefore the SI server cannot persist the latest count (which should include the last two productions `100` Croissants and `100` Croutons). The good news is, the Kafka source replays the last two messages, thereby allowing the Streaming Integrator to successfully recover from the server crash.
+        Here the SI server crashes before the state is persisted. Therefore the SI server cannot persist the latest count (which should include the last two productions `100` Croissants and `100` Croutons). The good news is, the Kafka source replays the last two messages, thereby allowing the WSO2 Integrator: SI to successfully recover from the server crash.
 
 12. Restart the SI server and wait for about one minute to observe the following logs.
 

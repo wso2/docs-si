@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via Kafka transport in JSON format.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to send sweet production events via Kafka transport in JSON format.
 
 ## Prerequisites
 

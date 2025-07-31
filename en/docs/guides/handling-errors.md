@@ -1,6 +1,6 @@
 # Handling Errors
 
-WSO2 Streaming Integrator allows you to handle any errors that may occur when handling streaming data in a graceful manner. 
+WSO2 Integrator: SI allows you to handle any errors that may occur when handling streaming data in a graceful manner. 
 
 The possible actions that you can take for events with errors are:
 
@@ -143,7 +143,7 @@ To try out storing errors in the store, follow the steps below:
 
 2. Download the [productions.csv file](https://github.com/wso2/docs-ei/blob/master/en/streaming-integrator/docs/examples/resources/productions.csv) and save it in a location of your choice in your machine.
 
-3. [Create a Siddhi application](../develop/creating-a-Siddhi-Application.md) as follows and [deploy it in the Streaming Integrator server](../develop/deploying-Streaming-Applications.md).
+3. [Create a Siddhi application](../develop/creating-a-Siddhi-Application.md) as follows and deploy it in the WSO2 Integrator: SI server.
 
     ```
     @App:name("CopyingProductionStatsApp")
@@ -168,9 +168,9 @@ To try out storing errors in the store, follow the steps below:
    
    The above Siddhi application simply copied content from one file to another. Any mapping errors generated when you run it can be stored in the error store you configured.
    
-4. Start the MySQL server. If the Streaming Integrator server and Streaming Integrator Tooling are not already started, start them too.
+4. Start the MySQL server. If the WSO2 Integrator: SI server and WSO2 Integrator: SI Tooling are not already started, start them too.
 
-5. Access and open the Streaming Integrator Tooling.
+5. Access and open the WSO2 Integrator: SI Tooling.
 
 6. To open the Error Store Explorer, click **Tools** and then click **Error Store Explorer**.
 
@@ -180,7 +180,7 @@ To try out storing errors in the store, follow the steps below:
 
 7. Click **Connect to Server**. Then enter information as follows:
 
-    To check the port of the Streaming Integrator Server, Open <SI-Home>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.
+    To check the port of the WSO2 Integrator: SI Server, Open <SI-Home>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.
    
     ![Server Configuration]({{base_path}}/images/quick-start-guide-101/connect-error-store.png)
     
@@ -203,13 +203,13 @@ To try out storing errors in the store, follow the steps below:
     
         `Crossaints,90.0`
         
-    3. Access Streaming Integrator Tooling and click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the sink error as follows.
+    3. Access WSO2 Integrator: SI Tooling and click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the sink error as follows.
     
         ![Sink Error]({{base_path}}/images/handling-errors/sink-error.png)
     
     4. To correct the error and replay it, follow the procedure below:
     
-        1. Correct the file path. For example, in this scenario, you can add a directory named `manager` in the `Users/foo` directory so that the `/Users/foo/manager/` is a path that actually exists, enabling WSO2 Streaming Integrator to generate the `managercopy.csv` in it.
+        1. Correct the file path. For example, in this scenario, you can add a directory named `manager` in the `Users/foo` directory so that the `/Users/foo/manager/` is a path that actually exists, enabling WSO2 Integrator: SI to generate the `managercopy.csv` in it.
         
         2. In the **Error Store Explorer** dialog box, click **Replay** for the event.
         
@@ -223,7 +223,7 @@ To try out storing errors in the store, follow the steps below:
         
         The above entry is erroneous because it has two string values instead of one.
         
-    2. Access Streaming Integrator Tooling and click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the mapping error as follows.
+    2. Access WSO2 Integrator: SI Tooling and click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the mapping error as follows.
     
         ![Mapping Error]({{base_path}}/images/handling-errors/mapping-error.png)
         
@@ -275,7 +275,7 @@ This involves logging the event with details of the error and then dropping it. 
 
 To try out logging events with errors, consider the same example previously used where production statistics is copied from one file to another.
 
-1. In Streaming Integrator Tooling, open the `CopyingProductionStatsApp`  Siddhi application that you created in the [Storing events with errors section](#storing-events-with-errors) and update it as follows. Then [deploy it in the Streaming Integrator server](../develop/deploying-Streaming-Applications.md).
+1. In WSO2 Integrator: SI Tooling, open the `CopyingProductionStatsApp`  Siddhi application that you created in the [Storing events with errors section](#storing-events-with-errors) and update it as follows.
 
     ```
     @App:name("CopyingProductionStatsApp")
@@ -305,7 +305,7 @@ To try out logging events with errors, consider the same example previously used
     
     `Crossaints,90.0`
     
-    As a result, the following is logged in the Streaming Integrator terminal.
+    As a result, the following is logged in the WSO2 Integrator: SI terminal.
     
     ```text
     ERROR {io.siddhi.core.stream.output.sink.Sink} - Error on 'CopyingProductionStatsApp'. Dropping event at Sink 'file' at 'CopyProductionStream' as its still trying to reconnect!, events dropped 'Fudge,100.0
@@ -315,7 +315,7 @@ To try out logging events with errors, consider the same example previously used
 
     `Fudge,Gateaux,80.0`
     
-    As a result, the following is logged in the Streaming Integrator console.
+    As a result, the following is logged in the WSO2 Integrator: SI console.
     
     ```text
     ERROR {io.siddhi.extension.map.csv.sourcemapper.CSVSourceMapper} - Incompatible data format. Because value of amount isGateaux and attribute type is DOUBLE in the stream ProductionStream of siddhi csv input mapper.
@@ -373,7 +373,7 @@ This can be used with the following:
 
 To try out streaming events with errors, follow the procedure below.
 
-1. In Streaming Integrator Tooling, open the `CopyingProductionStatsApp`  Siddhi application that you created in the [Storing events with errors section](#storing-events-with-errors) and update it as follows. Then [deploy it in the Streaming Integrator server](../develop/deploying-Streaming-Applications.md).
+1. In WSO2 Integrator: SI Tooling, open the `CopyingProductionStatsApp`  Siddhi application that you created in the [Storing events with errors section](#storing-events-with-errors) and update it as follows. Then deploy it in the WSO2 Integrator: SI server.
 
     ```
     @App:name("CopyingProductionStatsApp")
@@ -409,7 +409,7 @@ To try out streaming events with errors, follow the procedure below.
     
     `Crossaints,abc`
     
-    As a result, the following is logged in the Streaming Integrator terminal.
+    As a result, the following is logged in the WSO2 Integrator: SI terminal.
     
     ```text
     INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - CopyingProductionStatsApp: Error Occured, StreamEvent{ timestamp=1604408058031, beforeWindowData=null, onAfterWindowData=null, outputData=[Crossaints, abc, java.lang.ClassCastException: class java.lang.String cannot be cast to class java.lang.Double (java.lang.String and java.lang.Double are in module java.base of loader 'bootstrap')], type=CURRENT, next=null} 

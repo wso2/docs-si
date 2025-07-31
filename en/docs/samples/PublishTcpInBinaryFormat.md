@@ -1,7 +1,7 @@
 
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via TCP transport in binary format and view the output on the console.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to send sweet production events via TCP transport in binary format and view the output on the console.
 
 ## Executing the sample
 
