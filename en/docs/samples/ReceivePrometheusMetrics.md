@@ -5,9 +5,9 @@ This application demonstrates how  to retrieve Prometheus metrics that are expor
 
 ## Prerequisites:
 
-The following steps must be executed to enable WSO2 Streaming Integrator to publish and retrieve events via Prometheus.
+The following steps must be executed to enable WSO2 Integrator: SI to publish and retrieve events via Prometheus.
 
-1. To complete the installation of the Prometheus extension in WSO2 Streaming Integrator Tooling, follow the steps below:
+1. To complete the installation of the Prometheus extension in WSO2 Integrator: SI Tooling, follow the steps below:
 
     1. Download the following JARs.
     
@@ -19,20 +19,13 @@ The following steps must be executed to enable WSO2 Streaming Integrator to publ
         
         - [simpleclient_pushgateway-0.5.0.jar](https://mvnrepository.com/artifact/io.prometheus/simpleclient_pushgateway/0.5.0)
         
-    2. Place the JARs you downloaded in the `<SI_TOOLING_HOME>/lib` directory.
+    2. Place the JARs you downloaded in the `<SI_HOME>/lib` directory.
 		    
-2. Start WSO2 Streaming Integrator Tooling, navigate to the `<SI_TOOLING_HOME>/bin` directory and issue the appropriate command based on your operating system.
+2. 
 
-    - **For Windows**: `server.bat --run`
-    - **For Linux/MacOS**: `./server.sh`
+3. Save the sample [EnergyAlertApp](https://github.com/wso2/product-streaming-integrator-tooling/blob/421d942019a349151c763a2571f1f10f8c17f280/modules/samples/artifacts/ReceivePrometheusMetrics/ReceivePrometheusMetrics.siddhi) Siddhi application.
 
-3. Save the sample `EnergyAlertApp` Siddhi application.
-
-    When the Siddhi application is successfully deployed in Streaming Integrator Tooling, the following message is logged in the console.
-
-    `"Siddhi App EnergyAlertApp successfully deployed"`
-    
-4. Navigate to `<SI_TOOLING_HOME>/samples/sample-clients/prometheus-client` and issue the `ant` command as follows.
+4. Download `https://github.com/wso2/product-streaming-integrator-tooling/tree/421d942019a349151c763a2571f1f10f8c17f280/modules/samples/sample-clients/prometheus-client` and issue the `ant` command as follows.
 
     `ant`
 

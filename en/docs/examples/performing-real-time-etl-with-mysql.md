@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Streaming Integrator (SI) allows you to capture changes to a database table, in a streaming manner, enabling you to perform ETL operations.
+The WSO2 Integrator: SI (SI) allows you to capture changes to a database table, in a streaming manner, enabling you to perform ETL operations.
 
 This tutorial takes you through the different modes and  options you could use to perform Change Data Capturing (CDC) using the SI. In this tutorial, you are using a MySQL datasource.
 
@@ -208,7 +208,7 @@ Let's try out a scenario in which you are going to deploy a Siddhi application t
 
 !!!info
     In this scenario, the SI server is required to *remember* the current count through system failures so that when the system is restored, the count is not reset to zero.
-    To achieve this, you can use the state persistence capability in the Streaming Integrator.
+    To achieve this, you can use the state persistence capability in the WSO2 Integrator: SI.
 
 1. Enable state persistence feature in SI server as follows. Open the `<SI_HOME>/conf/server/deployment.yaml` file on a text editor and locate the `state.persistence` section.
 
@@ -239,7 +239,7 @@ Let's try out a scenario in which you are going to deploy a Siddhi application t
 
     Save the file.
 
-3. Restart the Streaming Integrator server for above change to be effective.
+3. Restart the WSO2 Integrator: SI server for above change to be effective.
 
 4. Open a text file and copy-paste following Siddhi application to it.
 
@@ -262,7 +262,7 @@ Let's try out a scenario in which you are going to deploy a Siddhi application t
     ```
 
 5. Save this file as `CountProductions.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory. When the
-   Siddhi application is successfully deployed, the following `INFO` log appears in the Streaming Integrator console.
+   Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
 
     ```
     INFO {org.wso2.carbon.stream.processor.core.internal.StreamProcessorService} - Siddhi App CountProductions deployed successfully
@@ -313,7 +313,7 @@ Let's try out a scenario in which you are going to deploy a Siddhi application t
 9. Shutdown SI server. Here you are deliberately creating a scenario where the server crashes before the SI server could persist the latest production count.
 
     !!!Info
-         Here, the SI server crashes before the state is persisted. Therefore the SI server cannot persist the latest count (which should include the last two productions `100` Croissants and `100` Croutons). The good news is, `CDC source` replays the last two messages, allowing the Streaming Integrator to recover successfully from the server crash.
+         Here, the SI server crashes before the state is persisted. Therefore the SI server cannot persist the latest count (which should include the last two productions `100` Croissants and `100` Croutons). The good news is, `CDC source` replays the last two messages, allowing the WSO2 Integrator: SI to recover successfully from the server crash.
 
 10. Restart the SI server and wait for about one minute.
 
@@ -421,7 +421,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
 
 !!!info
     In this scenario, the SI server is required to *remember* the current count through system failures so that when the system is restored, the count is not reset to zero.
-    To achieve this, you can use the state persistence capability in the Streaming Integrator.
+    To achieve this, you can use the state persistence capability in the WSO2 Integrator: SI.
 
 1. Enable state persistence feature in SI server as follows. Open the `<SI_HOME>/conf/server/deployment.yaml` file on a text editor and locate the `state.persistence` section.
 
@@ -452,7 +452,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
 
     Save the file.
 
-3. Restart the Streaming Integrator server for above change to be effective.
+3. Restart the WSO2 Integrator: SI server for above change to be effective.
 
 4. Open a text file and copy-paste following Siddhi application to it.
 
@@ -483,7 +483,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
     ```
 
 5. Save this file as `CountProductions_pol.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory. When the
-   Siddhi application is successfully deployed, the following `INFO` log appears in the Streaming Integrator console.
+   Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
 
     ```
     INFO {org.wso2.carbon.stream.processor.core.internal.StreamProcessorService} - Siddhi App CountProductions_pol deployed successfully
@@ -534,7 +534,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
 9. Shutdown SI server. Here you are deliberately creating a scenario where the server crashes before the SI server could persist the latest production count.
 
     !!!info
-        Here, the SI server crashes before the state is persisted. Therefore, the SI server cannot persist the latest count (which should include the last two production runs `100` Croissants and `100` Croutons). The good news is, the `CDC source` replays the last two messages, allowing the Streaming Integrator to successfully recover from the server crash.
+        Here, the SI server crashes before the state is persisted. Therefore, the SI server cannot persist the latest count (which should include the last two production runs `100` Croissants and `100` Croutons). The good news is, the `CDC source` replays the last two messages, allowing the WSO2 Integrator: SI to successfully recover from the server crash.
 
 10. Restart the SI server and wait for about one minute.
 

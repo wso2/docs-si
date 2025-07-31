@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this tutorial, let's learn how you can handle streaming data that has errors (e.g., events that do not have values for certain attributes). WSO2 Streaming Integrator allows you to log such events, direct them to a separate stream or store them in a data store. If these errors occur at the time of publishing (e.g., due to a connection error), WSO2 SI also provides the option to wait and then resume to publish once the connection is stable again. For detailed information about different ways to handle errors, see the [Handling Errors guide](../guides/handling-errors.md).
+In this tutorial, let's learn how you can handle streaming data that has errors (e.g., events that do not have values for certain attributes). WSO2 Integrator: SI allows you to log such events, direct them to a separate stream or store them in a data store. If these errors occur at the time of publishing (e.g., due to a connection error), SI also provides the option to wait and then resume to publish once the connection is stable again. For detailed information about different ways to handle errors, see the [Handling Errors guide](../guides/handling-errors.md).
 
 In this scenario, you are handling erroneous events by directing them to a MySQL store.
 
@@ -14,9 +14,9 @@ In this scenario, you are handling erroneous events by directing them to a MySQL
         <br/>
           - For Linux:  `sh server.sh`<br/>
         <br/>
-      The following log appears in the Streaming Integrator console once you have successfully started the server. <br/>
+      The following log appears in the WSO2 Integrator: SI console once you have successfully started the server. <br/>
       <br/>
-      `INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 4.240 sec`
+      `INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Integrator: SI started in 4.240 sec`
       <br/>
     - You need to have access to a MySQL instance.<br/>
     
@@ -85,14 +85,8 @@ This configuration refers to a data source named `Error_Store_DB`. Define this d
 
 To create and deploy a Siddhi application, follow the steps below:
 
-1. Start the Streaming Integrator Tooling by navigating to the `<SI_TOOLING_HOME>/bin` directory and issuing one of the following commands as appropriate, based on your operating system:
+1. Open the VSCode editor with **WSO2 Integrator: SI** extension installed.
 
-    - For Windows: `streaming-integrator-tooling.bat`
-
-    - For Linux: `./streaming-integrator-tooling.sh`
-    
-    Then Access the Streaming Integrator Tooling via the URL that appears in the start up log with the text `Editor Started on:`.
-    
 2. Copy paste the following three Siddhi applications to three separate new files and save.
     ```
         @App:name("MappingErrorTest")
@@ -153,10 +147,10 @@ To create and deploy a Siddhi application, follow the steps below:
 
     1. Click the **Deploy** menu and then click **Deploy to Server**. This opens the **Deploy Siddhi Apps to Server** dialog box.
     
-    2. In the **Add New Server** section, enter the host, port, user name and the password of your Streaming Integrator server as shown below.
+    2. In the **Add New Server** section, enter the host, port, user name and the password of your WSO2 Integrator: SI server as shown below.
     
         !!! Tip
-            To check the port of your streaming integrator server, open the `<SI_HOME>/conf/server/deployment.yaml file` and search for `wso2.transport.http` -> `Listener Configurations`. The port of your WSO2 Streaming Integrator port is specified under the listener configuration that has `msf4j-https` as the ID as shown in the extract below. In this example, it is `9443`.<br/><br/>
+            To check the port of your WSO2 Integrator: SI server, open the `<SI_HOME>/conf/server/deployment.yaml file` and search for `wso2.transport.http` -> `Listener Configurations`. The port of your WSO2 Integrator: SI port is specified under the listener configuration that has `msf4j-https` as the ID as shown in the extract below. In this example, it is `9443`.<br/><br/>
             ```
             listenerConfigurations:
                 -
@@ -187,14 +181,8 @@ The Error Store Explorer is a tool that allows you to view, correct and replay e
 
 To connect the Error Store Explorer to the SI server, follow the procedure below:
 
-1. Start the Streaming Integrator Tooling server by navigating to the `<SI_TOOLING_HOME>/bin` directory and issuing one of the following commands as appropriate, based on your operating system:
-                                                 
-     - For Windows: `streaming-integrator-tooling.bat`
-    
-     - For Linux: `./streaming-integrator-tooling.sh`
-     
-    Then Access the Streaming Integrator Tooling via the URL that appears in the start up log with the text `Editor Started on:`.
-       
+1. Open the VSCode editor with **WSO2 Integrator: SI** extension installed.
+
 2. To open the Error Store Explorer, click **Tools** and then click **Error Store Explorer**.
 
     The Error Store Explorer opens as shown below. 
@@ -202,7 +190,7 @@ To connect the Error Store Explorer to the SI server, follow the procedure below
     ![Access Error Store]({{base_path}}/images/handling-requests-with-errors/error-store-explorer-without-server.png)
    
 3. Click **Connect to Server**. Then enter information as follows:
-   To check the port of the Streaming Integrator Server, Open <SI_HOME>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.
+   To check the port of the WSO2 Integrator: SI Server, Open <SI_HOME>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.
 
     ![Server Configuration]({{base_path}}/images/handling-requests-with-errors/server-configurations.png)
 
@@ -241,7 +229,7 @@ The event causes an error referred to as `MappingFailedException`. This is becau
 
 To manage the error in the Error Store Explorer, follow the procedure below:
     
-1. To open the Error Store Explorer, open Streaming Integrator Tooling, click **Tools** and then click **Error Store Explorer**.
+1. To open the Error Store Explorer, open WSO2 Integrator: SI Tooling, click **Tools** and then click **Error Store Explorer**.
 
     ![Access Error Store]({{base_path}}/images/handling-requests-with-errors/access-error-store-explorer.png)
     
@@ -261,7 +249,7 @@ To manage the error in the Error Store Explorer, follow the procedure below:
     
     As a result, the **Error Entry** dialog box closes, and the **Error Store Explorer** dialog box is displayed with no errors.
     
-    At the same time the following is logged for the Streaming Integrator Server.
+    At the same time the following is logged for the WSO2 Integrator: SI Server.
     
     ```
         INFO {io.siddhi.core.stream.output.sink.LogSink} - Successful mapping:  : Event{timestamp=1595574091411, data=[Cake, 20.02], isExpired=false}
@@ -277,7 +265,7 @@ Send an HTTP event to the `TestInput` stream of the `SinkTransportErrorTest` Sid
 curl --location --request POST 'http://localhost:8007/testUnavailableEP' --header 'Content-Type: application/json' --data-raw ' { "event": { "name": "Cake2", "amount": 20.222 } }'
 ```
 
-The following is logged in the Streaming Integrator Server console
+The following is logged in the WSO2 Integrator: SI Server console
 ```
 INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - SinkTransportErrorTest: Sending to unavailableEndpoint: , StreamEvent{ timestamp=1597853565942, beforeWindowData=null, onAfterWindowData=null, outputData=[Cake2, 20.222], type=CURRENT, next=null}
 ```
@@ -291,7 +279,7 @@ In the **Siddhi Apps to Deploy** section, select the check box for the **Receive
 
    ![Select ReceiveAndCount Siddhi Application and Server]({{base_path}}/images/handling-requests-with-errors/select-receiveAndCount-app-and-server.png)
 
-The following log is displayed in the Streaming Integrator console.
+The following log is displayed in the WSO2 Integrator: SI console.
 
 ```
 INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App ReceiveAndCount deployed successfully
@@ -300,7 +288,7 @@ INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService}
 
 To manage the error in the Error Store Explorer, follow the procedure below:
     
-1. To open the Error Store Explorer, open Streaming Integrator Tooling, click **Tools** and then click **Error Store Explorer**.
+1. To open the Error Store Explorer, open WSO2 Integrator: SI Tooling, click **Tools** and then click **Error Store Explorer**.
 
     ![Access Error Store]({{base_path}}/images/handling-requests-with-errors/access-error-store-explorer.png)
     
@@ -322,7 +310,7 @@ To manage the error in the Error Store Explorer, follow the procedure below:
     
     As a result, the **Error Entry** dialog box closes, and the **Error Store Explorer** dialog box is displayed with no errors.
     
-    At the same time the following is logged for the Streaming Integrator Server which is logged by the ReceiveAndCount Siddhi application.
+    At the same time the following is logged for the WSO2 Integrator: SI Server which is logged by the ReceiveAndCount Siddhi application.
     
     ```
     INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveAndCount : TotalCountStream : Event{timestamp=1597857170244, data=[1], isExpired=false}    

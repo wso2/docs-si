@@ -1,4 +1,4 @@
-# List of Streaming Integrator Samples
+# List of WSO2 Integrator: SI Samples
 
 ### Consume
 - [Recieve TCP in JSON Format](./ReceiveTCPinJSONFormat.md)

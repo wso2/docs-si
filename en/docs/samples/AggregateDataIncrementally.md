@@ -6,26 +6,26 @@ This example demonstrates how to get running statistics using Siddhi. The sample
 
 !!!info "Before you begin:"
     1. Install MySQL.<br/>
-    2. Add the MySQL JDBC driver to your Streaming Integrator library as follows:<br/>
+    2. Add the MySQL JDBC driver to your WSO2 Integrator: SI library as follows:<br/>
         1. Download the JDBC driver from the [MySQL site](https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.45.tar.gz). <br/>
-        2. Extract the MySQL JDBC Driver zip file you downloaded. Then use the `jarbundle` tool in the `<SI_TOOLING_HOME>/bin` directory to convert the jars in it into OSGi bundles. To do this, issue one of the following commands:<br/>
-            - **For Windows**: `<SI_TOOLING_HOME>/bin/jartobundle.bat <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR>`<br/>
-            - **For Linux**: `<SI_TOOLING_HOME>/bin/jartobundle.sh <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR`<br/>
-        3. Copy the converted bundles to the `<SI_TOOLING_HOME>/lib` directory.<br/>
+        2. Extract the MySQL JDBC Driver zip file you downloaded. Then use the `jarbundle` tool in the `<SI_HOME>/bin` directory to convert the jars in it into OSGi bundles. To do this, issue one of the following commands:<br/>
+            - **For Windows**: `<SI_HOME>/bin/jartobundle.bat <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR>`<br/>
+            - **For Linux**: `<SI_HOME>/bin/jartobundle.sh <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR`<br/>
+        3. Copy the converted bundles to the `<SI_HOME>/lib` directory.<br/>
     3. Create a data store named `sweetFactoryDB` in MySQL with relevant access privileges.<br/>
     4. Replace the values for the `jdbc.url`, `username`, and `password` parameters in the sample.<br/>
         e.g., <br/>
         - `jdbc.url` - `jdbc:mysql://localhost:3306/sweetFactoryDB`<br/>
         - `username` - `root`<br/>
         - `password` - `root`<br/>
-    5. In the Streaming Integrator Tooling, save the sample Siddhi application.<br/>
+    5. In the WSO2 Integrator: SI Tooling, save the sample Siddhi application.<br/>
 
 
 
 ## Executing the Sample
 
 
-To execute the sample Siddhi application, open it in Streaming Integrator Tooling and click the **Start** button (shown below) or click **Run** => **Run**.
+To execute the sample Siddhi application, open it in WSO2 Integrator: SI Tooling and click the **Start** button (shown below) or click **Run** => **Run**.
 
 ![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
 
@@ -35,7 +35,7 @@ If the Siddhi application starts successfully, the following message appears in 
 
 ## Testing the Sample
 
-To test the sample Siddhi application, simulate single events for it via the Streaming Integrator Tooling as follows:
+To test the sample Siddhi application, simulate single events for it via the WSO2 Integrator: SI Tooling as follows:
 
 1. To open the Event Simulator, click the **Event Simulator** icon.
 

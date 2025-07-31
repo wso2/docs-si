@@ -4,7 +4,7 @@ This application demonstrates how to use the Kafka transport in Siddhi to receiv
 
 ## Prerequisites
 
-1. The following steps must be executed to enable WSO2 SI to receive and publish events via the Kafka transport. Since you need to shut down the server to execute these steps, get a copy of these instructions prior to proceeding.
+1. The following steps must be executed to enable SI to receive and publish events via the Kafka transport. Since you need to shut down the server to execute these steps, get a copy of these instructions prior to proceeding.
 
     1. Download the Kafka broker from [here](https://www.apache.org/dyn/closer.cgi?path=/kafka/0.10.2.1/kafka_2.11-0.10.2.1.tgz)
 

@@ -1,20 +1,20 @@
-# WSO2 Streaming Integrator Documentation
+# WSO2 Integrator: SI Documentation
 
-This repository contains the source code for WSO2 Streaming Integrator documentation.
+This repository contains the source code for WSO2 Integrator: SI documentation.
 
 This repository is open and we welcome your contributions!
 
 Follow the below topics to learn more:
 
-- [Contributing to WSO2 Streaming Integrator documentation](#contribute)
+- [Contributing to WSO2 Integrator: SI documentation](#contribute)
     - [For minor modifications](#minor-modification)
     - [For major modifications](#major-modification)
 - [Running the project locally](#run-locally)
 - [Signing the CLA](#cla)
 
-## <a name="contribute"></a> Contributing to WSO2 Streaming Integrator documentation
+## <a name="contribute"></a> Contributing to WSO2 Integrator: SI documentation
 
-As an open-source project, WSO2 Streaming Integrator documentation welcomes contributions from the community. Before you contribute, read the following guidelines to understand how you can contribute:
+As an open-source project, WSO2 Integrator: SI documentation welcomes contributions from the community. Before you contribute, read the following guidelines to understand how you can contribute:
 
 ### <a name="minor-modification"></a> For minor modifications
 
@@ -181,7 +181,7 @@ Navigate to the location where you want to clone the repository and clone the fo
     >```
 >
 
-2. Open the following URL on a new browser window to view the Micro Integrator documentation site locally:
+2. Open the following URL on a new browser window to view the WSO2 Integrator: MI documentation site locally:
 
    http://localhost:8000
 

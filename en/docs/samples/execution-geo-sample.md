@@ -4,11 +4,11 @@
 This application demonstrates how to retrieve the longitude and latitude based on location details provided.
 
 !!!info "Before you begin:"
-    Save the sample Siddhi application in Streaming Integrator Tooling.
+    Save the sample Siddhi application in WSO2 Integrator: SI Tooling.
 
 ## Executing the Sample
 
-To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
 
 ![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
 
@@ -18,7 +18,7 @@ If the Siddhi application starts successfully, the following message appears in 
 
 ## Testing the Sample
 
-To test the sample Siddhi application, simulate single events for it via the Streaming Integrator Tooling as follows:
+To test the sample Siddhi application, simulate single events for it via the WSO2 Integrator: SI Tooling as follows:
 
 1. To open the Event Simulator, click the **Event Simulator** icon.
 
@@ -52,7 +52,7 @@ To test the sample Siddhi application, simulate single events for it via the Str
 
 ## Viewing the Results
 
-The prediction for the location you provided via the event you simulated is displayed as follows in the Streaming Integrator Tooling console.
+The prediction for the location you provided via the event you simulated is displayed as follows in the WSO2 Integrator: SI Tooling console.
 
 `INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - sentimentExtensionSample: Event :, StreamEvent{ timestamp=1513623526790, beforeWindowData=null, onAfterWindowData=null, outputData=[48.8583698, 2.2944833, Tour Eiffel, 5 Avenue Anatole France, 75007 Paris, France], type=CURRENT, next=null}`
 

@@ -5,12 +5,12 @@
 This example demonstrates how to calculate the distance between two locations via the `siddhi-gpl-execution-geo` extension.
 
 !!!info "Before you begin:"
-    1. Download the [siddhi-gpl-execution-geo-x.x.x.jar](http://maven.wso2.org/nexus/content/repositories/wso2gpl/org/wso2/extension/siddhi/gpl/execution/geo/siddhi-gpl-execution-geo/5.0.0/siddhi-gpl-execution-geo-5.0.0.jar) and place it in the `<SI_TOOLING_HOME>/lib` directory.<br/>
-    2. Save this sample in Streaming Integrator Tooling.
+    1. Download the [siddhi-gpl-execution-geo-x.x.x.jar](http://maven.wso2.org/nexus/content/repositories/wso2gpl/org/wso2/extension/siddhi/gpl/execution/geo/siddhi-gpl-execution-geo/5.0.0/siddhi-gpl-execution-geo-5.0.0.jar) and place it in the `<SI_HOME>/lib` directory.<br/>
+    2. Save this sample in WSO2 Integrator: SI Tooling.
 
 ## Executing the Sample
 
-To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
 
 ![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
 
@@ -57,7 +57,7 @@ To test the sample application, simulate a single event for it as follows:
 
 ## Viewing the Results
 
-The following output is logged inthe Streaming Integrator console for the single event you simulated.
+The following output is logged inthe WSO2 Integrator: SI console for the single event you simulated.
 
 `INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - GeoDistanceCalculation: Event :, StreamEvent{ timestamp=1513616078228, beforeWindowData=null, onAfterWindowData=null, outputData=[2322119.848252557], type=CURRENT, next=null}`
 

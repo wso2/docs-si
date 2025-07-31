@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to receive events via HTTP transport and view the output on the console. The count of all events arriving to the stream is calculated.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to receive events via HTTP transport and view the output on the console. The count of all events arriving to the stream is calculated.
 
 ## Executing the sample
 

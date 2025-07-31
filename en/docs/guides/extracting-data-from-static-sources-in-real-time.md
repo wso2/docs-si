@@ -1,10 +1,10 @@
 # Extracting Data from Static Sources in Real Time
 
-WSO2 Streaming Integrator can extract data from static sources such as databases, files and cloud storages in real-tme. 
+WSO2 Integrator: SI can extract data from static sources such as databases, files and cloud storages in real-tme. 
 
 ## Consuming data from RDBMS databases
 
-A database table is a stored collection of records of a specific schema. Each record can be equivalent to an event. WSO2 Streaming Integrator can integrate databases into the streaming flow by extracting records in database tables as streaming events. This can be done via change data capture or by polling a database.
+A database table is a stored collection of records of a specific schema. Each record can be equivalent to an event. WSO2 Integrator: SI can integrate databases into the streaming flow by extracting records in database tables as streaming events. This can be done via change data capture or by polling a database.
 
 ![Extracting data from databases]({{base_path}}/images/extracting-data-from-static-sources/extract-data-from-databases.png)
 
@@ -14,7 +14,7 @@ To understand how data is extracted from a database into a streaming flow, consi
 
 Change data capture involves extracting any change that takes place in a selected database (i.e., any insert, update or a deletion) in real-time.
 
-To capture change data via the [WSO2 Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md), define an input [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) with the appropriate schema to capture the information you require, and then connect a [source](https://siddhi.io/en/v5.1/docs/query-guide/#source) of the `cdc` type as shown in the example below.
+To capture change data via the [WSO2 Integrator: SI for VS Code Overview](../develop/si-for-vscode-overview.md), define an input [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) with the appropriate schema to capture the information you require, and then connect a [source](https://siddhi.io/en/v5.1/docs/query-guide/#source) of the `cdc` type as shown in the example below.
 
 ```
 @source(type = 'cdc', 
@@ -122,11 +122,11 @@ Let's try out the example where you want to view the online bookings saved in a 
           people INT NULL,
           PRIMARY KEY (ref));`
           
-    4. [Start the Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+    4. [Open VSCode with WSO2 Integrator: SI extension installed](../develop/si-for-vscode-overview.md).
     
-    5. Download the `cdc-mysql`Siddhi extension for Streaming Integrator Tooling. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md/#installing-an-extension).
+    5. Download the `cdc-mysql`Siddhi extension for WSO2 Integrator: SI VSCode extension. For instructions, see [Installing Siddhi Extensions](../../develop/installing-siddhi-extensions/#installing-an-extension).
     
-    6. In Streaming Integrator Tooling, open a new file. Copy and paste the following Siddhi application to it.
+    6. In WSO2 Integrator: SI Tooling, open a new file. Copy and paste the following Siddhi application to it.
     
         ```
         @App:name("VacationsApp")
@@ -155,7 +155,7 @@ Let's try out the example where you want to view the online bookings saved in a 
     
         `insert into OnlineBookingsTable(ref,timestamp,name,package,people) values('1',1602506738000,'jem','best of rome',2);`
         
-        The following is logged in the Streaming Integrator Tooling terminal.
+        The following is logged in the WSO2 Integrator: SI Tooling terminal.
                    
         ```
         INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - VacationsApp : LogStream : Event{timestamp=1563378804914, data=[1, 1602506738000, jem, best of rome, 2], isExpired=false}
@@ -191,12 +191,12 @@ File Processing involves two types of operations related to files:
 
 e.g., In a sweet factory where the production bots publishes the production statistics in a file after each production run. Extracting the production statistics from the files for further processing can be considered reading files and extracting data. Checking whether a file is generated to indicate a completed production run, and checking whether a file is moved to a different location after its content is processed can be considered as managed file transfer.
 
-To understand how you can perform these file processing activities via the WSO2 Streaming Integrator, see the subtopics below.
+To understand how you can perform these file processing activities via the WSO2 Integrator: SI, see the subtopics below.
 
 
 ### Extracting data from files
 
-WSO2 Streaming Integrator extracts data from files via the [File Source](https://siddhi-io.github.io/siddhi-io-file/api/latest/#file-source). Once it extracts the data, it can publish it in a streaming manner so that other streaming applications that cannot read static data from files.
+WSO2 Integrator: SI extracts data from files via the [File Source](https://siddhi-io.github.io/siddhi-io-file/api/latest/#file-source). Once it extracts the data, it can publish it in a streaming manner so that other streaming applications that cannot read static data from files.
 
 ![Extracting data from databases]({{base_path}}/images/extracting-data-from-static-sources/file-content-processing.png)
 
@@ -292,7 +292,7 @@ The following mappers are supported for the File extension.
 
 ### Performing managed file transfers
 
-WSO2 Streaming Integrator supports managed file transfers which involves detecting whether a file is created/modified/removed.
+WSO2 Integrator: SI supports managed file transfers which involves detecting whether a file is created/modified/removed.
 
 ![Managed File Transfers]({{base_path}}/images/extracting-data-from-static-sources/file-events-processing.png)
 
@@ -338,9 +338,7 @@ Capturing file events is supported via the [fileeventlistener Siddhi extension](
 
 To try out reading the content of a file and file events, let's address the requirement of the example mentioned before of a sweet factory that publishes production details in a file. 
 
-1. Start and access [WSO2 Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md).
-
-2. Open a new file and add the following Siddhi application. 
+1. Open a new file and add the following Siddhi application. 
 
     ```
         @App:name('LogFileEventsApp')
@@ -374,13 +372,13 @@ To try out reading the content of a file and file events, let's address the requ
     
 3. Open a new file in a text editor of your choice, and save it as `productionstats.csv` in the `Users/production` directory.
 
-    As a result, the following is logged in the Streaming Integrator Tooling terminal to indicate that the `productionstats.csv` is created in the `Users/production` directory.
+    As a result, the following is logged in the WSO2 Integrator: SI Tooling terminal to indicate that the `productionstats.csv` is created in the `Users/production` directory.
     
     ```
     INFO {io.siddhi.core.stream.output.sink.LogSink} - LogFileEventsApp : LogFileEventsStream : Event{timestamp=1603105747423, data=[/Users/production/productionstats.csv, productionstats.csv, created], isExpired=false} 
     ```
    
-4. Create and save the following Siddhi application in Streaming Integrator Tooling.
+4. Create and save the following Siddhi application in VSCode.
 
     ```
     @App:name("FileReadingApp")
@@ -414,7 +412,7 @@ To try out reading the content of a file and file events, let's address the requ
     Almond cookie,100.0
     Baked alaska,20.0
     ```
-    The following is logged in the Streaming Integrator Tooling terminal:
+    The following is logged in the WSO2 Integrator: SI Tooling terminal:
     
     - **For the `FileReadingApp` Siddhi application**
     
@@ -426,7 +424,7 @@ To try out reading the content of a file and file events, let's address the requ
         INFO {io.siddhi.core.stream.output.sink.LogSink} - FileReadingApp : LogStream : Event{timestamp=1603106006720, data=[Baked alaska, 20.0], isExpired=false} 
         ```
       
-        These logs show the content of the `productionstats.csv` file that is read by WSO2 Streaming Integrator.
+        These logs show the content of the `productionstats.csv` file that is read by WSO2 Integrator: SI.
     
     - **For the `LogFileEventsApp` Siddhi application**
 
@@ -434,15 +432,15 @@ To try out reading the content of a file and file events, let's address the requ
         INFO {io.siddhi.core.stream.output.sink.LogSink} - LogFileEventsApp : LogFileEventsStream : Event{timestamp=1603106006807, data=[/Users/production/productionstats.csv, productionstats.csv, removed], isExpired=false}
         ```
       
-        This log indicates that the WSO2 Streaming Integrator has detected that the 'productionstats.csv` file is removed from the `/Users/production` directory.    
+        This log indicates that the WSO2 Integrator: SI has detected that the 'productionstats.csv` file is removed from the `/Users/production` directory.    
 
 ## Consuming data from cloud storages
 
-WSO2 Streaming Integrator allows you to access data in cloud storages (such as Amazon Web Services - SQS, Amazon Web Services - S3, and Google Cloud Platform) and expose it in a streaming manner to applications that cannot access cloud storages. Cloud-based data sources generally cannot be tailed and therefore, it is challenging to expose changes to the stored data in real time. WSO2 Streaming Integrator addresses this issue by periodically polling the cloud storage, transferring the changes detected during those polling intervals to a file, and then tailing the file to expose the data in a streaming manner as illustrated in the following diagram.
+WSO2 Integrator: SI allows you to access data in cloud storages (such as Amazon Web Services - SQS, Amazon Web Services - S3, and Google Cloud Platform) and expose it in a streaming manner to applications that cannot access cloud storages. Cloud-based data sources generally cannot be tailed and therefore, it is challenging to expose changes to the stored data in real time. WSO2 Integrator: SI addresses this issue by periodically polling the cloud storage, transferring the changes detected during those polling intervals to a file, and then tailing the file to expose the data in a streaming manner as illustrated in the following diagram.
 
 ![Accessing Data in Cloud Storages]({{base_path}}/images/extracting-data-from-static-sources/cloud-storages.png)
 
-The following is an example where the WSO2 Streaming Integrator retrieves messages from an SQS queue. A source of the `sqs`type is used for this purpose where you can provide the URL to the SQS queue that you want to subscribe to, and provide the access key and the secret to access it. the queue is polled periodically (i.e., every 5000 milliseconds). The source generates an event in the `InStream` stream for each message it retrieves.
+The following is an example where the WSO2 Integrator: SI retrieves messages from an SQS queue. A source of the `sqs`type is used for this purpose where you can provide the URL to the SQS queue that you want to subscribe to, and provide the access key and the secret to access it. the queue is polled periodically (i.e., every 5000 milliseconds). The source generates an event in the `InStream` stream for each message it retrieves.
 
 ```
 @source(type='sqs',
@@ -510,7 +508,7 @@ Now you can tail the data that is stored in the cloud by tailing the `/Users/mes
 
 ### Supported cloud platforms
 
-The following is a list of cloud platforms from which you can extract stored data via WSO2 Streaming Integrator.
+The following is a list of cloud platforms from which you can extract stored data via WSO2 Integrator: SI.
 
 | **Cloud Platform**            | **Extension**                                                                                         |
 |-------------------------------|-------------------------------------------------------------------------------------------------------|
@@ -524,7 +522,7 @@ The following is a list of cloud platforms from which you can extract stored dat
 
 Mappers determine the format in which the event is received. For information about transforming events by changing the format in which the data is received/published, see [Transforming Data](transforming-data.md#transforming-message-formats).
 
-WSO2 Streaming Integrator supports the following mappers for the cloud-based storages from which it extracts data.
+WSO2 Integrator: SI supports the following mappers for the cloud-based storages from which it extracts data.
 
 | **Mapper** | **Supporting Siddhi Extension**                                                                  |
 |---------------|-----------------------------------------------------------------------------------------------|

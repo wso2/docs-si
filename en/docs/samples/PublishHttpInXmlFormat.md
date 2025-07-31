@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via HTTP transport in XML default format and log the events in LowProductionAlertStream to the output console.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to send sweet production events via HTTP transport in XML default format and log the events in LowProductionAlertStream to the output console.
 
 !!!info "Before executing the sample:"
     Save the sample Siddhi application. Is there is no syntax error, the following message appears in the console.<br/>

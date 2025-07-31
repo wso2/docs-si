@@ -1,6 +1,6 @@
 # Adding Third Party Non OSGi Libraries
 
-The Streaming Integrator is OSGi-based. Therefore, when you integrate third party products such as Oracle with the Streaming Integrator, you need to check whether the libraries you need to add to the Streaming Integrator are OSGi-based. If they are not, you need to convert them to OSGi bundles before adding them to the `<SI_HOME>/lib` directory.
+The WSO2 Integrator: SI is OSGi-based. Therefore, when you integrate third party products such as Oracle with the WSO2 Integrator: SI, you need to check whether the libraries you need to add to the WSO2 Integrator: SI are OSGi-based. If they are not, you need to convert them to OSGi bundles before adding them to the `<SI_HOME>/lib` directory.
 
 To convert jar files to OSGi bundles, follow the procedure given below:
 
@@ -11,4 +11,4 @@ To convert jar files to OSGi bundles, follow the procedure given below:
       
     This generates the converted file in the `<SI_HOME>/lib` directory.
 
-3. Restart the WSO2 SI server.
+3. Restart the SI server.

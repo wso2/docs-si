@@ -5,7 +5,7 @@
 
 ![Stream statistics dashboard]({{base_path}}/images/streaming-integrator-grafana-dashboard/stream_statistics_dashboard.png)
 
-This dashboard displays the following information for your current WSO2 Streaming Integrator deployment:
+This dashboard displays the following information for your current WSO2 Integrator: SI deployment:
 
 - The throughput of each stream
 - The total stream count
@@ -17,7 +17,7 @@ This dashboard displays the following information for your current WSO2 Streamin
 
     ![Monitoring SI Performance]({{base_path}}/images/monitoring-si-performance/select-time-interval.png)
 
-- If you want to view statistics relating to streams in a one or more selected Streaming Integrator servers in your Streaming Integrator deployment, expand the **Instance** field and select the required instance(s).
+- If you want to view statistics relating to streams in a one or more selected WSO2 Integrator: SI servers in your WSO2 Integrator: SI deployment, expand the **Instance** field and select the required instance(s).
 
     The stream statistics of all the servers 
 

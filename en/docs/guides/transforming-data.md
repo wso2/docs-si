@@ -1,24 +1,24 @@
 # Transforming Data
 
-The Streaming Integrator allows you to perform a wide range of transformations to the input data received. A main type of transformation supported is transforming a message from one format to another. In addition, you can perform a range of mathematical, regex, string, unit conversion, map, json, etc., transformations via [Siddhi Extensions](https://siddhi.io/en/v5.1/docs/extensions/). You can also write a custom script to perform an required transformation of data.
+The WSO2 Integrator: SI allows you to perform a wide range of transformations to the input data received. A main type of transformation supported is transforming a message from one format to another. In addition, you can perform a range of mathematical, regex, string, unit conversion, map, json, etc., transformations via [Siddhi Extensions](https://siddhi.io/en/v5.1/docs/extensions/). You can also write a custom script to perform an required transformation of data.
 
 ## Transforming message formats
 
-WSO2 Streaming Integrator can transform message formats when it consumes data as well as when it publishes data.
+WSO2 Integrator: SI can transform message formats when it consumes data as well as when it publishes data.
 
 ### Transforming the message format when consuming data
 
-Data publishers, databases, files, and messaging systems send data to WSO2 Streaming Integrator in different data formats. Therefore, WSO2 Streaming Integrator has the capability to consume data in a range of formats. Once it receives the data in a specific format, it can convert it to a different format for processing purposes.
+Data publishers, databases, files, and messaging systems send data to WSO2 Integrator: SI in different data formats. Therefore, WSO2 Integrator: SI has the capability to consume data in a range of formats. Once it receives the data in a specific format, it can convert it to a different format for processing purposes.
 
-The Streaming Integrator can consume events in the default format in which they are sent/extracted or make changes to it to match the event schema as defined via the input stream.
+The WSO2 Integrator: SI can consume events in the default format in which they are sent/extracted or make changes to it to match the event schema as defined via the input stream.
 
 - **Consuming messages in a default format**
 
-    Consuming messages via WSO2 Streaming Integrator by configuring Siddhi sources is explained in [Extracting Data From Static Sources in Real Time](extracting-data-from-static-sources-in-real-time.md) and [Receiving Data in Trasit](receiving-data-in-transit.md).
+    Consuming messages via WSO2 Integrator: SI by configuring Siddhi sources is explained in [Extracting Data From Static Sources in Real Time](extracting-data-from-static-sources-in-real-time.md) and [Receiving Data in Trasit](receiving-data-in-transit.md).
     
     To receive data in a specific format, you need to annotate a mapper to the source configuration via the @map annotation. For more information, see [Siddhi Query Guide - Source Mapper](https://siddhi.io/en/v5.1/docs/query-guide/#source-mapper).
     
-    To understand how to do this, consider factory where production bots publish the production amounts in a file. The the file contains rows in the CSV format. Therefore, WSO2 Streaming Integrator needs to consume the records in that format. Therefore, the source and the mapper can be configured as shown below.
+    To understand how to do this, consider factory where production bots publish the production amounts in a file. The the file contains rows in the CSV format. Therefore, WSO2 Integrator: SI needs to consume the records in that format. Therefore, the source and the mapper can be configured as shown below.
     
     ```
     @source(type='file', mode='LINE',
@@ -71,9 +71,9 @@ The Streaming Integrator can consume events in the default format in which they 
 
 ### Transforming the message format when publishing data
 
-The different destinations to which you need to publish data via WSO2 Streaming Integrator accept data in different formats. Therefore, WSO2 Streaming Integrator supports publishing in a range of formats.
+The different destinations to which you need to publish data via WSO2 Integrator: SI accept data in different formats. Therefore, WSO2 Integrator: SI supports publishing in a range of formats.
 
-WSO2 Streaming Integrator can publish messages in the default format or in a custom format. 
+WSO2 Integrator: SI can publish messages in the default format or in a custom format. 
 
 - **Publishing messages in default format**
 
@@ -87,11 +87,11 @@ WSO2 Streaming Integrator can publish messages in the default format or in a cus
         @map(type = 'xml'))
     define stream OutputStream (name string, amount double);
     ```
-    Here, you have included the `@map` annotation within the `@sink` annotation and specified the mapping type as `xml` so that the WSO2 Streaming Integrator can publish the output in XML format.
+    Here, you have included the `@map` annotation within the `@sink` annotation and specified the mapping type as `xml` so that the WSO2 Integrator: SI can publish the output in XML format.
     
 - **Publishing messages in custom format**
 
-    The schema of the event accepted by the destination to which you are sending your output can be different to the schema of your input event or the schema of the event at the time you were processing it. Therefore, WSO2 Streaming Integrator allows you to perform custom mapings when you publish the output. The custom mapping needs to be annotated to the mapping configuration via the `@payload` annotation.
+    The schema of the event accepted by the destination to which you are sending your output can be different to the schema of your input event or the schema of the event at the time you were processing it. Therefore, WSO2 Integrator: SI allows you to perform custom mapings when you publish the output. The custom mapping needs to be annotated to the mapping configuration via the `@payload` annotation.
     
     To understand this, consider the example of a sweet factory that needs to send it's production report to the factory manager. The output stream in which the output is generated after processing can be as follows:
     
@@ -137,7 +137,7 @@ WSO2 Streaming Integrator can publish messages in the default format or in a cus
 
 ## Transforming with inline operators
 
-WSO2 Streaming Integrator is shipped with inline operators that allow you to do certain transformations to streaming data without downloading additional Siddhi extensions from the Siddhi store.
+WSO2 Integrator: SI is shipped with inline operators that allow you to do certain transformations to streaming data without downloading additional Siddhi extensions from the Siddhi store.
 
 For example, assume that instead of the amount produced during the specific production run, you need to present the total amount produced for the given product with each production run as well as the average. For this, you can write a query as follows:
 
@@ -155,9 +155,9 @@ In this example, the input event that reports only the name of the product and t
 
 ## Transforming with supported Siddhi extensions
 
-When you want to perform more advanced transformations that are not supported by the inline operators of the WSO2 Streaming Integrator, you can use one or more of the Siddhi extensions from the [Siddhi Store](https://store.wso2.com/store/assets/analyticsextension/list).
+When you want to perform more advanced transformations that are not supported by the inline operators of the WSO2 Integrator: SI, you can use one or more of the Siddhi extensions from the [Siddhi Store](https://store.wso2.com/store/assets/analyticsextension/list).
 
-Some of these extensions are shipped with the WSO2 Streaming Integrator by default. If you want to use a Siddhi extension that is not shipped by default, you need to download and install it following the instructions in [Downloading and Installing Siddhi Extensions]({{base_path}}/connectors/downloading-and-installing-siddhi-extensions.md).
+Some of these extensions are shipped with the WSO2 Integrator: SI by default. If you want to use a Siddhi extension that is not shipped by default, you need to download and install it following the instructions in [Downloading and Installing Siddhi Extensions]({{base_path}}/connectors/downloading-and-installing-siddhi-extensions.md).
 
 The following table describes the complete list of extensions that provide data transformation functionality.
 
@@ -198,7 +198,7 @@ Here, `js:eval("amount > average", 'bool') as exceedsAverage` is a custom functi
 
 To try out the transformations described above with some of the given examples, follow the steps below:
 
-1. [Start and Access Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+1. [Start and Access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
 
 2. Open a new file. Then add and save the following Siddhi application.
 
@@ -337,7 +337,7 @@ To try out the transformations described above with some of the given examples, 
     {"Product":{"ProductionData":{"Name":"Gingerbread","Quantity":"45.0","Total":165.0,"Average":55.0}
     ```
 
-5. Check the Streaming Integrator Tooling terminal. The following is logged in it.
+5. Check the WSO2 Integrator: SI Tooling terminal. The following is logged in it.
 
     ```text
     INFO {io.siddhi.core.stream.output.sink.LogSink} - Exceeds Average : name:"Jaffa Cake",

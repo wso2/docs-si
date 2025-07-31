@@ -1,6 +1,6 @@
 # Cleansing Data
 
-When you receive input data via the Streaming Integrator, it may consist of data that is not required to generate the required output, null values for certain attributes, etc. Cleansing data refers to refining the input data received by assigning values where there are missing values (if there are applicable values), filtering out the data that is not required, etc.
+When you receive input data via the WSO2 Integrator: SI, it may consist of data that is not required to generate the required output, null values for certain attributes, etc. Cleansing data refers to refining the input data received by assigning values where there are missing values (if there are applicable values), filtering out the data that is not required, etc.
 
 ## Filtering data based on conditions
 
@@ -46,8 +46,6 @@ To understand this, consider a scenario where you receive the temperature of mul
 ### Try it out
 
 To try out the query used in the above example, let's include it in a Siddhi Application and run it.
-
-1. [Start and Access Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md#starting-streaming-integrator-tooling).
 
 2. Open a new file. Then add and save the following Siddhi application.
 
@@ -133,9 +131,7 @@ Here, the `cast()` function presents the value for the `roomNo` attribute as a s
 
 To try out the above example, follow the steps below:
 
-1. [Start and Access Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
-
-2. Open a new file. Then add and save the following Siddhi application.
+1. Open a new file. Then add and save the following Siddhi application.
 
     ```
     @App:name('TemperatureApp')
@@ -153,7 +149,7 @@ To try out the above example, follow the steps below:
     ```
    In this Siddhi application, the `Temp Stream` has an attribute named `deviceID`, but it is not selected to be included in the output events. The `roomNo`attribute is cast as an string value via `cast(roomNo, "string")`. This means although the value for this attribute is received as an integer, it is presented as a string value in the output.
    
-3. Open the event simulator and simulate an event for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](testing-a-Siddhi-Application/#simulating-a-single-event).
+2. Open the event simulator and simulate an event for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](testing-a-Siddhi-Application/#simulating-a-single-event).
 
     | **deviceID**  | **roomNo** | **temp** |
     |---------------|------------|----------|
@@ -180,7 +176,7 @@ insert into CleansedDataStream
 
 To try out the above example, follow the steps below:
 
-1. [Start and Access Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+1. [Start and Access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
 
 2. Open a new file. Then add and save the following Siddhi application.
 

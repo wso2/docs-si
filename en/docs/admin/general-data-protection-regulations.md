@@ -1,4 +1,4 @@
-# General Data Protection Regulations (GDPR) for Streaming Integrator
+# General Data Protection Regulations (GDPR) for WSO2 Integrator: SI
 
 The General Data Protection Regulation (GDPR) is a new legal framework formalized by the European Union (EU) in 2016. This regulation is effective since 28, May 2018, and can affect any organization that processes Personally Identifiable Information (PII) of individuals who live in Europe. Organizations that fail to demonstrate GDPR compliance are subjected to financial penalties.
 
@@ -23,7 +23,7 @@ The General Data Protection Regulation (GDPR) is a new legal framework formalize
 
 ## Removing personally identifiable information via the Forget-me tool
 
-In the Streaming Integrator, streams specify the schema for events to be selected into the streaming integration event flow to be processed. This schema can include user IDs and other PII (Personally Identifiable Information) that you want to delete from log files and such. This can be done via the [Forget-me Tool](#Forget-me_Tool_Overview).
+In the WSO2 Integrator: SI, streams specify the schema for events to be selected into the streaming integration event flow to be processed. This schema can include user IDs and other PII (Personally Identifiable Information) that you want to delete from log files and such. This can be done via the [Forget-me Tool](#Forget-me_Tool_Overview).
 
 
 **Step 1: Configure the config.json file**
@@ -49,7 +49,7 @@ The `log-file` processor is specified in the configuration file of the Forget-Me
 }
 ```
 
-This extract shows the default configuration of the Streaming Integrator. The Streaming Integrator only saves PII in log files by default. Therefore, this configuration allows the Forget-me tool to delete these logs that are saved in the `<SI_HOME>/wso2/server/logs` directory.
+This extract shows the default configuration of the WSO2 Integrator: SI. The WSO2 Integrator: SI only saves PII in log files by default. Therefore, this configuration allows the Forget-me tool to delete these logs that are saved in the `<SI_HOME>/wso2/server/logs` directory.
 
 **Step 2: Execute the Forget-me tool**
 
@@ -60,7 +60,7 @@ To execute the Forget-me tool, issue the following command pointing to the `<SP_
 
 ## Removing references to deleted user identities
 
-This section covers how to remove references to deleted user identities in the Streaming Integrator by running the [Forget-me tool](#forget-me-tool-overview).
+This section covers how to remove references to deleted user identities in the WSO2 Integrator: SI by running the [Forget-me tool](#forget-me-tool-overview).
 
 
 !!! tip "Before you begin:"
@@ -155,7 +155,7 @@ This section covers how to remove references to deleted user identities in the S
 
 ## Creating GDPR compliant Siddhi applications
 
-The obfuscation/removal of such PII (Personally Identifiable Information) can be handled in the Streaming Integrator via Siddhi Applications that can either modify or remove records that contain the PII. These Siddhi Applications can be written in  a way to match the original queries that captured data for persistence so that the same data can be modified or removed as required. For more information about writing Siddhi Queries, see [Siddhi Query Guide](https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/).
+The obfuscation/removal of such PII (Personally Identifiable Information) can be handled in the WSO2 Integrator: SI via Siddhi Applications that can either modify or remove records that contain the PII. These Siddhi Applications can be written in  a way to match the original queries that captured data for persistence so that the same data can be modified or removed as required. For more information about writing Siddhi Queries, see [Siddhi Query Guide](https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/).
 
 The following sections explain how obfuscation/deletion of sensitive data can be managed via Siddhi queries in a custom Siddhi application developed based on a specific user case.
 
@@ -206,7 +206,7 @@ For more information about the Delete operator used here, see [Siddhi Query Guid
 
 ## Forget-me tool overview
 
-The Forget-me tool is shipped with the Streaming Integrator by default in the `<SI_HOME>/wso2/tools/identity-anonymization-tool-x.x.x` directory. If required, you can change the default location of the configurations of this tool or make changes to the default configurations. You can also run the Forget-me tool in the standalone mode.
+The Forget-me tool is shipped with the WSO2 Integrator: SI by default in the `<SI_HOME>/wso2/tools/identity-anonymization-tool-x.x.x` directory. If required, you can change the default location of the configurations of this tool or make changes to the default configurations. You can also run the Forget-me tool in the standalone mode.
 
 
 ### Changing the default configurations location
@@ -231,9 +231,9 @@ To change the default configurations location for the embedded tool, do the foll
 
 All configurations related to this tool can be found inside the `<SI_HOME>/wso2/tools/identity-anonymization-tool/conf` directory. The default configurations are set up as follows:
 
-- **Read Logs**: `<SI_HOME>/wso2/server/logs`, `<SI_TOOLING_HOME>/wso2/server/logs`
+- **Read Logs**: `<SI_HOME>/wso2/server/logs`
 
-- **Read Datasource**: `<SI_HOME>/conf/server/deployment.yaml` file, `<SI_TOOLING_HOME>/conf/server/deployment.yaml` file
+- **Read Datasource**: `<SI_HOME>/conf/server/deployment.yaml` file
 
 - **Default datasources**: `WSO2_CARBON_DB, WSO2_METRICS_DB`, `WSO2_PERMISSIONS_DB`, `WSO2_DASHBOARD_DB`, `BUSINESS_RULES_DB`, `SAMPLE_DB`, `WSO2_STATUS_DASHBOARD_DB`
 

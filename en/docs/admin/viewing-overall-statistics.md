@@ -3,7 +3,7 @@
 
 # Viewing Overall Statistics
 
-This dashboard displays the overall Siddhi statistics of the Siddhi applications currently deployed in your WSO2 Streaming Integrator instance.
+This dashboard displays the overall Siddhi statistics of the Siddhi applications currently deployed in your WSO2 Integrator: SI instance.
 
 There are nine other dashboards linked to the Siddhi overall statistics dashboard which represent the Siddhi components and their statistics. The Siddhi Grafana Dashboard represents the memory, latency and throughput statistics for the Siddhi components as follows.
 
@@ -132,7 +132,7 @@ The following information is displayed in this dashboard.
 This allows you to get an overall understanding of the level of activity carried out by the currently active servers.
 
 !!! tip "Recommended action"
-    If the Siddhi application count is relatively high, you can check the throughput for each Siddhi application to identify the Siddhi applications that you can remove from your Streaming Integrator deployment to reduce the system overhead. To do this, you can filter statistics for each individual Siddhi application in the following dashboards:<br/><br/>
+    If the Siddhi application count is relatively high, you can check the throughput for each Siddhi application to identify the Siddhi applications that you can remove from your WSO2 Integrator: SI deployment to reduce the system overhead. To do this, you can filter statistics for each individual Siddhi application in the following dashboards:<br/><br/>
     - [Siddhi Stream Statistics](viewing-stream-statistics.md)<br/>
     - [Siddhi Source Statistics](viewing-source-statistics.md)<br/>
     - [Siddhi Sink Statistics](viewing-sink-statistics.md)<br/>
@@ -147,7 +147,7 @@ This allows you to get an overall understanding of the level of activity carried
  
  ![Server statistics summary]({{base_path}}/images/streaming-integrator-grafana-dashboard/server_statistics_summary.png)
  
- This lists the currently active Streaming Integrator servers and displays the following for each server:
+ This lists the currently active WSO2 Integrator: SI servers and displays the following for each server:
   - The total events received by the server
   - The system load average
   - The total memory used by each server.
@@ -160,26 +160,26 @@ To evaluate the performance of each server as follows:
 - By comparing the events received, system load average and the memory usage of each server with that of other servers.
 
 !!! tip "Recommended action"
-    Once you analyze the performance of each server, you can make changes to your Streaming Integrator deployment to use server resources in a more optimum manner (e.g., by removing low performing servers, adding better performing servers, etc.)
+    Once you analyze the performance of each server, you can make changes to your WSO2 Integrator: SI deployment to use server resources in a more optimum manner (e.g., by removing low performing servers, adding better performing servers, etc.)
  
 ## Overall Throughput
  
  ![Overall throughput]({{base_path}}/images/streaming-integrator-grafana-dashboard/overall_throughput_graph.png)
  
- This shows the overall throughput of your current Streaming Integrator deployment. 
+ This shows the overall throughput of your current WSO2 Integrator: SI deployment. 
  
 **Purpose**
 
 To monitor the overall throughput and evaluate it against other statistics such as the system load average, memory used, the number of Siddhi applications deployed in the system etc.
  
 !!! tip "Recommended action"
-    Determine whether the overall throughput of your Streaming Integrator server is sufficient based on the system resources allocated, and identify ways in which you can improve it (e.g., reducing Siddhi elements that are deployed, but do not generate a sufficient throughput, making adjustments to the system resources allocated. etc.)
+    Determine whether the overall throughput of your WSO2 Integrator: SI server is sufficient based on the system resources allocated, and identify ways in which you can improve it (e.g., reducing Siddhi elements that are deployed, but do not generate a sufficient throughput, making adjustments to the system resources allocated. etc.)
  
 ## System Load Average
  
  ![System load average]({{base_path}}/images/streaming-integrator-grafana-dashboard/system_load_average_graph.png)
  
- This shows the average system load of your current Streaming Integrator deployment.
+ This shows the average system load of your current WSO2 Integrator: SI deployment.
  
 **Purpose**
 
@@ -192,27 +192,27 @@ To monitor the system load average and compare it with other statistics such as 
  
  ![CPU usage]({{base_path}}/images/streaming-integrator-grafana-dashboard/cpu_usage_graph.png)
  
-  This shows the CPU usage of your current Streaming Integrator deployment.
+  This shows the CPU usage of your current WSO2 Integrator: SI deployment.
   
 **Purpose**
 
-To monitor the CPU usage of your current Streaming Integrator deployment and to identify scenarios where you may need to make changes to the CPU resource allocation.
+To monitor the CPU usage of your current WSO2 Integrator: SI deployment and to identify scenarios where you may need to make changes to the CPU resource allocation.
 
 !!! tip "Recommended action"
-    If there is a spike in the CPU usage, you can identify whether you need to allocate more CPU resources to your deployment or redeploy some of the Siddhi elements with high throughputs to a different Streaming Integrator deployment. <br/><br/> Similarly, if there is a fall in the CPU usage, you can determine whether some of the CPU resources can be removed from the WSO2 Streaming Integrator deployment.
+    If there is a spike in the CPU usage, you can identify whether you need to allocate more CPU resources to your deployment or redeploy some of the Siddhi elements with high throughputs to a different WSO2 Integrator: SI deployment. <br/><br/> Similarly, if there is a fall in the CPU usage, you can determine whether some of the CPU resources can be removed from the WSO2 Integrator: SI deployment.
  
 ## Memory Usage
  
  ![Memory usage]({{base_path}}/images/streaming-integrator-grafana-dashboard/memory_usage_graph.png)
  
- This shows the memory usage of your current Streaming Integrator deployment and to identify scenarios where you may need to make changes to the memory allocation.
+ This shows the memory usage of your current WSO2 Integrator: SI deployment and to identify scenarios where you may need to make changes to the memory allocation.
   
 **Purpose**
 
-To monitor the memory usage of your Streaming Integrator deployment and allocate more memory when needed.
+To monitor the memory usage of your WSO2 Integrator: SI deployment and allocate more memory when needed.
  
 !!! tip "Recommended action"
-    If there is a spike in the memory usage, you can identify whether you need to allocate more memory resources to your deployment or redeploy some of the Siddhi elements with high throughputs to a different Streaming Integrator deployment. <br/><br/> Similarly, if there is a fall in the memory usage, you can determine whether some of the memory resources can be removed from the WSO2 Streaming Integrator deployment.
+    If there is a spike in the memory usage, you can identify whether you need to allocate more memory resources to your deployment or redeploy some of the Siddhi elements with high throughputs to a different WSO2 Integrator: SI deployment. <br/><br/> Similarly, if there is a fall in the memory usage, you can determine whether some of the memory resources can be removed from the WSO2 Integrator: SI deployment.
  
 ## Thread Count
 
@@ -238,11 +238,11 @@ You can use these statistics to profile your JVM.
 
 ![Memory Heap Used]({{base_path}}/images/viewing-overall-statistics/memory-heap-used.png)
 
-This shows the JVM memory heap that is currently consumed by your Streaming Integrator deployment.
+This shows the JVM memory heap that is currently consumed by your WSO2 Integrator: SI deployment.
 
 **Purpose**
 
-You can evaluate the performance of your Streaming Integrator servers based on the memory heap usage.
+You can evaluate the performance of your WSO2 Integrator: SI servers based on the memory heap usage.
 
 
 ## File Descriptors Open
@@ -257,7 +257,7 @@ The number of JVM file descriptors that are currently open.
 
 This indicates the following:
 
-- The complete list of streams in all the Siddhi applications that you are monitoring in your Streaming Integrator deployment.
+- The complete list of streams in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
 
 - The throughput of each stream listed.
 
@@ -267,7 +267,7 @@ The **Stream Statistics** widget also provides a link to open the **Siddhi Strea
 
 **Purpose**
 
-This allows you to monitor each stream in your Streaming Integrator deployment and identify the streams that generate a lot of activity.
+This allows you to monitor each stream in your WSO2 Integrator: SI deployment and identify the streams that generate a lot of activity.
 
 !!! tip "Recommended action"
     Filter stream statistics for each Siddhi application to identify active Siddhi applications. You can also identify streams that are duplicated in different Siddhi applications and merge such Siddhi applications if possible to reduce system overhead.
@@ -278,7 +278,7 @@ This allows you to monitor each stream in your Streaming Integrator deployment a
 
 This indicates the following:
 
-- The complete list of queries in all the Siddhi applications that you are monitoring in your Streaming Integrator deployment.
+- The complete list of queries in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
 
 - The latency of each query listed.
 
@@ -288,7 +288,7 @@ The **Query Statistics** widget also provides a link to the **Siddhi Query Stati
 
 **Purpose**
 
-This allows you to monitor each query in your WSO2 Streaming Integrator deployment and identify the main queries to be reviewed in order to reduce the overall latency.
+This allows you to monitor each query in your WSO2 Integrator: SI deployment and identify the main queries to be reviewed in order to reduce the overall latency.
 
 !!! tip "Recommended action"
     Identify queries with high latency and review them to use the Siddhi logic in a more efficient manner. You can also identify queries that are duplicated in different Siddhi applications and merge such Siddhi applications if possible to reduce system overhead
@@ -299,7 +299,7 @@ This allows you to monitor each query in your WSO2 Streaming Integrator deployme
 
 This indicates the following:
 
-- The complete list of sources in all the Siddhi applications that you are monitoring in your Streaming Integrator deployment.
+- The complete list of sources in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
 
 - The throughput of each source listed.
 
@@ -320,7 +320,7 @@ To monitor how each source contributes to the overall throughput of your Siddhi 
 
 This indicates the following:
 
-- The complete list of sinks in all the Siddhi applications that you are monitoring in your Streaming Integrator deployment.
+- The complete list of sinks in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
 
 - The throughput of each sink listed.
 
@@ -330,7 +330,7 @@ The **Sink Statistics** widget also provides a link to the **Siddhi Sink Statist
 
 **Purpose**
 
-To monitor the amount of data published by your WSO2 Streaming Integrator deployment to different destinations, brokers, files, databases and cloud storages.
+To monitor the amount of data published by your WSO2 Integrator: SI deployment to different destinations, brokers, files, databases and cloud storages.
 
 !!! tip "Recommended action"
 
@@ -340,7 +340,7 @@ To monitor the amount of data published by your WSO2 Streaming Integrator deploy
 
 This indicates the following:
 
-- The complete list of tables in all the Siddhi applications that you are monitoring in your Streaming Integrator deployment.
+- The complete list of tables in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
 
 - The throughput of each table listed.
 
@@ -350,7 +350,7 @@ The **Table Statistics** widget also provides a link to the **Siddhi Table Stati
 
 **Purpose**
 
-To monitor the tables defined in your WSO2 Streaming Integrator deployment and assessing the extent to which each table is used.
+To monitor the tables defined in your WSO2 Integrator: SI deployment and assessing the extent to which each table is used.
 
 !!! tip "Recommended action"
 
@@ -360,7 +360,7 @@ To monitor the tables defined in your WSO2 Streaming Integrator deployment and a
 
 This indicates the following:
 
-- The complete list of windows in all the Siddhi applications that you are monitoring in your Streaming Integrator deployment.
+- The complete list of windows in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
 
 - The throughput of each window listed.
 
@@ -370,7 +370,7 @@ The **Window Statistics** widget also provides a link to the **Siddhi Window Sta
 
 **Purpose**
 
-To monitor the windows defined in your WSO2 Streaming Integrator deployment and assessing the extent to which each window is used.
+To monitor the windows defined in your WSO2 Integrator: SI deployment and assessing the extent to which each window is used.
 
 !!! tip "Recommended action"
 
@@ -380,7 +380,7 @@ To monitor the windows defined in your WSO2 Streaming Integrator deployment and 
 
 This indicates the following:
 
-- The complete list of aggregations in all the Siddhi applications that you are monitoring in your Streaming Integrator deployment.
+- The complete list of aggregations in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
 
 - The throughput of each aggregation listed.
 
@@ -390,7 +390,7 @@ The **Aggregation Statistics** widget also provides a link to the **Siddhi Aggre
 
 **Purpose**
 
-To monitor the aggregations defined in your WSO2 Streaming Integrator deployment and assessing the extent to which each aggregation is used.
+To monitor the aggregations defined in your WSO2 Integrator: SI deployment and assessing the extent to which each aggregation is used.
 
 !!! tip "Recommended action"
 
@@ -400,7 +400,7 @@ To monitor the aggregations defined in your WSO2 Streaming Integrator deployment
 
 This indicates the following:
 
-- The complete list of triggers in all the Siddhi applications that you are monitoring in your Streaming Integrator deployment.
+- The complete list of triggers in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
 
 - The throughput of each trigger listed.
 
@@ -410,7 +410,7 @@ The **Trigger Statistics** widget also provides a link to the **Siddhi Trigger S
 
 **Purpose**
 
-To monitor the triggers defined in your WSO2 Streaming Integrator deployment and assessing the extent to which each trigger is used.
+To monitor the triggers defined in your WSO2 Integrator: SI deployment and assessing the extent to which each trigger is used.
 
 !!! tip "Recommended action"
 

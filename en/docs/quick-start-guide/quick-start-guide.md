@@ -1,8 +1,8 @@
-# Streaming Integrator Quick Start Guide
+# WSO2 Integrator: SI Quick Start Guide
 
 ## Introduction
 
-This quick start guide gets you started with the Streaming Integrator (SI), in just 5 minutes.
+This quick start guide gets you started with the WSO2 Integrator: SI (SI), in just 5 minutes.
 
 In this guide, you will download the SI distribution as well as Kafka, and then try out a simple Siddhi application. This Siddhi application consumes messages from a file processes the data, generates an output, and then publishes that output to a Kafka topic.
 
@@ -10,13 +10,13 @@ The following is the outline of this quick start guide.
 
 ![Quick Start Guide Outline]({{base_path}}/images/qsg/qsg-outline.png)
 
-## Step 1: Download the Streaming Integrator
+## Step 1: Download the WSO2 Integrator: SI
 
-Download the Streaming Integrator distribution from [WSO2 Streaming Integrator site](https://wso2.com/integration/streaming-integrator/) and extract it to a location of your choice. Hereafter, the extracted location is referred to as `<SI-Home>`.
+Download the WSO2 Integrator: SI distribution from [WSO2 Integrator: SI site](https://wso2.com/integration/streaming-integrator/) and extract it to a location of your choice. Hereafter, the extracted location is referred to as `<SI-Home>`.
 
-## Step 2: Start the Streaming Integrator
+## Step 2: Start the WSO2 Integrator: SI
 
-To start WSO2 Streaming Integrator, navigate to the `<SI-Home>/bin` directory from the CLI, and issue the appropriate command based on your operating system:
+To start WSO2 Integrator: SI, navigate to the `<SI-Home>/bin` directory from the CLI, and issue the appropriate command based on your operating system:
 
 - **For Linux**: `./server.sh`
 - **For Windows**: `server.bat --run`
@@ -40,7 +40,7 @@ Let's create a simple Siddhi application that reads data from a CSV file, does a
 2. Open a text file and copy-paste the following Siddhi application into it.
 
     !!! tip
-        Here, you are instructed to use a text editor to deploy a Siddhi Application that has already been tested in order to minimize the time you spend to follow this guide. It is recommended to design Siddhi application via Streaming Integration Tooling that offers features such as syntax checking, event simulation for testing purposes, reformatting code, the option to design applications in a graphical interface or by writing code, and many more. For more information, see [Streaming Integrator Tooling Overview](../develop/streaming-integrator-studio-overview.md).
+        Here, you are instructed to use VSCode to deploy a Siddhi Application to minimize the time you spend to follow this guide. It is recommended to design Siddhi application via VSCode with the WSO2 Integrator: SI extension that offers features such as syntax checking, event simulation for testing purposes, the option to design applications in a graphical interface or by writing code, and many more. For more information, see [WSO2 Integrator: SI VSCode extension](../develop/si-for-vscode-overview.md).
 
     ```sql
     @App:name('ManageProductionStats')
@@ -62,11 +62,11 @@ Let's create a simple Siddhi application that reads data from a CSV file, does a
     insert into TotalProductionStream;
     ```
 
-    The above Siddhi application reads input data from a file named `production.csv` in the CSV format, processes it and publishes the resulting output in a Kafka topic named `total_production`. As a result, any application that cannot read streaming data, but is capable of subscribing to a Kafka topic can access the output. The each input event reports the amount of a specific sweet produced in a production run. The Streaming Integrator calculates the total produced of each sweet with each event. Therefore, each output event reports the total amount produced for a sweet from the time you started running the Siddhi application. 
+    The above Siddhi application reads input data from a file named `production.csv` in the CSV format, processes it and publishes the resulting output in a Kafka topic named `total_production`. As a result, any application that cannot read streaming data, but is capable of subscribing to a Kafka topic can access the output. The each input event reports the amount of a specific sweet produced in a production run. The WSO2 Integrator: SI calculates the total produced of each sweet with each event. Therefore, each output event reports the total amount produced for a sweet from the time you started running the Siddhi application. 
 
 3. Save this file as `ManageProductionStats.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
 
-    This deploys the `ManageProductionStats` in the Streaming Integrator. The following message appears to indicate that the Siddhi application is successfully installed.
+    This deploys the `ManageProductionStats` in the WSO2 Integrator: SI. The following message appears to indicate that the Siddhi application is successfully installed.
 
     `INFO {org.wso2.carbon.siddhi.editor.core.internal.WorkspaceDeployer} - Siddhi App ManageProductionStats.siddhi successfully deployed.`
     
@@ -86,7 +86,7 @@ The `ManageProductionStats` Siddhi application uses a Kafka sink. However, the S
 
     ![Extention Installed]({{base_path}}/images/qsg/extension-installed.png)
     
-3. Restart the WSO2 Streaming Integrator server as instructed.
+3. Restart the WSO2 Integrator: SI server as instructed.
 
 
 ## Step 6: Start Kafka and create a topic
@@ -144,8 +144,8 @@ You can see the following message in the Kafka Consumer log.
 
 Once you try out this quick start guide, you can proceed to one of the following sections.
 
-- Learn the basic functionality of the Streaming Integrator in less than 30 minutes by [Creating Your First Siddhi Application](getting-started/getting-started-guide-overview.md)
+- Learn the basic functionality of the WSO2 Integrator: SI in less than 30 minutes by [Creating Your First Siddhi Application](getting-started/getting-started-guide-overview.md)
 
-- Try out [Streaming Integrator tutorials](../examples/tutorials-overview.md).
+- Try out [WSO2 Integrator: SI tutorials](../examples/tutorials-overview.md).
 
-- Learn how to run WSO2 Streaming Integrator in containerized environments, try [Running SI with Docker and Kubernetes](../examples/running-si-with-docker-and-kubernetes.md)
+- Learn how to run WSO2 Integrator: SI in containerized environments, try [Running SI with Docker and Kubernetes](../examples/running-si-with-docker-and-kubernetes.md)

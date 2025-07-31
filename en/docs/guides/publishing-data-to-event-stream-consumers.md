@@ -1,6 +1,6 @@
 # Publishing Data
 
-This guide covers how WSO2 Streaming Integrator publishes data to destinations and messaging systems.
+This guide covers how WSO2 Integrator: SI publishes data to destinations and messaging systems.
 
 ## Publishing data to destinations
 
@@ -8,7 +8,7 @@ Publishing to destinations involve using transports such as HTTP, TCP, email, et
 
 ![Publishing to destinations]({{base_path}}/images/publishing-data/publishing-to-destination.png)
 
-To understand this, consider a warehouse that needs to publish each stock update to a specific endpoint so that the stock can be monitored by the warehouse manager. To address this requirement via the WSO2 Streaming Integrator, you can define an output [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and connect a [sink](https://siddhi.io/en/v5.1/docs/query-guide/#sink) to it as shown below. In this example, let's use an HTTP sink.
+To understand this, consider a warehouse that needs to publish each stock update to a specific endpoint so that the stock can be monitored by the warehouse manager. To address this requirement via the WSO2 Integrator: SI, you can define an output [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and connect a [sink](https://siddhi.io/en/v5.1/docs/query-guide/#sink) to it as shown below. In this example, let's use an HTTP sink.
 
 ```
 @sink(type = 'http', publisher.url = 'http://stocks.com/stocks',
@@ -22,9 +22,7 @@ The above sink configuration publishes all the events in the `StockStream` outpu
 
 To try out the above example, follow the steps below:
 
-1. [Start and access WSO2 Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
-   
-2. Open a new file and copy the following Siddhi Application to it.
+1. Open a new file and copy the following Siddhi Application to it.
 
     ```
     @App:name("PublishStockUpdatesApp")  
@@ -44,7 +42,7 @@ To try out the above example, follow the steps below:
    
    This Siddhi application publishes stock updates as HTTP events via the `http` sink in the previous example.
    
-3. To monitor whether the HTTP events generated via the `PublishStockUpdatesApp` Siddhi application are getting published to the `http://localhost:5005/stocks` URL as specified, create and save another Siddhi Application as follows:
+2. To monitor whether the HTTP events generated via the `PublishStockUpdatesApp` Siddhi application are getting published to the `http://localhost:5005/stocks` URL as specified, create and save another Siddhi Application as follows:
 
     ```
     @App:name('ListenToStockUpdatesApp')
@@ -63,7 +61,7 @@ To try out the above example, follow the steps below:
     insert into OutputStream;
     ```
    
-    This Siddhi application listens for events in the `http://localhost:5005/stocks` endpoint and logs them in the Streaming Integrator Tooling console.
+    This Siddhi application listens for events in the `http://localhost:5005/stocks` endpoint and logs them in the WSO2 Integrator: SI Tooling console.
     
 4. Start both the Siddhi applications. To do this, open each siddhi application and click the **Play** icon.
 
@@ -77,7 +75,7 @@ To try out the above example, follow the steps below:
     | **price**     | `100`     |
     | **volume**    | `20`      |
     
-    As a result, the `ListenToStockUpdates` Siddhi applications prints the following log in the Streaming Integrator Tooling Console.
+    As a result, the `ListenToStockUpdates` Siddhi applications prints the following log in the WSO2 Integrator: SI Tooling Console.
     
     ```
     [2020-10-28_10-59-20_463] INFO {io.siddhi.core.stream.output.sink.LogSink} - Stock Updates : Event{timestamp=1603862960462, data=[ABC, 100.0, 20], isExpired=false} 
@@ -85,7 +83,7 @@ To try out the above example, follow the steps below:
 
 ### Supported transports
 
-WSO2 Streaming Integrator supports the following transport types to send messages to destinations.
+WSO2 Integrator: SI supports the following transport types to send messages to destinations.
 
 | **Transport** | **Supporting Siddhi Extension**                                       |
 |---------------|-----------------------------------------------------------------------|
@@ -113,11 +111,11 @@ The following are the supported mappers when you publish data to destinations.
     
 ## Publishing data to messaging systems
 
-WSO2 Streaming Integrator allows you to publish data to messaging systems such as Kafka, JMS, NATS, GooglePubSub, etc. so that you can expose streaming data to applications that cannot read streaming data, but are able to subscribe for data in messaging systems.
+WSO2 Integrator: SI allows you to publish data to messaging systems such as Kafka, JMS, NATS, GooglePubSub, etc. so that you can expose streaming data to applications that cannot read streaming data, but are able to subscribe for data in messaging systems.
 
 ![Publishing to messaging systems]({{base_path}}/images/publishing-data/publishing-to-message-broker.png)
 
-To understand this, consider a scenario where temperature readings from a sensor are published into a Kafka topic so that other devices that need to consume that data can subscribe for it. You can address this requirement via WSO2 Streaming Integrator by defining an output [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and then connecting a [sink](https://siddhi.io/en/v5.1/docs/query-guide/#sink) to it as shown in the example below.
+To understand this, consider a scenario where temperature readings from a sensor are published into a Kafka topic so that other devices that need to consume that data can subscribe for it. You can address this requirement via WSO2 Integrator: SI by defining an output [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and then connecting a [sink](https://siddhi.io/en/v5.1/docs/query-guide/#sink) to it as shown in the example below.
 
 ```
 @sink(type = 'kafka', bootstrap.servers = "localhost:9092", topic = "temperature",
@@ -148,13 +146,11 @@ To try out the example in the previous subtopic, follow the steps below:
     
         `bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic temperature`
         
-3. Prepare WSO2 Streaming Integrator Tooling to publish data to a Kafka topic as follows:
+3. Prepare WSO2 Integrator: SI to publish data to a Kafka topic as follows:
 
-    1. Start and access [WSO2 Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md). 
+    1. Download and install the Kafka extension via VSCode. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
     
-    2. Download and install the Kafka extension to it. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
-    
-    3. Open a new file and add the following Siddhi application to it.
+    2. Open a new file and add the following Siddhi application to it.
 
         ```
         @App:name('TemperaturePublishingApp')
@@ -193,7 +189,7 @@ To try out the example in the previous subtopic, follow the steps below:
         
 ### Supported messaging systems
 
-WSO2 Streaming Integrator allows you to publish messages to the following messaging system via Siddhi extentions.
+WSO2 Integrator: SI allows you to publish messages to the following messaging system via Siddhi extentions.
 
 | **Transport**    | **Supporting Siddhi Extension**                                                       |
 |------------------|---------------------------------------------------------------------------------------|

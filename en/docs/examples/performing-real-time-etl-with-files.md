@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Streaming Integrator (SI) allows you to perform real-time ETL with data that is stored in files.
+The WSO2 Integrator: SI allows you to perform real-time ETL with data that is stored in files.
 
 This tutorial takes you through the different modes and options you could use, in order to perform real-time ETL with files using the SI.
 
@@ -12,7 +12,7 @@ This tutorial takes you through the different modes and options you could use, i
         - For Windows: `server.bat`<br/>
         - For Linux:  `sh server.sh`<br/>
       <br/>
-    - The following log appears in the Streaming Integrator console once you have successfully started the server. <br/>
+    - The following log appears in the WSO2 Integrator: SI console once you have successfully started the server. <br/>
         `INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 4.240 sec`
       <br/>
 
@@ -54,7 +54,7 @@ In this scenario, you are tailing a text file, line by line, in order to extract
 3. Save this file as `TailFileLineByLine.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
 
     !!!info
-        This Siddhi application tails the file `productions.csv` line by line. Each line is converted to an event in the `SweetProductionStream` stream. After that, a simple transformation is carried out for the sweet production runs. The transformation involves converting the value for the `name` attribute to upper case. Finally, the output is logged in the Streaming Integrator console.
+        This Siddhi application tails the file `productions.csv` line by line. Each line is converted to an event in the `SweetProductionStream` stream. After that, a simple transformation is carried out for the sweet production runs. The transformation involves converting the value for the `name` attribute to upper case. Finally, the output is logged in the WSO2 Integrator: SI console.
 
     Upon successful deployment, following log appears in the SI console:
 
@@ -532,8 +532,8 @@ Let's try out a scenario where you deploy a Siddhi application to count the tota
 The production data is updated in a file and therefore you have to keep tailing this file, in order to get updates on the productions.
 
 !!!info
-    In this scenario, the Streaming Integrator server needs to *remember* the current count through system failures so that when the system is restored, the count is not reset to zero.
-    To achieve this, you can use the state persistence capability in the Streaming Integrator.
+    In this scenario, the WSO2 Integrator: SI server needs to *remember* the current count through system failures so that when the system is restored, the count is not reset to zero.
+    To achieve this, you can use the state persistence capability in the WSO2 Integrator: SI.
 
 1. Enable state persistence feature in SI server as follows. Open the `<SI-Home>/conf/server/deployment.yaml` file on a text editor and locate the `state.persistence` section.  
 
@@ -564,7 +564,7 @@ The production data is updated in a file and therefore you have to keep tailing 
 
     Save the file.
 
-3. Restart the Streaming Integrator server for above change to be effective.
+3. Restart the WSO2 Integrator: SI server for above change to be effective.
 
 4. Download `productions.csv` file from [here](https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/productions.csv) and save it in a location of your choice.
 
@@ -643,7 +643,7 @@ The production data is updated in a file and therefore you have to keep tailing 
 10. Shutdown SI server. Here you are deliberately creating a scenario where the server crashes before the SI server could persist the latest production count.
 
     !!!Info
-        Here, the SI server crashes before the state is persisted. Therefore, the Streaming Integrator server cannot persist the latest count (which includes the last two production runs that produced `100` Croissants and `100` Croutons). The good news is, the `File source` source replays the last two messages, allowing the Streaming Integrator to successfully recover from the server crash.
+        Here, the SI server crashes before the state is persisted. Therefore, the WSO2 Integrator: SI server cannot persist the latest count (which includes the last two production runs that produced `100` Croissants and `100` Croutons). The good news is, the `File source` source replays the last two messages, allowing the WSO2 Integrator: SI to successfully recover from the server crash.
 
 11. Restart the SI server and wait for about one minute.
 

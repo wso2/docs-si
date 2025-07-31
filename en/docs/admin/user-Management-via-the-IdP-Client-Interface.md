@@ -1,6 +1,6 @@
 # User Management via the IdP Client Interface
 
-In WSO2 Streaming Integrator, user management is carried out through the
+In WSO2 Integrator: SI, user management is carried out through the
 Identity Provider Client (IdP Client) interface that can be switched as
 required for the user scenario. Furthermore, a custom IdP Client can be
 written to encompass the required user store connection and
@@ -18,7 +18,7 @@ IdP clients can be switched by specifying te required IdP client in the
 
 The active IdP client is `local` by default.
 
-Following are the IdP Clients available for WS)2 Streaming Integrator:
+Following are the IdP Clients available for WS)2 WSO2 Integrator: SI:
 
 - [Local IdP Client](#UserManagementviatheIdPClientInterface-LocalIdPClient)
 

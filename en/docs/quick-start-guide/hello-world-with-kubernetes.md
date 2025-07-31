@@ -1,8 +1,8 @@
-# Getting the Streaming Integrator Running in Kubernetes in 5 Minutes
+# Getting the WSO2 Integrator: SI Running in Kubernetes in 5 Minutes
 
 ## Introduction
 
-This quick start guide gets you to start and run the Streaming Integrator in a Kubernetes cluster in 5 minutes.
+This quick start guide gets you to start and run the WSO2 Integrator: SI in a Kubernetes cluster in 5 minutes.
 
 !!!tip "Before you begin:"
     - Create a Kubernetes cluster. In this quick start guide, you can do this via Minikube as follows.
@@ -16,11 +16,11 @@ This quick start guide gets you to start and run the Streaming Integrator in a K
     - Make sure that you have admin privileges to install the [Siddhi operator](https://siddhi.io/en/v5.0/docs/siddhi-as-a-kubernetes-microservice/#!).
 
 
-## Installing the Siddhi Operator for the Streaming Integrator
+## Installing the Siddhi Operator for the WSO2 Integrator: SI
 
 To install the Siddhi Operator, follow the procedure below:
 
-1. To install the Siddhi Kubernetes operator for streaming integrator issue the following commands:
+1. To install the Siddhi Kubernetes operator for WSO2 Integrator: SI issue the following commands:
 
     `kubectl apply -f https://github.com/wso2/streaming-integrator/releases/download/v1.0.0-m1/00-prereqs.yaml`
 
@@ -38,7 +38,7 @@ To install the Siddhi Operator, follow the procedure below:
 
 ## Deploying Siddhi applications in Kubernetes
 
-You can deploy multiple Siddhi applications in one or more selected containers via Kubernetes. In this example, let's deploy just one Siddhi application in one container for the ease of understanding how to run the Streaming Integrator in a Kubernetes cluster.
+You can deploy multiple Siddhi applications in one or more selected containers via Kubernetes. In this example, let's deploy just one Siddhi application in one container for the ease of understanding how to run the WSO2 Integrator: SI in a Kubernetes cluster.
 
 1. First, let's design a simple Siddhi application that consumes events via HTTP to detect power surges. It filters events for a specific device type (i.e., dryers) and that also report a value greater than 600 for `power`.
 
@@ -208,7 +208,7 @@ You can deploy multiple Siddhi applications in one or more selected containers v
     `kubectl apply -f <PATH_to_siddhi-process.yaml>`
 
     !!!info
-        This file overrules the configurations in the `<SI_HOME>|<SI_TOOLING_HOME>/conf/server/deployment.yaml` file.
+        This file overrules the configurations in the `<SI_HOME>/conf/server/deployment.yaml` file.
 
 ## Invoking the Siddhi application
 

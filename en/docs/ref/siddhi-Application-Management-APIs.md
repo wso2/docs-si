@@ -399,13 +399,13 @@ curl -X GET "https://localhost:9443/siddhi-apps?isActive=true" -H "accept: appli
 
 Possible responses are as follows:
 
-- If the API request is valid and there are Siddhi applications deployed in your WSO2 Streaming Integrator setup, a response similar to the following is returned with response code 200.
+- If the API request is valid and there are Siddhi applications deployed in your WSO2 Integrator: SI setup, a response similar to the following is returned with response code 200.
 
     ``` java
     ["TestExecutionPlan3", "TestExecutionPlan4"]
     ```
 
-- If the API request is valid, there are Siddhi applications deployed in your Streaming Integrator setup, and a query parameter is defined in the request, a response similar to the following is returned with response code 200. This response only contains Siddhi applications that are active.<br/><br/>
+- If the API request is valid, there are Siddhi applications deployed in your WSO2 Integrator: SI setup, and a query parameter is defined in the request, a response similar to the following is returned with response code 200. This response only contains Siddhi applications that are active.<br/><br/>
 
     !!! info
         If these conditions are met, but the `isActive` parameter is set to `false`, the response contains only inactive Siddhi applications.
@@ -414,7 +414,7 @@ Possible responses are as follows:
     ["TestExecutionPlan3"]
     ```
 
-- If the API request is valid, but there are no Siddhi applications deployed in your Streaming Integrator setup, the following response is returned.
+- If the API request is valid, but there are no Siddhi applications deployed in your WSO2 Integrator: SI setup, the following response is returned.
 
     ``` java
     []
@@ -849,7 +849,7 @@ The above sample curl command can generate either one of the following responses
 </tbody>
 </table>
 
-## Returning real-time statistics of a Streaming Integrator node
+## Returning real-time statistics of a WSO2 Integrator: SI node
 
 ### Overview
 
@@ -857,7 +857,7 @@ The above sample curl command can generate either one of the following responses
 <tbody>
 <tr class="odd">
 <th>Description</th>
-<td>Returns the real-time statistics of a Streaming Integrator node.</td>
+<td>Returns the real-time statistics of a WSO2 Integrator: SI node.</td>
 </tr>
 <tr class="even">
 <th><p>API Context</p></th>
@@ -943,7 +943,7 @@ curl -X GET "https://localhost:9443/statistics" -H "accept: application/json" -u
 <tbody>
 <tr class="odd">
 <th>Description</th>
-<td>Enables/disables the real-time statistics of a Streaming Integrator node.</td>
+<td>Enables/disables the real-time statistics of a WSO2 Integrator: SI node.</td>
 </tr>
 <tr class="even">
 <th><p>API Context</p></th>
@@ -1041,7 +1041,7 @@ curl -X PUT "https://localhost:9443/statistics" -H "accept: application/json" -H
 </tbody>
 </table>
 
-## Returning general details of a Streaming Integrator node
+## Returning general details of a WSO2 Integrator: SI node
 
 ### Overview
 
@@ -1049,7 +1049,7 @@ curl -X PUT "https://localhost:9443/statistics" -H "accept: application/json" -H
 <tbody>
 <tr class="odd">
 <th>Description</th>
-<td>Returns general details of a Streaming Integrator node.</td>
+<td>Returns general details of a WSO2 Integrator: SI node.</td>
 </tr>
 <tr class="even">
 <th>API Context</th>
@@ -1135,7 +1135,7 @@ curl -X GET "https://localhost:9443/system-details" -H "accept: application/json
 <tbody>
 <tr class="odd">
 <th>Description</th>
-<td>Returns the detailed statistics of all the Siddhi applications currently deployed in the Streaming Integrator setup.</td>
+<td>Returns the detailed statistics of all the Siddhi applications currently deployed in the WSO2 Integrator: SI setup.</td>
 </tr>
 <tr class="even">
 <th>API Context</th>

@@ -1,8 +1,8 @@
-# Deploying the Streaming Integrator as a Minimum HA Cluster in AWS ECS
+# Deploying the WSO2 Integrator: SI as a Minimum HA Cluster in AWS ECS
 
 ## Introduction
 
-This section explains how to run WSO2 Streaming Integrator as a minimum HA (High Availability) cluster in AWS (Amazon Web Services) ECS(Elastic Container Service).
+This section explains how to run WSO2 Integrator: SI as a minimum HA (High Availability) cluster in AWS (Amazon Web Services) ECS(Elastic Container Service).
 
 The minimum HA cluster typically has two nodes where one node operates as the active node and the other as the passive node. Each node maintains a communication link with the other node as well as with the database.
 
@@ -46,7 +46,7 @@ The following table explains the above steps.
 ## Setting up the SI cluster in AWS ECS
 
 !!! tip "Before you begin:"
-    In order to deploy WSO2 Streaming Integrator in AWS ECS, you need to complete the following requisites:<br/>
+    In order to deploy WSO2 Integrator: SI in AWS ECS, you need to complete the following requisites:<br/>
      - [create an account in AWS](https://portal.aws.amazon.com).
      - [Download and install AWS CLI Version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).
      - Download and install Docker. For instructions, see [Docker Documentation](https://docs.docker.com/install/).
@@ -404,7 +404,7 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
         
         3. Click **Create** to create the cluster.
         
-3. Create a task for Streaming Integrator node 1 as follows:
+3. Create a task for WSO2 Integrator: SI node 1 as follows:
 
     1. In the left navigator of Amazon ECS, click **Task Definitions**. Then in the **Task Definitions** window, click **Create new Task Definition**.
     
@@ -459,7 +459,7 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
             
             5. Click **Create** in the **Configure task and container definitions** page to create the task.
             
-4. Create a task for Streaming Integrator node 2 as follows:
+4. Create a task for WSO2 Integrator: SI node 2 as follows:
 
     1. In the left navigator of Amazon ECS, click **Task Definitions**. Then in the **Task Definitions** window, click **Create new Task Definition**.
     
@@ -560,7 +560,7 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
         
             ```
                 [2020-03-20 20:18:48,283]  INFO {org.wso2.carbon.streaming.integrator.core.ha.HAManager} - HA Deployment: Starting up as Active Node
-                [2020-03-20 20:18:52,261]  INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 44.893 sec
+                [2020-03-20 20:18:52,261]  INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Integrator: SI started in 44.893 sec
                 [2020-03-20 20:19:46,595]  INFO {org.wso2.carbon.streaming.integrator.core.persistence.PersistenceManager} - Siddhi apps persisted successfully
 
             ```           
@@ -573,7 +573,7 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
     
     ```
         [2020-03-20 20:38:14,390]  INFO {org.wso2.carbon.streaming.integrator.core.ha.HAManager} - HA Deployment: Starting up as Passive Node
-        [2020-03-20 20:38:18,287]  INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 46.604 sec
+        [2020-03-20 20:38:18,287]  INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Integrator: SI started in 46.604 sec
 
     ```
    

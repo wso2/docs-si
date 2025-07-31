@@ -8,7 +8,7 @@
 ### Prerequisites
 
 -   Install JDK and set up the `JAVA_HOME` environment variable.
--   Download and install a service wrapper library to use for running WSO2 Streaming Integrator as a Windows service. WSO2 recommends Yet Another Java Service Wrapper ( YAJSW ) versions [11.03](https://sourceforge.net/projects/yajsw/files/yajsw/yajsw-stable11.03/yajsw-stable-11.03.zip/download) or [12.14](https://sourceforge.net/projects/yajsw/files/yajsw/yajsw-stable-12.14/). The instructions below describe how to set up this file.
+-   Download and install a service wrapper library to use for running WSO2 Integrator: SI as a Windows service. WSO2 recommends Yet Another Java Service Wrapper ( YAJSW ) versions [11.03](https://sourceforge.net/projects/yajsw/files/yajsw/yajsw-stable11.03/yajsw-stable-11.03.zip/download) or [12.14](https://sourceforge.net/projects/yajsw/files/yajsw/yajsw-stable-12.14/). The instructions below describe how to set up this file.
 
 !!! important
     Please note that JDK 11 might not be compatible with YAJSW 11.03. Use JDK 8 for YAJSW 11.03 and JDK 11 for YAJSW 12.14.
@@ -137,7 +137,7 @@ The configuration file used for wrapping Java Applications by YAJSW is `wrapper.
 
 ### Setting up CARBON\_HOME
 
-Extract WSO2 Streaming Integrator that you want to run as a Windows service, and then set the Windows environment variable `CARBON_HOME` to the extracted product directory location.
+Extract WSO2 Integrator: SI that you want to run as a Windows service, and then set the Windows environment variable `CARBON_HOME` to the extracted product directory location.
 
 ### Running the product in console mode
 
@@ -160,7 +160,7 @@ If the configurations are set properly for YAJSW, you will see console output si
 
 ### Working with the WSO2CARBON service
 
-To install the Carbon-based product WSO2 Streaming Integrator as a Windows service, execute the following command in the `<YAJSW_HOME>/bat/` directory:
+To install the Carbon-based product WSO2 Integrator: SI as a Windows service, execute the following command in the `<YAJSW_HOME>/bat/` directory:
 
 ``` java
 installService.bat

@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via TCP transport in text format, and view the output on the server terminal.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to send sweet production events via TCP transport in text format, and view the output on the server terminal.
 
 ## Executing the sample
 

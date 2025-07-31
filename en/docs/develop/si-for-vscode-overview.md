@@ -6,7 +6,7 @@ tags:
   - siddhi
 ---
 
-# Streaming Integrator for VS Code Overview
+# WSO2 Integrator: SI for VS Code Overview
 
 WSO2 Integrator: SI offers an extension for Visual Studio Code (VS Code) that provides a comprehensive development environment for designing, developing, debugging, and testing streaming integration solutions using Siddhi applications.
 

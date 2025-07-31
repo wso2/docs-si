@@ -1,6 +1,6 @@
 # Stream Processing
 
-Stream processing involves making changes to streaming data to generate a required output. WSO2 Streaming Integrator allows you to carry out a wide range of operations to process streaming data. These operations are supported via [Siddhi Extensions](https://siddhi.io/en/v5.1/docs/extensions/). These operations can be broadly categorized into five categories as follows:
+Stream processing involves making changes to streaming data to generate a required output. WSO2 Integrator: SI allows you to carry out a wide range of operations to process streaming data. These operations are supported via [Siddhi Extensions](https://siddhi.io/en/v5.1/docs/extensions/). These operations can be broadly categorized into five categories as follows:
 
 - [**Cleansing**](cleansing-data.md)
 

@@ -1,16 +1,16 @@
-# Step 1: Download Streaming Integrator and Dependencies
+# Step 1: Download WSO2 Integrator: SI and Dependencies
 
-First, you are required to download the Streaming Integrator and the other software needed for the scenario you are trying out. To do this, follow the topics below.
+First, you are required to download the WSO2 Integrator: SI and the other software needed for the scenario you are trying out. To do this, follow the topics below.
 
 !!! tip "Before you begin:"
     - Install [Oracle Java SE Development Kit (JDK) version 1.8](https://www.oracle.com/technetwork/java/javase/downloads/index.html).<br/>
     - [Set the Java home](https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/) environment variable.<br/>
     
-## Downloading the Streaming Integrator runtime and tooling
+## Downloading the WSO2 Integrator: SI runtime and VSCode extension
 
-- To download the Streaming Integrator runtime, visit the [Streaming Integrator Product Page](https://wso2.com/integration/streaming-integrator/). Enter you email address and agree to the license. Then click **Zip Archive** download the Streaming Integrator as a zip file.
+- To download the WSO2 Integrator: SI runtime, visit the [WSO2 Integrator: SI Product Page](https://wso2.com/integration/streaming-integrator/). Enter you email address and agree to the license. Then click **Zip Archive** download the WSO2 Integrator: SI as a zip file.
 
-- To download Streaming Integrator Tooling, click **Tooling** in the [Streaming Integrator Product Page](https://wso2.com/integration/streaming-integrator/). Enter you email address and agree to the license. Then click **MacOS Installer pkg** download the Streaming Integrator as a zip file.
+- To download WSO2 Integrator: SI VSCode extension, search **WSO2 Integrator: SI** in the VSCode marketplace and install it.
 
 ## Downloading the other dependencies for your scenario
 
@@ -18,7 +18,7 @@ This section shows how to prepare your production environment for the scenario d
 
 ## Setting up a MySQL database table
 
-In this scenario, the Streaming Integrator reads input data from a MySQL database table. Therefore, let's download and install MySQL and define the database and the database table as follows:
+In this scenario, the WSO2 Integrator: SI reads input data from a MySQL database table. Therefore, let's download and install MySQL and define the database and the database table as follows:
 
 1. Download MySQL 8.3.0 from [MySQL Community Downloads](https://downloads.mysql.com/archives/c-j/).
 
@@ -69,16 +69,16 @@ This scenario involves publishing some filtered production data to a Kafka topic
         `bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic eclair-production`
         
         
-## Starting the WSO2 Streaming Integrator Server
+## Starting the WSO2 Integrator: SI Server
 
-To start WSO2 Streaming Integrator, navigate to the `<SI_HOME>/bin` directory from the CLI, and issue the appropriate command based on your operating system:
+To start WSO2 Integrator: SI, navigate to the `<SI_HOME>/bin` directory from the CLI, and issue the appropriate command based on your operating system:
 
 - **For Linux**: `./server.sh`
 - **For Windows**: `server.bat --run`           
               
-Now you have completed a WSO2 Streaming Integrator setup that is capable of the following:
+Now you have completed a WSO2 Integrator: SI setup that is capable of the following:
 
-- Design, test and deploy Siddhi applications via Streaming Integrator Tooling.
+- Design, test and deploy Siddhi applications via VSCode with the **WSO2 Integrator: SI** extension.
 
 - Consume data from as well as publish data to MySQL databases.
 

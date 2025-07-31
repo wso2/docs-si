@@ -5,15 +5,15 @@
 This sample demonstrates how to perform unsupervised streaming learning on a set of data points using a Clustree model.
 
 !!!info "Before you begin:"
-    1. Download `siddhi-gpl-execution-streamingml-x.x.x.jar` from [here](http://maven.wso2.org/nexus/content/repositories/wso2gpl/org/wso2/extension/siddhi/gpl/execution/streamingml/siddhi-gpl-execution-streamingml/) and place it in the `<SI_TOOLING_HOME>/lib` directory.<br/>
-    2. Copy the `<SI_TOOLING_HOME>/samples/artifacts/ClusTreeSample/clusTreeTestFeed.json` file and place it in the `<SI_TOOLING_HOME>/wso2/server/deployment/simulation-configs` directory.<br/>
-    3. Copy the `<SI_TOOLING_HOME>/samples/artifacts/ClusTreeSample/clusTreeFileTest.csv` file and place it in the `<SI_TOOLING_HOME>/wso2/server/deployment/csv-files` directory.<br/>
-    4. Save the sample Siddhi application in Streaming Integrator Tooling.<br/>
+    1. Download `siddhi-gpl-execution-streamingml-x.x.x.jar` from [here](http://maven.wso2.org/nexus/content/repositories/wso2gpl/org/wso2/extension/siddhi/gpl/execution/streamingml/siddhi-gpl-execution-streamingml/) and place it in the `<SI_HOME>/lib` directory.<br/>
+    2. Copy the `https://github.com/wso2/product-streaming-integrator-tooling/blob/master/modules/samples/artifacts/ClusTreeSample/clusTreeTestFeed.json` file and place it in the `<SI_HOME>/wso2/server/deployment/simulation-configs` directory.<br/>
+    3. Copy the `https://github.com/wso2/product-streaming-integrator-tooling/blob/master/modules/samples/artifacts/ClusTreeSample/clusTreeFileTest.csv` file and place it in the `<SI_HOME>/wso2/server/deployment/csv-files` directory.<br/>
+    4. Save the sample Siddhi application in WSO2 Integrator: SI Tooling.<br/>
 
 
 ## Executing the Sample
 
-To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
 
 ![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
 
@@ -23,7 +23,7 @@ If the Siddhi application starts successfully, the following message appears in 
 
 ## Testing the Sample
 
-To test the sample Siddhi application, simulate multiple events via CSV file in the Streaming Integrator Tooling as follows:
+To test the sample Siddhi application, simulate multiple events via CSV file in the WSO2 Integrator: SI Tooling as follows:
 
 1. To open the Event Simulator, click the **Event Simulator** icon.
 

@@ -4,9 +4,9 @@ In this step, let's run the `SweetFactoryApp` Siddhi application that you create
 
 ## Installing the required extensions
 
-In [Step 2: Create the Siddhi Application](create-the-siddhi-application.md), you installed the `cdc-mysql` Siddhi extension in Streaming Integrator Tooling to test the `SweetFacoryApp` Siddhi application. Now let's install it in the Streaming Integrator server so that you can run the same Siddhi application there.
+In [Step 2: Create the Siddhi Application](create-the-siddhi-application.md), you installed the `cdc-mysql` Siddhi extension in WSO2 Integrator: SI Tooling to test the `SweetFacoryApp` Siddhi application. Now let's install it in the WSO2 Integrator: SI server so that you can run the same Siddhi application there.
 
-1. Start the Streaming Integrator server by navigating to the `<SI_HOME>/bin` directory from the CLI, and issuing the appropriate command based on your operating system:</br>
+1. Start the WSO2 Integrator: SI server by navigating to the `<SI_HOME>/bin` directory from the CLI, and issuing the appropriate command based on your operating system:</br>
    
    - For Windows: `server.bat --run`</br>
    - For Linux/Mac OS:  `./server.sh`
@@ -18,7 +18,7 @@ In [Step 2: Create the Siddhi Application](create-the-siddhi-application.md), yo
     
     Once the installation is complete, a message is logged to inform you that the extension is successfully installed.
     
-3. Restart the Streaming Integrator server.
+3. Restart the WSO2 Integrator: SI server.
 
 ## Generating an input event
 

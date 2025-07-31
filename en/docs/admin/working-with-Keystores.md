@@ -54,9 +54,9 @@ certificates signed by them.
     shared with outside parties.
 
 
-## Setting up keystores in the Streaming Integrator
+## Setting up keystores in the WSO2 Integrator: SI
 
-The Streaming Integrator uses keystores mainly for the following purposes:
+The WSO2 Integrator: SI uses keystores mainly for the following purposes:
 
 - Authenticating the communication over Secure Sockets Layer (SSL)/Transport Layer Security (TLS) protocols.
 
@@ -66,9 +66,9 @@ The Streaming Integrator uses keystores mainly for the following purposes:
 
 ## Default keystore settings in WSO2 products
 
-The Streaming Integrator is shipped with the following default keystore files stored in the `<SI_HOME>|<SI_TOOLING_HOME>/resources/security` directory.
+The WSO2 Integrator: SI is shipped with the following default keystore files stored in the `<SI_HOME>/resources/security` directory.
 
-- `wso2carbon.jks`: This keystore contains a key pair and is used by default in your Streaming Integrator and Streaming Integrator Tooling servers for all of the purposes explained above, except protecting sensitive information via Cipher tool.
+- `wso2carbon.jks`: This keystore contains a key pair and is used by default in your WSO2 Integrator: SI and WSO2 Integrator: SI Tooling servers for all of the purposes explained above, except protecting sensitive information via Cipher tool.
 
 - `securevault.jks`: This is the default keystore used by the secure vault to protect sensitive information via Cipher tool.
 
@@ -76,26 +76,26 @@ The Streaming Integrator is shipped with the following default keystore files st
 
 By default, the following files provide paths to these keystores:
 
-- `<SI_HOME>|<SI_TOOLING_HOME>/wso2/server/bin/carbon.sh` file
+- `<SI_HOME>/wso2/server/bin/carbon.sh` file
       
-    This script is run when you start an Streaming Integrator server. It contains the following parameters, and makes references to the two files mentioned above by default.
+    This script is run when you start an WSO2 Integrator: SI server. It contains the following parameters, and makes references to the two files mentioned above by default.
 
     | Parameter            | Default Value                                               | Description                                                                                        |
     |----------------------|-------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
-    | `keyStore`           | `"$CARBON_HOME/resources/security/wso2carbon.jks" \`        | This specifies the path to the keystore to be used when running the Streaming Integrator server on a secure network. |
+    | `keyStore`           | `"$CARBON_HOME/resources/security/wso2carbon.jks" \`        | This specifies the path to the keystore to be used when running the WSO2 Integrator: SI server on a secure network. |
     | `keyStorePassword`   | `"wso2carbon" \`                                            | The password to access the keystore.                                                               |
     | `trustStore`         | `"$CARBON_HOME/resources/security/client-truststore.jks" \` | This specifies the path to the trust store to be used when running the server on a secure network. |
     | `trustStorePassword` | `"wso2carbon" \`                                            | The password to access the trust store.                                                            |
 
-- `<SI_HOME>|<SI_TOOLING_HOME>/conf/server/deployment.yaml` file refers to the above keystore and trust store by default for the following configurations:
+- `<SI_HOME>/conf/server/deployment.yaml` file refers to the above keystore and trust store by default for the following configurations:
 
    - Listener configurations
 
-    This specifies the key store to be used when the Streaming Integrator is receiving events via a secure network, and the password to access the key store.
+    This specifies the key store to be used when the WSO2 Integrator: SI is receiving events via a secure network, and the password to access the key store.
 
    - Databridge configurations
 
-    This specifies the key store to be used when the Streaming Integrator is publishing events via databrige using a secure network, and the password to access the key store.
+    This specifies the key store to be used when the WSO2 Integrator: SI is publishing events via databrige using a secure network, and the password to access the key store.
 
    - Secure vault configurations
 
@@ -108,12 +108,12 @@ By default, the following files provide paths to these keystores:
 
 ## Managing keystores
 
-You can view the default keystores and truststores in the `<SI_HOME>|<SI_TOOLING_HOME>/resources/security` directory. Once you create your own keystore, you can delete the default keystores, but you need to ensure that they are no longer referenced  in the `<SI_HOME>|<SI_TOOLING_HOME>/wso2/server/bin/carbon.sh` file or the `<SI_HOME>|<SI_TOOLING_HOME>/conf/server/deployment.yaml` file.
+You can view the default keystores and truststores in the `<SI_HOME>/resources/security` directory. Once you create your own keystore, you can delete the default keystores, but you need to ensure that they are no longer referenced  in the `<SI_HOME>/wso2/server/bin/carbon.sh` file or the `<SI_HOME>/conf/server/deployment.yaml` file.
 
 
 ## Creating new keystores
 
-The Streaming Integrator is shipped with two default keystores named `wso2carbon.jks` and `securevault.jks`. These keystores are stored in the `<SI_HOME>|<SI_TOOLING_HOME>/resources/security` directory. They come with a private/public key pair that is used to encrypt sensitive information for communication over SSL and for encryption/signature purposes in WS-Security. However, note that because these keystores are available with open source WSO2 products, anyone can have access to the private keys of the default keystores. It is therefore recommended to replace these with keystores that have self-signed or CA signed certificates when the Streaming Integrator is deployed in production environments.
+The WSO2 Integrator: SI is shipped with two default keystores named `wso2carbon.jks` and `securevault.jks`. These keystores are stored in the `<SI_HOME>/resources/security` directory. They come with a private/public key pair that is used to encrypt sensitive information for communication over SSL and for encryption/signature purposes in WS-Security. However, note that because these keystores are available with open source WSO2 products, anyone can have access to the private keys of the default keystores. It is therefore recommended to replace these with keystores that have self-signed or CA signed certificates when the WSO2 Integrator: SI is deployed in production environments.
 
 ### Creating a keystore using an existing certificate
 
@@ -141,7 +141,7 @@ If there are no certificates signed by a Certification Authority, you can follow
 
 **Step 1: Creating keystore with private key and public certificate**
 
-1. Open a command prompt and go to the `<SI_HOME>|<SI_TOOLING_HOME>/resources/security` directory. All the keystores should be stored here.
+1. Open a command prompt and go to the `<SI_HOME>/resources/security` directory. All the keystores should be stored here.
 
 2. Create the keystore that includes the private key by executing the following command:
 
@@ -160,7 +160,7 @@ If there are no certificates signed by a Certification Authority, you can follow
     !!!tip
         If you did not specify values for the `'-keypass'` and the `'-storepass'` in the above command, you are requested to give a value for the `'-storepass'` (password of the keystore). As a best practice, use a password generator to generate a strong password. You are then asked to enter a value for `-keypass`. Click **Enter**, because we need the same password for both the keystore and the key. Also, if you did not specify values for `-dname`, you will be asked to provide those details individually.
 
-3. Open the `<SI_HOME>|<SI_TOOLING_HOME>/resources/security` directory and check if the new keystore file is created. Make a backup of it and move it to a secure location. This is important because if not your private key is available only on one location.
+3. Open the `<SI_HOME>/resources/security` directory and check if the new keystore file is created. Make a backup of it and move it to a secure location. This is important because if not your private key is available only on one location.
 
 
 **Step 2: Creating CA-signed certificates for public key**
@@ -174,7 +174,7 @@ Now we have a `.jks` file. This keystore (`.jks` file) can be used to generate a
     !!!tip
         As mentioned before, use the same alias that you used during the keystore creation process.
 
-    You are asked to give the keystore password. Once the password is given, the command outputs the `newcertreq.csr` file to the `<SI_HOME>|<SI_TOOLING_HOME>/resources/security` directory. This is the CSR that you must submit to a CA.
+    You are asked to give the keystore password. Once the password is given, the command outputs the `newcertreq.csr` file to the `<SI_HOME>/resources/security` directory. This is the CSR that you must submit to a CA.
 
 
 2. You must provide this CSR file to the CA. For testing purposes, try the [90 days trial SSL certificate from Comodo](https://www.instantssl.com/).
@@ -216,14 +216,14 @@ Now you have a Java keystore including a CA-signed certificate that can be used 
 
 **Adding the public key to client-truststore.jks**
 
-In SSL handshake, the client needs to verify the certificate presented by the server. For this purpose, the client usually stores the certificates it trusts in a trust store. The Streaming Integrator is shipped with the trust store named `client-truststore.jks` that resides in the same directory as the keystore (i.e., `<SI_HOME>|<SI_TOOLING_HOME>/resources/`). Therefore, you need to import the new public certificate into this trust store for front-end and backend communication of the Streaming Integrator to take place in the required manner over SSL.
+In SSL handshake, the client needs to verify the certificate presented by the server. For this purpose, the client usually stores the certificates it trusts in a trust store. The WSO2 Integrator: SI is shipped with the trust store named `client-truststore.jks` that resides in the same directory as the keystore (i.e., `<SI_HOME>/resources/`). Therefore, you need to import the new public certificate into this trust store for front-end and backend communication of the WSO2 Integrator: SI to take place in the required manner over SSL.
 
 !!!tip
-    In this example, you are using the default `client-truststore.jks` file in the Streaming Integrator as the trust store.
+    In this example, you are using the default `client-truststore.jks` file in the WSO2 Integrator: SI as the trust store.
 
 To add the public key of the signed certificate to the client trust store:
 
-1. Get a copy of the `client-truststore.jks` file from the `<SI_HOME>|<SI_TOOLING_HOME>/resources/security` directory.
+1. Get a copy of the `client-truststore.jks` file from the `<SI_HOME>/resources/security` directory.
 
 2. Export the public key from your `.jks` file using the by issuing the following command.
 
@@ -236,19 +236,20 @@ To add the public key of the signed certificate to the client trust store:
     !!!tip
         `wso2carbon` is the keystore password of the default `client-truststore.jks` file.
 
-Now, you have an SSL certificate stored in a Java keystore and a public key added to the `client-truststore.jks` file. Note that both these files should be placed in the `<SI_HOME>|<SI_TOOLING_HOME>/resources/security` directory. You can now replace the default `wso2carbon.jks` keystore in your product with the newly created keystore by updating the relevant configuration files in your product. For more information, see [Configuring Keystores](#configuring-keystores).
+Now, you have an SSL certificate stored in a Java keystore and a public key added to the `client-truststore.jks` file. Note that both these files should be placed in the `<SI_HOME>/resources/security` directory. You can now replace the default `wso2carbon.jks` keystore in your product with the newly created keystore by updating the relevant configuration files in your product. For more information, see [Configuring Keystores](#configuring-keystores).
 
 
 
 ## Configuring keystores
 
-Once you have created a new key store and updated the `<SI_HOME>|<SI_TOOLING_HOME>/resources/security/client-truststore.jks` file, you must update the `<SI_HOME>|<SI_TOOLING_HOME>/conf/<PROFILE/deployment.yaml` file to make that keystore work for the required functions. Keystores are used for multiple functions in the Streaming Integrator including securing the servlet transport, databridge communication, encrypting confidential information in configuration files etc.
+Once you have created a new key store and updated the `<SI_HOME>/resources/security/client-truststore.jks` file, you must update the `<SI_HOME>/conf/<PROFILE/deployment.yaml` file to make that keystore work for the required functions. Keystores are used for multiple functions in the Streaming Integrator including securing the servlet transport, databridge communication, encrypting confidential information in configuration files etc.
+Once you have created a new key store and updated the `<SI_HOME>/resources/security/client-truststore.jks` file, you must update the `<SI_HOME>/conf/<PROFILE/deployment.yaml` file to make that keystore work for the required functions. Keystores are used for multiple functions in the WSO2 Integrator: SI including securing the servlet transport, databridge communication, encrypting confidential information in configuration files etc.
 
 !!!tip
-    - The `wso2carbon.jks` keystore file that is shipped with the Streaming Integrator is used as the default keystore for all functions. However, in a production environment, it is recommended to create new keystores with keys and certificates because the Streaming Integrator is an open source integrator, and anyone who downloads it has access to the default keystore.
+    - The `wso2carbon.jks` keystore file that is shipped with the WSO2 Integrator: SI is used as the default keystore for all functions. However, in a production environment, it is recommended to create new keystores with keys and certificates because the WSO2 Integrator: SI is an open source integrator, and anyone who downloads it has access to the default keystore.
     - To find all the functions that require a keystore, you can search for `.jks` in the deployment.yaml file.
 
-e.g., If you want to secure the listener configured for the Streaming Integrator using a keystore, you can enter details relating to the keystore as shown below. In this example, the details of the default key is used.
+e.g., If you want to secure the listener configured for the WSO2 Integrator: SI using a keystore, you can enter details relating to the keystore as shown below. In this example, the details of the default key is used.
 
 ```
 listenerConfigurations:

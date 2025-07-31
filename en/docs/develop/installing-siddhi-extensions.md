@@ -1,33 +1,28 @@
 # Installing Siddhi Extensions
 
-Streaming Integrator Tooling uses Siddhi extensions to connect with various data sources. Siddhi extensions can be installed or un-installed using the Extension Installer.
+WSO2 Integrator: SI uses Siddhi extensions to connect with various data sources. Siddhi extensions can be installed or un-installed using the SI Extension Installer.
 
 !!!Tip
-    The Extension Installer can install/un-install extensions within Streaming Integrator Tooling. When deploying Siddhi applications in Streaming Integrator Server, `extension-installer` CLI command in the `<SI-Home>/bin` folder can be used or this can be manually done. For more information, see [Downloading and Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
+    The Extension Installer can install/un-install extensions within WSO2 Integrator: SI. When deploying Siddhi applications in WSO2 Integrator: SI Server, `extension-installer` CLI command in the `<SI-Home>/bin` folder can be used or this can be manually done. For more information, see [Downloading and Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
 
 ## Managing Siddhi extensions
 
-The following topics cover how to manage Siddhi extensions in Streaming Integrator Tooling
+The following topics cover how to manage Siddhi extensions in WSO2 Integrator: SI VSCode extension.
 
 ### Finding the Siddhi extensions to install/uninstall
 
 To access the Extension installer and find the extensions you need to install/uninstall, follow the steps below:
 
-1. To start Streaming Integrator Tooling, navigate to the `<SI_Tooling_Home>/bin` directory and issue the appropriate command out of the following based on your operating system:
+1. Open the VSCode with the WSO2 Integrator: SI for VS Code extension installed.
 
-    - For Windows: `tooling.bat`
-
-    - For Linux: `./tooling.sh`
+   If you have not installed the WSO2 Integrator: SI for VS Code extension, see [Install SI for VS Code](../develop/install-si-for-vscode.md).
 
 
-2. Click **Tools** menu option, and then click **Extension Installer**.
-
-    ![Extensions Installer option in the Tools menu]({{base_path}}/images/installing-siddhi-extensions/tools-menu.png)
-
+2. Select **SI: Extension Installer**.
 
     The **Extension Installer** dialog box opens as shown below.
 
-    ![Extension Installer]({{base_path}}/images/streaming-integrator-studio-overview/extension-installer.png)
+    ![Extensions Installer option in the Tools menu]({{base_path}}/images/installing-siddhi-extensions/tools-menu.png)
 
 
 3. Locate the extension that you want to install/un-install. You can enter the name, or a part of the name of the relevant extension in the **Search** field. It filters one or more extensions that match the entered key word.
@@ -37,7 +32,7 @@ To access the Extension installer and find the extensions you need to install/un
         - **Installed**<br/>This indicates that the extension is completely installed. The installation includes the JAR of the extension itself as well as all its dependencies (if any).<br/><br/>
         - **Not-Installed**<br/>This indicates that the extension has not been installed. The JAR of the extension itself has not been installed. Dependencies (if any) may be already installed due to shared dependencies. For more information about shared dependencies, see step 2 of [Un-installing an extension](#un-installing-an-extension).<br/><br/>
         - **Partially-Installed**<br/>This indicates that the JAR of the extension itself has been installed, but one or more dependencies of the extension still need to be installed.<br/> If these extensions need to be manually installed, it is indicated by an information icon next to the status. For more information, see [Manually installable dependencies](#manually-installable-dependencies).<br/><br/>
-        - **Restart-Required**<br/>This indicates that you need to restart Streaming Integrator Tooling in order to complete the installation/un-installation of the extension.
+        - **Restart-Required**<br/>This indicates that you need to restart the VSCode workspace in order to complete the installation/un-installation of the extension.
 
 
 ### Installing an extension
@@ -49,9 +44,9 @@ To access the Extension installer and find the extensions you need to install/un
     Then click **Install** in the confirmation dialog box that appears to confirm whether you want to proceed with the installation.
 
 
-2. Once the installation is complete, restart Streaming Integrator Tooling.
+2. Once the installation is complete, reload the VSCode workspace.
 
-    After restarting Streaming Integrator Tooling, you can open the Extension installer and view the extension you installed with the updated status.
+    After reloading the VSCode workspace, you can open the Extension installer and view the extension you installed with the updated status.
 
     ![Status Change as Installed]({{base_path}}/images/installing-siddhi-extensions/installed-status.png)
 
@@ -80,7 +75,7 @@ To access the Extension installer and find the extensions you need to install/un
     If there are no shared dependencies, click **UnInstall** in the confirmation dialog that appears to confirm whether you want to proceed to un-install the extension.
 
 
-3. Once the un-installation is completed, restart Streaming Integrator Tooling for the un-installation to be effective.
+3. Once the un-installation is completed, reload VSCode for the un-installation to be effective.
 
 
 ## Manually installable dependencies

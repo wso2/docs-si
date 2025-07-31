@@ -6,17 +6,17 @@ This sample demonstrates how to capture change data from MySQL using Siddhi. The
 
 !!!info "Before you begin:"
     1. Ensure that MySQL is installed on your computer.<br/>
-    2. Add the MySQL JDBC driver to the `<SI_Tooling_Home>/lib` directory as follows:<br/>
+    2. Add the MySQL JDBC driver to the `<SI_Home>/lib` directory as follows:<br/>
         1. Download the JDBC driver from the [MySQL website](https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.45.tar.gz).<br/>
         2. Unzip the archive.<br/>
-        3. Download and copy the `mysql-connector-j-8.3.0.jar` JAR and place it in the `<SI_Tooling_Home>/lib` directory.<br/>
+        3. Download and copy the `mysql-connector-j-8.3.0.jar` JAR and place it in the `<SI_Home>/lib` directory.<br/>
     3. Configure MySQL to [enable binary logging](https://debezium.io/docs/connectors/mysql/#enabling-the-binlog).<br/><br/>
             If you are using MySQL 8.0, use the following query to check the binlog status:<br/>
             ```bash
             SELECT variable_value as "BINARY LOGGING STATUS (log-bin) ::"
             FROM performance_schema.global_variables WHERE variable_name='log_bin';
             ```
-    4. Enable state persistence in siddhi applications. To do this, open the `<SI_Tooling_Home>/conf/server/deployment.yaml` file and set the `state.persistence enabled=true` property.<br/>
+    4. Enable state persistence in siddhi applications. To do this, open the `<SI_Home>/conf/server/deployment.yaml` file and set the `state.persistence enabled=true` property.<br/>
     5. Create a database named `production` by issuing the following command.<br/>
         `CREATE DATABASE production;`<br/>
     6. Create a user named `wso2sp` with `wso2` as the password, and with `SELECT`, `RELOAD`, `SHOW DATABASES`, `REPLICATION SLAVE`, `REPLICATION CLIENT` privileges. To do this, issue the following command.<br/>
@@ -25,11 +25,11 @@ This sample demonstrates how to capture change data from MySQL using Siddhi. The
         `use production;`<br/>
     8. Create a table named `SweetProductionTable`.<br/>
         `CREATE TABLE SweetProductionTable (name VARCHAR(20),amount double(10,2));`<br/>
-    9. Save the sample Siddhi application in Streaming Integrator Tooling.
+    9. Save the sample Siddhi application in WSO2 Integrator: SI Tooling.
 
 ## Executing the sample
 
-To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the **Start** button or by clicking **Run** => **Run**.
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button or by clicking **Run** => **Run**.
 
 If the Siddhi application starts successfully, the following message appears in the console.
 
@@ -46,7 +46,7 @@ To test the sample Siddhi application, insert a record to the `SweetProductionTa
 
 ## Viewing the results
 
-This insert is logged in the Streaming Integrator console as follows.
+This insert is logged in the WSO2 Integrator: SI console as follows.
 
 ![Insert Log]({{base_path}}/images/cdc-with-listening-mode-sample/insert-log.png)
 

@@ -1,8 +1,8 @@
 # Monitoring the Received Events Count via Logs
 
-You can monitor the total number of event received by the WSO2 Streaming Integrator via its sources per given time interval. This is done by configuring WSO2 Streaming Integrator to log the received event count for a specified time interval. The purpose of this log is to estimate the events received by the server during the time it is active. The event counter is reset each time the Streaming Integrator server is restarted.
+You can monitor the total number of event received by the WSO2 Integrator: SI via its sources per given time interval. This is done by configuring WSO2 Integrator: SI to log the received event count for a specified time interval. The purpose of this log is to estimate the events received by the server during the time it is active. The event counter is reset each time the WSO2 Integrator: SI server is restarted.
 
-To configure WSO2 Streaming Integrator to log the total received events count, follow the steps below:
+To configure WSO2 Integrator: SI to log the total received events count, follow the steps below:
 
 1. Open the `<SI_HOME>/conf/server/deployment.yaml` file.
 
@@ -26,7 +26,7 @@ To configure WSO2 Streaming Integrator to log the total received events count, f
      loggingDuration: 1
     ```
    
-5. Restart WSO2 Streaming Integrator for the change to be effective. 
+5. Restart WSO2 Integrator: SI for the change to be effective. 
     
     The total received event count is logged as shown in the example below:
     

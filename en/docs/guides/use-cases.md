@@ -1,14 +1,14 @@
-# WSO2 Streaming Integrator Use Cases Overview
+# WSO2 Integrator: SI Use Cases Overview
 
-WSO2 Streaming Integrator receives input data, processes it and presents an output as shown in the diagram below.
+WSO2 Integrator: SI receives input data, processes it and presents an output as shown in the diagram below.
 
-![Streaming Integrator Use cases]({{base_path}}/images/use-cases-overview/use-cases-overview.png)
+![WSO2 Integrator: SI Use cases]({{base_path}}/images/use-cases-overview/use-cases-overview.png)
 
-As shown in the diagram above, WSO2 Streaming Integrator first extracts/receives input data, processes them and then presents the output by publishing/loading/writing it. You can perform supporting activities such as error handling, performing queries via API and analyzing metrics.
+As shown in the diagram above, WSO2 Integrator: SI first extracts/receives input data, processes them and then presents the output by publishing/loading/writing it. You can perform supporting activities such as error handling, performing queries via API and analyzing metrics.
 
 ### Extracting/receiving data
 
-WSO2 Streaming Integrator can extract static data from sources such as databases, files, and cloud storages, as well as receive data in transit from data publishers and messaging systems.
+WSO2 Integrator: SI can extract static data from sources such as databases, files, and cloud storages, as well as receive data in transit from data publishers and messaging systems.
 
 For more information, see the following guides:
 
@@ -17,7 +17,7 @@ For more information, see the following guides:
 
 ### Stream Processing
 
-The different types of stream processing activities that can be performed by WSO2 Streaming Integrator are as follows:
+The different types of stream processing activities that can be performed by WSO2 Integrator: SI are as follows:
 
  - Cleansing data
  
@@ -44,7 +44,7 @@ For more information about how the output is published, see the following topics
 
 ### Supporting tasks
 
-The following guides cover the supporting tasks that can be performed by WSO2 Streaming Integrator when processing Streaming Data.
+The following guides cover the supporting tasks that can be performed by WSO2 Integrator: SI when processing Streaming Data.
 
 - [Error Handling](handling-errors.md)
 
