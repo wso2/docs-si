@@ -1,1173 +1,1138 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/concepts/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/page-not-found/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/adding-third-party-non-osgi-libraries/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/configuring-Cluster-Coordination/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/configuring-Database-and-File-System-State-Persistence/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/general-data-protection-regulations/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/introduction-to-User-Management/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/managing-grafana-dashboards/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/monitoring-received-events-count-via-logs/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/monitoring-si-performance-via-grafana/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/protecting-sensitive-data-via-the-secure-vault/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/setting-up-grafana-dashboards/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/supporting-different-transports/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/user-Management-via-the-IdP-Client-Interface/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/user-management/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-aggregation-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-cdc-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-dashboards/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-file-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-on-demand-query-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-overall-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-overview-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-query-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-rdbms-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-server-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-sink-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-source-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-stream-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-table-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-trigger-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/viewing-window-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/working-with-Keystores/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/admin/working-with-integration-control-plane/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/concepts/concepts/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/connectors/configuring-System-Parameters-for-Siddhi-Extensions/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/connectors/connectors-overview/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/connectors/downloading-and-Installing-Siddhi-Extensions/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/connectors/writing-Custom-Siddhi-Extensions/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/develop/creating-a-Siddhi-Application/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/develop/developing-streaming-integration-solutions/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/develop/exporting-Siddhi-Applications/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/develop/http-status-codes/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/develop/install-si-for-vscode/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/develop/installing-siddhi-extensions/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/develop/si-for-vscode-overview/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/develop/siddhi-Application-Overview/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/develop/simulating-Events/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/develop/testing-a-Siddhi-Application/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/develop/working-with-the-Design-View/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/analyzing-data-and-deriving-insights/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/exposing-processed-data-as-api/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/handling-requests-with-errors/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/integrating-stores/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/manage-stored-data-via-rest-api/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/performing-real-time-etl-with-files/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/performing-real-time-etl-with-mysql/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/running-si-with-docker-and-kubernetes/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/summarizing-and-aggregating-data/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/transforming-xml-messages/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/triggering-integrations-via-micro-integrator/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/tutorials-overview/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/examples/working-with-kafka/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/get-started/about-this-release/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/get-started/introduction/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/get-started/key-concepts/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/get-started/quick-start-guide/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/cleansing-data/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/correlating-data/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/enriching-data/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/extracting-data-from-static-sources-in-real-time/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/handling-errors/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/loading-and-writing-date/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/performing-etl-tasks/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/processing-data/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/publishing-data-to-event-stream-consumers/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/receiving-data-in-transit/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/summarizing-data/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/transforming-data/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/triggering-integration-flows/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/guides/use-cases/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/overview/about_this_release/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/overview/architecture/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/overview/overview/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/quick-start-guide/hello-world-with-docker/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/quick-start-guide/hello-world-with-kubernetes/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/quick-start-guide/quick-start-guide/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/quick-start-guide/getting-started/create-the-siddhi-application/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/quick-start-guide/getting-started/deploy-siddhi-application/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/quick-start-guide/getting-started/download-install-and-start-si/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/quick-start-guide/getting-started/getting-started-guide-overview/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/quick-start-guide/getting-started/monitor-statistics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/quick-start-guide/getting-started/test-siddhi-application/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/quick-start-guide/getting-started/update-the-siddhi-application/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/authentication-APIs/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/authorization-Permission-Model/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/business-Rules-APIs/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/configuring-default-ports/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/environment-compatibility/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/event-simulation-apis/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/hTTP-Status-Codes/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/healthcheck-APIs/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/performance-analysis-results/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/permission-apis/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/public-APIs/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/rest-api-guide-overview/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/siddhi-Application-Management-APIs/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/status-monitoring-apis/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/store-APIs/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/stream-Processor-REST-API-Guide/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/worker-Runtime---REST-APIs-Permission-Model/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/ref/working-with-data-providers/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/AggregateDataIncrementally/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/AggregateOverTime/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/AlertsAndThresholds/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/AmazonS3SinkSample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/CDCWithListeningMode/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/CDCWithPollingMode/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/CSVCustomMapping/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/CSVDefaultMapping/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ClusTreeTestApp/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/DataPreprocessing/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ExtremaBottomK/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/GCSSinkSample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/GeoDistanceCalculation/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/GplNLPFindNameEntityType/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/HelloKafka/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/HttpRequestResponseSample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/IBMMessageQueue/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/JoinWithStoredData/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/MapExtensionSample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/MathExtensionSample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PatternMatching/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PmmlModelProcessor/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishEmailInTextFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishEmailInXmlFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishEventsToFile/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishGooglePubSubMessagesInTextFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishHTTPInJsonFormatWithCustomMapping/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishHl7InER7Format/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishHl7InXmlFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishHttpInJsonFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishHttpInXmlFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishHttpInXmlFormatWithCustomMapping/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishHttpOAuthRequest/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishHttpOAuthRequestResponse/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishHttpOAuthRequestWithOAuthUser/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishHttpOAuthRequestWithRefreshToken/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishHttpOAuthRequestWithoutAccessToken/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishJmsInKeyvalueFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishJmsInXmlFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishKafkaInAvroFormatUsingSchemaRegistry/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishKafkaInBinaryFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishKafkaInCustomAvroFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishKafkaInJsonFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishMqttInXmlFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishPrometheusMetricsHTTPServer/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishRabbitmqInXmlFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishTcpInBinaryFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishTcpInJsonFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishTcpInTextFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/PublishWebSocketInXmlFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveAndCount/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveEmailInXmlFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveEventsFromFile/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveGooglePubSubMessagesInTextFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveHTTPInJsonFormatWithCustomMapping/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveHTTPInJsonFormatWithDefaultMapping/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveHTTPInXMLFormatWithDefaultMapping/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveHTTPinXMLFormatWithCustomMapping/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveHl7InER7Format/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveHl7InXmlFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveJMSInJsonFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveJMSInKeyvalueFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveKafkaInBinaryFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveKafkaInTextFormatWithCustomMapping/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveMQTTInXMLFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceivePrometheusMetrics/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveRabbitmqInJSONFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveTCPInTextFormatWithCustomMapping/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveTCPinBinaryFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveTCPinJSONFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveTCPinTextFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/ReceiveWebSocketInXMLFormat/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/RegexExecutionSample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/SNMPGetRequestApp/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/SNMPSetRequestApp/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/Script-js-sample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/Store-cassandra/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/Store-rdbms/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/Store-redis/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/Store-solr/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/StreamingKMeansSample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/StreamingRegressor/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/StringExtensionSample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/SweetProductionDataPreprocessing/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/TensorFlowTestApp/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/TextMappingWithInmemoryTransport/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/UnitConversionExtentionSample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/execution-geo-sample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/hoeffding-adaptive-tree-sample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/sample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/store-hbase/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/store-influxdb/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/store-mongodb/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/samples/streaming-perceptron-sample/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/configuring-data-sources/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/defining-Data-Tables/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/defining-Tables-for-Physical-Stores/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/deploying-si-as-a-scalable-cluster/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/deploying-si-as-a-single-deployment/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/deploying-si-as-an-active-active-deployment/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/deploying-si-as-minimum-ha-cluster-in-aws-ecs/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/deploying-si-as-minimum-ha-cluster/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/deployment-guide/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/installing-Stream-Processor-Using-Docker/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/installing-Stream-Processor-Using-Kubernetes/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/installing-as-a-windows-service/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/installing-si-as-a-linux-service/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/installing-si-in-vm/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/installing-si-using-docker/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/installing-si-using-kubernetes/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/migrating-from-stream-processor/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/production-checklist/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/upgrading-from-previous-version/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/upgrading-wso2-ei/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>None</loc>
-         <lastmod>2025-07-29</lastmod>
+         <loc>https://si.docs.wso2.com/setup/viewing-dashboards/</loc>
+         <lastmod>2025-08-05</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

@@ -6,11 +6,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentation for WSO2 Streaming Integrator">
+        <meta name="description" content="Documentation for WSO2 Integrator: SI">
       
       
         <meta name="author" content="WSO2">
       
+      
+        <link rel="canonical" href="https://si.docs.wso2.com/examples/running-si-with-docker-and-kubernetes/">
       
       
         <link rel="prev" href="../triggering-integrations-via-micro-integrator/">
@@ -23,7 +25,7 @@
     
     
       
-        <title>Running SI with Docker and Kubernetes - WSO2 Streaming Integrator Documentation</title>
+        <title>Running SI with Docker and Kubernetes - WSO2 Integrator: SI Documentation</title>
       
     
     
@@ -101,7 +103,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#running-the-streaming-integrator-in-containerized-environments" class="md-skip">
+        <a href="#running-the-wso2-integrator-si-in-containerized-environments" class="md-skip">
           Skip to content
         </a>
       
@@ -135,8 +137,8 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header" id="page-header" data-url="" data-lang="en">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="WSO2 Streaming Integrator Documentation"
-       class="md-header__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
+    <a href="../.." title="WSO2 Integrator: SI Documentation"
+       class="md-header__button md-logo" aria-label="WSO2 Integrator: SI Documentation" data-md-component="logo">
       
   <img src="../../img/logo.svg" alt="logo">
 
@@ -148,7 +150,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-             Streaming Integrator Documentation
+            WSO2 Integrator: SI Documentation
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -450,12 +452,12 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="WSO2 Streaming Integrator Documentation" class="md-nav__button md-logo" aria-label="WSO2 Streaming Integrator Documentation" data-md-component="logo">
+    <a href="../.." title="WSO2 Integrator: SI Documentation" class="md-nav__button md-logo" aria-label="WSO2 Integrator: SI Documentation" data-md-component="logo">
       
   <img src="../../img/logo.svg" alt="logo">
 
     </a>
-    WSO2 Streaming Integrator Documentation
+    WSO2 Integrator: SI Documentation
   </label>
   
     <div class="md-nav__source">
@@ -592,7 +594,7 @@
   
     <li class="md-nav__item">
       <a href="../../quick-start-guide/getting-started/download-install-and-start-si/" class="md-nav__link">
-        Step 1: Download and Install Streaming Integrator
+        Step 1: Download and Install WSO2 Integrator: SI
       </a>
     </li>
   
@@ -661,22 +663,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../quick-start-guide/getting-started/handle-errors/" class="md-nav__link">
-        Step 6: Handle Errors
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../quick-start-guide/getting-started/monitor-statistics/" class="md-nav__link">
-        Step 7: Monitor Statistics
+        Step 6: Monitor Statistics
       </a>
     </li>
   
@@ -1096,36 +1084,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../creating-etl-application-via-tooling/" class="md-nav__link">
-        Creating an ETL Application via SI Tooling
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../working-with-kafka/" class="md-nav__link">
         Working with Kafka
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../admin/creating-business-rules-templates/" class="md-nav__link">
-        Working with Business Rules
       </a>
     </li>
   
@@ -1228,16 +1188,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#running-the-streaming-integrator-with-docker" class="md-nav__link">
-    Running the Streaming Integrator with Docker
+  <a href="#running-the-wso2-integrator-si-with-docker" class="md-nav__link">
+    Running the WSO2 Integrator: SI with Docker
   </a>
   
-    <nav class="md-nav" aria-label="Running the Streaming Integrator with Docker">
+    <nav class="md-nav" aria-label="Running the WSO2 Integrator: SI with Docker">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#starting-the-streaming-integrator-in-docker" class="md-nav__link">
-    Starting the Streaming Integrator in Docker
+  <a href="#starting-the-wso2-integrator-si-in-docker" class="md-nav__link">
+    Starting the WSO2 Integrator: SI in Docker
   </a>
   
 </li>
@@ -1262,16 +1222,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-the-streaming-integrator-with-kubernetes" class="md-nav__link">
-    Running the Streaming Integrator with Kubernetes
+  <a href="#running-the-wso2-integrator-si-with-kubernetes" class="md-nav__link">
+    Running the WSO2 Integrator: SI with Kubernetes
   </a>
   
-    <nav class="md-nav" aria-label="Running the Streaming Integrator with Kubernetes">
+    <nav class="md-nav" aria-label="Running the WSO2 Integrator: SI with Kubernetes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#installing-the-siddhi-operator-for-the-streaming-integrator" class="md-nav__link">
-    Installing the Siddhi Operator for the Streaming Integrator
+  <a href="#installing-the-siddhi-operator-for-the-wso2-integrator-si" class="md-nav__link">
+    Installing the Siddhi Operator for the WSO2 Integrator: SI
   </a>
   
 </li>
@@ -3111,14 +3071,14 @@
       
       
         <label class="md-nav__link" for="__nav_4_1_1" id="__nav_4_1_1_label" tabindex="0">
-          Installing the Streaming Integrator
+          Installing the WSO2 Integrator: SI
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_1_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4_1_1">
           <span class="md-nav__icon md-icon"></span>
-          Installing the Streaming Integrator
+          Installing the WSO2 Integrator: SI
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -3201,14 +3161,14 @@
       
       
         <label class="md-nav__link" for="__nav_4_1_3" id="__nav_4_1_3_label" tabindex="0">
-          Running the Streaming Integrator in Containers
+          Running the WSO2 Integrator: SI in Containers
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_1_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4_1_3">
           <span class="md-nav__icon md-icon"></span>
-          Running the Streaming Integrator in Containers
+          Running the WSO2 Integrator: SI in Containers
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -3467,20 +3427,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../setup/configuring-business-rules-deployment/" class="md-nav__link">
-        Configuring Business Rules Deployment
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../admin/general-data-protection-regulations/" class="md-nav__link">
         General Data Protection Regulations
       </a>
@@ -3607,20 +3553,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../setup/change-hostname-and-context-path/" class="md-nav__link">
-        Changing the Host Name and Context Path of Web UI Applications
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../admin/monitoring-received-events-count-via-logs/" class="md-nav__link">
         Enabling Logs for Received Event Count
       </a>
@@ -3678,7 +3610,7 @@
   
     <li class="md-nav__item">
       <a href="../../develop/developing-streaming-integration-solutions/" class="md-nav__link">
-        Developing Streaming Integrator Solutions
+        Developing WSO2 Integrator: SI Solutions
       </a>
     </li>
   
@@ -3701,14 +3633,14 @@
       
       
         <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
-          Streaming Integrator Tooling
+          WSO2 Integrator: SI Tooling
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_5_2">
           <span class="md-nav__icon md-icon"></span>
-          Streaming Integrator Tooling
+          WSO2 Integrator: SI Tooling
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -3718,8 +3650,22 @@
   
   
     <li class="md-nav__item">
-      <a href="../../develop/streaming-integrator-studio-overview/" class="md-nav__link">
-        Streaming Integrator Tooling Overview
+      <a href="../../develop/si-for-vscode-overview/" class="md-nav__link">
+        Overview WSO2 Integrator: SI for VS Code
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../develop/install-si-for-vscode/" class="md-nav__link">
+        Install WSO2 Integrator: SI for VS Code
       </a>
     </li>
   
@@ -3782,21 +3728,7 @@
   
     <li class="md-nav__item">
       <a href="../../develop/testing-a-Siddhi-Application/" class="md-nav__link">
-        Testing Siddhi Applications
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../develop/deploying-Streaming-Applications/" class="md-nav__link">
-        Deploying Siddhi Applications
+        Running and Testing Siddhi Applications
       </a>
     </li>
   
@@ -3811,34 +3743,6 @@
     <li class="md-nav__item">
       <a href="../../develop/exporting-Siddhi-Applications/" class="md-nav__link">
         Exporting Siddhi Applications
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../develop/si-for-vscode-overview/" class="md-nav__link">
-        Overview WSO2 Integrator: SI for VS Code
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../develop/install-si-for-vscode/" class="md-nav__link">
-        Install WSO2 Integrator: SI for VS Code
       </a>
     </li>
   
@@ -3965,14 +3869,14 @@
       
       
         <label class="md-nav__link" for="__nav_6_2_3" id="__nav_6_2_3_label" tabindex="0">
-          Monitoring WSO2 SI
+          Monitoring SI
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_2_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_6_2_3">
           <span class="md-nav__icon md-icon"></span>
-          Monitoring WSO2 SI
+          Monitoring SI
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -4200,7 +4104,7 @@
   
     <li class="md-nav__item">
       <a href="../../connectors/connectors-overview/" class="md-nav__link">
-        Streaming Integrator Connectors Overview
+        WSO2 Integrator: SI Connectors Overview
       </a>
     </li>
   
@@ -4492,16 +4396,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#running-the-streaming-integrator-with-docker" class="md-nav__link">
-    Running the Streaming Integrator with Docker
+  <a href="#running-the-wso2-integrator-si-with-docker" class="md-nav__link">
+    Running the WSO2 Integrator: SI with Docker
   </a>
   
-    <nav class="md-nav" aria-label="Running the Streaming Integrator with Docker">
+    <nav class="md-nav" aria-label="Running the WSO2 Integrator: SI with Docker">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#starting-the-streaming-integrator-in-docker" class="md-nav__link">
-    Starting the Streaming Integrator in Docker
+  <a href="#starting-the-wso2-integrator-si-in-docker" class="md-nav__link">
+    Starting the WSO2 Integrator: SI in Docker
   </a>
   
 </li>
@@ -4526,16 +4430,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#running-the-streaming-integrator-with-kubernetes" class="md-nav__link">
-    Running the Streaming Integrator with Kubernetes
+  <a href="#running-the-wso2-integrator-si-with-kubernetes" class="md-nav__link">
+    Running the WSO2 Integrator: SI with Kubernetes
   </a>
   
-    <nav class="md-nav" aria-label="Running the Streaming Integrator with Kubernetes">
+    <nav class="md-nav" aria-label="Running the WSO2 Integrator: SI with Kubernetes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#installing-the-siddhi-operator-for-the-streaming-integrator" class="md-nav__link">
-    Installing the Siddhi Operator for the Streaming Integrator
+  <a href="#installing-the-siddhi-operator-for-the-wso2-integrator-si" class="md-nav__link">
+    Installing the Siddhi Operator for the WSO2 Integrator: SI
   </a>
   
 </li>
@@ -4591,9 +4495,9 @@
   
 
 
-<h1 id="running-the-streaming-integrator-in-containerized-environments">Running the Streaming Integrator in Containerized Environments<a class="headerlink" href="#running-the-streaming-integrator-in-containerized-environments" title="Permanent link">&para;</a></h1>
-<h2 id="running-the-streaming-integrator-with-docker">Running the Streaming Integrator with Docker<a class="headerlink" href="#running-the-streaming-integrator-with-docker" title="Permanent link">&para;</a></h2>
-<p>This section shows you how to run Streaming Integrator in Docker. This involves installing Docker, running the Streaming Integrator in Docker and then deploying and running a Siddhi application in the Docker environment.</p>
+<h1 id="running-the-wso2-integrator-si-in-containerized-environments">Running the WSO2 Integrator: SI in Containerized Environments<a class="headerlink" href="#running-the-wso2-integrator-si-in-containerized-environments" title="Permanent link">&para;</a></h1>
+<h2 id="running-the-wso2-integrator-si-with-docker">Running the WSO2 Integrator: SI with Docker<a class="headerlink" href="#running-the-wso2-integrator-si-with-docker" title="Permanent link">&para;</a></h2>
+<p>This section shows you how to run WSO2 Integrator: SI in Docker. This involves installing Docker, running the WSO2 Integrator: SI in Docker and then deploying and running a Siddhi application in the Docker environment.</p>
 <div class="admonition tip">
 <p class="admonition-title">Before you begin:</p>
 <ul>
@@ -4625,20 +4529,20 @@ insert into TransformedProductionStream;
 </li>
 </ul>
 </div>
-<h3 id="starting-the-streaming-integrator-in-docker">Starting the Streaming Integrator in Docker<a class="headerlink" href="#starting-the-streaming-integrator-in-docker" title="Permanent link">&para;</a></h3>
-<p>In this scenario, you are downloading and installing the Streaming Integrator via Docker.</p>
-<p>WSO2 provides open source Docker images to run WSO2 Streaming Integrator in Docker Hub. You can view these images <a href="https://hub.docker.com/u/wso2/">In Docker Hub - WSO2</a>.</p>
-<p>To run the Streaming Integrator in the  open source image that is available for it</p>
+<h3 id="starting-the-wso2-integrator-si-in-docker">Starting the WSO2 Integrator: SI in Docker<a class="headerlink" href="#starting-the-wso2-integrator-si-in-docker" title="Permanent link">&para;</a></h3>
+<p>In this scenario, you are downloading and installing the WSO2 Integrator: SI via Docker.</p>
+<p>WSO2 provides open source Docker images to run WSO2 Integrator: SI in Docker Hub. You can view these images <a href="https://hub.docker.com/u/wso2/">In Docker Hub - WSO2</a>.</p>
+<p>To run the WSO2 Integrator: SI in the  open source image that is available for it</p>
 <ol>
 <li>
-<p>To pull the required WSO2 Streaming Integrator distribution with updates from the Docker image, issue the following command.</p>
+<p>To pull the required WSO2 Integrator: SI distribution with updates from the Docker image, issue the following command.</p>
 <p><code>docker pull -it wso2/streaming-integrator:1.0.0</code></p>
 </li>
 <li>
 <p>Expose the required ports via docker when running the docker container. In this scenario, you need to expose the following ports:</p>
 <ul>
 <li>
-<p>The 9443 port where the Streaming Integrator server is run.</p>
+<p>The 9443 port where the WSO2 Integrator: SI server is run.</p>
 </li>
 <li>
 <p>The 8006 HTTP port from which Siddhi application you are deploying in this scenario receives messages.</p>
@@ -4648,13 +4552,13 @@ insert into TransformedProductionStream;
 <p><code>docker run -p 9443:9443 -p 8006:8006 wso2/streaming-integrator/1.0.0 -v &lt;local-absolute-siddhi-file-path&gt;/MySimpleApp.siddhi:/apps/MySimpleApp.siddhi siddhiio/siddhi-runner-alpine -Dapps=/apps/MySimpleApp.siddhi</code></p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>In the above command, you are mounting the location where you have saved the <code>MySimpleApp.siddhi</code> file so that the Streaming Integrator can locate it and run it when it starts in Docker. Therefore, replace <code>&lt;local-absolute-siddhi-file-path&gt;</code> with the path in which you saved the Siddhi application in your machine.</p>
+<p>In the above command, you are mounting the location where you have saved the <code>MySimpleApp.siddhi</code> file so that the WSO2 Integrator: SI can locate it and run it when it starts in Docker. Therefore, replace <code>&lt;local-absolute-siddhi-file-path&gt;</code> with the path in which you saved the Siddhi application in your machine.</p>
 </div>
 </li>
 <li>
-<p>If you did not mount the location to the <code>MySimpleApp.siddhi</code> file when issuing the command to start the Streaming Integrator, you can deploy the Siddhi application via the Streaming Integrator tool.</p>
+<p>If you did not mount the location to the <code>MySimpleApp.siddhi</code> file when issuing the command to start the WSO2 Integrator: SI, you can deploy the Siddhi application via the WSO2 Integrator: SI tool.</p>
 <details class="info"><summary>Click here for detailed instructions.</summary><ol>
-<li>Start and access the Streaming Integrator Tooling. Open a new file and copy-paste the <code>MySimpleApp.siddhi</code> Siddhi application in the Source View.<br/>
+<li>Start and access the WSO2 Integrator: SI Tooling. Open a new file and copy-paste the <code>MySimpleApp.siddhi</code> Siddhi application in the Source View.<br/>
     Then save the Siddhi application.<br/></li>
 <li>To deploy the Siddhi application, click the <strong>Deploy</strong> menu option and then click <strong>Deploy to Server</strong>. The <strong>Deploy Siddhi Apps to Server</strong> dialog box opens as shown in the example below.<br/>
     <img alt="Deploy to Server dialog box" src="https://wso2.github.io/docs-si/images/getting-si-run-with-mi/deploy-to-server-dialog-box.png" /><br/><ol>
@@ -4666,7 +4570,7 @@ insert into TransformedProductionStream;
 <li>Click <strong>Deploy</strong>.<br/>
     When the Siddhi application is successfully deployed, the following message appears in the <strong>Deploy Siddhi Apps to Server</strong> dialog box.<br/>
     <img alt="Deployment Status" src="https://wso2.github.io/docs-si/images/getting-si-run-with-mi/siddhi-application-deployment-status.png" /><br/>
-    The following is logged in the console in which you started the Streaming Integrator in Docker.<br/>
+    The following is logged in the console in which you started the WSO2 Integrator: SI in Docker.<br/>
     <img alt="Deployment Status" src="https://wso2.github.io/docs-si/images/hello-world-with-docker/siddhi-app-deployed-in-docker-log.png" /></li>
 </ol>
 </li>
@@ -4674,7 +4578,7 @@ insert into TransformedProductionStream;
 </details>
 </li>
 </ol>
-<p>Now the Streaming Integrator has started in the Docker environment.</p>
+<p>Now the WSO2 Integrator: SI has started in the Docker environment.</p>
 <h3 id="creating-and-deploying-the-siddhi-application">Creating and deploying the Siddhi application<a class="headerlink" href="#creating-and-deploying-the-siddhi-application" title="Permanent link">&para;</a></h3>
 <p>Let's create a simple Siddhi application that receives an HTTP message, does a simple transformation to the message, and then logs it in the SI console.</p>
 <h3 id="trying-out-the-siddhi-application">Trying-out the Siddhi application<a class="headerlink" href="#trying-out-the-siddhi-application" title="Permanent link">&para;</a></h3>
@@ -4682,10 +4586,10 @@ insert into TransformedProductionStream;
 <div class="highlight"><pre><span></span><code>curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;sugar\&quot;,\&quot;amount\&quot;: 20.5}}&quot;  http://0.0.0.0:8006/productionStream --header &quot;Content-Type:application/json&quot;
 </code></pre></div>
 
-<p>The following output appears in the console in which you started the Streaming Integrator in Docker.</p>
+<p>The following output appears in the console in which you started the WSO2 Integrator: SI in Docker.</p>
 <p><img alt="HTTP Response" src="https://wso2.github.io/docs-si/images/hello-world-with-docker/http-response.png" /></p>
-<h2 id="running-the-streaming-integrator-with-kubernetes">Running the Streaming Integrator with Kubernetes<a class="headerlink" href="#running-the-streaming-integrator-with-kubernetes" title="Permanent link">&para;</a></h2>
-<p>In this section, you get to start and run the Streaming Integrator in a Kubernetes cluster in 5 minutes.</p>
+<h2 id="running-the-wso2-integrator-si-with-kubernetes">Running the WSO2 Integrator: SI with Kubernetes<a class="headerlink" href="#running-the-wso2-integrator-si-with-kubernetes" title="Permanent link">&para;</a></h2>
+<p>In this section, you get to start and run the WSO2 Integrator: SI in a Kubernetes cluster in 5 minutes.</p>
 <div class="admonition tip">
 <p class="admonition-title">Before you begin:</p>
 <ul>
@@ -4698,11 +4602,11 @@ insert into TransformedProductionStream;
 <li>Make sure that you have admin privileges to install the <a href="https://siddhi.io/en/v5.0/docs/siddhi-as-a-kubernetes-microservice/#!">Siddhi operator</a>.</li>
 </ul>
 </div>
-<h3 id="installing-the-siddhi-operator-for-the-streaming-integrator">Installing the Siddhi Operator for the Streaming Integrator<a class="headerlink" href="#installing-the-siddhi-operator-for-the-streaming-integrator" title="Permanent link">&para;</a></h3>
+<h3 id="installing-the-siddhi-operator-for-the-wso2-integrator-si">Installing the Siddhi Operator for the WSO2 Integrator: SI<a class="headerlink" href="#installing-the-siddhi-operator-for-the-wso2-integrator-si" title="Permanent link">&para;</a></h3>
 <p>To install the Siddhi Operator, follow the procedure below:</p>
 <ol>
 <li>
-<p>To install the Siddhi Kubernetes operator for streaming integrator issue the following commands:</p>
+<p>To install the Siddhi Kubernetes operator for WSO2 Integrator: SI issue the following commands:</p>
 <p><code>kubectl apply -f https://github.com/wso2/streaming-integrator/releases/download/v1.0.0-m1/00-prereqs.yaml</code></p>
 <p><code>kubectl apply -f https://github.com/wso2/streaming-integrator/releases/download/v1.0.0-m1/01-siddhi-operator.yaml</code></p>
 </li>
@@ -4714,7 +4618,7 @@ insert into TransformedProductionStream;
 </li>
 </ol>
 <h3 id="deploying-siddhi-applications-in-kubernetes">Deploying Siddhi applications in Kubernetes<a class="headerlink" href="#deploying-siddhi-applications-in-kubernetes" title="Permanent link">&para;</a></h3>
-<p>You can deploy multiple Siddhi applications in one or more selected containers via Kubernetes. In this example, let's deploy just one Siddhi application in one container for the ease of understanding how to run the Streaming Integrator in a Kubernetes cluster.</p>
+<p>You can deploy multiple Siddhi applications in one or more selected containers via Kubernetes. In this example, let's deploy just one Siddhi application in one container for the ease of understanding how to run the WSO2 Integrator: SI in a Kubernetes cluster.</p>
 <ol>
 <li>
 <p>First, let's design a simple Siddhi application that consumes events via HTTP to detect power surges. It filters events for a specific device type (i.e., dryers) and that also report a value greater than 600 for <code>power</code>.</p>
@@ -4885,7 +4789,7 @@ spec:
 <p><code>kubectl apply -f &lt;PATH_to_siddhi-process.yaml&gt;</code></p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>This file overrules the configurations in the <code>&lt;SI_HOME&gt;|&lt;SI_TOOLING_HOME&gt;/conf/server/deployment.yaml</code> file.</p>
+<p>This file overrules the configurations in the <code>&lt;SI_HOME&gt;/conf/server/deployment.yaml</code> file.</p>
 </div>
 </li>
 </ol>
@@ -4990,7 +4894,7 @@ streaming-integrator-5f9fcb7679-n4zpj        1/1     Running      0        173m
   <div class="footer-copyright-left">
   
     <div class="md-copyright__highlight">
-      WSO2 Streaming Integrator - Documentation
+      WSO2 Integrator: SI - Documentation
     </div>
   
   
