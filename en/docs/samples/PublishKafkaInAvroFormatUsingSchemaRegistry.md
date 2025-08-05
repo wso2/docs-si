@@ -2,17 +2,17 @@
 
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send sweet production events via the Kafka transport in Avro format using Confluent Schema Registry.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to send sweet production events via the Kafka transport in Avro format using Confluent Schema Registry.
 
 ## Prerequisites
 
 1. To install Kafka, follow the steps below
 
-    1. In Streaming Integrator Tooling, click **Tools**, and then click **Extension Installer**.
+    1. In WSO2 Integrator: SI Tooling, click **Tools**, and then click **Extension Installer**.
 
     2. In the **Extension Installer** dialog box that opens, search for `Kafka`. Then click **Install** in the row that appears. A message appears to confirm whether you want to proceed to install the extension. Click **Install**.
 
-    3. Restart Streaming Integrator Tooling.
+    3. Restart WSO2 Integrator: SI Tooling.
 
 2. Download `confluent-5.2.1` from the [Confluent website](https://www.confluent.io/download/). Then unzip the file you downloaded.
 
@@ -57,7 +57,7 @@ To execute the sample, follow the steps below:
 
 5. Navigate to the `<SI-Tooling-Home>/samples/sample-clients/kafka-avro-consumer` directory and run the `ant` command without arguments.
 
-6. Start the `PublishKafkaInAvroFormatUsingSchemaRegistry` Siddhi application you saved by opening it in Streaming Integrator Tooling and clicking the **Start** button in the toolbar.
+6. Start the `PublishKafkaInAvroFormatUsingSchemaRegistry` Siddhi application you saved by opening it in WSO2 Integrator: SI Tooling and clicking the **Start** button in the toolbar.
 
     If the Siddhi application starts successfully, the following messages are logged in the terminal:
 
@@ -72,7 +72,7 @@ To test this sample, send events following one or more of the methods given belo
 
 ### Send events to the kafka sink via the Event Simulator
 
-1. In Streaming Integrator Studio, open the Event Simulator by clicking on the **Event Simulator** icon in the left panel or pressing Ctrl+Shift+I.
+1. In WSO2 Integrator: SI Studio, open the Event Simulator by clicking on the **Event Simulator** icon in the left panel or pressing Ctrl+Shift+I.
 
 2. In the **Single Simulation** tab of the panel, specify the values as follows:
 

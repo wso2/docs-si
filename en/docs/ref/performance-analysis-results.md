@@ -340,7 +340,7 @@ from InaccurateFileStream#file:move(fromPath, '/Users/wso2/demo/inaccurate-files
 select fromPath
 insert into InaccurateFileNotificationStream;
 ```
-For a detailed description of this scenario, see the [Streaming ETL with WSO2 Streaming Integrator article](https://wso2.com/articles/streaming-etl-with-wso2-streaming-integrator/)
+For a detailed description of this scenario, see the [Streaming ETL with WSO2 Integrator: SI article](https://wso2.com/articles/streaming-etl-with-wso2-streaming-integrator/)
 
 ### Results
 

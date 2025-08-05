@@ -1,6 +1,6 @@
 # Downloading and Installing Siddhi Extensions
 
-The Siddhi extensions supported for the Streaming Integrator are shipped with the product by
+The Siddhi extensions supported for the WSO2 Integrator: SI are shipped with the product by
 default. If you need to download and install a different version of an
 extension, you can download it via the command line or manually as covered in the following sections.
 
@@ -14,7 +14,7 @@ The following are some actions that you are required to perform in order to iden
 
 - **Viewing the list of extensions that are currently installed**
 
-    You can view the complete list of Siddhi extensions that are currently installed in your Streaming Integrator setup. All the extensions listed are completely installed with the dependencies.
+    You can view the complete list of Siddhi extensions that are currently installed in your WSO2 Integrator: SI setup. All the extensions listed are completely installed with the dependencies.
     
     To perform this action, issue the appropriate command out of the following based on your operating system:
     
@@ -28,7 +28,7 @@ The following are some actions that you are required to perform in order to iden
     
 - **Viewing the installation status of all the supported Siddhi extensions**
 
-    You can view the complete list of Siddhi extensions supported for WSO2 Streaming Integrator together with the current installation status for each extension.
+    You can view the complete list of Siddhi extensions supported for WSO2 Integrator: SI together with the current installation status for each extension.
     
     The installation status can be one of the following:
     
@@ -72,16 +72,16 @@ The following are some actions that you are required to perform in order to iden
 
 #### Installing all extensions required for currently deployed Siddhi applications
 
-If the Siddhi applications deployed in your WSO2 Streaming Integrator setup use Siddhi extensions that are not currently installed, you can automatically install all those extensions at once. To do this, issue the appropriate command out of the following based on your operating system.
+If the Siddhi applications deployed in your WSO2 Integrator: SI setup use Siddhi extensions that are not currently installed, you can automatically install all those extensions at once. To do this, issue the appropriate command out of the following based on your operating system.
 
 - **For Windows**     : `extension-installer.bat install`
 - **For Linux/MacOS** : `./extension-installer.sh install` 
 
-e.g., If a Siddhi application that is currently deployed in your WSO2 Streaming Integrator setup uses the Amazon S3 extension, and if this extension is not already installed, you can issue the command given above. As a result, the following message appears in the terminal informing you of extensions that are used in Siddhi applications, but not installed. It also prompts you to specify whether you want to install them.
+e.g., If a Siddhi application that is currently deployed in your WSO2 Integrator: SI setup uses the Amazon S3 extension, and if this extension is not already installed, you can issue the command given above. As a result, the following message appears in the terminal informing you of extensions that are used in Siddhi applications, but not installed. It also prompts you to specify whether you want to install them.
 
 ![Not-installed extensions in Siddhi applications]({{base_path}}/images/downloading-and-installing-siddhi-extensions/not-installed-but-used-extensions.png)
 
-If you enter `y` to specify that you want to proceed with the installation, the following message appears to inform you of the status of the installation and to prompt you to restart the WSO2 Streaming Integrator server once the installation is complete.
+If you enter `y` to specify that you want to proceed with the installation, the following message appears to inform you of the status of the installation and to prompt you to restart the WSO2 Integrator: SI server once the installation is complete.
 
 ![installed missing extension]({{base_path}}/images/downloading-and-installing-siddhi-extensions/installed-missing-extension-message.png)
 
@@ -100,7 +100,7 @@ e.g., To install the `grpc` Siddhi extension, issue the following command.
 - **For Windows**     : `extension-installer.bat install grpc`
 - **For Linux/MacOS** : `./extension-installer.sh install grpc` 
 
-The following message appears to inform you of the status of the installation and to prompt you to restart the WSO2 Streaming Integrator server once the installation is complete.
+The following message appears to inform you of the status of the installation and to prompt you to restart the WSO2 Integrator: SI server once the installation is complete.
 
 ![install extension log]({{base_path}}/images/downloading-and-installing-siddhi-extensions/install-extension-log.png)
 
@@ -123,7 +123,7 @@ A message appears to inform you of any other extension that shares dependencies 
 
 ![uninstall extension log]({{base_path}}/images/downloading-and-installing-siddhi-extensions/uninstall-extension-log.png)
 
-If you enter `y` and proceed with the un-installation, the following log appears to inform you of the progress of the un-installation and then prompt you to restart the Streaming Integrator server once the un-installation is complete.
+If you enter `y` and proceed with the un-installation, the following log appears to inform you of the progress of the un-installation and then prompt you to restart the WSO2 Integrator: SI server once the un-installation is complete.
 
 ![uninstall extension]({{base_path}}/images/downloading-and-installing-siddhi-extensions/uninstall-extension.png)
 
@@ -145,12 +145,12 @@ To download the Siddhi extensions, follow the steps below
    In the dialog box that appears, enter your e-mail address and click **Submit**. The extension JAR is downloaded to 
    the default location in your machine (based on your settings).
 
-3.  If you are not using the latest version of the Streaming Integrator, and you
+3.  If you are not using the latest version of the WSO2 Integrator: SI, and you
     want to select the version of the extension that matches your current product version, expand **Version Support** 
     in the left navigator for the selected extension.
 
     !!! tip 
-        Each extension has a separate **Version Support** navigator item for the Streaming Integrator, SP, CEP and DAS.
+        Each extension has a separate **Version Support** navigator item for the WSO2 Integrator: SI, SP, CEP and DAS.
     ![Version Support]({{base_path}}/images/downloading-and-installing-siddhi-extensions/Extension_Left_Navigator.png)
 
 4. If you need to download an older version of an extension, follow the substeps below.
@@ -166,7 +166,7 @@ To download the Siddhi extensions, follow the steps below
 
 ### Installing Siddhi extensions
 
-To install the Siddhi extension in your Streaming Integrator pack, place the extension JAR you downloaded in the 
+To install the Siddhi extension in your WSO2 Integrator: SI pack, place the extension JAR you downloaded in the 
 `<SI_HOME>/lib` directory.
 
 ### Uninstalling Siddhi extensions

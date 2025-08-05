@@ -1,7 +1,7 @@
 
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to receive events to the SweetProductionStream via TCP transport in binary format and check the custom text mapping and the default text mapping using inMemory transport and log the events in OutputStreams accordingly to the  output  console.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to receive events to the SweetProductionStream via TCP transport in binary format and check the custom text mapping and the default text mapping using inMemory transport and log the events in OutputStreams accordingly to the  output  console.
 
 ## Executing the sample
 

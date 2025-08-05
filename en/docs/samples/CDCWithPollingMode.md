@@ -13,8 +13,8 @@ By changing the database type, you can also try out this example for the followi
 
 !!!info "Before you begin:"
     1. Ensure that MySQL is installed on your computer.<br/>
-    2. Add the MySQL JDBC driver to the `<SI_Tooling_Home>/lib` directory as follows:<br/>
-        1. Download and copy the `mysql-connector-j-8.3.0.jar` JAR and place it in the `<SI_Tooling_Home>/lib` directory.<br/>
+    2. Add the MySQL JDBC driver to the `<SI_Home>/lib` directory as follows:<br/>
+        1. Download and copy the `mysql-connector-j-8.3.0.jar` JAR and place it in the `<SI_Home>/lib` directory.<br/>
         2. Unzip the archive.<br/>
         3. Copy the `mysql-connector-java-5.1.45-bin.jar` JAR and place it in the `<SI_HOME>/lib` directory.<br/>
     3. Create a database named `production` by issuing the following command.<br/>
@@ -23,13 +23,13 @@ By changing the database type, you can also try out this example for the followi
         `use production;`<br/>
     5. Create a table named `SweetProductionTable` by issuing the following command.<br/>
         `CREATE TABLE SweetProductionTable (last_update TIMESTAMP, name VARCHAR(20),amount double(10,2));`<br/>
-    6. If you want to capture the changes from the last point of time the Siddhi application was stopped, enable state persistence by setting the `state.persistence enabled=true` property in the `<SI_Tooling_Home>/conf/server/deployment.yaml` file. If you do not enable state persistence, only the changes since the Siddhi application started are captured.<br/>
+    6. If you want to capture the changes from the last point of time the Siddhi application was stopped, enable state persistence by setting the `state.persistence enabled=true` property in the `<SI_Home>/conf/server/deployment.yaml` file. If you do not enable state persistence, only the changes since the Siddhi application started are captured.<br/>
 
-    7. In the sample Siddhi application, update the `username` and `password` parameters in the source configuration by adding the username and password you use to log in to MySQL as the values. Then save the sample Siddhi application in Streaming Integrator Tooling.
+    7. In the sample Siddhi application, update the `username` and `password` parameters in the source configuration by adding the username and password you use to log in to MySQL as the values. Then save the sample Siddhi application in WSO2 Integrator: SI Tooling.
 
 ## Executing the sample
 
-To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the **Start** button or by clicking **Run** => **Run**.
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button or by clicking **Run** => **Run**.
 
 If the Siddhi application starts successfully, the following message appears in the console.
 
@@ -46,7 +46,7 @@ To test the sample Siddhi application, insert a record to the `SweetProductionTa
 
 ## Viewing the results
 
-The insert operation is logged in the Streaming Integrator console as shown below.
+The insert operation is logged in the WSO2 Integrator: SI console as shown below.
 
 ![Polling Log]({{base_path}}/images/cdc-with-polling-mode-sample/cdc-with-polling-mode.png)
 

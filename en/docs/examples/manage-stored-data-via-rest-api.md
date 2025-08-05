@@ -2,7 +2,7 @@
 
 ## Introduction 
 
-The Siddhi Store Query API is the REST API exposed by the Streaming Integrator (SI) in order to perform actions on the stored data. 
+The Siddhi Store Query API is the REST API exposed by the WSO2 Integrator: SI (SI) in order to perform actions on the stored data. 
 
 Stored data includes,
 - Siddhi Stores

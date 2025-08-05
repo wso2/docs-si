@@ -1,9 +1,9 @@
-# Getting the Streaming Integrator Running with Docker in 5 Minutes
+# Getting the WSO2 Integrator: SI Running with Docker in 5 Minutes
 
 
 ## Introduction
 
-This guide shows you how to run Streaming Integrator in Docker. This involves installing Docker, running the Streaming Integrator in Docker and then deploying and running a Siddhi application in the Docker environment.
+This guide shows you how to run WSO2 Integrator: SI in Docker. This involves installing Docker, running the WSO2 Integrator: SI in Docker and then deploying and running a Siddhi application in the Docker environment.
 
 !!!tip "Before you begin:"
     - The system requirements are as follows:
@@ -13,20 +13,20 @@ This guide shows you how to run Streaming Integrator in Docker. This involves in
 
     - Install Docker by following the instructions provided in [here](https://docs.docker.com/install/).
 
-## Downloading and installing the Streaming Integrator
+## Downloading and installing the WSO2 Integrator: SI
 
-In this scenario, you are downloading and installing the Streaming Integrator via Docker.
+In this scenario, you are downloading and installing the WSO2 Integrator: SI via Docker.
 
-WSO2 provides open source Docker images to run WSO2 Streaming Integrator in Docker Hub. You can view these images [In Docker Hub - WSO2](https://hub.docker.com/u/wso2/).
+WSO2 provides open source Docker images to run WSO2 Integrator: SI in Docker Hub. You can view these images [In Docker Hub - WSO2](https://hub.docker.com/u/wso2/).
 
-To run the Streaming Integrator in the  open source image that is available for it
+To run the WSO2 Integrator: SI in the  open source image that is available for it
 
-1. To pull the required WSO2 Streaming Integrator distribution with updates from the Docker image, issue the following command.
+1. To pull the required WSO2 Integrator: SI distribution with updates from the Docker image, issue the following command.
 
     `docker run -it wso2/streaming-integrator`
 
 2. Expose the required ports via docker when running the docker container. In this scenario, you need to expose the following ports:
-    - The 9443 port where the Streaming Integrator server is run.
+    - The 9443 port where the WSO2 Integrator: SI server is run.
     - The 8006 HTTP port from which Siddhi application you are deploying in this scenario receives messages.
 
     To expose these ports, issue the following command.
@@ -38,7 +38,7 @@ To run the Streaming Integrator in the  open source image that is available for 
 
 Let's create a simple Siddhi application that receives an HTTP message, does a simple transformation to the message, and then logs it in the SI console.
 
-1. Start the Streaming Integrator Tooling via one of the following methods depending on your operating system:
+1. Start the WSO2 Integrator: SI Tooling via one of the following methods depending on your operating system:
 
     - On MacOS/Linux/CentOS, open a terminal and issue the following command:
 
@@ -52,7 +52,7 @@ Let's create a simple Siddhi application that receives an HTTP message, does a s
             The default URL is `http://<localhost:9390/editor`.
 
     The Streaming Integration Tooling opens as shown below.
-       ![Streaming Integrator Tooling Welcome Page]({{base_path}}/images/quick-start-guide-101/Welcome-Page.png)
+       ![WSO2 Integrator: SI Tooling Welcome Page]({{base_path}}/images/quick-start-guide-101/Welcome-Page.png)
 
 
 2. Click **New** and copy-paste the following Siddhi application to the new file you opened.
@@ -113,7 +113,7 @@ Let's create a simple Siddhi application that receives an HTTP message, does a s
         ![Deployment Status]({{base_path}}/images/getting-si-run-with-mi/siddhi-application-deployment-status.png)
 
 
-        The following is logged in the console in which you started the Streaming Integrator in Docker.
+        The following is logged in the console in which you started the WSO2 Integrator: SI in Docker.
 
         ![Deployment Status]({{base_path}}/images/hello-world-with-docker/siddhi-app-deployed-in-docker-log.png)
 
@@ -127,7 +127,7 @@ To try out the `MySimpleApp` Siddhi application you deployed in Docker, issue th
 curl -X POST -d "{\"event\": {\"name\":\"sugar\",\"amount\": 20.5}}"  http://0.0.0.0:8006/productionStream --header "Content-Type:application/json"
 ```
 
-The following output appears in the console in which you started the Streaming Integrator in Docker.
+The following output appears in the console in which you started the WSO2 Integrator: SI in Docker.
 
 ![HTTP Response]({{base_path}}/images/hello-world-with-docker/http-response.png)
 

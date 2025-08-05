@@ -15,10 +15,10 @@
 # under the License.
 
 # Project information
-site_name: WSO2 Streaming Integrator Documentation
-site_description: Documentation for WSO2 Streaming Integrator
+site_name: "WSO2 Integrator: SI Documentation"
+site_description: "Documentation for WSO2 Integrator: SI"
 site_author: WSO2
-# site_url: https://si.docs.wso2.com/en/latest/
+site_url: https://si.docs.wso2.com/
 
 # Repository information
 repo_name: wso2/docs-streaming-integrator
@@ -27,7 +27,7 @@ edit_uri: https://github.com/wso2/docs-si/edit/main/en/docs/
 dev_addr: localhost:8000
 
 # Copyright
-copyright: WSO2 Streaming Integrator - Documentation
+copyright: "WSO2 Integrator: SI - Documentation"
 
 # Configuration
 theme:
@@ -78,13 +78,12 @@ nav:
     - 'Quick Start Guide': 'quick-start-guide/quick-start-guide.md'
     - 'Creating Your First Siddhi Application':
       - 'Streaming Integration Overview': 'quick-start-guide/getting-started/getting-started-guide-overview.md'
-      - 'Step 1: Download and Install Streaming Integrator': 'quick-start-guide/getting-started/download-install-and-start-si.md'
+      - 'Step 1: Download and Install WSO2 Integrator: SI': 'quick-start-guide/getting-started/download-install-and-start-si.md'
       - 'Step 2: Create the Siddhi Application': 'quick-start-guide/getting-started/create-the-siddhi-application.md'
       - 'Step 3: Deploy the Siddhi Application': 'quick-start-guide/getting-started/deploy-siddhi-application.md'
       - 'Step 4: Run the Siddhi Application': 'quick-start-guide/getting-started/test-siddhi-application.md'
       - 'Step 5: Update the Siddhi Application': 'quick-start-guide/getting-started/update-the-siddhi-application.md'
-      - 'Step 6: Handle Errors': 'quick-start-guide/getting-started/handle-errors.md'
-      - 'Step 7: Monitor Statistics': 'quick-start-guide/getting-started/monitor-statistics.md'
+      - 'Step 6: Monitor Statistics': 'quick-start-guide/getting-started/monitor-statistics.md'
     - 'Architecture': 'overview/architecture.md'
     - 'Key Concepts': 'concepts/concepts.md'
     - 'About this Release' : 'get-started/about-this-release.md'
@@ -108,9 +107,7 @@ nav:
       - 'Tutorials Overview': 'examples/tutorials-overview.md'
       - 'Performing Real-time ETL with MySQL': 'examples/performing-real-time-etl-with-mysql.md'
       - 'Performing Real-time ETL with Files': 'examples/performing-real-time-etl-with-files.md'
-      - 'Creating an ETL Application via SI Tooling': 'examples/creating-etl-application-via-tooling.md'
       - 'Working with Kafka': 'examples/working-with-kafka.md'
-      - 'Working with Business Rules': 'admin/creating-business-rules-templates.md'
       - 'Integrating Data Stores in Streaming Integration': 'examples/integrating-stores.md'
       - 'Exposing Processed Data as API': 'examples/exposing-processed-data-as-api.md'
       - 'Error Handling with Data Streams': 'examples/handling-requests-with-errors.md'
@@ -231,17 +228,15 @@ nav:
         - 'Publishing Events to a GCS Bucket': 'samples/GCSSinkSample.md'
   - Setup and Install:
     - 'Install':
-      - 'Installing the Streaming Integrator':
+      - 'Installing the WSO2 Integrator: SI':
         - 'Install SI': 'setup/installing-si-in-vm.md'
         - 'Installing as a Windows Service': 'setup/installing-as-a-windows-service.md'
         - 'Installing as a Linux Service': 'setup/installing-si-as-a-linux-service.md'
       - 'Installing Siddhi Extensions': 'connectors/downloading-and-Installing-Siddhi-Extensions.md'
-      - 'Running the Streaming Integrator in Containers':
+      - 'Running the WSO2 Integrator: SI in Containers':
         - 'Installing in Docker': 'setup/installing-si-using-docker.md'
         - 'Installing in Kubernetes': 'setup/installing-si-using-kubernetes.md'
     - 'Migrate':
-      #- 'Migrating from WSO2 SP': 'setup/migrating-from-stream-processor.md'
-      #- 'Upgrading from Streaming Integrator 1.0.0': 'setup/upgrading-from-previous-version.md'
       - 'Upgrading WSO2 Enterprise Integrator': 'setup/upgrading-wso2-ei.md'
     - 'Deploy':
       - 'Single Deployment': 'setup/deploying-si-as-a-single-deployment.md'
@@ -252,7 +247,6 @@ nav:
     - 'Set-up':
       - 'Production Checklist': 'setup/production-checklist.md'
       - 'Configuring Datasources': 'setup/configuring-data-sources.md'
-      - 'Configuring Business Rules Deployment': 'setup/configuring-business-rules-deployment.md'
       - 'General Data Protection Regulations': 'admin/general-data-protection-regulations.md'
       - 'Working with Keystores': 'admin/working-with-Keystores.md'
       - 'Supporting Different Transports': 'admin/supporting-different-transports.md'
@@ -262,26 +256,23 @@ nav:
       - 'Protecting Sensitive Data via the Secure Vault': 'admin/protecting-sensitive-data-via-the-secure-vault.md'
       - 'Adding Third Party Non OSGi Library': 'admin/adding-third-party-non-osgi-libraries.md'
       - 'Configuring Default Ports': 'ref/configuring-default-ports.md'
-      - 'Changing the Host Name and Context Path of Web UI Applications': 'setup/change-hostname-and-context-path.md'
       - 'Enabling Logs for Received Event Count': 'admin/monitoring-received-events-count-via-logs.md'
   - 'Develop':
-    - 'Developing Streaming Integrator Solutions': 'develop/developing-streaming-integration-solutions.md'
-    - 'Streaming Integrator Tooling':
-      - 'Streaming Integrator Tooling Overview': 'develop/streaming-integrator-studio-overview.md'
+    - 'Developing WSO2 Integrator: SI Solutions': 'develop/developing-streaming-integration-solutions.md'
+    - 'WSO2 Integrator: SI Tooling':
+      - 'Overview WSO2 Integrator: SI for VS Code': 'develop/si-for-vscode-overview.md'
+      - 'Install WSO2 Integrator: SI for VS Code': 'develop/install-si-for-vscode.md'
       - 'Working with the Design View': 'develop/working-with-the-Design-View.md'
     - 'Creating Siddhi Applications': 'develop/creating-a-Siddhi-Application.md'
     - 'Installing Siddhi Extensions': 'develop/installing-siddhi-extensions.md'
-    - 'Testing Siddhi Applications': 'develop/testing-a-Siddhi-Application.md'
-    - 'Deploying Siddhi Applications': 'develop/deploying-Streaming-Applications.md'
+    - 'Running and Testing Siddhi Applications': 'develop/testing-a-Siddhi-Application.md'
     - 'Exporting Siddhi Applications': 'develop/exporting-Siddhi-Applications.md'
-    - 'Overview WSO2 Integrator: SI for VS Code': 'develop/si-for-vscode-overview.md'
-    - 'Install WSO2 Integrator: SI for VS Code': 'develop/install-si-for-vscode.md'
   - 'Observability':
     - 'Integration Control Plane': 'admin/working-with-integration-control-plane.md'
     - 'Monitoring SI via Dashboards':
       - 'Configuring Dashboards': 'admin/setting-up-grafana-dashboards.md'
       - 'Managing Dashboards': 'admin/managing-grafana-dashboards.md'
-      - 'Monitoring WSO2 SI':
+      - 'Monitoring SI':
         - 'Overview': 'admin/monitoring-si-performance-via-grafana.md'
         - 'Viewing Overall Statistics': 'admin/viewing-overall-statistics.md'
         - 'Viewing Server Statistics': 'admin/viewing-server-statistics.md'
@@ -295,7 +286,7 @@ nav:
         - 'Viewing On Demand Query Statistics': 'admin/viewing-on-demand-query-statistics.md'
       - 'Monitoring ETL Flows': 'admin/viewing-dashboards.md'
   - 'Connectors':
-    - 'Streaming Integrator Connectors Overview': 'connectors/connectors-overview.md'
+    - 'WSO2 Integrator: SI Connectors Overview': 'connectors/connectors-overview.md'
     - 'Downloading and Installing Siddhi Connectors': 'connectors/downloading-and-Installing-Siddhi-Extensions.md'
     - 'Writing Custom Siddhi Extensions': 'connectors/writing-Custom-Siddhi-Extensions.md'
     - 'Configuring System Parameters for Siddhi Extensions': 'connectors/configuring-System-Parameters-for-Siddhi-Extensions.md'

@@ -2,13 +2,13 @@
 
 ETL (Extract Transform Load) is a form of data processing that involves **extracting** data from one or multiple sources (typically from multiple sources), **transforming data** to generate the required output, and then **loading** that output to one or more destinations to make it available for further processing.
 
-The following topics explain how WSO2 Streaming Integrator performs ETL operations, and how it addresses the modern business requirements relating to ETL operations.
+The following topics explain how WSO2 Integrator: SI performs ETL operations, and how it addresses the modern business requirements relating to ETL operations.
 
 ## Performing ETL in real time
 
 Traditional ETL used batch processing method where the ETL tasks were executed periodically on static data (e.g., database records). Due to this, the required output was also generated periodically and it involved a lot of waiting time. However, modern businesses often carry out a high volume of transactions in real time. This requires the ETL operations also to be executed in real time and to generate the results in real time so that quick decisions can be made based on this output.
 
-WSO2 Streaming Integrator executes ETL operations on streaming data and generates results in a streaming manner. To understand how this is done, consider a scenario where a sweet factory purchases sugar and flour from two suppliers. Each supplier publishes information about each consignment of raw material it supplies in a file. The events published by the sugar supplier does not include the product name. The flour supplier also supplies goods other than raw material. The head office needs all the purchase records saved in a database. The details of each consignment that needs to be saved as a purchase record includes the transaction number, product name, unit price and the amount.
+WSO2 Integrator: SI executes ETL operations on streaming data and generates results in a streaming manner. To understand how this is done, consider a scenario where a sweet factory purchases sugar and flour from two suppliers. Each supplier publishes information about each consignment of raw material it supplies in a file. The events published by the sugar supplier does not include the product name. The flour supplier also supplies goods other than raw material. The head office needs all the purchase records saved in a database. The details of each consignment that needs to be saved as a purchase record includes the transaction number, product name, unit price and the amount.
 
 To maintain a database with purchase records, you can create an ETL application as follows:
 
@@ -60,7 +60,7 @@ You are **loading** the output by performing `update or insert` operations to in
 
 In the previous example, you extracted information from two sources of the same type (i.e., files). In real world business scenarios, you often need to extract data from multiple sources of different types. 
 
-To understand how this requirement can be addressed via the WSO2 Streaming Integrator, let's try out consuming events from both a file and a database at the same time.
+To understand how this requirement can be addressed via the WSO2 Integrator: SI, let's try out consuming events from both a file and a database at the same time.
 
 Assume that the Head Office of the Sweet Factory also maintains a record of the current stock of each material in a database table named `StockRecords`. To keep the stock updated, each purchase of a raw material needs to be added to the existing stock, and each dispatch to the factory needs to be deducted from the existing stock. The material dispatches are recorded in a file. To achieve this, you need to create an ETL flow as shown in the below diagram.
 
@@ -195,7 +195,7 @@ update or insert into StockRecords
 
 ## Scalability
 
-When there are rapid changes and growths in business, it is necessary to scale ETL applications in an agile manner to support it. WSO2 Streaming Integrator supports the need for scalability via the Siddhi logic. 
+When there are rapid changes and growths in business, it is necessary to scale ETL applications in an agile manner to support it. WSO2 Integrator: SI supports the need for scalability via the Siddhi logic. 
 This can be observed in the previous examples where the `ManagingStocksApp` Siddhi application which only captured purchase records in the [Performing ETL in real time section](#performing-ETL-in-real-time) and with only two files and one database table (`SugarSupply.csv` file, `FlourSupply.csv` file and `PurchaseRecords` database table) in the ETL flow was scaled to perform stock updates by incorporating another file and a database (i.e., `MaterialDispatches.csv` file and `StockRecords` database table) to the ETL flow.
 
 ![Extended ETL Flow]({{base_path}}/images/performing-etl-operations/extended-etl-flow.png)
@@ -228,15 +228,13 @@ The following diagram depicts how the above changes scaled the ETL flow.
        
 ## Multiple platforms for ETL application design
 
-WSO2 Streaming Integrator provides the Source View, Design View and the Wizard View for application design. For more information, see [Streaming Integrator Tooling Overview](../develop/streaming-integrator-studio-overview.md).
+WSO2 Integrator: SI provides the Source View, and Design View for application design. For more information, see [WSO2 Integrator: SI for VS Code Overview](../develop/si-for-vscode-overview.md)
 
-Out of these three views, the Wizard View is dedicated for designing ETL applications without writing many Siddhi queries. This platform mainly caters for application designers who prefer to use Siddhi constructs without writing code. Therefore, it guides you to write multiple simple Siddhi applications that contribute to the same ETL flow instead of heavy applications embodying multiple components of the ETL flow. A single Siddhi application designed using the ETL wizard can only incorporate one source and one destination to the ETL flow. 
-
-To learn how to design an ETL application via the Wizard view, see the [Creating an ETL Application via SI Tooling tutorial](../examples/creating-etl-application-via-tooling.md).
+Out of these three views, the Wizard View is dedicated for designing ETL applications without writing many Siddhi queries. This platform mainly caters for application designers who prefer to use Siddhi constructs without writing code. Therefore, it guides you to write multiple simple Siddhi applications that contribute to the same ETL flow instead of heavy applications embodying multiple components of the ETL flow. A single Siddhi application designed using the ETL wizard can only incorporate one source and one destination to the ETL flow.
 
 ## Visualizing ETL Performance Statistics
 
-WSO2 Streaming Integrator provides nine pre-configured dashboards to visualize the overall ETLS statistics for your Streaming Integrator deployment, as well as the ETL statistics per Siddhi application and per ETL-related Siddhi extension type (i.e., CDC statistics, file statistics and RDBMS statistics).
+WSO2 Integrator: SI provides nine pre-configured dashboards to visualize the overall ETLS statistics for your WSO2 Integrator: SI deployment, as well as the ETL statistics per Siddhi application and per ETL-related Siddhi extension type (i.e., CDC statistics, file statistics and RDBMS statistics).
 
 You can set up the pre-configured dashboards in Grafana. For instructions to set up these dashboards and visualize your ETL statistics, see [Monitoring ETL Statistics with Grafana](../admin/viewing-dashboards.md).
 
@@ -244,9 +242,9 @@ You can set up the pre-configured dashboards in Grafana. For instructions to set
 
 In real world business scenarios, many businesses carry out about thousands of online transactions per second. This requires an ETL application performing in real time to handle a high volume of data in high speed.
     
-According to the latest performance statistics of the Streaming Integrator, it can process 29,000 transactions per second when performing ETL tasks. For more information about performance statistics, see the following:
+According to the latest performance statistics of the WSO2 Integrator: SI, it can process 29,000 transactions per second when performing ETL tasks. For more information about performance statistics, see the following:
     
 - [Performance Analysis Results - Performing ETL Tasks](../ref/performance-analysis-results.md/#performing-etl-tasks)
-- [Streaming ETL with WSO2 Streaming Integrator article](https://wso2.com/articles/streaming-etl-with-wso2-streaming-integrator/)
+- [Streaming ETL with WSO2 Integrator: SI article](https://wso2.com/articles/streaming-etl-with-wso2-streaming-integrator/)
 
 

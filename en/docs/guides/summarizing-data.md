@@ -100,7 +100,7 @@ To try out the example given above, follow the procedure below:
 
     `CREATE SCHEMA production;`
     
-    Then open the `<SI_TOOLING_HOME>/conf/server/deployment.yaml` file and add the following datasource configuration under `datasources`.
+    Then open the `<SI_HOME>/conf/server/deployment.yaml` file and add the following datasource configuration under `datasources`.
     
     ```
       - name: Production_DB
@@ -122,9 +122,9 @@ To try out the example given above, follow the procedure below:
             isAutoCommit: false
     ```
     
-2. [Start and Access Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+2. [Start and Access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
 
-3. Open a new file in Streaming Integrator Tooling. Then add and save the following Siddhi application.
+3. Open a new file in WSO2 Integrator: SI Tooling. Then add and save the following Siddhi application.
 
     ```
     @App:name('ProductionAggregatesApp')
@@ -172,7 +172,7 @@ To try out the example given above, follow the procedure below:
     
 5. To retrieve the information you stored, simulate an event for the `ProductionSummaryRetrievalStream` stream with `brownie` as the value for `name'. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
 
-    The Streaming Integrator Tooling terminal displays the following logs.
+    The WSO2 Integrator: SI Tooling terminal displays the following logs.
     
     ![Aggregate Logs]({{base_path}}/images/processing-data/aggregate-logs.png)
     
@@ -261,7 +261,7 @@ The following are a few examples of how short time summarizations can be perform
 
 To try out the four sample queries given above, follow the steps below:
 
-1. [Start and Access Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+1. [Start and Access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
 
 2. Open a new file. Then add and save the following Siddhi application.
 
@@ -333,7 +333,7 @@ To try out the four sample queries given above, follow the steps below:
     
 ### Supported methods of summarization
 
-WSO2 Streaming Integrator supports the following methods of summarization via Siddhi extensions. For more information about a summarization method, click on the relevant Siddhi link.
+WSO2 Integrator: SI supports the following methods of summarization via Siddhi extensions. For more information about a summarization method, click on the relevant Siddhi link.
 
 | **Method** (Window type) | **Description**  |
 |--------------------------|----------------------------------------------|

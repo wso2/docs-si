@@ -8,24 +8,19 @@ The following image depicts the procedure to be followed by the Siddhi applicati
 
 ![Siddhi Application Flow]({{base_path}}/images/quick-start-guide-101/scenario.png)
 
-1. Extract the Streaming Integrator Tooling pack to a preferred location. Hereafter, the extracted location is referred to as `<SI_TOOLING_HOME>`.
+1. Install **Visual Studio Code** editor, if not already installed.
 
-2. Navigate to the `<SI_TOOLING_HOME>/bin` directory and issue the appropriate command depending on your operating system to start the Streaming Integration tooling.
+2. Install the **WSO2 Integrator: SI** extension in Visual Studio Code. To do this, follow the steps below:
 
-    -   For Windows: `tooling.bat`
-
-    -   For Linux/MacOS: `./tooling.sh`
+    1. Open Visual Studio Code and click on the **Extensions** icon in the left pane.
     
-3. Access the Streaming Integration Tooling via the `http://<HOST_NAME>:<TOOLING_PORT>/editor` URL.
+    2. Search for **WSO2 Integrator: SI** in the marketplace and install it.
 
-    !!!info
-        The default URL is `http://<localhost:9390/editor`.
-        
-   The Streaming Integration Tooling opens as shown below.
+3. Access the **WSO2 Integrator: SI** Welcome page by typing and selecting `SI: Open SI Welcome` in the command palette. You can open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS).
 
    ![Welcome Page]({{base_path}}/images/Creating-Siddhi-Applications/Welcome-Page.png)
         
-4. Open a new Siddhi file by clicking **New**.
+4. Create a new Siddhi file by clicking on **+ Create New Siddhi Application**.
 
     The new file opens as follows.
     
@@ -99,31 +94,31 @@ insert  into ProductionUpdatesStream;
 
 ## Installing the required extensions
 
-The Streaming Integrator is by default shipped with most of the available Siddhi extensions by default. If a Siddhi extension you require is not shipped by default, you can download and install it via the Extension Installer tool. The `SweetFactoryApp` Siddhi application you created uses a source of the `cdc` type. The `cdc-mysql` extension that is required for this source is not shipped with WSO2 Streaming Integrator by default. Therefore, let's install it as follows.
+The WSO2 Integrator: SI is by default shipped with most of the available Siddhi extensions by default. If a Siddhi extension you require is not shipped by default, you can download and install it via the Extension Installer tool. The `SweetFactoryApp` Siddhi application you created uses a source of the `cdc` type. The `cdc-mysql` extension that is required for this source is not shipped with WSO2 Integrator: SI by default. Therefore, let's install it as follows.
 
 
-1. In Streaming Integrator Tooling, click **Tools**, and then click **Extension Installer**. The **Extension Installer** dialog box opens.
+1. In the VSCode editor, open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS) and type `SI: Open Extension Installer`. Then select the **SI: Extension Installer** option.
 
     ![Extension Installer Dialog Box]({{base_path}}/images/quick-start-guide-101/extension-installer-dialog.png)
     
     Click **Install** for **Change Data Capture - MySQL**.
     
-2. Restart Streaming Integrator Tooling.
+2. Reload VSCode.
 
 ## Testing the Siddhi application
 
-Before deploying the `SweetFactoryApp` Siddhi application to the Streaming Integrator Server, you need to test it to check whether the Siddhi queries you wrote work as expected. For this purpose, you can simulate events via the Event Simulator in Streaming Integrator Tooling as follows:
+Before deploying the `SweetFactoryApp` Siddhi application to the WSO2 Integrator: SI Server, you need to test it to check whether the Siddhi queries you wrote work as expected. For this purpose, you can simulate events via the Event Simulator in WSO2 Integrator: SI as follows:
 
 !!! tip
-    Although you are using the Event Simulateor instead of performing an insert operation in the MySQL database table you created, you need to start the MySQL server before following the steps below.
+    Although you are using the Event Simulator instead of performing an insert operation in the MySQL database table you created, you need to start the MySQL server before following the steps below.
 
-1. In Streaming Integrator Tooling, click the **Event Simulator** icon in the left pane of the editor to open the **Single Simulation** panel.
+1. In the VSCode editor, click the **Run** button to start the Event Simulator.
 
-    ![Event Simulation icon]({{base_path}}/images/Testing-Siddhi-Applications/Event_Simulation_Icon.png)
+    ![Run button]({{base_path}}/images/Testing-Siddhi-Applications/Run-Button.png)
 
     It opens the left panel for event simulation as follows.
 
-    ![Event Simulation Panel]({{base_path}}/images/Testing-Siddhi-Applications/Event_Simulation_Panel.png)
+    ![Event Simulation Panel]({{base_path}}/images/Testing-Siddhi-Applications/Single-Event-Simulation-Panel.png)
 
 2.  Enter Information in the **Single Simulation** panel as described below.
 

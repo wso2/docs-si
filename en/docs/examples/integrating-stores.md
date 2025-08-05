@@ -2,13 +2,13 @@
 
 ## Introduction
 
-WSO2 Streaming Integrator allows you to incorporate data stores when performing various streaming integration activities. The methods in which this is done include:
+WSO2 Integrator: SI allows you to incorporate data stores when performing various streaming integration activities. The methods in which this is done include:
 
 - Change data capture
 - Storing received data/processed data in data stores
 - Performing CRUD operations in data stores
 
-[Performing Real-time Change Data Capture with MySQL] tutorial covers how to perform change data capture in details. Therefore, in this tutorial, let's learn how WSO2 Streaming Integrator can incorporate data stores in streaming operations by performing CRUD operations.
+[Performing Real-time Change Data Capture with MySQL](./performing-real-time-etl-with-mysql.md) tutorial covers how to perform change data capture in details. Therefore, in this tutorial, let's learn how WSO2 Integrator: SI can incorporate data stores in streaming operations by performing CRUD operations.
 
 ## Scenario
 
@@ -26,28 +26,26 @@ In order to manage the material stock and to maintain the required records, the 
 
 Recording purchases and dispatches involve inserting new records into data stores. To maintain the current stock records, the Factory Manager needs to retrieve information about both purchases and dispatches, calculate the impact of both on the current stock and then perform an insert/update operation to the store with the stock records. 
 
-To understand how the WSO2 Streaming Integrator performs these operations, follow the steps below.
+To understand how the WSO2 Integrator: SI performs these operations, follow the steps below.
 
 ## Tutorial steps
 
 !!! tip  "Before you begin:"
     You need to complete the following prerequisites before you begin:<br/><br/>
     - You need to have access to a MySQL instance.<br/><br/>
-    - Install `rdbms-mysql` extension in WSO2 Streaming Integrator as follows:<br/><br/>
-        1. Start WSO2 Streaming Integrator by navigating to the `<SI_HOME>/bin` directory and issuing the appropriate command based on your operating system.<br/><br/>
+    - Install `rdbms-mysql` extension in WSO2 Integrator: SI as follows:<br/><br/>
+        1. Start WSO2 Integrator: SI by navigating to the `<SI_HOME>/bin` directory and issuing the appropriate command based on your operating system.<br/><br/>
             - **For Linux**  : `./server.sh`
             - **For Windows**: `server.bat --run`<br/><br/>
         2. To install the `rdbms-mysql` extension, navigate to the to the `<SI_HOME>/bin` directory and issue the appropriate command based on your operating system:<br/><br/>
             - **For Linux**  : `./extension-installer.sh`
             - **For Windows**: `extension-installer.bat --run`<br/><br/>
-        3. Restart the WSO2 Streaming Integrator server.<br/><br/>
-    - Install the `rdbms-mysql` extension in WSO2 Streaming Integrator as follows.<br/><br/>
-        1. Start WSO2 Streaming Integrator Tooling by navigating to the `<SI_TOOLING_HOME>/bin` directory and issuing the appropriate command based on your operating system.<br/><br/>
-            - **For Linux**  : `./tooling.sh`
-            - **For Windows**: `tooling.bat --run`<br/><br/>
-        2. Access Streaming Integrator Tooling. Then click **Tools** -> **Extension Installer** to open the **Extension Installer** dialog box.<br/><br/>
+        3. Restart the WSO2 Integrator: SI server.<br/><br/>
+    - Install the `rdbms-mysql` extension in WSO2 Integrator: SI as follows.<br/><br/>
+        1. Open the VSCode editor with **WSO2 Integrator: SI** extension installed.<br/><br/>
+        2. Open the command palette (Ctrl+Shift+P or Cmd+Shift+P on Mac), and type **SI: Extension Installer**.<br/><br/>
         3. In the **Extension Installer** dialog box, click **Install** for the **RDBMS-MYSQL** extension. Then click **Install** in the message that appears to confirm whether you want to proceed.<br/><br/>
-        4. Restart WSO2 Streaming Integrator Tooling.<br/><br/>
+        4. Reload the VSCode window.<br/><br/>
     - Start the MySQL server.<br/><br/>
     - Create three MySQL databases by issuing the following commands.<br/><br/>
         `CREATE SCHEMA purchases;`<br/><br/>`CREATE SCHEMA dispatches;`<br/><br/>`CREATE SCHEMA closingstock;`<br/><br/>
@@ -56,7 +54,7 @@ To understand how the WSO2 Streaming Integrator performs these operations, follo
 
 In this section, let's learn the different ways in which you can connect a Siddhi application to a data store.
 
-In Streaming Integrator Tooling, open a new file and start creating a new  Siddhi Application named `StockManagementApp`.
+In WSO2 Integrator: SI Tooling, open a new file and start creating a new  Siddhi Application named `StockManagementApp`.
 
     ```
     @App:name("StockManagementApp")
@@ -69,7 +67,7 @@ Now let's connect to the data stores (i.e., databases) you previously created to
 
 To connect to the `closingstock` database via a data source, follow the steps below:
 
-1. Define a data source in the `<SI_TOOLING_HOME>/conf/server/deployment.yaml` file as follows:
+1. Define a data source in the `<SI_HOME>/conf/server/deployment.yaml` file as follows:
 
     ```
       - name: Stock_DB
@@ -112,7 +110,7 @@ To connect to the `closingstock` database via a data source, follow the steps be
 
 To connect to the `purchases` database via a reference, follow the steps below:
 
-1. In the `<SI_TOOLING_HOME>/conf/server/deployment.yaml` file, add a subsection for refs, and then add a ref as shown below:
+1. In the `<SI_HOME>/conf/server/deployment.yaml` file, add a subsection for refs, and then add a ref as shown below:
 
     ```
     siddhi:
@@ -402,7 +400,7 @@ To try this, follow the steps below:
      on StockTable.name == name 
     ```
     
-    Here, the Streaming Integrator checks whether an event in the `LatestStockStream` has a matching record in the `StockTable` table where the value for the `name` attribute is the same. If such a record exists, the value for the `amount` attribute in that record is set to the amount reported via the stream event. If no matching event exists, the stream event is inserted as a new event
+    Here, the WSO2 Integrator: SI checks whether an event in the `LatestStockStream` has a matching record in the `StockTable` table where the value for the `name` attribute is the same. If such a record exists, the value for the `amount` attribute in that record is set to the amount reported via the stream event. If no matching event exists, the stream event is inserted as a new event
      
 3. Save the Siddhi application. The complete Siddhi application is as follows:
 
@@ -528,7 +526,7 @@ To update the `StockTable` table via streams, follow the steps below:
      set UpdateStockStream.amount = amount
      on StockTable.name == name;
     ```
-    Here, the Streaming Integrator checks whether an event in the `UpdateStockStream` has a matching record in the `StockTable` table where the value for the `name` attribute is the same. If such a record exists, the value for the `amount` attribute in that record is set to the amount reported via the stream event.
+    Here, the WSO2 Integrator: SI checks whether an event in the `UpdateStockStream` has a matching record in the `StockTable` table where the value for the `name` attribute is the same. If such a record exists, the value for the `amount` attribute in that record is set to the amount reported via the stream event.
     
 3. Save the Siddhi application. The complete Siddhi application is as follows:
 
@@ -638,7 +636,7 @@ To delete records in the `StockTable` table via streams, follow the steps below:
     delete StockTable 
       on StockTable.name == name;
     ```
-    Here, the Streaming Integrator checks whether an event in the `DeleteStream` has a matching record in the `StockTable` table where the value for the `name` attribute is the same. If such a record exists, it is deleted.
+    Here, the WSO2 Integrator: SI checks whether an event in the `DeleteStream` has a matching record in the `StockTable` table where the value for the `name` attribute is the same. If such a record exists, it is deleted.
     
 3. Save the Siddhi application. The complete Siddhi application is as follows:
 
@@ -859,10 +857,10 @@ The following is displayed:
 
 ### Manipulate data in stores via SQL queries
 
-You can execute SQL queries via WSO2 Streaming Integrator to manipulate data in data stores. This is supported via the [siddhi-store-rdbms extension](https://siddhi-io.github.io/siddhi-store-rdbms/).
+You can execute SQL queries via WSO2 Integrator: SI to manipulate data in data stores. This is supported via the [siddhi-store-rdbms extension](https://siddhi-io.github.io/siddhi-store-rdbms/).
 
 !!! tip "Before you begin:"
-    To allow Streaming Integrator Tooling to perform CRUD operations, open `<SI_TOOLING_HOME>/conf/server/deployment.yaml` file, and add an extract as shown below with the `perform.CRUD.operations` parameter set to `true` as shown below:<br/><br/>
+    To allow WSO2 Integrator: SI Tooling to perform CRUD operations, open `<SI_HOME>/conf/server/deployment.yaml` file, and add an extract as shown below with the `perform.CRUD.operations` parameter set to `true` as shown below:<br/><br/>
         ```yaml
         siddhi:
           extensions:
@@ -874,11 +872,11 @@ You can execute SQL queries via WSO2 Streaming Integrator to manipulate data in 
                   perform.CUD.operations: true
         ```<br/><br/>
         
-To perform CRUD operations in multiple tables via WSO2 Streaming Integrator, follow the steps below:
+To perform CRUD operations in multiple tables via WSO2 Integrator: SI, follow the steps below:
 
 To start creating the Siddhi application with the required tables, follow the steps below:
 
-1. In WSO2 Streaming Integrator Tooling, open the `StockManagementApp` that you previously created.
+1. In WSO2 Integrator: SI Tooling, open the `StockManagementApp` that you previously created.
 
 2. Define a new stream in it named `StockStream` as follows.
 

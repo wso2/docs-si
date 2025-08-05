@@ -1,7 +1,7 @@
 # Configuring Data Sources
 
-In the Streaming Integrator, there are datasources specific to both the Streaming Integrator server and Streaming Integrator Tooling. The data sources of
-each runtime are defined in the `<SI_HOME>|<SI_TOOLING_HOME>/conf/server/deployment.yaml` file.
+In the WSO2 Integrator: SI, there are datasources specific to both the WSO2 Integrator: SI server and WSO2 Integrator: SI Tooling. The data sources of
+each runtime are defined in the `<SI_HOME>/conf/server/deployment.yaml` file.
 
 e.g., To configure a data source in the server runtime, the relevant configurations need to be added in the `<SI_Home>/conf/server/deployment.yaml` file.
 
@@ -12,7 +12,7 @@ To view a sample data source configuration for each database type supported, exp
 
 !!!info
     If the database driver is not an OSGI bundle, then it should be converted to OSGI (using jartobundle.sh) before placing it in the
-    `<SI_HOME>|<SI_TOOLING_HOME>/lib` directory. For detailed instructions,see [Adding Third Party Non OSGi Libraries]({{base_path}}/admin/adding-third-party-non-osgi-libraries.md).
+    `<SI_HOME>/lib` directory. For detailed instructions,see [Adding Third Party Non OSGi Libraries]({{base_path}}/admin/adding-third-party-non-osgi-libraries.md).
 
     e.g., `sh WSO2_SI_HOME/bin/jartobundle.sh ojdbc6.jar WSO2_SI_HOME/lib/`
 
@@ -49,8 +49,8 @@ To view a sample data source configuration for each database type supported, exp
     | `description`         | A description of the data source. |
     | `type`                | The database type to which the data source connects. |
     | `jdbcUrl`             | The string used by the database driver to connect to the database. |
-    | `username`            | the username with which WSO2 Streaming Integrator accesses the database.|
-    | `password`            | The password with which WSO2 Streaming Integrator accesses the database. |
+    | `username`            | the username with which WSO2 Integrator: SI accesses the database.|
+    | `password`            | The password with which WSO2 Integrator: SI accesses the database. |
     | `driverClassName`     | The name of the driver class that establishes the connection to the database. |
     | `minIdle`             | The minimum number of active connections that can remain idle in the pool at a given time without extra connections being created. e.g., If you specify `2` as the value for this parameter, the system creates a new connection to the database only if the connection pool currently has only two or less active and idle connections. | 
     | `maxPoolSize`         | The maximum number of total connections that are allowed to exist in the connection pool at a given time. |
@@ -85,8 +85,8 @@ To view a sample data source configuration for each database type supported, exp
     | `description`         | A description of the data source. |
     | `type`                | The database type to which the data source connects. |
     | `jdbcUrl`             | The string used by the database driver to connect to the database. |
-    | `username`            | the username with which WSO2 Streaming Integrator accesses the database.|
-    | `password`            | The password with which WSO2 Streaming Integrator accesses the database. |
+    | `username`            | the username with which WSO2 Integrator: SI accesses the database.|
+    | `password`            | The password with which WSO2 Integrator: SI accesses the database. |
     | `driverClassName`     | The name of the driver class that establishes the connection to the database. |
     | `minIdle`             | The minimum number of active connections that can remain idle in the pool at a given time without extra connections being created. e.g., If you specify `2` as the value for this parameter, the system creates a new connection to the database only if the connection pool currently has only two or less active and idle connections. | 
     | `maxPoolSize`         | The maximum number of total connections that are allowed to exist in the connection pool at a given time. |
@@ -178,8 +178,8 @@ To view a sample data source configuration for each database type supported, exp
     | description         | A description of the data source. |
     | type                | The database type to which the data source connects. |
     | jdbcUrl             | The string used by the database driver to connect to the database. |
-    | username            | the username with which WSO2 Streaming Integrator accesses the database.|
-    | password            | The password with which WSO2 Streaming Integrator accesses the database. |
+    | username            | the username with which WSO2 Integrator: SI accesses the database.|
+    | password            | The password with which WSO2 Integrator: SI accesses the database. |
     | driverClassName     | The name of the driver class that establishes the connection to the database. |
     | minIdle             | The minimum number of active connections that can remain idle in the pool at a given time without extra connections being created. e.g., If you specify `2` as the value for this parameter, the system creates a new connection to the database only if the connection pool currently has only two or less active and idle connections. | 
     | maxPoolSize         | The maximum number of total connections that are allowed to exist in the connection pool at a given time. |
@@ -210,7 +210,7 @@ To view a sample data source configuration for each database type supported, exp
              isAutoCommit: false
     ```
     
-The following tables explain the default data sources configured in the Streaming Integrator components for different purposes, and how to change them.
+The following tables explain the default data sources configured in the WSO2 Integrator: SI components for different purposes, and how to change them.
     
 ### RDBMS data provider
 
@@ -228,7 +228,7 @@ The following tables explain the default data sources configured in the Streamin
         </tr>
         <tr class="even">
             <td>Required/Optional</td>
-            <td>This is required if you select a datasource when generating the widget or use existing widgets that connect to the RDBMS data provider when you run the dashboard server for the Streaming Integrator.</td>
+            <td>This is required if you select a datasource when generating the widget or use existing widgets that connect to the RDBMS data provider when you run the dashboard server for the WSO2 Integrator: SI.</td>
         </tr>
         <tr class="odd">
             <td>Default Datasource Name</td>
@@ -298,7 +298,7 @@ The following tables explain the default data sources configured in the Streamin
 
 
 
-### Streaming Integrator core - persistence
+### WSO2 Integrator: SI core - persistence
 
 <table>
     <colgroup>
@@ -337,7 +337,7 @@ The following tables explain the default data sources configured in the Streamin
 
 
 
-### Streaming Integrator - Status Dashboard
+### WSO2 Integrator: SI - Status Dashboard
 
 <table>
     <colgroup>
@@ -347,7 +347,7 @@ The following tables explain the default data sources configured in the Streamin
     <tbody>
         <tr class="odd">
             <td>Database Access Requirement</td>
-            <td>To display information relating to the status of your Streaming Integrator deployment, the Status Dashboard needs to retrieve carbon metrics data, registered Streaming Integrator server details and authentication details within the cluster from the database. For more information, see <a href="https://docs.wso2.com/display/SP440/Monitoring+Stream+Processor">Monitoring Stream Processor</a> .</td>
+            <td>To display information relating to the status of your WSO2 Integrator: SI deployment, the Status Dashboard needs to retrieve carbon metrics data, registered WSO2 Integrator: SI server details and authentication details within the cluster from the database. For more information, see <a href="https://docs.wso2.com/display/SP440/Monitoring+Stream+Processor">Monitoring Stream Processor</a> .</td>
         </tr>
         <tr class="even">
             <td>Required/Optional</td>

@@ -1,7 +1,7 @@
 
 ## Purpose
 
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to send Hl7 events in ER7 format via MLLP protocol and log the events in `hl7Stream` and the acknowledgement message to the output console.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to send Hl7 events in ER7 format via MLLP protocol and log the events in `hl7Stream` and the acknowledgement message to the output console.
 
 ## Prerequisites
 

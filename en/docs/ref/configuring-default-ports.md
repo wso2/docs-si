@@ -15,7 +15,7 @@ The following ports are common to all runtimes.
 | 9611 | Binary TCP port to receive events from clients.                         |
 | 9711 | Binary SSL port for secure transport where the client is authenticated. |
 
-You can offset binary and thrift by configuring the offset parameter in the `<SI_HOME>|<SI_TOOLING_HOME>/conf/server/deployment.yaml` file.
+You can offset binary and thrift by configuring the offset parameter in the `<SI_HOME>/conf/server/deployment.yaml` file.
 The following is a sample configuration.
 
 ```xml
@@ -24,7 +24,7 @@ wso2.carbon:
     # value to uniquely identify a server
   id: wso2-si
     # server name
-  name: WSO2 Streaming Integrator
+  name: WSO2 Integrator: SI
     # server type
   type: wso2-si
     # ports used by this server
@@ -44,7 +44,7 @@ wso2.carbon:
 | 9443 | HTTPS netty transport |
 
 
-## Streaming Integrator Tooling runtime
+## WSO2 Integrator: SI Tooling runtime
 
 |      |                       |
 |------|-----------------------|
@@ -59,7 +59,7 @@ wso2.carbon:
 | 9643 | HTTPS netty transport |
 
 !!! tip
-    The following example shows how to overide the default netty port for the Streaming Integrator Tooling by updating the required parameters in the `<SI_TOOLING_HOME>/conf/server/deployment.yaml` file.
+    The following example shows how to overide the default netty port for the WSO2 Integrator: SI Tooling by updating the required parameters in the `<SI_HOME>/conf/server/deployment.yaml` file.
 
     ``` xml
         wso2.transport.http:

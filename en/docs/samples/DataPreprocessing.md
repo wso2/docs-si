@@ -7,11 +7,11 @@ This example demonstrates how to receive events via the TCP transport and carry 
 For more information about Siddhi extensions, see [Siddhi Extensions](https://wso2.github.io/siddhi/extensions/).
 
 !!!info "Before you begin:"
-    Save the sample Siddhi application in Streaming Integrator Tooling.
+    Save the sample Siddhi application in WSO2 Integrator: SI Tooling.
 
 ## Executing the sample
 
-To execute the sample open the saved Siddhi application in Streaming Integrator Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
 
 ![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
 
@@ -26,7 +26,7 @@ If the Siddhi application starts successfully, the following messages appear in 
 
 ## Testing the sample
 
-To test this Siddhi application, navigate to the `<SI_TOOLING_HOME>/samples/sample-clients/tcp-client` directory and run the `ant` command as follows.
+To test this Siddhi application, download `https://github.com/wso2/product-streaming-integrator-tooling/tree/master/modules/samples/sample-clients/tcp-client` directory and run the `ant` command as follows.
 
 ```bash
 ant -Dtype=json -DfilePath=<SI-Tooling-Home>/samples/artifacts/DataPreprocessing/data_preprocessing_events.txt -DeventDefinition='{"event":{"id":"{0}","value":{1},"property":{2},"plugId":{3},"householdId":{4},"houseId":{5},"currentTime":"{6}"}}' -Durl=tcp://localhost:9892/SmartHomeStream
@@ -34,7 +34,7 @@ ant -Dtype=json -DfilePath=<SI-Tooling-Home>/samples/artifacts/DataPreprocessing
 
 ## Viewing the results
 
-Once the `DataProcessing` Siddhi application receives events from the TCP client, the following messages are displayed in the Streaming Integrator Tooling console:
+Once the `DataProcessing` Siddhi application receives events from the TCP client, the following messages are displayed in the WSO2 Integrator: SI Tooling console:
 
 ```bash
 INFO {io.siddhi.core.stream.output.sink.LogSink} - DataPreprocessing : ProcessedStream : Event{timestamp=1513621173211, data=[HouseholdID:1::UniqueID:0001, 12.12, 13-08-2001 23:49:33], isExpired=false}<br/><br/>

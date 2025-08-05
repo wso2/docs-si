@@ -1,9 +1,9 @@
 # Creating Siddhi Applications
 
 Siddhi applications are files that define the Siddhi logic to process
-the events sent to the Streaming Integrator. They are written in the [Siddhi Query
+the events sent to the WSO2 Integrator: SI. They are written in the [Siddhi Query
 Language](https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/)
-using the [Streaming Integrator Tooling](streaming-integrator-studio-overview.md).
+using the [WSO2 Integrator: SI for VS Code Overview](si-for-vscode-overview.md).
 
 A Siddhi file contains the following configurations:
 
@@ -40,23 +40,17 @@ A Siddhi file contains the following configurations:
 </table>
 
 A Siddhi application can be created from the source view or the design
-view of the Streaming Integrator Tooling.
+view of the WSO2 Integrator: SI Tooling.
 
 ### Creating a Siddhi application in the source view
 
-To create a Siddhi application via the source view of the Streaming Integrator Tooling, follow the steps below:
+To create a Siddhi application via the source view of the WSO2 Integrator: SI Tooling, follow the steps below:
 
-1. Start the Streaming Integrator Tooling by navigating to the `<SI_Tooling_Home>/bin` directory and issue one of the following commands:
-
-    - For Windows: `tooling.bat`
-
-    - For Linux: `./tooling.sh`
-
- The Streaming Integrator Tooling opens as shown below.
+1. Open a VSCode window and ensure that the WSO2 Integrator: SI for VS Code extension is installed. Open the command pallete and type `SI: Open SI Welcome` to open the welcome page.
 
   ![Welcome Page]({{base_path}}/images/Creating-Siddhi-Applications/Welcome-Page.png)
 
-2. Click **New** to start defining a new Siddhi application. A new file opens as shown below.
+2. Click on **Create new Siddhi Application** to start defining a new Siddhi application. A new file opens as shown below.
 
     ![New Siddhi File]({{base_path}}/images/Creating-Siddhi-Applications/New_Siddhi_File.png)
 
@@ -144,7 +138,7 @@ To create a Siddhi application via the source view of the Streaming Integrator T
                           </li>
                        </ul>                      
                            The source types and map types are available as Siddhi extensions, and you can find via the operator finder as follows:
-                       <ol>
+                       <!-- <ol>
                           <li>
                              <p>Click the <strong>Operator Finder</strong> icon to open the Operator Finder.</p>
                              <p><img src="{{base_path}}/images/Creating-Siddhi-Applications/Operator_Finder.png" /></p>
@@ -168,7 +162,7 @@ To create a Siddhi application via the source view of the Streaming Integrator T
                                 <img src="{{base_path}}/images/Creating-Siddhi-Applications/Selected_Extensions.png">
                              </p>
                           </li>
-                       </ol>
+                       </ol> -->
                     </div>
                  </td>
               </tr>
@@ -219,13 +213,10 @@ To create a Siddhi application via the source view of the Streaming Integrator T
 
 
 
-4. To save this Siddhi application, click **File**, and then click **Save**. By default siddhi applications are saved in the  `<SI-Home>/wso2/editor/deployment/workspace` directory.
-
-5.  To export the Siddhi application to your preferred location, click
-    **File**, and then click **Export File**.
+4. To save this Siddhi application, click **File**, and then click **Save**.
 
 6.  To see a graphical view of the event flow you defined in your Siddhi
-    application, click **Design View**.
+    application, go to the **Design View**.
     
     ![Switch to Design View]({{base_path}}/images/Creating-Siddhi-Applications/Design_View.png)
     
@@ -235,22 +226,18 @@ To create a Siddhi application via the source view of the Streaming Integrator T
 
 ### Creating a Siddhi application in the design view
 
-To create a Siddhi application via the design view of the Streaming Integrator Tooling, follow the steps below:
+To create a Siddhi application via the design view of the WSO2 Integrator: SI Tooling, follow the steps below:
 
-1.  Start the Streaming Integrator Tooling by navigating to the `<SI_Tooling_Home>/bin` directory and issue one of the following commands:
+1.  Open a VSCode window and ensure that the WSO2 Integrator: SI for VS Code extension is installed. Open the command palette and type `SI: Open SI Welcome` to open the welcome page.
 
-    - For Windows: `streaming-integrator-tooling.bat`
-    - For Linux: `./streaming-integrator-tooling.sh`
-
-    Streaming Integrator Tooling opens as shown below.
+    WSO2 Integrator: SI Tooling opens as shown below.
     ![Welcome Page]({{base_path}}/images/Creating-Siddhi-Applications/Welcome-Page.png)
 
-2.  Click **New** to start defining a new Siddhi application. A new file
-    opens as shown below.
+2.  Click **Create New Siddhi Application** to start defining a new Siddhi application. A new file opens as shown below.
 
     ![New Siddhi File]({{base_path}}/images/Creating-Siddhi-Applications/New_Siddhi_File.png)
 
-3.  To open the design view, click **Design View**.
+3.  To open the design view, click on the **Open Graphical View** button on the right side of the editor.
 
 4.  To define the input stream into which the events to be processed via
     the Siddhi application should be received, drag and drop the stream
@@ -360,13 +347,6 @@ To create a Siddhi application via the design view of the Streaming Integrator T
         must be generated. For this example, let's select `json`.
     3.  Click **Submit** to save the information.
 
-10. To align the Siddhi components that you have added to the grid,
-    click **Edit** and then click **Auto-Align**. As a result, all the
-    components are horizontally aligned as shown below.  
-    ![Aligned Siddhi components]({{base_path}}/images/Creating-Siddhi-Applications/Siddhi_Application_Design_View.png)
 11. Click **Source View**. The siddhi application is displayed as follows.  
     ![Source view]({{base_path}}/images/Creating-Siddhi-Applications/Siddhi_Application_Source_View.png)
-12. Click **File** and then click **Save as**. The **Save to Workspace** dialog box appears. In the **File Name** 
-    field, enter `SweetProductionAnalysis` and click **Save**.
-
-    ![Saving the Siddhi application]({{base_path}}/images/Creating-Siddhi-Applications/Save_Siddhi_Application.png)
+12. To save this Siddhi application, click **File**, and then click **Save**.

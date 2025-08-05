@@ -3,23 +3,23 @@
 Scalable high availability deployment predominantly focuses on scaling the system according to the load or the TPS of
 the system. This is achieved with the help of horizontal scalability.
 
-WSO2 Streaming Integrator uses Siddhi as the streaming language. Siddhi allows you to write Siddhi logic in a
+WSO2 Integrator: SI uses Siddhi as the streaming language. Siddhi allows you to write Siddhi logic in a
 stateless way as well as a stateful way.
 
 Stateless operations include filters, database operations etc., and stateful operations include window operations,
 aggregations etc., that keep data in memory to carry out calculations.
 
-The deployment options for a scalable streaming integrator depends on the statelessness and the statefulness of Siddhi applications.
+The deployment options for a scalable WSO2 Integrator: SI depends on the statelessness and the statefulness of Siddhi applications.
 
 The following topics provide detailed descriptions of two approaches.
 
 !!! tip "System Requirements"
-    For system requirements for this deployment, see [Installing the Streaming Integrator in a Virtual Machine](installing-si-in-vm.md).
+    For system requirements for this deployment, see [Installing the WSO2 Integrator: SI in a Virtual Machine](installing-si-in-vm.md).
 
 
 ## Stateless scalable high availability (HA) deployment
 
-In stateless scenarios, the system does not work with any in-memory state. Thus in order to scale, you can keep adding Streaming Integrator servers to the system and front them with a load balancer that publishes the events in round robin manner.
+In stateless scenarios, the system does not work with any in-memory state. Thus in order to scale, you can keep adding WSO2 Integrator: SI servers to the system and front them with a load balancer that publishes the events in round robin manner.
  
 This is depicted in the diagram below.
 
@@ -40,13 +40,13 @@ The following is a high level diagram of event flow and components to achieve sc
 
 ![overview]({{base_path}}/images/deploying-si-as-a-scalable-cluster/statefulDeploymentOverview.png)
 
-The following sections describe each component in detail and how to configure them with WSO2 Streaming Integrator.
+The following sections describe each component in detail and how to configure them with WSO2 Integrator: SI.
 
 ### Partitioning layer
 
 As shown in the above diagram, first you need to have a partitioning layer. Here, you are using an SI server to achieve it. The function of this layer is to consume events from output sources and then partition the events based on a partitioning condition.
 
-In order to partition you can leverage on the Distributed sink extension in WSO2 Streaming Integrator. The following is a
+In order to partition you can leverage on the Distributed sink extension in WSO2 Integrator: SI. The following is a
 sample Siddhi application syntax that defines a stream. It shows how the distributed sink can be applied to partition data. In
 this example, data is partitioned from tenant domain. For more information, see [Siddhi Query Guide - Distributed Sink](https://siddhi.io/en/v4.x/docs/query-guide/#distributed-sink).
 
@@ -88,7 +88,7 @@ IPs. The reason for using load balancers is because the stateful layer also cont
 
 According to the above diagram, there are four partitions. Therefore, four load balancers are used.
 
-You need the high availability in the partitioning layer. Therefore, you can use two WSO2 Streaming Integrator servers (minimum) as depicted in the diagram.
+You need the high availability in the partitioning layer. Therefore, you can use two WSO2 Integrator: SI servers (minimum) as depicted in the diagram.
 
 ### Stateful Layer
 

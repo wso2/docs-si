@@ -65,7 +65,7 @@ select *
 update or insert into ProductValueTable;
 ```
 
-In the above application, events in the `CheckUnitValueStream` stream are published to the `http://localhost:5005/CheckProductValueEP` URL via the connected `http-request` sink to invoke a service that returns the unit value for the name of the product sent. WSO2 Streaming Integrator captures this response (i.e., unit value) in the `StoreUnitValueStream` stream via the `http-response` source connected to the stream. In orcder to allow WSO2 Streaming Integrator to identify the response as the result of the request it previously sent, the same value is specified for the `sink.id` parameter in both the source configuration and the sink configuration.
+In the above application, events in the `CheckUnitValueStream` stream are published to the `http://localhost:5005/CheckProductValueEP` URL via the connected `http-request` sink to invoke a service that returns the unit value for the name of the product sent. WSO2 Integrator: SI captures this response (i.e., unit value) in the `StoreUnitValueStream` stream via the `http-response` source connected to the stream. In orcder to allow WSO2 Integrator: SI to identify the response as the result of the request it previously sent, the same value is specified for the `sink.id` parameter in both the source configuration and the sink configuration.
 To store the unit values obtained for further processing, all the events in the `StoreUnitValueStream` stream are inserted into a table named `ProductValueTable`.
 
 ## Enriching data with built-in extensions
@@ -101,7 +101,7 @@ To try out the examples given above, follow the steps below.
         
         `insert into StockTable values('coffee cake',6.0);`   
     
-    4. Then open the `<SI_TOOLING_HOME>/conf/server/deployment.yaml` file and add the following data source configuration under `datasources`.
+    4. Then open the `<SI_HOME>/conf/server/deployment.yaml` file and add the following data source configuration under `datasources`.
     
         ```
           - name: Stock_DB
@@ -123,9 +123,9 @@ To try out the examples given above, follow the steps below.
                 isAutoCommit: false
         ```
     
-2. [Start and Access Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+2. [Start and Access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
 
-3. Open a new file in Streaming Integrator Tooling. Then add and save the following Siddhi application.
+3. Open a new file in WSO2 Integrator: SI Tooling. Then add and save the following Siddhi application.
 
     ```
     @App:name('StockValuingApp')
@@ -195,7 +195,7 @@ To try out the examples given above, follow the steps below.
    
    4. Calculates the stock value by multiplying the latest stock with the unit value obtained from the external service. This is done by joining the `GetUnitValueStream` stream with the `LatestStockStream` stream. The result is then logges with the `Stock Value` prefix.
    
-4. In Streaming Integrator Tooling, create a new Siddhi application as follows, save it, and then start it.
+4. In WSO2 Integrator: SI Tooling, create a new Siddhi application as follows, save it, and then start it.
 
     ```
     @App:name('ReturnUnitValueApp')

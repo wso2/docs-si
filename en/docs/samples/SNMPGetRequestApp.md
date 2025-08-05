@@ -1,7 +1,7 @@
 
 
 ## Purpose:
-This application demonstrates how to configure WSO2 Streaming Integrator Tooling to resive snmp source via SNMP in keyvalue using custom mapping.
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to resive snmp source via SNMP in keyvalue using custom mapping.
 
 ## Prerequisites:
 1. Save this sample.

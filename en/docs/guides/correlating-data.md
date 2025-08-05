@@ -1,6 +1,6 @@
 # Correlating Data
 
-The streaming integrator can correlate data in order to detect patterns and trends in streaming data. Correlating can be done via patterns as well as sequences.
+The WSO2 Integrator: SI can correlate data in order to detect patterns and trends in streaming data. Correlating can be done via patterns as well as sequences.
 
 ![patterns-sequences-matrix]({{base_path}}/images/correlating-events/patterns-sequences-matrix.png)
 
@@ -48,9 +48,7 @@ In the `Calculate Shelf Life` query, `every e1 = ProductionStream -> e2 = SalesT
 
 To try out the Siddhi application given in the sample above, follow the steps below:
 
-1. [Start and Access Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
-
-2. Open a new file, add the following content to it and save.
+1. Open a new file, add the following content to it and save.
 
     ```
     @App:name('ShelfLifeApp')
@@ -74,7 +72,7 @@ To try out the Siddhi application given in the sample above, follow the steps be
     insert into ShelfLifeStream;
     ```
    
-3. Simulate events for the `ShelfLifeApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications - Simulating Events](../develop/testing-a-Siddhi-Application.md).
+2. Simulate events for the `ShelfLifeApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications - Simulating Events](../develop/testing-a-Siddhi-Application.md).
 
     - For the `ProductionStream` stream
     
@@ -122,9 +120,7 @@ insert into LowStockLevelAlertStream;
 
 To try out the Siddhi application given in the sample above, follow the steps below:
 
-1. [Start and Access Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
-
-2. Open a new file, add the following content to it and save.
+1. Open a new file, add the following content to it and save.
 
     ```
     @App:name('DetectLowStockApp')
@@ -142,7 +138,7 @@ To try out the Siddhi application given in the sample above, follow the steps be
     insert into LowStockLevelAlertStream;
     ```
    
-3. Simulate events for the `DetectingLowStockApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
+2. Simulate events for the `DetectingLowStockApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
 
     - For the `LatestStockStream` stream
     
@@ -201,9 +197,7 @@ In the `Detect Wastage` query, the `from` clause detects a pattern where the sal
 
 To try out the Siddhi application given in the sample above, follow the steps below:
 
-1. [Start and Access Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md#starting-streaming-integrator-tooling).
-
-2. Open a new file, add the following content to it and save.
+1. Open a new file, add the following content to it and save.
 
     ```
     @App:name('DetectWastageApp')
@@ -228,7 +222,7 @@ To try out the Siddhi application given in the sample above, follow the steps be
     ```
    For testing purposes, the above Siddhi application detects thye non occurrence of a matching event within three seconds instead of three days.
    
-3. Simulate events for the `ProductionStream` stream of the `DetectWastageApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
+2. Simulate events for the `ProductionStream` stream of the `DetectWastageApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
 
     | **name**  | **amount** |
     |-----------|------------|
@@ -273,9 +267,7 @@ The above Siddhi application compares  three events (i.e., e1, e2 and e3) that o
 
 To try out the Siddhi application given in the sample above, follow the steps below:
 
-1. [Start and Access Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
-
-2. Open a new file, add the following content to it and save.
+1. Open a new file, add the following content to it and save.
 
     ```
     @App:name('DecreasingProductionAlertApp')
@@ -292,7 +284,7 @@ To try out the Siddhi application given in the sample above, follow the steps be
     insert into DecreasingProductionAlertStream;
     ```
    
-3. Simulate three events for the `ProductionStream` stream of the `DecreasingProductionAlertApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
+2. Simulate three events for the `ProductionStream` stream of the `DecreasingProductionAlertApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
 
     | **name**      | **amount** |
     |---------------|------------|
@@ -334,9 +326,7 @@ The above Siddhi application matches every event in the `ProductionStream` strea
 
 To try out the Siddhi application given in the sample above, follow the steps below:
 
-1. [Start and Access Streaming Integrator Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
-
-2. Open a new file, add the following content to it and save.
+1. Open a new file, add the following content to it and save.
 
     ```
     @App:name('ObserveProductionTrendsApp')
@@ -353,7 +343,7 @@ To try out the Siddhi application given in the sample above, follow the steps be
     insert into DecreasingProductionAlertStream;
     ```
    
-3. Simulate events for the `ProductionStream` steeam of the `ObserveProductionTrendsApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications - Simulating Events](../develop/testing-a-Siddhi-Application.md).
+2. Simulate events for the `ProductionStream` steeam of the `ObserveProductionTrendsApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications - Simulating Events](../develop/testing-a-Siddhi-Application.md).
 
     | **name**      | **amount** |
     |---------------|------------|

@@ -1,9 +1,9 @@
-# Running the Streaming Integrator in Containerized Environments
+# Running the WSO2 Integrator: SI in Containerized Environments
 
 
-## Running the Streaming Integrator with Docker
+## Running the WSO2 Integrator: SI with Docker
 
-This section shows you how to run Streaming Integrator in Docker. This involves installing Docker, running the Streaming Integrator in Docker and then deploying and running a Siddhi application in the Docker environment.
+This section shows you how to run WSO2 Integrator: SI in Docker. This involves installing Docker, running the WSO2 Integrator: SI in Docker and then deploying and running a Siddhi application in the Docker environment.
 
 !!!tip "Before you begin:"
     - The system requirements are as follows:<br/>
@@ -30,21 +30,21 @@ This section shows you how to run Streaming Integrator in Docker. This involves 
         - The Siddhi application operates in Docker. Therefore, the HTTP source configured in it uses a receiver URL where the host number is `0.0.0.0`.<br/>
         - The `8006` port of the receiver URL is the same HTTP port that you previously exposed via Docker.<br/>
 
-### Starting the Streaming Integrator in Docker
+### Starting the WSO2 Integrator: SI in Docker
 
-In this scenario, you are downloading and installing the Streaming Integrator via Docker.
+In this scenario, you are downloading and installing the WSO2 Integrator: SI via Docker.
 
-WSO2 provides open source Docker images to run WSO2 Streaming Integrator in Docker Hub. You can view these images [In Docker Hub - WSO2](https://hub.docker.com/u/wso2/).
+WSO2 provides open source Docker images to run WSO2 Integrator: SI in Docker Hub. You can view these images [In Docker Hub - WSO2](https://hub.docker.com/u/wso2/).
 
-To run the Streaming Integrator in the  open source image that is available for it
+To run the WSO2 Integrator: SI in the  open source image that is available for it
 
-1. To pull the required WSO2 Streaming Integrator distribution with updates from the Docker image, issue the following command.
+1. To pull the required WSO2 Integrator: SI distribution with updates from the Docker image, issue the following command.
 
     `docker pull -it wso2/streaming-integrator:1.0.0`
 
 2. Expose the required ports via docker when running the docker container. In this scenario, you need to expose the following ports:
 
-    - The 9443 port where the Streaming Integrator server is run.
+    - The 9443 port where the WSO2 Integrator: SI server is run.
 
     - The 8006 HTTP port from which Siddhi application you are deploying in this scenario receives messages.
 
@@ -53,12 +53,12 @@ To run the Streaming Integrator in the  open source image that is available for 
     `docker run -p 9443:9443 -p 8006:8006 wso2/streaming-integrator/1.0.0 -v <local-absolute-siddhi-file-path>/MySimpleApp.siddhi:/apps/MySimpleApp.siddhi siddhiio/siddhi-runner-alpine -Dapps=/apps/MySimpleApp.siddhi`
 
     !!!info
-        In the above command, you are mounting the location where you have saved the `MySimpleApp.siddhi` file so that the Streaming Integrator can locate it and run it when it starts in Docker. Therefore, replace `<local-absolute-siddhi-file-path>` with the path in which you saved the Siddhi application in your machine.
+        In the above command, you are mounting the location where you have saved the `MySimpleApp.siddhi` file so that the WSO2 Integrator: SI can locate it and run it when it starts in Docker. Therefore, replace `<local-absolute-siddhi-file-path>` with the path in which you saved the Siddhi application in your machine.
 
-3. If you did not mount the location to the `MySimpleApp.siddhi` file when issuing the command to start the Streaming Integrator, you can deploy the Siddhi application via the Streaming Integrator tool.
+3. If you did not mount the location to the `MySimpleApp.siddhi` file when issuing the command to start the WSO2 Integrator: SI, you can deploy the Siddhi application via the WSO2 Integrator: SI tool.
 
     ???info "Click here for detailed instructions."
-        1. Start and access the Streaming Integrator Tooling. Open a new file and copy-paste the `MySimpleApp.siddhi` Siddhi application in the Source View.<br/>
+        1. Start and access the WSO2 Integrator: SI Tooling. Open a new file and copy-paste the `MySimpleApp.siddhi` Siddhi application in the Source View.<br/>
             Then save the Siddhi application.<br/>
         2. To deploy the Siddhi application, click the **Deploy** menu option and then click **Deploy to Server**. The **Deploy Siddhi Apps to Server** dialog box opens as shown in the example below.<br/>
             ![Deploy to Server dialog box]({{base_path}}/images/getting-si-run-with-mi/deploy-to-server-dialog-box.png)<br/>
@@ -70,11 +70,11 @@ To run the Streaming Integrator in the  open source image that is available for 
             3. Click **Deploy**.<br/>
                 When the Siddhi application is successfully deployed, the following message appears in the **Deploy Siddhi Apps to Server** dialog box.<br/>
                 ![Deployment Status]({{base_path}}/images/getting-si-run-with-mi/siddhi-application-deployment-status.png)<br/>
-                The following is logged in the console in which you started the Streaming Integrator in Docker.<br/>
+                The following is logged in the console in which you started the WSO2 Integrator: SI in Docker.<br/>
                 ![Deployment Status]({{base_path}}/images/hello-world-with-docker/siddhi-app-deployed-in-docker-log.png)
 
 
-Now the Streaming Integrator has started in the Docker environment.
+Now the WSO2 Integrator: SI has started in the Docker environment.
 
 
 ### Creating and deploying the Siddhi application
@@ -90,14 +90,14 @@ To try out the `MySimpleApp` Siddhi application you deployed in Docker, issue th
 curl -X POST -d "{\"event\": {\"name\":\"sugar\",\"amount\": 20.5}}"  http://0.0.0.0:8006/productionStream --header "Content-Type:application/json"
 ```
 
-The following output appears in the console in which you started the Streaming Integrator in Docker.
+The following output appears in the console in which you started the WSO2 Integrator: SI in Docker.
 
 ![HTTP Response]({{base_path}}/images/hello-world-with-docker/http-response.png)
 
 
-## Running the Streaming Integrator with Kubernetes
+## Running the WSO2 Integrator: SI with Kubernetes
 
-In this section, you get to start and run the Streaming Integrator in a Kubernetes cluster in 5 minutes.
+In this section, you get to start and run the WSO2 Integrator: SI in a Kubernetes cluster in 5 minutes.
 
 !!!tip "Before you begin:"
     - Create a Kubernetes cluster. In this quick start guide, you can do this via Minikube as follows.<br/>
@@ -107,11 +107,11 @@ In this section, you get to start and run the Streaming Integrator in a Kubernet
     - Make sure that you have admin privileges to install the [Siddhi operator](https://siddhi.io/en/v5.0/docs/siddhi-as-a-kubernetes-microservice/#!).
 
 
-### Installing the Siddhi Operator for the Streaming Integrator
+### Installing the Siddhi Operator for the WSO2 Integrator: SI
 
 To install the Siddhi Operator, follow the procedure below:
 
-1. To install the Siddhi Kubernetes operator for streaming integrator issue the following commands:
+1. To install the Siddhi Kubernetes operator for WSO2 Integrator: SI issue the following commands:
 
     `kubectl apply -f https://github.com/wso2/streaming-integrator/releases/download/v1.0.0-m1/00-prereqs.yaml`
 
@@ -129,7 +129,7 @@ To install the Siddhi Operator, follow the procedure below:
 
 ### Deploying Siddhi applications in Kubernetes
 
-You can deploy multiple Siddhi applications in one or more selected containers via Kubernetes. In this example, let's deploy just one Siddhi application in one container for the ease of understanding how to run the Streaming Integrator in a Kubernetes cluster.
+You can deploy multiple Siddhi applications in one or more selected containers via Kubernetes. In this example, let's deploy just one Siddhi application in one container for the ease of understanding how to run the WSO2 Integrator: SI in a Kubernetes cluster.
 
 1. First, let's design a simple Siddhi application that consumes events via HTTP to detect power surges. It filters events for a specific device type (i.e., dryers) and that also report a value greater than 600 for `power`.
 
@@ -301,7 +301,7 @@ You can deploy multiple Siddhi applications in one or more selected containers v
     `kubectl apply -f <PATH_to_siddhi-process.yaml>`
 
     !!!info
-        This file overrules the configurations in the `<SI_HOME>|<SI_TOOLING_HOME>/conf/server/deployment.yaml` file.
+        This file overrules the configurations in the `<SI_HOME>/conf/server/deployment.yaml` file.
 
 ### Invoking the Siddhi application
 

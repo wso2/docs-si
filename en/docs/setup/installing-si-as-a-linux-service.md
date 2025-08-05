@@ -1,10 +1,10 @@
-# Installing Streaming Integrator as a Linux Service
+# Installing WSO2 Integrator: SI as a Linux Service
 
-WSO2 Streaming Integrator can be run as a Linux service. Before you begin follow the instructions on [installing the WSO2 Streaming Integrator]({{base_path}}/setup/installing-si-in-vm/) if you have not done already.
+WSO2 Integrator: SI can be run as a Linux service. Before you begin follow the instructions on [installing the WSO2 Integrator: SI]({{base_path}}/setup/installing-si-in-vm/) if you have not done already.
 
-## Running WSO2 Streaming Integrator as a Linux Service
+## Running WSO2 Integrator: SI as a Linux Service
 
-To run WSO2 Streaming Integrator as a Linux service, follow the steps below:
+To run WSO2 Integrator: SI as a Linux service, follow the steps below:
 
 1. To run the product as a service, create a startup script and add it to the boot sequence. The basic structure of the startup script has three parts (i.e., start, stop and restart) as follows:
 
@@ -27,9 +27,9 @@ To run WSO2 Streaming Integrator as a Linux service, follow the steps below:
     esac
     ```
 
-   You can write the start up scripts for the Streaming Integrator server and Tooling as follows:
+   You can write the start up scripts for the WSO2 Integrator: SI server and Tooling as follows:
 
-   - Streaming Integrator Server
+   - WSO2 Integrator: SI Server
 
     ```bash
     #! /bin/sh
@@ -58,7 +58,7 @@ To run WSO2 Streaming Integrator as a Linux service, follow the steps below:
     esac
     ```
 
-    - Streaming Integrator Tooling
+    - WSO2 Integrator: SI Tooling
 
     ```bash
     #! /bin/sh
