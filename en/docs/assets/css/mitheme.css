@@ -141,6 +141,11 @@
     color: var(--md-primary-heder-fg-color);
 }
 
+.md-version {
+    color: var(--md-default-fg-color);
+    float: right;
+}
+
 header>.md-grid,
 .md-tabs>.md-grid,
 .md-main>.md-grid,

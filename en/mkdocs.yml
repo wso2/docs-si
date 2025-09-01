@@ -41,6 +41,7 @@ theme:
     - navigation.tabs.sticky
     - content.action.edit
     - content.action.view
+    - versioning
   #highlightjs: true
   feature:
     tabs: true
@@ -378,6 +379,8 @@ extra_javascript:
   # - assets/lib/backtotop/js/util.js
   # - assets/lib/backtotop/js/main.js
 extra:
+  version:
+    provider: mike
   social:
     - type: github
       link: https://github.com/wso2
