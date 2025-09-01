@@ -1,9 +1,13 @@
 name: WSO2 Streaming Integrator Docs Publish
 
+env:
+  BRANCH_NAME: ${{ github.ref_name }}
+
 on:
   push:
     branches:
       - main
+      - 4.3.0
   workflow_dispatch:
 
 jobs:
@@ -30,4 +34,8 @@ jobs:
           git config --global user.email "ballerina-bot@ballerina.org"
           git config --global user.name "ballerina-bot"
           cd en/
-          mkdocs gh-deploy
+          if [ "$BRANCH_NAME" = "main" ]; then
+            mike deploy 4.3.1 latest -t "4.3.1" --push
+          else
+            mike deploy 4.3.0 -t "<= 4.3.0" --push
+          fi
