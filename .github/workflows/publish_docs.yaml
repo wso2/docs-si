@@ -36,6 +36,7 @@ jobs:
           cd en/
           if [ "$BRANCH_NAME" = "main" ]; then
             mike deploy 4.3.1 latest -t "4.3.1" --push
+            mike set-default --push latest
           else
             mike deploy 4.3.0 -t "<= 4.3.0" --push
           fi
