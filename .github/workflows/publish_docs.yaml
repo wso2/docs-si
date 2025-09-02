@@ -35,8 +35,13 @@ jobs:
           git config --global user.name "ballerina-bot"
           cd en/
           if [ "$BRANCH_NAME" = "main" ]; then
+            echo "Deploying latest version from main branch"
             mike deploy 4.3.1 latest -t "4.3.1" --push
             mike set-default --push latest
+          elif [ "$BRANCH_NAME" = "4.3.0" ]; then
+            echo "Deploying 4.3.0 version from 4.3.0 branch"
+            mike deploy 4.3.0 -t "4.3.0 and older" --push
           else
-            mike deploy 4.3.0 -t "<= 4.3.0" --push
+            echo "Unknown branch: $BRANCH_NAME"
+            exit 1
           fi
