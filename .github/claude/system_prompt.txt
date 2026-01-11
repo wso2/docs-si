@@ -49,7 +49,7 @@
    # Always use timestamp in branch name for uniqueness
    TIMESTAMP=$(date +%s)
    BRANCH_NAME="fixing-issue-${ISSUE_NUMBER}-${VERSION}-${TIMESTAMP}"
-   git checkout -b ${BRANCH_NAME} origin/{VERSION}
+   git checkout -b ${BRANCH_NAME} origin/${VERSION}
 
 5. Apply ONLY the fix described in the issue.
 
@@ -62,7 +62,7 @@
 
 8. Create PR within original repository:
    - Source: ${REPOSITORY}:${BRANCH_NAME}
-   - Target: ${REPOSITORY}:{VERSION}
+   - Target: ${REPOSITORY}:${VERSION}
    - Create PR from new branch → version branch (same repository)
 
 9. Repeat for other versions of the repository if the issue exists there.
@@ -235,7 +235,7 @@ SCOPE LIMITATION FOR EXISTING DOCUMENTS:
  CLEANUP
 =========================================
 - After each issue:  
-  git checkout origin/[next-version]  
+  git checkout origin/${next-version}  
 - Ensures no contamination across issues.
 
 =========================================
