@@ -33,9 +33,8 @@
      - If any version has a CLOSED PR → create a new PR for that version
      - If any version has NO PR → create a new PR for that version
      - Only skip PR creation for versions that already have OPEN PRs
-   - Remove the AI-Agent/In-Progress label from the issue only if skipping all versions.
-   - Add the AI-Agent/Fixed label to the issue only if skipping all versions.
-   - Stop only if skipping due to all versions having open PRs.
+   - If skipping ALL versions (all have OPEN PRs): Remove AI-Agent/In-Progress label and add AI-Agent/Fixed label, then stop.
+   - Otherwise: Continue to create PRs for all versions that need them.
    - CRITICAL: Each version must be evaluated independently - create PRs for ALL versions except those with open PRs.
 
 3. Version detection:
@@ -66,16 +65,18 @@
    - Create PR from new branch → version branch (same repository)
 
 9. Repeat for other versions of the repository if the issue exists there.
+   - For each remaining version that requires a PR, follow steps 4-8 again.
+   - Track progress to ensure ALL applicable versions are covered.
 
-10. Remove workflow label(AI-Agent/In-Progress).
-
-11. Add 'AI-Agent/Fixed' label. 
+10. After ALL PRs for ALL applicable versions have been created:
+   - Remove workflow label (AI-Agent/In-Progress).
+   - Add label: AI-Agent/Fixed. 
 
 =========================================
  LABEL-BASED PROCESSING
 =========================================
 Label: AI-Agent/In-Progress
-First need to understand what the issue is related to by reading the issue very carefully.Then according to the issue type,apply the solution as below.
+First need to understand what the issue is related to by reading the issue very carefully. Then according to the issue type, apply the solution as below.
 
 1. Broken Links → fix ONLY broken-links, confirm correctness. 
    - If you cannot find the correct working link from the current working branch then go to other branches and check how they handle this.
@@ -249,7 +250,8 @@ SCOPE LIMITATION FOR EXISTING DOCUMENTS:
 - If issue is present in other versions including the main branch → fix and open separate PRs for each.  
 - Only relevant files are changed.  
 - Fix verified with running the repository successfully after fixing. How to run --> README.md file of the repository.
-- MOST IMPORTANT : PRs are minimal, clean, from ${REPOSITORY}:${BRANCH_NAME} → ${REPOSITORY}:{VERSION}   
-- Workflow label(AI-Agent/In-Progress) cleared only after ALL PRs have been created.  
+- MOST IMPORTANT : PRs are minimal, clean, from ${REPOSITORY}:${BRANCH_NAME} → ${REPOSITORY}:${VERSION}   
+- Workflow label (AI-Agent/In-Progress) is cleared ONLY after ALL PRs have been created for ALL applicable versions.  
+- After label removal (In-Progress), immediately add AI-Agent/Fixed label.
 - For issues that cannot be resolved, add the label AI-Agent/Cannot-Fix and provide the reason in a comment on the issue.
-- Add 'AI-Agent/Fixed' label to the issue ONLY after creating PRs for ALL applicable versions.
+- Remove AI-Agent/In-Progress and add AI-Agent/Fixed labels ONLY when the complete workflow is finished (all PRs created or issue skipped due to all versions having open PRs).
