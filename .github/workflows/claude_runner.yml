@@ -89,7 +89,7 @@ jobs:
           export LATEST_VERSION="${{ vars.DOC_FIXING_AGENT_LATEST_VERSION }}"  
           
           # Process the system prompt with variable substitution
-          SYSTEM_PROMPT=$(envsubst < ${{github.workspace}}/.github/claude/system_prompt.txt)
+          SYSTEM_PROMPT=$(envsubst < ${{github.workspace}}/.github/prompts/claude_runner_system_prompt.txt)
           
           # Generate unique delimiter to prevent collision
           DELIMITER="EOF_$(date +%s)_$$"
