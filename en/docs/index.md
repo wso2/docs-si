@@ -1,4 +1,4 @@
 ---
-title: WSO2 Integrator: SI Documentation
+title: "WSO2 Integrator: SI Documentation"
 template: templates/home-page.html
 ---
