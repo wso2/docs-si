@@ -1,0 +1,150 @@
+# Navigation Behaviors Configuration
+# This file defines how navigation sections expand/collapse based on user navigation
+#
+# GROUPING STRUCTURE:
+# - Home: Always expanded (no rules = always visible)
+# - Group 1: Get Started (default expanded)
+# - Group 2: Learn, Setup and Install, Develop, Observability, Connectors (collapsed by default)
+# - Group 3: References (collapsed by default)
+#
+# LOGIC:
+# - collapse_when_url_starts_with: URLs that trigger this section to collapse
+# - stay_expanded_when_url_starts_with: URLs that keep this section expanded
+# - stay_expanded_on_pages: Specific pages where this section stays expanded
+
+auto_collapse:
+  # GROUP 1: Get Started - Default expanded everywhere
+  - title: Get Started
+    collapse_when_url_starts_with:
+      # Collapse when visiting other main sections
+      - guides/
+      - examples/
+      - samples/
+      - setup/
+      - admin/
+      - develop/
+      - connectors/
+      - ref/
+    stay_expanded_when_url_starts_with:
+      # Stay expanded in own section
+      - overview/
+      - quick-start-guide/
+      - concepts/
+      - get-started/
+    stay_expanded_on_pages:
+      - index.md
+
+  # GROUP 2: Learn - Collapsed everywhere except own pages
+  - title: Learn
+    collapse_when_url_starts_with:
+      # Collapse when visiting other sections
+      - overview/
+      - quick-start-guide/
+      - concepts/
+      - get-started/
+      - setup/
+      - admin/
+      - develop/
+      - connectors/
+      - ref/
+    stay_expanded_when_url_starts_with:
+      # Stay expanded only in own section
+      - guides/
+      - examples/
+      - samples/
+
+  # GROUP 2: Setup and Install - Collapsed everywhere except own pages
+  - title: Setup and Install
+    collapse_when_url_starts_with:
+      # Collapse when visiting other sections
+      - overview/
+      - quick-start-guide/
+      - concepts/
+      - get-started/
+      - guides/
+      - examples/
+      - samples/
+      - develop/
+      - admin/
+      - connectors/
+      - ref/
+    stay_expanded_when_url_starts_with:
+      # Stay expanded only in own section
+      - setup/
+      - admin/
+
+  # GROUP 2: Develop - Collapsed everywhere except own pages
+  - title: Develop
+    collapse_when_url_starts_with:
+      # Collapse when visiting other sections
+      - overview/
+      - quick-start-guide/
+      - concepts/
+      - get-started/
+      - guides/
+      - examples/
+      - samples/
+      - setup/
+      - admin/
+      - connectors/
+      - ref/
+    stay_expanded_when_url_starts_with:
+      # Stay expanded only in own section
+      - develop/
+
+  # GROUP 2: Observability - Collapsed everywhere except own pages
+  - title: Observability
+    collapse_when_url_starts_with:
+      # Collapse when visiting other sections
+      - overview/
+      - quick-start-guide/
+      - concepts/
+      - get-started/
+      - guides/
+      - examples/
+      - samples/
+      - setup/
+      - develop/
+      - connectors/
+      - ref/
+    stay_expanded_when_url_starts_with:
+      # Stay expanded only in own section
+      - admin/
+
+  # GROUP 2: Connectors - Collapsed everywhere except own pages
+  - title: Connectors
+    collapse_when_url_starts_with:
+      # Collapse when visiting other sections
+      - overview/
+      - quick-start-guide/
+      - concepts/
+      - get-started/
+      - guides/
+      - examples/
+      - samples/
+      - setup/
+      - admin/
+      - develop/
+      - ref/
+    stay_expanded_when_url_starts_with:
+      # Stay expanded only in own section
+      - connectors/
+
+  # GROUP 3: References - Collapsed everywhere except own pages
+  - title: References
+    collapse_when_url_starts_with:
+      # Collapse when visiting other sections
+      - overview/
+      - quick-start-guide/
+      - concepts/
+      - get-started/
+      - guides/
+      - examples/
+      - samples/
+      - setup/
+      - admin/
+      - develop/
+      - connectors/
+    stay_expanded_when_url_starts_with:
+      # Stay expanded only in own section
+      - ref/
