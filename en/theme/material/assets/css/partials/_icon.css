@@ -22,12 +22,10 @@
   --md-icon-hover-background-color: var(--colors-mystic);
 }
 
-:root,
 [data-md-color-scheme=slate] {
   --md-icon-hover-background-color: #393939;
 }
 
-:root,
 [data-md-color-scheme=slate] {
   --md-header-box-shadow: none;
 }

@@ -388,7 +388,7 @@ extra:
         icon: octicons/graph-16
         level: 1
       Connectors:
-        icon: octicons/workflow-16
+        icon: octicons/plug-16
         level: 1
       References:
         icon: octicons/book-16

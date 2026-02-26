@@ -64,10 +64,8 @@
 
 /* Asgardeo Button */
 
-.md-button--asgardeo-mini {
-  svg .primary {
-    fill: var(--md-button-asgardeo-mini-icon-path-primary-fill-color);
-  }
+.md-button--asgardeo-mini svg .primary {
+  fill: var(--md-button-asgardeo-mini-icon-path-primary-fill-color);
 }
 
 /* Discord button */

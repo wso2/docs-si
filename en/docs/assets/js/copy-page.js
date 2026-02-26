@@ -187,14 +187,14 @@
         };
 
         const handleViewMarkdown = () => {
-            window.open(markdownUrl, '_blank');
+            window.open(markdownUrl, '_blank', 'noopener,noreferrer');
             setOpen(false);
         };
 
         const handleOpenInChatGPT = () => {
             // Uses HTML URL
             // Note: ChatGPT URL with ?q= may not pre-populate; external AI site URLs are fragile
-            window.open(`https://chat.openai.com/?q=${encodeURIComponent(getPromptWithHtml())}`, '_blank');
+            window.open(`https://chat.openai.com/?q=${encodeURIComponent(getPromptWithHtml())}`, '_blank', 'noopener,noreferrer');
             setOpen(false);
         };
 
@@ -202,13 +202,13 @@
             // Note: Claude.ai no longer accepts ?q= query parameters for pre-populating prompts
             // Opens Claude's new chat page; users must manually paste the prompt
             // Uses Markdown URL (available via copy functionality)
-            window.open('https://claude.ai/new', '_blank');
+            window.open('https://claude.ai/new', '_blank', 'noopener,noreferrer');
             setOpen(false);
         };
 
         const handleOpenInPerplexity = () => {
             // Uses Markdown URL with proper /search endpoint
-            window.open(`https://www.perplexity.ai/search?q=${encodeURIComponent(getPromptWithMarkdown())}`, '_blank');
+            window.open(`https://www.perplexity.ai/search?q=${encodeURIComponent(getPromptWithMarkdown())}`, '_blank', 'noopener,noreferrer');
             setOpen(false);
         };
 
