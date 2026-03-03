@@ -1,0 +1,280 @@
+<!--
+ * Copyright (c) 2023-2024, WSO2 LLC. (https://www.wso2.com).
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+-->
+
+{% macro home_card_icon(icon) %}
+{% if icon.endswith(".svg") or icon.endswith(".png") %}
+{% include icon %}
+{% else %}
+{% include ".icons/" ~ icon ~ ".svg" %}
+{% endif %}
+{% endmacro %}
+
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ 'assets/css/home.css' | url }}">
+{% endblock %}
+
+{% block container %}
+<div class="md-content">
+  <article class="md-content__inner md-typeset">
+    <div class="md-home-search-container">
+      <h1 class="md-home-search-input-label">WSO2 Integrator: SI Documentation</h1>
+      {% include "partials/search.html" %}
+
+    </div>
+    <div class="description-section"
+      style="display: flex; flex-direction: row; align-items: flex-start; margin-top: 30px;">
+      <p>
+        An advanced stream processing engine that understands streaming SQL queries to capture, analyze, and process
+        streaming data, and allows us to integrate and act on event streams in real-time. WSO2 Integrator: SI allows you
+        to connect any data source to any destination with its 60+ prebuilt, production-grade connectors.
+      </p>
+    </div>
+
+    {{ page.content }}
+
+    <a href="{{base_path}}/quick-start-guide/quick-start-guide/" rel="noopener" class="quickstart-cta">
+
+      <div class="cta-icon">
+        {{ home_card_icon("octicons/rocket-16") }}
+      </div>
+
+      <div class="cta-content">
+        <span class="cta-title">New to WSO2 Integrator: SI?</span>
+        <span class="cta-desc">Take our quick start guide to build your first streaming application.</span>
+      </div>
+    </a>
+
+    <div class="components-hub-container">
+
+      <div class="components-grid-split">
+
+        <div>
+          <div class="components-section-header">
+            <h2>Get Started</h2>
+            <p>Access introduction and guides.</p>
+          </div>
+          <div class="components-card">
+            <div>
+              <div class="md-column-grid-item-header-icon icon-color-4">
+                {{ home_card_icon("octicons/download-16") }}
+              </div>
+              <h3>Introduction</h3>
+              <div class="components-card-content">
+                Get started with WSO2 Integrator: SI. Learn the architecture, concepts, and install the runtime.
+              </div>
+            </div>
+            <div class="components-card-footer">
+
+              <a href="{{base_path}}/overview/overview/" rel="noopener" class="components-resource-link">
+                Introduction <span>&rarr;</span>
+              </a>
+              <a href="{{base_path}}/quick-start-guide/quick-start-guide/" rel="noopener" class="components-resource-link">
+                Quick Start Guide <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="components-section-header">
+            <h2>Set up and Install</h2>
+            <p>Install WSO2 Integrator: SI and configure Siddhi connectors.</p>
+          </div>
+          <div class="components-card">
+            <div>
+              <div class="md-column-grid-item-header-icon icon-color-4">
+                {{ home_card_icon("octicons/code-16") }}
+              </div>
+              <h3>Installation</h3>
+              <div class="components-card-content">
+                Install the WSO2 Integrator: SI runtime and download Siddhi connectors to get started.
+              </div>
+            </div>
+            <div class="components-card-footer">
+
+              <a href="{{base_path}}/setup/installing-si-in-vm/" rel="noopener"
+                class="components-resource-link">
+                Installing the WSO2 Integrator: SI <span>&rarr;</span>
+              </a>
+              <a href="{{base_path}}/connectors/downloading-and-Installing-Siddhi-Extensions/" rel="noopener" class="components-resource-link">
+                Downloading and Installing Siddhi Connectors <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="components-section-header">
+        <h2>Learn</h2>
+        <p>Explore streaming use cases and hands-on tutorials to master real-time data processing.</p>
+      </div>
+
+      <div class="components-grid-2">
+        <div class="components-card">
+          <div>
+            <div class="md-column-grid-item-header-icon icon-color-4">
+              {{ home_card_icon("octicons/globe-16") }}
+            </div>
+            <h3>Use Cases and Examples</h3>
+            <div class="components-card-content">
+              Discover common streaming integration patterns for data transit, transformations, and ETL workflows.
+            </div>
+          </div>
+          <div class="components-card-footer">
+
+            <a href="{{base_path}}/guides/use-cases/" rel="noopener"
+              class="components-resource-link">
+              Use Cases Overview <span>&rarr;</span>
+            </a>
+            <a href="{{base_path}}/guides/receiving-data-in-transit/" rel="noopener" class="components-resource-link">
+              Data in Transit <span>&rarr;</span>
+            </a>
+            <a href="{{base_path}}/guides/performing-etl-tasks/" rel="noopener" class="components-resource-link">
+              Performing ETL Operations <span>&rarr;</span>
+            </a>
+
+          </div>
+        </div>
+
+        <div>
+          <div class="components-card">
+            <div>
+              <div class="md-column-grid-item-header-icon icon-color-4">
+                {{ home_card_icon("octicons/code-16") }}
+              </div>
+              <h3>Tutorials</h3>
+              <div class="components-card-content">
+                Step-by-step guides to build streaming applications with Kafka integration and API exposure.
+              </div>
+            </div>
+            <div class="components-card-footer">
+
+              <a href="{{base_path}}/examples/tutorials-overview/" rel="noopener"
+                class="components-resource-link">
+                Tutorials Overview <span>&rarr;</span>
+              </a>
+              <a href="{{base_path}}/examples/working-with-kafka/" rel="noopener" class="components-resource-link">
+                Working with Kafka <span>&rarr;</span>
+              </a>
+              <a href="{{base_path}}/examples/exposing-processed-data-as-api/" rel="noopener"
+                class="components-resource-link">
+                Exposing Processed Data as API <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="components-section-header">
+        <h2>Observability and Connectors</h2>
+        <p>Monitor your integrations and connect to various systems.</p>
+      </div>
+
+      <div class="components-grid-2">
+        <div class="components-card">
+          <div>
+            <div class="md-column-grid-item-header-icon icon-color-4">
+              {{ home_card_icon("octicons/graph-16") }}
+            </div>
+            <h3>Observability</h3>
+            <div class="components-card-content">
+              Monitor your integrations with observability tools. Track metrics via dashboards.
+            </div>
+          </div>
+          <div class="components-card-footer">
+            <a href="{{base_path}}/admin/working-with-integration-control-plane/" rel="noopener"
+              class="components-resource-link">
+              Integration Control Plane <span>&rarr;</span>
+            </a>
+          </div>
+          <div class="components-card-footer">
+            <a href="{{base_path}}/admin/monitoring-si-performance-via-grafana/" rel="noopener"
+              class="components-resource-link">
+              Monitoring with Grafana <span>&rarr;</span>
+            </a>
+          </div>
+          <div class="components-card-footer">
+            <a href="{{base_path}}/admin/viewing-dashboards/" rel="noopener" class="components-resource-link">
+              Monitoring ETL Flows <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+        <div class="components-card">
+          <div>
+            <div class="md-column-grid-item-header-icon icon-color-4">
+              {{ home_card_icon("octicons/plug-16") }}
+            </div>
+            <h3>Connectors</h3>
+            <div class="components-card-content">
+              Integrate with various systems using out-of-the-box Siddhi Extensions or build your own custom connectors.
+            </div>
+          </div>
+          <div class="components-card-footer">
+
+            <a href="{{base_path}}/connectors/connectors-overview/" rel="noopener"
+              class="components-resource-link">
+              WSO2 Integrator: SI Connectors Overview <span>&rarr;</span>
+            </a>
+            <a href="{{base_path}}/connectors/downloading-and-Installing-Siddhi-Extensions/" rel="noopener" class="components-resource-link">
+              Downloading and Installing Siddhi Connectors <span>&rarr;</span>
+            </a>
+            <a href="{{base_path}}/connectors/configuring-System-Parameters-for-Siddhi-Extensions/" rel="noopener" class="components-resource-link">
+              Configuring System Parameters for Siddhi Extensions <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="components-section-header">
+        <h2>References</h2>
+        <p>System requirements, API guides, and compatibility.</p>
+      </div>
+
+      <div class="components-grid-2">
+        <div class="components-card">
+          <div>
+            <div class="md-column-grid-item-header-icon icon-color-4">
+              {{ home_card_icon("octicons/book-16") }}
+            </div>
+
+            <h3>Documentation & References</h3>
+            <div class="components-card-content">
+              Access system compatibility, streaming integration REST APIs, and performance results.
+            </div>
+          </div>
+          <div class="components-card-footer">
+
+            <a href="{{base_path}}/ref/environment-compatibility/" rel="noopener" class="components-resource-link">
+              Environment Compatibility <span>&rarr;</span>
+            </a>
+            <a href="{{base_path}}/ref/rest-api-guide-overview/" rel="noopener" class="components-resource-link">
+              REST API Guide <span>&rarr;</span>
+            </a>
+            <a href="{{base_path}}/ref/performance-analysis-results/" rel="noopener" class="components-resource-link">
+              Performance Analysis Results <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+{% endblock %}
