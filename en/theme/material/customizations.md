@@ -148,7 +148,7 @@ theme/material/assets/stylesheets/application.*.css
 theme/material/base.html
 ```
 
-5. Copy the the new files back to your `docs-mi` clone from the `mkdocs-material` clone you built at step 3.
+5. Copy the the new files back to your `docs-si` clone from the `mkdocs-material` clone you built at step 3.
 
 ```
 material/assets/javascripts/application.*.js
