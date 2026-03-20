@@ -140,8 +140,6 @@ index aa273d2f..e0d7d785 100644
 
 3. Run `npm run build`
 
-4. Remove the following files from `docs-si/en/` in your `https://github.com/wso2/docs-si` clone.
-
 ```
 theme/material/assets/javascripts/application.*.js
 theme/material/assets/javascripts/modernizr.*.js
