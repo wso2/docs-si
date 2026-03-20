@@ -445,7 +445,7 @@ extra:
           icon_color: icon-color-2
           list_items:
             - title: "GitHub"
-              url: "https://github.com/wso2/product-streaming-integrator/issues"
+              url: "https://github.com/wso2/product-integrator/issues"
             - title: "Discord"
               url: "https://discord.com/invite/wso2"
             - title: "Enterprise Support"
