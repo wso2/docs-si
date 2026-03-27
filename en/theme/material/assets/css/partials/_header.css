@@ -122,7 +122,7 @@
 /* Logo */
 .md-header__button.md-logo img,
 .md-header__button.md-logo svg {
-  height: 1.4rem;
+  height: 2.2rem;
   padding: .1rem 0;
 }
 
@@ -252,6 +252,6 @@
   /* Ensure logo and menu integration is smooth */
   .md-header__button.md-logo img,
   .md-header__button.md-logo svg {
-    height: 1.2rem;
+    height: 1.8rem;
   }
 }

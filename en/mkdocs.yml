@@ -48,8 +48,8 @@ theme:
          toggle:
            icon: material/brightness-7
            name: Switch to light mode
-    logo: assets/img/logo-for-light.svg
-    logo_light: assets/img/logo.svg
+    logo: assets/img/WSO2-logo-black.svg
+    logo_light: assets/img/WSO2-logo-white.svg
     favicon: assets/img/favicon.png
     features:
        - navigation.indexes
@@ -360,6 +360,96 @@ extra_javascript:
     - assets/js/theme.js
     - assets/js/copy-page.js
 extra:
+    product_name: "WSO2 Integrator: SI"
+    home_page_cards:
+      - section:
+        - title: "Get Started"
+          icon: octicons/rocket-16
+          icon_color: icon-color-1
+          list_items:
+            - title: "Introduction"
+              url: "Get Started|Introduction"
+            - title: "Quick Start Guide"
+              url: "Get Started|Quick Start Guide"
+            - title: "Install WSO2 Integrator: SI"
+              url: "Setup and Install|Install|Installing the WSO2 Integrator: SI|Install SI"
+            - title: "Create Your First Siddhi Application"
+              url: "Get Started|Creating Your First Siddhi Application|Streaming Integration Overview"
+            - title: "Architecture"
+              url: "Get Started|Architecture"
+            - title: "Key Concepts"
+              url: "Get Started|Key Concepts"
+        - title: "Tutorials"
+          icon: octicons/book-16
+          icon_color: icon-color-4
+          list_items:
+            - title: "Performing Real-time ETL"
+              url: "Learn|Tutorials|Performing Real-time ETL with Files"
+            - title: "Working with Kafka"
+              url: "Learn|Tutorials|Working with Kafka"
+            - title: "Exposing Processed Data as API"
+              url: "Learn|Tutorials|Exposing Processed Data as API"
+            - title: "Triggering Integration Flows via WSO2 Integrator: MI"
+              url: "Learn|Tutorials|Triggering Integrations via MI"
+            - title: "Running in Containerized Environments"
+              url: "Learn|Tutorials|Running SI with Docker and Kubernetes"
+            - title: "Managing Streaming Data with Errors"
+              url: "Learn|Tutorials|Error Handling with Data Streams"
+      - section:
+        - title: "Observability and Monitoring"
+          icon: octicons/graph-16
+          icon_color: icon-color-2
+          list_items:
+            - title: "Monitoring with WSO2 Integrator: ICP"
+              url: "Observability|Integration Control Plane"
+            - title: "Monitoring with Grafana"
+              url: "Observability|Monitoring SI via Dashboards|Monitoring SI|Overview"
+            - title: "Monitoring ETL Flows with Grafana"
+              url: "Observability|Monitoring SI via Dashboards|Monitoring ETL Flows"
+        - title: "Setup and Install"
+          icon: octicons/download-16
+          icon_color: icon-color-3
+          list_items:
+            - title: "Install WSO2 Integrator: SI"
+              url: "Setup and Install|Install|Installing the WSO2 Integrator: SI|Install SI"
+            - title: "Install in Docker"
+              url: "Setup and Install|Install|Running the WSO2 Integrator: SI in Containers|Installing in Docker"
+            - title: "Install in Kubernetes"
+              url: "Setup and Install|Install|Running the WSO2 Integrator: SI in Containers|Installing in Kubernetes"
+      - section:
+        - title: "Connectors"
+          icon: octicons/plug-16
+          icon_color: icon-color-1
+          list_items:
+            - title: "WSO2 Integrator: SI Connectors Overview"
+              url: "Connectors|WSO2 Integrator: SI Connectors Overview"
+            - title: "Downloading and Installing Siddhi Extensions"
+              url: "Connectors|Downloading and Installing Siddhi Connectors"
+            - title: "Writing Custom Siddhi Extensions"
+              url: "Connectors|Writing Custom Siddhi Extensions"
+            - title: "Configuring System Parameters for Siddhi Extensions"
+              url: "Connectors|Configuring System Parameters for Siddhi Extensions"
+        - title: "References"
+          icon: octicons/gear-16
+          icon_color: icon-color-1
+          list_items:
+            - title: "Environment Compatibility"
+              url: "References|Environment Compatibility"
+            - title: "REST API Guide Overview"
+              url: "References|Streaming Integration REST API Guide|REST API Guide Overview"
+            - title: "Performance Analysis Results"
+              url: "References|Performance Analysis Results"
+      - section:
+        - title: "Community & Support"
+          icon: octicons/light-bulb-16
+          icon_color: icon-color-2
+          list_items:
+            - title: "GitHub"
+              url: "https://github.com/wso2/product-integrator/issues"
+            - title: "Discord"
+              url: "https://discord.com/invite/wso2"
+            - title: "Enterprise Support"
+              url: "https://wso2.com/subscription/"
     material:
       jinja2content: true
     generator: false
