@@ -24,6 +24,15 @@
 {% endif %}
 {% endmacro %}
 
+{% macro find_url(path) %}
+  {% set found_page = pages | selectattr("src_path", "equalto", path) | first %}
+  {% if found_page %}
+    {{ found_page.url | url }}
+  {% else %}
+    #PAGE_NOT_FOUND_{{ path }}
+  {% endif %}
+{% endmacro %}
+
 {% extends "base.html" %}
 
 {% block styles %}
@@ -50,7 +59,7 @@
 
     {{ page.content }}
 
-    <a href="{{base_path}}/quick-start-guide/quick-start-guide/" rel="noopener" class="quickstart-cta">
+    <a href="{{ find_url('quick-start-guide/quick-start-guide.md') }}" rel="noopener" class="quickstart-cta">
 
       <div class="cta-icon">
         {{ home_card_icon("octicons/rocket-16") }}
@@ -83,10 +92,10 @@
             </div>
             <div class="components-card-footer">
 
-              <a href="{{base_path}}/overview/overview/" rel="noopener" class="components-resource-link">
+              <a href="{{ find_url('overview/overview.md') }}" rel="noopener" class="components-resource-link">
                 Introduction <span>&rarr;</span>
               </a>
-              <a href="{{base_path}}/quick-start-guide/quick-start-guide/" rel="noopener" class="components-resource-link">
+              <a href="{{ find_url('quick-start-guide/quick-start-guide.md') }}" rel="noopener" class="components-resource-link">
                 Quick Start Guide <span>&rarr;</span>
               </a>
             </div>
@@ -110,11 +119,11 @@
             </div>
             <div class="components-card-footer">
 
-              <a href="{{base_path}}/setup/installing-si-in-vm/" rel="noopener"
+              <a href="{{ find_url('setup/installing-si-in-vm.md') }}" rel="noopener"
                 class="components-resource-link">
                 Installing the WSO2 Integrator: SI <span>&rarr;</span>
               </a>
-              <a href="{{base_path}}/connectors/downloading-and-Installing-Siddhi-Extensions/" rel="noopener" class="components-resource-link">
+              <a href="{{ find_url('connectors/downloading-and-Installing-Siddhi-Extensions.md') }}" rel="noopener" class="components-resource-link">
                 Downloading and Installing Siddhi Connectors <span>&rarr;</span>
               </a>
             </div>
@@ -140,14 +149,14 @@
           </div>
           <div class="components-card-footer">
 
-            <a href="{{base_path}}/guides/use-cases/" rel="noopener"
+            <a href="{{ find_url('guides/use-cases.md') }}" rel="noopener"
               class="components-resource-link">
               Use Cases Overview <span>&rarr;</span>
             </a>
-            <a href="{{base_path}}/guides/receiving-data-in-transit/" rel="noopener" class="components-resource-link">
+            <a href="{{ find_url('guides/receiving-data-in-transit.md') }}" rel="noopener" class="components-resource-link">
               Data in Transit <span>&rarr;</span>
             </a>
-            <a href="{{base_path}}/guides/performing-etl-tasks/" rel="noopener" class="components-resource-link">
+            <a href="{{ find_url('guides/performing-etl-tasks.md') }}" rel="noopener" class="components-resource-link">
               Performing ETL Operations <span>&rarr;</span>
             </a>
 
@@ -167,14 +176,14 @@
             </div>
             <div class="components-card-footer">
 
-              <a href="{{base_path}}/examples/tutorials-overview/" rel="noopener"
+              <a href="{{ find_url('examples/tutorials-overview.md') }}" rel="noopener"
                 class="components-resource-link">
                 Tutorials Overview <span>&rarr;</span>
               </a>
-              <a href="{{base_path}}/examples/working-with-kafka/" rel="noopener" class="components-resource-link">
+              <a href="{{ find_url('examples/working-with-kafka.md') }}" rel="noopener" class="components-resource-link">
                 Working with Kafka <span>&rarr;</span>
               </a>
-              <a href="{{base_path}}/examples/exposing-processed-data-as-api/" rel="noopener"
+              <a href="{{ find_url('examples/exposing-processed-data-as-api.md') }}" rel="noopener"
                 class="components-resource-link">
                 Exposing Processed Data as API <span>&rarr;</span>
               </a>
@@ -200,19 +209,19 @@
             </div>
           </div>
           <div class="components-card-footer">
-            <a href="{{base_path}}/admin/working-with-integration-control-plane/" rel="noopener"
+            <a href="{{ find_url('admin/working-with-integration-control-plane.md') }}" rel="noopener"
               class="components-resource-link">
               Integration Control Plane <span>&rarr;</span>
             </a>
           </div>
           <div class="components-card-footer">
-            <a href="{{base_path}}/admin/monitoring-si-performance-via-grafana/" rel="noopener"
+            <a href="{{ find_url('admin/monitoring-si-performance-via-grafana.md') }}" rel="noopener"
               class="components-resource-link">
               Monitoring with Grafana <span>&rarr;</span>
             </a>
           </div>
           <div class="components-card-footer">
-            <a href="{{base_path}}/admin/viewing-dashboards/" rel="noopener" class="components-resource-link">
+            <a href="{{ find_url('admin/viewing-dashboards.md') }}" rel="noopener" class="components-resource-link">
               Monitoring ETL Flows <span>&rarr;</span>
             </a>
           </div>
@@ -229,14 +238,14 @@
           </div>
           <div class="components-card-footer">
 
-            <a href="{{base_path}}/connectors/connectors-overview/" rel="noopener"
+            <a href="{{ find_url('connectors/connectors-overview.md') }}" rel="noopener"
               class="components-resource-link">
               WSO2 Integrator: SI Connectors Overview <span>&rarr;</span>
             </a>
-            <a href="{{base_path}}/connectors/downloading-and-Installing-Siddhi-Extensions/" rel="noopener" class="components-resource-link">
+            <a href="{{ find_url('connectors/downloading-and-Installing-Siddhi-Extensions.md') }}" rel="noopener" class="components-resource-link">
               Downloading and Installing Siddhi Connectors <span>&rarr;</span>
             </a>
-            <a href="{{base_path}}/connectors/configuring-System-Parameters-for-Siddhi-Extensions/" rel="noopener" class="components-resource-link">
+            <a href="{{ find_url('connectors/configuring-System-Parameters-for-Siddhi-Extensions.md') }}" rel="noopener" class="components-resource-link">
               Configuring System Parameters for Siddhi Extensions <span>&rarr;</span>
             </a>
           </div>
@@ -262,13 +271,13 @@
           </div>
           <div class="components-card-footer">
 
-            <a href="{{base_path}}/ref/environment-compatibility/" rel="noopener" class="components-resource-link">
+            <a href="{{ find_url('ref/environment-compatibility.md') }}" rel="noopener" class="components-resource-link">
               Environment Compatibility <span>&rarr;</span>
             </a>
-            <a href="{{base_path}}/ref/rest-api-guide-overview/" rel="noopener" class="components-resource-link">
+            <a href="{{ find_url('ref/rest-api-guide-overview.md') }}" rel="noopener" class="components-resource-link">
               REST API Guide <span>&rarr;</span>
             </a>
-            <a href="{{base_path}}/ref/performance-analysis-results/" rel="noopener" class="components-resource-link">
+            <a href="{{ find_url('ref/performance-analysis-results.md') }}" rel="noopener" class="components-resource-link">
               Performance Analysis Results <span>&rarr;</span>
             </a>
           </div>
