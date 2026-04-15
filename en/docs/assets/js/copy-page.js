@@ -187,9 +187,11 @@
         };
 
         const handleViewMarkdown = () => {
-            if (markdownUrl) {
-                window.open(markdownUrl, '_blank');
-            }
+            const pathname = window.location.pathname;
+            const mdPath = (pathname === '/' || pathname === '')
+                ? '/index.md'
+                : pathname.replace(/\/$/, '') + '.md';
+            window.location.href = window.location.origin + mdPath;
             setOpen(false);
         };
 
@@ -298,7 +300,7 @@
     }
 
     // Observer for instant loading
-    const observer = new MutationObserver((mutations) => {
+    const observer = new MutationObserver(() => {
         if (document.querySelector('.md-content') && !document.querySelector('.copy-page-container')) {
             init();
         }

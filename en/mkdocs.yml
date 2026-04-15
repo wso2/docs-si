@@ -338,6 +338,10 @@ markdown_extensions:
         alternate_style: true
   - attr_list
 
+# Hooks
+hooks:
+  - hooks/copy_markdown.py
+
 # Plugins configuration
 plugins:
   - search
