@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
+    const DEBUG = false;
+
     /**
      * Icon SVG definitions matching the React component.
      */
@@ -159,7 +161,7 @@
         // Handlers
         const handleCopyPage = async () => {
             try {
-                console.log('Attempting to copy from URL:', markdownUrl);
+                DEBUG && console.log('Attempting to copy from URL:', markdownUrl);
 
                 if (!markdownUrl) {
                     throw new Error('Markdown URL is not set');
@@ -176,7 +178,7 @@
                     throw new Error('Markdown content is empty');
                 }
 
-                console.log('Markdown content length:', markdown.length);
+                DEBUG && console.log('Markdown content length:', markdown.length);
 
                 // Try modern Clipboard API first
                 if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -196,7 +198,7 @@
                     }
                 }
 
-                console.log('Successfully copied to clipboard');
+                DEBUG && console.log('Successfully copied to clipboard');
 
                 // Feedback - Show success message in menu
                 const copyItem = menu.querySelector('.cp-copy');
@@ -234,16 +236,25 @@
 
         const handleViewMarkdown = () => {
             const pathname = window.location.pathname;
-            const mdPath = (pathname === '/' || pathname === '')
+            const base = (pathname === '/' || pathname === '')
                 ? '/index.md'
-                : pathname.replace(/\/$/, '') + '.md';
+                : pathname.replace(/\/$/, '');
+            
+            let mdPath;
+            if (base === '/index.md') {
+                mdPath = '/index.md';
+            } else {
+                const last = base.split('/').pop();
+                mdPath = base + '/' + last + '.md';
+            }
+            
             window.location.href = window.location.origin + mdPath;
             setOpen(false);
         };
 
         const handleOpenInChatGPT = () => {
             // Uses HTML URL
-            window.open(`https://chat.openai.com/?q=${encodeURIComponent(getPromptWithHtml())}`, '_blank');
+            window.open(`https://chat.openai.com/?q=${encodeURIComponent(getPromptWithHtml())}`, '_blank', 'noopener,noreferrer');
             setOpen(false);
         };
 
@@ -251,12 +262,12 @@
             // Copy prompt to clipboard and open Claude
             const prompt = getPromptWithHtml();
             navigator.clipboard.writeText(prompt).then(() => {
-                window.open('https://claude.ai/new', '_blank');
-                console.log('Prompt copied to clipboard. Paste it in Claude.ai');
+                window.open('https://claude.ai/new', '_blank', 'noopener,noreferrer');
+                DEBUG && console.log('Prompt copied to clipboard. Paste it in Claude.ai');
             }).catch((err) => {
                 console.error('Clipboard copy failed:', err);
                 // If clipboard fails, just open Claude
-                window.open('https://claude.ai/new', '_blank');
+                window.open('https://claude.ai/new', '_blank', 'noopener,noreferrer');
             });
             setOpen(false);
         };
@@ -265,8 +276,8 @@
             // Use deployed site URL (simpler, matches ChatGPT approach)
             const fullUrl = getHtmlUrl();
             const prompt = `Could you read this document about WSO2 Streaming Integrator ${fullUrl} so I can ask questions about it?`;
-            console.log('Opening Perplexity with URL:', fullUrl);
-            window.open(`https://www.perplexity.ai/search?q=${encodeURIComponent(prompt)}`, '_blank');
+            DEBUG && console.log('Opening Perplexity with URL:', fullUrl);
+            window.open(`https://www.perplexity.ai/search?q=${encodeURIComponent(prompt)}`, '_blank', 'noopener,noreferrer');
             setOpen(false);
         };
 
@@ -293,32 +304,34 @@
         let rawUrl;
         let insertionPoint = null;
 
-        console.log('Initializing copy-page button...');
-        console.log('Edit button found:', !!editButton);
-        console.log('View button found:', !!viewButton);
-        console.log('Current URL:', window.location.href);
+        DEBUG && console.log('Initializing copy-page button...');
+        DEBUG && console.log('Edit button found:', !!editButton);
+        DEBUG && console.log('View button found:', !!viewButton);
+        DEBUG && console.log('Current URL:', window.location.href);
 
         // 1. Determine URL
         if (editButton) {
-            console.log('Using Edit button href:', editButton.href);
+            DEBUG && console.log('Using Edit button href:', editButton.href);
             rawUrl = editButton.href
                 .replace(/github\.com/g, 'raw.githubusercontent.com')
                 .replace(/\/edit\//g, '/')
                 .replace(/\/blob\//g, '/');
-            console.log('Converted to raw URL:', rawUrl);
+            DEBUG && console.log('Converted to raw URL:', rawUrl);
         } else if (viewButton) {
-            console.log('Using View button href:', viewButton.href);
+            DEBUG && console.log('Using View button href:', viewButton.href);
             rawUrl = viewButton.href
                 .replace(/github\.com/g, 'raw.githubusercontent.com')
                 .replace(/\/blob\//g, '/') // View might be blob, we want raw
                 .replace(/\/raw\//g, '/'); // If already raw, check structure
-            console.log('Converted to raw URL:', rawUrl);
+            DEBUG && console.log('Converted to raw URL:', rawUrl);
         } else {
             // No easy way to get raw URL without edit/view buttons
             // We will attempt to derive it from the current URL if possible
-            console.log('No edit/view buttons found, deriving URL...');
-            const siteUrl = 'https://si.docs.wso2.com/en/latest/';
-            const repoRawUrl = 'https://raw.githubusercontent.com/wso2/docs-si/main/en/docs/';
+            DEBUG && console.log('No edit/view buttons found, deriving URL...');
+            
+            // Read siteUrl and repoRawUrl from meta tags or fallback to hardcoded
+            const siteUrl = document.querySelector('meta[name="site-url"]')?.content || 'https://si.docs.wso2.com/en/latest/';
+            const repoRawUrl = document.querySelector('meta[name="repo-raw-url"]')?.content || 'https://raw.githubusercontent.com/wso2/docs-si/main/en/docs/';
 
             if (window.location.href.startsWith(siteUrl)) {
                 let relPath = window.location.href.substring(siteUrl.length);
@@ -328,9 +341,9 @@
                     relPath = relPath.replace(/\.html$/, '.md');
                 }
                 rawUrl = repoRawUrl + relPath;
-                console.log('Derived raw URL:', rawUrl);
+                DEBUG && console.log('Derived raw URL:', rawUrl);
             } else {
-                console.warn('Current URL does not match expected site URL');
+                console.warn('Current URL does not match site URL configuration. Derivation failed.');
             }
         }
 
@@ -346,7 +359,7 @@
         }
 
         if (rawUrl) {
-            console.log('Creating copy button with rawUrl:', rawUrl);
+            DEBUG && console.log('Creating copy button with rawUrl:', rawUrl);
             const btn = createCopyPageButton(rawUrl);
 
             if (insertionPoint) {
