@@ -147,17 +147,8 @@
 
         // Cleanup routine if needed (though this script runs once per page load)
 
-        const getFullMarkdownUrl = () => {
-            return markdownUrl;
-        };
-
         const getHtmlUrl = () => {
             return window.location.href;
-        };
-
-        const getPromptWithMarkdown = () => {
-            const fullUrl = getFullMarkdownUrl();
-            return `Could you read this document about WSO2 Streaming Integrator ${fullUrl} so I can ask questions about it?`;
         };
 
         const getPromptWithHtml = () => {
@@ -257,24 +248,24 @@
         };
 
         const handleOpenInClaude = () => {
-            // Claude.ai no longer accepts ?q= query parameters for pre-populating prompts
-            // Instead, we'll open Claude with the markdown URL in the prompt
-            const prompt = getPromptWithMarkdown();
-            // Since we can't pass the prompt via URL, copy it and open Claude
+            // Copy prompt to clipboard and open Claude
+            const prompt = getPromptWithHtml();
             navigator.clipboard.writeText(prompt).then(() => {
                 window.open('https://claude.ai/new', '_blank');
                 console.log('Prompt copied to clipboard. Paste it in Claude.ai');
-            }).catch(() => {
-                // If clipboard fails, just open Claude and user can manually copy
+            }).catch((err) => {
+                console.error('Clipboard copy failed:', err);
+                // If clipboard fails, just open Claude
                 window.open('https://claude.ai/new', '_blank');
             });
             setOpen(false);
         };
 
         const handleOpenInPerplexity = () => {
-            // Uses Markdown URL with proper /search endpoint
-            const prompt = getPromptWithMarkdown();
-            console.log('Opening Perplexity with prompt:', prompt);
+            // Use deployed site URL (simpler, matches ChatGPT approach)
+            const fullUrl = getHtmlUrl();
+            const prompt = `Could you read this document about WSO2 Streaming Integrator ${fullUrl} so I can ask questions about it?`;
+            console.log('Opening Perplexity with URL:', fullUrl);
             window.open(`https://www.perplexity.ai/search?q=${encodeURIComponent(prompt)}`, '_blank');
             setOpen(false);
         };
