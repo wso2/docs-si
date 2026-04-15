@@ -168,10 +168,35 @@
         // Handlers
         const handleCopyPage = async () => {
             try {
+                console.log('Attempting to copy from URL:', markdownUrl);
+
                 const response = await fetch(markdownUrl);
-                if (!response.ok) throw new Error('Failed to fetch');
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch markdown: ${response.status} ${response.statusText}`);
+                }
+
                 const markdown = await response.text();
-                await navigator.clipboard.writeText(markdown);
+
+                if (!markdown || markdown.trim().length === 0) {
+                    throw new Error('Markdown content is empty');
+                }
+
+                console.log('Markdown content length:', markdown.length);
+
+                // Try modern Clipboard API first
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(markdown);
+                } else {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = markdown;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                }
+
+                console.log('Successfully copied to clipboard');
 
                 // Feedback
                 const originalTitle = button.getAttribute('title');
@@ -182,6 +207,16 @@
                 }, 2000);
             } catch (err) {
                 console.error('Failed to copy:', err);
+
+                // Show error feedback to user
+                const originalTitle = button.getAttribute('title');
+                button.setAttribute('title', 'Copy failed - check console');
+                button.style.opacity = '0.5';
+
+                setTimeout(() => {
+                    button.setAttribute('title', originalTitle);
+                    button.style.opacity = '1';
+                }, 3000);
             }
             setOpen(false);
         };
