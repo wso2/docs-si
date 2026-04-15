@@ -257,16 +257,25 @@
         };
 
         const handleOpenInClaude = () => {
-            // Note: Claude.ai no longer accepts ?q= query parameters for pre-populating prompts
-            // Opens Claude's new chat page; users must manually paste the prompt
-            // Uses Markdown URL (available via copy functionality)
-            window.open('https://claude.ai/new', '_blank', 'noopener,noreferrer');
+            // Claude.ai no longer accepts ?q= query parameters for pre-populating prompts
+            // Instead, we'll open Claude with the markdown URL in the prompt
+            const prompt = getPromptWithMarkdown();
+            // Since we can't pass the prompt via URL, copy it and open Claude
+            navigator.clipboard.writeText(prompt).then(() => {
+                window.open('https://claude.ai/new', '_blank');
+                console.log('Prompt copied to clipboard. Paste it in Claude.ai');
+            }).catch(() => {
+                // If clipboard fails, just open Claude and user can manually copy
+                window.open('https://claude.ai/new', '_blank');
+            });
             setOpen(false);
         };
 
         const handleOpenInPerplexity = () => {
             // Uses Markdown URL with proper /search endpoint
-            window.open(`https://www.perplexity.ai/search?q=${encodeURIComponent(getPromptWithMarkdown())}`, '_blank');
+            const prompt = getPromptWithMarkdown();
+            console.log('Opening Perplexity with prompt:', prompt);
+            window.open(`https://www.perplexity.ai/search?q=${encodeURIComponent(prompt)}`, '_blank');
             setOpen(false);
         };
 
