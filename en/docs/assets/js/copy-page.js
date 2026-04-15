@@ -235,20 +235,36 @@
         };
 
         const handleViewMarkdown = () => {
-            const pathname = window.location.pathname;
-            const base = (pathname === '/' || pathname === '')
-                ? '/index.md'
-                : pathname.replace(/\/$/, '');
+            let pathname = window.location.pathname;
+            const origin = window.location.origin;
+            
+            // Strip trailing slash for consistent base
+            const base = pathname.replace(/\/$/, '');
+            
+            // Get path segments
+            const segments = base.split('/').filter(Boolean);
+            const last = segments[segments.length - 1];
             
             let mdPath;
-            if (base === '/index.md') {
-                mdPath = '/index.md';
+            // Root handling (adjusting for potential /docs-si/ subpath)
+            if (segments.length === 0 || (segments.length === 1 && last === 'docs-si')) {
+                mdPath = (base || '/') + '/index.md/';
             } else {
-                const last = base.split('/').pop();
-                mdPath = base + '/' + last + '.md';
+                // Check if the URL might already contain the filename (e.g., /overview/overview/)
+                const parent = segments[segments.length - 2];
+                if (last === parent) {
+                    // It's likely already at the file level
+                    mdPath = base + '.md/';
+                } else {
+                    // It's likely at the folder level (index)
+                    mdPath = base + '/' + last + '.md/';
+                }
             }
             
-            window.location.href = window.location.origin + mdPath;
+            // Clean up double slashes if any
+            mdPath = mdPath.replace(/\/+/g, '/');
+            
+            window.location.href = origin + mdPath;
             setOpen(false);
         };
 
@@ -334,11 +350,17 @@
             const repoRawUrl = document.querySelector('meta[name="repo-raw-url"]')?.content || 'https://raw.githubusercontent.com/wso2/docs-si/main/en/docs/';
 
             if (window.location.href.startsWith(siteUrl)) {
-                let relPath = window.location.href.substring(siteUrl.length);
-                if (relPath.endsWith('/') || relPath === '') {
-                    relPath += 'index.md';
+                let relPath = window.location.href.substring(siteUrl.length).replace(/\/$/, '');
+                const segments = relPath.split('/').filter(Boolean);
+                const last = segments[segments.length - 1];
+                const parent = segments[segments.length - 2];
+
+                if (segments.length === 0) {
+                    relPath = 'index.md';
+                } else if (last === parent) {
+                    relPath = relPath + '.md';
                 } else {
-                    relPath = relPath.replace(/\.html$/, '.md');
+                    relPath = relPath + '/' + last + '.md';
                 }
                 rawUrl = repoRawUrl + relPath;
                 DEBUG && console.log('Derived raw URL:', rawUrl);
