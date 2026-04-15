@@ -170,6 +170,10 @@
             try {
                 console.log('Attempting to copy from URL:', markdownUrl);
 
+                if (!markdownUrl) {
+                    throw new Error('Markdown URL is not set');
+                }
+
                 const response = await fetch(markdownUrl);
                 if (!response.ok) {
                     throw new Error(`Failed to fetch markdown: ${response.status} ${response.statusText}`);
@@ -190,25 +194,41 @@
                     // Fallback for older browsers
                     const textArea = document.createElement('textarea');
                     textArea.value = markdown;
+                    textArea.style.position = 'fixed';
+                    textArea.style.opacity = '0';
                     document.body.appendChild(textArea);
                     textArea.select();
-                    document.execCommand('copy');
+                    const success = document.execCommand('copy');
                     document.body.removeChild(textArea);
+                    if (!success) {
+                        throw new Error('Fallback copy method failed');
+                    }
                 }
 
                 console.log('Successfully copied to clipboard');
 
-                // Feedback
+                // Feedback - Show success message in menu
+                const copyItem = menu.querySelector('.cp-copy');
+                const titleElement = copyItem.querySelector('.copy-page-item-title');
+                const originalText = titleElement.textContent;
+                titleElement.textContent = 'Copied!';
+
+                // Also update button title
                 const originalTitle = button.getAttribute('title');
                 button.setAttribute('title', 'Copied!');
 
                 setTimeout(() => {
                     button.setAttribute('title', originalTitle);
+                    titleElement.textContent = originalText;
                 }, 2000);
             } catch (err) {
-                console.error('Failed to copy:', err);
+                const errorMsg = `Copy failed: ${err.message}`;
+                console.error(errorMsg, err);
 
-                // Show error feedback to user
+                // Show error alert to user
+                alert('Failed to copy to clipboard: ' + err.message + '\n\nPlease check the browser console for more details.');
+
+                // Show error feedback on button
                 const originalTitle = button.getAttribute('title');
                 button.setAttribute('title', 'Copy failed - check console');
                 button.style.opacity = '0.5';
@@ -273,23 +293,33 @@
         let rawUrl;
         let insertionPoint = null;
 
+        console.log('Initializing copy-page button...');
+        console.log('Edit button found:', !!editButton);
+        console.log('View button found:', !!viewButton);
+        console.log('Current URL:', window.location.href);
+
         // 1. Determine URL
         if (editButton) {
+            console.log('Using Edit button href:', editButton.href);
             rawUrl = editButton.href
                 .replace(/github\.com/g, 'raw.githubusercontent.com')
                 .replace(/\/edit\//g, '/')
                 .replace(/\/blob\//g, '/');
+            console.log('Converted to raw URL:', rawUrl);
         } else if (viewButton) {
+            console.log('Using View button href:', viewButton.href);
             rawUrl = viewButton.href
                 .replace(/github\.com/g, 'raw.githubusercontent.com')
                 .replace(/\/blob\//g, '/') // View might be blob, we want raw
                 .replace(/\/raw\//g, '/'); // If already raw, check structure
+            console.log('Converted to raw URL:', rawUrl);
         } else {
             // No easy way to get raw URL without edit/view buttons
             // We will attempt to derive it from the current URL if possible
+            console.log('No edit/view buttons found, deriving URL...');
             const siteUrl = 'https://si.docs.wso2.com/en/latest/';
             const repoRawUrl = 'https://raw.githubusercontent.com/wso2/docs-si/main/en/docs/';
-            
+
             if (window.location.href.startsWith(siteUrl)) {
                 let relPath = window.location.href.substring(siteUrl.length);
                 if (relPath.endsWith('/') || relPath === '') {
@@ -298,6 +328,9 @@
                     relPath = relPath.replace(/\.html$/, '.md');
                 }
                 rawUrl = repoRawUrl + relPath;
+                console.log('Derived raw URL:', rawUrl);
+            } else {
+                console.warn('Current URL does not match expected site URL');
             }
         }
 
@@ -313,6 +346,7 @@
         }
 
         if (rawUrl) {
+            console.log('Creating copy button with rawUrl:', rawUrl);
             const btn = createCopyPageButton(rawUrl);
 
             if (insertionPoint) {
