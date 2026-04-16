@@ -3,7 +3,7 @@
 To upgrade from WSO2 Integrator: SI 1.0.0 to WSO2 Integrator: SI 1.1.0, follow the steps below:
 
 !!! tip "Before you begin:"
-    Download WSO2 Integrator: SI 1.1.0 version from the [WSO2 Integrator: SI Page](https://wso2.com/integration/streaming-integrator/)
+    Download WSO2 Integrator: SI 1.1.0 version from the [WSO2 Integrator: SI Page](https://wso2.com/streaming-integrator/)
 
 ## Step 1: Deploy the Siddhi applications
 
@@ -29,7 +29,7 @@ The purpose of this step is to Start the WSO2 Integrator: SI and identify any fu
 1. Navigate to the `<SI 1.1.0_HOME>/bin` directory and issue the appropriate command based on your operating system:
 
     - **For Windows**     : `server.bat`
-    - **For Linux/MacOS** :`./server.sh`
+    - **For Linux/macOS** :`./server.sh`
     
     If any of the deployed Siddhi applications uses a Siddhi extension that is not currently installed, it is indicated via an error in the start up logs as shown in the example below:
     
@@ -38,7 +38,7 @@ The purpose of this step is to Start the WSO2 Integrator: SI and identify any fu
 2. To install all the missing extensions that are required to run the Siddhi applications currently deployed, navigate to the `<SI 1.1.0_HOME>/bin` directory and issue the appropriate command based on your operating system:
 
     - **For Windows**     : `extension-installer.bat install`
-    - **For Linux/MacOS** : `./extension-installer.sh install` 
+    - **For Linux/macOS** : `./extension-installer.sh install` 
     
     As a result, the following message is logged.
     

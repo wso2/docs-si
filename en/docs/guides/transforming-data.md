@@ -22,7 +22,7 @@ The WSO2 Integrator: SI can consume events in the default format in which they a
     
     ```
     @source(type='file', mode='LINE',
-        file.uri='file:/Users/foo/productions.csv',
+        file.uri='file:<YOUR_HOME>/productions.csv',
         tailing='true',
         @map(type='csv'))
     define stream SweetProductionStream (name string, amount double);
@@ -83,7 +83,7 @@ WSO2 Integrator: SI can publish messages in the default format or in a custom fo
     
     ```
     @sink(type = 'file', 
-        file.uri = "file:/Users/foo/productions.csv",
+        file.uri = "file:<YOUR_HOME>/productions.csv",
         @map(type = 'xml'))
     define stream OutputStream (name string, amount double);
     ```
@@ -211,7 +211,7 @@ To try out the transformations described above with some of the given examples, 
             @attributes(amount = "$.batch.count", name = "$.sweet")))
     define stream SweetProductionStream (name string, amount double);
     
-    @sink(type = 'file', file.uri = "file:/Users/foo/productions.json",
+    @sink(type = 'file', file.uri = "file:<YOUR_HOME>/productions.json",
         @map(type = 'json', validate.json = "false", enclosing.element = "$.Product",
             @payload("""{"ProductionData":{"Name":"{{name}}","Quantity":"{{amount}}","Total":{{total}},"Average":{{average}}}}""")))
     define stream ProductionTotalsStream (name string, amount double, total double, average double);

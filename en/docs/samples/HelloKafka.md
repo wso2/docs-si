@@ -26,7 +26,7 @@ This application demonstrates how to use the Kafka transport in Siddhi to receiv
             <SI-Tooling-Home>/bin/jartobundle.bat <{Source} Directory Path> <{Destination} Directory Path>
             ```
 
-            * For Linux:
+            * For Linux/macOS:
 
             ```bash
             sh <SI-Tooling-Home>/bin/jartobundle.sh <{Source} Directory Path> <{Destination} Directory Path>

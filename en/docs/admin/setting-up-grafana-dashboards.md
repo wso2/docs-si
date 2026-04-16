@@ -52,7 +52,7 @@ In order to configure a Grafana dashboard, follow the steps below:
     To start the Streaming runtime, navigate to the `<SI-Home>/bin` directory and issue the appropriate command based on your operating system.
     
     - **For Windows**: `server.bat --run`<br/>
-    - **For Linux/MacOS**: `./server.sh`
+    - **For Linux/macOS**: `./server.sh`
 
 3. **Start the Prometheus server**
 
@@ -77,7 +77,7 @@ In order to configure a Grafana dashboard, follow the steps below:
     2. Start Grafana
     
         !!! info
-            The procedure to start Grafana depends on your operating system and the installation process. e.g., If your operating system is Mac OS and you have installed Grafana via Homebrew, you start Grafana by issuing the `brew services start grafana` command.
+            The procedure to start Grafana depends on your operating system and the installation process. e.g., If your operating system is macOS and you have installed Grafana via Homebrew, you start Grafana by issuing the `brew services start grafana` command.
             
     3. Access Grafana via `http://localhost:3000/`.
    

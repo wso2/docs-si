@@ -25,3 +25,4 @@ To understand how Streaming Integration is performed via the WSO2 Integrator: SI
 [**Step 4: Run the Siddhi Application**](test-siddhi-application.md)<br/><br/>
 [**Step 5: Update the Siddhi Application**](update-the-siddhi-application.md)<br/><br/>
 [**Step 6: Monitor Statistics**](monitor-statistics.md)<br/><br/>
+[**Step 7: Export the Siddhi Application as a Docker Artifact**](export-siddhi-application-as-docker.md)<br/><br/>

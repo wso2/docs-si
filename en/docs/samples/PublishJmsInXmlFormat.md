@@ -24,7 +24,7 @@ This application demonstrates how to configure WSO2 Integrator: SI Tooling to se
 To convert ActiveMQ lib to OSGI,
 
 1. Navigate to <SI-Tooling-Home>/bin and run the following command:
-	- For Linux:
+	- For Linux/macOS:
 
 	```bash
 	./icf-provider.sh org.apache.activemq.jndi.ActiveMQInitialContextFactory <Downloaded Jar Path>/activemq-client-5.x.x.jar <Output Jar Path>

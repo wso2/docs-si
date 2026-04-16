@@ -29,8 +29,8 @@ To enable the WSO2 Integrator: SI to receive and publish events via the Kafka tr
             This directory is referred to as the `<DESTINATION_DIRECTORY>` in the next steps.
 
     3. To convert all the Kafka jars you copied into the `<SOURCE_DIRECTORY>` , issue one of the following commands.
-        - **For Windows:**: `<SI_HOME>/bin/jartobundle.bat <SOURCE_DIRECTORY_PATH> <DESTINATION_DIRECTORY_PATH>`
-        - **For Linux**: `<SI_HOME>/bin/jartobundle.sh <SOURCE_DIRECTORY_PATH> <DESTINATION_DIRECTORY_PATH>`
+        - **For Windows**: `<SI_HOME>/bin/jartobundle.bat <SOURCE_DIRECTORY_PATH> <DESTINATION_DIRECTORY_PATH>`
+        - **For Linux/macOS**: `<SI_HOME>/bin/jartobundle.sh <SOURCE_DIRECTORY_PATH> <DESTINATION_DIRECTORY_PATH>`
 
     4. Copy the converted files from the `<DESTINATION_DIRECTORY>` to the `<SI_HOME>/lib` directory.
 
@@ -53,7 +53,7 @@ To configure the **Apache ActiveMQ** message broker, follow the steps below:
 3. Register the `InitialContextFactory` implementation according to the OSGi JNDI spec and copy the client jar to the `<SI_HOME>/lib` directory as follows.
 
     1. Navigate to the `SI_HOME>/bin` directory and issue the following command.
-        - **For Linux**: `./icf-provider.sh org.apache.activemq.jndi.ActiveMQInitialContextFactory <Downloaded Jar Path>/activemq-client-5.x.x.jar <Output Jar Path>`
+        - **For Linux/macOS**: `./icf-provider.sh org.apache.activemq.jndi.ActiveMQInitialContextFactory <Downloaded Jar Path>/activemq-client-5.x.x.jar <Output Jar Path>`
         - **For Windows**: `./icf-provider.bat org.apache.activemq.jndi.ActiveMQInitialContextFactory <Downloaded Jar Path>\activemq-client-5.x.x.jar <Output Jar Path>`
 
         !!! info
@@ -90,7 +90,7 @@ To configure the **Apache ActiveMQ** message broker, follow the steps below:
 
 6. To convert all the Kafka jars you copied into the `<SOURCE_DIRECTORY>`, issue the following command.
     - **For Windows**: `<SI_HOME>/bin/jartobundle.bat <SOURCE_DIRECTORY_PATH> <DESTINATION_DIRECTORY_PATH>`
-    - **For Linux**: `<SI_HOME>/bin/jartobundle.sh <SOURCE_DIRECTORY_PATH> <DESTINATION_DIRECTORY_PATH>`
+    - **For Linux/macOS**: `<SI_HOME>/bin/jartobundle.sh <SOURCE_DIRECTORY_PATH> <DESTINATION_DIRECTORY_PATH>`
 
 7. Copy the converted files from the `<DESTINATION_DIRECTORY>` to the `<SI_HOME>/lib` directory.
 

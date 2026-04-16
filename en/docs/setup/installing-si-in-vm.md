@@ -7,7 +7,7 @@ Follow the steps given below to install the WSO2 Integrator: SI.
 | Type   | Requirement                                                                                     |
 |--------|-------------------------------------------------------------------------------------------------|
 | CPU    | You require a minimum of one CPU with 2 cores. It is recommended to have a CPU with 4 cores.    |
-| Memory | ~ 4 GB minimum is recommended</br> </br>  ~ 2 GB heap size                                      |
+| Memory | ~ 4 GB minimum is recommended<br/> <br/>  ~ 2 GB heap size                                      |
 | Disk   | ~ 1 GB minimum (excluding space allocated for log files and databases.)                         |
 
 ## Download and install
@@ -39,7 +39,7 @@ Follow the steps given below to start the server.
 
     - To start the server in background mode:
 
-        === ""On macOS/Linux"
+        === "On macOS/Linux"
             ```bash 
             sh server.sh start
             ```

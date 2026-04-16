@@ -10,7 +10,7 @@ This tutorial takes you through the different modes and options you could use, i
     - Start the SI server by navigating to the `<SI-Home>/bin` directory and issuing one of the following commands as appropriate, based on your operating system:<br/>
       <br/>
         - For Windows: `server.bat`<br/>
-        - For Linux:  `sh server.sh`<br/>
+        - For Linux/macOS:  `sh server.sh`<br/>
       <br/>
     - The following log appears in the WSO2 Integrator: SI console once you have successfully started the server. <br/>
         `INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 4.240 sec`
@@ -26,7 +26,7 @@ In this section of the tutorial, you are exploring the different ways in which y
 
 In this scenario, you are tailing a text file, line by line, in order to extract data from it. Each line is extracted as an event that undergoes a simple transformation thereafter. Let's write a simple Siddhi application to do this.
 
-1. Download `productions.csv` file from [here](https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/productions.csv) and save it in a location of your choice.
+1. Download `productions.csv` file from [here]({{base_path}}/examples/resources/productions.csv) and save it in a location of your choice.
 
 2. Open a text file and copy-paste following Siddhi application to it.
 
@@ -36,7 +36,7 @@ In this scenario, you are tailing a text file, line by line, in order to extract
     @App:description('Tails a file line by line and does a simple transformation.')
 
     @source(type='file', mode='LINE',
-        file.uri='file:/Users/foo/productions.csv',
+        file.uri='file:<YOUR_HOME>/productions.csv',
         tailing='true',
         @map(type='csv'))
     define stream SweetProductionStream (name string, amount double);
@@ -92,7 +92,7 @@ In this scenario, you are tailing a text file, line by line, in order to extract
 
 In this scenario, you are using a regular expression to extract data from the file. After data is extracted, a simple transformation is performed on them. Finally, the transformed event is logged in the SI console. Let's write a simple Siddhi application to do this.
 
-1. Download `noisy_data.txt` file from [here](https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/noisy_data.txt) and save it in a location of your choice.
+1. Download `noisy_data.txt` file from [here]({{base_path}}/examples/resources/noisy_data.txt) and save it in a location of your choice.
 
 2. Open a text file and copy-paste following Siddhi application to it.
 
@@ -102,7 +102,7 @@ In this scenario, you are using a regular expression to extract data from the fi
     @App:description('Tails a file using a regex and does a simple transformation.')
     
     @source(type='file', mode='REGEX',
-        file.uri='file:/Users/foo/noisy_data.txt',
+        file.uri='file:<YOUR_HOME>/noisy_data.txt',
         begin.regex='\<', end.regex='\>',
         tailing='true',
         @map(type='text', fail.on.missing.attribute = 'false', regex.A='(\w+)\s([-0-9]+)',regex.B='volume\s([-0-9]+)', @attributes(symbol = 'A[1]',price = 'A[2]',volume = 'B')))
@@ -158,7 +158,7 @@ In the previous scenarios, you tailed a file and each file generated multiple ev
 
 Furthermore, to try out the capability of processing remote files, you are processing a remote file instead of a file located in the local file system.
 
-1. Download `portfolio.txt` file from [here](https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/portfolio.txt) and upload it into an FTP server.
+1. Download `portfolio.txt` file from [here]({{base_path}}/examples/resources/portfolio.txt) and upload it into an FTP server.
 
 2. Create a directory on the FTP server.  The `portfolio.txt` file is moved to this folder after the processing is complete.
 
@@ -213,7 +213,7 @@ Furthermore, to try out the capability of processing remote files, you are proce
 
 In the previous scenarios, you processed text files in order to extract data. In this scenario, you are reading a binary file. The content of the file generates a single event.
 
-1. Download `wso2.bin` file from [here](https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/wso2.bin) and save it in a location of your choice.
+1. Download `wso2.bin` file from [here]({{base_path}}/examples/resources/wso2.bin) and save it in a location of your choice.
 
 2. Open a text file and copy-paste following Siddhi application to it.
 
@@ -223,8 +223,8 @@ In the previous scenarios, you processed text files in order to extract data. In
     @App:description('Reads a binary file and moves it after processing.')
     
     @source(type='file', mode='BINARY.FULL',
-        file.uri='file:/Users/foo/wso2.bin',
-        action.after.process='MOVE', move.after.process='file:/Users/foo/move.after.process', 
+        file.uri='file:<YOUR_HOME>/wso2.bin',
+        action.after.process='MOVE', move.after.process='file:<YOUR_HOME>/move.after.process', 
         @map(type='json', enclosing.element="$.portfolio", @attributes(symbol = "stock.company.symbol", price = "stock.price", volume = "stock.volume")))
     define stream StockStream (symbol string, price float, volume long);
      
@@ -261,7 +261,7 @@ In the previous scenarios, you processed text files in order to extract data. In
 
 In this scenario, you are reading a text file completely, and then deleting it after  processing. In other words, the file is not tailed. You read the file line by line where each line generates an event.
 
-1. Download `productions.csv` file from [here](https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/productions.csv) and save it in a location of your choice.
+1. Download `productions.csv` file from [here]({{base_path}}/examples/resources/productions.csv) and save it in a location of your choice.
 
 2. Open a text file and copy-paste following Siddhi application to it.
 
@@ -271,7 +271,7 @@ In this scenario, you are reading a text file completely, and then deleting it a
     @App:description('Reads a file line by line and does a simple transformation.')
     
     @source(type='file', mode='LINE',
-        file.uri='file:/Users/foo/productions.csv',
+        file.uri='file:<YOUR_HOME>/productions.csv',
         tailing='false',
         @map(type='csv'))
     define stream SweetProductionStream (name string, amount double);
@@ -313,7 +313,7 @@ In this scenario, you are reading a text file completely, and then deleting it a
 
 5. Note that `productions.csv` file is not present in the `file.uri` location.
 
-6. Next, create a new `productions.csv` file in the `file.uri` location that includes the latest set of productions. Download `productions.csv` file from [here](https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/productions.csv) and save it in the `file.uri` location.
+6. Next, create a new `productions.csv` file in the `file.uri` location that includes the latest set of productions. Download `productions.csv` file from [here]({{base_path}}/examples/resources/productions.csv) and save it in the `file.uri` location.
 
 7. Now the Siddhi application starts to process the new set of production runs in the `productions.csv` file. The file has the following two entries.
 
@@ -333,7 +333,7 @@ In this scenario, you are reading a text file completely, and then deleting it a
 
 In this scenario, you are using a regular expression to extract data from the content of the file. Here, you do not tail the file.  Instead, you read the full content of the file and generate a single event. After this is done, the file is deleted. To generate an event stream, you can keep re-creating the file with new data.
 
-1. Download `noisy_data.txt` file from [here](https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/noisy_data.txt) and save it in a location of your choice.
+1. Download `noisy_data.txt` file from [here]({{base_path}}/examples/resources/noisy_data.txt) and save it in a location of your choice.
 
 2. Open a text file and copy-paste following Siddhi application to it.
 
@@ -343,7 +343,7 @@ In this scenario, you are using a regular expression to extract data from the co
     @App:description('Reads a file using a regex and does a simple transformation.')
     
     @source(type='file', mode='REGEX',
-        file.uri='file:/Users/foo/noisy_data.txt',
+        file.uri='file:<YOUR_HOME>/noisy_data.txt',
         begin.regex='\<', end.regex='\>',
         tailing='false',
         @map(type='text', fail.on.missing.attribute = 'false', regex.A='(\w+)\s([-0-9]+)',regex.B='volume\s([-0-9]+)', @attributes(symbol = 'A[1]',price = 'A[2]',volume = 'B')))
@@ -380,7 +380,7 @@ In this scenario, you are using a regular expression to extract data from the co
 
     Note that `noisy_data.txt` file is not present in the `file.uri` location.
 
-5. Next, let's create a new `noisy_data.txt` file in the `file.uri` location that includes the latest set of productions. Download `noisy_data.txt` file from [here](https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/noisy_data.txt) and save it in the `file.uri` location.
+5. Next, let's create a new `noisy_data.txt` file in the `file.uri` location that includes the latest set of productions. Download `noisy_data.txt` file from [here]({{base_path}}/examples/resources/noisy_data.txt) and save it in the `file.uri` location.
 
     Now the Siddhi application starts to process the new content in the `noisy_data.txt` file. The file has the following content.
 
@@ -413,7 +413,7 @@ In this scenario, you extract data from a specific folder. All of the files are 
     @App:description('Process all files in the folder and delete files after processing.')
             
     @source(type='file', mode='text.full',
-        dir.uri='file:/Users/foo/productions',
+        dir.uri='file:<YOUR_HOME>/productions',
         @map(type='json', enclosing.element="$.portfolio", @attributes(symbol = "stock.company.symbol", price = "stock.price", volume = "stock.volume")))
     define stream StockStream (symbol string, price float, volume long);
     
@@ -470,7 +470,7 @@ In this scenario, you are appending a stream of events to the end of a file.
             @map(type='json'))
     define stream SweetProductionStream (name string, amount double);
     
-    @sink(type='file', @map(type='json'), file.uri='/Users/foo/low_productions.txt')
+    @sink(type='file', @map(type='json'), file.uri='<YOUR_HOME>/low_productions.txt')
     define stream LowProductionStream (name string, amount double);
     
     -- Query to filter productions which have amount < 500.0
@@ -519,7 +519,7 @@ In this scenario, you are appending a stream of events to the end of a file.
     Instead of appending each event to the end of the file, you can configure your Siddhi application to over-write the file. To do this, set the `append='false'` configuration in the Siddhi application as shown in the sample `file` sink configuration below.
 
     ```sql
-    @sink(type='file', append='false',  @map(type='json'), file.uri='/Users/foo/low_productions.txt')
+    @sink(type='file', append='false',  @map(type='json'), file.uri='<YOUR_HOME>/low_productions.txt')
        define stream LowProductionAlertStream (name string, amount double);
     ```
 
@@ -566,7 +566,7 @@ The production data is updated in a file and therefore you have to keep tailing 
 
 3. Restart the WSO2 Integrator: SI server for above change to be effective.
 
-4. Download `productions.csv` file from [here](https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/productions.csv) and save it in a location of your choice.
+4. Download `productions.csv` file from [here]({{base_path}}/examples/resources/productions.csv) and save it in a location of your choice.
 
 5. Open a text file and copy-paste following Siddhi application to it.
 
@@ -576,7 +576,7 @@ The production data is updated in a file and therefore you have to keep tailing 
     @App:description('Siddhi application to count the total number of orders.')
     
     @source(type='file', mode='LINE',
-        file.uri='file:/Users/foo/productions.csv',
+        file.uri='file:<YOUR_HOME>/productions.csv',
         tailing='true',
         @map(type='csv'))
     define stream SweetProductionStream (name string, amount double);

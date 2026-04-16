@@ -5,7 +5,7 @@ After creating and testing a Siddhi application, you can to deploy it in Docker 
 To deploy your Siddhi application in docker, follow the procedure below:
 
 1. Open VSCode in the directory where your Siddhi application is located.
-2. Open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS), and type **SI: Deploy Siddhi Apps to Docker**. Select this command.
+2. Open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS), and type **SI: Export Siddhi Apps to Docker**. Select this command.
 
     ![Deploy to Server Docker Option]({{base_path}}/images/quick-start-guide-101/export-to-docker.png)
 

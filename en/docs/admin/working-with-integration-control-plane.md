@@ -149,7 +149,7 @@ Follow the steps given below.
 1. Open a terminal and navigate to the `<ICP_HOME>/bin` folder.
 2. Execute one of the commands given below.
 
-    === "On MacOS/Linux"
+    === "On macOS/Linux"
         ```bash
         ./dashboard.sh
         ```
@@ -165,7 +165,7 @@ Follow the steps given below.
 1. Open a terminal and navigate to the `<SI_HOME>/bin` folder.
 2. Execute one of the commands given below.
 
-    === "On MacOS/Linux"
+    === "On macOS/Linux"
         ```bash 
         ./server.sh
         ```
@@ -200,8 +200,8 @@ Once you have [set up and started the ICP server](#using-the-integration-control
                 Username
             </th>
             <td>
-                The user name to sign in.</br></br>
-                <b>Note</b>: This should be a valid username that is saved in the WSO2 Integrator: SI server's user store. By default, the 'admin' user name is configured in the default user store.</br></br>
+                The user name to sign in.<br/><br/>
+                <b>Note</b>: This should be a valid username that is saved in the WSO2 Integrator: SI server's user store. By default, the 'admin' user name is configured in the default user store.<br/><br/>
             </td>
         </tr>
         <tr>

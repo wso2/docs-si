@@ -46,7 +46,7 @@ view of the WSO2 Integrator: SI Tooling.
 
 To create a Siddhi application via the source view of the WSO2 Integrator: SI Tooling, follow the steps below:
 
-1. Open a VSCode window and ensure that the WSO2 Integrator: SI for VS Code extension is installed. Open the command pallete and type `SI: Open SI Welcome` to open the welcome page.
+1. Open a VSCode window and ensure that the WSO2 Integrator: SI for VS Code extension is installed. Open the command palette and type `SI: Open SI Welcome` to open the welcome page.
 
   ![Welcome Page]({{base_path}}/images/Creating-Siddhi-Applications/Welcome-Page.png)
 

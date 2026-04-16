@@ -37,7 +37,8 @@ This tutorial demonstrates how you can use the Siddhi Store Query API to perform
 
 2. Create a new user by executing the following SQL query.
     ```
-    GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si' IDENTIFIED BY 'wso2';
+    CREATE USER 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';
+    GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si'@'localhost';
     ```
 
 3. Switch to the `production` database and create a new table, by executing the following queries:

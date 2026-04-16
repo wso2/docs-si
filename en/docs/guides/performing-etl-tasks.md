@@ -18,13 +18,13 @@ To maintain a database with purchase records, you can create an ETL application 
 @App:description('Maintains purchase records')
 
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/SugarSupply.csv',
+    file.uri='file:<YOUR_HOME>/SugarSupply.csv',
     tailing='true',
     @map(type='csv'))
 define stream SugarSupplyStream (transNo string, price double, amount double);
 
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/FlourSupply.csv',
+    file.uri='file:<YOUR_HOME>/FlourSupply.csv',
     tailing='true',
     @map(type='csv'))
 define stream FlourSupplyStream (transNo string, name string, price double, amount double);
@@ -74,7 +74,7 @@ WSO2 Stream Processor needs to extract events from that file and the `PurchaseRe
 define stream PurchasesStream (name string, amount double);
 
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/MaterialDispatches.xml',
+    file.uri='file:<YOUR_HOME>/MaterialDispatches.xml',
     tailing='true',
     @map(type='xml'))
 define stream MaterialDispatchesStream (name string, amount double); 
@@ -130,13 +130,13 @@ Once you add all the new Siddhi queries and configurations introduced in this se
 @App:description('Maintains the latest stock amounts')
 
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/SugarSupply.csv',
+    file.uri='file:<YOUR_HOME>/SugarSupply.csv',
     tailing='true',
     @map(type='csv'))
 define stream SugarSupplyStream (transNo string, price double, amount double);
 
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/FlourSupply.csv',
+    file.uri='file:<YOUR_HOME>/FlourSupply.csv',
     tailing='true',
     @map(type='csv'))
 define stream FlourSupplyStream (transNo string, name string, price double, amount double);
@@ -146,7 +146,7 @@ define stream FlourSupplyStream (transNo string, name string, price double, amou
 define stream PurchasesStream (name string, amount double);
 
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/MaterialDispatches.csv',
+    file.uri='file:<YOUR_HOME>/MaterialDispatches.csv',
     tailing='true',
     @map(type='csv'))
 define stream MaterialDispatchesStream (name string, amount double); 
@@ -204,7 +204,7 @@ When you extended the ETL flow to perform stock updates, it involved adding more
 
 ```
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/HoneySupply.xml',
+    file.uri='file:<YOUR_HOME>/HoneySupply.xml',
     tailing='true',
     @map(type='xml'))
 define stream HoneySupplyStream (transNo string, name string, price double, amount double);

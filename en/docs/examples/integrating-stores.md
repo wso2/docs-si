@@ -35,10 +35,10 @@ To understand how the WSO2 Integrator: SI performs these operations, follow the 
     - You need to have access to a MySQL instance.<br/><br/>
     - Install `rdbms-mysql` extension in WSO2 Integrator: SI as follows:<br/><br/>
         1. Start WSO2 Integrator: SI by navigating to the `<SI_HOME>/bin` directory and issuing the appropriate command based on your operating system.<br/><br/>
-            - **For Linux**  : `./server.sh`
+            - **For Linux/macOS**  : `./server.sh`
             - **For Windows**: `server.bat --run`<br/><br/>
         2. To install the `rdbms-mysql` extension, navigate to the to the `<SI_HOME>/bin` directory and issue the appropriate command based on your operating system:<br/><br/>
-            - **For Linux**  : `./extension-installer.sh`
+            - **For Linux/macOS**  : `./extension-installer.sh`
             - **For Windows**: `extension-installer.bat --run`<br/><br/>
         3. Restart the WSO2 Integrator: SI server.<br/><br/>
     - Install the `rdbms-mysql` extension in WSO2 Integrator: SI as follows.<br/><br/>

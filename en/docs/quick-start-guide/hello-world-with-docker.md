@@ -40,7 +40,7 @@ Let's create a simple Siddhi application that receives an HTTP message, does a s
 
 1. Start the WSO2 Integrator: SI Tooling via one of the following methods depending on your operating system:
 
-    - On MacOS/Linux/CentOS, open a terminal and issue the following command:
+    - On macOS/Linux/CentOS, open a terminal and issue the following command:
 
         `sudo wso2si-tooling-<VERSION>`
 

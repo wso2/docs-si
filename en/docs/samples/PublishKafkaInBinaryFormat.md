@@ -28,7 +28,7 @@ To convert Kafka libs to OSGI,
 2. Create another folder(Eg: Kafka-osgi, This folder will have the libs that converted to OSGI).
 3. Navigate to `<SI-Tooling-Home>/bin` and issue the follwing command.
 
-	* For Linux:
+	* For Linux/macOS:
 
 		```bash
 		./jartobundle.sh <path/kafka> <path/kafka-osgi>

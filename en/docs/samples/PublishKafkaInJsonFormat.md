@@ -15,7 +15,7 @@ This application demonstrates how to configure WSO2 Integrator: SI Tooling to se
 		* zookeeper-3.4.6.jar
 	3. Copy these same files to the `<SI-Tooling-Home>/samples/sample-clients/lib` folder.
 	4. Navigate to `<SI-Home>/bin` and issue the following command:
-		* For Linux:
+		* For Linux/macOS:
 			```bash
 			./jartobundle.sh <path/kafka> <path/kafka-osgi>
 			```

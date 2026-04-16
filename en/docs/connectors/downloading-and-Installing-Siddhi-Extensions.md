@@ -19,7 +19,7 @@ The following are some actions that you are required to perform in order to iden
     To perform this action, issue the appropriate command out of the following based on your operating system:
     
     - **For Windows**     : `extension-installer.bat list`
-    - **For Linux/MacOS** : `./extension-installer.sh list`
+    - **For Linux/macOS** : `./extension-installer.sh list`
     
     The following is a sample response log for this command.
     
@@ -41,7 +41,7 @@ The following are some actions that you are required to perform in order to iden
     To perform this action, issue the appropriate command out of the following based on your operating system:
     
     - **For Windows**     : `extension-installer.bat list --all`
-    - **For Linux/MacOS** : `./extension-installer.sh list --all`
+    - **For Linux/macOS** : `./extension-installer.sh list --all`
     
     The following is a sample response for this command.
     
@@ -54,7 +54,7 @@ The following are some actions that you are required to perform in order to iden
     To perform this action, issue the appropriate command out of the following based on your operating system:
     
     - **For Windows**     : `extension-installer.bat list <EXTENSION_NAME>`
-    - **For Linux/MacOS** : `./extension-installer.sh list <EXTENSION_NAME>`   
+    - **For Linux/macOS** : `./extension-installer.sh list <EXTENSION_NAME>`   
     
     !!! info
         Here, the `<EXTENSION_NAME>` refers to the name of the extension. When you use the command line to view the list of extensions that are currently installed or to view the installation status of all the supported Siddhi extensions, the extension names are displayed in the `name` column.<br/><br/>e.g., The extension name of the gRPC extension is `grpc`.
@@ -62,7 +62,7 @@ The following are some actions that you are required to perform in order to iden
     e.g., To view the installation status of the `cdc-oracle` extension (which is partially installed by default), issue the following command:
     
     - **For Windows**     : `extension-installer.bat list cdc-oracle`
-    - **For Linux/MacOS** : `./extension-installer.sh list cdc-oracle`
+    - **For Linux/macOS** : `./extension-installer.sh list cdc-oracle`
     
     The sample response is as follows.
     
@@ -75,7 +75,7 @@ The following are some actions that you are required to perform in order to iden
 If the Siddhi applications deployed in your WSO2 Integrator: SI setup use Siddhi extensions that are not currently installed, you can automatically install all those extensions at once. To do this, issue the appropriate command out of the following based on your operating system.
 
 - **For Windows**     : `extension-installer.bat install`
-- **For Linux/MacOS** : `./extension-installer.sh install` 
+- **For Linux/macOS** : `./extension-installer.sh install` 
 
 e.g., If a Siddhi application that is currently deployed in your WSO2 Integrator: SI setup uses the Amazon S3 extension, and if this extension is not already installed, you can issue the command given above. As a result, the following message appears in the terminal informing you of extensions that are used in Siddhi applications, but not installed. It also prompts you to specify whether you want to install them.
 
@@ -90,7 +90,7 @@ If you enter `y` to specify that you want to proceed with the installation, the 
 If you want to install a specific Siddhi extension, issue the appropriate command out of the following based on your operating system.
 
 - **For Windows**     : `extension-installer.bat install <EXTENSION_NAME>`
-- **For Linux/MacOS** : `./extension-installer.sh install <EXTENSION_NAME>` 
+- **For Linux/macOS** : `./extension-installer.sh install <EXTENSION_NAME>` 
 
 !!! info
     Here, the `<EXTENSION_NAME>` refers to the name of the extension. When you use the command line to view the list of extensions that are currently installed or to view the installation status of all the supported Siddhi extensions, the extension names are displayed in the `name` column.<br/><br/>e.g., The extension name of the gRPC extension is `grpc`.
@@ -98,7 +98,7 @@ If you want to install a specific Siddhi extension, issue the appropriate comman
 e.g., To install the `grpc` Siddhi extension, issue the following command.
 
 - **For Windows**     : `extension-installer.bat install grpc`
-- **For Linux/MacOS** : `./extension-installer.sh install grpc` 
+- **For Linux/macOS** : `./extension-installer.sh install grpc` 
 
 The following message appears to inform you of the status of the installation and to prompt you to restart the WSO2 Integrator: SI server once the installation is complete.
 
@@ -109,7 +109,7 @@ The following message appears to inform you of the status of the installation an
 To uninstall a specific Siddhi application, issue the appropriate command out of the following based on your operating system.
 
 - **For Windows**     : `extension-installer.bat uninstall <EXTENSION_NAME>`
-- **For Linux/MacOS** : `./extension-installer.sh uninstall <EXTENSION_NAME>` 
+- **For Linux/macOS** : `./extension-installer.sh uninstall <EXTENSION_NAME>` 
 
 !!! info
     Here, the `<EXTENSION_NAME>` refers to the name of the extension. When you use the command line to view the list of extensions that are currently installed or to view the installation status of all the supported Siddhi extensions, the extension names are displayed in the `name` column.<br/><br/>e.g., The extension name of the gRPC extension is `grpc`.
@@ -117,7 +117,7 @@ To uninstall a specific Siddhi application, issue the appropriate command out of
 e.g., To un-install the `grpc` Siddhi extension, issue the following command.
 
 - **For Windows**     : `extension-installer.bat uninstall grpc`
-- **For Linux/MacOS** : `./extension-installer.sh uninstall grpc` 
+- **For Linux/macOS** : `./extension-installer.sh uninstall grpc` 
 
 A message appears to inform you of any other extension that shares dependencies with the extension being uninstalled. The message also prompts you to confirm whether you want to proceed with the installation or not.
 

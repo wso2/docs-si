@@ -11,7 +11,7 @@ To understand this, consider a scenario where the WSO2 Integrator: SI receives p
     - Install the `grpc` Siddhi extension in WSO2 Integrator: SI VSCode extension. To do this, access WSO2 Integrator: VSCode extension, open the command pallette, type **SI: Extension Installer**, and then click **Install** for the **gRPC** extension. Reload VSCode for the installation to be effective. For detailed instructions, see [Installing Siddhi Extensions]({{base_path}}/develop/installing-siddhi-extensions.md).
     - To install the `grpc` Siddhi extension in WSO2 Integrator: SI, navigate to the `<SI_HOME>/bin` directory and issue the appropriate command based on your operating system.<br/><br/>
         - **For Windows**     : `extension-installer.bat install grpc`<br/>
-        - **For Linux/MacOS** : `./extension-installer.sh install grpc`<br/><br/>
+        - **For Linux/macOS** : `./extension-installer.sh install grpc`<br/><br/>
        Then restart WSO2 Integrator: SI for the installation to be effective. For detailed instructions to install a Siddhi extension, see [Downloading and Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
 
 ## Configuring the WSO2 Integrator: SI
@@ -203,7 +203,7 @@ After doing the required configurations in the WSO2 Integrator: SI, let's config
    
 3. Start the WSO2 Integrator: MI by issuing the appropriate command out of the following, depending on your operating system.
              
-    - **For Linux/MacOS**: `./micro-integrator.sh`
+    - **For Linux/macOS**: `./micro-integrator.sh`
     - **For Windows**: `micro-integrator.bat --run`
 
 

@@ -23,7 +23,7 @@ This application demonstrates how to configure WSO2 Integrator: SI Tooling to re
                 <SI-Tooling-Home>/bin/jartobundle.bat <{Source} Directory Path> <{Destination} Directory Path>
                 ```
 
-            * For Linux:
+            * For Linux/macOS:
 
                 ```bash
                 sh <SI-Tooling-Home>/bin/jartobundle.sh <{Source} Directory Path> <{Destination} Directory Path>

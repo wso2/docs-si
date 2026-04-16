@@ -4,7 +4,7 @@
 
 This quick start guide gets you started with the WSO2 Integrator: SI (SI), in just 5 minutes.
 
-In this guide, you will download the SI distribution as well as Kafka, and then try out a simple Siddhi application. This Siddhi application consumes messages from a file processes the data, generates an output, and then publishes that output to a Kafka topic.
+In this guide, you will download the SI distribution as well as Kafka, and then try out a simple Siddhi application. This Siddhi application consumes messages from a file, processes the data, generates an output, and then publishes that output to a Kafka topic.
 
 The following is the outline of this quick start guide.
 
@@ -12,13 +12,13 @@ The following is the outline of this quick start guide.
 
 ## Step 1: Download the WSO2 Integrator: SI
 
-Download the WSO2 Integrator: SI distribution from [WSO2 Integrator: SI site](https://wso2.com/integration/streaming-integrator/) and extract it to a location of your choice. Hereafter, the extracted location is referred to as `<SI-Home>`.
+Download the WSO2 Integrator: SI distribution from [WSO2 Integrator: SI site](https://wso2.com/streaming-integrator/) and extract it to a location of your choice. Hereafter, the extracted location is referred to as `<SI-Home>`.
 
 ## Step 2: Start the WSO2 Integrator: SI
 
 To start WSO2 Integrator: SI, navigate to the `<SI-Home>/bin` directory from the CLI, and issue the appropriate command based on your operating system:
 
-- **For Linux**: `./server.sh`
+- **For Linux/macOS**: `./server.sh`
 - **For Windows**: `server.bat --run`
 
 ## Step 3: Download Kafka
@@ -28,14 +28,14 @@ This directory is referred to as `<Kafka_Home>` from here on.
 
 ## Step 4: Create and deploy a simple Siddhi application
 
-Let's create a simple Siddhi application that reads data from a CSV file, does a simple transformation to the data, and then publishes the results to a Kafka topic so that multiple subscriber applications can have access to that data.
+Let's create a simple Siddhi application that reads data from a CSV file, performs a simple transformation on the data, and then publishes the results to a Kafka topic so that multiple subscriber applications can have access to that data.
 
 ![Scenario]({{base_path}}/images/qsg/quick-start.png)
 
-1. Download `productions.csv` file from [here](https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/productions.csv) and save it in a location of your choice.
+1. Download `productions.csv` file from [here]({{base_path}}/examples/resources/productions.csv) and save it in a location of your choice.
 
     !!! info
-        In this example, the file is located in the `Users/foo`directory.
+        In this example, the file is located in the `<YOUR_HOME>` directory.
 
 2. Open a text file and copy-paste the following Siddhi application into it.
 
@@ -46,7 +46,7 @@ Let's create a simple Siddhi application that reads data from a CSV file, does a
     @App:name('ManageProductionStats')
     @App:description('Receive events via file and publish to Kafka topic')
     
-    @source(type = 'file', mode = "LINE", file.uri = "file:/Users/foo/productions.csv", tailing = "true",
+    @source(type = 'file', mode = "LINE", file.uri = "file:<YOUR_HOME>/productions.csv", tailing = "true",
         @map(type = 'csv'))
     define stream SweetProductionStream (name string, amount double);
     
@@ -62,36 +62,40 @@ Let's create a simple Siddhi application that reads data from a CSV file, does a
     insert into TotalProductionStream;
     ```
 
-    The above Siddhi application reads input data from a file named `production.csv` in the CSV format, processes it and publishes the resulting output in a Kafka topic named `total_production`. As a result, any application that cannot read streaming data, but is capable of subscribing to a Kafka topic can access the output. The each input event reports the amount of a specific sweet produced in a production run. The WSO2 Integrator: SI calculates the total produced of each sweet with each event. Therefore, each output event reports the total amount produced for a sweet from the time you started running the Siddhi application. 
+    The above Siddhi application reads input data from a file named `productions.csv` in the CSV format, processes it and publishes the resulting output to a Kafka topic named `total_production`. As a result, any application that cannot read streaming data, but is capable of subscribing to a Kafka topic can access the output. Each input event reports the amount of a specific sweet produced in a production run. The WSO2 Integrator: SI calculates the total amount produced for each sweet with each event. Therefore, each output event reports the total amount produced for a sweet from the time you started running the Siddhi application. 
 
 3. Save this file as `ManageProductionStats.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
 
-    This deploys the `ManageProductionStats` in the WSO2 Integrator: SI. The following message appears to indicate that the Siddhi application is successfully installed.
-
-    `INFO {org.wso2.carbon.siddhi.editor.core.internal.WorkspaceDeployer} - Siddhi App ManageProductionStats.siddhi successfully deployed.`
+    At this point the Siddhi application references the Kafka extension, which is not yet installed, so WSO2 Integrator: SI cannot deploy it. You will see the successful-deploy log after installing the extension and restarting the server in Step 5.
     
 ## Step 5: Install the required extensions
 
-The `ManageProductionStats` Siddhi application uses a Kafka sink. However, the Siddhi extension for Kafka is not installed by default. To install it so that the Siddi application can integrate with Kafka as expected, follow the steps below:
+The `ManageProductionStats` Siddhi application uses a Kafka sink. However, the Siddhi extension for Kafka is not installed by default. To install it so that the Siddhi application can integrate with Kafka as expected, follow the steps below:
 
 1. Navigate to the `<SI-Home>/bin` directory and issue the appropriate command based on your operating system:
 
-    - **For Linux**: `./extension-installer.sh install`
+    - **For Linux/macOS**: `./extension-installer.sh install`
     - **For Windows**: `extension-installer.bat install`
     
-    As a result, a message appears in the terminal with a list of extensions used in your Siddhi application that are not completely installed, and requests you to confirm whether the system should proceed to install them
-    
-    
-2. Enter `Y` in the terminal to confirm that you want to proceed to install the required extensions, and then press the return key. Then the following message is displayed to indicate that the extension isinstalled.
+    As a result, a message appears in the terminal with a list of extensions used in your Siddhi application that are not completely installed, and requests you to confirm whether the system should proceed to install them.
 
-    ![Extention Installed]({{base_path}}/images/qsg/extension-installed.png)
+    ![Confirm extension install]({{base_path}}/images/qsg/confirm-extension-install.png)
+    
+    
+2. Enter `Y` in the terminal to confirm that you want to proceed to install the required extensions, and then press the return key. Then the following message is displayed to indicate that the extension is installed.
+
+    ![Extension Installed]({{base_path}}/images/qsg/extension-installed.png)
     
 3. Restart the WSO2 Integrator: SI server as instructed.
+
+    Once the server restarts, the following log confirms that the Siddhi application is now deployed:
+
+    `INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App ManageProductionStats deployed successfully`
 
 
 ## Step 6: Start Kafka and create a topic
 
-Let's start the Kafka server and create a Kafka topic so that the `ManageProductionStats.siddhi` application you created can publish its output to it.
+Let's start the Kafka server and create a Kafka topic so that the `ManageProductionStats` application you created can publish its output to it.
 
 To start Kafka:
 
@@ -99,13 +103,13 @@ To start Kafka:
 
     `sh bin/zookeeper-server-start.sh config/zookeeper.properties`
 
-2. Navigate to the `<Kafka_Home>` directory and start Kafka server node by issuing the following command.
+2. Navigate to the `<Kafka_Home>` directory and start a Kafka server node by issuing the following command.
 
     `sh bin/kafka-server-start.sh config/server.properties`
     
 To create a Kafka topic named `total_production`:
 
-1. Navigate to `<Kafka_Home>` directory and issue the following command:
+1. Navigate to the `<Kafka_Home>` directory and issue the following command:
 
     `bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic total_production`
     
@@ -114,14 +118,14 @@ To create a Kafka topic named `total_production`:
 
 To test the `ManageProductionStats` Siddhi application you created, follow the steps below.
  
-1. Open the `/Users/foo/productions.csv` file and add five rows in it as follows and save your changes.
+1. Open the `<YOUR_HOME>/productions.csv` file and append the following five rows, making sure to press Enter after the last row so the file ends with a newline, then save your changes.
 
     ```csv
     Toffee,40.0
-    Almond cookie, 70.0
-    Baked alaska, 30.0
-    Toffee, 60.0
-    Baked alaska, 20.0
+    Almond cookie,70.0
+    Baked alaska,30.0
+    Toffee,60.0
+    Baked alaska,20.0
     ```
 2. To observe the messages in the `total_production` topic, navigate to the `<Kafka_Home>` directory and issue the following command:
 
@@ -132,11 +136,12 @@ You can see the following message in the Kafka Consumer log.
 
 ```text
 {"event":{"name":"Almond cookie","amount":100.0}}
-{"event":{"name":"Baked alaska","amount":120.0}}
-{"event":{"name":"Toffee","amount":160.0}}
-{"event":{"name":"Almond cookie","amount":230.0}}
-{"event":{"name":"Baked alaska","amount":260.0}}
-{"event":{"name":"Toffee","amount":320.0}}
+{"event":{"name":"Baked alaska","amount":20.0}}
+{"event":{"name":"Toffee","amount":40.0}}
+{"event":{"name":"Almond cookie","amount":170.0}}
+{"event":{"name":"Baked alaska","amount":50.0}}
+{"event":{"name":"Toffee","amount":100.0}}
+{"event":{"name":"Baked alaska","amount":70.0}}
 ```
 
 
@@ -144,8 +149,8 @@ You can see the following message in the Kafka Consumer log.
 
 Once you try out this quick start guide, you can proceed to one of the following sections.
 
-- Learn the basic functionality of the WSO2 Integrator: SI in less than 30 minutes by [Creating Your First Siddhi Application](getting-started/getting-started-guide-overview.md)
+- Learn the basic functionality of the WSO2 Integrator: SI in less than 30 minutes by [Creating Your First Siddhi Application](getting-started/getting-started-guide-overview.md).
 
 - Try out [WSO2 Integrator: SI tutorials](../examples/tutorials-overview.md).
 
-- Learn how to run WSO2 Integrator: SI in containerized environments, try [Running SI with Docker and Kubernetes](../examples/running-si-with-docker-and-kubernetes.md)
+- Learn how to run WSO2 Integrator: SI in containerized environments by trying [Running SI with Docker and Kubernetes](../examples/running-si-with-docker-and-kubernetes.md).

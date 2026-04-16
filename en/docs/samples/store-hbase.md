@@ -19,7 +19,7 @@ This application demonstrates how to perform CRUD operations in HBase stores usi
             ```bash
             <SI_HOME>/bin/jartobundle.bat <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR>
             ```
-        - For Linux:
+        - For Linux/macOS:
             ```bash
             <SI_HOME>/bin/jartobundle.sh <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR>
             ```

@@ -1,118 +1,136 @@
 # Step 5: Update the Siddhi Application
 
-A Siddhi application can be easily extended to consume messages from more sources, to carry out more processing activities for data or to publish data to more destinations. For this example, consider a scenario where you also need to filter out the production data of eclairs and publish it to a Kafka topic so that applications that cannot read streaming data can have access to it. This involves extending the `SweetFactoryApp` Siddhi application to include Kafka in the streaming flow so that it functions as shown in the diagram below.
+A Siddhi application can be easily extended to consume messages from more sources, to carry out more processing activities for data, or to publish data to more destinations. For this example, consider a scenario where you also need to filter out the production data of eclairs and publish it to a Kafka topic so that applications that cannot read streaming data can have access to it. This involves extending the `SweetFactoryApp` Siddhi application to include Kafka in the streaming flow so that it functions as shown in the diagram below.
 
-![Updated Siddhi Application]({{base_path}}/images/quick-start-guide-101/updated-siddhi-application.png) 
+![Updated Siddhi Application]({{base_path}}/images/quick-start-guide-101/updated-siddhi-application.png)
 
-To update the `SweetFactoryApp` Siddhi application so that it functions as described, follow the steps below:
+To update the `SweetFactoryApp` Siddhi application so that it functions as described, follow the steps below.
+
+## Edit the Siddhi application in VSCode
 
 1. Open the `SweetFactoryApp` Siddhi application you created in [Step 2: Create the Siddhi Application](create-the-siddhi-application.md) in the VSCode editor.
 
-2. Define another stream to which you can direct the filtered events you need to publish in a the Kafka topic.
+2. Define an input stream that reads each new row appended to the `<YOUR_HOME>/productioninserts.csv` file as an event. Prepend a `@source` annotation of type `file` in `LINE`/tailing mode:
 
-    `define stream FilterStream (name string,amount double);`
-    
-3. To publish the events filtered into the `PublishFilteredDataStream` stream, connect a source of the `kafa` type to it as shown below.
+    ```
+    @source(type='file', mode='LINE',
+       file.uri='file:<YOUR_HOME>/productioninserts.csv',
+       tailing='true',
+       @map(type='csv'))
+    define stream FilterStream (name string, amount double);
+    ```
+
+    !!! tip
+        Alternatively, you can write the query to read from one of the existing streams. However, in this example, let's create a new stream to understand how WSO2 Integrator: SI reads data from files.
+
+3. Define an output stream that publishes filtered events to the `eclair-production` Kafka topic. Prepend a `@sink` annotation of type `kafka`:
 
     ```
     @sink(type = 'kafka', bootstrap.servers = "localhost:9092", topic = "eclair-production", is.binary.message = "false", partition.no = "0",
              @map(type = 'json'))
-    define stream PublishFilteredDataStream (name string,amount double);
+    define stream PublishFilteredDataStream (name string, amount double);
     ```
-   
-   The above sink annotation publishes all the events received into the `PublishFilteredDataStream` stream into a topic named `eclair-production` in `json` format.
-   
-4. Let's create another stream to read from the `/Users/foo/productioninserts.csv` file to which you have been publishing data.
 
-    !!! tip
-        Alternatively, you can write the query to read from one of the existing streams. However, in this example, let's create a new stream to understand how WSO2 Integrator: SI reads data from files.
-        
-    ```
-    @source(type='file', mode='LINE',
-       file.uri='file:/Users/foo/productioninserts.csv',
-       tailing='true',
-       @map(type='csv'))
-    define stream FilterStream (name string,amount double);
-    ```
-   
-    Here, you are configuring the file to be read line by line in the tailing mode. Therefore, any new row added to the file is captured as an event in the `FilterStream` stream as and when it is added.
+    The sink publishes every event it receives into the `eclair-production` topic in `json` format.
 
-
-5. Now let's add the query to filter the required information and publish it.
+4. Add a query that filters eclair events from `FilterStream` and inserts them into `PublishFilteredDataStream`:
 
     ```
     from FilterStream [name=='ECLAIRS']
-    select * 
-    group by name 
-    insert  into PublishFilteredDataStream;
+    select *
+    group by name
+    insert into PublishFilteredDataStream;
     ```
-   
-    In the `from` clause, `[name=='ECLAIRS']` filters all production runs where the name of the sweet produced is `Eclairs`. Then all the filtered events are inserted into the `PublishFilteredDataStream` stream so that they can be published in the `eclair_production` Kafka topic.
-    
-6. Save your changes.
+
+    The `[name=='ECLAIRS']` filter keeps only production runs for eclairs. These events are inserted into `PublishFilteredDataStream`, which publishes them to the `eclair-production` Kafka topic via its `@sink` annotation.
+
+5. Save your changes.
 
     The completed Siddhi application looks as follows:
-    
+
     ```
     @App:name('SweetFactoryApp')
-    
+
     @source(type='cdc',url = "jdbc:mysql://localhost:3306/production",username = "wso2si",password = "wso2",table.name = "SweetProductionTable",operation = "insert",
         @map(type='keyvalue'))
-    define stream InsertSweetProductionStream (name string,amount double);
-    
+    define stream InsertSweetProductionStream (name string, amount double);
+
     @source(type='file', mode='LINE',
-       file.uri='file:/Users/foo/productioninserts.csv',
+       file.uri='file:<YOUR_HOME>/productioninserts.csv',
        tailing='true',
        @map(type='csv'))
-    define stream FilterStream (name string,amount double);
-    
-    @sink(type='file',file.uri = "/Users/foo/productioninserts.csv",
+    define stream FilterStream (name string, amount double);
+
+    @sink(type='file',file.uri = "<YOUR_HOME>/productioninserts.csv",
         @map(type='csv'))
-    define stream ProductionUpdatesStream (name string,amount double);
-    
-    @sink(type = 'kafka', bootstrap.servers = "localhost:9092", topic = "eclair_production", is.binary.message = "false", partition.no = "0",
+    define stream ProductionUpdatesStream (name string, amount double);
+
+    @sink(type = 'kafka', bootstrap.servers = "localhost:9092", topic = "eclair-production", is.binary.message = "false", partition.no = "0",
              @map(type = 'json'))
-    define stream PublishFilteredDataStream (name string,amount double);
-    
+    define stream PublishFilteredDataStream (name string, amount double);
+
     @info(name='query1')
-    from InsertSweetProductionStream 
-    select str:upper(name) as name, amount 
-    group by name 
-    insert  into ProductionUpdatesStream;
-    
+    from InsertSweetProductionStream
+    select str:upper(name) as name, amount
+    group by name
+    insert into ProductionUpdatesStream;
+
     from FilterStream [name=='ECLAIRS']
-    select * 
-    group by name 
-    insert  into PublishFilteredDataStream;
+    select *
+    group by name
+    insert into PublishFilteredDataStream;
     ```
-   
-7. Deploy the updated `SweetFactoryApp` Siddhi application as you previously did in [Step 3: Deploy the Siddhi Application](deploy-siddhi-application.md).
 
-8. The `kafka` extension is not shipped with the WSO2 Integrator: SI Server by default. Therefore, install it via the Extension Installer Tool. You can do this by starting the WSO2 Integrator: SI server and then issuing the appropriate command (based on your operating system) from the `<SI_HOME>/bin` directory.
+## Install the Kafka extension on the SI server
 
-    - **For Linux**: `./extension-installer.sh install kafka`<br/>
-    - **For Windows**: `extension-installer.bat install kafka`
-            
-9. To test the Siddhi application after the update, insert records into the `production` database as follows.
+The `kafka` extension is not shipped with the WSO2 Integrator: SI server by default, so it must be installed before the updated application (which uses a Kafka sink) can be deployed.
 
-    `insert into SweetProductionTable values('eclairs',100.0);`
-    
-    `insert into SweetProductionTable values('eclairs',60.0);`
-    
-    `insert into SweetProductionTable values('toffee',40.0);`
-    
-10. To check the messages in the `eclair_production` topic, navigate to the `<KAFKA_HOME>` directory and issue the following command:
+1. If the SI server is currently running from [Step 4: Run the Siddhi Application](test-siddhi-application.md), stop it in its terminal by pressing `Ctrl + C`.
 
-    `bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic eclair-production --from-beginning`
-    
-    You can see the following messages in the Kafka Consumer log.
-    
+2. From the `<SI_HOME>/bin` directory, install the `kafka` extension by running `./extension-installer.sh install kafka` (on Linux/macOS) or `extension-installer.bat install kafka` (on Windows):
+
+    ```sh
+    ./extension-installer.sh install kafka
+    ```
+
+    When the installation completes, the extension installer logs `Installation completed with status: INSTALLED.` followed by `Please restart the server.`
+
+3. Restart the SI server using the command from [Step 4: Run the Siddhi Application](test-siddhi-application.md).
+
+## Deploy the updated Siddhi application
+
+Deploy the updated `SweetFactoryApp` Siddhi application to the SI server using the same method as in [Step 3: Deploy the Siddhi Application](deploy-siddhi-application.md) — either by copying the updated `SweetFactoryApp.siddhi` file into `<SI_HOME>/wso2/server/deployment/siddhi-files/` (overwriting the existing file), or by deploying from VSCode.
+
+The SI server automatically re-deploys the application when the `.siddhi` file changes. A log line similar to the following appears in the server's terminal:
+
+```
+INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App SweetFactoryApp deployed successfully
+```
+
+## Verify the update
+
+1. Insert records into the `production` database:
+
+    ```sql
+    insert into SweetProductionTable values('eclairs',100.0);
+    insert into SweetProductionTable values('eclairs',60.0);
+    insert into SweetProductionTable values('toffee',40.0);
+    ```
+
+2. From the `<KAFKA_HOME>` directory, consume messages from the `eclair-production` Kafka topic:
+
+    ```sh
+    bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic eclair-production --from-beginning
+    ```
+
+    You see the following messages in the Kafka consumer log:
+
     ```text
     {"event":{"name":"ECLAIRS","amount":100.0}}
     {"event":{"name":"ECLAIRS","amount":60.0}}
     ```
-   
-   Note that the third record you inserted does not appear in the Kafka consumer log because the value for the `name` field is not `ECLAIRS` and therefore, it is filtered out.
-   
-!!!tip "What's Next?"
+
+    The third record does not appear because the value for the `name` field is not `ECLAIRS`, so it is filtered out by the query.
+
+!!! tip "What's Next?"
     To view the statistics generated by the `SweetFactoryApp` Siddhi application, proceed to [Step 6: Monitor Statistics](monitor-statistics.md).

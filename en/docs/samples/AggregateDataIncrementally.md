@@ -10,7 +10,7 @@ This example demonstrates how to get running statistics using Siddhi. The sample
         1. Download the JDBC driver from the [MySQL site](https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.45.tar.gz). <br/>
         2. Extract the MySQL JDBC Driver zip file you downloaded. Then use the `jarbundle` tool in the `<SI_HOME>/bin` directory to convert the jars in it into OSGi bundles. To do this, issue one of the following commands:<br/>
             - **For Windows**: `<SI_HOME>/bin/jartobundle.bat <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR>`<br/>
-            - **For Linux**: `<SI_HOME>/bin/jartobundle.sh <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR`<br/>
+            - **For Linux/macOS**: `<SI_HOME>/bin/jartobundle.sh <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR>`<br/>
         3. Copy the converted bundles to the `<SI_HOME>/lib` directory.<br/>
     3. Create a data store named `sweetFactoryDB` in MySQL with relevant access privileges.<br/>
     4. Replace the values for the `jdbc.url`, `username`, and `password` parameters in the sample.<br/>

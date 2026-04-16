@@ -84,6 +84,7 @@ nav:
       - 'Step 4: Run the Siddhi Application': 'quick-start-guide/getting-started/test-siddhi-application.md'
       - 'Step 5: Update the Siddhi Application': 'quick-start-guide/getting-started/update-the-siddhi-application.md'
       - 'Step 6: Monitor Statistics': 'quick-start-guide/getting-started/monitor-statistics.md'
+      - 'Step 7: Export the Siddhi Application as a Docker Artifact': 'quick-start-guide/getting-started/export-siddhi-application-as-docker.md'
     - 'Architecture': 'overview/architecture.md'
     - 'Key Concepts': 'concepts/concepts.md'
     - 'About this Release' : 'get-started/about-this-release.md'

@@ -11,7 +11,7 @@ Siddhi query API provides APIs related to:
 - Health check
 - Siddhi Store operations
 
-For a comprehensive reference on the Siddhi query API, see [Streaming Integration REST API Guide](https://ei.docs.wso2.com/en/next/streaming-integrator/ref/si-rest-api-guide/).
+For a comprehensive reference on the Siddhi query API, see [Streaming Integration REST API Guide](../ref/rest-api-guide-overview.md).
 
 This tutorial demonstrates how you can use the Siddhi query API to perform essential operations in SI, using simple examples.
 
@@ -32,7 +32,8 @@ This tutorial demonstrates how you can use the Siddhi query API to perform essen
 
 2. Create a new user by executing the following SQL query.
     ```
-    GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si' IDENTIFIED BY 'wso2';
+    CREATE USER 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';
+    GRANT SELECT, INSERT, UPDATE, DELETE ON production.* TO 'wso2si'@'localhost';
     ```
 
 3. Switch to the `production` database and create a new table, by executing the following queries:
@@ -91,7 +92,7 @@ This tutorial demonstrates how you can use the Siddhi query API to perform essen
     !!!info
         Next, you are going to send a few events to `insertSweetProductionStream` stream via a `CURL` command.
 
-6. Execute following `CURL` command in the console:
+4. Execute following `CURL` command in the console:
     ```
     curl -X POST -d "{\"event\": {\"name\":\"Almond cookie\",\"amount\": 100.0}}"  http://localhost:8006/productionStream --header "Content-Type:application/json"
     ```
@@ -99,7 +100,7 @@ This tutorial demonstrates how you can use the Siddhi query API to perform essen
     !!!info
         You have written the Siddhi application to insert a new record from the `insertSweetProductionStream` stream into the `SweetProductionTable` table, or to update the record if it already exists in the table. As a result, above event is now inserted into the `SweetProductionTable`.
 
-7. To verify whether above event is inserted into `SweetProductionTable`, execute following `SQL` query in the SQL console:
+5. To verify whether above event is inserted into `SweetProductionTable`, execute following `SQL` query in the SQL console:
     ```
     SELECT * FROM SweetProductionTable;
     ```
@@ -117,7 +118,7 @@ This tutorial demonstrates how you can use the Siddhi query API to perform essen
 
 You can use `Siddhi Store Query API` to execute queries on Siddhi Store tables.
 
-In this section shows you how to execute a simple store query via the REST API in order to fetch all records from the `SweetProductionTable` Siddhi Store table. To learn about other types of queries, see [WSO2 Integrator: SI REST API Guide](https://ei.docs.wso2.com/en/next/streaming-integrator/ref/si-rest-api-guide/).
+In this section shows you how to execute a simple store query via the REST API in order to fetch all records from the `SweetProductionTable` Siddhi Store table. To learn about other types of queries, see [Store APIs](../ref/store-APIs.md).
 
 Execute following `CURL` command on the console:
 ```
@@ -129,7 +130,7 @@ The following output is logged in the console:
 {"records":[["Almond cookie",100.0]]}
 ```
 
-## Fetching the status of a Siddhi Application
+## Fetching the status of a Siddhi application
 
 Now let's fetch the status of the Siddhi application you just deployed.
 
@@ -143,7 +144,7 @@ The following output appears in the command line:
 {"status":"active"}
 ```
 
-## Taking a snapshot of a Siddhi Application
+## Taking a snapshot of a Siddhi application
 
 In this section, deploy a stateful Siddhi application and use the REST API to take a snapshot of it. To do this, follow the procedure below:
 
@@ -200,7 +201,7 @@ In this section, deploy a stateful Siddhi application and use the REST API to ta
     INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App CountProductions deployed successfully.
     ```
 
-8. Now let's send  two sweet production events using `CURL` by issuing tghe following two `CURL` commands via the command line:
+6. Now let's send two sweet production events using `CURL` by issuing the following two `CURL` commands via the command line:
     ```
     curl -X POST -d "{\"event\": {\"name\":\"Almond cookie\",\"amount\": 100.0}}"  http://localhost:8007/productionStream --header "Content-Type:application/json"
     ```
@@ -208,14 +209,14 @@ In this section, deploy a stateful Siddhi application and use the REST API to ta
     curl -X POST -d "{\"event\": {\"name\":\"Baked alaska\",\"amount\": 20.0}}"  http://localhost:8007/productionStream --header "Content-Type:application/json"
     ```
 
-9. As a result, the following logs appears on the SI console:
+7. As a result, the following logs appear in the SI console:
     ```
     INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1566288572024, data=[100.0], isExpired=false}
     INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1566288596336, data=[120.0], isExpired=false}
     ```
     Note that the current productions count is `120`.
 
-10. Now you can invoke the Siddhi Query API to take a snapshot of the Siddhi application. To do this, execute following `CURL` command on the command line:
+8. Now you can invoke the Siddhi Query API to take a snapshot of the Siddhi application. To do this, execute following `CURL` command on the command line:
     ```
     curl -X POST "https://localhost:9443/siddhi-apps/CountProductions/backup" -H "accept: application/json" -u admin:admin -k
     ```
@@ -228,7 +229,7 @@ In this section, deploy a stateful Siddhi application and use the REST API to ta
     !!!info
         `1566293390654__CountProductions` is the revision number of the Siddhi application snapshot that you requested via the REST API. You can store this revision number and later use it in order to restore the Siddhi application to the state at which you took the snapshot.
 
-## Restoring a Siddhi Application via a snapshot
+## Restoring a Siddhi application via a snapshot
 
 In the previous section, you took a snapshot of the `CountProductions` Siddhi application when the productions count was `120`. In this section, you can increase the count further by sending a few more production events, and then restore the Siddhi application to the state you backed up. To do this, follow the procedure below
 
@@ -247,9 +248,9 @@ In the previous section, you took a snapshot of the `CountProductions` Siddhi ap
     ```
    Note that the current productions count is `920`.
 
-3. Now you can invoke the Siddhi Query API to restore the snapshot that you obtained in step 10 of the [Taking a snapshot of a Siddhi Application](#Taking-a-snapshot-of-a-Siddhi-Application) section of this tutorial.
+2. Now you can invoke the Siddhi Query API to restore the snapshot that you obtained in step 8 of the [Taking a snapshot of a Siddhi application](#taking-a-snapshot-of-a-siddhi-application) section of this tutorial.
 
-    In this example, the revision number obtained is `1566293390654__CountProductions` (see step 10 in [Taking a snapshot of a Siddhi Application](#Taking-a-snapshot-of-a-Siddhi-Application) section.). When restoring the state, use the exact revision number that you obtained.
+    In this example, the revision number obtained is `1566293390654__CountProductions` (see step 8 in [Taking a snapshot of a Siddhi application](#taking-a-snapshot-of-a-siddhi-application) section.). When restoring the state, use the exact revision number that you obtained.
 
     Execute following command on the command line:
     ```
@@ -268,7 +269,7 @@ In the previous section, you took a snapshot of the `CountProductions` Siddhi ap
     INFO {org.wso2.carbon.streaming.integrator.core.persistence.FileSystemPersistenceStore} - State loaded for CountProductions revision 1566293390654__CountProductions from the file system.
     ```
 
-4.  Now send another sweet production event by executing the following `CURL` command:
+3. Now send another sweet production event by executing the following `CURL` command:
     ```
     curl -X POST -d "{\"event\": {\"name\":\"Danish pastry\",\"amount\": 100.0}}"  http://localhost:8007/productionStream --header "Content-Type:application/json"
     ```

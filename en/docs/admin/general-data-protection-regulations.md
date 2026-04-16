@@ -70,7 +70,7 @@ This section covers how to remove references to deleted user identities in the W
 1. Open a new terminal window and navigate to the `<SP_HOME>/bin` directory.
 
 2. Execute one of the following commands depending on your operating system:
-    - On Linux/Mac OS: `./forgetme.sh -U <username>`
+    - On Linux/macOS: `./forgetme.sh -U <username>`
     - On Windows: `forgetme.bat -U <username>`
 
 !!!note

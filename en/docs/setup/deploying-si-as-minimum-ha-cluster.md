@@ -255,7 +255,7 @@ synchronization can take place effectively even if the Siddhi applications are a
     
 2. Start both servers by navigating to the `<SI-Home>/bin` directory and issuing one of the following commands (depending on your operating system:
     - For Windows: `server.bat`
-    - For Linux/Mac OS : `./server.sh`
+    - For Linux/macOS : `./server.sh`
         
 If the cluster is correctly configured, the following CLI logs can be viewed without any error logs:
 

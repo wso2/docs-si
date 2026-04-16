@@ -55,7 +55,8 @@ You can capture following type of changes done to a database table:
             ```<br/>
         2. Create a new user by executing the following SQL query.<br/>
             ```
-            GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si' IDENTIFIED BY 'wso2';
+            CREATE USER 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';
+            GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si'@'localhost';
             ```<br/>
         3. Switch to the `production` database and create a new table, by executing the following queries:<br/>
             `use production;`<br/>
@@ -98,7 +99,7 @@ Now you can write a simple Siddhi application to monitor the `SweetProductionTab
     <br/>
     - For Windows: `extension-installer.bat`<br/>
     <br/>
-    - For Linux:  `sh extension-installer.sh`<br/>
+    - For Linux/macOS:  `sh extension-installer.sh`<br/>
     <br/>
 
 4. Now let's perform an insert operation on the MySQL table by executing the following MySQL query on the database:
@@ -338,7 +339,8 @@ Note that the `CDC source` has replayed the last two messages. As a result, the 
         `use production_pol;`<br/>
         `CREATE TABLE SweetProductionTable (last_update TIMESTAMP, name VARCHAR(20),amount double(10,2));`<br/>
     3. If you have not already created a user under [Listening Mode](#listening-mode), create a new user by executing the following SQL query.<br/>
-        `GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si' IDENTIFIED BY 'wso2';`<br/>
+        `CREATE USER 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';`<br/>
+        `GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si'@'localhost';`<br/>
     4. If you have not already added the MySQL JDBC driver into `<SI_HOME>/lib` under [Listening Mode](#listening-mode), add it as follows:<br/>
             a. Download the MySQL JDBC driver from [the MySQL site](https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.45.tar.gz).<br/>
             b. Unzip the archive.<br/>

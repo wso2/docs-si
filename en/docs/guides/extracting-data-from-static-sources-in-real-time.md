@@ -107,7 +107,8 @@ Let's try out the example where you want to view the online bookings saved in a 
     2. Create a new user by executing the following SQL query.
         
        ```
-       GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si' IDENTIFIED BY 'wso2';
+       CREATE USER 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';
+       GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si'@'localhost';
        ```
        
     3. Switch to the `tours` database and create a new table, by executing the following queries.
@@ -208,21 +209,21 @@ You can extract data from a single file or from multiple files in a directory. T
 
 - **Reading a single file**
 
-    In the following example, the `file.uri` parameter specifies the `productioninserts.csv` file in the `/Users/foo` directory as the file from which the source should extract data. 
+    In the following example, the `file.uri` parameter specifies the `productioninserts.csv` file in the `<YOUR_HOME>` directory as the file from which the source should extract data. 
     
     ```
-    @source(type = 'file',file.uri = "file:/Users/foo/productioninserts.csv",
+    @source(type = 'file',file.uri = "file:<YOUR_HOME>/productioninserts.csv",
         @map(type = 'csv'))
     define stream ProductionStream (name string, amount double);
     ```
     
 - **Reading multiple files within a directory**
 
-    In the following example, the `dir.uri` parameter specifies the `/Users/foo/production` as the directory with the files from which the source extracts information. According to the following configuration, all the files in the directory are read.
+    In the following example, the `dir.uri` parameter specifies the `<YOUR_HOME>/production` as the directory with the files from which the source extracts information. According to the following configuration, all the files in the directory are read.
     
     ```
     @source(type = 'file',
-        dir.uri = "file:/Users/foo/production",
+        dir.uri = "file:<YOUR_HOME>/production",
         @map(type = 'csv'))
     define stream ProductionStream (name string, amount double);
     ```
@@ -231,7 +232,7 @@ You can extract data from a single file or from multiple files in a directory. T
     
     ```
     @source(type = 'file', 
-        dir.uri = "file:/Users/foo/production", 
+        dir.uri = "file:<YOUR_HOME>/production", 
         file.name.list = "productioninserts.csv,AssistantFile.csv,ManagerFile.csv",
     	@map(type = 'csv'))
     define stream ProductionStream (name string, amount double);
@@ -252,7 +253,7 @@ You can specify the required mode via the `mode` parameter as shown in the examp
 
 ```
 @source(type = 'file',
-    file.uri = "file:/Users/foo/productioninserts.csv",
+    file.uri = "file:<YOUR_HOME>/productioninserts.csv",
     mode='LINE'
     @map(type = 'csv'))
 define stream ProductionStream (name string, amount double);
@@ -264,7 +265,7 @@ If required, you can configure a `file` source to move or delete the files after
 e.g., If you want to move the `productioninserts.csv` file in the previous example after it is read, specify `move` as the value for `action.after.process`. Then add the `move.after.process` to specify the location to which the file should be moved after processing.
 
 ```
-@source(type = 'file', file.uri = "file:/Users/foo/productioninserts.csv", 
+@source(type = 'file', file.uri = "file:<YOUR_HOME>/productioninserts.csv", 
     mode = "line",
     tailing = "false",
     action.after.process = "move", 
@@ -272,7 +273,7 @@ e.g., If you want to move the `productioninserts.csv` file in the previous examp
 	@map(type = 'csv'))
 define stream ProductionStream (name string, amount double);
 ```
-Here, you are  moving the `productioninserts.csv` file from the `/Users/foo` directory to the `/Users/processedfiles` after it is processed. 
+Here, you are  moving the `productioninserts.csv` file from the `<YOUR_HOME>` directory to the `/Users/processedfiles` after it is processed. 
 
 Note that this extract also includes `tailing = "false"`. When tailing is enabled, the source reports any change made to the file immediately. Tailing is available only when the mode is set to `LINE` or `REGEX`, and it is enabled for these modes by default. Therefore, if you are using one of these modes and you want to set the `action.after.process` to `move` you need to disable tailing.
 
@@ -301,17 +302,17 @@ To check whether any file is created, modified or removed in a specific director
 
 ```
 @source(type = 'fileeventlistener', 
-    dir.uri = "file:/Users/foo",
+    dir.uri = "file:<YOUR_HOME>",
 	@map(type = 'passThrough'))
 define stream FileListenerStream (filepath string, filename string, status string);
 ```
-The above configuration monitors whether any activity is generated for any file in the `/Users/foo` directory. If any file was created/modified/removed in the directory, an event is generated in the `FileListenerStream` stream. This event reports the name of the file, the file path, and the status of the file.
+The above configuration monitors whether any activity is generated for any file in the `<YOUR_HOME>` directory. If any file was created/modified/removed in the directory, an event is generated in the `FileListenerStream` stream. This event reports the name of the file, the file path, and the status of the file.
 
 If you want to monitor only activities generated for a specific file, you need to specify the names of the files via the  `file.name.list` parameter as shown in the example below.
 
 ```
 @source(type = 'fileeventlistener', 
-    dir.uri = "file:/Users/foo",
+    dir.uri = "file:<YOUR_HOME>",
     file.name.list = "productioninserts 18.01.22.csv,materialconsumption.txt",
 	@map(type = 'passThrough'))
 define stream FileListenerStream (filepath string, filename string, status string);
@@ -322,13 +323,13 @@ If you want the directory to be monitored for file events periodically, you can 
 
 ```
 @source(type = 'fileeventlistener', 
-        dir.uri = "file:/Users/foo", 
+        dir.uri = "file:<YOUR_HOME>", 
         monitoring.interval = "200", 
         file.name.list = "productioninserts 18.01.22.csv,materialconsumption.txt",
         @map(type = 'passThrough'))
 define stream FileListenerStream (filepath string, filename string, status string);
 ```
-The above source configuration checks the `/Users/foo` directory every 200 milliseconds, and an event is generated in the `FileListenerStream` for each file transaction that involved creating/modifying/removing a file named `productioninserts 18.01.22.csv` or `materialconsumption.txt`.
+The above source configuration checks the `<YOUR_HOME>` directory every 200 milliseconds, and an event is generated in the `FileListenerStream` for each file transaction that involved creating/modifying/removing a file named `productioninserts 18.01.22.csv` or `materialconsumption.txt`.
 
 #### Supporting Siddhi extension
 

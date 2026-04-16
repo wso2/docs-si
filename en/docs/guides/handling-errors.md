@@ -141,7 +141,7 @@ To try out storing errors in the store, follow the steps below:
               isAutoCommit: false
         ```
 
-2. Download the [productions.csv file](https://github.com/wso2/docs-ei/blob/master/en/streaming-integrator/docs/examples/resources/productions.csv) and save it in a location of your choice in your machine.
+2. Download the [productions.csv file]({{base_path}}/examples/resources/productions.csv) and save it in a location of your choice in your machine.
 
 3. [Create a Siddhi application](../develop/creating-a-Siddhi-Application.md) as follows and deploy it in the WSO2 Integrator: SI server.
 
@@ -149,7 +149,7 @@ To try out storing errors in the store, follow the steps below:
     @App:name("CopyingProductionStatsApp")
     
     @source(type='file', mode='LINE',
-       file.uri='file:/Users/foo/productions.csv',
+       file.uri='file:<YOUR_HOME>/productions.csv',
        tailing='true',
        @map(type='csv'))
     @onError(action='STORE') 
@@ -157,7 +157,7 @@ To try out storing errors in the store, follow the steps below:
     
     @sink(type='file',
         on.error='STORE',
-        file.uri = "/Users/foo/manager/managercopy.csv",
+        file.uri = "<YOUR_HOME>/manager/managercopy.csv",
         @map(type='csv'))
     define stream CopyProductionStream (name string,amount double);
     
@@ -197,9 +197,9 @@ To try out storing errors in the store, follow the steps below:
 
     **Generating a sink error**
 
-    1. Be sure  that the file path you specified in the sink configuration is not actually available. For example, in this scenario, you can make sure that the `manager` sub-directory in the `/Users/foo/manager/managercopy.csv` path is not available.
+    1. Be sure  that the file path you specified in the sink configuration is not actually available. For example, in this scenario, you can make sure that the `manager` sub-directory in the `<YOUR_HOME>/manager/managercopy.csv` path is not available.
     
-    2. Now create a file event by entering a new row in the input file (in this scenario, `/Users/foo/productions.csv`) as follows.
+    2. Now create a file event by entering a new row in the input file (in this scenario, `<YOUR_HOME>/productions.csv`) as follows.
     
         `Crossaints,90.0`
         
@@ -209,7 +209,7 @@ To try out storing errors in the store, follow the steps below:
     
     4. To correct the error and replay it, follow the procedure below:
     
-        1. Correct the file path. For example, in this scenario, you can add a directory named `manager` in the `Users/foo` directory so that the `/Users/foo/manager/` is a path that actually exists, enabling WSO2 Integrator: SI to generate the `managercopy.csv` in it.
+        1. Correct the file path. For example, in this scenario, you can add a directory named `manager` in the `<YOUR_HOME>` directory so that the `<YOUR_HOME>/manager/` is a path that actually exists, enabling WSO2 Integrator: SI to generate the `managercopy.csv` in it.
         
         2. In the **Error Store Explorer** dialog box, click **Replay** for the event.
         
@@ -217,7 +217,7 @@ To try out storing errors in the store, follow the steps below:
     
     **Generating a mapping error**
     
-    1. Open the input file (in this scenario, `/Users/foo/productions.csv`) and enter a new row in it in the wrong format as shown below.
+    1. Open the input file (in this scenario, `<YOUR_HOME>/productions.csv`) and enter a new row in it in the wrong format as shown below.
     
         `Fudge,Gateaux,80.0`
         
@@ -281,7 +281,7 @@ To try out logging events with errors, consider the same example previously used
     @App:name("CopyingProductionStatsApp")
     
     @source(type='file', mode='LINE',
-       file.uri='file:/Users/foo/productions.csv',
+       file.uri='file:<YOUR_HOME>/productions.csv',
        tailing='true',
        @map(type='csv'))
     @onError(action='LOG') 
@@ -289,7 +289,7 @@ To try out logging events with errors, consider the same example previously used
     
     @sink(type='file',
         on.error='LOG',
-        file.uri = "/Users/foo/manager/managercopy.csv",
+        file.uri = "<YOUR_HOME>/manager/managercopy.csv",
         @map(type='csv'))
     define stream CopyProductionStream (name string,amount double);
     
@@ -299,7 +299,7 @@ To try out logging events with errors, consider the same example previously used
     ```
    Here, the on error action is changed to `LOG` for both the stream and the sink.
    
-2. To generate a sink error, give an incorrect destination path for your output file. For example, in this scenario, be sure that the `manager` directory does not exist in the `/Users/foo/manager/managercopy.csv` path. 
+2. To generate a sink error, give an incorrect destination path for your output file. For example, in this scenario, be sure that the `manager` directory does not exist in the `<YOUR_HOME>/manager/managercopy.csv` path. 
 
     Then generate an input event by adding the foillowing row in the `Users/foo/productions.csv` input file.
     
@@ -311,7 +311,7 @@ To try out logging events with errors, consider the same example previously used
     ERROR {io.siddhi.core.stream.output.sink.Sink} - Error on 'CopyingProductionStatsApp'. Dropping event at Sink 'file' at 'CopyProductionStream' as its still trying to reconnect!, events dropped 'Fudge,100.0
     ```
     
-3. To generate a mapping error, open the input file (in this scenario, `/Users/foo/productions.csv`) and enter a new row in it in the wrong format as shown below.
+3. To generate a mapping error, open the input file (in this scenario, `<YOUR_HOME>/productions.csv`) and enter a new row in it in the wrong format as shown below.
 
     `Fudge,Gateaux,80.0`
     
@@ -379,7 +379,7 @@ To try out streaming events with errors, follow the procedure below.
     @App:name("CopyingProductionStatsApp")
     
     @source(type='file', mode='LINE',
-       file.uri='file:/Users/foo/productions.csv',
+       file.uri='file:<YOUR_HOME>/productions.csv',
        tailing='true',
        @map(type='csv'))
     @onError(action='STREAM') 
@@ -387,7 +387,7 @@ To try out streaming events with errors, follow the procedure below.
     
     @sink(type='file',
         on.error='STREAM',
-        file.uri = "/Users/foo/managercopy.csv",
+        file.uri = "<YOUR_HOME>/managercopy.csv",
         @map(type='csv'))
     define stream CopyProductionStream (name string,amount double);
     

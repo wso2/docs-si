@@ -12,7 +12,7 @@ In this scenario, you are handling erroneous events by directing them to a MySQL
         <br/>
           - For Windows: `streaming-integrator.bat`<br/>
         <br/>
-          - For Linux:  `sh server.sh`<br/>
+          - For Linux/macOS:  `sh server.sh`<br/>
         <br/>
       The following log appears in the WSO2 Integrator: SI console once you have successfully started the server. <br/>
       <br/>

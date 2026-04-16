@@ -40,11 +40,11 @@ To navigate through the Grafana dashboards you set up for monitoring WSO2 Integr
     2. Start Grafana.
     
         !!! info
-            The procedure to start Grafana depends on your operating system and the installation process. e.g., If your operating system is Mac OS and you have installed Grafana via Homebrew, you start Grafana by issuing the `brew services start grafana` command.
+            The procedure to start Grafana depends on your operating system and the installation process. e.g., If your operating system is macOS and you have installed Grafana via Homebrew, you start Grafana by issuing the `brew services start grafana` command.
             
     3. Start the WSO2 Integrator: SI server by navigating to the `<SI_HOME>/bin`directory, and issuing the appropriate command out of the following based on your operating system.
            
-        - For Linux: `./server.sh`
+        - For Linux/macOS: `./server.sh`
         - For Windows: `server.bat`
 
     Access Grafana via `http://localhost:3000/`.
