@@ -18,22 +18,19 @@ This tutorial demonstrates how you can use the Siddhi query API to perform essen
 ## Preparing the server
 
 !!!tip "Before you begin:"
-    - You need to have access to a MySQL instance.<br/>
-    - Save the MySQL JDBC driver in the `<SI_HOME>/lib` directory as follows:<br/>
-      1. Download the MySQL JDBC driver from [the MySQL site](https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.45.tar.gz).<br/>
-      2. Unzip the archive.<br/>
-      3. Copy the `mysql-connector-java-5.1.45-bin.jar` to the `<SI_HOME>/lib` directory.<br/>
-      4. Start the SI server.<br/>
+    - You need to have access to a MySQL instance. Steps 1–3 in **Preparing the server** below require a MySQL account that can create schemas, users, and grants (typically `root`). The Siddhi application created in subsequent sections then connects as the `wso2si` user created in step 2.<br/>
+    - Make sure the MySQL JDBC driver is installed in `<SI_HOME>/lib`. See [Adding the MySQL JDBC driver](../quick-start-guide/getting-started/download-install-and-start-si.md#adding-the-mysql-jdbc-driver) for the steps.<br/>
 
 1. Let's create a new database in the MySQL server which you are to use throughout this tutorial. To do this, execute the following query.
     ```
     CREATE SCHEMA production;
     ```
 
-2. Create a new user by executing the following SQL query.
+2. Create the `wso2si` user (or re-grant the production-scoped privileges if it already exists from another tutorial) by executing the following SQL queries:
     ```
-    CREATE USER 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';
+    CREATE USER IF NOT EXISTS 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';
     GRANT SELECT, INSERT, UPDATE, DELETE ON production.* TO 'wso2si'@'localhost';
+    FLUSH PRIVILEGES;
     ```
 
 3. Switch to the `production` database and create a new table, by executing the following queries:
@@ -62,7 +59,7 @@ This tutorial demonstrates how you can use the Siddhi query API to perform essen
            jdbc.url="jdbc:mysql://localhost:3306/production?useSSL=false",
            username="wso2si",
            password="wso2" ,
-           jdbc.driver.name="com.mysql.jdbc.Driver")
+           jdbc.driver.name="com.mysql.cj.jdbc.Driver")
     define table SweetProductionTable (name string, amount double);
 
     from insertSweetProductionStream
@@ -76,7 +73,7 @@ This tutorial demonstrates how you can use the Siddhi query API to perform essen
 
 3. Now you need to execute a `CURL` command and deploy this Siddhi application. In the command line, navigate to the location where you saved the Siddhi application in the previous step, and execute following command:
     ```
-    curl -X POST "https://localhost:9443/siddhi-apps" -H "accept: application/json" -H "Content-Type: text/plain" -d @SweetProduction-Store.siddhi -u admin:admin -k
+    curl -X POST "https://localhost:9443/siddhi-apps" -H "accept: application/json" -H "Content-Type: text/plain" --data-binary @SweetProduction-Store.siddhi -u admin:admin -k
     ```
 
   Upon successful deployment, the following response is logged for the `CURL` command you just executed.
@@ -188,7 +185,7 @@ In this section, deploy a stateful Siddhi application and use the REST API to ta
 
 5. Now execute a `CURL` command and deploy this Siddhi application. To do this, use the command line to navigate to the location where you saved the Siddhi application in above step, and then execute following command.
     ```
-    curl -X POST "https://localhost:9443/siddhi-apps" -H "accept: application/json" -H "Content-Type: text/plain" -d @CountProductions.siddhi -u admin:admin -k
+    curl -X POST "https://localhost:9443/siddhi-apps" -H "accept: application/json" -H "Content-Type: text/plain" --data-binary @CountProductions.siddhi -u admin:admin -k
     ```
 
    Upon successful deployment, the following response is logged for the `CURL` command you just executed.
@@ -211,8 +208,8 @@ In this section, deploy a stateful Siddhi application and use the REST API to ta
 
 7. As a result, the following logs appear in the SI console:
     ```
-    INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1566288572024, data=[100.0], isExpired=false}
-    INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1566288596336, data=[120.0], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1566288572024, data=[100.0], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1566288596336, data=[120.0], isExpired=false}
     ```
     Note that the current productions count is `120`.
 
@@ -243,8 +240,8 @@ In the previous section, you took a snapshot of the `CountProductions` Siddhi ap
 
    As a result, the following two lines of log appear in the SI console:
     ```
-    INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1566288572024, data=[420.0], isExpired=false}
-    INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1566288596336, data=[920.0], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1566288572024, data=[420.0], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1566288596336, data=[920.0], isExpired=false}
     ```
    Note that the current productions count is `920`.
 
@@ -276,6 +273,6 @@ In the previous section, you took a snapshot of the `CountProductions` Siddhi ap
 
    As a result, the following log appears in the SI console:
     ```
-    INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1566293520176, data=[220.0], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - CountProductions : LogStream : Event{timestamp=1566293520176, data=[220.0], isExpired=false}
     ```
     Note that the productions count is `220`. This is because the count was reset to `120` when you restored the snapshot.

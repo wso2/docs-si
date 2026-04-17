@@ -1172,7 +1172,7 @@ curl -X DELETE "http://localhost:9390/simulation/files/CSVTestFile.csv" -H "acce
 ### Sample curl command
 
 ```java
-curl -X POST "http://localhost:9090/simulation/connectToDatabase" -H "accept: application/json" -H "content-type: application/json" -d "{ \"dataSourceLocation\": \"jdbc:mysql://localhost:3306/DatabaseFeedSimulation\", \"driver\": \"com.mysql.jdbc.Driver\", \"username\": \"root\", \"password\": \"password\"}"
+curl -X POST "http://localhost:9090/simulation/connectToDatabase" -H "accept: application/json" -H "content-type: application/json" -d "{ \"dataSourceLocation\": \"jdbc:mysql://localhost:3306/DatabaseFeedSimulation\", \"driver\": \"com.mysql.cj.jdbc.Driver\", \"username\": \"root\", \"password\": \"password\"}"
 ```
 
 ### Sample output
@@ -1243,7 +1243,7 @@ curl -X POST "http://localhost:9090/simulation/connectToDatabase" -H "accept: ap
 ### Sample curl command
 
 ```java
-curl -X POST "http://localhost:9090/simulation/connectToDatabase/retrieveTableNames" -H "accept: application/json" -H "content-type: application/json" -d "{ \"dataSourceLocation\": \"jdbc:mysql://localhost:3306/DatabaseFeedSimulation\", \"driver\": \"com.mysql.jdbc.Driver\", \"username\": \"root\", \"password\": \"password\"}"
+curl -X POST "http://localhost:9090/simulation/connectToDatabase/retrieveTableNames" -H "accept: application/json" -H "content-type: application/json" -d "{ \"dataSourceLocation\": \"jdbc:mysql://localhost:3306/DatabaseFeedSimulation\", \"driver\": \"com.mysql.cj.jdbc.Driver\", \"username\": \"root\", \"password\": \"password\"}"
 ```
 
 ### Sample output
@@ -1320,7 +1320,7 @@ curl -X POST "http://localhost:9090/simulation/connectToDatabase/retrieveTableNa
 ### Sample curl command
 
 ```java
-curl -X POST "http://localhost:9090/simulation/connectToDatabase/DataTable/retrieveColumnNames" -H "accept: application/json" -H "content-type: application/json" -d "{ \"dataSourceLocation\": \"jdbc:mysql://localhost:3306/DatabaseFeedSimulation\", \"driver\": \"com.mysql.jdbc.Driver\", \"username\": \"root\", \"password\": \"password\"}"
+curl -X POST "http://localhost:9090/simulation/connectToDatabase/DataTable/retrieveColumnNames" -H "accept: application/json" -H "content-type: application/json" -d "{ \"dataSourceLocation\": \"jdbc:mysql://localhost:3306/DatabaseFeedSimulation\", \"driver\": \"com.mysql.cj.jdbc.Driver\", \"username\": \"root\", \"password\": \"password\"}"
 ```
 
 ### Sample output

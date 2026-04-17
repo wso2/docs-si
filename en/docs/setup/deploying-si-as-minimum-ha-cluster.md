@@ -92,7 +92,7 @@ To configure the HA cluster, follow the steps below:
                jdbcUrl: 'jdbc:mysql://localhost:3306/PERSISTENCE_DB?useSSL=false'
                username: root
                password: root
-               driverClassName: com.mysql.jdbc.Driver
+               driverClassName: com.mysql.cj.jdbc.Driver
                maxPoolSize: 50
                idleTimeout: 60000
                connectionTestQuery: SELECT 1
@@ -134,7 +134,7 @@ To configure the HA cluster, follow the steps below:
               jdbcUrl: 'jdbc:mysql://localhost:3306/WSO2_CLUSTER_DB?useSSL=false'
               username: root
               password: root
-              driverClassName: com.mysql.jdbc.Driver
+              driverClassName: com.mysql.cj.jdbc.Driver
               maxPoolSize: 50
               idleTimeout: 60000
               connectionTestQuery: SELECT 1

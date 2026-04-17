@@ -53,7 +53,7 @@ define stream SweetProductionStream (name string, amount double);
        jdbc.url="jdbc:mysql://localhost:3306/sampleDB?useSSL=false",
        username="root",
        password="mysql" ,
-       jdbc.driver.name="com.mysql.jdbc.Driver")
+       jdbc.driver.name="com.mysql.cj.jdbc.Driver")
 @PrimaryKey("compositeID")
 define table ProcessedSweetProductionTable (compositeID string, amount double, date string);
 

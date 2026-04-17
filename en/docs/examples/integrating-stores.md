@@ -38,8 +38,8 @@ To understand how the WSO2 Integrator: SI performs these operations, follow the 
             - **For Linux/macOS**  : `./server.sh`
             - **For Windows**: `server.bat --run`<br/><br/>
         2. To install the `rdbms-mysql` extension, navigate to the to the `<SI_HOME>/bin` directory and issue the appropriate command based on your operating system:<br/><br/>
-            - **For Linux/macOS**  : `./extension-installer.sh`
-            - **For Windows**: `extension-installer.bat --run`<br/><br/>
+            - **For Linux/macOS**  : `./extension-installer.sh install`
+            - **For Windows**: `extension-installer.bat install`<br/><br/>
         3. Restart the WSO2 Integrator: SI server.<br/><br/>
     - Install the `rdbms-mysql` extension in WSO2 Integrator: SI as follows.<br/><br/>
         1. Open the VSCode editor with **WSO2 Integrator: SI** extension installed.<br/><br/>
@@ -80,7 +80,7 @@ To connect to the `closingstock` database via a data source, follow the steps be
             jdbcUrl: 'jdbc:mysql://localhost:3306/closingstock?useSSL=false'
             username: root
             password: root
-            driverClassName: com.mysql.jdbc.Driver
+            driverClassName: com.mysql.cj.jdbc.Driver
             minIdle: 5
             maxPoolSize: 50
             idleTimeout: 60000
@@ -123,7 +123,7 @@ To connect to the `purchases` database via a reference, follow the steps below:
               jdbc.url: "jdbc:mysql://localhost:3306/purchases?useSSL=false"
               username: 'root'
               password: 'root'
-              jdbc.driver.name: 'com.mysql.jdbc.Driver'
+              jdbc.driver.name: 'com.mysql.cj.jdbc.Driver'
     ```
    The above reference connects to the `purchases` database that you previously created.
    
@@ -139,7 +139,7 @@ To connect to the `purchases` database via a reference, follow the steps below:
 You can define the data store configuration for the `dispatches` database by adding a table definition in the `StockManagementApp` Siddhi application as follows:
 
 ```
-@store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.jdbc.Driver")
+@store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
 define table DispatchesTable (timestamp long, name string, amount double);
 ```
 Here, you are configuring the data store configuration in the Siddhi application itself. The Siddhi application connects to the `dispatches` database via the specified JDBC URL.
@@ -199,7 +199,7 @@ To try out these queries, simulate events for the streams via the Event Simulato
     
     define stream MaterialPurchasesStream (timestamp long, name string, amount double);
     
-    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.jdbc.Driver")
+    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
     define table DispatchesTable (timestamp long, name string, amount double);
     
     @store(type = 'rdbms', ref = "purchases")
@@ -340,7 +340,7 @@ Assume that the Factory Manager needs to view all the purchase records for honey
     
     define stream PurchaseRecordRetrievalStream (name string);
     
-    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.jdbc.Driver")
+    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
     define table DispatchesTable (timestamp long, name string, amount double);
     
     @store(type = 'rdbms', ref = "purchases")
@@ -421,7 +421,7 @@ To try this, follow the steps below:
     
     define stream LatestStockStream (name string, amount double);
     
-    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.jdbc.Driver")
+    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
     define table DispatchesTable (timestamp long, name string, amount double);
     
     @store(type = 'rdbms', ref = "purchases")
@@ -547,7 +547,7 @@ To update the `StockTable` table via streams, follow the steps below:
     
     define stream LatestStockStream (name string, amount double);
     
-    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.jdbc.Driver")
+    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
     define table DispatchesTable (timestamp long, name string, amount double);
     
     @store(type = 'rdbms', ref = "purchases")
@@ -657,7 +657,7 @@ To delete records in the `StockTable` table via streams, follow the steps below:
     
     define stream LatestStockStream (name string, amount double);
     
-    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.jdbc.Driver")
+    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
     define table DispatchesTable (timestamp long, name string, amount double);
     
     @store(type = 'rdbms', ref = "purchases")
@@ -914,7 +914,7 @@ To start creating the Siddhi application with the required tables, follow the st
     
     define stream TriggerStream (name string, amount double);
     
-    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.jdbc.Driver")
+    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/dispatches?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
     define table DispatchesTable (timestamp long, name string, amount double);
     
     @store(type = 'rdbms', ref = "purchases")

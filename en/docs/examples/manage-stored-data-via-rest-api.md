@@ -71,7 +71,7 @@ First let's create a Siddhi application with an RDBMS Store so that we can try o
            jdbc.url="jdbc:mysql://localhost:3306/production?useSSL=false",
            username="wso2si",
            password="wso2" ,
-           jdbc.driver.name="com.mysql.jdbc.Driver")
+           jdbc.driver.name="com.mysql.cj.jdbc.Driver")
     define table SweetProductionTable (name string, amount double);
 
     from insertSweetProductionStream
@@ -222,7 +222,7 @@ First let's create a Siddhi application with an Aggregation, so that we can try 
             jdbc.url="jdbc:mysql://localhost:3306/production?useSSL=false",
             username="wso2si",
             password="wso2" ,
-            jdbc.driver.name="com.mysql.jdbc.Driver")
+            jdbc.driver.name="com.mysql.cj.jdbc.Driver")
     define aggregation RawMaterialAggregation
     from RawMaterialStream
     select name, avg(amount) as avgAmount, sum(amount) as totalAmount

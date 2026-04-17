@@ -19,7 +19,7 @@ To understand this, consider a scenario where the production statistics generate
 
 define stream ProductionStream (name string, amount double, timestamp long);
 
-@store(type='rdbms', jdbc.url="jdbc:mysql://localhost:3306/Production", username="root", password="root" , jdbc.driver.name="com.mysql.jdbc.Driver")
+@store(type='rdbms', jdbc.url="jdbc:mysql://localhost:3306/Production", username="root", password="root" , jdbc.driver.name="com.mysql.cj.jdbc.Driver")
 define aggregation ProductionAggregation
 from ProductionStream
 select name, amount, sum(amount) as total, avg(amount) as average 
@@ -113,7 +113,7 @@ To try out the example given above, follow the procedure below:
             jdbcUrl: 'jdbc:mysql://localhost:3306/production?useSSL=false'
             username: root
             password: root
-            driverClassName: com.mysql.jdbc.Driver
+            driverClassName: com.mysql.cj.jdbc.Driver
             minIdle: 5
             maxPoolSize: 50
             idleTimeout: 60000
@@ -139,7 +139,7 @@ To try out the example given above, follow the procedure below:
     define stream ProductionSummaryStream (name string, total double, average double);
     
     
-    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/production?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.jdbc.Driver")
+    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/production?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
     define aggregation ProductionAggregation
     from ProductionStream
     select name, amount, sum(amount) as total, avg(amount) as average

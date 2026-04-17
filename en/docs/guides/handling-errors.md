@@ -132,7 +132,7 @@ To try out storing errors in the store, follow the steps below:
               jdbcUrl: 'jdbc:mysql://localhost:3306/siddhierrorstoredb?useSSL=false'
               username: root
               password: root
-              driverClassName: com.mysql.jdbc.Driver
+              driverClassName: com.mysql.cj.jdbc.Driver
               minIdle: 5
               maxPoolSize: 50
               idleTimeout: 60000

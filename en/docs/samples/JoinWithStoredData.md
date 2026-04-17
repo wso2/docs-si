@@ -35,7 +35,7 @@ See the output for suspicious trades on the console.
        jdbc.url="jdbc:mysql://localhost:3306/fraudDB",
        username="root",
        password="root" ,
-       jdbc.driver.name="com.mysql.jdbc.Driver")
+       jdbc.driver.name="com.mysql.cj.jdbc.Driver")
 @PrimaryKey("creditCardNo")
 define table FraudTable (creditCardNo string);
 

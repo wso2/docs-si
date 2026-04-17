@@ -56,6 +56,18 @@ In this scenario, the WSO2 Integrator: SI reads input data from a MySQL database
         CREATE TABLE SweetProductionTable (name VARCHAR(20),amount double(10,2));
         ```
 
+## Adding the MySQL JDBC driver
+
+WSO2 Integrator: SI does not ship with a MySQL JDBC driver. Any tutorial that uses an `@Store(type='rdbms')` against MySQL — or a CDC source against MySQL — needs Connector/J on the SI classpath. To add it:
+
+1. Download the latest **Platform Independent** Connector/J 8.x release (for example, `mysql-connector-j-8.0.33.jar`) from [MySQL Community Downloads — Connector/J](https://dev.mysql.com/downloads/connector/j/).
+
+2. Extract the archive and copy the `mysql-connector-j-8.0.33.jar` file into the `<SI_HOME>/lib/` directory.
+
+3. Restart the WSO2 Integrator: SI server for the driver to be picked up.
+
+When you reference this driver from a Siddhi `@Store` definition, use `com.mysql.cj.jdbc.Driver` as the `jdbc.driver.name` value — this is the canonical class for Connector/J 8.x. The legacy `com.mysql.jdbc.Driver` class still works as a deprecation shim, but new applications should use the modern class.
+
 ## Download Kafka and create topics
 
 This scenario involves publishing some filtered production data to a Kafka topic named `eclair-production`.

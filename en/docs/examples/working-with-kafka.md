@@ -215,7 +215,7 @@ Let's add another Siddhi application `HelloKafka_2`, to add another Kafka consum
 2. Save this file as `HelloKafka_2.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. When the Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
 
     ```bash
-    INFO {org.wso2.carbon.stream.processor.core.internal.StreamProcessorService} - Siddhi App HelloKafka_2 deployed successfully
+    INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App HelloKafka_2 deployed successfully
     ```
 
 3. Navigate to the `<Kafka_Home>` directory and run following command.
@@ -484,7 +484,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
 6. Save this file as `CountProductions.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. When the Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
 
     ```bash
-    INFO {org.wso2.carbon.stream.processor.core.internal.StreamProcessorService} - Siddhi App CountProductions deployed successfully
+    INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App CountProductions deployed successfully
     ```
 
 7. Now let's run the Kafka command line client to push a few messages to the Kafka server. Navigate to `<Kafka_Home>` and run following command:

@@ -111,7 +111,7 @@ The input and the corresponding output is displayed in the console as follows.
             jdbc.url="jdbc:mysql://localhost:3306/sweetFactoryDB",
             username="root",
             password="root",
-            jdbc.driver.name="com.mysql.jdbc.Driver")
+            jdbc.driver.name="com.mysql.cj.jdbc.Driver")
 
     define aggregation stockAggregation
 

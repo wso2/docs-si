@@ -36,7 +36,7 @@ To understand how an active-active cluster processes aggregations when aggregati
 
 ```
 define stream TradeStream (symbol string, price double, quantity long, ;timestamp long);
-@store(type='rdbms',jdbc.url="jdbc:mysql://localhost:3306/TestDB", username="root", password="root" , jdbc.driver.name="com.mysql.jdbc.Driver")
+@store(type='rdbms',jdbc.url="jdbc:mysql://localhost:3306/TestDB", username="root", password="root" , jdbc.driver.name="com.mysql.cj.jdbc.Driver")
 @PartitionById(enable='true')
 define aggregation TradeAggregation
 from TradeStream

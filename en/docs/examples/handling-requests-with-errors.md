@@ -72,7 +72,7 @@ This configuration refers to a data source named `Error_Store_DB`. Define this d
       jdbcUrl: 'jdbc:mysql://localhost:3306/siddhierrorstoredb?useSSL=false'
       username: root
       password: root
-      driverClassName: com.mysql.jdbc.Driver
+      driverClassName: com.mysql.cj.jdbc.Driver
       minIdle: 5
       maxPoolSize: 50
       idleTimeout: 60000

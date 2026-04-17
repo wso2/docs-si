@@ -32,7 +32,7 @@ To view a sample data source configuration for each database type supported, exp
              jdbcUrl: jdbc:mysql://hostname:port/testdb
              username: root
              password: root
-             driverClassName: com.mysql.jdbc.Driver
+             driverClassName: com.mysql.cj.jdbc.Driver
              minIdle: 5
              maxPoolSize: 50
              idleTimeout: 60000

@@ -114,7 +114,7 @@ To try out the examples given above, follow the steps below.
                 jdbcUrl: 'jdbc:mysql://localhost:3306/stock?useSSL=false'
                 username: root
                 password: root
-                driverClassName: com.mysql.jdbc.Driver
+                driverClassName: com.mysql.cj.jdbc.Driver
                 minIdle: 5
                 maxPoolSize: 50
                 idleTimeout: 60000
@@ -157,7 +157,7 @@ To try out the examples given above, follow the steps below.
     	@map(type = 'text'))
     define stream StockValueStream (name string, value double);
     
-    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/stock?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.jdbc.Driver")
+    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/stock?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
     @primaryKey("name")
     define table StockTable (name string, amount double);
     

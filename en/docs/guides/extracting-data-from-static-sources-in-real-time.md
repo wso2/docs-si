@@ -23,7 +23,7 @@ To capture change data via the [WSO2 Integrator: SI for VS Code Overview](../dev
     password = "wso2", 
     table.name = "OnlineBookingsTable", 
     operation = "insert", 
-    mode = "listening", jdbc.driver.name = "com.mysql.jdbc.Driver",
+    mode = "listening", jdbc.driver.name = "com.mysql.cj.jdbc.Driver",
 	@map(type = 'keyvalue'))
 define stream OnlineBookingsStream (ref int, timestamp int, name string, package string, people int);
 ```
@@ -39,7 +39,7 @@ If you want to capture updates to the records in the `OnlineBookingsTable` datab
     table.name = "OnlineBookingsTable", 
     operation = "update", 
     mode = "listening", 
-    jdbc.driver.name = "com.mysql.jdbc.Driver",
+    jdbc.driver.name = "com.mysql.cj.jdbc.Driver",
 	@map(type = 'keyvalue'))
 define stream OnlineBookingsStream (ref int, timestamp int, name string, package string, people int);
 ```
@@ -53,7 +53,7 @@ Similarly, if you want to capture deletions in the `OnlineBookingsTable` databas
     table.name = "OnlineBookingsTable", 
     operation = "delete", 
     mode = "listening", 
-    jdbc.driver.name = "com.mysql.jdbc.Driver",
+    jdbc.driver.name = "com.mysql.cj.jdbc.Driver",
 	@map(type = 'keyvalue'))
 define stream OnlineBookingsStream (ref int, timestamp int, name string, package string, people int);
 ```
@@ -66,7 +66,7 @@ This method involves periodically polling a database table to capture changes in
 @source(type = 'cdc',
     url = 'jdbc:mysql://localhost:3306/tours?useSSL=false',
     mode = 'polling',
-    jdbc.driver.name = 'com.mysql.jdbc.Driver',
+    jdbc.driver.name = 'com.mysql.cj.jdbc.Driver',
     polling.column = 'timestamp',
     polling.interval = '10',
     username = 'wso2si',
@@ -133,7 +133,7 @@ Let's try out the example where you want to view the online bookings saved in a 
         @App:name("VacationsApp")
         @App:description("Captures cdc events from MySQL table")
                
-        @source(type = 'cdc', url = "jdbc:mysql://localhost:3306/tours?useSSL=false", username = "wso2si", password = "wso2", table.name = "OnlineBookingsTable", operation = "insert", mode = "listening", jdbc.driver.name = "com.mysql.jdbc.Driver",
+        @source(type = 'cdc', url = "jdbc:mysql://localhost:3306/tours?useSSL=false", username = "wso2si", password = "wso2", table.name = "OnlineBookingsTable", operation = "insert", mode = "listening", jdbc.driver.name = "com.mysql.cj.jdbc.Driver",
             @map(type = 'keyvalue'))
         define stream OnlineBookingsStream (ref int, timestamp long, name string, package string, people int);
                   
@@ -159,7 +159,7 @@ Let's try out the example where you want to view the online bookings saved in a 
         The following is logged in the WSO2 Integrator: SI Tooling terminal.
                    
         ```
-        INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - VacationsApp : LogStream : Event{timestamp=1563378804914, data=[1, 1602506738000, jem, best of rome, 2], isExpired=false}
+        INFO {io.siddhi.core.stream.output.sink.LogSink} - VacationsApp : LogStream : Event{timestamp=1563378804914, data=[1, 1602506738000, jem, best of rome, 2], isExpired=false}
         ```
 
 ### Supported databases

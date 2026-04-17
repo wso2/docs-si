@@ -106,7 +106,7 @@ nav:
       - 'Performing ETL Operations': 'guides/performing-etl-tasks.md'
     - 'Tutorials':
       - 'Tutorials Overview': 'examples/tutorials-overview.md'
-      - 'Performing Real-time ETL with MySQL': 'examples/performing-real-time-etl-with-mysql.md'
+      - 'Performing Real-time Change Data Capture with MySQL': 'examples/performing-real-time-etl-with-mysql.md'
       - 'Performing Real-time ETL with Files': 'examples/performing-real-time-etl-with-files.md'
       - 'Working with Kafka': 'examples/working-with-kafka.md'
       - 'Integrating Data Stores in Streaming Integration': 'examples/integrating-stores.md'

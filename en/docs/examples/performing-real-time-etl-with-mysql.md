@@ -4,7 +4,7 @@
 
 The WSO2 Integrator: SI (SI) allows you to capture changes to a database table, in a streaming manner, enabling you to perform ETL operations.
 
-This tutorial takes you through the different modes and  options you could use to perform Change Data Capturing (CDC) using the SI. In this tutorial, you are using a MySQL datasource.
+This tutorial takes you through the different modes and options you could use to perform Change Data Capturing (CDC) using the SI. In this tutorial, you are using a MySQL datasource.
 
 !!!info
     To use a different database other than MySQL, see [dependencies for CDC](https://github.com/siddhi-io/siddhi-io-cdc#dependencies) and add the corresponding driver jar. In addition to that, modify the JDBC URL accordingly, in `url` parameter in all Siddhi applications given in this tutorial.
@@ -32,9 +32,9 @@ You can capture following type of changes done to a database table:
 
 ### Listening mode
 
-!!!info "Before you begin:"
-    - You need to have access to a MySQL instance.<br/>
-    - Enable binary logging in the MySQL server. For detailed instructions, see [Debezium documentation - Enabling the binlog](https://debezium.io/docs/connectors/mysql/#enabling-the-binlog).<br/>
+!!!tip "Before you begin:"
+    - You need to have access to a MySQL instance. Steps 1–3 below require a MySQL account that can create schemas, users, and grants (typically `root`). The Siddhi applications in subsequent sections connect as the `wso2si` user created in step 2.<br/>
+    - Enable binary logging in the MySQL server. For detailed instructions, see [Debezium documentation - Enabling the binlog](https://debezium.io/documentation/reference/stable/connectors/mysql.html#enable-mysql-binlog).<br/>
     
         !!! note
             If you are using MySQL 8.0, use the following query to check the binlog status:<br/><br/>
@@ -43,20 +43,17 @@ You can capture following type of changes done to a database table:
             FROM performance_schema.global_variables WHERE variable_name='log_bin';
             ```
             
-    - Add the MySQL JDBC driver into the `<SI_HOME>/lib` directory as follows:<br/>
-        1. Download the MySQL JDBC driver from [the MySQL site](https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.45.tar.gz).<br/>
-        2. Unzip the archive.<br/>
-        3. Copy the `mysql-connector-java-5.1.45-bin.jar` to the `<SI_HOME>/lib` directory.<br/>
-        4. Start the SI server.<br/>
+    - Make sure the MySQL JDBC driver is installed in `<SI_HOME>/lib`. See [Adding the MySQL JDBC driver](../quick-start-guide/getting-started/download-install-and-start-si.md#adding-the-mysql-jdbc-driver) for the steps.<br/>
     - Once you install MySQL and start the MySQL server, create the database and the database table you require as follows:
         1. Let's create a new database in the MySQL server which you are to use throughout this tutorial. To do this, execute the following query.<br/>
             ```
             CREATE SCHEMA production;
             ```<br/>
-        2. Create a new user by executing the following SQL query.<br/>
+        2. Create the `wso2si` user (or re-grant the privileges if it already exists from another tutorial) by executing the following SQL queries:<br/>
             ```
-            CREATE USER 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';
+            CREATE USER IF NOT EXISTS 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';
             GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si'@'localhost';
+            FLUSH PRIVILEGES;
             ```<br/>
         3. Switch to the `production` database and create a new table, by executing the following queries:<br/>
             `use production;`<br/>
@@ -97,10 +94,11 @@ Now you can write a simple Siddhi application to monitor the `SweetProductionTab
         
 3. To install the extensions required for the `CDCListenForInserts` Siddhi application you deployed, open a new terminal window and navigate to the `<SI_HOME>/bin` directory and issue one of the following commands as appropriate, based on your operating system:
     <br/>
-    - For Windows: `extension-installer.bat`<br/>
+    - For Windows: `extension-installer.bat install`<br/>
     <br/>
-    - For Linux/macOS:  `sh extension-installer.sh`<br/>
+    - For Linux/macOS: `sh extension-installer.sh install`<br/>
     <br/>
+    After the extension installer completes, restart the SI server so that the newly installed extensions are loaded.
 
 4. Now let's perform an insert operation on the MySQL table by executing the following MySQL query on the database:
 
@@ -111,10 +109,13 @@ Now you can write a simple Siddhi application to monitor the `SweetProductionTab
     The following log appears in the SI console:
 
     ```
-    INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - CDCWithListeningMode : logStream : Event{timestamp=1563200225948, data=[chocolate, 100.0], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - CDCListenForInserts : LogStream : Event{timestamp=1563200225948, data=[chocolate, 100.0], isExpired=false}
     ```
 
 #### Capturing updates
+
+!!!note
+    Before proceeding, remove `CDCListenForInserts.siddhi` from the `<SI_HOME>/wso2/server/deployment/siddhi-files/` directory. Only one CDC listening-mode application can monitor the same table at a time.
 
 Now you can write a Siddhi application to monitor the `SweetProductionTable` for update operations.
 
@@ -153,13 +154,16 @@ Now you can write a Siddhi application to monitor the `SweetProductionTable` for
     As a result, you can see the following log in the SI console.
 
     ```
-    INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - CDCWithListeningMode : updateSweetProductionStream : Event{timestamp=1563201040953, data=[chocolate, Almond cookie, 100.0, 100.0], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - CDCListenForUpdates : LogStream : Event{timestamp=1563201040953, data=[chocolate, Almond cookie, 100.0, 100.0], isExpired=false}
     ```
 
     !!!info
-        Here, the `before_name1` attribute indicates the value of the `name` attribute before the update was made (`chocolate` in this case), and the `name` attribute has the current name after the update (i.e., `almond cookie`).
+        Here, the `before_name` attribute indicates the value of the `name` attribute before the update was made (`chocolate` in this case), and the `name` attribute has the current name after the update (i.e., `Almond cookie`).
 
 #### Capturing deletes
+
+!!!note
+    Before proceeding, remove `CDCListenForUpdates.siddhi` from the `<SI_HOME>/wso2/server/deployment/siddhi-files/` directory. Only one CDC listening-mode application can monitor the same table at a time.
 
 Now you can write a Siddhi application to monitor the `SweetProductionTable` for delete operations.
 
@@ -197,7 +201,7 @@ Now you can write a Siddhi application to monitor the `SweetProductionTable` for
     The following log appears in the SI console:
 
     ```
-    INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - CDCWithListeningMode : DeleteSweetProductionStream : Event{timestamp=1563367367098, data=[Almond cookie, 100.0], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - CDCListenForDeletes : LogStream : Event{timestamp=1563367367098, data=[Almond cookie, 100.0], isExpired=false}
     ```
 
     !!!info
@@ -266,7 +270,7 @@ Let's try out a scenario in which you are going to deploy a Siddhi application t
    Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
 
     ```
-    INFO {org.wso2.carbon.stream.processor.core.internal.StreamProcessorService} - Siddhi App CountProductions deployed successfully
+    INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App CountProductions deployed successfully
     ```
 
 6. Now let's perform a few insert operations on the MySQL table. Execute following MySQL queries on the database:
@@ -329,7 +333,8 @@ Note that the `CDC source` has replayed the last two messages. As a result, the 
 
 ### Polling mode
 
-!!!info "Before you begin:"
+!!!tip "Before you begin:"
+    Polling mode queries the table over JDBC and does not use the MySQL binary log. The `REPLICATION SLAVE` / `REPLICATION CLIENT` grants from Listening mode are only needed for that mode; they do no harm if already present.<br/>
     You are required to have access to a MySQL instance. Create the required database and the database table in the MySQL instance as follows:<br/>
     1. Let's create a new database in the MySQL server which you are to use throughout this tutorial. To do this, issue the following command.<br/>
         ```
@@ -338,13 +343,13 @@ Note that the `CDC source` has replayed the last two messages. As a result, the 
     2. Switch to the production database and create a new table by executing following queries.<br/>
         `use production_pol;`<br/>
         `CREATE TABLE SweetProductionTable (last_update TIMESTAMP, name VARCHAR(20),amount double(10,2));`<br/>
-    3. If you have not already created a user under [Listening Mode](#listening-mode), create a new user by executing the following SQL query.<br/>
-        `CREATE USER 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';`<br/>
-        `GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si'@'localhost';`<br/>
-    4. If you have not already added the MySQL JDBC driver into `<SI_HOME>/lib` under [Listening Mode](#listening-mode), add it as follows:<br/>
-            a. Download the MySQL JDBC driver from [the MySQL site](https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.45.tar.gz).<br/>
-            b. Unzip the archive.<br/>
-            c. Copy the `mysql-connector-java-5.1.45-bin.jar` to the `<SI_HOME>/lib` directory.
+    3. If you have not already created a user under [Listening Mode](#listening-mode), create one by executing the following SQL queries:<br/>
+        ```
+        CREATE USER IF NOT EXISTS 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';
+        GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si'@'localhost';
+        FLUSH PRIVILEGES;
+        ```<br/>
+    4. If you have not already added the MySQL JDBC driver under [Listening Mode](#listening-mode), see [Adding the MySQL JDBC driver](../quick-start-guide/getting-started/download-install-and-start-si.md#adding-the-mysql-jdbc-driver) for the steps.
 
 
 #### Capturing inserts
@@ -361,7 +366,7 @@ Now you can write a simple Siddhi application to monitor the `SweetProductionTab
     @source(type = 'cdc',
         url = 'jdbc:mysql://localhost:3306/production_pol?useSSL=false',
         mode = 'polling',
-        jdbc.driver.name = 'com.mysql.jdbc.Driver',
+        jdbc.driver.name = 'com.mysql.cj.jdbc.Driver',
         polling.column = 'last_update',
         polling.interval = '10',
         username = 'wso2si',
@@ -398,7 +403,7 @@ Now you can write a simple Siddhi application to monitor the `SweetProductionTab
     The following log appears in the SI console:
 
     ```
-    INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - CDCWithPollingMode : LogStream : Event{timestamp=1563378804914, data=[chocolate, 100.0], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - CDCPolling : LogStream : Event{timestamp=1563378804914, data=[chocolate, 100.0], isExpired=false}
     ```
 
 #### Capturing Updates
@@ -414,7 +419,7 @@ update SweetProductionTable SET name = 'Almond cookie' where name = 'chocolate';
 The following log appears in the SI console:
 
 ```
-INFO {org.wso2.siddhi.core.stream.output.sink.LogSink} - CDCWithPollingMode : logStream : Event{timestamp=1563436388530, data=[Almond cookie, 100.0], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - CDCPolling : LogStream : Event{timestamp=1563436388530, data=[Almond cookie, 100.0], isExpired=false}
 ```
 
 #### Preserving State of the application through a system failure
@@ -466,7 +471,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
     @source(type = 'cdc',
         url = 'jdbc:mysql://localhost:3306/production_pol?useSSL=false',
         mode = 'polling',
-        jdbc.driver.name = 'com.mysql.jdbc.Driver',
+        jdbc.driver.name = 'com.mysql.cj.jdbc.Driver',
         polling.column = 'last_update',
         polling.interval = '10',
         username = 'wso2si',
@@ -488,7 +493,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
    Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
 
     ```
-    INFO {org.wso2.carbon.stream.processor.core.internal.StreamProcessorService} - Siddhi App CountProductions_pol deployed successfully
+    INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App CountProductions_pol deployed successfully
     ```
 
 6. Now let's perform a few insert operations on the MySQL table. Execute following MySQL queries on the database:

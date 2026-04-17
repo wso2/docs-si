@@ -81,7 +81,7 @@ define stream logStream(name string, amount double);
        jdbc.url="jdbc:mysql://localhost:3306/production?useSSL=false",
        username="wso2",
        password="123" ,
-       jdbc.driver.name="com.mysql.jdbc.Driver")
+       jdbc.driver.name="com.mysql.cj.jdbc.Driver")
 --@PrimaryKey("name")
 @index("amount")
 define table SweetProductionTable (name string, amount double);

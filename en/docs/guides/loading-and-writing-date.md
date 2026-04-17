@@ -17,7 +17,7 @@ To understand this, consider an example of an sweet shop that needs to save all 
     ```
     @primaryKey('ref')
     @index('name')
-    @store(type='rdbms', jdbc.url="jdbc:mysql://localhost:3306/SalesRecordsDB", username="root", password="root" , jdbc.driver.name="com.mysql.jdbc.Driver")
+    @store(type='rdbms', jdbc.url="jdbc:mysql://localhost:3306/SalesRecordsDB", username="root", password="root" , jdbc.driver.name="com.mysql.cj.jdbc.Driver")
     define table SalesRecords(ref string, name string, amount int);
     ```
   The above table definition captures sales records. The details captured in each sales record includes the transaction reference (`ref`), the name of the product (`name`), and sales amount (`amount`). The `ref` attribute is the primary key because there cannot be two or more records with the same transaction reference. The `name` attribute is an index attribute.
@@ -78,7 +78,7 @@ To try out the example given above, follow the steps below:
     
     define stream SalesRecordsStream (name string, amount int);
     
-    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/sales?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.jdbc.Driver")
+    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/sales?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
     @primaryKey('ref' )
     @index('name' )
     define table SalesRecords (name string, amount int);

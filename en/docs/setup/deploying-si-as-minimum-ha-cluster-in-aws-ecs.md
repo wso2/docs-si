@@ -152,7 +152,7 @@ The following table explains the above steps.
                       jdbcUrl: 'jdbc:mysql://wso2db.cxtsxcdgcayr.ap-south-1.rds.amazonaws.com:3306/persistencedb?useSSL=false'
                       username: root
                       password: rootroot
-                      driverClassName: com.mysql.jdbc.Driver
+                      driverClassName: com.mysql.cj.jdbc.Driver
                       maxPoolSize: 50
                       idleTimeout: 60000
                       connectionTestQuery: SELECT 1
@@ -171,7 +171,7 @@ The following table explains the above steps.
                       jdbcUrl: 'jdbc:mysql://wso2db.cxtsxcdgcayr.ap-south-1.rds.amazonaws.com:3306/clusterdb?useSSL=false'
                       username: root
                       password: rootroot
-                      driverClassName: com.mysql.jdbc.Driver
+                      driverClassName: com.mysql.cj.jdbc.Driver
                       maxPoolSize: 50
                       idleTimeout: 60000
                       connectionTestQuery: SELECT 1

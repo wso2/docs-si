@@ -66,7 +66,7 @@ The insert operation is logged in the WSO2 Integrator: SI console as shown below
 @source(type = 'cdc',
     url = 'jdbc:mysql://localhost:3306/production?useSSL=false',
     mode = 'polling',
-    jdbc.driver.name = 'com.mysql.jdbc.Driver',
+    jdbc.driver.name = 'com.mysql.cj.jdbc.Driver',
     polling.column = 'last_update',
     polling.interval = '1',
     username = '',
