@@ -229,7 +229,7 @@ The event causes an error referred to as `MappingFailedException`. This is becau
 
 To manage the error in the Error Store Explorer, follow the procedure below:
     
-1. To open the Error Store Explorer, open WSO2 Integrator: SI Tooling, click **Tools** and then click **Error Store Explorer**.
+1. To open the Error Store Explorer, open the VSCode editor with the WSO2 Integrator: SI extension installed, click **Tools** and then click **Error Store Explorer**.
 
     ![Access Error Store]({{base_path}}/images/handling-requests-with-errors/access-error-store-explorer.png)
     
@@ -288,7 +288,7 @@ INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService}
 
 To manage the error in the Error Store Explorer, follow the procedure below:
     
-1. To open the Error Store Explorer, open WSO2 Integrator: SI Tooling, click **Tools** and then click **Error Store Explorer**.
+1. To open the Error Store Explorer, open the VSCode editor with the WSO2 Integrator: SI extension installed, click **Tools** and then click **Error Store Explorer**.
 
     ![Access Error Store]({{base_path}}/images/handling-requests-with-errors/access-error-store-explorer.png)
     

@@ -58,7 +58,7 @@ To run the WSO2 Integrator: SI in the  open source image that is available for i
 3. If you did not mount the location to the `MySimpleApp.siddhi` file when issuing the command to start the WSO2 Integrator: SI, you can deploy the Siddhi application via the WSO2 Integrator: SI tool.
 
     ???info "Click here for detailed instructions."
-        1. Start and access the WSO2 Integrator: SI Tooling. Open a new file and copy-paste the `MySimpleApp.siddhi` Siddhi application in the Source View.<br/>
+        1. Start and access the VSCode editor with the WSO2 Integrator: SI extension installed. Open a new file and copy-paste the `MySimpleApp.siddhi` Siddhi application in the Source View.<br/>
             Then save the Siddhi application.<br/>
         2. To deploy the Siddhi application, click the **Deploy** menu option and then click **Deploy to Server**. The **Deploy Siddhi Apps to Server** dialog box opens as shown in the example below.<br/>
             ![Deploy to Server dialog box]({{base_path}}/images/getting-si-run-with-mi/deploy-to-server-dialog-box.png)<br/>

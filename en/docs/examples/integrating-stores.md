@@ -33,16 +33,17 @@ To understand how the WSO2 Integrator: SI performs these operations, follow the 
 !!! tip  "Before you begin:"
     You need to complete the following prerequisites before you begin:<br/><br/>
     - You need to have access to a MySQL instance.<br/><br/>
-    - Install `rdbms-mysql` extension in WSO2 Integrator: SI as follows:<br/><br/>
+    - Install the `rdbms-mysql` extension in WSO2 Integrator: SI using **one of** the following approaches:<br/><br/>
+        **Option 1 — Install via the command line:**<br/><br/>
         1. Start WSO2 Integrator: SI by navigating to the `<SI_HOME>/bin` directory and issuing the appropriate command based on your operating system.<br/><br/>
             - **For Linux/macOS**  : `./server.sh`
             - **For Windows**: `server.bat --run`<br/><br/>
-        2. To install the `rdbms-mysql` extension, navigate to the to the `<SI_HOME>/bin` directory and issue the appropriate command based on your operating system:<br/><br/>
-            - **For Linux/macOS**  : `./extension-installer.sh install`
-            - **For Windows**: `extension-installer.bat install`<br/><br/>
+        2. To install the `rdbms-mysql` extension, navigate to the `<SI_HOME>/bin` directory and issue the appropriate command based on your operating system:<br/><br/>
+            - **For Linux/macOS**  : `./extension-installer.sh install rdbms-mysql`
+            - **For Windows**: `extension-installer.bat install rdbms-mysql`<br/><br/>
         3. Restart the WSO2 Integrator: SI server.<br/><br/>
-    - Install the `rdbms-mysql` extension in WSO2 Integrator: SI as follows.<br/><br/>
-        1. Open the VSCode editor with **WSO2 Integrator: SI** extension installed.<br/><br/>
+        **Option 2 — Install via the VSCode editor:**<br/><br/>
+        1. Open the VSCode editor with the **WSO2 Integrator: SI** extension installed.<br/><br/>
         2. Open the command palette (Ctrl+Shift+P or Cmd+Shift+P on Mac), and type **SI: Extension Installer**.<br/><br/>
         3. In the **Extension Installer** dialog box, click **Install** for the **RDBMS-MYSQL** extension. Then click **Install** in the message that appears to confirm whether you want to proceed.<br/><br/>
         4. Reload the VSCode window.<br/><br/>
@@ -54,7 +55,7 @@ To understand how the WSO2 Integrator: SI performs these operations, follow the 
 
 In this section, let's learn the different ways in which you can connect a Siddhi application to a data store.
 
-In WSO2 Integrator: SI Tooling, open a new file and start creating a new  Siddhi Application named `StockManagementApp`.
+In the VSCode editor with the WSO2 Integrator: SI extension installed, open a new file and start creating a new Siddhi Application named `StockManagementApp`.
 
     ```
     @App:name("StockManagementApp")
@@ -67,7 +68,7 @@ Now let's connect to the data stores (i.e., databases) you previously created to
 
 To connect to the `closingstock` database via a data source, follow the steps below:
 
-1. Define a data source in the `<SI_HOME>/conf/server/deployment.yaml` file as follows:
+1. Define a data source under the `dataSources:` key in the `<SI_HOME>/conf/server/deployment.yaml` file as follows:
 
     ```
       - name: Stock_DB
@@ -179,10 +180,10 @@ To insert values into `purchases` and `dispatches` databases, let's write two qu
 - For dispatches:
 
     ```
-    @info(name = 'Save purchase records')
-    from MaterialPurchasesStream 
+    @info(name = 'Save material dispatch records')
+    from MaterialDispatchesStream 
     select * 
-    insert into PurchasesTable;
+    insert into DispatchesTable;
     ```
 To try out these queries, simulate events for the streams via the Event Simulator as follows:
 
@@ -276,7 +277,7 @@ To try out these queries, simulate events for the streams via the Event Simulato
     
       ![Saved Dispatch Records]({{base_path}}/images/integrating-stores/saved-dispatch-records.png)
          
-#### Retrieve Records
+#### Retrieve records
  
 Assume that the Factory Manager needs to view all the purchase records for honey. This can be done by following the steps below:
 
@@ -286,7 +287,7 @@ Assume that the Factory Manager needs to view all the purchase records for honey
     define stream PurchaseRecordRetrievalStream (name string);
     ```
    
-   This stream only has the `name` attribute because only the name is needed to filter the search results
+   This stream only has the `name` attribute because only the name is needed to filter the search results.
 
 2. To present the retrieved records, define an output stream as follows:
 
@@ -316,7 +317,7 @@ Assume that the Factory Manager needs to view all the purchase records for honey
    
    - Based on the previous point, `on s.name == p.name ` condition specifies that a matching event is identified when the `PurchasesTable` has a record where the value for the `name` attribute is the same as that of the stream.
    
-   - The `select` clause the query specifies that when such a matching event is identified, attribute values for the output event should be selected as follows:
+   - The `select` clause of the query specifies that when such a matching event is identified, attribute values for the output event should be selected as follows:
    
         - The timestamp from the table
         - The name from the stream
@@ -376,7 +377,7 @@ Assume that the Factory Manager needs to view all the purchase records for honey
         
 #### Update or insert records
  
-The `Stock Table` table at any given time contains a single record per product, showing the current closing stock for the relevant product. When you send a new event reporting a stock value to the table, the outcome is one of the following:
+The `StockTable` table at any given time contains a single record per product, showing the current closing stock for the relevant product. When you send a new event reporting a stock value to the table, the outcome is one of the following:
 
 - If a record with the same value for `name` already exists, the event updates the value for the `amount` attribute in that record.
 - If a record with the same value for `name` does not exist, the new event is inserted into the table as a new record.
@@ -397,10 +398,10 @@ To try this, follow the steps below:
     select name, amount
     update or insert into StockTable
      set LatestStockStream.amount = amount
-     on StockTable.name == name 
+     on StockTable.name == name;
     ```
     
-    Here, the WSO2 Integrator: SI checks whether an event in the `LatestStockStream` has a matching record in the `StockTable` table where the value for the `name` attribute is the same. If such a record exists, the value for the `amount` attribute in that record is set to the amount reported via the stream event. If no matching event exists, the stream event is inserted as a new event
+    Here, the WSO2 Integrator: SI checks whether an event in the `LatestStockStream` has a matching record in the `StockTable` table where the value for the `name` attribute is the same. If such a record exists, the value for the `amount` attribute in that record is set to the amount reported via the stream event. If no matching event exists, the stream event is inserted as a new event.
      
 3. Save the Siddhi application. The complete Siddhi application is as follows:
 
@@ -450,12 +451,12 @@ To try this, follow the steps below:
         group by p.name 
     insert into SearchResultsStream;
     
-    @info(name = ''Update or Record Stock'')
+    @info(name = 'Update or Record Stock')
     from LatestStockStream
     select name, amount
     update or insert into StockTable
      set LatestStockStream.amount = amount
-     on StockTable.name == name 
+     on StockTable.name == name;
     ```
    
 4. Simulate events as follows:
@@ -471,11 +472,11 @@ To try this, follow the steps below:
     3. Execute the following MySQL queries:
      
         ```
-        use closing stock
+        use closingstock;
         ``` 
 
         ```
-        select * from StockTable
+        select * from StockTable;
         ``` 
        
         The following is  displayed.
@@ -493,11 +494,11 @@ To try this, follow the steps below:
     5. Execute the following MySQL queries:
                 
         ```
-        use closing stock
+        use closingstock;
         ``` 
         
         ```
-        select * from StockTable
+        select * from StockTable;
         ``` 
         
         The following is  displayed.
@@ -576,12 +577,12 @@ To update the `StockTable` table via streams, follow the steps below:
         group by p.name 
     insert into SearchResultsStream;
     
-    @info(name = ''Update or Record Stock'')
+    @info(name = 'Update or Record Stock')
     from LatestStockStream
     select name, amount
     update or insert into StockTable
      set LatestStockStream.amount = amount
-     on StockTable.name == name 
+     on StockTable.name == name;
    
     @info(name = 'Update Stock')
     from UpdateStockStream
@@ -604,18 +605,18 @@ To update the `StockTable` table via streams, follow the steps below:
     3. Execute the following MySQL queries:
      
         ```
-        use closing stock
+        use closingstock;
         ``` 
 
         ```
-        select * from StockTable
+        select * from StockTable;
         ``` 
        
        The following is  displayed.
        
        ![Saved Stock Records]({{base_path}}/images/integrating-stores/edited-stock-records.png)
        
-       Here, the single record displayed is the event you sent. This event is inserted as a new record because the `StockTable` table did not have any records. 
+       Here, the single record displayed shows the updated amount for `flour`. The `Update Stock` query matched the existing record on the `name` attribute and replaced its `amount` value with the one sent via the `UpdateStockStream` event.
  
 #### Delete records
     
@@ -686,12 +687,12 @@ To delete records in the `StockTable` table via streams, follow the steps below:
         group by p.name 
     insert into SearchResultsStream;
     
-    @info(name = ''Update or Record Stock'')
+    @info(name = 'Update or Record Stock')
     from LatestStockStream
     select name, amount
     update or insert into StockTable
      set LatestStockStream.amount = amount
-     on StockTable.name == name 
+     on StockTable.name == name;
    
     @info(name = 'Update Stock')
     from UpdateStockStream
@@ -720,11 +721,11 @@ To delete records in the `StockTable` table via streams, follow the steps below:
     3. Execute the following MySQL queries:
      
         ```
-        use closing stock
+        use closingstock;
         ``` 
 
         ```
-        select * from StockTable
+        select * from StockTable;
         ``` 
        
        The `StockTable` is displayed as an empty set. This is because the event you sent to the `DeleteStream` stream matched the record in the table, and as a result, the record was deleted by the `Delete Stock` query.
@@ -738,7 +739,7 @@ In this section, let's perform CRUD operations via the [Store API](../ref/store-
 To insert a record into the `StockTable` table, issue the following CURL command:
 
 ```
-curl -X POST http://localhost:7370/stores/query -H "content-type: application/json" -u "admin:admin" -d '{"appName" : "StockManagementApp", "query" : "select \"sugar\" as name, 200.0 as amount insert into StockTable;" }' -k
+curl -X POST http://localhost:7070/stores/query -H "content-type: application/json" -u "admin:admin" -d '{"appName" : "StockManagementApp", "query" : "select \"sugar\" as name, 200.0 as amount insert into StockTable;" }'
 ```
 
 Then issue the following commands in the terminal where you are running the MySQL server.
@@ -760,21 +761,21 @@ The following is displayed:
 To retrieve a record from the `StockTable` table, issue the following CURL command:
 
 ```
-curl -X POST http://localhost:7370/stores/query -H "content-type: application/json" -u "admin:admin" -d '{"appName" : "StockManagementApp", "query" : "from StockTable on name == \"sugar\" select name, amount;  " }' -k
+curl -X POST http://localhost:7070/stores/query -H "content-type: application/json" -u "admin:admin" -d '{"appName" : "StockManagementApp", "query" : "from StockTable on name == \"sugar\" select name, amount;  " }'
 ```
 
 This returns the following response:
 
 ```
-{"records":[["sugar",200.0]]
+{"records":[["sugar",200.0]]}
 ```
 
-#### Update or inserts records
+#### Update or insert records
 
 First, let's send an event that has the same value for the `name` attribute as the existing record in the `StockTable` table. To do this, issue the following command:
 
 ```
-curl -X POST http://localhost:7370/stores/query -H "content-type: application/json" -u "admin:admin" -d '{"appName" : "StockManagementApp", "query" : "select \"sugar\" as name, 260.0 as amount update or insert into StockTable  set amount = amount  on StockTable.name == name;" }' -k
+curl -X POST http://localhost:7070/stores/query -H "content-type: application/json" -u "admin:admin" -d '{"appName" : "StockManagementApp", "query" : "select \"sugar\" as name, 260.0 as amount update or insert into StockTable  set amount = amount  on StockTable.name == name;" }'
 ```
 
 Then issue the following commands in the terminal where you are running the MySQL server.
@@ -794,7 +795,7 @@ The following is displayed:
 Now let's send an event where the value for the `name` attribute is different to that of the existing value in the `StockTable` table as follows:
 
 ```
-curl -X POST http://localhost:7370/stores/query -H "content-type: application/json" -u "admin:admin" -d '{"appName" : "StockManagementApp", "query" : "select \"vanilla\" as name, 100.0 as amount update or insert into StockTable  set amount = amount  on StockTable.name == name;" }' -k
+curl -X POST http://localhost:7070/stores/query -H "content-type: application/json" -u "admin:admin" -d '{"appName" : "StockManagementApp", "query" : "select \"vanilla\" as name, 100.0 as amount update or insert into StockTable  set amount = amount  on StockTable.name == name;" }'
 ```
 
 Then issue the following commands in the terminal where you are running the MySQL server.
@@ -816,7 +817,7 @@ The following is displayed:
 To update an existing record in the `StockTable` table, issue the following CURL command:
 
 ```
-curl -X POST http://localhost:7370/stores/query -H "content-type: application/json" -u "admin:admin" -d '{"appName" : "StockManagementApp", "query" : "select \"vanilla\" as name, 127.0 as amount update StockTable  set amount = amount on StockTable.name == name;" }' -k
+curl -X POST http://localhost:7070/stores/query -H "content-type: application/json" -u "admin:admin" -d '{"appName" : "StockManagementApp", "query" : "select \"vanilla\" as name, 127.0 as amount update StockTable  set amount = amount on StockTable.name == name;" }'
 ```
 
 Then issue the following commands in the terminal where you are running the MySQL server.
@@ -838,7 +839,7 @@ The following is displayed:
 To delete an existing record in the `StockTable` table, issue the following CURL command:
 
 ```
-curl -X POST http://localhost:7370/stores/query -H "content-type: application/json" -u "admin:admin" -d '{"appName" : "StockManagementApp", "query" : "select \"vanilla\" as name delete StockTable on StockTable.name == name;" }' -k
+curl -X POST http://localhost:7070/stores/query -H "content-type: application/json" -u "admin:admin" -d '{"appName" : "StockManagementApp", "query" : "select \"vanilla\" as name delete StockTable on StockTable.name == name;" }'
 ```
 
 Then issue the following commands in the terminal where you are running the MySQL server.
@@ -860,7 +861,7 @@ The following is displayed:
 You can execute SQL queries via WSO2 Integrator: SI to manipulate data in data stores. This is supported via the [siddhi-store-rdbms extension](https://siddhi-io.github.io/siddhi-store-rdbms/).
 
 !!! tip "Before you begin:"
-    To allow WSO2 Integrator: SI Tooling to perform CRUD operations, open `<SI_HOME>/conf/server/deployment.yaml` file, and add an extract as shown below with the `perform.CRUD.operations` parameter set to `true` as shown below:<br/><br/>
+    To allow WSO2 Integrator: SI to perform CRUD operations, open the `<SI_HOME>/conf/server/deployment.yaml` file, and add an extract as shown below with the `perform.CUD.operations` parameter set to `true`:<br/><br/>
         ```yaml
         siddhi:
           extensions:
@@ -876,9 +877,9 @@ To perform CRUD operations in multiple tables via WSO2 Integrator: SI, follow th
 
 To start creating the Siddhi application with the required tables, follow the steps below:
 
-1. In WSO2 Integrator: SI Tooling, open the `StockManagementApp` that you previously created.
+1. In the VSCode editor with the WSO2 Integrator: SI extension installed, open the `StockManagementApp` that you previously created.
 
-2. Define a new stream in it named `StockStream` as follows.
+2. Define a new stream in it named `TriggerStream` as follows.
 
     `define stream TriggerStream (name string, amount double);`
     
