@@ -161,7 +161,7 @@ To try the above example, follow the steps below.
     
         `bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic houston`
         
-3. Prepare WSO2 Integrator: SI Tooling to consume Kafka messages as follows:
+3. Prepare the VSCode editor (with the WSO2 Integrator: SI extension installed) to consume Kafka messages as follows:
 
     1. Download and install the Kafka extension via VSCode. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
     
@@ -203,7 +203,7 @@ To try the above example, follow the steps below.
         
         This pushes a message to the Kafka Server. Then, the Siddhi application you deployed in the WSO2 Integrator: SI consumes this message. As a result, the WSO2 Integrator: SI log displays the following:
         
-5. Check the logs of WSO2 Integrator: SI Tooling. The Kafka message you generated is logged as follows:
+5. Check the logs of the VSCode editor (with the WSO2 Integrator: SI extension installed). The Kafka message you generated is logged as follows:
 
     ```
     INFO {io.siddhi.core.stream.output.sink.LogSink} - Temperature Update : Event{timestamp=1603339705244, data=[23, 99], isExpired=false}

@@ -1,7 +1,7 @@
 # Receiving Email Alerts
 
 ## Purpose:
-This application demonstrates how to send a single event via Single Simulation, and to generate alerts using filters when the threshold value is exceeded. Furthermore, it shows how to configure WSO2 Integrator: SI Tooling to publish an alerts via e-mail. An alert is generated as an email when a high value transaction (i.e., where the value is over 5000) takes place.
+This application demonstrates how to send a single event via Single Simulation, and to generate alerts using filters when the threshold value is exceeded. Furthermore, it shows how to configure the WSO2 Integrator: SI VSCode extension to publish an alerts via e-mail. An alert is generated as an email when a high value transaction (i.e., where the value is over 5000) takes place.
 
 !!!info "Before you begin:"
     - Enable access to less  secure apps in the gmail account you are using for this example via the [Less SecureApps](https://myaccount.google.com/lesssecureapps) link.<br/>

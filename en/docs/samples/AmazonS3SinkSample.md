@@ -7,7 +7,7 @@ This application demonstrates how to publish aggregated events to Amazon AWS S3 
 
 !!!info "Before you begin:"
     - Create an AWS account and set the credentials following the instructions in the [AWS Developer Guide](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html).
-    - Save the sample Siddhi application in WSO2 Integrator: SI Tooling.
+    - Save the sample Siddhi application in the VSCode editor with the WSO2 Integrator: SI extension installed.
 
 ## Prerequisites
 

@@ -7,7 +7,7 @@ This example demonstrates how to receive events via the TCP transport and carry 
 For more information about Siddhi extensions, see [Siddhi Extensions](https://wso2.github.io/siddhi/extensions/).
 
 !!!info "Before you begin:"
-    Save the sample Siddhi application in WSO2 Integrator: SI Tooling.
+    Save the sample Siddhi application in the VSCode editor with the WSO2 Integrator: SI extension installed.
 
 ## Executing the sample
 
@@ -34,7 +34,7 @@ ant -Dtype=json -DfilePath=<SI-Tooling-Home>/samples/artifacts/DataPreprocessing
 
 ## Viewing the results
 
-Once the `DataProcessing` Siddhi application receives events from the TCP client, the following messages are displayed in the WSO2 Integrator: SI Tooling console:
+Once the `DataProcessing` Siddhi application receives events from the TCP client, the following messages are displayed in the VSCode editor (with the WSO2 Integrator: SI extension installed) console:
 
 ```bash
 INFO {io.siddhi.core.stream.output.sink.LogSink} - DataPreprocessing : ProcessedStream : Event{timestamp=1513621173211, data=[HouseholdID:1::UniqueID:0001, 12.12, 13-08-2001 23:49:33], isExpired=false}<br/><br/>

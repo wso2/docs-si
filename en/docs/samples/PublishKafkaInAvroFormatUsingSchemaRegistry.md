@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This application demonstrates how to configure WSO2 Integrator: SI Tooling to send sweet production events via the Kafka transport in Avro format using Confluent Schema Registry.
+This application demonstrates how to configure the WSO2 Integrator: SI VSCode extension to send sweet production events via the Kafka transport in Avro format using Confluent Schema Registry.
 
 ## Prerequisites
 

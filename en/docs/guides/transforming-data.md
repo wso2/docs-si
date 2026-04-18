@@ -198,7 +198,7 @@ Here, `js:eval("amount > average", 'bool') as exceedsAverage` is a custom functi
 
 To try out the transformations described above with some of the given examples, follow the steps below:
 
-1. [Start and Access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
 
 2. Open a new file. Then add and save the following Siddhi application.
 
@@ -337,7 +337,7 @@ To try out the transformations described above with some of the given examples, 
     {"Product":{"ProductionData":{"Name":"Gingerbread","Quantity":"45.0","Total":165.0,"Average":55.0}
     ```
 
-5. Check the WSO2 Integrator: SI Tooling terminal. The following is logged in it.
+5. Check the VSCode editor (with the WSO2 Integrator: SI extension installed) terminal. The following is logged in it.
 
     ```text
     INFO {io.siddhi.core.stream.output.sink.LogSink} - Exceeds Average : name:"Jaffa Cake",

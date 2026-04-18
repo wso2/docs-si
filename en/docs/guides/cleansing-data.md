@@ -176,7 +176,7 @@ insert into CleansedDataStream
 
 To try out the above example, follow the steps below:
 
-1. [Start and Access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
 
 2. Open a new file. Then add and save the following Siddhi application.
 

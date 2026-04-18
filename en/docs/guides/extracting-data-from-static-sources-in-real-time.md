@@ -127,7 +127,7 @@ Let's try out the example where you want to view the online bookings saved in a 
     
     5. Download the `cdc-mysql`Siddhi extension for WSO2 Integrator: SI VSCode extension. For instructions, see [Installing Siddhi Extensions](../../develop/installing-siddhi-extensions/#installing-an-extension).
     
-    6. In WSO2 Integrator: SI Tooling, open a new file. Copy and paste the following Siddhi application to it.
+    6. In the VSCode editor (with the WSO2 Integrator: SI extension installed), open a new file. Copy and paste the following Siddhi application to it.
     
         ```
         @App:name("VacationsApp")
@@ -156,7 +156,7 @@ Let's try out the example where you want to view the online bookings saved in a 
     
         `insert into OnlineBookingsTable(ref,timestamp,name,package,people) values('1',1602506738000,'jem','best of rome',2);`
         
-        The following is logged in the WSO2 Integrator: SI Tooling terminal.
+        The following is logged in the VSCode editor (with the WSO2 Integrator: SI extension installed) terminal.
                    
         ```
         INFO {io.siddhi.core.stream.output.sink.LogSink} - VacationsApp : LogStream : Event{timestamp=1563378804914, data=[1, 1602506738000, jem, best of rome, 2], isExpired=false}
@@ -373,7 +373,7 @@ To try out reading the content of a file and file events, let's address the requ
     
 3. Open a new file in a text editor of your choice, and save it as `productionstats.csv` in the `Users/production` directory.
 
-    As a result, the following is logged in the WSO2 Integrator: SI Tooling terminal to indicate that the `productionstats.csv` is created in the `Users/production` directory.
+    As a result, the following is logged in the VSCode editor (with the WSO2 Integrator: SI extension installed) terminal to indicate that the `productionstats.csv` is created in the `Users/production` directory.
     
     ```
     INFO {io.siddhi.core.stream.output.sink.LogSink} - LogFileEventsApp : LogFileEventsStream : Event{timestamp=1603105747423, data=[/Users/production/productionstats.csv, productionstats.csv, created], isExpired=false} 
@@ -413,7 +413,7 @@ To try out reading the content of a file and file events, let's address the requ
     Almond cookie,100.0
     Baked alaska,20.0
     ```
-    The following is logged in the WSO2 Integrator: SI Tooling terminal:
+    The following is logged in the VSCode editor (with the WSO2 Integrator: SI extension installed) terminal:
     
     - **For the `FileReadingApp` Siddhi application**
     

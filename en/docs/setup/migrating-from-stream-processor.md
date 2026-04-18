@@ -20,7 +20,7 @@ To connect the WSO2 Integrator: SI to the same databases as WSO2 SP 4.4.0 so tha
 - Check the data source configured for Business Rules  in the `<SP_HOME>/conf/wso2/dashboard/deployment.yaml` file, and configure that data source with the same parameter values in the `<SI__TOOLING_HOME>/conf/server/deployment.yaml` file.
 
     !!!info
-        The Business Rules feature which was a part of the `Dashboard` profile of the Stream Processor is now shipped with WSO2 Integrator: SI Tooling. Therefore, configurations related to this feature are added in the `<SI__TOOLING_HOME>/conf/server/deployment.yaml` file.
+        The Business Rules feature which was a part of the `Dashboard` profile of the Stream Processor is now shipped with the VSCode editor (with the WSO2 Integrator: SI extension installed). Therefore, configurations related to this feature are added in the `<SI__TOOLING_HOME>/conf/server/deployment.yaml` file.
 
 For the complete list of data sources configured for the WSO2 Integrator: SI, see [Configuring Data sources](configuring-data-sources.md).
 

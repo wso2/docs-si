@@ -1,6 +1,6 @@
 
 ## Purpose:
-This application demonstrates how to configure WSO2 Integrator: SI Tooling to send snmp set request via SNMP in keyvalue using custom mapping.
+This application demonstrates how to configure the WSO2 Integrator: SI VSCode extension to send snmp set request via SNMP in keyvalue using custom mapping.
 
 ## Prerequisites:
 1. Save this sample.

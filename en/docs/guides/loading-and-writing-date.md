@@ -67,11 +67,11 @@ To try out the example given above, follow the steps below:
               PRIMARY KEY (ref));
             ```
         
-2. [Start and access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+2. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
 
-3. Install the `RDBMS - MySQL` extension in WSO2 Integrator: SI tooling. For instructions to install an extension, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
+3. Install the `RDBMS - MySQL` extension in the VSCode editor (with the WSO2 Integrator: SI extension installed). For instructions to install an extension, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
 
-4. Open a new file in WSO2 Integrator: SI Tooling and add the following Siddhi content to it.
+4. Open a new file in the VSCode editor (with the WSO2 Integrator: SI extension installed) and add the following Siddhi content to it.
 
     ```
     @App:name('SalesApp')
@@ -149,7 +149,7 @@ Here, any event directed to the `TemperatureLogStream` is written into the `/use
 
 To try out the above example by including the given output stream and the sink configuration in a complete Siddhi application, follow the steps below:
 
-1. [Start and access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
 
 2. Open a new file and copy the following Siddhi Application to it.
 
@@ -228,7 +228,7 @@ To try out the above example, follow the steps below:
     
     3. Create a bucket named `temperaturelog` in the Google Cloud Console.
     
-2. [Start and access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+2. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
 
 3. Open a new file and copy the following Siddhi Application to it.
 

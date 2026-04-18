@@ -143,4 +143,4 @@ For the complete list of pre-written Siddhi extensions that are currently availa
 ## Further References
 
 - For instructions to download and install a Siddhi extension, see [Downloading and Installing Siddhi Extensions](downloading-and-Installing-Siddhi-Extensions.md).
-- If you want to install/uninstall one or more Siddhi extensions in WSO2 Integrator: SI Tooling, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
+- If you want to install/uninstall one or more Siddhi extensions in the VSCode editor (with the WSO2 Integrator: SI extension installed), see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).

@@ -61,7 +61,7 @@ To try out the above example, follow the steps below:
     insert into OutputStream;
     ```
    
-    This Siddhi application listens for events in the `http://localhost:5005/stocks` endpoint and logs them in the WSO2 Integrator: SI Tooling console.
+    This Siddhi application listens for events in the `http://localhost:5005/stocks` endpoint and logs them in the VSCode editor (with the WSO2 Integrator: SI extension installed) console.
     
 4. Start both the Siddhi applications. To do this, open each siddhi application and click the **Play** icon.
 
@@ -75,7 +75,7 @@ To try out the above example, follow the steps below:
     | **price**     | `100`     |
     | **volume**    | `20`      |
     
-    As a result, the `ListenToStockUpdates` Siddhi applications prints the following log in the WSO2 Integrator: SI Tooling Console.
+    As a result, the `ListenToStockUpdates` Siddhi applications prints the following log in the VSCode editor (with the WSO2 Integrator: SI extension installed) Console.
     
     ```
     [2020-10-28_10-59-20_463] INFO {io.siddhi.core.stream.output.sink.LogSink} - Stock Updates : Event{timestamp=1603862960462, data=[ABC, 100.0, 20], isExpired=false} 

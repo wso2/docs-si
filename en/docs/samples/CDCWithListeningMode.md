@@ -26,7 +26,7 @@ This sample demonstrates how to capture change data from MySQL using Siddhi. The
         `use production;`<br/>
     8. Create a table named `SweetProductionTable`.<br/>
         `CREATE TABLE SweetProductionTable (name VARCHAR(20),amount double(10,2));`<br/>
-    9. Save the sample Siddhi application in WSO2 Integrator: SI Tooling.
+    9. Save the sample Siddhi application in the VSCode editor with the WSO2 Integrator: SI extension installed.
 
 ## Executing the sample
 
