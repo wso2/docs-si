@@ -51,7 +51,7 @@ Navigate to the `<SI-Home>/bin` directory and issue the following command.
 The following log appears on the SI console when the server is started successfully.
 
 ```bash
-INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Integrator: SI started in 4.240 sec
+INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 4.240 sec
 ```
 
 ### Consume from a Kafka topic

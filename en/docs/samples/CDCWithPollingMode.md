@@ -14,9 +14,9 @@ By changing the database type, you can also try out this example for the followi
 !!!info "Before you begin:"
     1. Ensure that MySQL is installed on your computer.<br/>
     2. Add the MySQL JDBC driver to the `<SI_Home>/lib` directory as follows:<br/>
-        1. Download and copy the `mysql-connector-j-8.3.0.jar` JAR and place it in the `<SI_Home>/lib` directory.<br/>
+        1. Download the JDBC driver (Connector/J 8.0.33 or later) from the [MySQL website](https://dev.mysql.com/downloads/connector/j/).<br/>
         2. Unzip the archive.<br/>
-        3. Copy the `mysql-connector-java-5.1.45-bin.jar` JAR and place it in the `<SI_HOME>/lib` directory.<br/>
+        3. Copy the `mysql-connector-j-8.0.33.jar` JAR and place it in the `<SI_Home>/lib` directory.<br/>
     3. Create a database named `production` by issuing the following command.<br/>
         `CREATE SCHEMA production;`<br/>
     4. Change the database by issuing the following command.<br/>

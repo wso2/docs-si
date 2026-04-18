@@ -30,7 +30,7 @@ events to the active node. To achieve this, you can use a load balancing mechani
       - Download, install and start a working RDBMS instance to be used for clustering the two nodes.<br/>
       <br/>
       - Download the MySQL connector from <a target="_blank" href="https://dev.mysql.com/downloads/connector/j/">here</a>.
-        Extract and find the `mysql-connector-java-5.*.*-bin.jar`, and place it in the `<SI-Home>/lib` directory of both nodes.<br/>
+        Extract and find the `mysql-connector-j-8.0.33.jar` (Connector/J 8.0.33 or later), and place it in the `<SI-Home>/lib` directory of both nodes.<br/>
         <br/>
       - In order to retrieve the state of the Siddhi Applications deployed in the system (in case of a scenario where both the
         nodes fail), enable state persistence for both the nodes by specifying the same datasource/file location.

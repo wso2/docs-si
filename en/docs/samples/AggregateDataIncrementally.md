@@ -7,7 +7,7 @@ This example demonstrates how to get running statistics using Siddhi. The sample
 !!!info "Before you begin:"
     1. Install MySQL.<br/>
     2. Add the MySQL JDBC driver to your WSO2 Integrator: SI library as follows:<br/>
-        1. Download the JDBC driver from the [MySQL site](https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.45.tar.gz). <br/>
+        1. Download the JDBC driver (Connector/J 8.0.33 or later) from the [MySQL site](https://dev.mysql.com/downloads/connector/j/). <br/>
         2. Extract the MySQL JDBC Driver zip file you downloaded. Then use the `jarbundle` tool in the `<SI_HOME>/bin` directory to convert the jars in it into OSGi bundles. To do this, issue one of the following commands:<br/>
             - **For Windows**: `<SI_HOME>/bin/jartobundle.bat <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR>`<br/>
             - **For Linux/macOS**: `<SI_HOME>/bin/jartobundle.sh <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR>`<br/>
