@@ -1,11 +1,11 @@
 {
    "portfolio":{
       "stock":{
-         "volume":100,
+         "volume":200,
          "company":{
-            "symbol":"WSO2"
+            "symbol":"orcl"
          },
-         "price":55.6
+         "price":95
       }
    }
 }

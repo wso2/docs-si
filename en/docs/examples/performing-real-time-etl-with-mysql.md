@@ -98,7 +98,7 @@ Now you can write a simple Siddhi application to monitor the `SweetProductionTab
     <br/>
     - For Linux/macOS: `sh extension-installer.sh install`<br/>
     <br/>
-    After the extension installer completes, restart the SI server so that the newly installed extensions are loaded.
+    After the extension installer completes, restart the SI server so that the newly installed extensions are loaded. If the installer reports that all required extensions are already installed, you can skip the restart.
 
 4. Now let's perform an insert operation on the MySQL table by executing the following MySQL query on the database:
 
@@ -115,7 +115,7 @@ Now you can write a simple Siddhi application to monitor the `SweetProductionTab
 #### Capturing updates
 
 !!!note
-    Before proceeding, remove `CDCListenForInserts.siddhi` from the `<SI_HOME>/wso2/server/deployment/siddhi-files/` directory. Only one CDC listening-mode application can monitor the same table at a time.
+    Before proceeding, remove `CDCListenForInserts.siddhi` from the `<SI_HOME>/wso2/server/deployment/siddhi-files/` directory. Only one CDC listening-mode application can monitor the same table at a time. You may see a series of `WARN ... Unable to register metrics ...` lines in the SI console for up to a minute as the Debezium connector cleans up — these are harmless; proceed with the next step when you are ready.
 
 Now you can write a Siddhi application to monitor the `SweetProductionTable` for update operations.
 
@@ -163,7 +163,7 @@ Now you can write a Siddhi application to monitor the `SweetProductionTable` for
 #### Capturing deletes
 
 !!!note
-    Before proceeding, remove `CDCListenForUpdates.siddhi` from the `<SI_HOME>/wso2/server/deployment/siddhi-files/` directory. Only one CDC listening-mode application can monitor the same table at a time.
+    Before proceeding, remove `CDCListenForUpdates.siddhi` from the `<SI_HOME>/wso2/server/deployment/siddhi-files/` directory. Only one CDC listening-mode application can monitor the same table at a time. You may see a series of `WARN ... Unable to register metrics ...` lines in the SI console for up to a minute as the Debezium connector cleans up — these are harmless; proceed with the next step when you are ready.
 
 Now you can write a Siddhi application to monitor the `SweetProductionTable` for delete operations.
 
@@ -333,16 +333,19 @@ Note that the `CDC source` has replayed the last two messages. As a result, the 
 
 ### Polling mode
 
+!!!note
+    Polling mode is presented here for completeness. Today, the Listening mode scenario above is the recommended path on MySQL 8 — it is validated end-to-end including state-persistence replay. If you only need CDC, follow Listening mode and skip the rest of this page.
+
 !!!tip "Before you begin:"
     Polling mode queries the table over JDBC and does not use the MySQL binary log. The `REPLICATION SLAVE` / `REPLICATION CLIENT` grants from Listening mode are only needed for that mode; they do no harm if already present.<br/>
-    You are required to have access to a MySQL instance. Create the required database and the database table in the MySQL instance as follows:<br/>
+    You are required to have access to a MySQL instance. Steps 1–3 below require a MySQL account that can create schemas, users, and grants (typically `root`); the `wso2si` user defined in step 3 is intentionally unprivileged and is the user the Siddhi applications connect as. Create the required database and the database table as follows:<br/>
     1. Let's create a new database in the MySQL server which you are to use throughout this tutorial. To do this, issue the following command.<br/>
         ```
         CREATE SCHEMA production_pol;
         ```<br/>
     2. Switch to the production database and create a new table by executing following queries.<br/>
         `use production_pol;`<br/>
-        `CREATE TABLE SweetProductionTable (last_update TIMESTAMP, name VARCHAR(20),amount double(10,2));`<br/>
+        `CREATE TABLE SweetProductionTable (last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, name VARCHAR(20), amount double(10,2));`<br/>
     3. If you have not already created a user under [Listening Mode](#listening-mode), create one by executing the following SQL queries:<br/>
         ```
         CREATE USER IF NOT EXISTS 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';

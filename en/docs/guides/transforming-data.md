@@ -157,7 +157,7 @@ In this example, the input event that reports only the name of the product and t
 
 When you want to perform more advanced transformations that are not supported by the inline operators of the WSO2 Integrator: SI, you can use one or more of the Siddhi extensions from the [Siddhi Store](https://store.wso2.com/store/assets/analyticsextension/list).
 
-Some of these extensions are shipped with the WSO2 Integrator: SI by default. If you want to use a Siddhi extension that is not shipped by default, you need to download and install it following the instructions in [Downloading and Installing Siddhi Extensions]({{base_path}}/connectors/downloading-and-installing-siddhi-extensions.md).
+Some of these extensions are shipped with the WSO2 Integrator: SI by default. If you want to use a Siddhi extension that is not shipped by default, you need to download and install it following the instructions in [Downloading and Installing Siddhi Extensions]({{base_path}}/connectors/downloading-and-Installing-Siddhi-Extensions.md).
 
 The following table describes the complete list of extensions that provide data transformation functionality.
 

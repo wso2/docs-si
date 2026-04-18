@@ -7,7 +7,7 @@ The WSO2 Integrator: SI allows you to perform real-time ETL with data that is st
 This tutorial takes you through the different modes and options you could use, in order to perform real-time ETL with files using the SI.
 
 !!!info "Before you begin:"
-    - Start the SI server by navigating to the `<SI-Home>/bin` directory and issuing one of the following commands as appropriate, based on your operating system:<br/>
+    - Start the SI server by navigating to the `<SI_HOME>/bin` directory and issuing one of the following commands as appropriate, based on your operating system:<br/>
       <br/>
         - For Windows: `server.bat`<br/>
         - For Linux/macOS:  `sh server.sh`<br/>
@@ -51,7 +51,7 @@ In this scenario, you are tailing a text file, line by line, in order to extract
 
     Change the  value of the `file.uri` parameter in the above Siddhi application to the file path to which you downloaded `productions.csv` file in step 1.
 
-3. Save this file as `TailFileLineByLine.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
+3. Save this file as `TailFileLineByLine.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory.
 
     !!!info
         This Siddhi application tails the file `productions.csv` line by line. Each line is converted to an event in the `SweetProductionStream` stream. After that, a simple transformation is carried out for the sweet production runs. The transformation involves converting the value for the `name` attribute to upper case. Finally, the output is logged in the WSO2 Integrator: SI console.
@@ -72,20 +72,20 @@ In this scenario, you are tailing a text file, line by line, in order to extract
     As a result, the following log appears in the SI console:
 
     ```bash
-    INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveEventsFromFile : LogStream : Event{timestamp=1564490830652, data=[ALMOND COOKIE, 100.0], isExpired=false}
-    INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveEventsFromFile : LogStream : Event{timestamp=1564490830657, data=[BAKED ALASKA, 20.0], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - TailFileLineByLine : LogStream : Event{timestamp=1564490830652, data=[ALMOND COOKIE, 100.0], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - TailFileLineByLine : LogStream : Event{timestamp=1564490830657, data=[BAKED ALASKA, 20.0], isExpired=false}
     ```
- 
-6. Now append the following line to `productions.csv` file and save the file.
+
+5. Now append the following line to `productions.csv` file and save the file.
 
     ```csv
     Cup cake,300.0
     ```
 
-7. The following log appears in the SI console:
+6. The following log appears in the SI console:
 
     ```bash
-    INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveEventsFromFile : LogStream : Event{timestamp=1564490869579, data=[CUP CAKE, 300.0], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - TailFileLineByLine : LogStream : Event{timestamp=1564490869579, data=[CUP CAKE, 300.0], isExpired=false}
     ```
 
 #### Tailing a text file using a regular expression
@@ -118,7 +118,7 @@ In this scenario, you are using a regular expression to extract data from the fi
 
     Change the  value of the `file.uri` parameter in the above Siddhi application to the file path to which you downloaded `noisy_data.txt` file in step 1.
 
-3. Save this file as `TailFileRegex.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
+3. Save this file as `TailFileRegex.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory.
 
     !!!info
         This Siddhi application tails the `noisy_data.txt` file to find matches according to the regular expressions given: `begin.regex` and `end.regex`. Each match is converted to an event in the `StockStream` stream. After that, a simple transformation is carried out on the `StockStream` stream where the value for the `symbol` attribute from the event is converted to upper case. Finally, the output is logged in the SI console.
@@ -158,9 +158,12 @@ In the previous scenarios, you tailed a file and each file generated multiple ev
 
 Furthermore, to try out the capability of processing remote files, you are processing a remote file instead of a file located in the local file system.
 
+!!!note
+    This scenario requires access to an FTP server with upload permissions.
+
 1. Download `portfolio.txt` file from [here]({{base_path}}/examples/resources/portfolio.txt) and upload it into an FTP server.
 
-2. Create a directory on the FTP server.  The `portfolio.txt` file is moved to this folder after the processing is complete.
+2. Decide on a path on the FTP server where the processed file should be moved (for example, `/home/user/portfolio-processed.txt`). This path must not already exist; the `portfolio.txt` file is renamed to this path after processing.
 
 3. Open a text file and copy-paste following Siddhi application to it.
 
@@ -170,8 +173,8 @@ Furthermore, to try out the capability of processing remote files, you are proce
     @App:description('Reads a text file and moves it after processing.')
     
     @source(type='file', mode='TEXT.FULL',
-        file.uri="ftp://<username>:<password>@<ftp_hostname>:<ftp_port>/Users/foo/portfolio.txt",
-        action.after.process='MOVE', move.after.process="ftp://<username>:<password>@<ftp_hostname>:<ftp_port>/Users/foo/move.after.process", 
+        file.uri="ftp://<username>:<password>@<ftp_hostname>:<ftp_port>/<remote_path>/portfolio.txt",
+        action.after.process='MOVE', move.after.process="ftp://<username>:<password>@<ftp_hostname>:<ftp_port>/<remote_path>/portfolio-processed.txt", 
         @map(type='json', enclosing.element="$.portfolio", @attributes(symbol = "stock.company.symbol", price = "stock.price", volume = "stock.volume")))
     define stream StockStream (symbol string, price float, volume long);
      
@@ -184,13 +187,13 @@ Furthermore, to try out the capability of processing remote files, you are proce
     ```
 
     Change the value of the `file.uri` parameter in the above Siddhi application to the remote file path to which you uploaded the `portfolio.txt` file in step 1.
-    In addition to that, change `move.after.process` so that it points to the remote folder you created in step 2.
-    When configuring both of the above parameters, change the values for `<username>`, `<password>`, `<ftp_hostname>`, and `<ftp_port>` parameters accordingly.
+    In addition to that, change `move.after.process` so that it points to the move-target path you chose in step 2.
+    When configuring both parameters, replace all placeholders (`<username>`, `<password>`, `<ftp_hostname>`, `<ftp_port>`, and `<remote_path>`) with concrete values before saving the file — the URI parser rejects unresolved angle-bracket placeholders.
 
-4. Save this file as `TextFullFileProcessing.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
+4. Save this file as `TextFullFileProcessing.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory.
 
     !!!info
-        This Siddhi application reads the complete `portfolio.txt` remote file to create a `StockStream` event. After that, a simple transformation is carried out on the `StockStream` stream where the value for the `symbol` attribute in each event is converted ito upper case. Finally, the output is logged in the SI console.
+        This Siddhi application reads the complete `portfolio.txt` remote file to create a `StockStream` event. After that, a simple transformation is carried out on the `StockStream` stream where the value for the `symbol` attribute in each event is converted into upper case. Finally, the output is logged in the SI console.
 
     Once the Siddhi application is successfully deployed, following log appears in the SI console:
 
@@ -207,7 +210,7 @@ Furthermore, to try out the capability of processing remote files, you are proce
     ```
 
 !!!info
-    In this scenario, you moved the file after processing. To delete a file after processing, remove the `action.after.process` and `move.after.process` parameters from the Siddhi application. For other configuration options, see [Siddhi File Source documentation](https://siddhi-io.github.io/siddhi-io-file/api/latest/#file-source).
+    In this scenario, you moved the file after processing. To delete the file after processing instead, set `action.after.process='DELETE'` and remove the `move.after.process` parameter from the Siddhi application. For other configuration options, see [Siddhi File Source documentation](https://siddhi-io.github.io/siddhi-io-file/api/latest/#file-source).
 
 #### Reading a binary file and moving it after processing
 
@@ -238,7 +241,7 @@ In the previous scenarios, you processed text files in order to extract data. In
 
     In the above Siddhi application, change the value for the `file.uri` parameter to the file path to which you downloaded the `wso2.bin` file in step 1.
 
-3. Save this file as `BinaryFullFileProcessing.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
+3. Save this file as `BinaryFullFileProcessing.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory.
 
     !!!info
         This Siddhi application reads the file `wso2.bin` fully to create a `StockStream` event. After that, a simple transformation is carried out for the `StockStream` stream where the value for the `symbol` attribute is converted to upper case. Finally, the output is logged in the SI console.
@@ -257,7 +260,7 @@ In the previous scenarios, you processed text files in order to extract data. In
     INFO {io.siddhi.core.stream.output.sink.LogSink} - BinaryFullFileProcessing :  LogStream : Event{timestamp=1564660553623, data=[WSO2, 55.6, 100], isExpired=false} 
     ```
 
-#### Reading a file line by line and delete it after processing
+#### Reading a file line by line and deleting it after processing
 
 In this scenario, you are reading a text file completely, and then deleting it after  processing. In other words, the file is not tailed. You read the file line by line where each line generates an event.
 
@@ -273,6 +276,7 @@ In this scenario, you are reading a text file completely, and then deleting it a
     @source(type='file', mode='LINE',
         file.uri='file:<YOUR_HOME>/productions.csv',
         tailing='false',
+        action.after.process='DELETE',
         @map(type='csv'))
     define stream SweetProductionStream (name string, amount double);
     
@@ -286,10 +290,10 @@ In this scenario, you are reading a text file completely, and then deleting it a
 
     In the above Siddhi application, change the value for the `file.uri` parameter to the file path to which you downloaded the `productions.csv` file in step 1.
 
-3. Save this file as `ReadFileLineByLine.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
+3. Save this file as `ReadFileLineByLine.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory.
 
     !!!info
-        This Siddhi application tails the `productions.csv` file line by line. Each line is converted to an event in the `SweetProductionStream` stream. After that, a simple transformation is carried out for the sweet production runs where the value for the `name` attribute from the event is converted into upper case. Finally, the output is logged in the SI console.
+        This Siddhi application reads the `productions.csv` file line by line. Each line is converted to an event in the `SweetProductionStream` stream. After that, a simple transformation is carried out for the sweet production runs where the value for the `name` attribute from the event is converted into upper case. Finally, the output is logged in the SI console.
 
     Once the Siddhi application is successfully deployed, the following log appears in the SI console:
 
@@ -346,6 +350,7 @@ In this scenario, you are using a regular expression to extract data from the co
         file.uri='file:<YOUR_HOME>/noisy_data.txt',
         begin.regex='\<', end.regex='\>',
         tailing='false',
+        action.after.process='DELETE',
         @map(type='text', fail.on.missing.attribute = 'false', regex.A='(\w+)\s([-0-9]+)',regex.B='volume\s([-0-9]+)', @attributes(symbol = 'A[1]',price = 'A[2]',volume = 'B')))
     define stream StockStream (symbol string, price float, volume long);
     
@@ -359,10 +364,10 @@ In this scenario, you are using a regular expression to extract data from the co
 
     In the above Siddhi application, change the value of the `file.uri` parameter to the file path to which you downloaded the `noisy_data.txt` file in step 1.
  
-3. Save this file as `ReadFileRegex.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
+3. Save this file as `ReadFileRegex.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory.
 
     !!!info
-        This Siddhi application tails the `noisy_data.txt` file to find matches based on the `begin.regex` and `end.regex` regular expressions. Each match is converted to an event in the `StockStream` stream. After that, a simple transformation is carried out for the `StockStream` stream where value for the `symbol` attribute converted to upper case. Finally, the output is logged in the SI console.
+        This Siddhi application reads the `noisy_data.txt` file to find matches based on the `begin.regex` and `end.regex` regular expressions. Each match is converted to an event in the `StockStream` stream. After that, a simple transformation is carried out for the `StockStream` stream where the value for the `symbol` attribute is converted to upper case. Finally, the output is logged in the SI console.
 
     Once the Siddhi application is successfully deployed, following log appears in the SI console:
 
@@ -372,29 +377,27 @@ In this scenario, you are using a regular expression to extract data from the co
 
 4. Now the Siddhi application starts to process the `noisy_data.txt` file.
 
-    As a result, the following log appears in the SI console.
+    As a result, the following logs appear in the SI console.
 
     ```bash
     INFO {io.siddhi.core.stream.output.sink.LogSink} - ReadFileRegex : LogStream : Event{timestamp=1564906475623, data=[WSO2, 75.0, 100], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - ReadFileRegex : LogStream : Event{timestamp=1564906475624, data=[ORCL, 95.0, 200], isExpired=false}
     ```
 
     Note that `noisy_data.txt` file is not present in the `file.uri` location.
 
-5. Next, let's create a new `noisy_data.txt` file in the `file.uri` location that includes the latest set of productions. Download `noisy_data.txt` file from [here]({{base_path}}/examples/resources/noisy_data.txt) and save it in the `file.uri` location.
-
-    Now the Siddhi application starts to process the new content in the `noisy_data.txt` file. The file has the following content.
+5. Next, let's create a new `noisy_data.txt` file in the `file.uri` location with a new stock. Open a text editor, add the following content, and save the file as `noisy_data.txt` in the `file.uri` location:
 
     ```bash
-    Oracle Corporation <orcl 95 volume 200> 500 Oracle Parkway.
-    Redwood Shores CA, 94065.
-    Corporate Phone: 650.506.7000.
-    HQ-Security: 650.506.5555
+    IBM <ibm 88 volume 150> 1 New Orchard Rd Armonk, NY 10504
+    Phone Number: (914) 499-1900
+    Fax Number: (914) 765-6021
     ```
 
     As a result, the following log appears in the SI console:
 
     ```bash
-    INFO {io.siddhi.core.stream.output.sink.LogSink} - ReadFileRegex : LogStream : Event{timestamp=1564906713176, data=[ORCL, 95.0, 200], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - ReadFileRegex : LogStream : Event{timestamp=1564906713176, data=[IBM, 88.0, 150], isExpired=false}
     ```
 
 ### Extracting data from a folder
@@ -403,7 +406,11 @@ In this scenario, you are using a regular expression to extract data from the co
 
 In this scenario, you extract data from a specific folder. All of the files are processed sequentially, where each file generates a single event.
 
-1. Download `productions.zip` file from [here](https://github.com/wso2/docs-ei/tree/master/en/streaming-integrator/docs/examples/resources/productions.zip) and extract it. Now you have a folder named `productions`. Place it in a location of your choice.
+1. Create a folder named `productions` in a location of your choice. Download the following three files and save each one into that folder:
+
+    - [`ibm.txt`]({{base_path}}/examples/resources/productions/ibm.txt)
+    - [`orcl.txt`]({{base_path}}/examples/resources/productions/orcl.txt)
+    - [`wso2.txt`]({{base_path}}/examples/resources/productions/wso2.txt)
 
 2. Open a text file and copy-paste following Siddhi application to it.
 
@@ -414,6 +421,7 @@ In this scenario, you extract data from a specific folder. All of the files are 
             
     @source(type='file', mode='text.full',
         dir.uri='file:<YOUR_HOME>/productions',
+        action.after.process='DELETE',
         @map(type='json', enclosing.element="$.portfolio", @attributes(symbol = "stock.company.symbol", price = "stock.price", volume = "stock.volume")))
     define stream StockStream (symbol string, price float, volume long);
     
@@ -427,7 +435,7 @@ In this scenario, you extract data from a specific folder. All of the files are 
 
     In the above Siddhi application, change the value for the `dir.uri` parameter so that it points to the `productions` folder you created in step 1.
 
-3. Save this file as `ProcessFolder.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
+3. Save this file as `ProcessFolder.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory.
 
     !!!info
         This Siddhi application processes each file in `productions` folder. Each file generates an event in the `StockStream` stream. After that, a simple transformation is carried out for the `StockStream` stream where the value for the `symbol` attribute is converted to upper case. Finally, the output is logged in the SI console.
@@ -443,7 +451,7 @@ In this scenario, you extract data from a specific folder. All of the files are 
     As a result, the following logs appear in the SI console:
 
     ```bash
-    INFO {io.siddhi.core.stream.output.sink.LogSink} - ProcessFolder : LogStream : Event{timestamp=1564932255417, data=[WSO2, 75.0, 100], isExpired=false}
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - ProcessFolder : LogStream : Event{timestamp=1564932255417, data=[WSO2, 55.6, 100], isExpired=false}
     INFO {io.siddhi.core.stream.output.sink.LogSink} - ProcessFolder : LogStream : Event{timestamp=1564932255417, data=[ORCL, 95.0, 200], isExpired=false}
     INFO {io.siddhi.core.stream.output.sink.LogSink} - ProcessFolder : LogStream : Event{timestamp=1564932255417, data=[IBM, 88.0, 150], isExpired=false}
     ```
@@ -482,7 +490,7 @@ In this scenario, you are appending a stream of events to the end of a file.
 
     Create an empty file and specify the location of the file as the value for the `file.uri` parameter. If this file does not exist, it is created at runtime.
 
-2. Save this file as `AppendToFile.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
+2. Save this file as `AppendToFile.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory.
 
     !!!info
         This Siddhi application filters incoming `SweetProductionStream` events, selects the production runs of which the value for the `amount` attribute is less than `500.0`, and inserts the results into the `LowProductionStream`. Finally, all the events in the `LowProductionStream` events are appended to the file specified via the `file.uri` parameter in the Siddhi application.
@@ -535,7 +543,7 @@ The production data is updated in a file and therefore you have to keep tailing 
     In this scenario, the WSO2 Integrator: SI server needs to *remember* the current count through system failures so that when the system is restored, the count is not reset to zero.
     To achieve this, you can use the state persistence capability in the WSO2 Integrator: SI.
 
-1. Enable state persistence feature in SI server as follows. Open the `<SI-Home>/conf/server/deployment.yaml` file on a text editor and locate the `state.persistence` section.  
+1. Enable state persistence feature in SI server as follows. Open the `<SI_HOME>/conf/server/deployment.yaml` file on a text editor and locate the `state.persistence` section.  
 
     ```yaml
       # Periodic Persistence Configuration
@@ -550,7 +558,7 @@ The production data is updated in a file and therefore you have to keep tailing 
 
     Set `enabled` parameter to `true` and save the file. 
 
-2. To enable the state persistence debug logs, open the `<SI-Home>/conf/server/log4j2.xml` file on a text editor and locate following line in it.
+2. To enable the state persistence debug logs, open the `<SI_HOME>/conf/server/log4j2.xml` file on a text editor and locate following line in it.
 
     ```xml
      <Logger name="com.zaxxer.hikari" level="error"/>
@@ -593,10 +601,10 @@ The production data is updated in a file and therefore you have to keep tailing 
 
     Change the `file.uri` parameter in the above Siddhi application to the file path to which you downloaded the `productions.csv` file in step 4.
 
-6. Save this file as `CountProductions.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
+6. Save this file as `CountProductions.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory.
 
     !!!info
-        This Siddhi application tails the file `productions.csv` line by line. Each line is converted to an event in the `SweetProductionStream` stream. After that, a simple transformation is carried out for the sweet production runs. This transformation involves converting the value for the `name` attribute to upper case. Finally, the output is logged in the SI console.
+        This Siddhi application tails the `productions.csv` file line by line. Each line is converted to an event in the `SweetProductionStream` stream. The query then computes the running total of the `amount` attribute and emits it as `totalProductions`. Finally, the output is logged in the SI console.
 
     Once the Siddhi application is successfully deployed, the following log appears in the SI console.
 
@@ -604,7 +612,7 @@ The production data is updated in a file and therefore you have to keep tailing 
     INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App CountProductions deployed successfully
     ```
 
-7. Now the Siddhi application starts to process the `productions.csv` file. The file two entries as follows.
+7. Now the Siddhi application starts to process the `productions.csv` file. The file has two entries as follows:
 
     ```csv
     Almond cookie,100.0
@@ -642,7 +650,7 @@ The production data is updated in a file and therefore you have to keep tailing 
 
 10. Shutdown SI server. Here you are deliberately creating a scenario where the server crashes before the SI server could persist the latest production count.
 
-    !!!Info
+    !!!info
         Here, the SI server crashes before the state is persisted. Therefore, the WSO2 Integrator: SI server cannot persist the latest count (which includes the last two production runs that produced `100` Croissants and `100` Croutons). The good news is, the `File source` source replays the last two messages, allowing the WSO2 Integrator: SI to successfully recover from the server crash.
 
 11. Restart the SI server and wait for about one minute.
