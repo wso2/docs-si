@@ -13,7 +13,7 @@ This tutorial takes you through the different modes and options you could use, i
         - For Linux/macOS:  `sh server.sh`<br/>
       <br/>
     - The following log appears in the WSO2 Integrator: SI console once you have successfully started the server. <br/>
-        `INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 4.240 sec`
+        `INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in N.NNN sec`
       <br/>
 
 ## Tutorial steps

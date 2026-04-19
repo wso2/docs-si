@@ -16,7 +16,7 @@ In this scenario, you are handling erroneous events by directing them to a MySQL
         <br/>
       The following log appears in the WSO2 Integrator: SI console once you have successfully started the server. <br/>
       <br/>
-      `INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 4.240 sec`
+      `INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in N.NNN sec`
       <br/>
     - You need to have access to a MySQL instance.<br/>
     

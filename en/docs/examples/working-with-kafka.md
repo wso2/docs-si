@@ -7,31 +7,16 @@ The WSO2 Integrator: SI can consume from a Kafka topic as well as to publish to 
 This tutorial takes you through consuming from a Kafka topic, processing the messages, and finally, publishing output to a Kafka topic.
 
 !!!tip "Before you begin:"
-    Prepare the server to consume from or to publish to Kafka, follow the steps below:<br/>
-    <br/>
-        1. Download the Kafka broker from [the Apache site](https://www.apache.org/dyn/closer.cgi?path=/kafka/2.3.0/kafka_2.12-2.3.0.tgz) and extract it.
-        From here onwards, this directory is referred to as `<Kafka_Home>`. <br/>
-        2. Create a directory named `Source` in a preferred location in your machine and copy the following JARs to it from the `<Kafka_Home>/libs` directory.<br/>
-        <br/>
-            - `kafka_2.12-2.3.0.jar`<br/>
-            - `kafka-clients-2.3.0.jar`<br/>
-            - `metrics-core-2.2.0.jar`<br/>
-            - `scala-library-2.12.8.jar`<br/>
-            - `zkclient-0.11.jar`<br/>
-            - `zookeeper-3.4.14.jar`<br/>
-            <br/>
-        3. Create another directory named `Destination` in a preferred location in your machine.<br/>
-        <br/>
-        4. To convert the Kafka JARS you copied to the `Source` directory, issue the following command:<br/>
-           ```
-           sh <SI-Home>/bin/jartobundle.sh <{Source}_Directory_Path> <{Destination}_Directory_Path>
-           ```<br/>
-           <br/>
-        5. Copy all the jars from the `Destination` directory to the `<SI-Home>/lib` directory.
+    Download and extract a supported Apache Kafka broker from the
+    [Apache downloads page](https://kafka.apache.org/downloads). This
+    tutorial was verified against Kafka 2.5.0. From here onwards, the
+    extracted directory is referred to as `<Kafka_Home>`.
+
+    The WSO2 Integrator: SI distribution already ships the Kafka OSGi
+    bundles it needs under `<SI-Home>/lib/` — no additional jar-to-bundle
+    conversion is required.
 
 ## Tutorial steps
-
-### Consuming data from Kafka
 
 ### Start Kafka
 
@@ -51,14 +36,20 @@ Navigate to the `<SI-Home>/bin` directory and issue the following command.
 The following log appears on the SI console when the server is started successfully.
 
 ```bash
-INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 4.240 sec
+INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in N.NNN sec
 ```
 
 ### Consume from a Kafka topic
 
 Let's create a basic Siddhi application to consume messages from a Kafka topic.
 
-1. Open a text file and copy-paste following Siddhi application to it.
+1. Create a topic named `productions` in the Kafka server. Navigate to `<Kafka_Home>` and run the following command:
+
+    ```bash
+    bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic productions
+    ```
+
+2. Open a text file and copy-paste following Siddhi application to it.
 
     ```sql
     @App:name("HelloKafka")
@@ -82,32 +73,26 @@ Let's create a basic Siddhi application to consume messages from a Kafka topic.
     insert into OutputStream;
     ```
 
-2. Save this file as `HelloKafka.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. The following log appears on the SI console.
+3. Save this file as `HelloKafka.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. The following log appears on the SI console.
 
     ```bash
     INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App HelloKafka deployed successfully
     ```
 
 !!! info
-    You just created a Siddhi application that listens to a Kafka topic named `productions` and logs any incoming messages. When logging, the name attribute of the message is converted to upper case. However, you have still not created this Kafka topic or published any messages to it. To do this, proceed to the next section.
+    You just created a Siddhi application that listens to the `productions` topic and logs any incoming messages. When logging, the name attribute of the message is converted to upper case. The topic is empty at this point — to see messages flow through, publish to it in the next section.
 
 #### Generate Kafka messages
 
-Now let's generate some Kafka messages that the WSO2 Integrator: SI can receive. 
+Now let's generate some Kafka messages that the WSO2 Integrator: SI can receive.
 
-1. First, let's create a topic named `productions` in the Kafka server. To do this, navigate to `<Kafka_Home>` and run following command:
-
-    ```bash
-    bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic productions
-    ```
-
-2. Now let's run the Kafka command line client to push a few messages to the Kafka server.
+1. Run the Kafka command line client to push a few messages to the Kafka server:
 
     ```bash
-    bin/kafka-console-producer.sh --broker-list localhost:9092 --topic productions
+    bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic productions
     ```
 
-3. Now you are prompted to type messages in the console. Type the following in the command prompt:
+2. Now you are prompted to type messages in the console. Type the following in the command prompt:
 
     ```json
     {"event":{ "name":"cookie", "amount":100.0}}
@@ -116,16 +101,22 @@ Now let's generate some Kafka messages that the WSO2 Integrator: SI can receive.
    This pushes a message to the Kafka Server. Then, the Siddhi application you deployed in the WSO2 Integrator: SI consumes this message. As a result, the WSO2 Integrator: SI log displays the following:
 
 ```bash
-INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562069868006, data=[ALMOND COOKIE, 100.0], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562069868006, data=[COOKIE, 100.0], isExpired=false}
 ```
 
-You may notice that the output message has an uppercase name: `ALMOND COOKIE`. This is because of the simple message transformation done in the Siddhi application.
+You may notice that the output message has an uppercase name: `COOKIE`. This is because of the simple message transformation done in the Siddhi application.
 
 ### Consuming with an offset
 
 Previously, you consumed messages from the `productions` topic *without specifying an offset*. In other words, the Kafka offset was zero. In this section, instead of consuming with a zero offset, you specify an offset value and consume messages from that offset onwards.
 
 For this purpose, you can configure the `topic.offsets.map` parameter. Let's modify our previous Siddhi application to specify an offset value. Specify an offset value `2` so that the Siddhi application consumes messages with index `2` and above.
+
+!!!note
+    This scenario currently hits a known off-by-one behaviour in the `siddhi-io-kafka` extension: `topic.offsets.map='productions=2'` seeks the consumer to offset `3` rather than offset `2`, so the index-`2` message is skipped. The log output shown below reflects the intended behaviour; the fix is tracked upstream in the extension repository.
+
+!!!note
+    If you are re-running this tutorial against an existing Kafka cluster, first clear any committed offsets for `group1`: `bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --delete --group group1`. Otherwise the Kafka client resumes from the committed offset and `topic.offsets.map` has no effect.
 
 1. Open the `<SI-Home>/wso2/server/deployment/siddhi-files/HelloKafka.siddhi` file and add the following new configuration parameters.
 
@@ -189,6 +180,9 @@ In our `HelloKafka` Siddhi application, note the `group.id` parameter. This para
 
 Let's add another Siddhi application `HelloKafka_2`, to add another Kafka consumer to the same consumer group.
 
+!!!info "About the event distribution shown in this section and the next"
+    Kafka 2.4 and later use the `UniformStickyPartitioner` as the default producer partitioner (introduced in [KIP-480](https://cwiki.apache.org/confluence/display/KAFKA/KIP-480%3A+Sticky+Partitioner)). Events published within a single producer session tend to stick to one partition for throughput, then rotate. As a result, the exact per-event interleaving across consumers varies between runs and depends on whether the events were published from one producer session or several. The overall distribution pattern (events spread across the consumer group, or across assigned partitions in the next section) is the stable property; the specific sample logs below may not reproduce exactly on your machine.
+
 1. Open a text file and copy-paste following Siddhi application to it.
 
     ```sql
@@ -244,7 +238,7 @@ Let's add another Siddhi application `HelloKafka_2`, to add another Kafka consum
     {"event":{ "name":"Eclair toffee", "amount":100.0}} 
     ```
 
-   Now observe the logs on the SI console.
+   Now observe the logs on the SI console. A sample interleaving is shown below — your actual ordering may differ per the partitioner note above.
     ```
     INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka_2 : OutputStream : Event{timestamp=1562759480019, data=[DOUGHNUT, 500.0], isExpired=false}
     INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562759494710, data=[DANISH PASTRY, 200.0], isExpired=false}
@@ -252,7 +246,7 @@ Let's add another Siddhi application `HelloKafka_2`, to add another Kafka consum
     INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562759508757, data=[ECLAIR TOFFEE, 100.0], isExpired=false}
     ```
 
-   You can see that the events are being received by the two consumers in a Round Robin manner. Events received by the first consumer are logged by Siddhi application `HelloKafka`, whilst events received by the second consumer are logged by the `HelloKafka_2` Siddhi application.
+   The events are distributed across the two consumers in the group. Events received by the first consumer are logged by Siddhi application `HelloKafka`, and events received by the second consumer are logged by the `HelloKafka_2` Siddhi application. Push each event from a separate producer session if you want to see the load spread across both consumers on Kafka 2.4 or later.
 
 ### Assigning consumers to partitions
 
@@ -337,7 +331,7 @@ Let's alter your topic to have three partitions. After that, you can assign two 
     {"event":{ "name":"Ice cream cake", "amount":250.0}} 
     ```
 
-4. Now observe the WSO2 Integrator: SI logs. The following is displayed.
+4. Now observe the WSO2 Integrator: SI logs. A sample output is shown below — the specific per-event assignment to `consumer-1` or `consumer-2` depends on which partition the Kafka producer sends each event to (see the partitioner note above).
 
     ```bash
     INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562851086792, data=[FORTUNE COOKIE, 100.0, consumer-1], isExpired=false}
@@ -348,7 +342,7 @@ Let's alter your topic to have three partitions. After that, you can assign two 
     INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562851100309, data=[ICE CREAM CAKE, 250.0, consumer-2], isExpired=false}
     ```
 
-   You can observe a pattern where the load is distributed among `consumer-1` and `consumer-2` in the 2:1 ratio. This is because you assigned two partitions to `consumer-1` and assigned only one partition to `consumer-2`.
+   Over many events the load settles into a 2:1 ratio between `consumer-1` and `consumer-2`, because `consumer-1` is assigned two partitions and `consumer-2` is assigned only one. To see events distributed across all three partitions within a short run, publish each event from a separate producer session.
 
 ### Publish to a Kafka topic
 
@@ -397,7 +391,7 @@ Now let's create a new Siddhi application to consume from the `productions` topi
     ```
 
     !!!info
-        The `PublishToKafka` Siddhi application consumes all the messages from the `productions` topic and populates the `SweetProductionStream` stream. All the sweet production runs where the amount is greater than 100 are inserted into the `BulkOrdersStream` stream. These events are pushed to the `bulk-orders` Kafka topic.
+        The `PublishToKafka` Siddhi application consumes all the messages from the `productions` topic and populates the `SweetProductionStream` stream. All the sweet production runs where the amount is greater than 50 are inserted into the `BulkOrdersStream` stream. These events are pushed to the `bulk-orders` Kafka topic.
 
 5. To observe the messages in the `bulk-orders` topic, run a Kafka Console Consumer. Then navigate to the `<Kafka_Home>` directory and issue the following command.
 
@@ -405,10 +399,10 @@ Now let's create a new Siddhi application to consume from the `productions` topi
     bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic bulk-orders --from-beginning
     ```
 
-   You can see the following message in the Kafka Consumer log. These indicate the production runs of which the amount is greater than 50.
+   The console consumer prints every event from the `productions` topic whose `amount > 50`, in the order those events were published. For example, an event of the form below appears for each production run whose amount exceeds 50:
 
     ```json
-    {"event":{ "name":"Almond cookie", "amount":100.0}}
+    {"event":{ "name":"cookie", "amount":100.0}}
     ```
 
 ### Preserving the state of the application through a system failure
@@ -419,6 +413,9 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
     In this scenario, the SI server is required to *remember* the current count through system failures so that when the system is restored, the count is not reset to zero.
 
     To achieve this, you can use the state persistence capability in the WSO2 Integrator: SI.
+
+!!!note
+    The post-restart replay described at the end of this scenario (`[300.0]` / `[400.0]` log lines) currently does not appear on stock Kafka 2.5 or later. The Kafka consumer's auto-commit tick (5 seconds by default) advances the broker-side committed offset past the post-snapshot events before `kill -9` fires, so on restart the Siddhi state restores correctly but the Kafka source has nothing left to replay. Siddhi state persistence and Kafka offset commits are not currently coupled in the `siddhi-io-kafka` extension; the fix is tracked upstream. The steps below describe the intended behaviour once that coupling ships.
 
 1. Enable state persistence feature in SI server as follows. Open the `<SI-Home>/conf/server/deployment.yaml` file on a text editor and locate the `state.persistence` section.  
 
@@ -490,7 +487,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
 7. Now let's run the Kafka command line client to push a few messages to the Kafka server. Navigate to `<Kafka_Home>` and run following command:
 
     ```bash
-    bin/kafka-console-producer.sh --broker-list localhost:9092 --topic sandwich_productions
+    bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic sandwich_productions
     ```
 
 8. Now you are prompted to type the messages in the console. Type following in the command prompt:
