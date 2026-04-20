@@ -62,7 +62,7 @@ Let's create a simple Siddhi application that receives an HTTP message, does a s
 
     @App:description('Receive events via HTTP transport and view the output on the console')
 
-    @Source(type = 'http', receiver.url='http://0.0.0.0:8006/productionStream', basic.auth.enabled='false',
+    @source(type = 'http', receiver.url='http://0.0.0.0:8006/productionStream', basic.auth.enabled='false',
        @map(type='json'))
     define stream SweetProductionStream (name string, amount double);
 

@@ -8,13 +8,14 @@ This tutorial takes you through consuming from a Kafka topic, processing the mes
 
 !!!tip "Before you begin:"
     Download and extract a supported Apache Kafka broker from the
-    [Apache downloads page](https://kafka.apache.org/downloads). This
+    [Apache downloads page](https://kafka.apache.org/downloads) — this
     tutorial was verified against Kafka 2.5.0. From here onwards, the
-    extracted directory is referred to as `<Kafka_Home>`.
+    extracted directory is referred to as `<Kafka_Home>`. You will run the
+    broker from this directory in the next section.
 
-    The WSO2 Integrator: SI distribution already ships the Kafka OSGi
-    bundles it needs under `<SI-Home>/lib/` — no additional jar-to-bundle
-    conversion is required.
+    You do not need to copy any JARs from `<Kafka_Home>/libs` into
+    `<SI-Home>/lib` — the WSO2 Integrator: SI distribution already ships
+    its own Kafka client libraries as OSGi bundles under `<SI-Home>/lib/`.
 
 ## Tutorial steps
 
@@ -110,10 +111,7 @@ You may notice that the output message has an uppercase name: `COOKIE`. This is 
 
 Previously, you consumed messages from the `productions` topic *without specifying an offset*. In other words, the Kafka offset was zero. In this section, instead of consuming with a zero offset, you specify an offset value and consume messages from that offset onwards.
 
-For this purpose, you can configure the `topic.offsets.map` parameter. Let's modify our previous Siddhi application to specify an offset value. Specify an offset value `2` so that the Siddhi application consumes messages with index `2` and above.
-
-!!!note
-    This scenario currently hits a known off-by-one behaviour in the `siddhi-io-kafka` extension: `topic.offsets.map='productions=2'` seeks the consumer to offset `3` rather than offset `2`, so the index-`2` message is skipped. The log output shown below reflects the intended behaviour; the fix is tracked upstream in the extension repository.
+For this purpose, you can configure the `topic.offsets.map` parameter. The value configured for each partition is interpreted as the *last consumed offset*; the Kafka consumer resumes from the next offset after it. To start consuming from offset `2` on partition `0`, specify `productions=1` — offset `1` is treated as the last consumed offset, so consumption resumes at offset `2`.
 
 !!!note
     If you are re-running this tutorial against an existing Kafka cluster, first clear any committed offsets for `group1`: `bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --delete --group group1`. Otherwise the Kafka client resumes from the committed offset and `topic.offsets.map` has no effect.
@@ -121,7 +119,7 @@ For this purpose, you can configure the `topic.offsets.map` parameter. Let's mod
 1. Open the `<SI-Home>/wso2/server/deployment/siddhi-files/HelloKafka.siddhi` file and add the following new configuration parameters.
 
     ```sql
-    topic.offsets.map='productions=2',
+    topic.offsets.map='productions=1',
     partition.no.list='0'
     ```
 
@@ -138,7 +136,7 @@ For this purpose, you can configure the `topic.offsets.map` parameter. Let's mod
             group.id="group1",
             bootstrap.servers='localhost:9092',
             partition.no.list='0',
-            topic.offsets.map='productions=2',
+            topic.offsets.map='productions=1',
             @map(type='json'))
     define stream SweetProductionStream (name string, amount double);
 
@@ -172,7 +170,7 @@ For this purpose, you can configure the `topic.offsets.map` parameter. Let's mod
 INFO {io.siddhi.core.stream.output.sink.LogSink} - HelloKafka : OutputStream : Event{timestamp=1562676477785, data=[CUP CAKE, 300.0], isExpired=false}
 ```
 
-As you configured your Siddhi application to consume messages with offset `2`, all messages bearing index `2` or above are consumed.
+Because `topic.offsets.map='productions=1'` tells the consumer that offset `1` is the last consumed offset, consumption resumes at offset `2`. All messages bearing index `2` or above are consumed.
 
 ### Adding more consumers to the consumer group
 
@@ -413,9 +411,6 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
     In this scenario, the SI server is required to *remember* the current count through system failures so that when the system is restored, the count is not reset to zero.
 
     To achieve this, you can use the state persistence capability in the WSO2 Integrator: SI.
-
-!!!note
-    The post-restart replay described at the end of this scenario (`[300.0]` / `[400.0]` log lines) currently does not appear on stock Kafka 2.5 or later. The Kafka consumer's auto-commit tick (5 seconds by default) advances the broker-side committed offset past the post-snapshot events before `kill -9` fires, so on restart the Siddhi state restores correctly but the Kafka source has nothing left to replay. Siddhi state persistence and Kafka offset commits are not currently coupled in the `siddhi-io-kafka` extension; the fix is tracked upstream. The steps below describe the intended behaviour once that coupling ships.
 
 1. Enable state persistence feature in SI server as follows. Open the `<SI-Home>/conf/server/deployment.yaml` file on a text editor and locate the `state.persistence` section.  
 

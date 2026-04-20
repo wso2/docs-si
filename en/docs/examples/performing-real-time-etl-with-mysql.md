@@ -333,9 +333,6 @@ Note that the `CDC source` has replayed the last two messages. As a result, the 
 
 ### Polling mode
 
-!!!note
-    Polling mode is presented here for completeness. Today, the Listening mode scenario above is the recommended path on MySQL 8 — it is validated end-to-end including state-persistence replay. If you only need CDC, follow Listening mode and skip the rest of this page.
-
 !!!tip "Before you begin:"
     Polling mode queries the table over JDBC and does not use the MySQL binary log. The `REPLICATION SLAVE` / `REPLICATION CLIENT` grants from Listening mode are only needed for that mode; they do no harm if already present.<br/>
     You are required to have access to a MySQL instance. Steps 1–3 below require a MySQL account that can create schemas, users, and grants (typically `root`); the `wso2si` user defined in step 3 is intentionally unprivileged and is the user the Siddhi applications connect as. Create the required database and the database table as follows:<br/>

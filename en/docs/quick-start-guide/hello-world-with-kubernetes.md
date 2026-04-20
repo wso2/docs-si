@@ -22,9 +22,9 @@ To install the Siddhi Operator, follow the procedure below:
 
 1. To install the Siddhi Kubernetes operator for WSO2 Integrator: SI issue the following commands:
 
-    `kubectl apply -f https://github.com/wso2/streaming-integrator/releases/download/v1.0.0-m1/00-prereqs.yaml`
+    `kubectl apply -f https://github.com/siddhi-io/siddhi-operator/releases/download/v0.2.2/00-prereqs.yaml`
 
-    `kubectl apply -f https://github.com/wso2/streaming-integrator/releases/download/v1.0.0-m1/01-siddhi-operator.yaml`
+    `kubectl apply -f https://github.com/siddhi-io/siddhi-operator/releases/download/v0.2.2/01-siddhi-operator.yaml`
 
 
 2. To verify whether the Siddhi operator is successfully installed, issue the following command.

@@ -317,14 +317,14 @@ In this scenario, you are reading a text file completely, and then deleting it a
 
 5. Note that `productions.csv` file is not present in the `file.uri` location.
 
-6. Next, create a new `productions.csv` file in the `file.uri` location that includes the latest set of productions. Download `productions.csv` file from [here]({{base_path}}/examples/resources/productions.csv) and save it in the `file.uri` location.
+6. Next, create a new `productions.csv` file in the `file.uri` location with the following content:
 
-7. Now the Siddhi application starts to process the new set of production runs in the `productions.csv` file. The file has the following two entries.
-
-    ```
+    ```csv
     Cup cake,300.0
     Doughnut,500.0
     ```
+
+7. Now the Siddhi application starts to process the new `productions.csv` file.
 
     As a result, the following log appears in the SI console:
 
@@ -335,7 +335,7 @@ In this scenario, you are reading a text file completely, and then deleting it a
 
 #### Reading a file using a regular expression and deleting it after processing
 
-In this scenario, you are using a regular expression to extract data from the content of the file. Here, you do not tail the file.  Instead, you read the full content of the file and generate a single event. After this is done, the file is deleted. To generate an event stream, you can keep re-creating the file with new data.
+In this scenario, you are using a regular expression to extract data from the content of the file. Here, you do not tail the file.  Instead, you read the full content of the file and each regex match generates a separate event. After this is done, the file is deleted. To generate new events, you can keep re-creating the file with new data.
 
 1. Download `noisy_data.txt` file from [here]({{base_path}}/examples/resources/noisy_data.txt) and save it in a location of your choice.
 
@@ -474,7 +474,7 @@ In this scenario, you are appending a stream of events to the end of a file.
     
     @App:description('Append incoming events in to a file.')
     
-    @Source(type = 'http', receiver.url='http://localhost:8006/SweetProductionStream', basic.auth.enabled='false',
+    @source(type = 'http', receiver.url='http://localhost:8006/SweetProductionStream', basic.auth.enabled='false',
             @map(type='json'))
     define stream SweetProductionStream (name string, amount double);
     

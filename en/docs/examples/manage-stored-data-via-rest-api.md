@@ -63,7 +63,7 @@ First let's create a Siddhi application with an RDBMS Store so that we can try o
 
     @App:description('Receive events via HTTP and persist the received data in the store.')
 
-    @Source(type = 'http', receiver.url='http://localhost:8006/productionStream', basic.auth.enabled='false',
+    @source(type = 'http', receiver.url='http://localhost:8006/productionStream', basic.auth.enabled='false',
         @map(type='json'))
     define stream insertSweetProductionStream (name string, amount double);
 
@@ -214,7 +214,7 @@ First let's create a Siddhi application with an Aggregation, so that we can try 
     
     @App:description('Aggregates values every second until year and gets statistics')
     
-    @Source(type = 'http', receiver.url='http://localhost:8006/rawMaterialStream', basic.auth.enabled='false',
+    @source(type = 'http', receiver.url='http://localhost:8006/rawMaterialStream', basic.auth.enabled='false',
         @map(type='json'))
     define stream RawMaterialStream (name string, amount double);
     
@@ -283,7 +283,7 @@ Let's create a Siddhi application with a Window and then query the status of the
     ```
     @App:name("SweetProduction-Window")
 
-    @Source(type = 'http', receiver.url='http://localhost:8008/productionStream', basic.auth.enabled='false',
+    @source(type = 'http', receiver.url='http://localhost:8008/productionStream', basic.auth.enabled='false',
         @map(type='json'))
     define stream SweetProductionStream (name string, amount double);
 
