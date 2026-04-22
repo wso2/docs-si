@@ -203,3 +203,39 @@ To send an event to the defines `http` source hosted in `http://localhost:8006/I
 In the SI console an output similar to following will be printed after 1 minute (if the average of the amount is larger than 100)
 
 `INFO {io.siddhi.core.stream.output.sink.LogSink} - response_from_mi:  : Event{timestamp=1573711436547, data=[soap, 110.23], isExpired=false}`
+
+## Alternative: fire-and-forget via the `grpc` sink
+
+As an alternative to the request/response pattern above, you can trigger a sequence in the WSO2 Integrator: MI **without waiting for a response** — a fire-and-forget flow. This is useful when the downstream integration does not need to send anything back, or when the WSO2 Integrator: SI does not need to react to the response.
+
+The key difference is the sink type and the method path in the publisher URL:
+
+- Use `@sink(type='grpc', ...)` instead of `grpc-call`. The `grpc` sink does not expect a response and does not need a matching `grpc-call-response` source.
+
+- The publisher URL ends in `/consume/inSeq` instead of `/process/inSeq`. The `consume` method on the WSO2 Integrator: MI's gRPC inbound endpoint accepts the message and routes it to the named sequence without returning a response to the client. The `process` method, by contrast, routes to the sequence and then sends the sequence's `<respond/>` output back to the caller.
+
+The following Siddhi application demonstrates the fire-and-forget variant:
+
+```siddhi
+@App:name("grpc-fire-and-forget")
+@App:description("Triggers inSeq in the WSO2 Integrator: MI without waiting for a response")
+
+@source(type='http',
+        receiver.url='http://localhost:8006/InputStream',
+        basic.auth.enabled='false',
+        @map(type='json'))
+define stream InputStream(symbol string, amount double);
+
+@sink(
+    type='grpc',
+    publisher.url='grpc://localhost:8888/org.wso2.grpc.EventService/consume/inSeq',
+    headers='Content-Type:json',
+    @map(type='json'))
+define stream FooStream(symbol string, amount double);
+
+from InputStream
+select *
+insert into FooStream;
+```
+
+The WSO2 Integrator: MI-side artifacts (gRPC inbound endpoint and `inSeq` sequence) are the same as in the previous sections. The sequence's `<respond/>` mediator still fires, but the WSO2 Integrator: SI does not listen for it — the response is discarded.

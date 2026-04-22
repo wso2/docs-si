@@ -1,22 +1,22 @@
-# Working with the Design View
+# Working with the Graphical View
 
-This section provides an overview of the design view of the WSO2 Integrator: SI VSCode extension.
+This section provides an overview of the Graphical View of the WSO2 Integrator: SI VSCode extension.
 
-## Accesing the Design View
+## Accessing the Graphical View
 
-To open the design view of the WSO2 Integrator: SI VSCode extension, follow the steps below:
+To open the Graphical View of the WSO2 Integrator: SI VSCode extension, follow the steps below:
 
 1. Open the VSCode in a directory with Siddhi files, and click on a Siddhi file.
-2. Click on the **Open Graphical View** button to open the Design View.
-3. Click **Design View** to open the Design View.  
-    ![Design View button]({{base_path}}/images/working-with-the-design-view/Open_Design_View.png)
+2. Click on the **Open Graphical View** button to open the Graphical View.
+3. Click **Graphical View** to open the Graphical View.  
+    ![Graphical View button]({{base_path}}/images/working-with-the-design-view/Open_Design_View.png)
    
-   The design view opens as shown in the example below. It consists of a grid to which you can drag and drop the Siddhi components represented by icons displayed in the left panel to design a Siddhi application. 
-    ![Design View]({{base_path}}/images/working-with-the-design-view/Design-View.png)
+   The Graphical View opens as shown in the example below. It consists of a grid to which you can drag and drop the Siddhi components represented by icons displayed in the left panel to design a Siddhi application. 
+    ![Graphical View]({{base_path}}/images/working-with-the-design-view/Design-View.png)
 
 ## Adding Siddhi components
 
-To add a Siddhi component to the Siddhi application that you are creating/editing in the design view, click on the 
+To add a Siddhi component to the Siddhi application that you are creating/editing in the Graphical View, click on the 
 relevant icon in the left pane, and then drag and drop it to the grid as demonstrated in the example below.
 
 ![Dragging and dropping Siddhi components]({{base_path}}/images/working-with-the-design-view/Drag-And-Drop-Siddhi-Component.gif)
@@ -28,7 +28,7 @@ This opens a form with parameters related to the relevant component.
 ![Configure Siddhi component settings]({{base_path}}/images/working-with-the-design-view/Configure-Siddhi-Component-In-Design-View.png)
 
 The following is the complete list of Siddhi components that you can add
-to the grid of the design view when you create a Siddhi application.
+to the grid of the Graphical View when you create a Siddhi application.
 
 ### Stream
 
@@ -1230,4 +1230,4 @@ demonstrated below.
 
 ## Saving and running Siddhi applications
 
-To save a Siddhi application that you created in the design view, you need to switch to the source view. You also need to switch to the source view to run a Siddhi application. For more information, see [WSO2 Integrator: SI for VS Code Overview](si-for-vscode-overview.md).
+To save a Siddhi application that you created in the Graphical View, you need to switch to the source view. You also need to switch to the source view to run a Siddhi application. For more information, see [WSO2 Integrator: SI for VS Code Overview](si-for-vscode-overview.md).

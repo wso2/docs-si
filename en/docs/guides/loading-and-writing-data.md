@@ -4,31 +4,30 @@ Loading and writing data involves publishing the data in a destination where it 
 
 ## Loading data to databases
 
-WSO2 Streaming allows you to load data into databases so that the data can be available in a static manner for further processing. You can load the data received from another source unchanged or after processing it. This is achieved by defining [Siddhi tables](https://siddhi.io/en/v5.1/docs/query-guide/#table) that are connected to database tables, and then writing queries to publish data into those tables so that it can be transferred to the connected database tables.
+WSO2 Integrator: SI allows you to load data into databases so that the data can be available in a static manner for further processing. You can load the data received from another source unchanged or after processing it. This is achieved by defining [Siddhi tables](https://siddhi.io/en/v5.1/docs/query-guide/#table) that are connected to database tables, and then writing queries to publish data into those tables so that it can be transferred to the connected database tables.
 
-![Loading Data to Databases]({{base_path}}/images/loading-and-writing-data/load-data-to_database.png)
+![Loading Data to Databases]({{base_path}}/images/loading-and-writing-data/load-data-to-database.png)
 
-To understand this, consider an example of an sweet shop that needs to save all its sales records in a database table. To address this, you can write a Siddhi application as follows:
+To understand this, consider an example of a sweet shop that needs to save all its sales records in a database table. To address this, you can write a Siddhi application as follows:
 
 - **Define a table**
 
     In this example, let's define a table named `SalesRecords` as follows:
     
-    ```
-    @primaryKey('ref')
+    ```siddhi
     @index('name')
-    @store(type='rdbms', jdbc.url="jdbc:mysql://localhost:3306/SalesRecordsDB", username="root", password="root" , jdbc.driver.name="com.mysql.cj.jdbc.Driver")
-    define table SalesRecords(ref string, name string, amount int);
+    @store(type='rdbms', jdbc.url="jdbc:mysql://localhost:3306/sales", username="root", password="root", jdbc.driver.name="com.mysql.cj.jdbc.Driver")
+    define table SalesRecords(name string, amount int);
     ```
-  The above table definition captures sales records. The details captured in each sales record includes the transaction reference (`ref`), the name of the product (`name`), and sales amount (`amount`). The `ref` attribute is the primary key because there cannot be two or more records with the same transaction reference. The `name` attribute is an index attribute.
-  
-  A data store named `SalesRecordsDB` is connected to this table definition via the `@store` annotation. This is the data store to which you are loading data.
+  The above table definition captures sales records. Each sales record includes the name of the product (`name`) and the sales amount (`amount`). The `name` attribute is an index attribute. The database schema (created in the **Try it out** section below) has a `ref` column that is generated automatically by MySQL as `AUTO_INCREMENT`; the Siddhi table definition only needs to cover the columns that the application writes.
+
+  A data store named `sales` is connected to this table definition via the `@store` annotation. This is the data store to which you are loading data.
 
 - **Add a query**
 
     You need to add a query to specify how events are selected to be inserted into the table you defined. You can add this query as shown below. 
     
-    ```
+    ```siddhi
     from SalesRecordsStream
     select *
     insert into SalesRecords;
@@ -47,19 +46,19 @@ To try out the example given above, follow the steps below:
     
         1. To create a new database, issue the following MySQL command.
         
-            ```
+            ```sql
             CREATE SCHEMA sales;
             ```
                             
         2. Switch to the `sales` database by issuing the following command.
             
-           ```
+           ```sql
            use sales;
            ```
            
         3. Create a new table, by issuing the following command.        
             
-            ```
+            ```sql
             CREATE TABLE sales.SalesRecords (
               ref INT NOT NULL AUTO_INCREMENT,
               name VARCHAR(45) NULL,
@@ -67,20 +66,19 @@ To try out the example given above, follow the steps below:
               PRIMARY KEY (ref));
             ```
         
-2. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+2. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
 
 3. Install the `RDBMS - MySQL` extension in the VSCode editor (with the WSO2 Integrator: SI extension installed). For instructions to install an extension, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
 
 4. Open a new file in the VSCode editor (with the WSO2 Integrator: SI extension installed) and add the following Siddhi content to it.
 
-    ```
+    ```siddhi
     @App:name('SalesApp')
     
     define stream SalesRecordsStream (name string, amount int);
     
     @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/sales?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
-    @primaryKey('ref' )
-    @index('name' )
+    @index('name')
     define table SalesRecords (name string, amount int);
     
     from SalesRecordsStream 
@@ -90,13 +88,14 @@ To try out the example given above, follow the steps below:
    
    Save the Siddhi application.   
     
-5. Simulate an event with the following values for the `SalesRecordsStream` stream of the `SalesApp` Siddhi application. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
+5. Simulate an event with the following values for the `SalesRecordsStream` stream of the `SalesApp` Siddhi application. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
     
     | **Attribute** | **Value**        |
     |---------------|------------------|
-    | **ref**       | `AA000000000001` |
     | **name**      | `fruit cake`     |
     | **amount**    | `100`            |
+
+    The `ref` column is auto-generated by MySQL because the `SalesRecords` table was created with `ref INT NOT NULL AUTO_INCREMENT`. It does not need to be entered in the Event Simulator.
         
 6. To check whether the `sales` mysql table is updated, issue the following command in the MySQL server.
 
@@ -112,7 +111,7 @@ To understand how to publish data on demand, see [Correlating Data](correlating-
 
 ### Supported databases
 
-WSO2 Streaming supports the following database types via Siddhi extensions:
+WSO2 Integrator: SI supports the following database types via Siddhi extensions:
 
 | **Database Type** | **Siddhi Extension**                                                                |
 |-------------------|-------------------------------------------------------------------------------------|
@@ -125,42 +124,42 @@ WSO2 Streaming supports the following database types via Siddhi extensions:
 
 Mappers determine the format in which the event is published. For information about transforming events by changing the format in which the data is published, see [Transforming Data](transforming-data.md#transforming-the-message-format-when-publishing-data).
 
-The mapper available for loading data to databases is [Keyvalue](https://siddhi-io.github.io/siddhi-map-keyvalue/api/2.1.0/#sinkmapper).
+The mapper available for loading data to databases is [Keyvalue](https://siddhi-io.github.io/siddhi-map-keyvalue/api/latest/#sinkmapper).
 
 ## Writing data to files
 
-WSO2 Streaming allows you to write data into files so that the data can be available in a static manner for further processing. You can write the data received from another source unchanged or after processing it. This is achieved by defining an output [stream](https://ei.docs.wso2.com/en/7.2.0/streaming-integrator/guides/loading-and-writing-date/) and then connecting a [sink](https://siddhi.io/en/v5.1/docs/query-guide/#sink) of the [file](https://siddhi-io.github.io/siddhi-io-file/api/2.0.10/#sink) type.
+WSO2 Integrator: SI allows you to write data into files so that the data can be available in a static manner for further processing. You can write the data received from another source unchanged or after processing it. This is achieved by defining an output [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and then connecting a [sink](https://siddhi.io/en/v5.1/docs/query-guide/#sink) of the [file](https://siddhi-io.github.io/siddhi-io-file/api/latest/#sink) type.
 
-![Loading Data to Databases]({{base_path}}/images/loading-and-writing-data/load-data-to-file.png)
+![Writing Data to Files]({{base_path}}/images/loading-and-writing-data/load-data-to-file.png)
 
 To understand this, consider the example of a lab with a sensor that reports the temperature at different times. These temperature readings need to be saved in a file for reference when carrying out further analysis.  
 
 To address the above requirement via WSO2 Integrator: SI, define an output stream and connect a file source to it as shown below.
 
-```
+```siddhi
 @sink(type = 'file', 
-    file.uri = "/users/temperature/temperature.csv",
-	@map(type = 'passThrough'))
+    file.uri = "<YOUR_HOME>/temperature/temperature.csv",
+    @map(type = 'passThrough'))
 define stream TemperatureLogStream (timestamp long, temperature int);
 ```
-Here, any event directed to the `TemperatureLogStream` is written into the `/users/temperature/temperature.csv` file.
+Here, any event directed to the `TemperatureLogStream` is written into the `<YOUR_HOME>/temperature/temperature.csv` file.
 
 ### Try it out
 
 To try out the above example by including the given output stream and the sink configuration in a complete Siddhi application, follow the steps below:
 
-1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
 
 2. Open a new file and copy the following Siddhi Application to it.
 
-    ```
+    ```siddhi
     @App:name('LabTemperatureApp')
     
     define stream LabTemperatureStream (timestamp long, temperature int);
     
     @sink(type = 'file', 
-        file.uri = "/users/temperature/temperature.csv",
-    	@map(type = 'passThrough'))
+        file.uri = "<YOUR_HOME>/temperature/temperature.csv",
+        @map(type = 'passThrough'))
     define stream TemperatureLogStream (timestamp long, temperature int);
     
     from LabTemperatureStream 
@@ -170,16 +169,16 @@ To try out the above example by including the given output stream and the sink c
    This Siddhi application includes the file sink from the previous example.
    
     !!! tip
-        If required, you can replace the value for the `file.uri` parameter to a preferred location in your machine.
+        You can replace `<YOUR_HOME>/temperature/temperature.csv` with any other location on your machine.
    
-3. Simulate an event with the following values for the `LabTemperatureStream` stream of the `LabTemperatureApp` Siddhi application. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).  
+3. Simulate an event with the following values for the `LabTemperatureStream` stream of the `LabTemperatureApp` Siddhi application. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).  
     
     | **Attribute**   | **Value**       |
     |-----------------|-----------------|
     | **timestamp**   | `1603461542000` |
     | **temperature** | `27`            |
     
-4. Open the `/users/temperature/temperature.csv` file. It contains a line as shown below.
+4. Open the `<YOUR_HOME>/temperature/temperature.csv` file. It contains a line as shown below.
 
     ![Updated File]({{base_path}}/images/loading-and-writing-data/updated-file.png)
 
@@ -193,21 +192,21 @@ The following mappers are supported for the File extension.
 
 | **Transport** | **Supporting Siddhi Extension**                                                        |
 |---------------|----------------------------------------------------------------------------------------|
-| `csv`         | [csv](https://siddhi-io.github.io/siddhi-map-csv/api/2.1.0/#csv-source-mapper)         |
-| `xml`         | [xml](https://siddhi-io.github.io/siddhi-map-xml/api/latest/#sourcemapper)             |
-| `text`        | [text](https://siddhi-io.github.io/siddhi-map-text/api/latest/#sourcemapper)           |
+| `csv`         | [csv](https://siddhi-io.github.io/siddhi-map-csv/api/latest/#csv-sink-mapper)          |
+| `xml`         | [xml](https://siddhi-io.github.io/siddhi-map-xml/api/latest/#sinkmapper)               |
+| `text`        | [text](https://siddhi-io.github.io/siddhi-map-text/api/latest/#sinkmapper)             |
     
 ## Storing data in Cloud storage
 
-SI allows you to store data in cloud storages in a static manner so that it can be accessed for further processing. The data you store can be the unprocessed data you received from another source or output data generated by WSO2 Integrator: SI. This is achieved by defining an output [stream](https://ei.docs.wso2.com/en/7.2.0/streaming-integrator/guides/loading-and-writing-date/) and then connecting a [sink](https://siddhi.io/en/v5.1/docs/query-guide/#sink) of a type that links to cloud storages.
+SI allows you to store data in cloud storages in a static manner so that it can be accessed for further processing. The data you store can be the unprocessed data you received from another source or output data generated by WSO2 Integrator: SI. This is achieved by defining an output [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and then connecting a [sink](https://siddhi.io/en/v5.1/docs/query-guide/#sink) of a type that links to cloud storages.
 
 ![Saving Data in Cloud Storages]({{base_path}}/images/loading-and-writing-data/load-data-to-cloud.png)
 
-To understand this, To understand this, consider the example of a lab with a sensor that reports the temperature at different times. These temperature readings need to be uploaded to a cloud-based application for reference when carrying out further analysis. 
+To understand this, consider the example of a lab with a sensor that reports the temperature at different times. These temperature readings need to be uploaded to a cloud-based application for reference when carrying out further analysis. 
 
 To address the above requirement with WSO2 Integrator: SI, configure an output stream, and connect a sink of the `google-cloud-storage` type to it as shown below.
 
-```
+```siddhi
 @sink(type='google-cloud-storage', credential.path='<credential.path>', bucket.name='temperaturelog',
       object.name='temperature-object-{{name}}',
     @map(type='text'))
@@ -224,15 +223,17 @@ To try out the above example, follow the steps below:
 
     1. Create an account in [Google Cloud](https://cloud.google.com/).
     
-    2. Download the credential file that is generated through the GCP console and save it in a directory of your choice. For more information, see [Google Cloud Authentication Documentation](https://cloud.google.com/docs/authentication/?hl=en_US&_ga=2.203156947.-316765357.1568779091).
+    2. Download the credential file that is generated through the GCP console and save it in a directory of your choice. For more information, see [Google Cloud Authentication Documentation](https://cloud.google.com/docs/authentication).
     
     3. Create a bucket named `temperaturelog` in the Google Cloud Console.
     
-2. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+2. Install the `GCS` extension in the VSCode editor (with the WSO2 Integrator: SI extension installed). For instructions to install an extension, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
 
-3. Open a new file and copy the following Siddhi Application to it.
+3. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
 
-    ```
+4. Open a new file and copy the following Siddhi Application to it.
+
+    ```siddhi
     @App:name('LabTemperatureApp')
     
     define stream LabTemperatureStream (timestamp long, temperature int);
@@ -251,7 +252,7 @@ To try out the above example, follow the steps below:
    
    The above Siddhi application gets all the events in the `LabTemperatureStream` stream and inserts them into the `TemperatureLogStream` stream so that they can be stored in the `temperaturelog` bucket in the Google Cloud Console via the sink connected to the `TemperatureLogStream` stream.
    
-4. Simulate an event to the `LabTemperatureStream` stream of the `LabTemperatureApp` Siddhi application with the following values via the Event Simulator tool. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md). 
+5. Simulate an event to the `LabTemperatureStream` stream of the `LabTemperatureApp` Siddhi application with the following values via the Event Simulator tool. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md). 
     
     | **Attribute**   | **Value**       |
     |-----------------|-----------------|
@@ -266,16 +267,15 @@ The following is a list of cloud platforms in which you can store data via WSO2 
 
 | **Cloud Platform**            | **Extension**                                                                                       |
 |-------------------------------|-----------------------------------------------------------------------------------------------------|
-| AWS SQS                       | [SQS](https://siddhi-io.github.io/siddhi-io-sqs/api/2.0.0/#sink)                                    |
+| AWS SQS                       | [SQS](https://siddhi-io.github.io/siddhi-io-sqs/api/latest/#sink)                                   |
 | AWS Simple Cloud Storage (S3) | [S3](https://siddhi-io.github.io/siddhi-io-s3/api/latest/#s3-sink)                                  |
 | Google Cloud Storage          | [GCS](https://siddhi-io.github.io/siddhi-io-gcs/)                                                   |
 | CosmosDB                      | [CosmosDB](https://github.com/wso2-extensions/siddhi-store-cosmosdb/blob/master/docs/api/latest.md) |
 | Azure Data Lake               | [azuredatalake](https://siddhi-io.github.io/siddhi-io-azuredatalake/api/latest/#sink)               |
-| GCS                           | [GCS](https://siddhi-io.github.io/siddhi-io-gcs/)                                                   |
 
 ### Supported mappers
 
-Mappers determine the format in which the event is received. For information about transforming events by changing the format in which the data is received/published, see [Transforming Data](transforming-data.md#transforming-message-formats).
+Mappers determine the format in which the event is received. For information about transforming events by changing the format in which the data is received/published, see [Transforming Data](transforming-data.md#transforming-the-message-format-when-publishing-data).
 
 WSO2 Integrator: SI supports the following mappers for the cloud-based storages in which it stores data.
 
@@ -286,6 +286,6 @@ WSO2 Integrator: SI supports the following mappers for the cloud-based storages 
 | `text`        | [text](https://siddhi-io.github.io/siddhi-map-text/api/latest/#sinkmapper)                    |
 | `avro`        | [avro](https://siddhi-io.github.io/siddhi-map-avro/api/latest/#sinkmapper)                    |
 | `binary`      | [binary](https://siddhi-io.github.io/siddhi-map-binary/api/latest/#binary-sink-mapper)        | 
-| `keyvalue`    | [keyvalue](https://siddhi-io.github.io/siddhi-map-keyvalue/api/2.1.0/#sourcemapper)           |
-| `csv`         | [csv](https://siddhi-io.github.io/siddhi-map-csv/api/2.1.0/#sourcemapper)                     |
-| `protobuf`    | [protobuf](https://siddhi-io.github.io/siddhi-map-protobuf/api/1.1.0/#protobuf-source-mapper) |
+| `keyvalue`    | [keyvalue](https://siddhi-io.github.io/siddhi-map-keyvalue/api/latest/#sinkmapper)            |
+| `csv`         | [csv](https://siddhi-io.github.io/siddhi-map-csv/api/latest/#csv-sink-mapper)                 |
+| `protobuf`    | [protobuf](https://siddhi-io.github.io/siddhi-map-protobuf/api/latest/#protobuf-sink-mapper)  |

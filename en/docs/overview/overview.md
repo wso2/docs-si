@@ -18,7 +18,7 @@ SI can be effectively used for:
 WSO2 Integrator: SI is powered by [Siddhi.io](https://siddhi.io/), a well-known cloud native open source stream processing engine. Siddhi allows you to write complex stream processing logic using an intuitive SQL-like language known as [SiddhiQL](https://siddhi.io/en/v5.1/docs/). You can perform the following actions on the fly using Siddhi queries and constructs.
 
 - [**Extracting data from static sources in real time**](../guides/extracting-data-from-static-sources-in-real-time.md).
-- [**Loading and writing data**](../guides/loading-and-writing-date.md) to databases, files and cloud based storages.
+- [**Loading and writing data**](../guides/loading-and-writing-data.md) to databases, files and cloud based storages.
 - [**Receiving data in transit**](../guides/receiving-data-in-transit.md) from message brokers and data publishers.
 - [**Publishing data**](../guides/publishing-data-to-event-stream-consumers.md) to destinations.
 - [**Stream processing**](../guides/processing-data.md) activities including cleansing, transforming, enriching correlating, and summarizing data.

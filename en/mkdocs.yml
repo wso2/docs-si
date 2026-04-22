@@ -93,7 +93,7 @@ nav:
       - 'Use Cases Overview': 'guides/use-cases.md'
       - 'Extracting Data from Static Sources in Real Time': 'guides/extracting-data-from-static-sources-in-real-time.md'
       - 'Receiving Data in Transit': 'guides/receiving-data-in-transit.md'
-      - 'Loading and Writing Data': 'guides/loading-and-writing-date.md'
+      - 'Loading and Writing Data': 'guides/loading-and-writing-data.md'
       - 'Publishing Data': 'guides/publishing-data-to-event-stream-consumers.md'
       - 'Stream Processing':
         - 'Stream Processing Overview': 'guides/processing-data.md'
@@ -263,7 +263,7 @@ nav:
     - 'WSO2 Integrator: SI Tooling':
       - 'Overview WSO2 Integrator: SI for VS Code': 'develop/si-for-vscode-overview.md'
       - 'Install WSO2 Integrator: SI for VS Code': 'develop/install-si-for-vscode.md'
-      - 'Working with the Design View': 'develop/working-with-the-Design-View.md'
+      - 'Working with the Graphical View': 'develop/working-with-the-graphical-view.md'
     - 'Creating Siddhi Applications': 'develop/creating-a-Siddhi-Application.md'
     - 'Installing Siddhi Extensions': 'develop/installing-siddhi-extensions.md'
     - 'Running and Testing Siddhi Applications': 'develop/testing-a-Siddhi-Application.md'

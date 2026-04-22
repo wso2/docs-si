@@ -216,13 +216,13 @@ To create a Siddhi application via the source view of the VSCode editor with the
 4. To save this Siddhi application, click **File**, and then click **Save**.
 
 6.  To see a graphical view of the event flow you defined in your Siddhi
-    application, go to the **Design View**.
+    application, go to the **Graphical View**.
     
-    ![Switch to Design View]({{base_path}}/images/Creating-Siddhi-Applications/Design_View.png)
+    ![Switch to Graphical View]({{base_path}}/images/Creating-Siddhi-Applications/Design_View.png)
     
     The event flow is displayed as follows.  
     
-    ![Siddhi Application in Design View]({{base_path}}/images/Creating-Siddhi-Applications/Siddhi_Application_Design_View.png)
+    ![Siddhi Application in Graphical View]({{base_path}}/images/Creating-Siddhi-Applications/Siddhi_Application_Design_View.png)
 
 ### Creating a Siddhi application in the design view
 
@@ -237,7 +237,7 @@ To create a Siddhi application via the design view of the VSCode editor with the
 
     ![New Siddhi File]({{base_path}}/images/Creating-Siddhi-Applications/New_Siddhi_File.png)
 
-3.  To open the design view, click on the **Open Graphical View** button on the right side of the editor.
+3.  To open the Graphical View, click on the **Open Graphical View** button on the right side of the editor.
 
 4.  To define the input stream into which the events to be processed via
     the Siddhi application should be received, drag and drop the stream
@@ -347,6 +347,6 @@ To create a Siddhi application via the design view of the VSCode editor with the
         must be generated. For this example, let's select `json`.
     3.  Click **Submit** to save the information.
 
-11. Click **Source View**. The siddhi application is displayed as follows.  
+11. Click **Show Source** to return to the Source View. The Siddhi application is displayed as follows.  
     ![Source view]({{base_path}}/images/Creating-Siddhi-Applications/Siddhi_Application_Source_View.png)
 12. To save this Siddhi application, click **File**, and then click **Save**.

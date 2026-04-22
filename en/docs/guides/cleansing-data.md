@@ -13,11 +13,11 @@ To understand this, consider a scenario where you receive the temperature of mul
     If you want the temperature readings only for a specific room, you can add a query with a filter as follows.
     
     ```
-    from TempStream [roomNo=='2233']
+    from TempStream [roomNo==2233]
     select *
     insert into RoomAnalysisStream;
     ```
-    With the `roomNo=='2233'` filter, you are filtering the temperature readings for the room number `2233`. These readings are then inserted into a separate stream named `RoomAnalysisStream`.
+    With the `roomNo==2233` filter, you are filtering the temperature readings for the room number `2233`. These readings are then inserted into a separate stream named `RoomAnalysisStream`.
     
 - **Filtering based on regex pattern**
 
@@ -47,7 +47,7 @@ To understand this, consider a scenario where you receive the temperature of mul
 
 To try out the query used in the above example, let's include it in a Siddhi Application and run it.
 
-2. Open a new file. Then add and save the following Siddhi application.
+1. Open a new file. Then add and save the following Siddhi application.
 
     ```
     @App:name('TemperatureApp')
@@ -59,11 +59,11 @@ To try out the query used in the above example, let's include it in a Siddhi App
     define stream RoomAnalysisStream (deviceID string, roomNo int, temp double);
     
     @info(name = 'Filtering2233')
-    from TempStream[roomNo == '2233'] 
+    from TempStream[roomNo == 2233] 
     select * 
     insert into RoomAnalysisStream;
     ```
-3. Open the event simulator and simulate three events for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](testing-a-Siddhi-Application/#simulating-a-single-event).
+2. Open the event simulator and simulate three events for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](../develop/testing-a-Siddhi-Application.md#simulating-a-single-event).
 
     | **Event** | **deviceID**  | **roomNo** | **temp** |
     |-----------|---------------|------------|----------|
@@ -76,7 +76,7 @@ To try out the query used in the above example, let's include it in a Siddhi App
     ```text
     INFO {io.siddhi.core.stream.output.sink.LogSink} - FilteredResult : Event{timestamp=1604494352744, data=[SOU5438B765, 2233, 30.0], isExpired=false} 
     ``` 
-4. Now remove the `Filtering2233` query and replace it with the following query that filters based on multiple criteria.
+3. Now remove the `Filtering2233` query and replace it with the following query that filters based on multiple criteria.
 
     ```
     from TempStream [(roomNo >= 100 and roomNo < 210) and temp > 40]
@@ -99,7 +99,7 @@ To try out the query used in the above example, let's include it in a Siddhi App
     insert into RoomAnalysisStream;
    ```
    
-5. Open the event simulator and simulate three events for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](testing-a-Siddhi-Application/#simulating-a-single-event).
+4. Open the event simulator and simulate three events for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](../develop/testing-a-Siddhi-Application.md#simulating-a-single-event).
 
     | **Event** | **deviceID**  | **roomNo** | **temp** |
     |-----------|---------------|------------|----------|
@@ -122,7 +122,7 @@ Assume that in the previous example, you do not need the device ID for further p
 ```
 @info(name = 'CleaningData')
 from FilteredResultsStream
-select cast(roomNo string) as roomNo, temp
+select cast(roomNo, "string") as roomNo, temp
 insert into CleansedDataStream;
 ```
 Here, the `cast()` function presents the value for the `roomNo` attribute as a string value although it is received as an integer value. The `select` clause excludes the `deviceID` attribute.
@@ -147,9 +147,9 @@ To try out the above example, follow the steps below:
     select cast(roomNo, "string") as roomNo, temp
     insert into CleansedDataStream;
     ```
-   In this Siddhi application, the `Temp Stream` has an attribute named `deviceID`, but it is not selected to be included in the output events. The `roomNo`attribute is cast as an string value via `cast(roomNo, "string")`. This means although the value for this attribute is received as an integer, it is presented as a string value in the output.
+   In this Siddhi application, the `TempStream` has an attribute named `deviceID`, but it is not selected to be included in the output events. The `roomNo` attribute is cast as a string value via `cast(roomNo, "string")`. This means although the value for this attribute is received as an integer, it is presented as a string value in the output.
    
-2. Open the event simulator and simulate an event for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](testing-a-Siddhi-Application/#simulating-a-single-event).
+2. Open the event simulator and simulate an event for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](../develop/testing-a-Siddhi-Application.md#simulating-a-single-event).
 
     | **deviceID**  | **roomNo** | **temp** |
     |---------------|------------|----------|
@@ -170,19 +170,19 @@ In the example of processing temperature readings, assume that some events arriv
 @info(name = 'AddingMissingValues')
 from FilteredResultsStream
 select ifThenElse(deviceID is null, "UNKNOWN", deviceID) as deviceID, roomNo, temp
-insert into CleansedDataStream
+insert into CleansedDataStream;
 ```
-### Try it out.
+### Try it out
 
 To try out the above example, follow the steps below:
 
-1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
 
 2. Open a new file. Then add and save the following Siddhi application.
 
     ```
-    @App:name("TemperatureApp")
-    @App:description("Description of the plan")
+    @App:name('TemperatureApp')
+    @App:description('Description of the plan')
     
     define stream TempStream (deviceID string, roomNo string, temp double);
     
@@ -195,9 +195,9 @@ To try out the above example, follow the steps below:
     select ifThenElse(deviceID is null, "UNKNOWN", deviceID) as deviceID, roomNo, temp
     insert into CleansedDataStream;
     ```
-   In this Siddhi application, the `Temp Stream` has an attribute named `deviceID`, but it is not selected to be included in the output events. The `roomNo`attribute is cast as an string value via `cast(roomNo, "string")`. This means although the value for this attribute is received as an integer, it is presented as a string value in the output.
+   In this Siddhi application, the `TempStream` stream has a `deviceID` attribute that may arrive with a null value. The `ifThenElse(deviceID is null, "UNKNOWN", deviceID)` expression substitutes `"UNKNOWN"` whenever `deviceID` is null and passes the original value through otherwise. The result is inserted into `CleansedDataStream` so downstream queries see a non-null `deviceID`.
    
-3. Open the event simulator and simulate an event for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](testing-a-Siddhi-Application/#simulating-a-single-event).
+3. Open the event simulator and simulate an event for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](../develop/testing-a-Siddhi-Application.md#simulating-a-single-event).
 
     | **deviceID**                                        | **roomNo** | **temp** |
     |-----------------------------------------------------|------------|----------|

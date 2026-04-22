@@ -1,6 +1,6 @@
 # Enriching Data
 
-Enriching data involves integrated the data received into a streaming integration flow with data from other medium such as a data store, another data stream, or an external service to derive an expected result.
+Enriching data involves integrating the data received into a streaming integration flow with data from other media such as a data store, another data stream, or an external service to derive an expected result.
 
 ## Integrating data streams and static data
 
@@ -12,14 +12,14 @@ To address this, you can write a query as follows.
 
 ```
 from ProductionStream as p 
-join StocksTable as s 
+join StockTable as s 
 	on p.name == s.name 
 select p.name as name, sum(p.amount) + s.amount as amount 
 	group by p.name 
 insert into UpdateStockwithProductionStream;
 ```
 
-Here, the `ProductionStream` stream that has the production amounts for sweets after each production run is assigned the short name `p`. The `StocksTable` that has the current stock for each product before the latest production runs is given the short name `s`. This allows you to uniquely identify the attributes in each. The matching condition is `p.name == s.name `, which means that a match is identified when an event in the `ProductionStream` stream has the same value for the `name` attribute as a record in the `StockTable` table. 
+Here, the `ProductionStream` stream that has the production amounts for sweets after each production run is assigned the short name `p`. The `StockTable` that has the current stock for each product before the latest production runs is given the short name `s`. This allows you to uniquely identify the attributes in each. The matching condition is `p.name == s.name `, which means that a match is identified when an event in the `ProductionStream` stream has the same value for the `name` attribute as a record in the `StockTable` table. 
 `sum(p.amount)` calculates the total production per product. This total production amount for a product is then added to the stock amount of the product (i.e., `s.amount`). The resulting output is inserted into the `UpdateStockwithProductionStream` stream.
 
 ## Integrating multiple data streams
@@ -48,7 +48,7 @@ This involves enriching a data stream by incorporating information received from
 To understand this, consider that in order to value the stock, a Sweet Factory obtains the value of one unit of a product from an external application named `StockValuingApp`. When you submit the name of the product, it returns the unit value. To value the stock based on this information, you can create a Siddhi application as follows:
 
 ```
-@App:name("StockValuingApp")
+@App:name('StockValuingApp')
 
 @sink(type='http-request',publisher.url='http://localhost:5005/CheckProductValueEP',method='POST', headers="'Content-Type:application/x-www-form-urlencoded'",
 sink.id="unitvalueSink",
@@ -123,7 +123,7 @@ To try out the examples given above, follow the steps below.
                 isAutoCommit: false
         ```
     
-2. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+2. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
 
 3. Open a new file in the VSCode editor (with the WSO2 Integrator: SI extension installed). Then add and save the following Siddhi application.
 

@@ -72,7 +72,7 @@ When you reference this driver from a Siddhi `@Store` definition, use `com.mysql
 
 This scenario involves publishing some filtered production data to a Kafka topic named `eclair-production`.
 
-1. Download the Kafka broker from [the Apache site](https://www.apache.org/dyn/closer.cgi?path=/kafka/2.3.0/kafka_2.12-2.3.0.tgz) and extract it.
+1. Download the Kafka broker from [the Apache site](https://archive.apache.org/dist/kafka/2.3.0/kafka_2.12-2.3.0.tgz) and extract it.
    This directory is referred to as `<KAFKA_HOME>` from here on.
 
 2. Start Kafka as follows:

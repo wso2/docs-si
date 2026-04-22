@@ -1,6 +1,6 @@
 # Extracting Data from Static Sources in Real Time
 
-WSO2 Integrator: SI can extract data from static sources such as databases, files and cloud storages in real-tme. 
+WSO2 Integrator: SI can extract data from static sources such as databases, files and cloud storages in real time. 
 
 ## Consuming data from RDBMS databases
 
@@ -25,7 +25,7 @@ To capture change data via the [WSO2 Integrator: SI for VS Code Overview](../dev
     operation = "insert", 
     mode = "listening", jdbc.driver.name = "com.mysql.cj.jdbc.Driver",
 	@map(type = 'keyvalue'))
-define stream OnlineBookingsStream (ref int, timestamp int, name string, package string, people int);
+define stream OnlineBookingsStream (ref int, timestamp long, name string, package string, people int);
 ```
 Here, note that the `mode` parameter of the `cdc` source is set to `listening`. This mode involves listening to the database for the specified database operation. In this example, the `operation` parameter is set to `insert`. Therefore, the source listens to new records inserted into the `OnlineBookingsTable` table and generates an input event in the `OnlineBookingsStream` stream for each insert.
 
@@ -41,7 +41,7 @@ If you want to capture updates to the records in the `OnlineBookingsTable` datab
     mode = "listening", 
     jdbc.driver.name = "com.mysql.cj.jdbc.Driver",
 	@map(type = 'keyvalue'))
-define stream OnlineBookingsStream (ref int, timestamp int, name string, package string, people int);
+define stream OnlineBookingsStream (ref int, timestamp long, name string, package string, people int);
 ```
 Similarly, if you want to capture deletions in the `OnlineBookingsTable` database table in real time, you can change the value for the `operation` parameter to `delete` as shown below.
 
@@ -55,7 +55,7 @@ Similarly, if you want to capture deletions in the `OnlineBookingsTable` databas
     mode = "listening", 
     jdbc.driver.name = "com.mysql.cj.jdbc.Driver",
 	@map(type = 'keyvalue'))
-define stream OnlineBookingsStream (ref int, timestamp int, name string, package string, people int);
+define stream OnlineBookingsStream (ref int, timestamp long, name string, package string, people int);
 ```
 
 ### Polling databases
@@ -75,7 +75,7 @@ This method involves periodically polling a database table to capture changes in
     @map(type = 'keyvalue' ))
 define stream OnlineBookingsStream (ref int, timestamp long, name string, package string, people int);
 ```
-The above source polls the `OnlineBookingsTable`table every 10 seconds and captures all inserts and updates to the database table that take place during that time interval. An input event is generated in the `OnlineBookingsStream` stream for each insert and update.
+The above source polls the `OnlineBookingsTable` table every 10 seconds and captures all inserts and updates to the database table that take place during that time interval. An input event is generated in the `OnlineBookingsStream` stream for each insert and update.
 
 !!! tip
     - The `polling` mode only captures insert and update operations. Unlike in the `listening` mode, you do not need to specify the operation.
@@ -113,19 +113,21 @@ Let's try out the example where you want to view the online bookings saved in a 
        
     3. Switch to the `tours` database and create a new table, by executing the following queries.
     
-        `use tours;`
-        
-        `CREATE TABLE tours.tours (
+        ```sql
+        use tours;
+
+        CREATE TABLE tours.OnlineBookingsTable (
           ref INT NOT NULL AUTO_INCREMENT,
-          timestamp LONGTEXT NULL,
+          timestamp BIGINT NULL,
           name VARCHAR(45) NULL,
           package VARCHAR(45) NULL,
           people INT NULL,
-          PRIMARY KEY (ref));`
+          PRIMARY KEY (ref));
+        ```
           
     4. [Open VSCode with WSO2 Integrator: SI extension installed](../develop/si-for-vscode-overview.md).
     
-    5. Download the `cdc-mysql`Siddhi extension for WSO2 Integrator: SI VSCode extension. For instructions, see [Installing Siddhi Extensions](../../develop/installing-siddhi-extensions/#installing-an-extension).
+    5. Download the `cdc-mysql` Siddhi extension for WSO2 Integrator: SI VSCode extension. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md#installing-an-extension).
     
     6. In the VSCode editor (with the WSO2 Integrator: SI extension installed), open a new file. Copy and paste the following Siddhi application to it.
     
@@ -152,7 +154,7 @@ Let's try out the example where you want to view the online bookings saved in a 
     
         ![Play]({{base_path}}/images/extracting-data-from-static-sources/play.png)
         
-    8. To insert a record into the `OnlineBookingsTable`, issue the following MySQL command:
+    8. To insert a record into the `OnlineBookingsTable`, connect as the MySQL root user (or a user with `INSERT` privilege on the `tours` database) and issue the following command:
     
         `insert into OnlineBookingsTable(ref,timestamp,name,package,people) values('1',1602506738000,'jem','best of rome',2);`
         
@@ -164,9 +166,7 @@ Let's try out the example where you want to view the online bookings saved in a 
 
 ### Supported databases
 
-[siddhi-io-cdc source](https://siddhi-io.github.io/siddhi-io-cdc/api/latest/) via which the WSO2 Steaming Integrator extracts database records supports the following database types.
-
-The following is a list of Siddhi extensions that support change data capturing to allow you to extract database records as input events in real time.
+The [siddhi-io-cdc source](https://siddhi-io.github.io/siddhi-io-cdc/api/latest/) via which the WSO2 Integrator: SI extracts database records supports the following database types.
 
 | **Database Type** | **Extension Name** | **Description**                                 |
 |-------------------|--------------------|-------------------------------------------------|
@@ -182,9 +182,9 @@ Mappers determine the format in which the event is received. For information abo
 
 The mapper available for extracting data from databases is [Keyvalue](https://siddhi-io.github.io/siddhi-map-keyvalue/api/2.1.0/#sourcemapper).
 
-## File Processing
+## File processing
 
-File Processing involves two types of operations related to files:
+File processing involves two types of operations related to files:
 
 - **Extracting data from files**: This involves extracting the content of file as input data for further processing.
 
@@ -199,9 +199,9 @@ To understand how you can perform these file processing activities via the WSO2 
 
 WSO2 Integrator: SI extracts data from files via the [File Source](https://siddhi-io.github.io/siddhi-io-file/api/latest/#file-source). Once it extracts the data, it can publish it in a streaming manner so that other streaming applications that cannot read static data from files.
 
-![Extracting data from databases]({{base_path}}/images/extracting-data-from-static-sources/file-content-processing.png)
+![Extracting data from files]({{base_path}}/images/extracting-data-from-static-sources/file-content-processing.png)
 
-To further understand this, let's try out designing a solution for the Sweet Factory that needs to expose its production statitstics in the file generated by production bots in a streaming manner to the production manager so thyat the statistics can be viewed and analyzed in real time.
+To further understand this, let's try out designing a solution for the Sweet Factory that needs to expose its production statistics in the file generated by production bots in a streaming manner to the production manager so that the statistics can be viewed and analyzed in real time.
 
 #### Selecting the file(s) to read
 
@@ -254,13 +254,13 @@ You can specify the required mode via the `mode` parameter as shown in the examp
 ```
 @source(type = 'file',
     file.uri = "file:<YOUR_HOME>/productioninserts.csv",
-    mode='LINE'
+    mode='LINE',
     @map(type = 'csv'))
 define stream ProductionStream (name string, amount double);
 ```
 #### Moving or deleting files after reading/failure
 
-If required, you can configure a `file` source to move or delete the files after they are read or after an attempt to read them has resulted in a failure. In both scenarios, the defauly action is to delete the file.
+If required, you can configure a `file` source to move or delete the files after they are read or after an attempt to read them has resulted in a failure. In both scenarios, the default action is to delete the file.
 
 e.g., If you want to move the `productioninserts.csv` file in the previous example after it is read, specify `move` as the value for `action.after.process`. Then add the `move.after.process` to specify the location to which the file should be moved after processing.
 
@@ -269,11 +269,11 @@ e.g., If you want to move the `productioninserts.csv` file in the previous examp
     mode = "line",
     tailing = "false",
     action.after.process = "move", 
-    move.after.process = "file:/Users/processedfiles/productioninserts.csv", 
+    move.after.process = "file:<YOUR_HOME>/processedfiles/productioninserts.csv", 
 	@map(type = 'csv'))
 define stream ProductionStream (name string, amount double);
 ```
-Here, you are  moving the `productioninserts.csv` file from the `<YOUR_HOME>` directory to the `/Users/processedfiles` after it is processed. 
+Here, you are  moving the `productioninserts.csv` file from the `<YOUR_HOME>` directory to the `<YOUR_HOME>/processedfiles` after it is processed. 
 
 Note that this extract also includes `tailing = "false"`. When tailing is enabled, the source reports any change made to the file immediately. Tailing is available only when the mode is set to `LINE` or `REGEX`, and it is enabled for these modes by default. Therefore, if you are using one of these modes and you want to set the `action.after.process` to `move` you need to disable tailing.
 
@@ -346,7 +346,7 @@ To try out reading the content of a file and file events, let's address the requ
         @App:description('Description of the plan')
         
         @source(type = 'fileeventlistener', 
-                dir.uri = "file:/Users/production", 
+                dir.uri = "file:<YOUR_HOME>/production", 
                 @map(type = 'passThrough'))
         define stream FileListenerStream (filepath string, filename string, status string);
         
@@ -361,22 +361,27 @@ To try out reading the content of a file and file events, let's address the requ
     ```
    
     !!! tip
-        You can change the `Users/production` directory path to the path of a preferred directory in your machine.
+        You can change the `<YOUR_HOME>/production` directory path to the path of a preferred directory in your machine.
 
     Then save the file as `LogFileEventsApp`.
     
-    The above Siddhi Application monitors the `Users/production` directory and generates an event in the `FileListenerStream` if any file is created/modified/removed in it.
+    The above Siddhi Application monitors the `<YOUR_HOME>/production` directory and generates an event in the `FileListenerStream` if any file is created/modified/removed in it.
     
 2. Start the `LogFileEventsApp` Siddhi application you created by clicking on the play icon in the top panel.
 
     ![Play]({{base_path}}/images/extracting-data-from-static-sources/play.png)
     
-3. Open a new file in a text editor of your choice, and save it as `productionstats.csv` in the `Users/production` directory.
+3. Open a new file in a text editor of your choice, and save it as `productionstats.csv` in the `<YOUR_HOME>/production` directory with the following content:
 
-    As a result, the following is logged in the VSCode editor (with the WSO2 Integrator: SI extension installed) terminal to indicate that the `productionstats.csv` is created in the `Users/production` directory.
+    ```
+    Almond cookie,100.0
+    Baked alaska,20.0
+    ```
+
+    As a result, the following is logged in the VSCode editor (with the WSO2 Integrator: SI extension installed) terminal to indicate that the `productionstats.csv` is created in the `<YOUR_HOME>/production` directory.
     
     ```
-    INFO {io.siddhi.core.stream.output.sink.LogSink} - LogFileEventsApp : LogFileEventsStream : Event{timestamp=1603105747423, data=[/Users/production/productionstats.csv, productionstats.csv, created], isExpired=false} 
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - LogFileEventsApp : LogFileEventsStream : Event{timestamp=1603105747423, data=[<YOUR_HOME>/production/productionstats.csv, productionstats.csv, created], isExpired=false} 
     ```
    
 4. Create and save the following Siddhi application in VSCode.
@@ -385,11 +390,11 @@ To try out reading the content of a file and file events, let's address the requ
     @App:name("FileReadingApp")
     
     @source(type = 'file', 
-        file.uri = "file:/Users/production/productionstats.csv", 
+        file.uri = "file:<YOUR_HOME>/production/productionstats.csv", 
         mode = "line", 
         tailing = "false", 
         action.after.process = "move", 
-        move.after.process = "file:/Users/processedfiles/productionstats.csv",
+        move.after.process = "file:<YOUR_HOME>/processedfiles/productionstats.csv",
         @map(type = 'csv'))
     define stream ProductionStream (name string, amount double);
     
@@ -403,16 +408,10 @@ To try out reading the content of a file and file events, let's address the requ
     insert into LogStream;
     ```
    
-   This Siddhi application reads the content of the `/Users/production/productionstats.csv` file that you previously created and generates an event per row in the `ProductionStream` stream. After reading the file, the Siddhi app moves it to the `/Users/processedfiles` directory.
+   This Siddhi application reads the content of the `<YOUR_HOME>/production/productionstats.csv` file that you previously created and generates an event per row in the `ProductionStream` stream. After reading the file, the Siddhi app moves it to the `<YOUR_HOME>/processedfiles` directory.
    
 5. Start the `FileReadingApp` Siddhi application.
 
-6. Open the `/Users/production/productionstats.csv` file, add the following content to it, and then save the file.
-
-    ```
-    Almond cookie,100.0
-    Baked alaska,20.0
-    ```
     The following is logged in the VSCode editor (with the WSO2 Integrator: SI extension installed) terminal:
     
     - **For the `FileReadingApp` Siddhi application**
@@ -430,10 +429,10 @@ To try out reading the content of a file and file events, let's address the requ
     - **For the `LogFileEventsApp` Siddhi application**
 
         ```
-        INFO {io.siddhi.core.stream.output.sink.LogSink} - LogFileEventsApp : LogFileEventsStream : Event{timestamp=1603106006807, data=[/Users/production/productionstats.csv, productionstats.csv, removed], isExpired=false}
+        INFO {io.siddhi.core.stream.output.sink.LogSink} - LogFileEventsApp : LogFileEventsStream : Event{timestamp=1603106006807, data=[<YOUR_HOME>/production/productionstats.csv, productionstats.csv, removed], isExpired=false}
         ```
       
-        This log indicates that the WSO2 Integrator: SI has detected that the 'productionstats.csv` file is removed from the `/Users/production` directory.    
+        This log indicates that the WSO2 Integrator: SI has detected that the `productionstats.csv` file is removed from the `<YOUR_HOME>/production` directory.    
 
 ## Consuming data from cloud storages
 
@@ -441,7 +440,7 @@ WSO2 Integrator: SI allows you to access data in cloud storages (such as Amazon 
 
 ![Accessing Data in Cloud Storages]({{base_path}}/images/extracting-data-from-static-sources/cloud-storages.png)
 
-The following is an example where the WSO2 Integrator: SI retrieves messages from an SQS queue. A source of the `sqs`type is used for this purpose where you can provide the URL to the SQS queue that you want to subscribe to, and provide the access key and the secret to access it. the queue is polled periodically (i.e., every 5000 milliseconds). The source generates an event in the `InStream` stream for each message it retrieves.
+The following is an example where the WSO2 Integrator: SI retrieves messages from an SQS queue. A source of the `sqs` type is used for this purpose where you can provide the URL to the SQS queue that you want to subscribe to, and provide the access key and the secret to access it. The queue is polled periodically (i.e., every 5000 milliseconds). The source generates an event in the `InStream` stream for each message it retrieves.
 
 ```
 @source(type='sqs',
@@ -464,16 +463,16 @@ define stream InStream (symbol string, message_id string);
 To transfer the content of the cloud storage to a file, add another stream with a sink of the `file` type as shown in the example below.
 
 !!! tip
-    To learn more about publishing data to files, see [Loading and Writing Data](loading-and-writing-date.md).
+    To learn more about publishing data to files, see [Loading and Writing Data](loading-and-writing-data.md).
 
 ```
 @sink(type = 'file', 
-    file.uri = "/Users/messages/messages.csv",
+    file.uri = "<YOUR_HOME>/messages/messages.csv",
 	@map(type = 'json'))
 define stream ExtractCloudDataStream (symbol string, message_id string);
 ```
 
-Then write a query as follows to send all the events in the `InStream` stream to the `ExtractCloudDataStream` stream so that all the events extracted from the cloud can be transferred to the `/Users/messages/messages.csv` file.
+Then write a query as follows to send all the events in the `InStream` stream to the `ExtractCloudDataStream` stream so that all the events extracted from the cloud can be transferred to the `<YOUR_HOME>/messages/messages.csv` file.
 
 ```
 @info(name = 'MoveCloudContentToFile')
@@ -493,7 +492,7 @@ The complete Siddhi application with the above configurations is as follows.
 define stream InStream (symbol string, message_id string);
 
 @sink(type = 'file', 
-    file.uri = "/Users/messages/messages.csv",
+    file.uri = "<YOUR_HOME>/messages/messages.csv",
 	@map(type = 'json'))
 
 define stream ExtractCloudDataStream (symbol string, message_id string);
@@ -504,7 +503,7 @@ select *
 insert into ExtractCloudDataStream;
 ```
 
-Now you can tail the data that is stored in the cloud by tailing the `/Users/messages/messages.csv` file. For more information about extracting information from files, see [Extracting data from files](#extracting-data-from-files).
+Now you can tail the data that is stored in the cloud by tailing the `<YOUR_HOME>/messages/messages.csv` file. For more information about extracting information from files, see [Extracting data from files](#extracting-data-from-files).
 
 
 ### Supported cloud platforms

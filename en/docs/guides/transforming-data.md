@@ -1,6 +1,6 @@
 # Transforming Data
 
-The WSO2 Integrator: SI allows you to perform a wide range of transformations to the input data received. A main type of transformation supported is transforming a message from one format to another. In addition, you can perform a range of mathematical, regex, string, unit conversion, map, json, etc., transformations via [Siddhi Extensions](https://siddhi.io/en/v5.1/docs/extensions/). You can also write a custom script to perform an required transformation of data.
+The WSO2 Integrator: SI allows you to perform a wide range of transformations to the input data received. A main type of transformation supported is transforming a message from one format to another. In addition, you can perform a range of mathematical, regex, string, unit conversion, map, json, etc., transformations via [Siddhi Extensions](https://siddhi.io/en/v5.1/docs/extensions/). You can also write a custom script to perform a required transformation of data.
 
 ## Transforming message formats
 
@@ -14,11 +14,11 @@ The WSO2 Integrator: SI can consume events in the default format in which they a
 
 - **Consuming messages in a default format**
 
-    Consuming messages via WSO2 Integrator: SI by configuring Siddhi sources is explained in [Extracting Data From Static Sources in Real Time](extracting-data-from-static-sources-in-real-time.md) and [Receiving Data in Trasit](receiving-data-in-transit.md).
+    Consuming messages via WSO2 Integrator: SI by configuring Siddhi sources is explained in [Extracting Data From Static Sources in Real Time](extracting-data-from-static-sources-in-real-time.md) and [Receiving Data in Transit](receiving-data-in-transit.md).
     
     To receive data in a specific format, you need to annotate a mapper to the source configuration via the @map annotation. For more information, see [Siddhi Query Guide - Source Mapper](https://siddhi.io/en/v5.1/docs/query-guide/#source-mapper).
     
-    To understand how to do this, consider factory where production bots publish the production amounts in a file. The the file contains rows in the CSV format. Therefore, WSO2 Integrator: SI needs to consume the records in that format. Therefore, the source and the mapper can be configured as shown below.
+    To understand how to do this, consider a factory where production bots publish the production amounts in a file. The file contains rows in the CSV format. Therefore, WSO2 Integrator: SI needs to consume the records in that format. Therefore, the source and the mapper can be configured as shown below.
     
     ```
     @source(type='file', mode='LINE',
@@ -91,9 +91,9 @@ WSO2 Integrator: SI can publish messages in the default format or in a custom fo
     
 - **Publishing messages in custom format**
 
-    The schema of the event accepted by the destination to which you are sending your output can be different to the schema of your input event or the schema of the event at the time you were processing it. Therefore, WSO2 Integrator: SI allows you to perform custom mapings when you publish the output. The custom mapping needs to be annotated to the mapping configuration via the `@payload` annotation.
+    The schema of the event accepted by the destination to which you are sending your output can be different to the schema of your input event or the schema of the event at the time you were processing it. Therefore, WSO2 Integrator: SI allows you to perform custom mappings when you publish the output. The custom mapping needs to be annotated to the mapping configuration via the `@payload` annotation.
     
-    To understand this, consider the example of a sweet factory that needs to send it's production report to the factory manager. The output stream in which the output is generated after processing can be as follows:
+    To understand this, consider the example of a sweet factory that needs to send its production report to the factory manager. The output stream in which the output is generated after processing can be as follows:
     
     ```
     define stream SweetProductionStream (name string, amount double);
@@ -103,7 +103,7 @@ WSO2 Integrator: SI can publish messages in the default format or in a custom fo
     ```json
     {
         "event":{
-            "name":gingerbread,
+            "name":"gingerbread",
             "amount":100
         }
     }
@@ -114,7 +114,7 @@ WSO2 Integrator: SI can publish messages in the default format or in a custom fo
     ```json
     {"Product":{
         "ProductionData":{
-            "Name":gingerbread,
+            "Name":"gingerbread",
             "Quantity":100
           }
       }
@@ -125,7 +125,7 @@ WSO2 Integrator: SI can publish messages in the default format or in a custom fo
     
     ```
     @sink(type='inMemory', 
-        topic='{{production}}', 
+        topic='SweetProduction', 
         @map(type='json', 
             enclosing.element='$.Product', 
             validate.json='true', 
@@ -151,11 +151,11 @@ group by name
 insert into ProductionTotalsStream;
 ```
 
-In this example, the input event that reports only the name of the product and the amount produced is transformed into an output event that reports the product name, amount produced, the total produced for the given product, and the average produced per production run for the given product. The `group by` clause ensures that the calculations are done per product name. The `sum()` and `avg()` inline operators calculate the total and the average recpectively.
+In this example, the input event that reports only the name of the product and the amount produced is transformed into an output event that reports the product name, amount produced, the total produced for the given product, and the average produced per production run for the given product. The `group by` clause ensures that the calculations are done per product name. The `sum()` and `avg()` inline operators calculate the total and the average respectively.
 
 ## Transforming with supported Siddhi extensions
 
-When you want to perform more advanced transformations that are not supported by the inline operators of the WSO2 Integrator: SI, you can use one or more of the Siddhi extensions from the [Siddhi Store](https://store.wso2.com/store/assets/analyticsextension/list).
+When you want to perform more advanced transformations that are not supported by the inline operators of the WSO2 Integrator: SI, you can use one or more of the Siddhi extensions from the [Siddhi extensions catalogue](https://siddhi.io/en/v5.1/docs/extensions/).
 
 Some of these extensions are shipped with the WSO2 Integrator: SI by default. If you want to use a Siddhi extension that is not shipped by default, you need to download and install it following the instructions in [Downloading and Installing Siddhi Extensions]({{base_path}}/connectors/downloading-and-Installing-Siddhi-Extensions.md).
 
@@ -175,8 +175,8 @@ The following table describes the complete list of extensions that provide data 
 | [Siddhi-execution-regex](https://siddhi-io.github.io/siddhi-execution-regex/) | Finds the subsequence that matches the given regex pattern. |
 | [Siddhi-execution-geo](https://wso2-extensions.github.io/siddhi-execution-geo/api/5.0.1/) | Provides geo data related functionality such as such as geocode, reverse geocode and finding places based on IP. |
 | [Siddhi-execution-env](https://wso2-extensions.github.io/siddhi-execution-env/) |Allows you to read environment properties inside Siddhi stream definitions and use it in queries. |
-| [Siddhi-execution-streeamingml](https://siddhi-io.github.io/siddhi-execution-streamingml/) | Provides streaming machine learning (clustering, classification and regression) for event streams. |
-| [Siddhi-execution-tensorflow](https://siddhi-io.github.io/siddhi-execution-tensorflow/) | 
+| [Siddhi-execution-streamingml](https://siddhi-io.github.io/siddhi-execution-streamingml/) | Provides streaming machine learning (clustering, classification and regression) for event streams. |
+| [Siddhi-execution-tensorflow](https://siddhi-io.github.io/siddhi-execution-tensorflow/) | Runs pre-trained TensorFlow models to process event streams. |
 | [Siddhi-execution-r](https://wso2-extensions.github.io/siddhi-gpl-execution-r/) | Processes events with R scripts. |
 
 ## Writing a custom script to transform data
@@ -198,7 +198,7 @@ Here, `js:eval("amount > average", 'bool') as exceedsAverage` is a custom functi
 
 To try out the transformations described above with some of the given examples, follow the steps below:
 
-1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
 
 2. Open a new file. Then add and save the following Siddhi application.
 
@@ -228,7 +228,7 @@ To try out the transformations described above with some of the given examples, 
     
     @info(name = 'Compare with Average')
     from ProductionTotalsStream 
-    select name, js:eval("('amount' > 'average')", 'bool') as exceedsAverage
+    select name, js:eval("amount > average", 'bool') as exceedsAverage
     group by name 
     insert into MonitorProductionTrendStream;
     ```
@@ -237,14 +237,14 @@ To try out the transformations described above with some of the given examples, 
    
    - Derives the values for `name` and `amount` attributes representing the name of the product and the amount produced. This is derived from input events sent is a custom format where the two required values are provided under the `Sweet` and `count` attributes, and the `count` attribute is nested under another attribute named `batch`.
    
-   - Publishes the production statistics in a custom format. `name` and `amount` attributes are presented as `Name` and `Quantity`, and nested under `ProductionData` in the `Product` enclosing element. These events are published in the `Users/foo/productions.json` file.
+   - Publishes the production statistics in a custom format. `name` and `amount` attributes are presented as `Name` and `Quantity`, and nested under `ProductionData` in the `Product` enclosing element. These events are published in the `<YOUR_HOME>/productions.json` file.
    
         !!! tip
             You can save the `productions.json` file mentioned above in a different location of your choice if required.
    
    - Calculates the total production amount and the average production amount per sweet, and presents them as values for the `total` and `average` attributes in the output event published in the `productions.json` file.
    
-   - Uses a custom script to check whether the amount produced of a sweet in the production run is greater than the average production for that sweets, and logs `true` or `false` in the terminal in the text format.
+   - Uses a custom script to check whether the amount produced of a sweet in the production run is greater than the average production for that sweet, and logs `true` or `false` in the terminal in the text format.
    
 3. To simulate events for this Siddhi application, issue the following six CURL commands.
 
@@ -326,15 +326,15 @@ To try out the transformations described above with some of the given examples, 
     }'
     ``` 
     
-4. Open the `Users/foo/productions.json` file. The following content is available in it.
+4. Open the `<YOUR_HOME>/productions.json` file. The following content is available in it.
 
     ```json
-    {"Product":{"ProductionData":{"Name":"Jaffa Cake","Quantity":"10.0","Total":10.0,"Average":10.0}
-    {"Product":{"ProductionData":{"Name":"Gingerbread","Quantity":"65.0","Total":65.0,"Average":65.0}
-    {"Product":{"ProductionData":{"Name":"Jaffa Cake","Quantity":"15.0","Total":25.0,"Average":12.5}
-    {"Product":{"ProductionData":{"Name":"Gingerbread","Quantity":"55.0","Total":120.0,"Average":60.0}
-    {"Product":{"ProductionData":{"Name":"Jaffa Cake","Quantity":"25.0","Total":50.0,"Average":16.666666666666668}
-    {"Product":{"ProductionData":{"Name":"Gingerbread","Quantity":"45.0","Total":165.0,"Average":55.0}
+    {"Product":{"ProductionData":{"Name":"Jaffa Cake","Quantity":"10.0","Total":10.0,"Average":10.0}}}
+    {"Product":{"ProductionData":{"Name":"Gingerbread","Quantity":"65.0","Total":65.0,"Average":65.0}}}
+    {"Product":{"ProductionData":{"Name":"Jaffa Cake","Quantity":"15.0","Total":25.0,"Average":12.5}}}
+    {"Product":{"ProductionData":{"Name":"Gingerbread","Quantity":"55.0","Total":120.0,"Average":60.0}}}
+    {"Product":{"ProductionData":{"Name":"Jaffa Cake","Quantity":"25.0","Total":50.0,"Average":16.666666666666668}}}
+    {"Product":{"ProductionData":{"Name":"Gingerbread","Quantity":"45.0","Total":165.0,"Average":55.0}}}
     ```
 
 5. Check the VSCode editor (with the WSO2 Integrator: SI extension installed) terminal. The following is logged in it.

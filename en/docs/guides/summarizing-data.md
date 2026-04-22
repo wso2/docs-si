@@ -122,7 +122,7 @@ To try out the example given above, follow the procedure below:
             isAutoCommit: false
     ```
     
-2. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+2. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
 
 3. Open a new file in the VSCode editor (with the WSO2 Integrator: SI extension installed). Then add and save the following Siddhi application.
 
@@ -261,7 +261,7 @@ The following are a few examples of how short time summarizations can be perform
 
 To try out the four sample queries given above, follow the steps below:
 
-1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
 
 2. Open a new file. Then add and save the following Siddhi application.
 

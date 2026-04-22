@@ -35,7 +35,7 @@ After the environment setup is done, you'll see the **Welcome View** that gives 
 
 ## Siddhi Application Development
 
-### Code Editor
+### Source View
 
 The SI extension provides a rich code editing experience for Siddhi applications with comprehensive language support:
 
@@ -48,11 +48,11 @@ The SI extension provides a rich code editing experience for Siddhi applications
 - **Error Detection**: Real-time validation and error highlighting
 - **Code Snippets**: Pre-built templates for common patterns
 
-### Graphical Design View
+### Graphical View
 
 The extension includes a powerful visual editor that allows you to design stream processing flows using a drag-and-drop interface:
 
-<a href="{{base_path}}/images/si-for-vscode/graphical-view.png"><img src="{{base_path}}/images/si-for-vscode/graphical-view.png" alt="Graphical Design View" width="80%"></a>
+<a href="{{base_path}}/images/si-for-vscode/graphical-view.png"><img src="{{base_path}}/images/si-for-vscode/graphical-view.png" alt="Graphical View" width="80%"></a>
 
 **Visual Editor Features:**
 

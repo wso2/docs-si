@@ -2,7 +2,7 @@
 
 WSO2 Integrator: SI receives input data, processes it and presents an output as shown in the diagram below.
 
-![WSO2 Integrator: SI Use cases]({{base_path}}/images/use-cases-overview/use-cases-overview.png)
+![WSO2 Integrator: SI use cases diagram]({{base_path}}/images/use-cases-overview/use-cases-overview.png)
 
 As shown in the diagram above, WSO2 Integrator: SI first extracts/receives input data, processes them and then presents the output by publishing/loading/writing it. You can perform supporting activities such as error handling, performing queries via API and analyzing metrics.
 
@@ -12,10 +12,10 @@ WSO2 Integrator: SI can extract static data from sources such as databases, file
 
 For more information, see the following guides:
 
-- [Extracting Data from Static Sources in Real Time](../guides/extracting-data-from-static-sources-in-real-time.md)
-- [Receiving Data in Transit](../guides/receiving-data-in-transit.md)
+- [Extracting Data from Static Sources in Real Time](extracting-data-from-static-sources-in-real-time.md)
+- [Receiving Data in Transit](receiving-data-in-transit.md)
 
-### Stream Processing
+### Stream processing
 
 The different types of stream processing activities that can be performed by WSO2 Integrator: SI are as follows:
 
@@ -25,11 +25,11 @@ The different types of stream processing activities that can be performed by WSO
  
  - Enriching data
  
- - Aggregating data
+ - Summarizing data
  
  - Correlating data
  
-For more information about the above processing activities, see [Processing Data](../guides/processing-data.md)
+For more information about the above processing activities, see [Stream processing](processing-data.md).
 
 
 ### Publishing/loading/writing data
@@ -38,7 +38,7 @@ Once the received data is processed, the output can be stored in a database, wri
 
 For more information about how the output is published, see the following topics:
 
-- [Loading and Writing Data](loading-and-writing-date.md)
+- [Loading and Writing Data](loading-and-writing-data.md)
 - [Publishing Data](publishing-data-to-event-stream-consumers.md)
 
 
@@ -46,9 +46,11 @@ For more information about how the output is published, see the following topics
 
 The following guides cover the supporting tasks that can be performed by WSO2 Integrator: SI when processing Streaming Data.
 
-- [Error Handling](handling-errors.md)
+- [Handling Errors](handling-errors.md)
 
-- [Metrics (Monitoring )](../admin/monitoring-si-performance-via-grafana.md)
+- [Performing ETL Operations](performing-etl-tasks.md)
+
+- [Metrics (Monitoring)](../admin/monitoring-si-performance-via-grafana.md)
 
 - [Query API](../ref/store-APIs.md)
  
