@@ -146,6 +146,9 @@ To create and deploy a Siddhi application, follow the steps below:
 
 3. Deploy the `MappingErrorTest.siddhi` and `SinkTransportErrorTest.siddhi` applications by POSTing each Siddhi source to the SI server's REST API:
 
+    !!!warning "Security notice"
+        The `curl` examples throughout this tutorial use the default `admin:admin` credentials that ship with a fresh WSO2 Integrator: SI install. In production, replace these credentials with secure values (ideally via shell environment variables, e.g. `-u "$SI_USER:$SI_PASS"`) to avoid leaking secrets through shell history and process lists.
+
     ```
     curl -sk -u admin:admin -X POST -H "Content-Type: text/plain" \
       --data-binary @MappingErrorTest.siddhi \

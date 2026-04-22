@@ -72,6 +72,10 @@ This tutorial demonstrates how you can use the Siddhi query API to perform essen
 2. Save this file as `SweetProduction-Store.siddhi` in a location of your choice in the local file system.
 
 3. Now you need to execute a `CURL` command and deploy this Siddhi application. In the command line, navigate to the location where you saved the Siddhi application in the previous step, and execute following command:
+
+    !!!warning "Security notice"
+        The `curl` examples throughout this tutorial use the default `admin:admin` credentials that ship with a fresh WSO2 Integrator: SI install. In production, replace these credentials with secure values (ideally via shell environment variables, e.g. `-u "$SI_USER:$SI_PASS"`) to avoid leaking secrets through shell history and process lists.
+
     ```
     curl -X POST "https://localhost:9443/siddhi-apps" -H "accept: application/json" -H "Content-Type: text/plain" --data-binary @SweetProduction-Store.siddhi -u admin:admin -k
     ```

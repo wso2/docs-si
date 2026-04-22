@@ -734,6 +734,9 @@ To delete records in the `StockTable` table via streams, follow the steps below:
 
 In this section, let's perform CRUD operations via the [Store API](../ref/store-APIs.md)
 
+!!!warning "Security notice"
+    The `curl` examples in this section use the default `admin:admin` credentials that ship with a fresh WSO2 Integrator: SI install. In production, replace these credentials with secure values (ideally via shell environment variables, e.g. `-u "$SI_USER:$SI_PASS"`) to avoid leaking secrets through shell history and process lists.
+
 #### Insert records
 
 To insert a record into the `StockTable` table, issue the following CURL command:

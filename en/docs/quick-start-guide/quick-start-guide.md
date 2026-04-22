@@ -12,11 +12,11 @@ The following is the outline of this quick start guide.
 
 ## Step 1: Download the WSO2 Integrator: SI
 
-Download the WSO2 Integrator: SI distribution from [WSO2 Integrator: SI site](https://wso2.com/streaming-integrator/) and extract it to a location of your choice. Hereafter, the extracted location is referred to as `<SI-Home>`.
+Download the WSO2 Integrator: SI distribution from [WSO2 Integrator: SI site](https://wso2.com/streaming-integrator/) and extract it to a location of your choice. Hereafter, the extracted location is referred to as `<SI_HOME>`.
 
 ## Step 2: Start the WSO2 Integrator: SI
 
-To start WSO2 Integrator: SI, navigate to the `<SI-Home>/bin` directory from the CLI, and issue the appropriate command based on your operating system:
+To start WSO2 Integrator: SI, navigate to the `<SI_HOME>/bin` directory from the CLI, and issue the appropriate command based on your operating system:
 
 - **For Linux/macOS**: `./server.sh`
 - **For Windows**: `server.bat --run`
@@ -24,7 +24,7 @@ To start WSO2 Integrator: SI, navigate to the `<SI-Home>/bin` directory from the
 ## Step 3: Download Kafka
 
 Download the Kafka broker from [the Apache site](https://archive.apache.org/dist/kafka/2.5.0/kafka_2.12-2.5.0.tgz) and extract it.
-This directory is referred to as `<Kafka_Home>` from here on.
+This directory is referred to as `<KAFKA_HOME>` from here on.
 
 ## Step 4: Create and deploy a simple Siddhi application
 
@@ -64,7 +64,7 @@ Let's create a simple Siddhi application that reads data from a CSV file, perfor
 
     The above Siddhi application reads input data from a file named `productions.csv` in the CSV format, processes it and publishes the resulting output to a Kafka topic named `total_production`. As a result, any application that cannot read streaming data, but is capable of subscribing to a Kafka topic can access the output. Each input event reports the amount of a specific sweet produced in a production run. The WSO2 Integrator: SI calculates the total amount produced for each sweet with each event. Therefore, each output event reports the total amount produced for a sweet from the time you started running the Siddhi application. 
 
-3. Save this file as `ManageProductionStats.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory.
+3. Save this file as `ManageProductionStats.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory.
 
     At this point the Siddhi application references the Kafka extension, which is not yet installed, so WSO2 Integrator: SI cannot deploy it. You will see the successful-deploy log after installing the extension and restarting the server in Step 5.
     
@@ -72,7 +72,7 @@ Let's create a simple Siddhi application that reads data from a CSV file, perfor
 
 The `ManageProductionStats` Siddhi application uses a Kafka sink. However, the Siddhi extension for Kafka is not installed by default. To install it so that the Siddhi application can integrate with Kafka as expected, follow the steps below:
 
-1. Navigate to the `<SI-Home>/bin` directory and issue the appropriate command based on your operating system:
+1. Navigate to the `<SI_HOME>/bin` directory and issue the appropriate command based on your operating system:
 
     - **For Linux/macOS**: `./extension-installer.sh install`
     - **For Windows**: `extension-installer.bat install`
@@ -99,17 +99,17 @@ Let's start the Kafka server and create a Kafka topic so that the `ManageProduct
 
 To start Kafka:
 
-1. Navigate to the `<Kafka_Home>` directory and start a zookeeper node by issuing the following command.
+1. Navigate to the `<KAFKA_HOME>` directory and start a zookeeper node by issuing the following command.
 
     `sh bin/zookeeper-server-start.sh config/zookeeper.properties`
 
-2. Navigate to the `<Kafka_Home>` directory and start a Kafka server node by issuing the following command.
+2. Navigate to the `<KAFKA_HOME>` directory and start a Kafka server node by issuing the following command.
 
     `sh bin/kafka-server-start.sh config/server.properties`
     
 To create a Kafka topic named `total_production`:
 
-1. Navigate to the `<Kafka_Home>` directory and issue the following command:
+1. Navigate to the `<KAFKA_HOME>` directory and issue the following command:
 
     `bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic total_production`
     
@@ -127,7 +127,7 @@ To test the `ManageProductionStats` Siddhi application you created, follow the s
     Toffee,60.0
     Baked alaska,20.0
     ```
-2. To observe the messages in the `total_production` topic, navigate to the `<Kafka_Home>` directory and issue the following command:
+2. To observe the messages in the `total_production` topic, navigate to the `<KAFKA_HOME>` directory and issue the following command:
 
     `bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic total_production --from-beginning`
     
