@@ -3,7 +3,7 @@
 This application demonstrates how to import a pretrained Tensorflow model WSO2 Integrator: SI to perform a regression task.
 
 ## Prerequisites:
-1. Replace `{SI_HOME}` with absolute path to the WSO2 Integrator: SI Tooling home directory.
+1. Replace `{SI_HOME}` with absolute path to the WSO2 Integrator: SI home directory.
 2. Save this sample.
 3. If there is no syntax error, the following message is shown on the console:
 	```

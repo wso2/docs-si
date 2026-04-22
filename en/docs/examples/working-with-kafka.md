@@ -87,7 +87,7 @@ Let's create a basic Siddhi application to consume messages from a Kafka topic.
 
 Now let's generate some Kafka messages that the WSO2 Integrator: SI can receive.
 
-1. Run the Kafka command line client to push a few messages to the Kafka server:
+1. Run the Kafka command-line client to push a few messages to the Kafka server:
 
     ```bash
     bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic productions
@@ -479,7 +479,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
     INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App CountProductions deployed successfully
     ```
 
-7. Now let's run the Kafka command line client to push a few messages to the Kafka server. Navigate to `<Kafka_Home>` and run following command:
+7. Now let's run the Kafka command-line client to push a few messages to the Kafka server. Navigate to `<Kafka_Home>` and run following command:
 
     ```bash
     bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic sandwich_productions

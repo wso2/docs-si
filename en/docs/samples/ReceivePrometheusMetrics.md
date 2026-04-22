@@ -7,7 +7,7 @@ This application demonstrates how  to retrieve Prometheus metrics that are expor
 
 The following steps must be executed to enable WSO2 Integrator: SI to publish and retrieve events via Prometheus.
 
-1. To complete the installation of the Prometheus extension in the VSCode editor (with the WSO2 Integrator: SI extension installed), follow the steps below:
+1. To enable Prometheus source support in WSO2 Integrator: SI, follow the steps below:
 
     1. Download the following JARs.
     

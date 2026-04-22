@@ -8,7 +8,7 @@ First, you are required to download the WSO2 Integrator: SI and the other softwa
 
 ## Downloading the WSO2 Integrator: SI runtime and VSCode extension
 
-- To download the WSO2 Integrator: SI runtime, visit the [WSO2 Integrator: SI Product Page](https://wso2.com/streaming-integrator/). Enter you email address and agree to the license. Then click **Zip Archive** download the WSO2 Integrator: SI as a zip file.
+- To download the WSO2 Integrator: SI runtime, visit the [WSO2 Integrator: SI Product Page](https://wso2.com/streaming-integrator/). Enter your email address and agree to the license. Then click **Zip Archive** to download the WSO2 Integrator: SI as a zip file.
 
 - To download WSO2 Integrator: SI VSCode extension, search **WSO2 Integrator: SI** in the VSCode marketplace and install it.
 

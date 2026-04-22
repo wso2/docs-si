@@ -180,7 +180,7 @@ To try out the above example, follow the steps below:
 
 2. Open a new file. Then add and save the following Siddhi application.
 
-    ```
+    ```siddhi
     @App:name('TemperatureApp')
     @App:description('Description of the plan')
     

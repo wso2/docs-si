@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure the WSO2 Integrator: SI VSCode extension to Publish and receive data events processed within Siddhi to files in CSV default format.
+This application demonstrates how to configure WSO2 Integrator: SI to Publish and receive data events processed within Siddhi to files in CSV default format.
 
 ## Prerequisites
 

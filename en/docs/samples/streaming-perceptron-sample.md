@@ -1,6 +1,6 @@
 
 ## Purpose:
-This application demonstrates how to configure the WSO2 Integrator: SI VSCode extension to perform binary classification using a streaming Perceptron.
+This application demonstrates how to configure WSO2 Integrator: SI to perform binary classification using a streaming Perceptron.
 
 ## Prerequisites:
 1. Save this sample.

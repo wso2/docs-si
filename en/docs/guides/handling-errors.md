@@ -145,7 +145,7 @@ To try out storing errors in the store, follow the steps below:
 
 3. [Create a Siddhi application](../develop/creating-a-Siddhi-Application.md) as follows and deploy it in the WSO2 Integrator: SI server.
 
-    ```
+    ```siddhi
     @App:name("CopyingProductionStatsApp")
     
     @source(type='file', mode='LINE',
@@ -265,7 +265,7 @@ This involves logging the event with details of the error and then dropping it. 
           method = "POST", @map(type = 'json'))
     define stream TestPublisherStream (symbol string, volume long);
     ```
-   If you do not specify the on-error action for a stream via the `on.error` parameter, the event is logged and dropped.
+   If you do not specify the on-error action for a sink via the `on.error` parameter, the event is logged and dropped.
    
 - Source mappers 
 
@@ -275,9 +275,9 @@ This involves logging the event with details of the error and then dropping it. 
 
 To try out logging events with errors, consider the same example previously used where production statistics is copied from one file to another.
 
-1. In the VSCode editor (with the WSO2 Integrator: SI extension installed), open the `CopyingProductionStatsApp`  Siddhi application that you created in the [Storing events with errors section](#storing-and-replaying-events-with-errors) and update it as follows.
+1. In WSO2 Integrator: SI, open the `CopyingProductionStatsApp`  Siddhi application that you created in the [Storing events with errors section](#storing-and-replaying-events-with-errors) and update it as follows.
 
-    ```
+    ```siddhi
     @App:name("CopyingProductionStatsApp")
     
     @source(type='file', mode='LINE',
@@ -373,9 +373,9 @@ This can be used with the following:
 
 To try out streaming events with errors, follow the procedure below.
 
-1. In the VSCode editor (with the WSO2 Integrator: SI extension installed), open the `CopyingProductionStatsApp`  Siddhi application that you created in the [Storing events with errors section](#storing-and-replaying-events-with-errors) and update it as follows. Then deploy it in the WSO2 Integrator: SI server.
+1. In WSO2 Integrator: SI, open the `CopyingProductionStatsApp`  Siddhi application that you created in the [Storing events with errors section](#storing-and-replaying-events-with-errors) and update it as follows. Then deploy it in the WSO2 Integrator: SI server.
 
-    ```
+    ```siddhi
     @App:name("CopyingProductionStatsApp")
     
     @source(type='file', mode='LINE',

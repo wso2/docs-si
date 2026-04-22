@@ -63,7 +63,7 @@ To try out the above example, follow the steps below:
    
     This Siddhi application listens for events in the `http://localhost:5005/stocks` endpoint and logs them in the VSCode editor (with the WSO2 Integrator: SI extension installed) console.
     
-3. Start both the Siddhi applications. To do this, open each siddhi application and click the **Play** icon.
+3. Start both the Siddhi applications. To do this, open each Siddhi application and click the **Play** icon.
 
     ![Play]({{base_path}}/images/extracting-data-from-static-sources/play.png)
     

@@ -25,11 +25,11 @@ By changing the database type, you can also try out this example for the followi
         `CREATE TABLE SweetProductionTable (last_update TIMESTAMP, name VARCHAR(20),amount double(10,2));`<br/>
     6. If you want to capture the changes from the last point of time the Siddhi application was stopped, enable state persistence by setting the `state.persistence enabled=true` property in the `<SI_Home>/conf/server/deployment.yaml` file. If you do not enable state persistence, only the changes since the Siddhi application started are captured.<br/>
 
-    7. In the sample Siddhi application, update the `username` and `password` parameters in the source configuration by adding the username and password you use to log in to MySQL as the values. Then save the sample Siddhi application in the VSCode editor with the WSO2 Integrator: SI extension installed.
+    7. In the sample Siddhi application, update the `username` and `password` parameters in the source configuration by adding the username and password you use to log in to MySQL as the values. Then save the sample Siddhi application in WSO2 Integrator: SI.
 
 ## Executing the sample
 
-To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button or by clicking **Run** => **Run**.
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI, and start it by clicking the **Start** button or by clicking **Run** => **Run**.
 
 If the Siddhi application starts successfully, the following message appears in the console.
 

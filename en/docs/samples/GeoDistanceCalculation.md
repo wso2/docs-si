@@ -6,11 +6,11 @@ This example demonstrates how to calculate the distance between two locations vi
 
 !!!info "Before you begin:"
     1. Download the [siddhi-gpl-execution-geo-x.x.x.jar](http://maven.wso2.org/nexus/content/repositories/wso2gpl/org/wso2/extension/siddhi/gpl/execution/geo/siddhi-gpl-execution-geo/5.0.0/siddhi-gpl-execution-geo-5.0.0.jar) and place it in the `<SI_HOME>/lib` directory.<br/>
-    2. Save this sample in the VSCode editor with the WSO2 Integrator: SI extension installed.
+    2. Save this sample in WSO2 Integrator: SI.
 
 ## Executing the Sample
 
-To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI, and start it by clicking the **Start** button (shown below) or by clicking **Run** => **Run**.
 
 ![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
 

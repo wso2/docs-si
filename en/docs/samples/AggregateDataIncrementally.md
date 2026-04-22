@@ -18,14 +18,14 @@ This example demonstrates how to get running statistics using Siddhi. The sample
         - `jdbc.url` - `jdbc:mysql://localhost:3306/sweetFactoryDB`<br/>
         - `username` - `root`<br/>
         - `password` - `root`<br/>
-    5. In the VSCode editor (with the WSO2 Integrator: SI extension installed), save the sample Siddhi application.<br/>
+    5. In the WSO2 Integrator: SI, save the sample Siddhi application.<br/>
 
 
 
 ## Executing the Sample
 
 
-To execute the sample Siddhi application, open it in WSO2 Integrator: SI Tooling and click the **Start** button (shown below) or click **Run** => **Run**.
+To execute the sample Siddhi application, open it in WSO2 Integrator: SI and click the **Start** button (shown below) or click **Run** => **Run**.
 
 ![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
 
@@ -35,7 +35,7 @@ If the Siddhi application starts successfully, the following message appears in 
 
 ## Testing the Sample
 
-To test the sample Siddhi application, simulate single events for it via the WSO2 Integrator: SI Tooling as follows:
+To test the sample Siddhi application, simulate single events for it via the WSO2 Integrator: SI as follows:
 
 1. To open the Event Simulator, click the **Event Simulator** icon.
 

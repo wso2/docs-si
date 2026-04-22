@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure the WSO2 Integrator: SI VSCode extension to sending an HTTP event via an OAuth protected endpoint and catching its response.
+This application demonstrates how to configure WSO2 Integrator: SI to sending an HTTP event via an OAuth protected endpoint and catching its response.
 
 ## Prerequisites
 

@@ -19,7 +19,7 @@ select p.name as name, sum(p.amount) + s.amount as amount
 insert into UpdateStockwithProductionStream;
 ```
 
-Here, the `ProductionStream` stream that has the production amounts for sweets after each production run is assigned the short name `p`. The `StockTable` that has the current stock for each product before the latest production runs is given the short name `s`. This allows you to uniquely identify the attributes in each. The matching condition is `p.name == s.name `, which means that a match is identified when an event in the `ProductionStream` stream has the same value for the `name` attribute as a record in the `StockTable` table. 
+Here, the `ProductionStream` stream that has the production amounts for sweets after each production run is assigned the short name `p`. The `StockTable` that has the current stock for each product before the latest production runs is given the short name `s`. This allows you to uniquely identify the attributes in each. The matching condition is `p.name == s.name`, which means that a match is identified when an event in the `ProductionStream` stream has the same value for the `name` attribute as a record in the `StockTable` table. 
 `sum(p.amount)` calculates the total production per product. This total production amount for a product is then added to the stock amount of the product (i.e., `s.amount`). The resulting output is inserted into the `UpdateStockwithProductionStream` stream.
 
 ## Integrating multiple data streams

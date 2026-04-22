@@ -219,6 +219,9 @@ You can deploy multiple Siddhi applications in one or more selected containers v
               - /stores/*
     ```
 
+    !!!warning "Security notice"
+        The above `runner` configuration uses a default credential (`YWRtaW4=`, base64 for `admin`) for demonstration purposes. In production deployments, replace this with a strong credential and manage it via a Kubernetes Secret rather than embedding it inline in the `SiddhiProcess` manifest.
+
     The `container.env` block specifies that Siddhi applications running within the container should receive events at the `http://0.0.0.0:8080/checkPower` URL (substituted into `${RECEIVER_URL}` at runtime) and that basic authentication is not enabled for them.
 
 3. Save the file as `siddhi-process.yaml` in a preferred location.

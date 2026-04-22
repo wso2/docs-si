@@ -66,7 +66,7 @@ Assume that the Head Office of the Sweet Factory also maintains a record of the 
 
 ![Integrating Heterogeneous Data Sources]({{base_path}}/images/performing-etl-operations/integrating-heterogeneous-data-sources.png)
 
-WSO2 Integrator: SI needs to extract events from that file and the `PurchaseRecords` database table simultaneously to update the stock records. To do this, you can define two input streams and connect then to the relevant sources as follows:
+WSO2 Integrator: SI needs to extract events from that file and the `PurchaseRecords` database table simultaneously to update the stock records. To do this, you can define two input streams and connect them to the relevant sources as follows:
 
 ```sql
 @source(type = 'cdc', url = 'jdbc:mysql://localhost:3306/RAW_MATERIAL_DB', username = 'root', password = 'root', table.name = 'PurchaseRecords', operation = 'insert',

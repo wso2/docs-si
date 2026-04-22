@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure the WSO2 Integrator: SI VSCode extension to send sweet production events via HTTP transport in JSON default format and log the events in LowProductionAlertStream to the output console.
+This application demonstrates how to configure WSO2 Integrator: SI to send sweet production events via HTTP transport in JSON default format and log the events in LowProductionAlertStream to the output console.
 
 ## Prerequisites
 

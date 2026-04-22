@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure the WSO2 Integrator: SI VSCode extension to send sweet production events via RabbitMQ transport in XML format, and view the output on the rabbitmq-consumer.
+This application demonstrates how to configure WSO2 Integrator: SI to send sweet production events via RabbitMQ transport in XML format, and view the output on the rabbitmq-consumer.
 
 1. The following message appears on the console.
 
@@ -81,7 +81,7 @@ RabbitMq consumer was written according to this example (go through the RabbitMQ
 
 ```sql
 @App:name("PublishRabbitmqInXmlFormat")
-@APP:description("demonstrates how to configure the WSO2 Integrator: SI VSCode extension to send sweet production events via RabbitMQ transport in XML format, and view the output on the rabbitmq-consumer")
+@APP:description("demonstrates how to configure WSO2 Integrator: SI to send sweet production events via RabbitMQ transport in XML format, and view the output on the rabbitmq-consumer")
 
 define stream SweetProductionStream (name string, amount double);
 

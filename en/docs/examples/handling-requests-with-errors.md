@@ -32,7 +32,7 @@ Let's create the MySQL data store in which the events with errors can be saved. 
 
 3. Copy the `mysql-connector-j-8.0.33.jar` to the `<SI_HOME>/lib` directory.<br/>
 
-4. Start the MySQL server as follows:
+4. Open the MySQL client as follows:
 
     `mysql -u <USERNAME> -p`
     

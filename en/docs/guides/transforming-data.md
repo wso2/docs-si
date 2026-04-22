@@ -20,7 +20,7 @@ The WSO2 Integrator: SI can consume events in the default format in which they a
     
     To understand how to do this, consider a factory where production bots publish the production amounts in a file. The file contains rows in the CSV format. Therefore, WSO2 Integrator: SI needs to consume the records in that format. Therefore, the source and the mapper can be configured as shown below.
     
-    ```
+    ```siddhi
     @source(type='file', mode='LINE',
         file.uri='file:<YOUR_HOME>/productions.csv',
         tailing='true',
@@ -157,7 +157,7 @@ In this example, the input event that reports only the name of the product and t
 
 When you want to perform more advanced transformations that are not supported by the inline operators of the WSO2 Integrator: SI, you can use one or more of the Siddhi extensions from the [Siddhi extensions catalogue](https://siddhi.io/en/v5.1/docs/extensions/).
 
-Some of these extensions are shipped with the WSO2 Integrator: SI by default. If you want to use a Siddhi extension that is not shipped by default, you need to download and install it following the instructions in [Downloading and Installing Siddhi Extensions]({{base_path}}/connectors/downloading-and-Installing-Siddhi-Extensions.md).
+Some of these extensions are shipped with the WSO2 Integrator: SI by default. If you want to use a Siddhi extension that is not shipped by default, you need to download and install it following the instructions in [Downloading and Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
 
 The following table describes the complete list of extensions that provide data transformation functionality.
 

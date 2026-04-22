@@ -39,8 +39,7 @@ A Siddhi file contains the following configurations:
 </tbody>
 </table>
 
-A Siddhi application can be created from the source view or the design
-view of the VSCode editor with the WSO2 Integrator: SI extension installed.
+A Siddhi application can be created from the Source View or the Graphical View of WSO2 Integrator: SI.
 
 ### Creating a Siddhi application in the source view
 
@@ -224,9 +223,9 @@ To create a Siddhi application via the source view of the VSCode editor with the
     
     ![Siddhi Application in Graphical View]({{base_path}}/images/Creating-Siddhi-Applications/Siddhi_Application_Design_View.png)
 
-### Creating a Siddhi application in the design view
+### Creating a Siddhi application in the Graphical View
 
-To create a Siddhi application via the design view of the VSCode editor with the WSO2 Integrator: SI extension installed, follow the steps below:
+To create a Siddhi application via the Graphical View of WSO2 Integrator: SI, follow the steps below:
 
 1.  Open a VSCode window and ensure that the WSO2 Integrator: SI for VS Code extension is installed. Open the command palette and type `SI: Open SI Welcome` to open the welcome page.
 
