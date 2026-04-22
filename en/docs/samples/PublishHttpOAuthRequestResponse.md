@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure WSO2 Integrator: SI to sending an HTTP event via an OAuth protected endpoint and catching its response.
+This application demonstrates how to configure WSO2 Integrator: SI to send an HTTP event via an OAuth-protected endpoint and catch its response.
 
 ## Prerequisites
 

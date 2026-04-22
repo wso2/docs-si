@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure WSO2 Integrator: SI to send sweet production events via JMS transport in Keyvalue format.
+This application demonstrates how to configure WSO2 Integrator: SI to send sweet production events via JMS transport in key-value format.
 
 ## Prerequisites
 

@@ -99,7 +99,7 @@ Save the file and restart the SI server for the configuration to take effect (st
 
 By default, SI emits only server-level metrics (JVM, uptime, HTTP transports). To also emit per-Siddhi-application metrics — which the pre-configured SI app, file, and CDC dashboards depend on — add the `@App:statistics` annotation to the Siddhi application immediately below the `@App:name` annotation:
 
-```
+```siddhi
 @App:name('SweetFactoryApp')
 @App:statistics(reporter = 'prometheus')
 ```

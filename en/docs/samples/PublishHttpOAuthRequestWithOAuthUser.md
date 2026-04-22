@@ -1,6 +1,6 @@
 ## Purpose
 
-This application demonstrates how to configure WSO2 Integrator: SI to send HTTP events to an OAuth-protected endpoint. Here we use password grant type.
+This application demonstrates how to configure WSO2 Integrator: SI to send HTTP events to an OAuth-protected endpoint. Here, we use the password grant type.
 
 ## Prerequisites
 

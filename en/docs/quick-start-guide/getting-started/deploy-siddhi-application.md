@@ -22,7 +22,7 @@ Alternatively, the **WSO2 Integrator: SI** extension can handle the deployment f
 
 In both cases, when the deployment succeeds, a log line similar to the following appears in the terminal running the SI server:
 
-```
+```text
 INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App SweetFactoryApp deployed successfully
 ```
 

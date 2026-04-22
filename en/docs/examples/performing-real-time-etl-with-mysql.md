@@ -46,11 +46,11 @@ You can capture following type of changes done to a database table:
     - Make sure the MySQL JDBC driver is installed in `<SI_HOME>/lib`. See [Adding the MySQL JDBC driver](../quick-start-guide/getting-started/download-install-and-start-si.md#adding-the-mysql-jdbc-driver) for the steps.<br/>
     - Once you install MySQL and start the MySQL server, create the database and the database table you require as follows:
         1. Let's create a new database in the MySQL server which you are to use throughout this tutorial. To do this, execute the following query.<br/>
-            ```
+            ```sql
             CREATE SCHEMA production;
             ```<br/>
         2. Create the `wso2si` user (or re-grant the privileges if it already exists from another tutorial) by executing the following SQL queries:<br/>
-            ```
+            ```sql
             CREATE USER IF NOT EXISTS 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';
             GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si'@'localhost';
             FLUSH PRIVILEGES;
@@ -337,14 +337,14 @@ Note that the `CDC source` has replayed the last two messages. As a result, the 
     Polling mode queries the table over JDBC and does not use the MySQL binary log. The `REPLICATION SLAVE` / `REPLICATION CLIENT` grants from Listening mode are only needed for that mode; they do no harm if already present.<br/>
     You are required to have access to a MySQL instance. Steps 1–3 below require a MySQL account that can create schemas, users, and grants (typically `root`); the `wso2si` user defined in step 3 is intentionally unprivileged and is the user the Siddhi applications connect as. Create the required database and the database table as follows:<br/>
     1. Let's create a new database in the MySQL server which you are to use throughout this tutorial. To do this, issue the following command.<br/>
-        ```
+        ```sql
         CREATE SCHEMA production_pol;
         ```<br/>
     2. Switch to the production database and create a new table by executing following queries.<br/>
         `use production_pol;`<br/>
         `CREATE TABLE SweetProductionTable (last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, name VARCHAR(20), amount double(10,2));`<br/>
     3. If you have not already created a user under [Listening Mode](#listening-mode), create one by executing the following SQL queries:<br/>
-        ```
+        ```sql
         CREATE USER IF NOT EXISTS 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';
         GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si'@'localhost';
         FLUSH PRIVILEGES;

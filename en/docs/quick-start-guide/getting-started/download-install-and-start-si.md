@@ -27,7 +27,7 @@ In this scenario, the WSO2 Integrator: SI reads input data from a MySQL database
 
 2. Verify that binary logging is enabled in the MySQL server. In MySQL 8.0 and later (including the 8.3.0 release used in this guide), binary logging is enabled by default. To confirm, open the MySQL client (`mysql -u root -p`) and run the following query:
 
-    ```
+    ```sql
     SELECT variable_value as "BINARY LOGGING STATUS (log-bin) ::"
     FROM performance_schema.global_variables WHERE variable_name='log_bin';
     ```

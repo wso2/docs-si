@@ -34,7 +34,7 @@ ant -Dtype=json -DfilePath=<SI-Tooling-Home>/samples/artifacts/DataPreprocessing
 
 ## Viewing the results
 
-Once the `DataProcessing` Siddhi application receives events from the TCP client, the following messages are displayed in the WSO2 Integrator: SI console:
+Once the `DataPreprocessing` Siddhi application receives events from the TCP client, the following messages are displayed in the WSO2 Integrator: SI console:
 
 ```bash
 INFO {io.siddhi.core.stream.output.sink.LogSink} - DataPreprocessing : ProcessedStream : Event{timestamp=1513621173211, data=[HouseholdID:1::UniqueID:0001, 12.12, 13-08-2001 23:49:33], isExpired=false}<br/><br/>

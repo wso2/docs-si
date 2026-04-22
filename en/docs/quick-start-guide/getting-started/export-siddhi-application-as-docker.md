@@ -36,7 +36,7 @@ To export the `SweetFactoryApp` Siddhi application as a Docker artifact, follow 
 
 7. Once completed, a zip will be created in the workspace directory with the following structure:
 
-    ```
+    ```text
     .
     ├── Dockerfile
     ├── README.md

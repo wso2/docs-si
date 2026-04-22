@@ -119,7 +119,7 @@ This tutorial demonstrates how you can use the Siddhi query API to perform essen
 
 You can use `Siddhi Store Query API` to execute queries on Siddhi Store tables.
 
-In this section shows you how to execute a simple store query via the REST API in order to fetch all records from the `SweetProductionTable` Siddhi Store table. To learn about other types of queries, see [Store APIs](../ref/store-APIs.md).
+This section shows you how to execute a simple store query via the REST API to fetch all records from the `SweetProductionTable` Siddhi Store table. To learn about other types of queries, see [Store APIs](../ref/store-APIs.md).
 
 Execute following `CURL` command on the console:
 ```

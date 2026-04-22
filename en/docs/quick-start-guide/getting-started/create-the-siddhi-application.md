@@ -35,7 +35,7 @@ The following image depicts the procedure to be followed by the Siddhi applicati
 
 Specify a name for the new Siddhi application via the `@App:name` annotation:
 
-```
+```siddhi
 @App:name("SweetFactoryApp")
 ```
 
@@ -43,20 +43,20 @@ Specify a name for the new Siddhi application via the `@App:name` annotation:
 
 1. Define the stream that receives the input data:
 
-    ```
+    ```siddhi
     define stream InsertSweetProductionStream (name string,amount double);
     ```
 
 2. Prepend a `@source` annotation of type `cdc` to the stream definition so that inserts from the `production` database are captured into this stream:
 
-    ```
+    ```siddhi
     @source(type='cdc',url = "jdbc:mysql://localhost:3306/production",username = "wso2si",password = "wso2",table.name = "SweetProductionTable",operation = "insert",
         @map(type='keyvalue'))
     ```
 
     The complete stream definition now looks like:
 
-    ```
+    ```siddhi
     @source(type='cdc',url = "jdbc:mysql://localhost:3306/production",username = "wso2si",password = "wso2",table.name = "SweetProductionTable",operation = "insert",
         @map(type='keyvalue'))
     define stream InsertSweetProductionStream (name string,amount double);
@@ -66,20 +66,20 @@ Specify a name for the new Siddhi application via the `@App:name` annotation:
 
 1. Define an output stream for the captured data:
 
-    ```
+    ```siddhi
     define stream ProductionUpdatesStream (name string,amount double);
     ```
 
 2. Prepend a `@sink` annotation of type `file` so the events are published to `<YOUR_HOME>/productioninserts.csv` in CSV format:
 
-    ```
+    ```siddhi
     @sink(type='file',file.uri = "<YOUR_HOME>/productioninserts.csv",
         @map(type='csv'))
     ```
 
     The complete stream definition now looks like:
 
-    ```
+    ```siddhi
     @sink(type='file',file.uri = "<YOUR_HOME>/productioninserts.csv",
         @map(type='csv'))
     define stream ProductionUpdatesStream (name string,amount double);
@@ -87,9 +87,9 @@ Specify a name for the new Siddhi application via the `@App:name` annotation:
 
 ## Add the processing query
 
-Write a query that reads from the input stream, converts the product name from lower case to title case, and inserts the converted events into the output stream:
+Write a query that reads from the input stream, converts the product name from lower case to upper case, and inserts the converted events into the output stream:
 
-```
+```siddhi
 @info(name='query1')
 from InsertSweetProductionStream
 select str:upper(name) as name, amount
@@ -97,7 +97,7 @@ group by name
 insert  into ProductionUpdatesStream;
 ```
 
-This query gets the information inserted into the `production` database table from the `InsertSweetProductionStream` stream. The `str:upper()` function included in the `select` clause converts the product name from lower case to title case. Once this conversion is done, the converted events are directed to the `ProductionUpdatesStream` stream. These events are written into the `<YOUR_HOME>/productioninserts.csv` file because it is configured via the `@sink` annotation you previously attached to the `ProductionUpdatesStream` stream.
+This query gets the information inserted into the `production` database table from the `InsertSweetProductionStream` stream. The `str:upper()` function included in the `select` clause converts the product name from lower case to upper case. Once this conversion is done, the converted events are directed to the `ProductionUpdatesStream` stream. These events are written into the `<YOUR_HOME>/productioninserts.csv` file because it is configured via the `@sink` annotation you previously attached to the `ProductionUpdatesStream` stream.
 
 ## Save the Siddhi application
 
@@ -105,7 +105,7 @@ Save your changes.
 
 The completed Siddhi application looks as follows:
 
-```
+```siddhi
 @App:name('SweetFactoryApp')
 
 @source(type='cdc',url = "jdbc:mysql://localhost:3306/production",username = "wso2si",password = "wso2",table.name = "SweetProductionTable",operation = "insert",

@@ -202,7 +202,7 @@ update or insert into StockRecords
 ## Scalability
 
 When there are rapid changes and growths in business, it is necessary to scale ETL applications in an agile manner to support it. WSO2 Integrator: SI supports the need for scalability via the Siddhi logic. 
-This can be observed in the previous examples where the `ManagingStocksApp` Siddhi application which only captured purchase records in the [Performing ETL in real time section](#performing-etl-in-real-time) and with only two files and one database table (`SugarSupply.csv` file, `FlourSupply.csv` file and `PurchaseRecords` database table) in the ETL flow was scaled to perform stock updates by incorporating another file and a database (i.e., `MaterialDispatches.csv` file and `StockRecords` database table) to the ETL flow.
+This can be observed in the previous examples where the `ManagingStocksApp` Siddhi application which only captured purchase records in the [Performing ETL in real time section](#performing-etl-in-real-time) and with only two files and one database table (`SugarSupply.csv` file, `FlourSupply.csv` file and `PurchaseRecords` database table) in the ETL flow was scaled to perform stock updates by incorporating another file and a database (i.e., `MaterialDispatches.xml` file and `StockRecords` database table) to the ETL flow.
 
 ![Extended ETL Flow]({{base_path}}/images/performing-etl-operations/extended-etl-flow.png)
 
