@@ -1,8 +1,8 @@
 # Minimum High Availability (HA) Deployment
 
 The minimum high availability deployment mainly focuses on providing high availability that ensures the prevention of data loss if the
-system suffers a failure due to one or more unforeseeable reasons. One of the main adavantages of this deployment pattern is that it uses minimum
-amount of infrastructure resources possible. Thus deployment pattern is run with only two Streaming integration servers.
+system suffers a failure due to one or more unforeseeable reasons. One of the main advantages of this deployment pattern is that it uses minimum
+amount of infrastructure resources possible. This deployment pattern is run with only two Streaming integration servers.
 
 In the minimum HA setup, one node is assigned as the active node while the other node is assigned as the passive node.
 Only the active node processes the incoming events and publishes the outgoing events. Internally, the active node 
@@ -25,12 +25,12 @@ events to the active node. To achieve this, you can use a load balancing mechani
     Before configuring a minimum HA cluster, you need to complete the following prerequisites:<br/>
       - For each SI instance, you need a CPU with four cores, and a total memory of 4GB. For more information, see [Installing the WSO2 Integrator: SI in a Virtual Machine](installing-si-in-vm.md).<br/>
       <br/>
-      - Download and install two binary packs of SI..<br/>
+      - Download and install two binary packs of SI.<br/>
       <br/>
       - Download, install and start a working RDBMS instance to be used for clustering the two nodes.<br/>
       <br/>
       - Download the MySQL connector from <a target="_blank" href="https://dev.mysql.com/downloads/connector/j/">here</a>.
-        Extract and find the `mysql-connector-j-8.0.33.jar` (Connector/J 8.0.33 or later), and place it in the `<SI_HOME>/lib` directory of both nodes.<br/>
+        Extract the archive and place the Connector/J JAR in the `<SI_HOME>/lib` directory of both nodes.<br/>
         <br/>
       - In order to retrieve the state of the Siddhi Applications deployed in the system (in case of a scenario where both the
         nodes fail), enable state persistence for both the nodes by specifying the same datasource/file location.
@@ -150,7 +150,7 @@ To configure the HA cluster, follow the steps below:
 
     - `heartbeatMaxRetry`:
 
-       Define the number of times to tghe system should retry to hear the heartbeat of the active node (that indicates that the node is alive) before the passive node becomes active. The recommended value is five times.
+       Define the number of times the system should retry to hear the heartbeat of the active node (that indicates that the node is alive) before the passive node becomes active. The recommended value is five times.
 
     - `eventPollingInterval`:
 

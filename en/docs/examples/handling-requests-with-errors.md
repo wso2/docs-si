@@ -26,11 +26,11 @@ In this scenario, you are handling erroneous events by directing them to a MySQL
 
 Let's create the MySQL data store in which the events with errors can be saved. To do this, follow the steps below:
 
-1. Download the MySQL JDBC driver (Connector/J 8.0.33 or later) from [the MySQL site](https://dev.mysql.com/downloads/connector/j/).
+1. Download the latest MySQL JDBC driver (Connector/J) from [the MySQL site](https://dev.mysql.com/downloads/connector/j/).
 
 2. Unzip the archive.<br/>
 
-3. Copy the `mysql-connector-j-8.0.33.jar` to the `<SI_HOME>/lib` directory.<br/>
+3. Copy the Connector/J JAR to the `<SI_HOME>/lib` directory.<br/>
 
 4. Open the MySQL client as follows:
 

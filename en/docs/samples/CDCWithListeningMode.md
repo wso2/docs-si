@@ -7,9 +7,9 @@ This sample demonstrates how to capture change data from MySQL using Siddhi. The
 !!!info "Before you begin:"
     1. Ensure that MySQL is installed on your computer.<br/>
     2. Add the MySQL JDBC driver to the `<SI_Home>/lib` directory as follows:<br/>
-        1. Download the JDBC driver (Connector/J 8.0.33 or later) from the [MySQL website](https://dev.mysql.com/downloads/connector/j/).<br/>
+        1. Download the latest MySQL JDBC driver (Connector/J) from the [MySQL website](https://dev.mysql.com/downloads/connector/j/).<br/>
         2. Unzip the archive.<br/>
-        3. Copy the `mysql-connector-j-8.0.33.jar` JAR and place it in the `<SI_Home>/lib` directory.<br/>
+        3. Copy the Connector/J JAR and place it in the `<SI_Home>/lib` directory.<br/>
     3. Configure MySQL to [enable binary logging](https://debezium.io/docs/connectors/mysql/#enabling-the-binlog).<br/><br/>
             If you are using MySQL 8.0, use the following query to check the binlog status:<br/>
             ```bash

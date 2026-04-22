@@ -60,7 +60,7 @@ The WSO2 Integrator: SI can consume events in the default format in which they a
     
     Now you can include an attribute configuration within the mapping configuration based on the JSON path expressions you identified as shown below.
     
-    ```
+    ```siddhi
     @source(type='http', 
         receiver.url='http://localhost:5005/SweetProductionEP', 
         @map(type = 'json', 
@@ -81,7 +81,7 @@ WSO2 Integrator: SI can publish messages in the default format or in a custom fo
     
     To do this, you can define your output [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and connect a [sink](https://siddhi.io/en/v5.1/docs/query-guide/#sink) to it with a [mapper](https://siddhi.io/en/v5.1/docs/query-guide/#sink-mapper) of the `xml` type. as shown below.
     
-    ```
+    ```siddhi
     @sink(type = 'file', 
         file.uri = "file:<YOUR_HOME>/productions.csv",
         @map(type = 'xml'))
@@ -95,7 +95,7 @@ WSO2 Integrator: SI can publish messages in the default format or in a custom fo
     
     To understand this, consider the example of a sweet factory that needs to send its production report to the factory manager. The output stream in which the output is generated after processing can be as follows:
     
-    ```
+    ```siddhi
     define stream SweetProductionStream (name string, amount double);
     ```
     A sample JSON event that is published from the above schema without any custom mapping is as shown in the example below:
@@ -141,7 +141,7 @@ WSO2 Integrator: SI is shipped with inline operators that allow you to do certai
 
 For example, assume that instead of the amount produced during the specific production run, you need to present the total amount produced for the given product with each production run as well as the average. For this, you can write a query as follows:
 
-```
+```siddhi
 define stream SweetProductionStream (name string, amount double);
 
 @info(name = 'Calculate Total and Average')
@@ -202,7 +202,7 @@ To try out the transformations described above with some of the given examples, 
 
 2. Open a new file. Then add and save the following Siddhi application.
 
-    ```
+    ```siddhi
     @App:name('ProductionTotalsApp')
     @App:description('Transform Production Statistics')
     

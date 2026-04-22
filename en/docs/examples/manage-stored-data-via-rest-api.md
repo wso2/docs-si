@@ -25,9 +25,9 @@ This tutorial demonstrates how you can use the Siddhi Store Query API to perform
 !!!tip"Before you begin:"
     - You need to have access to a MySQL instance.<br/>
     - Save the MySQL JDBC driver in the `<SI_HOME>/lib` directory as follows:
-      1. Download the MySQL JDBC driver (Connector/J 8.0.33 or later) from [the MySQL site](https://dev.mysql.com/downloads/connector/j/).
+      1. Download the latest MySQL JDBC driver (Connector/J) from [the MySQL site](https://dev.mysql.com/downloads/connector/j/).
       2. Unzip the archive.
-      3. Copy the `mysql-connector-j-8.0.33.jar` to the `<SI_HOME>/lib` directory.
+      3. Copy the Connector/J JAR to the `<SI_HOME>/lib` directory.
       4. Start the SI server.
 
 1. Let's create a new database in the MySQL server which you are to use throughout this tutorial. To do this, execute the following query.

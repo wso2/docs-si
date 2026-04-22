@@ -168,9 +168,9 @@ To try out storing errors in the store, follow the steps below:
    
    The above Siddhi application simply copies content from one file to another. Any mapping errors generated when you run it can be stored in the error store you configured.
    
-4. Start the MySQL server. If the WSO2 Integrator: SI server and the VSCode editor (with the WSO2 Integrator: SI extension installed) are not already started, start them too.
+4. Start the MySQL server. If the WSO2 Integrator: SI server and WSO2 Integrator: SI are not already started, start them too.
 
-5. Access and open the VSCode editor with the WSO2 Integrator: SI extension installed.
+5. Open WSO2 Integrator: SI.
 
 6. To open the Error Store Explorer, click **Tools** and then click **Error Store Explorer**.
 
@@ -203,7 +203,7 @@ To try out storing errors in the store, follow the steps below:
     
         `Croissants,90.0`
         
-    3. Access WSO2 Integrator: SI Tooling and click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the sink error as follows.
+    3. In WSO2 Integrator: SI, click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the sink error as follows.
     
         ![Sink Error]({{base_path}}/images/handling-errors/sink-error.png)
     
@@ -223,7 +223,7 @@ To try out storing errors in the store, follow the steps below:
         
         The above entry is erroneous because it has two string values instead of one.
         
-    2. Access WSO2 Integrator: SI Tooling and click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the mapping error as follows.
+    2. In WSO2 Integrator: SI, click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the mapping error as follows.
     
         ![Mapping Error]({{base_path}}/images/handling-errors/mapping-error.png)
         

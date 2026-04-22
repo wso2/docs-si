@@ -49,7 +49,7 @@ To try out the query used in the above example, let's include it in a Siddhi App
 
 1. Open a new file. Then add and save the following Siddhi application.
 
-    ```
+    ```siddhi
     @App:name('TemperatureApp')
     
     define stream TempStream (deviceID string, roomNo int, temp double);
@@ -85,7 +85,7 @@ To try out the query used in the above example, let's include it in a Siddhi App
     ``` 
    The complete Siddhi application is as follows:
    
-   ```
+   ```siddhi
     @App:name('TemperatureApp')
     
     define stream TempStream (deviceID string, roomNo int, temp double);
@@ -122,7 +122,7 @@ Assume that in the previous example, you do not need the device ID for further p
 ```
 @info(name = 'CleaningData')
 from FilteredResultsStream
-select cast(roomNo, "string") as roomNo, temp
+select cast(roomNo, 'string') as roomNo, temp
 insert into CleansedDataStream;
 ```
 Here, the `cast()` function presents the value for the `roomNo` attribute as a string value although it is received as an integer value. The `select` clause excludes the `deviceID` attribute.
@@ -133,7 +133,7 @@ To try out the above example, follow the steps below:
 
 1. Open a new file. Then add and save the following Siddhi application.
 
-    ```
+    ```siddhi
     @App:name('TemperatureApp')
     
     define stream TempStream (deviceID string, roomNo int, temp double);
@@ -144,7 +144,7 @@ To try out the above example, follow the steps below:
     
     @info(name = 'CleaningData')
     from TempStream
-    select cast(roomNo, "string") as roomNo, temp
+    select cast(roomNo, 'string') as roomNo, temp
     insert into CleansedDataStream;
     ```
    In this Siddhi application, the `TempStream` has an attribute named `deviceID`, but it is not selected to be included in the output events. The `roomNo` attribute is cast as a string value via `cast(roomNo, "string")`. This means although the value for this attribute is received as an integer, it is presented as a string value in the output.

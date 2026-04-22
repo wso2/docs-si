@@ -343,10 +343,10 @@ Note that the `CDC source` has replayed the last two messages. As a result, the 
     2. Switch to the production database and create a new table by executing following queries.<br/>
         `use production_pol;`<br/>
         `CREATE TABLE SweetProductionTable (last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, name VARCHAR(20), amount double(10,2));`<br/>
-    3. If you have not already created a user under [Listening Mode](#listening-mode), create one by executing the following SQL queries:<br/>
+    3. If you have not already created a user under [Listening Mode](#listening-mode), create one by executing the following SQL queries. Polling mode only needs `SELECT`, so the grant below is narrower than the Listening mode equivalent:<br/>
         ```sql
         CREATE USER IF NOT EXISTS 'wso2si'@'localhost' IDENTIFIED WITH mysql_native_password BY 'wso2';
-        GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'wso2si'@'localhost';
+        GRANT SELECT ON *.* TO 'wso2si'@'localhost';
         FLUSH PRIVILEGES;
         ```<br/>
     4. If you have not already added the MySQL JDBC driver under [Listening Mode](#listening-mode), see [Adding the MySQL JDBC driver](../quick-start-guide/getting-started/download-install-and-start-si.md#adding-the-mysql-jdbc-driver) for the steps.

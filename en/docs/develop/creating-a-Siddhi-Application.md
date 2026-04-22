@@ -346,6 +346,6 @@ To create a Siddhi application via the Graphical View of WSO2 Integrator: SI, fo
         must be generated. For this example, let's select `json`.
     3.  Click **Submit** to save the information.
 
-11. Click **Show Source** to return to the Source View. The Siddhi application is displayed as follows.  
+10. Click **Show Source** to return to the Source View. The Siddhi application is displayed as follows.  
     ![Source view]({{base_path}}/images/Creating-Siddhi-Applications/Siddhi_Application_Source_View.png)
-12. To save this Siddhi application, click **File**, and then click **Save**.
+11. To save this Siddhi application, click **File**, and then click **Save**.
