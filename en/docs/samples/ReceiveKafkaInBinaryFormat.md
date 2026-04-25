@@ -7,7 +7,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to receive ev
 1. The following steps must be executed to enable SI to receive events via the Kafka transport. Since you need to shut down the server to execute these steps, get a copy of these instructions prior to proceeding.
 
     1. Download the Kafka broker from [here](https://archive.apache.org/dist/kafka/0.10.0.0/kafka_2.11-0.10.0.0.tgz).
-    2. Convert and copy the Kafka client jars from the `{KafkaHome}/libs` directory to the `<SI-Tooling-Home>/libs` directory as follows.
+    2. Convert and copy the Kafka client jars from the `{KafkaHome}/libs` directory to the `<SI_HOME>/libs` directory as follows.
         1. Create a directory named `{Source}` in a preferred location in your machine and copy the following JARs to it from the `{KafkaHome}/libs` directory.
             * kafka_2.11-0.10.0.0.jar
             * kafka-clients-0.10.0.0.jar
@@ -20,17 +20,17 @@ This application demonstrates how to configure WSO2 Integrator: SI to receive ev
             * For Windows:
 
                 ```bash
-                <SI-Tooling-Home>/bin/jartobundle.bat <{Source} Directory Path> <{Destination} Directory Path>
+                <SI_HOME>/bin/jartobundle.bat <{Source} Directory Path> <{Destination} Directory Path>
                 ```
 
             * For Linux/macOS:
 
                 ```bash
-                sh <SI-Tooling-Home>/bin/jartobundle.sh <{Source} Directory Path> <{Destination} Directory Path>
+                sh <SI_HOME>/bin/jartobundle.sh <{Source} Directory Path> <{Destination} Directory Path>
                 ```
 
-        4. Add the OSGI converted kafka libs from `{Destination}` directory to `<SI-Tooling-Home>/lib`.
-        5. Add the original Kafka libs from `{Source}` to `<SI-Tooling-Home>/samples/sample-clients/lib`.
+        4. Add the OSGI converted kafka libs from `{Destination}` directory to `<SI_HOME>/lib`.
+        5. Add the original Kafka libs from `{Source}` to `<SI_HOME>/samples/sample-clients/lib`.
         6. Navigate to `{KafkaHome}` and start zookeeper node using following command.
 
             ```bash
@@ -59,7 +59,7 @@ If you edit this application while it's running, stop the application -> Save ->
 
 ## Testing the sample
 
-Navigate to `<SI-Tooling-Home>/samples/sample-clients/kafka-producer` and run "ant" command as follows:
+Navigate to `<SI_HOME>/samples/sample-clients/kafka-producer` and run "ant" command as follows:
 
 ```bash
 ant -DnoOfEventsToSend=5 -DtopicName=kafka_sample_topic -DisBinaryMessage=true

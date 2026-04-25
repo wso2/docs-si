@@ -1,113 +1,10 @@
-# Installing Siddhi Extensions
+# Configuring Extension Dependencies
 
-WSO2 Integrator: SI uses Siddhi extensions to connect with various data sources. Siddhi extensions can be installed or un-installed using the SI Extension Installer.
+This page is for extension developers building custom Siddhi extensions and wiring them into the **Extension Installer** panel. For instructions on installing and uninstalling existing Siddhi extensions, see [Downloading and Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
 
-!!!Tip
-    The Extension Installer can install/un-install extensions within WSO2 Integrator: SI. When deploying Siddhi applications in WSO2 Integrator: SI Server, `extension-installer` CLI command in the `<SI-Home>/bin` folder can be used or this can be manually done. For more information, see [Downloading and Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
+Configurations of Siddhi extensions are loaded from the `<SI_HOME>/wso2/server/resources/extensionsInstaller/extensionDependencies.json` configuration file.
 
-## Managing Siddhi extensions
-
-The following topics cover how to manage Siddhi extensions in WSO2 Integrator: SI VSCode extension.
-
-### Finding the Siddhi extensions to install/uninstall
-
-To access the Extension installer and find the extensions you need to install/uninstall, follow the steps below:
-
-1. Open the VSCode with the WSO2 Integrator: SI for VS Code extension installed.
-
-   If you have not installed the WSO2 Integrator: SI for VS Code extension, see [Install SI for VS Code](../develop/install-si-for-vscode.md).
-
-
-2. Select **SI: Extension Installer**.
-
-    The **Extension Installer** dialog box opens as shown below.
-
-    ![Extensions Installer option in the Tools menu]({{base_path}}/images/installing-siddhi-extensions/tools-menu.png)
-
-
-3. Locate the extension that you want to install/un-install. You can enter the name, or a part of the name of the relevant extension in the **Search** field. It filters one or more extensions that match the entered key word.
-
-    !!!info
-        The status of the extension can be one of the following.<br/><br/>
-        - **Installed**<br/>This indicates that the extension is completely installed. The installation includes the JAR of the extension itself as well as all its dependencies (if any).<br/><br/>
-        - **Not-Installed**<br/>This indicates that the extension has not been installed. The JAR of the extension itself has not been installed. Dependencies (if any) may be already installed due to shared dependencies. For more information about shared dependencies, see step 2 of [Un-installing an extension](#un-installing-an-extension).<br/><br/>
-        - **Partially-Installed**<br/>This indicates that the JAR of the extension itself has been installed, but one or more dependencies of the extension still need to be installed.<br/> If these extensions need to be manually installed, it is indicated by an information icon next to the status. For more information, see [Manually installable dependencies](#manually-installable-dependencies).<br/><br/>
-        - **Restart-Required**<br/>This indicates that you need to restart the VSCode workspace in order to complete the installation/un-installation of the extension.
-
-
-### Installing an extension
-
-1. To install an extension, click **Install** for it.
-
-    ![Not Installed Extension]({{base_path}}/images/installing-siddhi-extensions/a-not-installed-extension.png)
-
-    Then click **Install** in the confirmation dialog box that appears to confirm whether you want to proceed with the installation.
-
-
-2. Once the installation is complete, reload the VSCode workspace.
-
-    After reloading the VSCode workspace, you can open the Extension installer and view the extension you installed with the updated status.
-
-    ![Status Change as Installed]({{base_path}}/images/installing-siddhi-extensions/installed-status.png)
-
-
-### Un-installing an extension
-
-1. To un-install an extension, click **UnInstall** for it.
-
-    ![Installed Extension]({{base_path}}/images/installing-siddhi-extensions/an-installed-extension.png)
-
-    Then click **UnInstall** in the confirmation dialog box that appears to confirm whether you want to proceed to un-install the extension.
-
-
-2. If the extension you are un-installing has shared dependencies with one or more other extensions, a message appears with information as shown in the example below.
-
-    ![Shared Dependencies Exist Dialog Box]({{base_path}}/images/installing-siddhi-extensions/shared-dependencies-exist-dialog-box.png)
-
-    The names of the other extensions are in bold. The dependencies each extension shares with the extension you are deleting are listed under the extension name. In this example, the extension being un-installed shares the `mysql-connector-java` dependency with the `rdbms-mysql` extension, and the `siddhi-io-cdc` dependency with the `cdc-oracle`, `cdc-postgresql`, `cdc-mssql`, and `cdc-mongodb` extensions.
-
-
-    If you want to proceed, click **Confirm**.
-
-    !!! note
-        If you click **Confirm** the other extensions that use the shared dependencies lose some of their dependencies. Therefore, if you need to continue to use those extensions, you need to reinstall them.
-
-    If there are no shared dependencies, click **UnInstall** in the confirmation dialog that appears to confirm whether you want to proceed to un-install the extension.
-
-
-3. Once the un-installation is completed, reload VSCode for the un-installation to be effective.
-
-
-## Manually installable dependencies
-
-Certain dependencies of some extensions cannot be automatically downloaded via the Extension Installer. These dependencies should be manually downloaded and installed in order to complete the installation of the extensions that use them.
-
-When there is at least one such dependency for an extension, an icon is displayed next to the status of the extension as shown below.
-    
-![Manually Installable Dependencies Available for Extension]({{base_path}}/images/installing-siddhi-extensions/manually-installable-dependencies-available.png)
-
-Click this information to open a dialog box as shown below with information about the dependency.
-    
-![Manually Installable Dependency Instructions]({{base_path}}/images/installing-siddhi-extensions/manually-installable-instructions.png)
-
-The dialog box displays all the dependencies that need to be manually installed. For each dependency, the dialog box provides the following information.
-
-- **Instructions** to download (and depending on the dependency, to convert) the JAR of the dependency.
-
-- **Installation Location** where the downloaded JAR (and depending on the dependency, the converted OSGi bundle) needs to be placed in order to install the dependency. The following table especifies the directory in which you need to place the JAR/OSGi bundle depending on the installation location.
-
-    |**Installation Location**|**Directory**|
-    |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-    |**bundle in runtime**|Place the OSGi bundle you downloaded/converted in either the `<SI-Home>/lib` or the `<SI-Home>/bundles` directory based on the instructions.|
-    |**jar in runtime**   |Place the non-OSGi bundle you downloaded in the `<SI-Home>/jars` directory.                                                                 |
-    |**jar in samples**   |Place the non-OSGi bundle you dowloaded in the `<SI-Tooling-Home>/samples/sample-clients/lib` directory.                                            |
-
-
-## Configuring Extension Dependencies
-
-Configurations of extensions are loaded from the `<SI-Home>/wso2/server/resources/extensionsInstaller/extensionDependencies.json` configuration file.
-
-When you are working with [custom extensions]({{base_path}}/connectors/writing-Custom-Siddhi-Extensions.md#writing-custom-siddhi-extensions), and if you want a custom extension to be installable from the Extension Installer, you need to add the configuration of the extension to this configuration file.
+When you are working with [custom extensions](../connectors/writing-Custom-Siddhi-Extensions.md), and if you want a custom extension to be installable from the **Extension Installer** panel, you need to add the configuration of the extension to this configuration file.
 
 The configuration of an extension is a JSON object that looks as follows:
 
@@ -211,9 +108,9 @@ This is an _array_. Each member of this _array_ is an _object_ that denotes info
     <td>
       <p>This denotes download information of the dependency via the following properties.</p>
       <ul>
-        <li><code>autoDownloadable</code>: This specifies whether the dependency is auto downloadable via the <code>true</code> and <code>false</code> values. If the value is <code>false</code>, the property is <a href="#manually-installable-dependencies">manually installable</a>.</li>
+        <li><code>autoDownloadable</code>: This specifies whether the dependency is auto downloadable via the <code>true</code> and <code>false</code> values. If the value is <code>false</code>, the property is manually installable (see <a href="../connectors/downloading-and-Installing-Siddhi-Extensions.md#manually-installable-dependencies">Manually installable dependencies</a>).</li>
         <li><code>url</code>: <strong>If the dependency is auto downloadable</strong>, this specifies the URL via which the JAR of the dependency is downloaded.</li>
-        <li><code>instructions</code>: <strong>If the dependency is only <a href="#manually-installable-dependencies">manually installable</a></strong>, this property provides instructions to download (and if applicable, convert) the JAR of the dependency.</li>
+        <li><code>instructions</code>: <strong>If the dependency is only manually installable</strong>, this property provides instructions to download (and if applicable, convert) the JAR of the dependency.</li>
       </ul>
     </td>
   </tr>
@@ -225,7 +122,7 @@ This is an _array_. Each member of this _array_ is an _object_ that denotes info
       <p>This is an <i>array</i>. Each member of this <i>array</i> is an <i>object</i> that denotes a directory where the jar of the dependency needs to be placed. Each such directory (location) is denoted by the following properties:</p>
       <ul>
         <li><code>type</code>: The type of the JAR. Possible values are as follows:<br/><li style="margin-left:2em"><code>BUNDLE</code>: This means that the dependency JAR is an OSGi bundle.</li><li style="margin-left:2em"><code>JAR</code>: This means that the dependency JAR is not converted to an OSGi bundle.</li></li><br/>
-        <li><code>usedBy</code>: This indicates whether the JAR is used in runtime or in samples. For more information, see the explanation of <b>installation locations</b> under <a href="#manually-installable-dependencies">Manually installable dependencies</a></li>
+        <li><code>usedBy</code>: This indicates whether the JAR is used in runtime or in samples. For more information, see the explanation of <b>installation locations</b> under <a href="../connectors/downloading-and-Installing-Siddhi-Extensions.md#manually-installable-dependencies">Manually installable dependencies</a></li>
       </ul>
     </td>
   </tr>

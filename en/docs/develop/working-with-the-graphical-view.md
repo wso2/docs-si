@@ -1,12 +1,12 @@
 # Working with the Graphical View
 
-This section provides an overview of the Graphical View of the WSO2 Integrator: SI VSCode extension.
+This section provides an overview of the Graphical View of WSO2 Integrator: SI.
 
 ## Accessing the Graphical View
 
-To open the Graphical View of the WSO2 Integrator: SI VSCode extension, follow the steps below:
+To open the Graphical View of WSO2 Integrator: SI, follow the steps below:
 
-1. Open the VSCode in a directory with Siddhi files, and click on a Siddhi file.
+1. Open WSO2 Integrator: SI in a directory with Siddhi files, and click on a Siddhi file.
 2. Click on the **Open Graphical View** button to open the Graphical View.
 3. Click **Graphical View** to open the Graphical View.  
     ![Graphical View button]({{base_path}}/images/working-with-the-design-view/Open_Design_View.png)
@@ -371,7 +371,7 @@ to the grid of the Graphical View when you create a Siddhi application.
       <tr class="odd">
          <td>Form</td>
          <td>
-            <p>To configure the window, <a href="#WorkingwiththeDesignView-Settings">click the settings icon</a> on the window component you added to the grid, and update the following information.</p>
+            <p>To configure the window, click the settings icon on the window component you added to the grid, and update the following information.</p>
             <ul>
                <li><strong>Name</strong> : This field specifies a unique name for the window. <code>               PascalCase              </code> is used for window names as a convention.</li>
                <li><strong>Attributes</strong> : Attributes of windows are specified as name and type pairs in the <strong>Attributes</strong> table.</li>
@@ -442,7 +442,7 @@ to the grid of the Graphical View when you create a Siddhi application.
       <td>Form</td>
       <td>
         <div class="content-wrapper">
-            <p>To configure the trigger, <a href="#WorkingwiththeDesignView-Settings">click the settings icon</a> on the trigger component you added to the grid, and update the following information.</p>
+            <p>To configure the trigger, click the settings icon on the trigger component you added to the grid, and update the following information.</p>
              <ul>
                 <li><strong>Name</strong> <strong>:</strong> A unique name for the trigger</li>
                 <li><strong>Trigger Criteria</strong> : This specifies the criteria based on which the trigger is activated. Possible values are as follows:
@@ -517,7 +517,7 @@ to the grid of the Graphical View when you create a Siddhi application.
          <td>Form</td>
          <td>
             <div class="content-wrapper">
-               <p>To configure the aggregation, <a href="#WorkingwiththeDesignView-Settings">click the settings icon</a> on the aggregation component you added to the grid, and update the following information.</p>
+               <p>To configure the aggregation, click the settings icon on the aggregation component you added to the grid, and update the following information.</p>
                <ul>
                   <li><strong>Aggregation Meta Information</strong> : In this section, define a unique name for the aggregation in the <strong>Name</strong> field, and specify the stream from which the input information is taken to perform the aggregations. You can also select the optional annotations you want to use in the aggregation definition by selecting the relevant check boxes. For more information about configuring the annotations once you select them, see <a href="https://docs.wso2.com/display/SP440/Incremental+Analysis#IncrementalAnalysis-annotation">Incremental Analysis</a>.</li>
                   <li><strong>Projection</strong> : This section specifies the attributes to be included in the aggregation query. In the <strong>Select</strong> field, you can select <strong>All</strong> attributes to perform the aggregation for all the attributes of the stream specified under <strong>Input</strong> , or select <strong>User Defined Attributes</strong> to select specific attributes. If you select <strong>User Defined Attributes</strong> , you can add attributes to be selected to be inserted into the output stream. Here, you can enter the names of specific attributes in the input stream, or enter expressions to convert input stream attribute values as required to generate output events. You can also specify the attribute(s) by which you want to group the output.</li>
@@ -576,7 +576,7 @@ to the grid of the Graphical View when you create a Siddhi application.
       <tr class="odd">
          <td>Form</td>
          <td>
-            <p>To configure the function, <a href="#WorkingwiththeDesignView-Settings">click the settings icon</a> on the function component you added to the grid, and update the following information.</p>
+            <p>To configure the function, click the settings icon on the function component you added to the grid, and update the following information.</p>
             <ul>
                <li><strong>Name</strong> : A unique name for the function.</li>
                <li><strong>Script Type</strong> : The language in which the function is written.</li>
@@ -640,7 +640,7 @@ to the grid of the Graphical View when you create a Siddhi application.
          <td>Form</td>
          <td>
             <div class="content-wrapper">
-               <p>Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the projection query, <a href="#WorkingwiththeDesignView-Settings">click the settings icon</a> on the projection query component you added to the grid, and update the following information.</p>
+               <p>Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the projection query, click the settings icon on the projection query component you added to the grid, and update the following information.</p>
                <ul>
                   <li><strong>Query Meta Information</strong> : This section specifies the stream to be considered as the input stream with the events to which the query needs to be applied. The input stream connected to the query as the source is automatically displayed.</li>
                   <li><strong>Projection</strong> : This section specifies the attributes to be included in the output. In the <strong>Select</strong> field, you can select <strong>All Attributes</strong> to select all the attributes of the events, or select <strong>User Defined Attributes</strong> to select specific attributes from the input stream. If you select <strong>User Defined Attributes</strong> , you can add attributes to be selected to be inserted into the output stream. Here, you can enter the names of specific attributes in the input stream, or enter expressions to convert input stream attribute values as required to generate output events. You can also specify the attribute(s) by which you want to group the output.</li>
@@ -724,7 +724,7 @@ to the grid of the Graphical View when you create a Siddhi application.
 <tr class="odd">
 <td>Form</td>
 <td><div class="content-wrapper">
-<p>Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the filter query, <a href="#WorkingwiththeDesignView-Settings">click the settings icon</a> on the filter query component you added to the grid, and update the following information.</p>
+<p>Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the filter query, click the settings icon on the filter query component you added to the grid, and update the following information.</p>
 <ul>
 <li><p>By default, the <strong>Stream Handler</strong> check box is selected, and a stream handler of the <code>filter</code> type is available under it to indicate that the query is a filter. Expand this stream handler, and enter the condition based on which the information needs to be filtered.</p>
 <p>A Siddhi application can have multiple stream handlers. To add another stream handler, click the <strong>+ Stream Handler</strong>. Multiple functions, filters and windows can be defined within the same form as stream handlers.</p>
@@ -803,7 +803,7 @@ to the grid of the Graphical View when you create a Siddhi application.
          <td>Form</td>
          <td>
             <div class="content-wrapper">
-               <p>Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the window query, <a href="#WorkingwiththeDesignView-Settings">click the settings icon</a> on the window query component you added to the grid, and update the following information.</p>
+               <p>Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the window query, click the settings icon on the window query component you added to the grid, and update the following information.</p>
                <ul>
                   <li>
                      <p>By default, the <strong>Stream Handler</strong> check box is selected, and a stream handler of the <code>window</code> type is available under it to indicate that the query is a filter. Expand this stream handler, and enter details to determine the window including the window type and the basis on which the subset of events considered by the window is determined (i.e., based on the window type selected).</p>
@@ -888,7 +888,7 @@ to the grid of the Graphical View when you create a Siddhi application.
          <td>Form</td>
          <td>
             <div class="content-wrapper">
-               <p>Once you connect two Siddhi components to the join query as sources and another Siddhi component as the target, you can configure the join query. To configure the join query, <a href="#WorkingwiththeDesignView-Settings">click the settings icon</a> on the join query component you added to the grid and update the following information.</p>
+               <p>Once you connect two Siddhi components to the join query as sources and another Siddhi component as the target, you can configure the join query. To configure the join query, click the settings icon on the join query component you added to the grid and update the following information.</p>
                <ul>
                   <li><strong>Query Meta Information</strong> : In this section, enter a unique name for the query and any annotations that you want to include in the query. The <code>                @dist               </code> annotation is supported by default to use the query in a fully distributed deployment if required (for more information, see <a href="https://docs.wso2.com/display/SP440/Converting+to+a+Distributed+Streaming+Application">Converting to a Distributed Streaming Application</a> ). You can also add customized annotations.<br /></li>
                   <li><strong>Input</strong> : Here, you can specify the input sources, the references, the join type, join condition, and stream handlers for the left source and right source of the join. For a detailed explanation of the join concept, see <a href="https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#join-stream">Siddhi Query Guide - Joins</a>.</li>
@@ -991,7 +991,7 @@ to the grid of the Graphical View when you create a Siddhi application.
          <td>Form</td>
          <td>
             <div class="content-wrapper">
-               <p>Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the pattern query, <a href="#WorkingwiththeDesignView-Settings">click the settings icon</a> on the pattern query component you added to the grid and update the following information.<br /></p>
+               <p>Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the pattern query, click the settings icon on the pattern query component you added to the grid and update the following information.<br /></p>
                <ul>
                   <li><strong>Query Meta Information</strong> : In this section, enter a unique name for the query and any annotations that you want to include in the query. The <code>                @dist               </code> annotation is supported by default to use the query in a fully distributed deployment if required (for more information, see <a href="https://docs.wso2.com/display/SP440/Converting+to+a+Distributed+Streaming+Application">Converting to a Distributed Streaming Application</a> ). You can also add customized annotations.</li>
                   <li><strong>Input</strong> : This section defines the conditions based on which patterns are identified. This involves specifying a unique ID and the input stream considered for each condition. Multiple conditions can be added. Each condition is configured in a separate tab within this section. For more information about the Pattern concept, see <a href="https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#pattern">Siddhi Query Guide - Patterns</a>.</li>
@@ -1087,7 +1087,7 @@ to the grid of the Graphical View when you create a Siddhi application.
          <td>Form</td>
          <td>
             <div class="content-wrapper">
-               <p>Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the sequence query, <a href="#WorkingwiththeDesignView-Settings">click the settings icon</a> on the sequence query component you added to the grid and update the following information.</p>
+               <p>Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the sequence query, click the settings icon on the sequence query component you added to the grid and update the following information.</p>
                <ul>
                   <li><strong>Query Meta Information</strong> : In this section, enter a unique name for the query and any annotations that you want to include in the query. The <code>                @dist               </code> annotation is supported by default to use the query in a fully distributed deployment if required (for more information, see <a href="https://docs.wso2.com/display/SP440/Converting+to+a+Distributed+Streaming+Application">Converting to a Distributed Streaming Application</a> ). You can also add customized annotations.</li>
                   <li><strong>Input</strong> : This section defines the conditions based on which sequences are identified. This involves specifying a unique ID and the input stream considered for each condition. Multiple conditions can be added. Each condition is configured in a separate tab within this section. For more information about the Sequence concept, see <a href="https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#sequence">Siddhi Query Guide - Sequences</a>.</li>
@@ -1178,7 +1178,7 @@ to the grid of the Graphical View when you create a Siddhi application.
          <td>Form</td>
          <td>
             <div class="content-wrapper">
-               <p>Once the stream to be partitioned is connected as a source to the partition, you can configure the partition. In order to do so, move the cursor over the partition and <a href="#WorkingwiththeDesignView-Settings">click the settings icon</a> on the partition component. This opens the <strong>Partition Configuration</strong> form. In this form, you can enter expressions to convert the attributes of the stream that is selected to be partitioned.</p>
+               <p>Once the stream to be partitioned is connected as a source to the partition, you can configure the partition. In order to do so, move the cursor over the partition and click the settings icon on the partition component. This opens the <strong>Partition Configuration</strong> form. In this form, you can enter expressions to convert the attributes of the stream that is selected to be partitioned.</p>
             </div>
          </td>
       </tr>
@@ -1230,4 +1230,4 @@ demonstrated below.
 
 ## Saving and running Siddhi applications
 
-To save a Siddhi application that you created in the Graphical View, you need to switch to the source view. You also need to switch to the source view to run a Siddhi application. For more information, see [WSO2 Integrator: SI for VS Code Overview](si-for-vscode-overview.md).
+To save a Siddhi application that you created in the Graphical View, you need to switch to the Source View. You also need to switch to the Source View to run a Siddhi application. For more information, see [WSO2 Integrator: SI](si-for-vscode-overview.md).

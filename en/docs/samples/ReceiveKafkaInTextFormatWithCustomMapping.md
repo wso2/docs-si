@@ -12,8 +12,8 @@ This application demonstrates how to configure WSO2 Integrator: SI to receive ev
 		* scala-library-2.11.8.jar
 		* zkclient-0.8.jar
 		* zookeeper-3.4.6.jar
-	*  Add the OSGI converted kafka libs to `<SI-Tooling-Home>/lib`.
-	*  Add the kafka libs to `<SI-Tooling-Home>/samples/sample-clients/lib`.
+	*  Add the OSGI converted kafka libs to `<SI_HOME>/lib`.
+	*  Add the kafka libs to `<SI_HOME>/samples/sample-clients/lib`.
 2. Save this sample.
 3. If there is no syntax error, the following message is shown on the console:
 
@@ -27,7 +27,7 @@ To convert Kafka libs to OSGI,
 
 1. Create a folder (eg: kafka) and copy Kafka libs to be added from `{KafkaHome}/libs`.
 2. Create another folder (eg: kafka-osgi, This folder will have the libs that converted to OSGI).
-3. Navigate to `<SI-Tooling-Home>/bin` and issue the following command.
+3. Navigate to `<SI_HOME>/bin` and issue the following command.
 	- For Linux/macOS:
 
 	```bash
@@ -46,7 +46,7 @@ To convert Kafka libs to OSGI,
     - INFO: Created the OSGi bundle <kafka-lib-name>.jar for JAR file <absolute_path>/kafka/<kafka-lib-name>.jar
     ```
 
-5. You can find the osgi converted libs in kafka-osgi folder. You can copy that to `<SI-Tooling-Home>/lib`.
+5. You can find the osgi converted libs in kafka-osgi folder. You can copy that to `<SI_HOME>/lib`.
 
 ## Executing the sample
 
@@ -68,7 +68,7 @@ To convert Kafka libs to OSGI,
 
 ## Testing the sample
 
-Navigate to `<SI-Tooling-Home>/samples/sample-clients/kafka-producer` and run `ant` command as follows:
+Navigate to `<SI_HOME>/samples/sample-clients/kafka-producer` and run `ant` command as follows:
 
 ```bash
 ant -Dtype=text -DcustomMapping=true

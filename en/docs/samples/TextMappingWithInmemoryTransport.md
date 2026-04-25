@@ -15,7 +15,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to receive ev
 
 In order to publish events with TCP client,
 
-1. Go to `<SI-Tooling-Home>/samples/sample-clients/tcp-client/` directory.
+1. Go to `<SI_HOME>/samples/sample-clients/tcp-client/` directory.
 2. Run ant commant as following.
 
     ```bash

@@ -4,7 +4,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
 
 ## Executing the sample
 
-1. Open a terminal and navigate to the `<SI-Tooling-Home>/samples/sample-clients/tcp-server` directory. Run the `ant -Dtype=text` command.
+1. Open a terminal and navigate to the `<SI_HOME>/samples/sample-clients/tcp-server` directory. Run the `ant -Dtype=text` command.
 2. Start the Siddhi application by clicking 'Run'.
 3. If the Siddhi application starts successfully, the following messages appear on the console.
 
@@ -17,7 +17,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
     * `Stream Name`: `SweetProductionStream`
 6. In the 'name' field and 'amount' field, enter 'toffee' and '45.24' respectively and click Send to send the event.
 7. Send some more events.
-8. See the output in the terminal of `<SI-Tooling-Home>/samples/sample-clients/tcp-server`. You can see output similar to the following:
+8. See the output in the terminal of `<SI_HOME>/samples/sample-clients/tcp-server`. You can see output similar to the following:
 
     ```bash
     [java] [org.wso2.si.tcp.server.TCPServer] : Event{timestamp=1512446413468, data=[toffee, 45.25], isExpired=false}

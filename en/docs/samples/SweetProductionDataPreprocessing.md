@@ -6,7 +6,7 @@ This application demonstrates how to receive events via TCP transport and carryo
 
 1. Ensure that MySQL is installed on your machine.
 2. Add the MySQL JDBC driver into `{WSO2_SI_HOME}/lib` as follows:
-    1. Download the latest Connector/J JAR from the [MySQL website](https://dev.mysql.com/downloads/connector/j/) and copy it to the `{WSO2_SI_Home}/lib` directory.
+    1. Download the latest Connector/J JAR from the [MySQL website](https://dev.mysql.com/downloads/connector/j/) and copy it to the `<SI_HOME>/lib` directory.
 3. Create a database named `sampleDB` in MySQL. This database is referred to with `jdbc:mysql://localhost:3306/sampleDB` url.
 4. In the store configuration of this application, replace `username` and `password` values with your MySQL credentials.
 5. Save this sample.

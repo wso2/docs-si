@@ -6,8 +6,8 @@ This application demonstrates how to configure WSO2 Integrator: SI to publish an
 
 !!!info "Before you begin:"
     1. Edit the sample Siddhi application as follows:<br/>
-        - In the source configuration, update the value for the `dir.uri` parameter by replacing `<SI-Tooling-Home>` with the absolute path of your SI Tooling directory.<br/>
-        - In the sink configuration, update the value for the `file.uri` parameter by replacing `<SI-Tooling-Home>` with the absolute path of your SI Tooling directory. If required, you can provide a different path to publish the output to a location of your choice.<br/>
+        - In the source configuration, update the value for the `dir.uri` parameter by replacing `<SI_HOME>` with the absolute path of your SI installation.<br/>
+        - In the sink configuration, update the value for the `file.uri` parameter by replacing `<SI_HOME>` with the absolute path of your SI installation. If required, you can provide a different path to publish the output to a location of your choice.<br/>
     2. Save the sample Siddhi application in WSO2 Integrator: SI.
 
 ## Executing and testing the Sample
@@ -20,7 +20,7 @@ If the Siddhi application starts successfully, the following message appears in 
 
 ## Viewing the results
 
-* The source gets the input from the `SI-Tooling-Home>/samples/artifacts/CSVMappingWithFile/new/example.csv` file and produces the event. This file has data in below format.
+* The source gets the input from the `<SI_HOME>/samples/artifacts/CSVMappingWithFile/new/example.csv` file and produces the event. This file has data in below format.
 
     `1,WSO2,23.5`<br/>
     `2,IBM,2.5`<br/>
@@ -35,12 +35,12 @@ If the Siddhi application starts successfully, the following message appears in 
 @App:description('Publish and receive data events processed within Siddhi to files in CSV custom format.')
 
 @source(type='file',
-dir.uri='file://<SI-Tooling-Home>/samples/artifacts/CSVMappingWithFile/new',
+dir.uri='file://<SI_HOME>/samples/artifacts/CSVMappingWithFile/new',
 action.after.process='NONE',
 @map(type='csv', @attributes(id='0', name='1', amount='2')))
 define stream IntputStream (name string, id int,  amount double);
 
-@sink(type='file', file.uri='/<SI-Tooling-Home>/samples/artifacts/CSVMappingWithFile/new/outputOfCustom.csv' , @map(type='csv',@payload(id='1', name='0', amount='2')))
+@sink(type='file', file.uri='/<SI_HOME>/samples/artifacts/CSVMappingWithFile/new/outputOfCustom.csv' , @map(type='csv',@payload(id='1', name='0', amount='2')))
 define stream OutputStream (name string, id int, amount double);
 
 from IntputStream

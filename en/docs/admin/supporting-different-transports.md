@@ -52,7 +52,7 @@ To configure the **Apache ActiveMQ** message broker, follow the steps below:
 
 3. Register the `InitialContextFactory` implementation according to the OSGi JNDI spec and copy the client jar to the `<SI_HOME>/lib` directory as follows.
 
-    1. Navigate to the `SI_HOME>/bin` directory and issue the following command.
+    1. Navigate to the `<SI_HOME>/bin` directory and issue the following command.
         - **For Linux/macOS**: `./icf-provider.sh org.apache.activemq.jndi.ActiveMQInitialContextFactory <Downloaded Jar Path>/activemq-client-5.x.x.jar <Output Jar Path>`
         - **For Windows**: `./icf-provider.bat org.apache.activemq.jndi.ActiveMQInitialContextFactory <Downloaded Jar Path>\activemq-client-5.x.x.jar <Output Jar Path>`
 

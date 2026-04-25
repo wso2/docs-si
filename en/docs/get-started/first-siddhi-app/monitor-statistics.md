@@ -1,10 +1,10 @@
 # Step 6: Monitor Statistics
 
-In this step, you monitor the CDC and file statistics of the `SweetFactoryApp` Siddhi application you deployed and ran in the previous steps. WSO2 Integrator: SI ships pre-configured Grafana dashboards for this purpose. You host the dashboards in Grafana, with Prometheus scraping metrics directly from the SI server. For more information about these dashboards, see [Monitoring ETL Statistics with Grafana]({{base_path}}/admin/viewing-dashboards/).
+In this step, you monitor the CDC and file statistics of the `SweetFactoryApp` Siddhi application you deployed and ran in the previous steps. WSO2 Integrator: SI ships pre-configured Grafana dashboards for this purpose. You host the dashboards in Grafana, with Prometheus scraping metrics directly from the SI server. For more information about these dashboards, see [Monitoring ETL Statistics with Grafana](../../admin/viewing-dashboards.md).
 
 ## Prerequisites
 
-- The WSO2 Integrator: SI server is running, with `SweetFactoryApp` deployed (see [Step 3: Deploy the Siddhi Application](deploy-siddhi-application.md) and [Step 4: Run the Siddhi Application](test-siddhi-application.md)).
+- The WSO2 Integrator: SI server is running, with `SweetFactoryApp` deployed (see [Step 3: Deploy the Siddhi Application](deploy-siddhi-application.md) and [Step 4: Run the Siddhi Application](run-siddhi-application.md)).
 
 ## Download the pre-configured dashboards
 
@@ -43,7 +43,7 @@ metrics.prometheus:
         serverURL: "http://localhost:9005"
 ```
 
-Save the file and restart the SI server for the configuration to take effect (stop the server with `Ctrl + C` in its terminal, then run `./server.sh` from `<SI_HOME>/bin` on Linux/macOS or `server.bat --run` on Windows).
+Save the file. Restart the SI runtime so the configuration takes effect — stop any running Siddhi applications and click **Run** again, or restart the SI server in its terminal (see [Starting the WSO2 Integrator: SI server](set-up-environment-and-dependencies.md#starting-the-wso2-integrator-si-server)).
 
 ## Install and configure Prometheus
 
@@ -104,7 +104,10 @@ By default, SI emits only server-level metrics (JVM, uptime, HTTP transports). T
 @App:statistics(reporter = 'prometheus')
 ```
 
-Redeploy the application (see [Step 3: Deploy the Siddhi Application](deploy-siddhi-application.md)) for the annotation to take effect. Without this annotation, the dashboards render but show no per-app data.
+Redeploy the application (see [Step 3: Deploy the Siddhi Application](deploy-siddhi-application.md)) for the annotation to take effect.
+
+!!! note
+    Without the `@App:statistics` annotation, the dashboards render but show no per-app data. This is the most common reason for empty SI app, file, or CDC dashboards.
 
 ## View the statistics
 
@@ -167,7 +170,7 @@ Redeploy the application (see [Step 3: Deploy the Siddhi Application](deploy-sid
 
 !!! tip "What's Next?"
     - To package the `SweetFactoryApp` Siddhi application as a Docker artifact for containerized deployment, proceed to [Step 7: Export the Siddhi Application as a Docker Artifact](export-siddhi-application-as-docker.md).
-    - To learn more about the key concepts of WSO2 Integrator: SI, see [Key Concepts]({{base_path}}/concepts/concepts/).
-    - For more hands-on experience, try the [Tutorials]({{base_path}}/examples/tutorials-overview/).
-    - For guidance on common Streaming Integration use cases, see [Use Cases]({{base_path}}/guides/use-cases/).
-    - To run WSO2 Integrator: SI in containerized environments, see [Running SI with Docker and Kubernetes]({{base_path}}/examples/running-si-with-docker-and-kubernetes/).
+    - To learn more about the key concepts of WSO2 Integrator: SI, see [Key Concepts](../../get-started/key-concepts.md).
+    - For more hands-on experience, try the [Tutorials](../../examples/tutorials-overview.md).
+    - For guidance on common Streaming Integration use cases, see [Use Cases](../../guides/use-cases.md).
+    - To run WSO2 Integrator: SI in containerized environments, see [Running SI with Docker and Kubernetes](../../examples/running-si-with-docker-and-kubernetes.md).

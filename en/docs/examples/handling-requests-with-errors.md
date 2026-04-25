@@ -85,7 +85,7 @@ This configuration refers to a data source named `SIDDHI_ERROR_STORE_DB`. Define
 
 To create and deploy a Siddhi application, follow the steps below:
 
-1. Open the VSCode editor with **WSO2 Integrator: SI** extension installed.
+1. Open the editor with **WSO2 Integrator: SI** installed.
 
 2. Copy paste the following three Siddhi applications to three separate new files and save.
     ```

@@ -15,7 +15,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to receive ev
 
 ##### Publish events with http sample client
 
-Navigate to `<SI-Tooling-Home>/samples/sample-clients/http-client` and run the `ant` command.
+Navigate to `<SI_HOME>/samples/sample-clients/http-client` and run the `ant` command.
 
 If you want to publish custom number of events, you need to run `ant` command as follows.
 

@@ -66,11 +66,11 @@ To try out the example given above, follow the steps below:
               PRIMARY KEY (ref));
             ```
         
-2. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
+2. [Start and access WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
-3. Install the `RDBMS - MySQL` extension in the VSCode editor (with the WSO2 Integrator: SI extension installed). For instructions to install an extension, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
+3. Install the `RDBMS - MySQL` extension in WSO2 Integrator: SI. For instructions to install an extension, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
 
-4. Open a new file in the VSCode editor (with the WSO2 Integrator: SI extension installed) and add the following Siddhi content to it.
+4. In WSO2 Integrator: SI, open a new file and add the following Siddhi content to it.
 
     ```siddhi
     @App:name('SalesApp')
@@ -88,7 +88,7 @@ To try out the example given above, follow the steps below:
    
    Save the Siddhi application.   
     
-5. Simulate an event with the following values for the `SalesRecordsStream` stream of the `SalesApp` Siddhi application. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
+5. Simulate an event with the following values for the `SalesRecordsStream` stream of the `SalesApp` Siddhi application. This step requires the editor with WSO2 Integrator: SI installed. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
     
     | **Attribute** | **Value**        |
     |---------------|------------------|
@@ -148,7 +148,7 @@ Here, any event directed to the `TemperatureLogStream` is written into the `<YOU
 
 To try out the above example by including the given output stream and the sink configuration in a complete Siddhi application, follow the steps below:
 
-1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
+1. [Start and access WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
 2. Open a new file and copy the following Siddhi Application to it.
 
@@ -171,7 +171,7 @@ To try out the above example by including the given output stream and the sink c
     !!! tip
         You can replace `<YOUR_HOME>/temperature/temperature.csv` with any other location on your machine.
    
-3. Simulate an event with the following values for the `LabTemperatureStream` stream of the `LabTemperatureApp` Siddhi application. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).  
+3. Simulate an event with the following values for the `LabTemperatureStream` stream of the `LabTemperatureApp` Siddhi application. This step requires the editor with WSO2 Integrator: SI installed. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).  
     
     | **Attribute**   | **Value**       |
     |-----------------|-----------------|
@@ -227,9 +227,9 @@ To try out the above example, follow the steps below:
     
     3. Create a bucket named `temperaturelog` in the Google Cloud Console.
     
-2. Install the `GCS` extension in the VSCode editor (with the WSO2 Integrator: SI extension installed). For instructions to install an extension, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
+2. Install the `GCS` extension in WSO2 Integrator: SI. For instructions to install an extension, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
 
-3. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
+3. [Start and access WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
 4. Open a new file and copy the following Siddhi Application to it.
 
@@ -252,7 +252,7 @@ To try out the above example, follow the steps below:
    
    The above Siddhi application gets all the events in the `LabTemperatureStream` stream and inserts them into the `TemperatureLogStream` stream so that they can be stored in the `temperaturelog` bucket in the Google Cloud Console via the sink connected to the `TemperatureLogStream` stream.
    
-5. Simulate an event to the `LabTemperatureStream` stream of the `LabTemperatureApp` Siddhi application with the following values via the Event Simulator tool. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md). 
+5. Simulate an event to the `LabTemperatureStream` stream of the `LabTemperatureApp` Siddhi application with the following values via the Event Simulator tool. This step requires WSO2 Integrator: SI. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md). 
     
     | **Attribute**   | **Value**       |
     |-----------------|-----------------|

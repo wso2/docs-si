@@ -4,7 +4,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to Publish an
 
 ## Prerequisites
 
-* Edit the uri `<SI-Tooling-Home>/samples/artifacts/CSVMappingWithFile/new/example.csv` by replacing `<SI-Tooling-Home>` with the absolute path of your SI Tooling home directory.
+* Edit the uri `<SI_HOME>/samples/artifacts/CSVMappingWithFile/new/example.csv` by replacing `<SI_HOME>` with the absolute path of your SI installation.
 
 * You can also change the path for `file.uri` in the sink, if you want to publish your event file to a different location.
 
@@ -19,7 +19,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to Publish an
 
 ## Viewing the results
 
-* Source takes input from the `<SI-Tooling-Home>/samples/artifacts/CSVMappingWithFile/new/example.csv` then produce the event. example.csv has data in below format.<br/>
+* Source takes input from the `<SI_HOME>/samples/artifacts/CSVMappingWithFile/new/example.csv` then produce the event. example.csv has data in below format.<br/>
 
     `1,WSO2,23.5`<br/>
     `2,IBM,2.5`<br/>
@@ -34,12 +34,12 @@ This application demonstrates how to configure WSO2 Integrator: SI to Publish an
 @App:description('Publish and receive data events processed within Siddhi to files in CSV default format.')
 
 @source(type='file',
-dir.uri='file://<SI-Tooling-Home>/samples/artifacts/CSVMappingWithFile/new',
+dir.uri='file://<SI_HOME>/samples/artifacts/CSVMappingWithFile/new',
 action.after.process='NONE',
 @map(type='csv'))
 define stream InputStream (id int, name string, amount double);
 
-@sink(type='file', file.uri='/<SI-Tooling-Home>/samples/artifacts/CSVMappingWithFile/new/outputOfDefault.csv' , @map(type='csv'))
+@sink(type='file', file.uri='/<SI_HOME>/samples/artifacts/CSVMappingWithFile/new/outputOfDefault.csv' , @map(type='csv'))
 define stream OutputStream (id int, name string, amount double);
 
 from InputStream

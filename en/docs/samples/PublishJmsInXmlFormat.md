@@ -7,8 +7,8 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
 1. Setup ActiveMQ
 	* Download [activemq-client-5.x.x.jar](https://repo1.maven.org/maven2/org/apache/activemq/activemq-client/5.9.0/activemq-client-5.9.0.jar).
 	* Download [apache-activemq-5.x.x-bin.zip](http://archive.apache.org/dist/activemq/apache-activemq/5.9.0/apache-activemq-5.9.0-bin.zip).
-	* Convert the ActiveMQ `activemq-client-5.x.x.jar` to an OSGI bundle and add the converted bundle to `<SI-Home>/lib/` directory (See Note: To convert ActiveMQ lib to OSGI).
-	* Unzip the `apache-activemq-5.x.x-bin.zip` and copy the following ActiveMQ libs in `apache-activemq-5.x.x/lib` to `<SI-Tooling-Home>/samples/sample-clients/lib` and `<SI-Tooling-Home>/lib`.
+	* Convert the ActiveMQ `activemq-client-5.x.x.jar` to an OSGI bundle and add the converted bundle to `<SI_HOME>/lib/` directory (See Note: To convert ActiveMQ lib to OSGI).
+	* Unzip the `apache-activemq-5.x.x-bin.zip` and copy the following ActiveMQ libs in `apache-activemq-5.x.x/lib` to `<SI_HOME>/samples/sample-clients/lib` and `<SI_HOME>/lib`.
 		- `hawtbuf-1.9.jar`
 		- `geronimo-j2ee-management_1.1_spec-1.0.1.jar`
 		- `geronimo-jms_1.1_spec-1.1.1.jar`
@@ -23,7 +23,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
 
 To convert ActiveMQ lib to OSGI,
 
-1. Navigate to <SI-Tooling-Home>/bin and run the following command:
+1. Navigate to <SI_HOME>/bin and run the following command:
 	- For Linux/macOS:
 
 	```bash
@@ -51,7 +51,7 @@ To convert ActiveMQ lib to OSGI,
 	- INFO: Created the OSGi bundle activemq_client_5.x.x_1.0.0.jar for JAR file <absolute_path>/activemq-client-5.x.x/activemq-client-5.x.x.jar
 	```
 
-3. You can find the osgi converted libs in `activemq-client-5.x.x` folder. You can copy `activemq-client-5.x.x/activemq-client-5.x.x_1.0.0.jar` to `<SI-Tooling-Home>/lib` and `activemq-client-5.x.x/activemq-client-5.x.x.jar` to `<SI-Tooling-Home>/samples/sample-clients/lib`.
+3. You can find the osgi converted libs in `activemq-client-5.x.x` folder. You can copy `activemq-client-5.x.x/activemq-client-5.x.x_1.0.0.jar` to `<SI_HOME>/lib` and `activemq-client-5.x.x/activemq-client-5.x.x.jar` to `<SI_HOME>/samples/sample-clients/lib`.
 
 ## Executing the sample
 
@@ -64,7 +64,7 @@ To convert ActiveMQ lib to OSGI,
 
 ## Testing the sample
 
-1. Open a terminal and navigate to `<SI-Tooling-Home>/samples/sample-clients/jms-consumer` and run `ant` command without arguments.
+1. Open a terminal and navigate to `<SI_HOME>/samples/sample-clients/jms-consumer` and run `ant` command without arguments.
 2. Send events through one or more of the following methods.
 
 ##### Send events to jms sink, via event simulator
@@ -113,7 +113,7 @@ To convert ActiveMQ lib to OSGI,
 
 ## Viewing the results
 
-See the output on the terminal of `<SI-Tooling-Home>/samples/sample-clients/jms-consumer`:
+See the output on the terminal of `<SI_HOME>/samples/sample-clients/jms-consumer`:
 
 ```bash
 [java] [io.siddhi.core.stream.output.sink.LogSink] : JmsReceiver : logStream : Event{timestamp=1513607495863, data=['chocolate cake', 50.50], isExpired=false}

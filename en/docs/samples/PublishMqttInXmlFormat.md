@@ -44,7 +44,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
 
 ## Executing the Sample
 
-1. Open a terminal, navigate to the `{SI-Tooling-Home}/samples/sample-clients/mqtt-consumer` directory, and run the `ant` command.
+1. Open a terminal, navigate to the `<SI_HOME>/samples/sample-clients/mqtt-consumer` directory, and run the `ant` command.
     * If you use the default topic `mqtt_topic` and URL `tcp://localhost:1883`, in your program use the `ant` command without any arguments.
     * However, if you use a different topic, run the `ant` command with appropriate argument.
     e.g. `ant -Dtopic=mqttTest`
@@ -66,7 +66,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
 
 ## Viewing the Results
 
-See the output in the terminal of `{SI-Tooling-Home}/samples/sample-clients/mqtt-consumer`. You will get the output as follows (example for 3 events):
+See the output in the terminal of `<SI_HOME>/samples/sample-clients/mqtt-consumer`. You will get the output as follows (example for 3 events):
 
 ```bash
 [java] [org.apache.axiom.om.util.StAXUtils] : XMLStreamReader is org.apache.axiom.util.stax.dialect.SJSXPStreamReaderWrapper

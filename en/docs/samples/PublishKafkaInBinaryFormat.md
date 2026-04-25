@@ -12,8 +12,8 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
 		* scala-library-2.11.8.jar
 		* zkclient-0.8.jar
 		* zookeeper-3.4.6.jar
-	*  Add the OSGI converted kafka libs to `<SI-Tooling-Home>/lib`.
-	*  Add the kafka libs to `<SI-Tooling-Home>/samples/sample-clients/lib`.
+	*  Add the OSGI converted kafka libs to `<SI_HOME>/lib`.
+	*  Add the kafka libs to `<SI_HOME>/samples/sample-clients/lib`.
 2. Save this sample.
 3. If there is no syntax error, the following messages would be shown on the console.
 	```
@@ -26,7 +26,7 @@ To convert Kafka libs to OSGI,
 
 1. Create a folder (Eg: Kafka) and copy Kafka libs to be added from `{KafkaHome}/libs`.
 2. Create another folder(Eg: Kafka-osgi, This folder will have the libs that converted to OSGI).
-3. Navigate to `<SI-Tooling-Home>/bin` and issue the follwing command.
+3. Navigate to `<SI_HOME>/bin` and issue the follwing command.
 
 	* For Linux/macOS:
 
@@ -46,7 +46,7 @@ To convert Kafka libs to OSGI,
 	- INFO: Created the OSGi bundle <kafka-lib-name>.jar for JAR file <absolute_path>/kafka/<kafka-lib-name>.jar
 	```
 
-5. You can find the osgi converted libs in kafka-osgi folder. You can copy that to `<SI-Tooling-Home>/lib`.
+5. You can find the osgi converted libs in kafka-osgi folder. You can copy that to `<SI_HOME>/lib`.
 
 ## Executing the sample
 
@@ -62,7 +62,7 @@ To convert Kafka libs to OSGI,
 	bin/kafka-server-start.sh config/server.properties
 
 	```
-3. Navigate to `<SI-Tooling-Home>/samples/sample-clients/kafka-consumer` and run `ant` command with following arguments.
+3. Navigate to `<SI_HOME>/samples/sample-clients/kafka-consumer` and run `ant` command with following arguments.
 
 	```bash
 	ant -DisBinaryMessage=true -DtopicList=kafka_result_topic -Dtype=binary

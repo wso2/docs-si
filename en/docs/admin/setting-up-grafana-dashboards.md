@@ -14,7 +14,7 @@ In order to configure a Grafana dashboard, follow the steps below:
 
     Enable statistics for the Prometheus reporter as follows.
    
-    - To enable statistics for the Prometheus reporter, open the `<SI-Home>/conf/server/deployment.yaml` file and set the `enabled` parameter in the `wso2.metrics` section to `true`, and update the other parameters in the section as shown below. You also need to add the `metrics.prometheus:` as shown.
+    - To enable statistics for the Prometheus reporter, open the `<SI_HOME>/conf/server/deployment.yaml` file and set the `enabled` parameter in the `wso2.metrics` section to `true`, and update the other parameters in the section as shown below. You also need to add the `metrics.prometheus:` as shown.
     
     ```yaml
      wso2.metrics:
@@ -49,7 +49,7 @@ In order to configure a Grafana dashboard, follow the steps below:
 
 2. **Start WSO2 Integrator: SI server**
 
-    To start the Streaming runtime, navigate to the `<SI-Home>/bin` directory and issue the appropriate command based on your operating system.
+    To start the Streaming runtime, navigate to the `<SI_HOME>/bin` directory and issue the appropriate command based on your operating system.
     
     - **For Windows**: `server.bat --run`<br/>
     - **For Linux/macOS**: `./server.sh`

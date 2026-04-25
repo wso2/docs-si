@@ -12,7 +12,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to receive ev
 
 ## Testing the sample
 
-Navigate to `<SI-Tooling-Home>/samples/sample-clients/tcp-client` and run `ant` command as follows:
+Navigate to `<SI_HOME>/samples/sample-clients/tcp-client` and run `ant` command as follows:
 
 Run `ant` command in the terminal as follows:
 

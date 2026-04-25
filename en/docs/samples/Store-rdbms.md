@@ -12,7 +12,7 @@ This application demonstrates how to perform RDBMS operations using Siddhi queri
 ## Prerequisites
 
 1. Ensure that MySQL is installed on your machine.
-2. Download the latest Connector/J JAR from the [MySQL website](https://dev.mysql.com/downloads/connector/j/) and copy it to the `{WSO2_SI_Home}/lib` directory.
+2. Download the latest Connector/J JAR from the [MySQL website](https://dev.mysql.com/downloads/connector/j/) and copy it to the `<SI_HOME>/lib` directory.
 3. Create a database named `production` in MySQL. This database is referred to with the `jdbc:mysql://localhost:3306/production` url.
 4. Create a table named `SweetProductionTable` as follows.
 

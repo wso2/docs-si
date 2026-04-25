@@ -6,9 +6,9 @@ A Siddhi application can be easily extended to consume messages from more source
 
 To update the `SweetFactoryApp` Siddhi application so that it functions as described, follow the steps below.
 
-## Edit the Siddhi application in VSCode
+## Edit the Siddhi application in WSO2 Integrator
 
-1. Open the `SweetFactoryApp` Siddhi application you created in [Step 2: Create the Siddhi Application](create-the-siddhi-application.md) in the VSCode editor.
+1. Open the `SweetFactoryApp` Siddhi application you created in [Step 2: Create the Siddhi Application](create-the-siddhi-application.md) in WSO2 Integrator.
 
 2. Define an input stream that reads each new row appended to the `<YOUR_HOME>/productioninserts.csv` file as an event. Prepend a `@source` annotation of type `file` in `LINE`/tailing mode:
 
@@ -81,29 +81,26 @@ To update the `SweetFactoryApp` Siddhi application so that it functions as descr
     insert into PublishFilteredDataStream;
     ```
 
-## Install the Kafka extension on the SI server
+## Install the Kafka extension
 
-The `kafka` extension is not shipped with the WSO2 Integrator: SI server by default, so it must be installed before the updated application (which uses a Kafka sink) can be deployed.
+The `kafka` extension is not shipped with WSO2 Integrator: SI by default, so it must be installed before the updated application (which uses a Kafka sink) can run.
 
-1. If the SI server is currently running from [Step 4: Run the Siddhi Application](test-siddhi-application.md), stop it in its terminal by pressing `Ctrl + C`.
+1. In WSO2 Integrator, open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS) and type `SI: Extension Installer`. Then select the **SI: Extension Installer** option.
 
-2. From the `<SI_HOME>/bin` directory, install the `kafka` extension by running `./extension-installer.sh install kafka` (on Linux/macOS) or `extension-installer.bat install kafka` (on Windows):
+    In the **Extension Installer** panel, scroll to **Kafka** and click **Install**.
 
-    ```sh
-    ./extension-installer.sh install kafka
-    ```
+2. Reload WSO2 Integrator.
 
-    When the installation completes, the extension installer logs `Installation completed with status: INSTALLED.` followed by `Please restart the server.`
-
-3. Restart the SI server using the command from [Step 4: Run the Siddhi Application](test-siddhi-application.md).
+!!! tip "Alternative: install from the terminal"
+    You can also install the Kafka extension on the SI runtime directly from the terminal — useful for production setups that don't use WSO2 Integrator. From the `<SI_HOME>/bin` directory, run `./extension-installer.sh install kafka` (on Linux/macOS) or `extension-installer.bat install kafka` (on Windows). When the installation completes, restart the SI server.
 
 ## Deploy the updated Siddhi application
 
-Deploy the updated `SweetFactoryApp` Siddhi application to the SI server using the same method as in [Step 3: Deploy the Siddhi Application](deploy-siddhi-application.md) — either by copying the updated `SweetFactoryApp.siddhi` file into `<SI_HOME>/wso2/server/deployment/siddhi-files/` (overwriting the existing file), or by deploying from VSCode.
+Deploy the updated `SweetFactoryApp` Siddhi application to the SI runtime using the same method as in [Step 3: Deploy the Siddhi Application](deploy-siddhi-application.md) — by clicking **Run** in WSO2 Integrator (re-deploys automatically), or by copying the updated `SweetFactoryApp.siddhi` file into `<SI_HOME>/wso2/server/deployment/siddhi-files/` (overwriting the existing file).
 
-The SI server automatically re-deploys the application when the `.siddhi` file changes. A log line similar to the following appears in the server's terminal:
+When the deployment succeeds, a log line similar to the following is written to the SI server's logs:
 
-```
+```text
 INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App SweetFactoryApp deployed successfully
 ```
 

@@ -1,6 +1,6 @@
 # Installing WSO2 Integrator: SI as a Linux Service
 
-WSO2 Integrator: SI can be run as a Linux service. Before you begin follow the instructions on [installing the WSO2 Integrator: SI]({{base_path}}/setup/installing-si-in-vm/) if you have not done already.
+WSO2 Integrator: SI can be run as a Linux service. Before you begin follow the instructions on [installing the WSO2 Integrator: SI](installing-si-in-vm.md) if you have not done already.
 
 ## Running WSO2 Integrator: SI as a Linux Service
 
@@ -27,17 +27,15 @@ To run WSO2 Integrator: SI as a Linux service, follow the steps below:
     esac
     ```
 
-   You can write the start up scripts for the WSO2 Integrator: SI server and Tooling as follows:
-
-   - WSO2 Integrator: SI Server
+   You can write the startup script for the WSO2 Integrator: SI server as follows:
 
     ```bash
     #! /bin/sh
     export JAVA_HOME="<Java-Home>"
      
-    startcmd='<SI-Home>/bin/server.sh start > /dev/null &'
-    restartcmd='<SI-Home>/bin/server.sh restart > /dev/null &'
-    stopcmd='<SI-Home>/bin/server.sh stop > /dev/null &'
+    startcmd='<SI_HOME>/bin/server.sh start > /dev/null &'
+    restartcmd='<SI_HOME>/bin/server.sh restart > /dev/null &'
+    stopcmd='<SI_HOME>/bin/server.sh stop > /dev/null &'
      
     case "$1" in
     start)
@@ -50,35 +48,6 @@ To run WSO2 Integrator: SI as a Linux service, follow the steps below:
     ;;
     stop)
        echo "Stopping WSO2 Streaming Integrator ..."
-       su -c "${stopcmd}" user1
-    ;;
-    *)
-       echo "Usage: $0 {start|stop|restart}"
-    exit 1
-    esac
-    ```
-
-    - WSO2 Integrator: SI Tooling
-
-    ```bash
-    #! /bin/sh
-    export JAVA_HOME="<Java-Home>"
-     
-    startcmd='<SI-Tooling-Home>/bin/tooling.sh start > /dev/null &'
-    restartcmd='<SI-Tooling-Home>/bin/tooling.sh restart > /dev/null &'
-    stopcmd='<SI-Tooling-Home>/bin/tooling.sh stop > /dev/null &'
-     
-    case "$1" in
-    start)
-       echo "WSO2 Streaming Integrator Tooling ..."
-       su -c "${startcmd}" user1
-    ;;
-    restart)
-       echo "Re-starting WSO2 Streaming Integrator Tooling ..."
-       su -c "${restartcmd}" user1
-    ;;
-    stop)
-       echo "Stopping WSO2 Streaming Integrator Tooling ..."
        su -c "${stopcmd}" user1
     ;;
     *)

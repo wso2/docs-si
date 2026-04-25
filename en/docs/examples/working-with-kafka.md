@@ -14,8 +14,8 @@ This tutorial takes you through consuming from a Kafka topic, processing the mes
     broker from this directory in the next section.
 
     You do not need to copy any JARs from `<Kafka_Home>/libs` into
-    `<SI-Home>/lib` — the WSO2 Integrator: SI distribution already ships
-    its own Kafka client libraries as OSGi bundles under `<SI-Home>/lib/`.
+    `<SI_HOME>/lib` — the WSO2 Integrator: SI distribution already ships
+    its own Kafka client libraries as OSGi bundles under `<SI_HOME>/lib/`.
 
 ## Tutorial steps
 
@@ -31,7 +31,7 @@ This tutorial takes you through consuming from a Kafka topic, processing the mes
 
 ### Start the WSO2 Integrator: SI
 
-Navigate to the `<SI-Home>/bin` directory and issue the following command. 
+Navigate to the `<SI_HOME>/bin` directory and issue the following command. 
 `sh server.sh`
 
 The following log appears on the SI console when the server is started successfully.
@@ -74,7 +74,7 @@ Let's create a basic Siddhi application to consume messages from a Kafka topic.
     insert into OutputStream;
     ```
 
-3. Save this file as `HelloKafka.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. The following log appears on the SI console.
+3. Save this file as `HelloKafka.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory. The following log appears on the SI console.
 
     ```bash
     INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App HelloKafka deployed successfully
@@ -116,7 +116,7 @@ For this purpose, you can configure the `topic.offsets.map` parameter. The value
 !!!note
     If you are re-running this tutorial against an existing Kafka cluster, first clear any committed offsets for `group1`: `bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --delete --group group1`. Otherwise the Kafka client resumes from the committed offset and `topic.offsets.map` has no effect.
 
-1. Open the `<SI-Home>/wso2/server/deployment/siddhi-files/HelloKafka.siddhi` file and add the following new configuration parameters.
+1. Open the `<SI_HOME>/wso2/server/deployment/siddhi-files/HelloKafka.siddhi` file and add the following new configuration parameters.
 
     ```sql
     topic.offsets.map='productions=1',
@@ -204,7 +204,7 @@ Let's add another Siddhi application `HelloKafka_2`, to add another Kafka consum
     insert into OutputStream;
     ```
 
-2. Save this file as `HelloKafka_2.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. When the Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
+2. Save this file as `HelloKafka_2.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory. When the Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
 
     ```bash
     INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App HelloKafka_2 deployed successfully
@@ -381,7 +381,7 @@ Now let's create a new Siddhi application to consume from the `productions` topi
     insert into BulkOrdersStream;
     ```
 
-4. Save this file as `PublishToKafka.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. When the 
+4. Save this file as `PublishToKafka.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory. When the 
    Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
 
     ```bash
@@ -412,7 +412,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
 
     To achieve this, you can use the state persistence capability in the WSO2 Integrator: SI.
 
-1. Enable state persistence feature in SI server as follows. Open the `<SI-Home>/conf/server/deployment.yaml` file on a text editor and locate the `state.persistence` section.  
+1. Enable state persistence feature in SI server as follows. Open the `<SI_HOME>/conf/server/deployment.yaml` file on a text editor and locate the `state.persistence` section.  
 
     ```yaml
       # Periodic Persistence Configuration
@@ -427,7 +427,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
 
     Set `enabled` parameter to `true` and save the file.
 
-2. Enable state persistence debug logs as follows. Open the `<SI-Home>/conf/server/log4j2.xml` file on a text editor and locate following line in it.
+2. Enable state persistence debug logs as follows. Open the `<SI_HOME>/conf/server/log4j2.xml` file on a text editor and locate following line in it.
 
     ```xml
      <Logger name="com.zaxxer.hikari" level="error"/>
@@ -473,7 +473,7 @@ Let's try out a scenario in which you deploy a Siddhi application to count the t
     insert into OutputStream;
     ```
 
-6. Save this file as `CountProductions.siddhi` in the `<SI-Home>/wso2/server/deployment/siddhi-files` directory. When the Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
+6. Save this file as `CountProductions.siddhi` in the `<SI_HOME>/wso2/server/deployment/siddhi-files` directory. When the Siddhi application is successfully deployed, the following `INFO` log appears in the WSO2 Integrator: SI console.
 
     ```bash
     INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App CountProductions deployed successfully

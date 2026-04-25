@@ -14,7 +14,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to receive ev
 
 ##### Publish events with http sample client
 
-Navigate to `<SI-Tooling-Home>/samples/sample-clients/http-client` and run `ant` command as follows:
+Navigate to `<SI_HOME>/samples/sample-clients/http-client` and run `ant` command as follows:
 
 ```bash
 ant -Dtype=xml -DcustomMapping=true

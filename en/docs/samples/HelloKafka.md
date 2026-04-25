@@ -8,7 +8,7 @@ This application demonstrates how to use the Kafka transport in Siddhi to receiv
 
     1. Download the Kafka broker from [here](https://www.apache.org/dyn/closer.cgi?path=/kafka/0.10.2.1/kafka_2.11-0.10.2.1.tgz)
 
-    2. Convert and copy the Kafka client jars from the `{KafkaHome}/libs` directory to the `<SI-Tooling-Home>/libs` directory as follows.
+    2. Convert and copy the Kafka client jars from the `{KafkaHome}/libs` directory to the `<SI_HOME>/libs` directory as follows.
         1. Create a directory named `{Source}` in a preferred location in your machine and copy the following JARs to it from the `{KafkaHome}/libs` directory.
             * kafka_2.11-0.10.2.1.jar
             * kafka-clients-0.10.2.1.jar
@@ -23,17 +23,17 @@ This application demonstrates how to use the Kafka transport in Siddhi to receiv
             * For Windows:
 
             ```bash
-            <SI-Tooling-Home>/bin/jartobundle.bat <{Source} Directory Path> <{Destination} Directory Path>
+            <SI_HOME>/bin/jartobundle.bat <{Source} Directory Path> <{Destination} Directory Path>
             ```
 
             * For Linux/macOS:
 
             ```bash
-            sh <SI-Tooling-Home>/bin/jartobundle.sh <{Source} Directory Path> <{Destination} Directory Path>
+            sh <SI_HOME>/bin/jartobundle.sh <{Source} Directory Path> <{Destination} Directory Path>
             ```
 
-        4. Add the OSGI converted kafka libs from `{Destination}` directory to `<SI-Tooling-Home>/lib`.
-        5. Add the original Kafka libs from `{Source}` to `<SI-Tooling-Home>/samples/sample-clients/lib`.
+        4. Add the OSGI converted kafka libs from `{Destination}` directory to `<SI_HOME>/lib`.
+        5. Add the original Kafka libs from `{Source}` to `<SI_HOME>/samples/sample-clients/lib`.
         6. Navigate to `{KafkaHome}` and start zookeeper node using following command.
 
             ```bash
@@ -65,16 +65,16 @@ This application demonstrates how to use the Kafka transport in Siddhi to receiv
 
 ## Testing the sample
 
-1. Navigate to `<SI-Tooling-Home>/samples/sample-clients/kafka-consumer` and run the following command.
+1. Navigate to `<SI_HOME>/samples/sample-clients/kafka-consumer` and run the following command.
 
     ```bash
     ant -DtopicList=kafka_result_topic -Dtype=xml -DpartitionList=0
     ```
 
-2. Navigate to `<SI-Tooling-Home>/samples/sample-clients/kafka-producer` and run the following command.
+2. Navigate to `<SI_HOME>/samples/sample-clients/kafka-producer` and run the following command.
 
     ```bash
-    ant -DtopicName=kafka_topic -DfilePath=<SI-Tooling-Home>/samples/artifacts/HelloKafka/kafka_sample.txt
+    ant -DtopicName=kafka_topic -DfilePath=<SI_HOME>/samples/artifacts/HelloKafka/kafka_sample.txt
     ```
 
     This command would publish the events in `kafka_sample` file to the Source Kafka Topic (named 'kafka_topic').

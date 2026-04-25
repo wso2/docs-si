@@ -5,7 +5,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
 
 ## Executing the sample
 
-1. Open a terminal and navigate to the `<SI-Tooling-Home>/samples/sample-clients/tcp-server` directory. Run the command:
+1. Open a terminal and navigate to the `<SI_HOME>/samples/sample-clients/tcp-server` directory. Run the command:
 
     ```bash
     ant -Dcontext=LowProductionAlertStream
@@ -23,7 +23,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
     * `Stream Name`: `SweetProductionStream`
 6. In the 'name' and 'amount' fields, enter 'toffee' and '45.24' respectively, and then click Send to send the event.
 7. Send some more events.
-8. Check the output in the terminal of `<SI-Tooling-Home>/samples/sample-clients/tcp-server`. You will see output similar to the following:
+8. Check the output in the terminal of `<SI_HOME>/samples/sample-clients/tcp-server`. You will see output similar to the following:
 
     ```bash
     [java] [org.wso2.si.tcp.server.TCPServer] : Event{timestamp=1512446413468, data=[toffee, 45.25], isExpired=false}

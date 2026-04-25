@@ -1,12 +1,8 @@
 # Step 7: Export the Siddhi Application as a Docker Artifact
 
-Once you have completed Steps 1–6, you can optionally export your Siddhi application as a Docker artifact for containerized deployment. Follow the procedure below.
+Once you have completed Steps 1–6, you can optionally export the `SweetFactoryApp` Siddhi application as a Docker artifact for containerized deployment. To do so, follow the procedure below:
 
-## Exporting the Siddhi application as a Docker artifact
-
-To export the `SweetFactoryApp` Siddhi application as a Docker artifact, follow the procedure below:
-
-1. Open VSCode in the directory where your Siddhi application is located.
+1. Open WSO2 Integrator in the directory where your Siddhi application is located.
 
 2. Open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS), and type **SI: Export Siddhi Apps to Docker**. Select this command.
 

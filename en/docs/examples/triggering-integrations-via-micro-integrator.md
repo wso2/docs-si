@@ -15,7 +15,7 @@ To understand this, consider a scenario where the WSO2 Integrator: SI receives p
 Let's design a Siddhi application that triggers an integration flow and deploy it by following the procedure below:
 
 
-1. In WSO2 Integrator: SI VSCode extension welcome page, click **Create New Siddhi Application** to open a new application.
+1. In WSO2 Integrator: SI welcome page, click **Create New Siddhi Application** to open a new application.
 
 2. Add a name and a description for your new Siddhi application as follows:
 
@@ -149,7 +149,7 @@ Let's design a Siddhi application that triggers an integration flow and deploy i
 
 9. Save the Siddhi application.
 
-10. Click the **Run** button in the WSO2 Integrator: SI VSCode extension to run the Siddhi application.
+10. Click the **Run** button in WSO2 Integrator: SI to run the Siddhi application.
 
 ## Configuring WSO2 Integrator: MI
 

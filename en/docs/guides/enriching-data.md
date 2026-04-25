@@ -123,9 +123,9 @@ To try out the examples given above, follow the steps below.
                 isAutoCommit: false
         ```
     
-2. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
+2. [Start and access WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
-3. Open a new file in the VSCode editor (with the WSO2 Integrator: SI extension installed). Then add and save the following Siddhi application.
+3. In WSO2 Integrator: SI, open a new file. Then add and save the following Siddhi application.
 
     ```
     @App:name('StockValuingApp')
@@ -195,7 +195,7 @@ To try out the examples given above, follow the steps below.
    
    4. Calculates the stock value by multiplying the latest stock with the unit value obtained from the external service. This is done by joining the `GetUnitValueStream` stream with the `LatestStockStream` stream. The result is then logges with the `Stock Value` prefix.
    
-4. In the VSCode editor (with the WSO2 Integrator: SI extension installed), create a new Siddhi application as follows, save it, and then start it.
+4. In the editor (with WSO2 Integrator: SI installed), create a new Siddhi application as follows, save it, and then start it.
 
     ```
     @App:name('ReturnUnitValueApp')

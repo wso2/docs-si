@@ -19,10 +19,10 @@ WSO2 Integrator: SI allows data to be received from multiple sources such as fil
 
 To understand how Streaming Integration is performed via the WSO2 Integrator: SI, follow the sections below.
 
-[**Step 1: Download WSO2 Integrator: SI and Dependencies**](download-install-and-start-si.md)<br/><br/>
+[**Step 1: Set up your environment and dependencies**](set-up-environment-and-dependencies.md)<br/><br/>
 [**Step 2: Create the Siddhi Application**](create-the-siddhi-application.md)<br/><br/>
 [**Step 3: Deploy the Siddhi Application**](deploy-siddhi-application.md)<br/><br/>
-[**Step 4: Run the Siddhi Application**](test-siddhi-application.md)<br/><br/>
+[**Step 4: Run the Siddhi Application**](run-siddhi-application.md)<br/><br/>
 [**Step 5: Update the Siddhi Application**](update-the-siddhi-application.md)<br/><br/>
 [**Step 6: Monitor Statistics**](monitor-statistics.md)<br/><br/>
 [**Step 7: Export the Siddhi Application as a Docker Artifact**](export-siddhi-application-as-docker.md)<br/><br/>

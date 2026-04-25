@@ -36,7 +36,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
 
 ## Executing the sample
 
-1. Open a terminal and navigate to the `<SI-Tooling-Home>/samples/sample-clients/rabbitmq-consumer` directory and run the `ant` command.
+1. Open a terminal and navigate to the `<SI_HOME>/samples/sample-clients/rabbitmq-consumer` directory and run the `ant` command.
     * If you use the default exchange `RABBITMQSAMPLE` and URI `amqp://guest:guest@localhost:5672` in your program use `ant` command without any arguments.
     * However, if you use different exchange names or URIs, run the `ant` command with appropriate arguments.
     e.g., `ant -Dexchange=rabbitMqtest`
@@ -58,7 +58,7 @@ PublishRabbitmqInXmlFormat.siddhi - Started Successfully!
 
 ## Viewing the results
 
-* See the output in the terminal of `<SI-Tooling-Home>/samples/sample-clients/rabbitmq-consumer`. You will get the output as follows (sample output for 4 events):
+* See the output in the terminal of `<SI_HOME>/samples/sample-clients/rabbitmq-consumer`. You will get the output as follows (sample output for 4 events):
 
 ```bash
 [java] [org.apache.axiom.om.util.StAXUtils] : XMLStreamReader is org.apache.axiom.util.stax.dialect.SJSXPStreamReaderWrapper

@@ -1,9 +1,8 @@
 # Configuring Data Sources
 
-In the WSO2 Integrator: SI, there are datasources specific to both the WSO2 Integrator: SI server and WSO2 Integrator: SI Tooling. The data sources of
-each runtime are defined in the `<SI_HOME>/conf/server/deployment.yaml` file.
+In WSO2 Integrator: SI, datasources are defined in the `<SI_HOME>/conf/server/deployment.yaml` file.
 
-e.g., To configure a data source in the server runtime, the relevant configurations need to be added in the `<SI_Home>/conf/server/deployment.yaml` file.
+e.g., To configure a data source in the server runtime, the relevant configurations need to be added in the `<SI_HOME>/conf/server/deployment.yaml` file.
 
 !!! note
 The embedded H2 databases shipped with your product are suitable for development and testing environments. However, for production environments, it is recommended to use an industry-standard RDBMS such as Oracle, PostgreSQL, MySQL, MS SQL, etc.
@@ -308,7 +307,7 @@ The following tables explain the default data sources configured in the WSO2 Int
     <tbody>
         <tr class="odd">
             <td>Database Access Requirement</td>
-            <td>This involves persisting the state of Siddhi Applications periodically in the database. State persistence is enabled by selecting the <code>org.wso2.carbon.stream.processor.core.persistence.DBPersistenceStore</code> class in the <code>state.persistence</code> section of the <code>&lt;SI_Home&gt;/conf/&lt;server&gt;/deployment.yaml</code> file. For more information, see <a href="https://ei.docs.wso2.com/en/latest/streaming-integrator/admin/configuring-Database-and-File-System-State-Persistence/">Configuring Database and File System State Persistence</a>.</td>
+            <td>This involves persisting the state of Siddhi Applications periodically in the database. State persistence is enabled by selecting the <code>org.wso2.carbon.stream.processor.core.persistence.DBPersistenceStore</code> class in the <code>state.persistence</code> section of the <code>&lt;SI_HOME&gt;/conf/&lt;server&gt;/deployment.yaml</code> file. For more information, see <a href="https://ei.docs.wso2.com/en/latest/streaming-integrator/admin/configuring-Database-and-File-System-State-Persistence/">Configuring Database and File System State Persistence</a>.</td>
         </tr>
         <tr class="even">
             <td>Required/Optional</td>
@@ -316,11 +315,11 @@ The following tables explain the default data sources configured in the WSO2 Int
         </tr>
         <tr class="odd">
             <td>Default Datasource Name</td>
-            <td>N/A. If state persistence is required, you need to configure the datasource in the <code>&lt;SI_Home&gt;/conf/&lt;server&gt;/deployment.yaml</code> file under <code>state.persistence</code> &gt;<code>config</code> &gt; <code>datasource</code> .</td>
+            <td>N/A. If state persistence is required, you need to configure the datasource in the <code>&lt;SI_HOME&gt;/conf/&lt;server&gt;/deployment.yaml</code> file under <code>state.persistence</code> &gt;<code>config</code> &gt; <code>datasource</code> .</td>
         </tr>
         <tr class="even">
             <td>Tables</td>
-            <td>N/A. If state persistence is required, you need to specify the table name to be used when persisting the state in the <code>&lt;SI_Home&gt;/conf/&lt;server&gt;/deployment.yaml</code> file under <code>state.persistence</code> &gt; <code>config</code> &gt; <code>table</code> .</td>
+            <td>N/A. If state persistence is required, you need to specify the table name to be used when persisting the state in the <code>&lt;SI_HOME&gt;/conf/&lt;server&gt;/deployment.yaml</code> file under <code>state.persistence</code> &gt; <code>config</code> &gt; <code>table</code> .</td>
         </tr>
         <tr class="odd">
             <td>Schemas and Queries</td>

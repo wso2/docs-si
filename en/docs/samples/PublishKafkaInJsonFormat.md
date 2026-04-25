@@ -13,8 +13,8 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
 		* scala-library-2.11.8.jar
 		* zkclient-0.8.jar
 		* zookeeper-3.4.6.jar
-	3. Copy these same files to the `<SI-Tooling-Home>/samples/sample-clients/lib` folder.
-	4. Navigate to `<SI-Home>/bin` and issue the following command:
+	3. Copy these same files to the `<SI_HOME>/samples/sample-clients/lib` folder.
+	4. Navigate to `<SI_HOME>/bin` and issue the following command:
 		* For Linux/macOS:
 			```bash
 			./jartobundle.sh <path/kafka> <path/kafka-osgi>
@@ -27,7 +27,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
 		```
 		- INFO: Created the OSGi bundle <kafka-lib-name>.jar for JAR file <absolute_path>/kafka/<kafka-lib-name>.jar
 		```
-	5. Copy the OSGi-converted kafka libs from the `kafka-osgi` folder to `<SI-Tooling-Home>/lib`.
+	5. Copy the OSGi-converted kafka libs from the `kafka-osgi` folder to `<SI_HOME>/lib`.
 2. Save this sample.
 3. If there is no syntax error, the following message is shown on the console:
 	```
@@ -44,7 +44,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
 	```bash
 	bin/kafka-server-start.sh config/server.properties
 	```
-3. Navigate to `<SI-Tooling-Home>/samples/sample-clients/kafka-consumer` and run the `ant` command without arguments.
+3. Navigate to `<SI_HOME>/samples/sample-clients/kafka-consumer` and run the `ant` command without arguments.
 4. Start the Siddhi application by clicking on 'Run'.
 5. If the Siddhi application starts successfully, the following messages are shown on the console:
 
@@ -104,7 +104,7 @@ Send events through one or more of the following methods.
 
 ## Viewing the results
 
-See the output on the terminal of `<SI-Tooling-Home>/samples/sample-clients/kafka-consumer`:
+See the output on the terminal of `<SI_HOME>/samples/sample-clients/kafka-consumer`:
 ```
 [java] [org.wso2.si.sample.kafka.consumer.KafkaReceiver] : Event received in Kafka Event Adaptor: {"event":{"name":"chocolate cake","amount":50.50}}, offSet: 0, key: null, topic: kafka_result_topic, partition: 0
 [java] [org.apache.kafka.clients.consumer.internals.ConsumerCoordinator] : Committed offset 1 for partition kafka_result_topic-0

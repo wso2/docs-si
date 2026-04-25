@@ -14,7 +14,7 @@ This application demonstrates how to perform Cassandra operations using Siddhi q
 1. Ensure that Cassandra version 3 or above is installed on your machine.
 2. Add the DataStax Java driver into `{WSO2_SI_HOME}/lib` as follows:
     1. Download the [DataStax Java driver](https://repo1.maven.org/maven2/com/datastax/cassandra/cassandra-driver-core/3.3.2/cassandra-driver-core-3.3.2.jar)
-    2. Use the `jartobundle` tool in `{WSO2_SI_Home}/bin` to extract and convert the above JARs into OSGi bundles.
+    2. Use the `jartobundle` tool in `<SI_HOME>/bin` to extract and convert the above JARs into OSGi bundles.
 
         * For Windows:
 
@@ -30,7 +30,7 @@ This application demonstrates how to perform Cassandra operations using Siddhi q
 
         **Note: Please skip this step if the jar is already OSGi bunbled.**
 
-    3. Copy the converted bundles to the {WSO2_SI_Home}/lib directory.
+    3. Copy the converted bundles to the <SI_HOME>/lib directory.
 
 3. Create a keyspace named `production` in Cassandra store:
 

@@ -4,7 +4,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to receive ev
 
 ## Executing the sample
 
-1. Navigate to `<SI-Tooling-Home>/samples/sample-clients/websocket-producer` and run `ant` command as follows:
+1. Navigate to `<SI_HOME>/samples/sample-clients/websocket-producer` and run `ant` command as follows:
     Run `ant` command in the terminal.
 
     ```bash

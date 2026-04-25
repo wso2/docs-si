@@ -74,19 +74,19 @@ strict: false # Set to true to break the build if there are warnings
 nav:
   - 'Home': index.md
   - 'Get Started':
-    - 'Introduction': 'overview/overview.md'
-    - 'Quick Start Guide': 'quick-start-guide/quick-start-guide.md'
+    - 'Introduction': 'get-started/introduction.md'
+    - 'Quick Start Guide': 'get-started/quick-start-guide.md'
     - 'Creating Your First Siddhi Application':
-      - 'Streaming Integration Overview': 'quick-start-guide/getting-started/getting-started-guide-overview.md'
-      - 'Step 1: Download and Install WSO2 Integrator: SI': 'quick-start-guide/getting-started/download-install-and-start-si.md'
-      - 'Step 2: Create the Siddhi Application': 'quick-start-guide/getting-started/create-the-siddhi-application.md'
-      - 'Step 3: Deploy the Siddhi Application': 'quick-start-guide/getting-started/deploy-siddhi-application.md'
-      - 'Step 4: Run the Siddhi Application': 'quick-start-guide/getting-started/test-siddhi-application.md'
-      - 'Step 5: Update the Siddhi Application': 'quick-start-guide/getting-started/update-the-siddhi-application.md'
-      - 'Step 6: Monitor Statistics': 'quick-start-guide/getting-started/monitor-statistics.md'
-      - 'Step 7: Export the Siddhi Application as a Docker Artifact': 'quick-start-guide/getting-started/export-siddhi-application-as-docker.md'
-    - 'Architecture': 'overview/architecture.md'
-    - 'Key Concepts': 'concepts/concepts.md'
+      - 'Streaming Integration Overview': 'get-started/first-siddhi-app/overview.md'
+      - 'Step 1: Set up your environment and dependencies': 'get-started/first-siddhi-app/set-up-environment-and-dependencies.md'
+      - 'Step 2: Create the Siddhi Application': 'get-started/first-siddhi-app/create-the-siddhi-application.md'
+      - 'Step 3: Deploy the Siddhi Application': 'get-started/first-siddhi-app/deploy-siddhi-application.md'
+      - 'Step 4: Run the Siddhi Application': 'get-started/first-siddhi-app/run-siddhi-application.md'
+      - 'Step 5: Update the Siddhi Application': 'get-started/first-siddhi-app/update-the-siddhi-application.md'
+      - 'Step 6: Monitor Statistics': 'get-started/first-siddhi-app/monitor-statistics.md'
+      - 'Step 7: Export the Siddhi Application as a Docker Artifact': 'get-started/first-siddhi-app/export-siddhi-application-as-docker.md'
+    - 'Architecture': 'get-started/architecture.md'
+    - 'Key Concepts': 'get-started/key-concepts.md'
     - 'About this Release' : 'get-started/about-this-release.md'
   - 'Learn':
     - 'Use Cases':
@@ -117,7 +117,6 @@ nav:
     - 'Examples':
       - 'Consuming Data':
         - 'Receiving JSON Events via TCP': 'samples/ReceiveTCPinJSONFormat.md'
-        - 'Publishing Events to a Google Pub/Sub Topic': 'samples/PublishGooglePubSubMessagesInTextFormat.md'
         - 'Publishing and Receiving CSV Events via Files': 'samples/CSVDefaultMapping.md'
         - 'Capturing MySQL Inserts via CDC': 'samples/CDCWithListeningMode.md'
         - 'Receiving Messages from a Google Pub/Sub Topic': 'samples/ReceiveGooglePubSubMessagesInTextFormat.md'
@@ -125,28 +124,20 @@ nav:
         - 'Receiving Binary Events via TCP': 'samples/ReceiveTCPinBinaryFormat.md'
         - 'Receiving Binary Events via Kafka': 'samples/ReceiveKafkaInBinaryFormat.md'
         - 'Receiving XML Events via HTTP': 'samples/ReceiveHTTPInXMLFormatWithDefaultMapping.md'
-        - 'Working with an influxDB Store': 'samples/store-influxdb.md'
         - 'Capturing MySQL Inserts and Updates via CDC Polling Mode': 'samples/CDCWithPollingMode.md'
-        - 'Publishing HTTP Events to an OAuth-protected Endpoint while Using a Refresh Token Grant Type': 'samples/PublishHttpOAuthRequestWithRefreshToken.md'
-        - 'Publishing HTTP Events via an OAuth-protected Endpoint': 'samples/PublishHttpOAuthRequestResponse.md'
-        - 'Receiving Events via Simulator and Persisting in SOLR Store': 'samples/Store-solr.md'
-        - 'Receiving Events via HTTP Transport': 'samples/ReceiveAndCount.md'
         - 'Receiving Events via File': 'samples/ReceiveEventsFromFile.md'
         - 'Receiving XML Events via Email': 'samples/ReceiveEmailInXmlFormat.md'
         - 'Receiving JSON Events via RabbitMQ': 'samples/ReceiveRabbitmqInJSONFormat.md'
-        - 'Receive Events via Simulator and Persist in Cassandra Store': 'samples/Store-cassandra.md'
+        - 'Receiving ER7 Events via HL7': 'samples/ReceiveHl7InER7Format.md'
       - 'Transforming Data':
         - 'Publishing HTTP Events to an OAuth-protected Endpoint': 'samples/PublishHttpOAuthRequest.md'
         - 'Publishing HTTP Events to an OAuth-protected Endpoint without an Access Token': 'samples/PublishHttpOAuthRequestWithoutAccessToken.md'
-        - 'Receiving ER7 Events via HL7': 'samples/ReceiveHl7InER7Format.md'
         - 'Preprocessing Data Received via TCP': 'samples/DataPreprocessing.md'
         - 'Publishing ER7 Events via HL7': 'samples/PublishHl7InER7Format.md'
         - 'Receiving Data via TCP and Preprocessing': 'samples/SweetProductionDataPreprocessing.md'
         - 'Receiving and Publishing Events in Custom CSV Format': 'samples/CSVCustomMapping.md'
         - 'Sending Custom JSON Events via HTTP': 'samples/PublishHTTPInJsonFormatWithCustomMapping.md'
-        - 'Publishing Text Events via Email': 'samples/PublishEmailInTextFormat.md'
         - 'Receiving Custom Text Events via Kafka': 'samples/ReceiveKafkaInTextFormatWithCustomMapping.md'
-        - 'Using Javascript Functions in Siddhi Applications': 'samples/Script-js-sample.md'
         - 'Publishing Custom Avro Events via Kafka': 'samples/PublishKafkaInCustomAvroFormat.md'
         - 'Receiving Custom XML Messages via HL7': 'samples/ReceiveHl7InXmlFormat.md'
         - 'Receiving Custom Text Events via TCP': 'samples/ReceiveTCPInTextFormatWithCustomMapping.md'
@@ -183,9 +174,6 @@ nav:
         - 'Performing Streaming Learning Using a Clustree Model': 'samples/ClusTreeTestApp.md'
         - 'Receiving XML Events via Websocket': 'samples/ReceiveWebSocketInXMLFormat.md'
       - 'Aggregating Data':
-        - 'Preprocessing Data Received via TCP': 'samples/DataPreprocessing.md'
-        - 'Receiving Data via TCP and Preprocessing': 'samples/SweetProductionDataPreprocessing.md'
-        - 'Publishing Text Events via Email': 'samples/PublishEmailInTextFormat.md'
         - 'Calculating Aggregations Over Time': 'samples/AggregateOverTime.md'
         - 'Receiving Events via HTTP Transport': 'samples/ReceiveAndCount.md'
         - 'Aggregating Data Incrementally': 'samples/AggregateDataIncrementally.md'
@@ -194,7 +182,6 @@ nav:
       - 'Correlating Data':
         - 'Making Predictions via PMML Model': 'samples/PmmlModelProcessor.md'
         - 'Making Predictions via a Regressor Model': 'samples/StreamingRegressor.md'
-        - 'Extracting Values from a String': 'samples/GplNLPFindNameEntityType.md'
         - 'Performing Regression Tasks via an Imported Tensorflow Model': 'samples/TensorFlowTestApp.md'
         - 'Publishing XML Events via MQTT': 'samples/PublishMqttInXmlFormat.md'
         - 'Identifying Event Patterns Based On Order of Event Arrival': 'samples/PatternMatching.md'
@@ -209,7 +196,6 @@ nav:
         - 'Calculating the Distance Between Two Locations': 'samples/GeoDistanceCalculation.md'
       - 'Publishing Data':
         - 'Publishing Text Events via TCP': 'samples/PublishTcpInTextFormat.md'
-        - 'Receiving ER7 Events via HL7': 'samples/ReceiveHl7InER7Format.md'
         - 'Publishing Events to a Google Pub/Sub Topic': 'samples/PublishGooglePubSubMessagesInTextFormat.md'
         - 'Publishing Binary Events via TCP': 'samples/PublishTcpInBinaryFormat.md'
         - 'Publishing XML Events via WebSocket': 'samples/PublishWebSocketInXmlFormat.md'
@@ -227,6 +213,7 @@ nav:
         - 'Publishing Avro Events via Kafka': 'samples/PublishKafkaInAvroFormatUsingSchemaRegistry.md'
         - 'Publishing Aggregated Events to the Amazon AWS S3 Bucket': 'samples/AmazonS3SinkSample.md'
         - 'Publishing Events to a GCS Bucket': 'samples/GCSSinkSample.md'
+        - 'Publishing Text Events via Email': 'samples/PublishEmailInTextFormat.md'
   - Setup and Install:
     - 'Install':
       - 'Installing the WSO2 Integrator: SI':
@@ -259,13 +246,10 @@ nav:
       - 'Configuring Default Ports': 'ref/configuring-default-ports.md'
       - 'Enabling Logs for Received Event Count': 'admin/monitoring-received-events-count-via-logs.md'
   - 'Develop':
-    - 'Developing WSO2 Integrator: SI Solutions': 'develop/developing-streaming-integration-solutions.md'
-    - 'WSO2 Integrator: SI Tooling':
-      - 'Overview WSO2 Integrator: SI for VS Code': 'develop/si-for-vscode-overview.md'
-      - 'Install WSO2 Integrator: SI for VS Code': 'develop/install-si-for-vscode.md'
-      - 'Working with the Graphical View': 'develop/working-with-the-graphical-view.md'
-    - 'Creating Siddhi Applications': 'develop/creating-a-Siddhi-Application.md'
-    - 'Installing Siddhi Extensions': 'develop/installing-siddhi-extensions.md'
+    - 'Overview': 'develop/si-for-vscode-overview.md'
+    - 'Working with the Graphical View': 'develop/working-with-the-graphical-view.md'
+    - 'Build a Siddhi Application with the Graphical View': 'develop/build-siddhi-app-with-graphical-view.md'
+    - 'Configuring Extension Dependencies': 'develop/installing-siddhi-extensions.md'
     - 'Running and Testing Siddhi Applications': 'develop/testing-a-Siddhi-Application.md'
     - 'Exporting Siddhi Applications': 'develop/exporting-Siddhi-Applications.md'
   - 'Observability':

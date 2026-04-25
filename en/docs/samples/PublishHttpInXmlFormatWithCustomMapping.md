@@ -27,7 +27,7 @@ This application demonstrates how to configure WSO2 Integrator: SI to send sweet
 
 ## Testing the sample
 
-Open a terminal and navigate to `<SI-Tooling-Home>/samples/sample-clients/http-server`.  Then run the `ant` command without any arguments. Send events using one or more of the following methods:
+Open a terminal and navigate to `<SI_HOME>/samples/sample-clients/http-server`.  Then run the `ant` command without any arguments. Send events using one or more of the following methods:
 
 ##### Send events with the HTTP server through the event simulator
 

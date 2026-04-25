@@ -19,7 +19,7 @@ This tutorial demonstrates how you can use the Siddhi query API to perform essen
 
 !!!tip "Before you begin:"
     - You need to have access to a MySQL instance. Steps 1–3 in **Preparing the server** below require a MySQL account that can create schemas, users, and grants (typically `root`). The Siddhi application created in subsequent sections then connects as the `wso2si` user created in step 2.<br/>
-    - Make sure the MySQL JDBC driver is installed in `<SI_HOME>/lib`. See [Adding the MySQL JDBC driver](../quick-start-guide/getting-started/download-install-and-start-si.md#adding-the-mysql-jdbc-driver) for the steps.<br/>
+    - Make sure the MySQL JDBC driver is installed in `<SI_HOME>/lib`. See [Adding the MySQL JDBC driver](../get-started/first-siddhi-app/set-up-environment-and-dependencies.md#adding-the-mysql-jdbc-driver) for the steps.<br/>
 
 1. Let's create a new database in the MySQL server which you are to use throughout this tutorial. To do this, execute the following query.
     ```

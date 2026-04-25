@@ -4,8 +4,8 @@ The WSO2 Integrator: SI allows the following tasks to be carried
 out to ensure that the Siddhi applications you create and deploy are
 validated before they are run in an actual production environment.
 
--   Validate Siddhi applications that are written using the WSO2 Integrator: SI VSCode extension.
--   Run Siddhi applications that were written using the WSO2 Integrator: SI VSCode extension.
+-   Validate Siddhi applications that are written using  WSO2 Integrator: SI.
+-   Run Siddhi applications that were written using  WSO2 Integrator: SI.
 -   Simulate events to test the Siddhi applications and analyze events
     that are received and sent. This allows you to analyze the status of
     each query within a Siddhi application at different execution
@@ -15,7 +15,7 @@ validated before they are run in an actual production environment.
 
 To validate a Siddhi application, follow the procedure below:
 
-1.  Open the VSCode within the workspace that contains the Siddhi application.
+1.  Open the WSO2 Integrator: SI within the workspace that contains the Siddhi application.
 
 2.  In this example, we are using the **ReceiveAndCount** sample from [Siddhi Application Overview](./siddhi-Application-Overview.md). Copy the entire Siddhi application code
     and paste it in a new file. Save the file with a `.siddhi` extension.
@@ -68,7 +68,7 @@ To validate a Siddhi application, follow the procedure below:
 You can run a Siddhi application to verify whether the logic
 you have written is correct. To start a Siddhi application, follow the procedure below:
 
-1.  Open the application in VSCode.
+1.  Open the application in WSO2 Integrator: SI.
 
 2.  In the editor, click the **Run** button (▶️) in the toolbar.
 
@@ -97,7 +97,7 @@ via the WSO2 Integrator: SI.
 
 To simulate a single event, follow the steps given below.
 
-1.  Run the Siddhi application from the VSCode editor. It will pop up the **WSO2 Integrator: SI Event Simulator** panel.
+1.  Run the Siddhi application from the editor. It will pop up the **WSO2 Integrator: SI Event Simulator** panel.
     
 2.  Click the **Single Simulation** panel.
     It opens the left panel for event simulation as follows.
@@ -135,7 +135,7 @@ be analyzed via the WSO2 Integrator: SI.
 To simulate multiple events from a CSV file, follow the steps given
 below.
 
-1.  Run the Siddhi application from the VSCode editor. It will pop up the **WSO2 Integrator: SI Event Simulator** panel.
+1.  Run the Siddhi application from the editor. It will pop up the **WSO2 Integrator: SI Event Simulator** panel.
     
 2.  Click the **Feed Simulation** panel.
     It opens the left panel for event simulation as follows.
@@ -209,7 +209,7 @@ This section explains how to generate multiple events via databases to be analyz
     
 To simulate multiple events from a database, follow the procedure below:
 
-1. Run the Siddhi application from the VSCode editor. It will pop up the **WSO2 Integrator: SI Event Simulator** panel.
+1. Run the Siddhi application from the editor. It will pop up the **WSO2 Integrator: SI Event Simulator** panel.
 
 2.  Click the **Feed Simulation** panel.
     It opens the left panel for event simulation as follows.
@@ -266,7 +266,7 @@ To simulate multiple events from a database, follow the procedure below:
 
 6.  Click **Save**. This adds the fed simulation you created as an active simulation in the **Feed Simulation** tab of the left panel as shown below.
 
-    ![Feed simulation added]({{base_path}}/images/Testing-Siddhi-Applications/Created_Feed-Simulation.png)
+    ![Feed simulation added]({{base_path}}/images/Testing-Siddhi-Applications/Created_Feed_Simulation.png)
 
 7.  Click on the play button of this simulation to open the **Start the Siddhi Application** dialog box.
 
@@ -283,7 +283,7 @@ This section explains how to generate random data to be analyzed via the WSO2 In
     
 To simulate random events, follow the steps given below:
 
-1. Run the Siddhi application from the VSCode editor. It will pop up the **WSO2 Integrator: SI Event Simulator** panel.
+1. Run the Siddhi application from the editor. It will pop up the **WSO2 Integrator: SI Event Simulator** panel.
 
 2.  Click the **Feed Simulation** panel.
     It opens the left panel for event simulation as follows.
@@ -333,8 +333,7 @@ To simulate random events, follow the steps given below:
                 **Custom data based** from the list. When you select
                 this value, data field in which the required value can
                 be entered appears as shown in the example below.  
-                ![Custom data based simulation]({{base_path}}/images/Testing-Siddhi-Applications/Custom-data-based.png){width="235"
-                height="88"}
+                ![Custom data based simulation]({{base_path}}/images/Testing-Siddhi-Applications/Custom-data-based.png)
             -   To enter a primitive based value, select **Primitive
                 based** from the list. The information to be entered
                 varies depending on the data type of the attribute. The

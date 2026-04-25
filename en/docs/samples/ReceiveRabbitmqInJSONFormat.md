@@ -35,7 +35,7 @@ Check whether the exchange 'rabbitmq_sample' is created in the rabbitmq server o
 
 ##### Publish events with rabbitmq sample publisher
 
-Open a terminal and issue command from the `<SI-Tooling-Home>/samples/sample-clients/rabbitmq-producer` and run `ant` command.
+Open a terminal and issue command from the `<SI_HOME>/samples/sample-clients/rabbitmq-producer` and run `ant` command.
 If you want to publish custom number of events, you need to run `ant` command as follows:
 
 ```bash

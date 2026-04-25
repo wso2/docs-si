@@ -44,36 +44,6 @@ wso2.carbon:
 | 9443 | HTTPS netty transport |
 
 
-## WSO2 Integrator: SI Tooling runtime
-
-|      |                       |
-|------|-----------------------|
-| 9390 | HTTP netty transport  |
-| 9743 | HTTPS netty transport |
-
-## Dashboard runtime
-
-|      |                       |
-|------|-----------------------|
-| 9290 | HTTP netty transport  |
-| 9643 | HTTPS netty transport |
-
-!!! tip
-    The following example shows how to overide the default netty port for the WSO2 Integrator: SI Tooling by updating the required parameters in the `<SI_HOME>/conf/server/deployment.yaml` file.
-
-    ``` xml
-        wso2.transport.http:
-         transportProperties:
-          listenerConfigurations:
-         -
-              id: "default"
-         port: 9390
-            -
-              id: "msf4j-https"
-         port: 9743
-    ```
-
-
 ## Clustering Ports
 
 Ports that are required for clustering deployment:

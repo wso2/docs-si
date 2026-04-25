@@ -5,7 +5,7 @@ This application demonstrates how to use `siddhi-io-file` for receiving.
 
 ## Prerequisites
 
-1. Edit this sample file by replacing `<SI-Tooling-Home>` with the absolute path of your WSO2SI Tooling home directory.
+1. Edit this sample file by replacing `<SI_HOME>` with the absolute path of your SI installation.
 2. Save this sample.
 
 ## Executing the sample
@@ -17,14 +17,14 @@ This application demonstrates how to use `siddhi-io-file` for receiving.
     ReceiveEventsFromFile.siddhi - Started Successfully!
     ```
 
-3. Check the directories `<SI-Tooling-Home>/samples/artifacts/ReceiveEventsFromFile/files/consumed` and `new`.
+3. Check the directories `<SI_HOME>/samples/artifacts/ReceiveEventsFromFile/files/consumed` and `new`.
 4. All the files which were in the directory `new` should have been moved to `consumed` directory.
 
 ## Note
 
 If the sample is not running and producing output, do the following first.
 
-* Move all the files in `<SI-Tooling-Home>/samples/artifacts/ReceiveEventsFromFile/files/consumed` directory to `<SI-Tooling-Home>/samples/artifacts/ReceiveEventsFromFile/files/new`.
+* Move all the files in `<SI_HOME>/samples/artifacts/ReceiveEventsFromFile/files/consumed` directory to `<SI_HOME>/samples/artifacts/ReceiveEventsFromFile/files/new`.
 * Delete all the files in consumed and sink directories.
 
 ## Viewing the results
@@ -40,10 +40,10 @@ INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - ReceiveEventsF
 @App:name('ReceiveEventsFromFile')
 
 @source(type='file', mode='text.full',
-dir.uri='file:/<SI-Tooling-Home>/samples/artifacts/ReceiveEventsFromFile/files/new',
+dir.uri='file:/<SI_HOME>/samples/artifacts/ReceiveEventsFromFile/files/new',
 action.after.process='move',
 tailing='false',
-move.after.process='file:/<SI-Tooling-Home>/samples/artifacts/ReceiveEventsFromFile/files/consumed',
+move.after.process='file:/<SI_HOME>/samples/artifacts/ReceiveEventsFromFile/files/consumed',
 @map(type='json'))
 define stream SweetProductionStream (name string, amount double);
 

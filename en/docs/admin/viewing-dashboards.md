@@ -1,4 +1,4 @@
-# Monitoring ETL Flows with Grafana
+# Monitoring ETL Statistics with Grafana
 
 !!! tip "Before you begin:"
     To enable WSO2 Integrator: SI to publish statistics in Grafana, follow the instructions in [Setting up Grafana to Display SI Statistics](../admin/setting-up-grafana-dashboards.md).

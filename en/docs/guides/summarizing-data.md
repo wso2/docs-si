@@ -122,9 +122,9 @@ To try out the example given above, follow the procedure below:
             isAutoCommit: false
     ```
     
-2. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
+2. [Start and access WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
-3. Open a new file in the VSCode editor (with the WSO2 Integrator: SI extension installed). Then add and save the following Siddhi application.
+3. In WSO2 Integrator: SI, open a new file. Then add and save the following Siddhi application.
 
     ```
     @App:name('ProductionAggregatesApp')
@@ -172,7 +172,7 @@ To try out the example given above, follow the procedure below:
     
 5. To retrieve the information you stored, simulate an event for the `ProductionSummaryRetrievalStream` stream with `brownie` as the value for `name'. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
 
-    The VSCode editor (with the WSO2 Integrator: SI extension installed) terminal displays the following logs.
+    The editor (with WSO2 Integrator: SI installed) terminal displays the following logs.
     
     ![Aggregate Logs]({{base_path}}/images/processing-data/aggregate-logs.png)
     
@@ -261,7 +261,7 @@ The following are a few examples of how short time summarizations can be perform
 
 To try out the four sample queries given above, follow the steps below:
 
-1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
+1. [Start and access WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
 2. Open a new file. Then add and save the following Siddhi application.
 

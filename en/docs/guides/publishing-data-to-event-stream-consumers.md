@@ -61,13 +61,13 @@ To try out the above example, follow the steps below:
     insert into OutputStream;
     ```
    
-    This Siddhi application listens for events in the `http://localhost:5005/stocks` endpoint and logs them in the VSCode editor (with the WSO2 Integrator: SI extension installed) console.
+    This Siddhi application listens for events in the `http://localhost:5005/stocks` endpoint and logs them in the WSO2 Integrator: SI console.
     
 3. Start both the Siddhi applications. To do this, open each Siddhi application and click the **Play** icon.
 
     ![Play]({{base_path}}/images/extracting-data-from-static-sources/play.png)
     
-4. Simulate an event with the following values for the `InputStream` stream of the `PublishStockUpdatesApp` Siddhi application. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md). This step requires the VSCode editor with the WSO2 Integrator: SI extension installed.
+4. Simulate an event with the following values for the `InputStream` stream of the `PublishStockUpdatesApp` Siddhi application. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md). This step requires WSO2 Integrator: SI.
 
     | **Attribute** | **Value** |
     |---------------|-----------|
@@ -75,7 +75,7 @@ To try out the above example, follow the steps below:
     | **price**     | `100`     |
     | **volume**    | `20`      |
     
-    As a result, the `ListenToStockUpdatesApp` Siddhi application prints the following log in the VSCode editor (with the WSO2 Integrator: SI extension installed) console.
+    As a result, the `ListenToStockUpdatesApp` Siddhi application prints the following log in the WSO2 Integrator: SI console.
     
     ```
     [2020-10-28_10-59-20_463] INFO {io.siddhi.core.stream.output.sink.LogSink} - Stock Updates : Event{timestamp=1603862960462, data=[ABC, 100.0, 20], isExpired=false} 
@@ -147,7 +147,7 @@ To try out the example in the previous subtopic, follow the steps below:
         
 3. Prepare WSO2 Integrator: SI to publish data to a Kafka topic as follows:
 
-    1. Download and install the Kafka extension via VSCode. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
+    1. Download and install the Kafka extension. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
     
     2. Open a new file and add the following Siddhi application to it.
 
@@ -174,7 +174,7 @@ To try out the example in the previous subtopic, follow the steps below:
         
     4. Simulate an event for the `TemperatureStream` stream of the `TemperaturePublishingApp` Siddhi application. In this example, let's enter `30` as the value for the `temperature` attribute.
 
-        For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md). This step requires the VSCode editor with the WSO2 Integrator: SI extension installed.
+        For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md). This step requires the editor with WSO2 Integrator: SI installed.
         
     5. To retrieve the events published to the Kafka topic, issue the following command from `<KAFKA_HOME>`
     

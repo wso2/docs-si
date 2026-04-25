@@ -10,7 +10,7 @@ Siddhi App PublishWebSocketInXmlFormat successfully deployed.
 
 ## Executing the sample
 
-1. Open a terminal and navigate to the `<SI-Tooling-Home>/samples/sample-clients/websocket-receiver` directory and run the `ant` command.
+1. Open a terminal and navigate to the `<SI_HOME>/samples/sample-clients/websocket-receiver` directory and run the `ant` command.
 	* If you use the default host 'localhost' and port '8025' in your program use `ant` command without any arguments.
 	* However, if you use different host or port, run the `ant` command with appropriate arguments.
 	e.g., `ant -Dport=9025`
@@ -27,7 +27,7 @@ Siddhi App PublishWebSocketInXmlFormat successfully deployed.
 	* `Stream Name`: `SweetProductionStream`
 6. In the 'name' and 'amount' fields, enter 'toffee' and '45.24' respectively, and then click Send to send the event.
 7. Send some more events.
-8. Check the output in the terminal of `<SI-Tooling-Home>/samples/sample-clients/websocket-receiver`. You will see output similar to the following:
+8. Check the output in the terminal of `<SI_HOME>/samples/sample-clients/websocket-receiver`. You will see output similar to the following:
 
 ```bash
 WebSocketSample : logStream : Event{timestamp=1517982716368, data=[toffee, 45.25], isExpired=false}

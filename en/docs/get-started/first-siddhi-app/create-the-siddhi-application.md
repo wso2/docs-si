@@ -8,28 +8,25 @@ The following image depicts the procedure to be followed by the Siddhi applicati
 
 ![Siddhi Application Flow]({{base_path}}/images/quick-start-guide-101/scenario.png)
 
-## Set up the VSCode editor
+## Open the WSO2 Integrator welcome page
 
-1. Install **Visual Studio Code** editor, if not already installed.
+1. If you have not already done so, install WSO2 Integrator and switch to the WSO2 Integrator: SI profile (see [Step 1: Set up your environment and dependencies](set-up-environment-and-dependencies.md#setting-up-wso2-integrator-si)).
 
-2. Install the **WSO2 Integrator: SI** extension in Visual Studio Code. To do this, follow the steps below:
+2. Open WSO2 Integrator. Open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS), type `WSO2 Integrator: Open Welcome Page`, and select it. The welcome page opens.
 
-    1. Open Visual Studio Code and click on the **Extensions** icon in the left pane.
-
-    2. Search for **WSO2 Integrator: SI** in the marketplace and install it.
+    ![WSO2 Integrator home page](http://localhost:8000/images/qsg/wso2-integrator-home.png)
 
     !!! note
-        SI commands appear in the VSCode command palette only after the **WSO2 Integrator: SI** extension activates, which happens when a `.siddhi` file is open. If typing `SI:` in the palette returns no results, open or create a `.siddhi` file first and then reopen the palette.
+        WSO2 Integrator: SI commands appear in the WSO2 Integrator command palette only after WSO2 Integrator: SI activates, which happens when a `.siddhi` file is open. If typing `SI:` in the palette returns no results, open or create a `.siddhi` file first and then reopen the palette.
 
-3. Access the **WSO2 Integrator: SI** Welcome page by typing and selecting `SI: Open SI Welcome` in the command palette. You can open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS).
+3. On the welcome page, click **Configure** in the top right corner, and select **WSO2 Integrator: SI** under **Select your Integration Profile** (if you have not already done so).
 
-    ![Welcome Page]({{base_path}}/images/Creating-Siddhi-Applications/Welcome-Page.png)
-
-4. Create a new Siddhi file by clicking on **+ Create New Siddhi Application**.
-
-    The new file opens as follows.
+4. Create a new project. A new `.siddhi` file opens for you to work in.
 
     ![New Siddhi File]({{base_path}}/images/Creating-Siddhi-Applications/New_Siddhi_File.png)
+
+!!! tip "Prefer to build visually?"
+    Siddhi applications can also be designed visually in the **Graphical View** by dragging and dropping flow constructs. For a worked example, see [Build a Siddhi Application with the Graphical View](../../develop/build-siddhi-app-with-graphical-view.md).
 
 ## Name the Siddhi application
 
@@ -125,28 +122,29 @@ insert  into ProductionUpdatesStream;
 
 ## Installing the required extensions
 
-The WSO2 Integrator: SI is by default shipped with most of the available Siddhi extensions by default. If a Siddhi extension you require is not shipped by default, you can download and install it via the Extension Installer tool. The `SweetFactoryApp` Siddhi application you created uses a source of the `cdc` type. The `cdc-mysql` extension that is required for this source is not shipped with WSO2 Integrator: SI by default. Therefore, let's install it as follows.
+WSO2 Integrator: SI is shipped with most of the available Siddhi extensions by default. If a Siddhi extension you require is not shipped by default, you can download and install it via the **Extension Installer** panel. The `SweetFactoryApp` Siddhi application you created uses a source of the `cdc` type. The `cdc-mysql` extension that is required for this source is not shipped with WSO2 Integrator: SI by default. Therefore, let's install it as follows.
 
-1. In the VSCode editor, open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS) and type `SI: Extension Installer`. Then select the **SI: Extension Installer** option.
+1. In WSO2 Integrator, open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS) and type `SI: Extension Installer`. Then select the **SI: Extension Installer** option.
 
     ![Extension Installer Dialog Box]({{base_path}}/images/quick-start-guide-101/extension-installer-dialog.png)
 
     Click **Install** for **Change Data Capture - MySQL**.
 
-2. Reload VSCode.
+2. Reload WSO2 Integrator.
+
+!!! tip "Alternative: install from the terminal"
+    You can also install Siddhi extensions on the SI runtime directly from the terminal — useful for production setups that don't use WSO2 Integrator. From the `<SI_HOME>/bin` directory, run `./extension-installer.sh install cdc-mysql` (on Linux/macOS) or `extension-installer.bat install cdc-mysql` (on Windows). When the installation completes, restart the SI server.
 
 ## Testing the Siddhi application
 
-Before deploying the `SweetFactoryApp` Siddhi application to the WSO2 Integrator: SI Server, you need to test it to check whether the Siddhi queries you wrote work as expected. For this purpose, you can simulate events via the Event Simulator in WSO2 Integrator: SI as follows:
+To verify that the Siddhi queries you wrote work as expected, you can simulate events via the Event Simulator in WSO2 Integrator: SI before connecting the application to real database events. To do so, follow the steps below:
 
-!!! tip
-    Although you are using the Event Simulator instead of performing an insert operation in the MySQL database table you created, you need to start the MySQL server before following the steps below.
+!!! note
+    MySQL must be running before you start the test. The `cdc` source opens its connection to MySQL on application startup, so the application will fail to deploy if MySQL is not reachable — even though you are using the Event Simulator instead of inserting real records.
 
-1. In the VSCode editor, click the **Run** button to start the Event Simulator.
+1. In WSO2 Integrator: SI, click the **Run** button. The application is deployed to the SI runtime, and the Event Simulator panel opens on the left.
 
     ![Run button]({{base_path}}/images/Testing-Siddhi-Applications/Run-Button.png)
-
-    It opens the left panel for event simulation as follows.
 
     ![Event Simulation Panel]({{base_path}}/images/Testing-Siddhi-Applications/Single-Event-Simulation-Panel.png)
 

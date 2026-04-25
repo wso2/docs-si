@@ -17,7 +17,7 @@ This application demonstrates how to configure the WSO2 Integrator: SI to send s
 
 ## Testing the sample
 
-1. Open a terminal and navigate to `<SI-Tooling-Home>/samples/sample-clients/http-server`.  Then run the `ant` command without any arguments.
+1. Open a terminal and navigate to `<SI_HOME>/samples/sample-clients/http-server`.  Then run the `ant` command without any arguments.
 
 2. To send events, follow one or more of the following methods.
     * **Send events with http server through the event simulator**

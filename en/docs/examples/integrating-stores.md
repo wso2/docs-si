@@ -42,11 +42,11 @@ To understand how the WSO2 Integrator: SI performs these operations, follow the 
             - **For Linux/macOS**  : `./extension-installer.sh install rdbms-mysql`
             - **For Windows**: `extension-installer.bat install rdbms-mysql`<br/><br/>
         3. Restart the WSO2 Integrator: SI server.<br/><br/>
-        **Option 2 — Install via the VSCode editor:**<br/><br/>
-        1. Open the VSCode editor with the **WSO2 Integrator: SI** extension installed.<br/><br/>
+        **Option 2 — Install via the WSO2 Integrator: SI editor:**<br/><br/>
+        1. Open the editor with **WSO2 Integrator: SI** installed.<br/><br/>
         2. Open the command palette (Ctrl+Shift+P or Cmd+Shift+P on Mac), and type **SI: Extension Installer**.<br/><br/>
         3. In the **Extension Installer** dialog box, click **Install** for the **RDBMS-MYSQL** extension. Then click **Install** in the message that appears to confirm whether you want to proceed.<br/><br/>
-        4. Reload the VSCode window.<br/><br/>
+        4. Reload the window.<br/><br/>
     - Start the MySQL server.<br/><br/>
     - Create three MySQL databases by issuing the following commands.<br/><br/>
         `CREATE SCHEMA purchases;`<br/><br/>`CREATE SCHEMA dispatches;`<br/><br/>`CREATE SCHEMA closingstock;`<br/><br/>
@@ -55,7 +55,7 @@ To understand how the WSO2 Integrator: SI performs these operations, follow the 
 
 In this section, let's learn the different ways in which you can connect a Siddhi application to a data store.
 
-In the VSCode editor with the WSO2 Integrator: SI extension installed, open a new file and start creating a new Siddhi Application named `StockManagementApp`.
+In WSO2 Integrator: SI, open a new file and start creating a new Siddhi Application named `StockManagementApp`.
 
     ```
     @App:name("StockManagementApp")
@@ -880,7 +880,7 @@ To perform CRUD operations in multiple tables via WSO2 Integrator: SI, follow th
 
 To start creating the Siddhi application with the required tables, follow the steps below:
 
-1. In the VSCode editor with the WSO2 Integrator: SI extension installed, open the `StockManagementApp` that you previously created.
+1. In WSO2 Integrator: SI, open the `StockManagementApp` that you previously created.
 
 2. Define a new stream in it named `TriggerStream` as follows.
 

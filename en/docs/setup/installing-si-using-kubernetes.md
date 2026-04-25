@@ -2,8 +2,8 @@
 
 WSO2 Integrator: SI can be deployed natively on Kubernetes via the Siddhi Kubernetes Operator.
 
-The WSO2 Integrator: SI can be configured in the `<SI-TOOLING_HOME>/wso2/server/resources/docker-export/siddhi-process.yaml` file and passed to the CRD(Custom Resource Definition)for deployment.
-Siddhi logic can be directly written in the `<SI-TOOLING_HOME>/wso2/server/resources/docker-export/siddhi-process.yaml` file or passed as `.siddhi` files via config maps.
+The WSO2 Integrator: SI can be configured in the `<SI_HOME>/wso2/server/resources/docker-export/siddhi-process.yaml` file and passed to the CRD(Custom Resource Definition)for deployment.
+Siddhi logic can be directly written in the `<SI_HOME>/wso2/server/resources/docker-export/siddhi-process.yaml` file or passed as `.siddhi` files via config maps.
 
 To install WSO2 Integrator: SI via Kubernetes, follow the steps below:
 
@@ -47,109 +47,109 @@ siddhi-parser          1         1         1            1           1m
 
 The Siddhi application that contains the streaming integration logic can be deployed in Kubernetes via the Siddhi operator.
 
-To understand how this is done, let's create a very simple Siddhi stream processing application that consumes events via HTTP, filters the input events where the value for `deviceType` is `dryer` and the value for `power` is greater than `600`, and then logs the output in the console. This can be created by configuring the `<SI-TOOLING_HOME>/wso2/server/resources/docker-export/siddhi-process.yaml` file as given below.
+To understand how this is done, let's create a very simple Siddhi stream processing application that consumes events via HTTP, filters the input events where the value for `deviceType` is `dryer` and the value for `power` is greater than `600`, and then logs the output in the console. This can be created by configuring the `<SI_HOME>/wso2/server/resources/docker-export/siddhi-process.yaml` file as given below.
 
 ```yaml
-    apiVersion: siddhi.io/v1alpha2
-    kind: SiddhiProcess
-    metadata: 
-      name: streaming-integrator
-    spec: 
-      apps: 
-        - script: |
-            @App:name("PowerSurgeDetection")
-            @App:description("App consumes events from HTTP as a JSON message of { 'deviceType': 'dryer', 'power': 6000 } format and inserts the events into DevicePowerStream, and alerts the user if the power level is greater than or equal to 600W by printing a message in the log.")
-            /*
-                Input: deviceType string and powerConsuption int(Watt)
-                Output: Alert user from printing a log, if there is a power surge in the dryer. In other words, notify when power is greater than or equal to 600W.
-            */
-            
-            @source(
-              type='http',
-              receiver.url='${RECEIVER_URL}',
-              basic.auth.enabled='false',
-              @map(type='json')
-            )
-            define stream DevicePowerStream(deviceType string, power int);
-            @sink(type='log', prefix='LOGGER')  
-            define stream PowerSurgeAlertStream(deviceType string, power int); 
-            @info(name='surge-detector')  
-            from DevicePowerStream[deviceType == 'dryer' and power >= 600] 
-            select deviceType, power  
-            insert into PowerSurgeAlertStream;
-      container: 
-        env: 
-          - 
-            name: RECEIVER_URL
-            value: "http://0.0.0.0:8080/checkPower"
-          - 
-            name: BASIC_AUTH_ENABLED
-            value: "false"
+apiVersion: siddhi.io/v1alpha2
+kind: SiddhiProcess
+metadata:
+  name: streaming-integrator
+spec:
+  apps:
+    - script: |
+        @App:name("PowerSurgeDetection")
+        @App:description("App consumes events from HTTP as a JSON message of { 'deviceType': 'dryer', 'power': 6000 } format and inserts the events into DevicePowerStream, and alerts the user if the power level is greater than or equal to 600W by printing a message in the log.")
+        /*
+            Input: deviceType string and powerConsuption int(Watt)
+            Output: Alert user from printing a log, if there is a power surge in the dryer. In other words, notify when power is greater than or equal to 600W.
+        */
+
+        @source(
+          type='http',
+          receiver.url='${RECEIVER_URL}',
+          basic.auth.enabled='false',
+          @map(type='json')
+        )
+        define stream DevicePowerStream(deviceType string, power int);
+        @sink(type='log', prefix='LOGGER')
+        define stream PowerSurgeAlertStream(deviceType string, power int);
+        @info(name='surge-detector')
+        from DevicePowerStream[deviceType == 'dryer' and power >= 600]
+        select deviceType, power
+        insert into PowerSurgeAlertStream;
+  container:
+    env:
+      -
+        name: RECEIVER_URL
+        value: "http://0.0.0.0:8080/checkPower"
+      -
+        name: BASIC_AUTH_ENABLED
+        value: "false"
 ```
 
-To change the default configurations in WSO2 Integrator: SI that are defined in the `<SI-TOOLING_HOME>/conf/server/deployment.yaml` file, you need to add the required configurations with the required overriding values in the `SiddhiProcess.yaml` file under a section named `runner` as shown in the example below.
+To change the default configurations in WSO2 Integrator: SI that are defined in the `<SI_HOME>/conf/server/deployment.yaml` file, you need to add the required configurations with the required overriding values in the `SiddhiProcess.yaml` file under a section named `runner` as shown in the example below.
 
 ```yaml
-    apiVersion: siddhi.io/v1alpha2
-    kind: SiddhiProcess
-    metadata: 
-      name: streaming-integrator-app
-    spec: 
-      apps: 
-        - script: |
-            @App:name("PowerSurgeDetection")
-            @App:description("App consumes events from HTTP as a JSON message of { 'deviceType': 'dryer', 'power': 6000 } format and inserts the events into DevicePowerStream, and alerts the user if the power level is greater than or equal to 600W by printing a message in the log.")
-            /*
-                Input: deviceType string and powerConsuption int(Watt)
-                Output: Alert user from printing a log, if there is a power surge in the dryer. In other words, notify when power is greater than or equal to 600W.
-            */
-            
-            @source(
-              type='http',
-              receiver.url='${RECEIVER_URL}',
-              basic.auth.enabled='false',
-              @map(type='json')
-            )
-            define stream DevicePowerStream(deviceType string, power int);
-            @sink(type='log', prefix='LOGGER')  
-            define stream PowerSurgeAlertStream(deviceType string, power int); 
-            @info(name='surge-detector')  
-            from DevicePowerStream[deviceType == 'dryer' and power >= 600] 
-            select deviceType, power  
-            insert into PowerSurgeAlertStream;
-      container: 
-        env: 
-          - 
-            name: RECEIVER_URL
-            value: "http://0.0.0.0:8080/checkPower"
-          - 
-            name: BASIC_AUTH_ENABLED
-            value: "false"
-            
-      runner: |
-        auth.configs:
-          type: 'local'        # Type of the IdP client used
-          userManager:
-            adminRole: admin   # Admin role which is granted all permissions
-            userStore:         # User store
-              users:
-              -
-                user:
-                  username: root
-                  password: YWRtaW4=
-                  roles: 1
-              roles:
-              -
-                role:
-                  id: 1
-                  displayName: root
-          restAPIAuthConfigs:
-            exclude:
-              - /simulation/*
-              - /stores/* 
+apiVersion: siddhi.io/v1alpha2
+kind: SiddhiProcess
+metadata:
+  name: streaming-integrator-app
+spec:
+  apps:
+    - script: |
+        @App:name("PowerSurgeDetection")
+        @App:description("App consumes events from HTTP as a JSON message of { 'deviceType': 'dryer', 'power': 6000 } format and inserts the events into DevicePowerStream, and alerts the user if the power level is greater than or equal to 600W by printing a message in the log.")
+        /*
+            Input: deviceType string and powerConsuption int(Watt)
+            Output: Alert user from printing a log, if there is a power surge in the dryer. In other words, notify when power is greater than or equal to 600W.
+        */
+
+        @source(
+          type='http',
+          receiver.url='${RECEIVER_URL}',
+          basic.auth.enabled='false',
+          @map(type='json')
+        )
+        define stream DevicePowerStream(deviceType string, power int);
+        @sink(type='log', prefix='LOGGER')
+        define stream PowerSurgeAlertStream(deviceType string, power int);
+        @info(name='surge-detector')
+        from DevicePowerStream[deviceType == 'dryer' and power >= 600]
+        select deviceType, power
+        insert into PowerSurgeAlertStream;
+  container:
+    env:
+      -
+        name: RECEIVER_URL
+        value: "http://0.0.0.0:8080/checkPower"
+      -
+        name: BASIC_AUTH_ENABLED
+        value: "false"
+
+  runner: |
+    auth.configs:
+      type: 'local'        # Type of the IdP client used
+      userManager:
+        adminRole: admin   # Admin role which is granted all permissions
+        userStore:         # User store
+          users:
+          -
+            user:
+              username: root
+              password: YWRtaW4=
+              roles: 1
+          roles:
+          -
+            role:
+              id: 1
+              displayName: root
+      restAPIAuthConfigs:
+        exclude:
+          - /simulation/*
+          - /stores/*
 ```
 
-Here, you have included a configuration for `auth.configs` to override the default values that are applicable to the WSO2 Integrator: SI (i.e., values configured under `auth.configs` in the `<SI-TOOLING_HOME>/conf/server/deployment.yaml` file.
+Here, you have included a configuration for `auth.configs` to override the default values that are applicable to the WSO2 Integrator: SI (i.e., values configured under `auth.configs` in the `<SI_HOME>/conf/server/deployment.yaml` file).
 
 To apply the configurations in the `siddhi-process.yaml` to your Kubernetes cluster, save the file in a preferred location and then issue the following command.
 

@@ -68,7 +68,7 @@ The WSO2 Integrator: SI uses keystores mainly for the following purposes:
 
 The WSO2 Integrator: SI is shipped with the following default keystore files stored in the `<SI_HOME>/resources/security` directory.
 
-- `wso2carbon.jks`: This keystore contains a key pair and is used by default in your WSO2 Integrator: SI and WSO2 Integrator: SI Tooling servers for all of the purposes explained above, except protecting sensitive information via Cipher tool.
+- `wso2carbon.jks`: This keystore contains a key pair and is used by default in your WSO2 Integrator: SI server for all of the purposes explained above, except protecting sensitive information via Cipher tool.
 
 - `securevault.jks`: This is the default keystore used by the secure vault to protect sensitive information via Cipher tool.
 

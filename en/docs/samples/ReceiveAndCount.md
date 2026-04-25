@@ -23,7 +23,7 @@ If the message "Source Listener has created for url http://localhost:8006/produc
 ## Testing the sample
 
 ##### Publish events with the client
-Navigate to `<SI-Tooling-Home>/samples/sample-clients/http-client` and run `ant` command as follows:
+Navigate to `<SI_HOME>/samples/sample-clients/http-client` and run `ant` command as follows:
 
 Run `ant` command in the terminal.
 If you want to publish custom number of events, you need to run "ant" command as follows.

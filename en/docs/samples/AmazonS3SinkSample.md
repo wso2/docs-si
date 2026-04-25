@@ -14,10 +14,10 @@ This application demonstrates how to publish aggregated events to Amazon AWS S3 
 1. Download the following files.
     - `woodstox-core-7.1.0.jar`
     - `woodstox-osgi-3.2.1.1.jar`
-2. Navigate to {SI-Home}/bin and issue the following command to convert the `woodstox-osgi-3.2.1.1.jar` to OSGi Bundle.
+2. Navigate to <SI_HOME>/bin and issue the following command to convert the `woodstox-osgi-3.2.1.1.jar` to OSGi Bundle.
     - For Linux/macOS: `./jartobundle.sh <source-path> <destination-path>`
     - For Windows: `./jartobundle.bat <source-path> <destination-path>`
-3. Copy the above two bundles to the `<SI-Tooling-Home>/lib` directory.
+3. Copy the above two bundles to the `<SI_HOME>/lib` directory.
 
 ## Executing the Sample
 

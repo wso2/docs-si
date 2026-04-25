@@ -1,25 +1,30 @@
-# Step 1: Download WSO2 Integrator: SI and Dependencies
+# Step 1: Set up your environment and dependencies
 
-First, you are required to download the WSO2 Integrator: SI and the other software needed for the scenario you are trying out. To do this, follow the topics below.
+First, you are required to set up WSO2 Integrator: SI and the other software needed for the scenario you are trying out. To do this, follow the topics below.
 
 !!! tip "Before you begin:"
-    - Install [Oracle Java SE Development Kit (JDK) version 1.8](https://www.oracle.com/technetwork/java/javase/downloads/index.html).<br/>
+    - Install [Oracle Java SE Development Kit (JDK) version 21](https://www.oracle.com/java/technologies/downloads/).<br/>
     - [Set the Java home](https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/) environment variable.<br/>
 
-## Downloading the WSO2 Integrator: SI runtime and VSCode extension
+## Setting up WSO2 Integrator: SI
 
-- To download the WSO2 Integrator: SI runtime, visit the [WSO2 Integrator: SI Product Page](https://wso2.com/streaming-integrator/). Enter your email address and agree to the license. Then click **Zip Archive** to download the WSO2 Integrator: SI as a zip file.
+1. Download WSO2 Integrator from the [WSO2 Integrator downloads page](https://wso2.com/products/downloads/?product=wso2integrator). Enter your email address and agree to the license — you will receive an email with a link to download the installer.
 
-- To download WSO2 Integrator: SI VSCode extension, search **WSO2 Integrator: SI** in the VSCode marketplace and install it.
+2. Run the installer and open WSO2 Integrator. From the home page, click **Configure** in the top right corner, and under **Select your Integration Profile**, choose **WSO2 Integrator: SI**.
+
+3. WSO2 Integrator opens the SI setup page. If Java 21 or the SI runtime is not detected, click **Download Java & SI** to install both automatically. If you already have Java 21 or the SI runtime installed, expand **Advanced Options** to point WSO2 Integrator at your existing `JAVA_HOME` and SI installation directory.
+
+    !!! note
+        After installation, WSO2 Integrator places the SI runtime in `~/.wso2-si/streaming-integrator/wso2si-<VERSION>/` (a hidden folder in your home directory). This is referred to as `<SI_HOME>` throughout the rest of this guide. For more on managing the SI runtime directly, see [Install SI in a VM](../../setup/installing-si-in-vm.md).
 
 ## Downloading the other dependencies for your scenario
 
-This section shows how to prepare your production environment for the scenario described in the [Streaming Integration Overview section](getting-started-guide-overview.md).
+This section shows how to prepare your production environment for the scenario described in the [Streaming Integration Overview section](overview.md).
 
 ## Setting up a MySQL database table
 
 !!! note "macOS users"
-    The MySQL DMG installer does not add the `mysql` client to your shell's `PATH`. Either invoke the full path (`/usr/local/mysql/bin/mysql -u root -p`) or add `/usr/local/mysql/bin` to your `PATH` (for example: `echo 'export PATH="/usr/local/mysql/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc`). The MySQL server itself is started and stopped from **System Settings → MySQL**.
+    The MySQL DMG installer does not add the `mysql` client to `PATH`. Either invoke the full path (`/usr/local/mysql/bin/mysql -u root -p`) or add `/usr/local/mysql/bin` to `PATH` (e.g., `echo 'export PATH="/usr/local/mysql/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc`). Start and stop the MySQL server itself from **System Settings → MySQL**.
 
 In this scenario, the WSO2 Integrator: SI reads input data from a MySQL database table. Therefore, let's download and install MySQL and define the database and database table as follows:
 
@@ -72,7 +77,7 @@ When you reference this driver from a Siddhi `@Store` definition, use `com.mysql
 
 This scenario involves publishing some filtered production data to a Kafka topic named `eclair-production`.
 
-1. Download the Kafka broker from [the Apache site](https://archive.apache.org/dist/kafka/2.3.0/kafka_2.12-2.3.0.tgz) and extract it.
+1. Download the Kafka broker from [the Apache site](https://archive.apache.org/dist/kafka/2.5.0/kafka_2.12-2.5.0.tgz) and extract it.
    This directory is referred to as `<KAFKA_HOME>` from here on.
 
 2. Start Kafka as follows:
@@ -105,29 +110,28 @@ mkdir -p /Users/<your-username>/siddhi-data
 
 This directory is referred to as `<YOUR_HOME>` from here on. Wherever `<YOUR_HOME>` appears in this guide, substitute the directory you just created. Make sure this directory exists before you run any Siddhi application — if it does not, the file sink enters a retry loop and drops events with an error similar to `Dropping event at Sink 'file' at '...' as its still trying to reconnect!`.
 
-## Starting the WSO2 Integrator: SI Server
+## Starting the WSO2 Integrator: SI server
 
-To start WSO2 Integrator: SI, navigate to the `<SI_HOME>/bin` directory from the CLI, and issue the appropriate command based on your operating system:
+WSO2 Integrator starts the SI runtime automatically when you click the **Run** button on a Siddhi application, so you can rely on this throughout the rest of this guide.
 
-- **For Linux/macOS:**
+If you would rather drive the server from a terminal (for example, to monitor server logs in real time), navigate to the `<SI_HOME>/bin` directory from the CLI and issue the appropriate command based on your operating system:
 
+=== "On macOS/Linux"
     ```sh
     ./server.sh
     ```
-
-- **For Windows:**
-
+=== "On Windows"
     ```sh
     server.bat --run
     ```
 
 Now you have completed a WSO2 Integrator: SI setup that is capable of the following:
 
-- Design, test and deploy Siddhi applications via VSCode with the **WSO2 Integrator: SI** extension.
+- Designing, testing, and deploying Siddhi applications in **WSO2 Integrator: SI**.
 
-- Consume data from as well as publish data to MySQL databases.
+- Consuming data from and publishing data to MySQL databases.
 
-- Consume data from as well as publish data to Kafka topics.
+- Consuming data from and publishing data to Kafka topics.
 
 
 !!! tip "What's Next?"

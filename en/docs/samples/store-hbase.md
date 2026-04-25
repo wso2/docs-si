@@ -14,7 +14,7 @@ This application demonstrates how to perform CRUD operations in HBase stores usi
     1. Download the following jars:
         * HBase client (http://central.maven.org/maven2/org/apache/hbase/hbase-shaded-client/1.3.1/hbase-shaded-client-1.3.1.jar)
         * Apache HTrace core (http://central.maven.org/maven2/org/apache/htrace/htrace-core/3.1.0-incubating/htrace-core-3.1.0-incubating.jar)
-    2. Use the `jartobundle` tool in `{WSO2_SI_Home}/bin` to convert the above jar into a OSGi bundle.
+    2. Use the `jartobundle` tool in `<SI_HOME>/bin` to convert the above jar into a OSGi bundle.
         - For Windows:
             ```bash
             <SI_HOME>/bin/jartobundle.bat <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR>
@@ -23,7 +23,7 @@ This application demonstrates how to perform CRUD operations in HBase stores usi
             ```bash
             <SI_HOME>/bin/jartobundle.sh <PATH_OF_DOWNLOADED_JAR> <PATH_OF_CONVERTED_JAR>
             ```
-    3. Copy the converted bundles to the `{WSO2_SI_Home}/lib` directory.
+    3. Copy the converted bundles to the `<SI_HOME>/lib` directory.
 3. Save this sample.
 
 ## Executing the Sample:

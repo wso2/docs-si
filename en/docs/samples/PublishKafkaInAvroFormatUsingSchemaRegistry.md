@@ -55,7 +55,7 @@ To execute the sample, follow the steps below:
 
    For more information about how to configure an Avro mapper, see [Siddhi Documentation - Avro Sink Mapper](https://siddhi-io.github.io/siddhi-map-avro/api/latest/#avro-sink-mapper)
 
-5. Navigate to the `<SI-Tooling-Home>/samples/sample-clients/kafka-avro-consumer` directory and run the `ant` command without arguments.
+5. Navigate to the `<SI_HOME>/samples/sample-clients/kafka-avro-consumer` directory and run the `ant` command without arguments.
 
 6. Start the `PublishKafkaInAvroFormatUsingSchemaRegistry` Siddhi application you saved by opening it in WSO2 Integrator: SI and clicking the **Start** button in the toolbar.
 
@@ -114,7 +114,7 @@ When the message is successfully sent, the following message is logged in the te
 
 ## Viewing the Results
 
-You can view the following output in the terminal in which you ran the ant build for `<SI-Home>/samples/sample-clients/kafka-avro-consumer`.
+You can view the following output in the terminal in which you ran the ant build for `<SI_HOME>/samples/sample-clients/kafka-avro-consumer`.
 
 ```bash
 [java] [org.wso2.extension.siddhi.io.kafka.source.KafkaConsumerThread] : Event received in Kafka Event Adaptor with offSet: 2, key: null, topic: kafka_result_topic, partition: 0

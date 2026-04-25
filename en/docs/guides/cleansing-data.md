@@ -63,7 +63,7 @@ To try out the query used in the above example, let's include it in a Siddhi App
     select * 
     insert into RoomAnalysisStream;
     ```
-2. Open the event simulator and simulate three events for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](../develop/testing-a-Siddhi-Application.md#simulating-a-single-event).
+2. Open the event simulator and simulate three events for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. This step requires the editor with WSO2 Integrator: SI installed. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](../develop/testing-a-Siddhi-Application.md#simulating-a-single-event).
 
     | **Event** | **deviceID**  | **roomNo** | **temp** |
     |-----------|---------------|------------|----------|
@@ -99,7 +99,7 @@ To try out the query used in the above example, let's include it in a Siddhi App
     insert into RoomAnalysisStream;
    ```
    
-4. Open the event simulator and simulate three events for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](../develop/testing-a-Siddhi-Application.md#simulating-a-single-event).
+4. Open the event simulator and simulate three events for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. This step requires the editor with WSO2 Integrator: SI installed. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](../develop/testing-a-Siddhi-Application.md#simulating-a-single-event).
 
     | **Event** | **deviceID**  | **roomNo** | **temp** |
     |-----------|---------------|------------|----------|
@@ -149,7 +149,7 @@ To try out the above example, follow the steps below:
     ```
    In this Siddhi application, the `TempStream` has an attribute named `deviceID`, but it is not selected to be included in the output events. The `roomNo` attribute is cast as a string value via `cast(roomNo, "string")`. This means although the value for this attribute is received as an integer, it is presented as a string value in the output.
    
-2. Open the event simulator and simulate an event for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](../develop/testing-a-Siddhi-Application.md#simulating-a-single-event).
+2. Open the event simulator and simulate an event for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. This step requires the editor with WSO2 Integrator: SI installed. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](../develop/testing-a-Siddhi-Application.md#simulating-a-single-event).
 
     | **deviceID**  | **roomNo** | **temp** |
     |---------------|------------|----------|
@@ -176,7 +176,7 @@ insert into CleansedDataStream;
 
 To try out the above example, follow the steps below:
 
-1. [Start and access the VSCode editor with the WSO2 Integrator: SI extension installed](../develop/install-si-for-vscode.md).
+1. [Start and access WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
 2. Open a new file. Then add and save the following Siddhi application.
 
@@ -197,7 +197,7 @@ To try out the above example, follow the steps below:
     ```
    In this Siddhi application, the `TempStream` stream has a `deviceID` attribute that may arrive with a null value. The `ifThenElse(deviceID is null, "UNKNOWN", deviceID)` expression substitutes `"UNKNOWN"` whenever `deviceID` is null and passes the original value through otherwise. The result is inserted into `CleansedDataStream` so downstream queries see a non-null `deviceID`.
    
-3. Open the event simulator and simulate an event for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. This step requires the VSCode editor with the WSO2 Integrator: SI extension installed. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](../develop/testing-a-Siddhi-Application.md#simulating-a-single-event).
+3. Open the event simulator and simulate an event for the `TempStream` input stream of the `TemperatureApp` Siddhi application with the values for the attributes as given below. This step requires the editor with WSO2 Integrator: SI installed. For instructions to simulate single events, see [Testing Siddhi Applications - Simulating a single event](../develop/testing-a-Siddhi-Application.md#simulating-a-single-event).
 
     | **deviceID**                                        | **roomNo** | **temp** |
     |-----------------------------------------------------|------------|----------|

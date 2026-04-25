@@ -2,11 +2,13 @@
 
 ## What's new in this release?
 
-- **New WSO2 Integrator: SI VSCode extension**
+- **New WSO2 Integrator release with bundled integrators**
 
-    This allows users to develop integrations with Siddhi applications with the VSCode. The new VSCode extension replaces the existing WSO2 Integrator: SI Tooling editor. 
+    WSO2 Integrator replaces the existing WSO2 Integrator: SI extension and the Tooling editor by bundling all of our integrators into a single, cohesive tool.
+
+    To access SI, simply switch profiles to **WSO2 Integrator: SI** in the **Configure** panel.
 
 ## Download the latest release
 
-- Get the latest version of WSO2 Integrator: SI 4.3.1: [Download Here](https://wso2.com/streaming-integrator/)
+- Get the latest version of WSO2 Integrator: [Download here](https://wso2.com/products/downloads/?product=wso2integrator)
 

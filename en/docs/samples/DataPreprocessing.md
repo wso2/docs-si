@@ -29,7 +29,7 @@ If the Siddhi application starts successfully, the following messages appear in 
 To test this Siddhi application, download `https://github.com/wso2/product-streaming-integrator-tooling/tree/master/modules/samples/sample-clients/tcp-client` directory and run the `ant` command as follows.
 
 ```bash
-ant -Dtype=json -DfilePath=<SI-Tooling-Home>/samples/artifacts/DataPreprocessing/data_preprocessing_events.txt -DeventDefinition='{"event":{"id":"{0}","value":{1},"property":{2},"plugId":{3},"householdId":{4},"houseId":{5},"currentTime":"{6}"}}' -Durl=tcp://localhost:9892/SmartHomeStream
+ant -Dtype=json -DfilePath=<SI_HOME>/samples/artifacts/DataPreprocessing/data_preprocessing_events.txt -DeventDefinition='{"event":{"id":"{0}","value":{1},"property":{2},"plugId":{3},"householdId":{4},"houseId":{5},"currentTime":"{6}"}}' -Durl=tcp://localhost:9892/SmartHomeStream
 ```
 
 ## Viewing the results

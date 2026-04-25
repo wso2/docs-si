@@ -44,7 +44,7 @@ mosquitto_pub -t 'mqtt_topic_input' -m '<events><event><name>sugar</name><amount
 
 ### Option 2: Publish events with mqtt sample client
 
-1. Open a terminal and navigate to `<SI-Tooling-Home>/samples/sample-clients/mqtt-client`.
+1. Open a terminal and navigate to `<SI_HOME>/samples/sample-clients/mqtt-client`.
 2. Run the following command in the terminal:
 
     ```bash

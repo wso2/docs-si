@@ -1,17 +1,18 @@
-# Deploying Siddhi Applications
+# Exporting Siddhi Applications as a Docker Artifact
 
-After creating and testing a Siddhi application, you can to deploy it in Docker and Kubernetes.
+You can export any Siddhi application as a Docker artifact for containerized deployment. To do so, follow the procedure below:
 
-To deploy your Siddhi application in docker, follow the procedure below:
+1. Open WSO2 Integrator in the directory where your Siddhi application is located.
 
-1. Open VSCode in the directory where your Siddhi application is located.
 2. Open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS), and type **SI: Export Siddhi Apps to Docker**. Select this command.
 
-    ![Deploy to Server Docker Option]({{base_path}}/images/quick-start-guide-101/export-to-docker.png)
+    ![Export to Server Docker Option]({{base_path}}/images/quick-start-guide-101/export-to-docker.png)
 
     The Siddhi App selection dialog box opens as follows.
 
-    ![Deploy Siddhi Apps to Docker]({{base_path}}/images/quick-start-guide-101/export-to-docker-file-selector.png)
+    ![Export Siddhi Apps to Docker]({{base_path}}/images/quick-start-guide-101/export-to-docker-file-selector.png)
+
+    Select the Siddhi application(s) you want to include and click **OK**.
 
 3. Enter the Docker image name.
 
@@ -21,13 +22,17 @@ To deploy your Siddhi application in docker, follow the procedure below:
 
     ![Select Siddhi Extensions]({{base_path}}/images/quick-start-guide-101/export-to-docker-jar-selector.png)
 
-5. Provide the export file name.
+5. Select the bundles from the bundles directory that you want to include in the Docker image.
+
+    ![Select bundles from bundles directory]({{base_path}}/images/quick-start-guide-101/export-to-docker-bundle-selector.png)
+
+6. Provide the export file name.
 
     ![Export File Name]({{base_path}}/images/quick-start-guide-101/export-to-docker-file-name.png)
 
-6. Once completed, a zip will be created in the workspace directory with the following structure:
+7. Once completed, a zip will be created in the workspace directory with the following structure:
 
-    ```
+    ```text
     .
     ├── Dockerfile
     ├── README.md

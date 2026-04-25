@@ -14,7 +14,7 @@ To understand how data is extracted from a database into a streaming flow, consi
 
 Change data capture involves extracting any change that takes place in a selected database (i.e., any insert, update or a deletion) in real-time.
 
-To capture change data via the [WSO2 Integrator: SI for VS Code Overview](../develop/si-for-vscode-overview.md), define an input [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) with the appropriate schema to capture the information you require, and then connect a [source](https://siddhi.io/en/v5.1/docs/query-guide/#source) of the `cdc` type as shown in the example below.
+To capture change data via [WSO2 Integrator: SI](../develop/si-for-vscode-overview.md), define an input [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) with the appropriate schema to capture the information you require, and then connect a [source](https://siddhi.io/en/v5.1/docs/query-guide/#source) of the `cdc` type as shown in the example below.
 
 ```
 @source(type = 'cdc', 
@@ -125,11 +125,11 @@ Let's try out the example where you want to view the online bookings saved in a 
           PRIMARY KEY (ref));
         ```
           
-    4. [Open VSCode with WSO2 Integrator: SI extension installed](../develop/si-for-vscode-overview.md).
+    4. [Open WSO2 Integrator: SI](../develop/si-for-vscode-overview.md).
     
-    5. Download the `cdc-mysql` Siddhi extension for WSO2 Integrator: SI VSCode extension. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md#installing-an-extension).
+    5. Download the `cdc-mysql` Siddhi extension for WSO2 Integrator: SI. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md#installing-an-extension).
     
-    6. In the VSCode editor (with the WSO2 Integrator: SI extension installed), open a new file. Copy and paste the following Siddhi application to it.
+    6. In the editor (with WSO2 Integrator: SI installed), open a new file. Copy and paste the following Siddhi application to it.
     
         ```
         @App:name("VacationsApp")
@@ -158,7 +158,7 @@ Let's try out the example where you want to view the online bookings saved in a 
     
         `insert into OnlineBookingsTable(ref,timestamp,name,package,people) values('1',1602506738000,'jem','best of rome',2);`
         
-        The following is logged in the VSCode editor (with the WSO2 Integrator: SI extension installed) terminal.
+        The following is logged in the editor (with WSO2 Integrator: SI installed) terminal.
                    
         ```
         INFO {io.siddhi.core.stream.output.sink.LogSink} - VacationsApp : LogStream : Event{timestamp=1563378804914, data=[1, 1602506738000, jem, best of rome, 2], isExpired=false}
@@ -378,13 +378,13 @@ To try out reading the content of a file and file events, let's address the requ
     Baked alaska,20.0
     ```
 
-    As a result, the following is logged in the VSCode editor (with the WSO2 Integrator: SI extension installed) terminal to indicate that the `productionstats.csv` is created in the `<YOUR_HOME>/production` directory.
+    As a result, the following is logged in the editor (with WSO2 Integrator: SI installed) terminal to indicate that the `productionstats.csv` is created in the `<YOUR_HOME>/production` directory.
     
     ```
     INFO {io.siddhi.core.stream.output.sink.LogSink} - LogFileEventsApp : LogFileEventsStream : Event{timestamp=1603105747423, data=[<YOUR_HOME>/production/productionstats.csv, productionstats.csv, created], isExpired=false} 
     ```
    
-4. Create and save the following Siddhi application in VSCode.
+4. Create and save the following Siddhi application.
 
     ```
     @App:name("FileReadingApp")
@@ -412,7 +412,7 @@ To try out reading the content of a file and file events, let's address the requ
    
 5. Start the `FileReadingApp` Siddhi application.
 
-    The following is logged in the VSCode editor (with the WSO2 Integrator: SI extension installed) terminal:
+    The following is logged in the editor (with WSO2 Integrator: SI installed) terminal:
     
     - **For the `FileReadingApp` Siddhi application**
     

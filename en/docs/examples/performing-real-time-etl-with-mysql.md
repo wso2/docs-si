@@ -43,7 +43,7 @@ You can capture following type of changes done to a database table:
             FROM performance_schema.global_variables WHERE variable_name='log_bin';
             ```
             
-    - Make sure the MySQL JDBC driver is installed in `<SI_HOME>/lib`. See [Adding the MySQL JDBC driver](../quick-start-guide/getting-started/download-install-and-start-si.md#adding-the-mysql-jdbc-driver) for the steps.<br/>
+    - Make sure the MySQL JDBC driver is installed in `<SI_HOME>/lib`. See [Adding the MySQL JDBC driver](../get-started/first-siddhi-app/set-up-environment-and-dependencies.md#adding-the-mysql-jdbc-driver) for the steps.<br/>
     - Once you install MySQL and start the MySQL server, create the database and the database table you require as follows:
         1. Let's create a new database in the MySQL server which you are to use throughout this tutorial. To do this, execute the following query.<br/>
             ```sql
@@ -349,7 +349,7 @@ Note that the `CDC source` has replayed the last two messages. As a result, the 
         GRANT SELECT ON *.* TO 'wso2si'@'localhost';
         FLUSH PRIVILEGES;
         ```<br/>
-    4. If you have not already added the MySQL JDBC driver under [Listening Mode](#listening-mode), see [Adding the MySQL JDBC driver](../quick-start-guide/getting-started/download-install-and-start-si.md#adding-the-mysql-jdbc-driver) for the steps.
+    4. If you have not already added the MySQL JDBC driver under [Listening Mode](#listening-mode), see [Adding the MySQL JDBC driver](../get-started/first-siddhi-app/set-up-environment-and-dependencies.md#adding-the-mysql-jdbc-driver) for the steps.
 
 
 #### Capturing inserts
