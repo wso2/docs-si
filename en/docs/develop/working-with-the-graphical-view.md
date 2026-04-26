@@ -1230,4 +1230,4 @@ demonstrated below.
 
 ## Saving Siddhi applications
 
-To save a Siddhi application that you created in the Graphical View, you need to switch to the Source View. For more information, see [WSO2 Integrator: SI](si-for-vscode-overview.md).
+To save a Siddhi application that you created in the Graphical View, you need to switch to the Source View. For more information, see [WSO2 Integrator: SI](si-overview.md).

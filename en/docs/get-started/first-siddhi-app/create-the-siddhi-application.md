@@ -14,7 +14,7 @@ The following image depicts the procedure to be followed by the Siddhi applicati
 
 2. Open WSO2 Integrator. Open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS), type `WSO2 Integrator: Open Welcome Page`, and select it. The welcome page opens.
 
-    ![WSO2 Integrator home page](http://localhost:8000/images/qsg/wso2-integrator-home.png)
+    ![WSO2 Integrator home page]({{base_path}}/images/qsg/wso2-integrator-home.png)
 
     !!! note
         WSO2 Integrator: SI commands appear in the WSO2 Integrator command palette only after WSO2 Integrator: SI activates, which happens when a `.siddhi` file is open. If typing `SI:` in the palette returns no results, open or create a `.siddhi` file first and then reopen the palette.

@@ -14,7 +14,7 @@ To understand how data is extracted from a database into a streaming flow, consi
 
 Change data capture involves extracting any change that takes place in a selected database (i.e., any insert, update or a deletion) in real-time.
 
-To capture change data via [the editor](../develop/si-for-vscode-overview.md), define an input [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) with the appropriate schema to capture the information you require, and then connect a [source](https://siddhi.io/en/v5.1/docs/query-guide/#source) of the `cdc` type as shown in the example below.
+To capture change data via [the editor](../develop/si-overview.md), define an input [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) with the appropriate schema to capture the information you require, and then connect a [source](https://siddhi.io/en/v5.1/docs/query-guide/#source) of the `cdc` type as shown in the example below.
 
 ```
 @source(type = 'cdc', 
@@ -125,7 +125,7 @@ Let's try out the example where you want to view the online bookings saved in a 
           PRIMARY KEY (ref));
         ```
           
-    4. [Open the editor](../develop/si-for-vscode-overview.md).
+    4. [Open the editor](../develop/si-overview.md).
     
     5. Download the `cdc-mysql` Siddhi extension for WSO2 Integrator: SI. For instructions, see [Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md#installing-an-extension).
     

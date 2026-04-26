@@ -32,7 +32,7 @@ The SI Store API exposes aggregated and collected data streams to in-memory and 
 
 Synapse integration flows deployed in [WSO2 Integrator: MI](https://github.com/wso2/micro-integrator) can be executed directly by SI. This allows you to build robust data processing and integration pipelines by combining powerful stream processing and integration capabilities.
 
-SI is coupled with [WSO2 Integrator: SI](../develop/si-for-vscode-overview.md); a comprehensive streaming integration flow designer for [**developing**](first-siddhi-app/create-the-siddhi-application.md) Siddhi applications by writing queries or via the drag-and-drop functionality, [**testing**](../develop/testing-a-Siddhi-Application.md) them thoroughly before using them in production, and then **deploying** them in the SI server or [exporting them to be deployed as a K8 or a Docker image](../develop/exporting-Siddhi-Applications.md).
+SI is coupled with [WSO2 Integrator: SI](../develop/si-overview.md); a comprehensive streaming integration flow designer for [**developing**](first-siddhi-app/create-the-siddhi-application.md) Siddhi applications by writing queries or via the drag-and-drop functionality, [**testing**](../develop/testing-a-Siddhi-Application.md) them thoroughly before using them in production, and then **deploying** them in the SI server or [exporting them to be deployed as a K8 or a Docker image](../develop/exporting-Siddhi-Applications.md).
 
 ## Centralized and Decentralized Deployment
 

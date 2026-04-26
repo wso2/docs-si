@@ -29,14 +29,14 @@ This application demonstrates how to use siddhi-io-prometheus for publishing eve
 ## Executing the Sample
 1. Start the Siddhi application by clicking on 'Run'
 2. If the Siddhi application starts successfully, the following messages would be shown on the console,
-    * PublishPrometheusMetricHTTPServer.siddhi - Started Successfully!
+    * PublishPrometheusMetricsHTTPServer.siddhi - Started Successfully!
 	* SweetProductionStream has successfully connected at http://localhost:9080
 
 ## Testing the Sample
 * Send events through the event simulator:
     1. Open the event simulator by clicking on the second icon or pressing Ctrl+Shift+I.
 	2. In the Single Simulation tab of the panel, specify the values as follows:
-        * Siddhi App Name  : PublishPrometheusMetricHTTPServer
+        * Siddhi App Name  : PublishPrometheusMetricsHTTPServer
         * Stream Name     : SweetProductionStream
     3. In the name and amount fields, enter 'toffees' and '55.4' respectively and then click Send to send the event.
     4. Send some more events as follows,
@@ -85,7 +85,7 @@ This application demonstrates how to use siddhi-io-prometheus for publishing eve
 ```
 
 ```sql
-@App:name("PublishPrometheusMetrics")
+@App:name("PublishPrometheusMetricsHTTPServer")
 
 @App:description('Publish consumed events to Prometheus metrics and expose them via http server.')
 

@@ -28,11 +28,11 @@ WSO2 Integrator includes an **Extension Installer** panel that lists all support
 
 In WSO2 Integrator, open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS), type `SI: Extension Installer`, and select the **SI: Extension Installer** option.
 
-![Command palette](http://localhost:8000/images/qsg/command-palette-extension-installer.png)
+![Command palette]({{base_path}}/images/qsg/command-palette-extension-installer.png)
 
 The **Extension Installer** panel opens.
 
-![Extension Installer panel](http://localhost:8000/images/qsg/extension-installer-panel.png)
+![Extension Installer panel]({{base_path}}/images/qsg/extension-installer-panel.png)
 
 To narrow down the list, enter all or part of an extension's name in the **Search** field at the top of the panel.
 
@@ -92,7 +92,7 @@ For each dependency, the dialog box provides:
     | **jar in runtime**        | Place the non-OSGi JAR you downloaded in `<SI_HOME>/jars`.                                                                     |
     | **jar in samples**        | Place the non-OSGi JAR you downloaded in `<SI_HOME>/samples/sample-clients/lib`.                                               |
 
-If you are an extension developer and want to configure manually installable dependencies for a custom extension, see [Configuring Extension Dependencies](../develop/installing-siddhi-extensions.md).
+If you are an extension developer and want to configure manually installable dependencies for a custom extension, see [Configuring Extension Dependencies](../develop/configuring-extension-dependencies.md).
 
 ## Installing extensions via the terminal
 

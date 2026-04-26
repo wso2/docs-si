@@ -234,7 +234,7 @@ The following diagram depicts how the above changes scaled the ETL flow.
        
 ## Application design views
 
-WSO2 Integrator: SI provides a Source View and a Graphical View for designing Siddhi applications. For more information, see [WSO2 Integrator: SI](../develop/si-for-vscode-overview.md).
+WSO2 Integrator: SI provides a Source View and a Graphical View for designing Siddhi applications. For more information, see [WSO2 Integrator: SI](../develop/si-overview.md).
 
 ## Visualizing ETL Performance Statistics
 

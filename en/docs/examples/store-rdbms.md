@@ -39,7 +39,7 @@ This application demonstrates how to perform RDBMS operations using Siddhi queri
 2. If the Siddhi application starts successfully, the following message is shown on the console.
 
 ```bash
-Store-rdbms.siddhi - Started Successfully!
+store-rdbms.siddhi - Started Successfully!
 ```
 
 ## Note
@@ -50,7 +50,7 @@ If you want to edit this application while it's running, stop the application, m
 
 1. Simulate single events:
     1. Click on 'Event Simulator' (double arrows on left tab) and click 'Single Simulation'
-    2. Select `Store-rdbms` as `Siddhi App Name` and select `searchSweetProductionStream` as `Stream Name`.
+    2. Select `store-rdbms` as `Siddhi App Name` and select `searchSweetProductionStream` as `Stream Name`.
     3. Provide attribute values, and then click Send.
 2. Send at least one event where the name matches a name value in the data you previously inserted into the SweetProductionTable. This will satisfy the 'on' condition of the join query.
 3. Optionally, send events to the other corresponding streams to add, delete, update, insert, and search events.
@@ -66,7 +66,7 @@ If you want to edit this application while it's running, stop the application, m
 See the output for raw materials on the console. You can use `searchSweetProductionStream` to check for inserted, deleted, and updated events.
 
 ```sql
-@App:name("Store-rdbms")
+@App:name("store-rdbms")
 @App:description('Receive events via simulator and persist the received data in the store.')
 
 define stream insertSweetProductionStream (name string, amount double);

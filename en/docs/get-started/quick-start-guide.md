@@ -12,17 +12,17 @@ In this guide, you will set up WSO2 Integrator: SI, download Kafka, and try out 
 
 2. Open WSO2 Integrator. The home page opens with a **Configure** button in the top right corner.
 
-    ![WSO2 Integrator home](http://localhost:8000/images/qsg/wso2-integrator-home.png)
+    ![WSO2 Integrator home]({{base_path}}/images/qsg/wso2-integrator-home.png)
 
 3. Click **Configure**. The **Configurations** panel opens.
 
 4. Under **Select your Integration Profile**, choose **WSO2 Integrator: SI**.
 
-    ![Select SI profile](http://localhost:8000/images/qsg/profile-selector.png)
+    ![Select SI profile]({{base_path}}/images/qsg/profile-selector.png)
 
 5. WSO2 Integrator opens the SI setup page. If Java 21 or the SI runtime is not detected, you are prompted to install them. Click **Download Java & SI** to install both automatically.
 
-    ![Download Java and SI runtime](http://localhost:8000/images/qsg/runtime-setup.png)
+    ![Download Java and SI runtime]({{base_path}}/images/qsg/runtime-setup.png)
 
     !!! tip
         If you already have Java 21 or the SI runtime installed, expand **Advanced Options** to point WSO2 Integrator at your existing `JAVA_HOME` and SI installation directory. The SI installation directory is referred to as `<SI_HOME>` from here on.
@@ -72,7 +72,7 @@ Let's create a simple Siddhi application that reads data from a CSV file, perfor
     !!! tip
         You can also build this application visually in the **Graphical Design View** of WSO2 Integrator: SI by dragging and dropping flow constructs.
 
-        ![Graphical Design View](http://localhost:8000/images/qsg/graphical-design-view.png)
+        ![Graphical Design View]({{base_path}}/images/qsg/graphical-design-view.png)
 
 ## Step 4: Install the required Kafka extension
 
@@ -80,11 +80,11 @@ The `ManageProductionStats` Siddhi application uses a Kafka sink, but the Kafka 
 
 1. In WSO2 Integrator, open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS), type `SI: Extension Installer`, and select the **SI: Extension Installer** option.
 
-    ![Command palette](http://localhost:8000/images/qsg/command-palette-extension-installer.png)
+    ![Command palette]({{base_path}}/images/qsg/command-palette-extension-installer.png)
 
 2. The **Extension Installer** panel opens. Scroll to **Kafka** and click **Install**.
 
-    ![Extension Installer panel](http://localhost:8000/images/qsg/extension-installer-panel.png)
+    ![Extension Installer panel]({{base_path}}/images/qsg/extension-installer-panel.png)
 
 3. Reload WSO2 Integrator after the installation completes so that the new extension is picked up.
 

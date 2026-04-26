@@ -143,4 +143,4 @@ For the complete list of pre-written Siddhi extensions that are currently availa
 ## Further references
 
 - For instructions to download and install a Siddhi extension, see [Downloading and Installing Siddhi Extensions](downloading-and-Installing-Siddhi-Extensions.md).
-- If you are building a custom extension and want it to install via the **Extension Installer** panel, see [Configuring Extension Dependencies](../develop/installing-siddhi-extensions.md).
+- If you are building a custom extension and want it to install via the **Extension Installer** panel, see [Configuring Extension Dependencies](../develop/configuring-extension-dependencies.md).

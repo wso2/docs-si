@@ -18,15 +18,15 @@ WSO2 Integrator bundles all WSO2 integrators in a single application; you access
 
 2. Run the installer and open WSO2 Integrator. The home page opens with a **Configure** button in the top right corner.
 
-    ![WSO2 Integrator home](http://localhost:8000/images/qsg/wso2-integrator-home.png)
+    ![WSO2 Integrator home]({{base_path}}/images/qsg/wso2-integrator-home.png)
 
 3. Click **Configure**, and under **Select your Integration Profile**, choose **WSO2 Integrator: SI**.
 
-    ![Select SI profile](http://localhost:8000/images/qsg/profile-selector.png)
+    ![Select SI profile]({{base_path}}/images/qsg/profile-selector.png)
 
 4. WSO2 Integrator opens the SI setup page. If Java 21 or the SI runtime is not detected, click **Download Java & SI** to install both automatically. If you already have Java 21 or the SI runtime installed, expand **Advanced Options** to point WSO2 Integrator at your existing `JAVA_HOME` and SI installation directory.
 
-    ![Download Java and SI runtime](http://localhost:8000/images/qsg/runtime-setup.png)
+    ![Download Java and SI runtime]({{base_path}}/images/qsg/runtime-setup.png)
 
 ## Locate SI_HOME
 

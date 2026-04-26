@@ -13,11 +13,11 @@
 - [CDC With Polling Mode](./CDCWithPollingMode.md)
 - [Publish Http OAuth Request With Refresh Token](./PublishHttpOAuthRequestWithRefreshToken.md)
 - [Publish Http OAuth Request Response](./PublishHttpOAuthRequestResponse.md)
-- [Store solr](./Store-solr.md)
+- [Store solr](./store-solr.md)
 - [Receive Events From File](./ReceiveEventsFromFile.md)
 - [Receive Email In Xml Format](./ReceiveEmailInXmlFormat.md)
 - [Receive Rabbitmq In JSON Format](./ReceiveRabbitmqInJSONFormat.md)
-- [Store cassandra](./Store-cassandra.md)
+- [Store cassandra](./store-cassandra.md)
 
  
 ### Transform
@@ -72,10 +72,10 @@
 - [Publish Http In Xml Format](./PublishHttpInXmlFormat.md)
 - [Publish Http OAuth Request With Refresh Token](./PublishHttpOAuthRequestWithRefreshToken.md)
 - [Publish Http OAuth Request Response](./PublishHttpOAuthRequestResponse.md)
-- [Store solr](./Store-solr.md)
+- [Store solr](./store-solr.md)
 - [Publish Http In Json Format](./PublishHttpInJsonFormat.md)
-- [Store rdbms](./Store-rdbms.md)
-- [Store cassandra](./Store-cassandra.md)
+- [Store rdbms](./store-rdbms.md)
+- [Store cassandra](./store-cassandra.md)
 - [Publish Kafka In Avro Format Using Schema Registry](./PublishKafkaInAvroFormatUsingSchemaRegistry.md)
 
 ### Insights
@@ -86,7 +86,7 @@
 - [Pattern Matching](./PatternMatching.md)
 - [Streaming KMeans Sample](./StreamingKMeansSample.md)
 - [Receive Prometheus Metrics](./ReceivePrometheusMetrics.md)
-- [hoeffding adaptive tree sample](./hoeffding-adaptive-tree-sample.md)
+- [streaming hoeffding classifier sample](./streaming-hoeffding-classifier-sample.md)
 - [Alerts And Thresholds](./AlertsAndThresholds.md)
 - [streaming perceptron sample](./streaming-perceptron-sample.md)
 - [Geo Distance Calculation](./GeoDistanceCalculation.md)
@@ -96,7 +96,7 @@
 - [Aggregate Over Time](./AggregateOverTime.md)
 - [Receive And Count](./ReceiveAndCount.md)   
 - [Aggregate Data Incrementally](./AggregateDataIncrementally.md)
-- [Store redis](./Store-redis.md)
+- [Store redis](./store-redis.md)
 - [store mongodb](./store-mongodb.md)
 
 ### Enrich
@@ -105,7 +105,7 @@
 - [Join With Stored Data](./JoinWithStoredData.md)
 - [Script js sample](./Script-js-sample.md)
 - [store hbase](./store-hbase.md)
-- [Unit Conversion Extention Sample](./UnitConversionExtentionSample.md)
+- [Unit Conversion Extension Sample](./UnitConversionExtensionSample.md)
 - [execution geo sample](./execution-geo-sample.md)
 - [Clus Tree Test App](./ClusTreeTestApp.md)
 - [Receive WebSocket In XML Format](./ReceiveWebSocketInXMLFormat.md)
