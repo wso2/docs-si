@@ -1,4 +1,4 @@
-# Scalable Deployment
+# Scalable Cluster
 
 Scalable high availability deployment predominantly focuses on scaling the system according to the load or the TPS of
 the system. This is achieved with the help of horizontal scalability.
@@ -14,7 +14,7 @@ The deployment options for a scalable WSO2 Integrator: SI depends on the statele
 The following topics provide detailed descriptions of two approaches.
 
 !!! tip "System Requirements"
-    For system requirements for this deployment, see [Installing the WSO2 Integrator: SI in a Virtual Machine](installing-si-in-vm.md).
+    For system requirements, see [Installing WSO2 Integrator: SI](installing-si-in-vm.md).
 
 
 ## Stateless scalable high availability (HA) deployment
@@ -48,39 +48,40 @@ As shown in the above diagram, first you need to have a partitioning layer. Here
 
 In order to partition you can leverage on the Distributed sink extension in WSO2 Integrator: SI. The following is a
 sample Siddhi application syntax that defines a stream. It shows how the distributed sink can be applied to partition data. In
-this example, data is partitioned from tenant domain. For more information, see [Siddhi Query Guide - Distributed Sink](https://siddhi.io/en/v4.x/docs/query-guide/#distributed-sink).
+this example, data is partitioned from tenant domain. For more information, see [Siddhi Query Guide - Distributed Sink](https://siddhi.io/en/v5.1/docs/query-guide/#distributed-sink).
 
 !!! note
-    In the following example, the definition of the `Request` stream(Request stream) only includes the logicto send events out for load balancers via http for each
-    partition. In addition, there should be a logic to consume eventsfrom outside and direct them to the `Request` stream.
+    In the following example, the definition of the `Request` stream only includes the logic to send events out for load balancers via HTTP for each
+    partition. In addition, there should be a logic to consume events from outside and direct them to the `Request` stream.
 
 e.g.,
 
-    // Stream defined with distributed sink with partitioned stratergy      
-    @Sink(type = 'http',
-              @map(type='json'),
-              @distribution(strategy='partitioned', partitionKey='userTenantDomain',
-              @destination(publisher.url='http://Ip1:8009/Request'),
-              @destination(publisher.url='http://Ip2:8009/Request')))
-    define stream Request (meta_clientType string,
-         applicationConsumerKey string,
-         applicationName string,
-         applicationId string,
-         applicationOwner string,
-         apiContext string,
-         apiName string,
-         apiVersion string,
-         apiCreator string,,
-         apiTier string,
-         apiHostname string,
-         username string,
-         userTenantDomain string,,
-         requestTimestamp long,
-         throttledOut bool,
-         responseTime long,
-         backendTime long);
-         
-    
+```siddhi
+-- Stream defined with distributed sink with partitioned strategy
+@Sink(type='http',
+      @map(type='json'),
+      @distribution(strategy='partitioned', partitionKey='userTenantDomain',
+                    @destination(publisher.url='http://Ip1:8009/Request'),
+                    @destination(publisher.url='http://Ip2:8009/Request')))
+define stream Request (meta_clientType string,
+                       applicationConsumerKey string,
+                       applicationName string,
+                       applicationId string,
+                       applicationOwner string,
+                       apiContext string,
+                       apiName string,
+                       apiVersion string,
+                       apiCreator string,
+                       apiTier string,
+                       apiHostname string,
+                       username string,
+                       userTenantDomain string,
+                       requestTimestamp long,
+                       throttledOut bool,
+                       responseTime long,
+                       backendTime long);
+```
+
 According to above distributed sink configuration, events that arrive at the `Request` stream are partitioned based on the
 `userTenantDomain` attribute. Therefore, if there are two tenant domain values `fooDomain` and `barDomain`, then events of
 `fooDomain` can be published to `Ip1`, and the events of `barDomain` can be published to `Ip2`. The distributed sink ensures that the unique partitioned events are not distributed across the cluster. Here, `Ip1` and `Ip2` represent the load balancer
@@ -93,37 +94,24 @@ You need the high availability in the partitioning layer. Therefore, you can use
 ### Stateful Layer
 
 The function of this layer is to consume events according to each partition and carry out the rest of the stateful
-operations. When you have partitioned the date, you can seamlessly handle the scalability of the system as well as address the requirement for high availability of the system.
+operations. When you have partitioned the data, you can seamlessly handle the scalability of the system as well as address the requirement for high availability of the system.
 Thus for each partition we can deploy the system as mentioned in two node
 minimum high available deployment section. Basically for each partition or partitions there will be a separate cluster 
 of two SI nodes. So if active node fails for a particular partition the other node in the cluster will carry out the 
 work.
 
-In order to configure the stateful layer you can follow the minimum high availability deployment guide. The only 
-difference in configurations regarding this layer would be , as mentioned since we maintain separate clusters for each
-partition the Cluster Configuration **group id** should be different for each cluster.
+To configure the stateful layer, follow the [minimum high availability deployment guide](deploying-si-as-minimum-ha-cluster.md). The only difference for this layer is the Cluster Configuration **groupId** — since each partition is its own cluster, each must have a unique groupId.
 
-Sample cluster configuration can be as below  :
+Sample cluster configuration:
 
-    
-      - cluster.config:
-          enabled: true
-          groupId:  group 1
-          coordinationStrategyClass: org.wso2.carbon.cluster.coordinator.rdbms.RDBMSCoordinationStrategy
-          strategyConfig:
-            datasource: WSO2_CLUSTER_DB
-            heartbeatInterval: 5000
-            heartbeatMaxRetry: 5
-            eventPollingInterval: 5000
-        
-            
-           
-
-
-  
-
- 
-
-
-
-
+```yaml
+cluster.config:
+  enabled: true
+  groupId: group-1
+  coordinationStrategyClass: org.wso2.carbon.cluster.coordinator.rdbms.RDBMSCoordinationStrategy
+  strategyConfig:
+    datasource: WSO2_CLUSTER_DB
+    heartbeatInterval: 5000
+    heartbeatMaxRetry: 5
+    eventPollingInterval: 5000
+```

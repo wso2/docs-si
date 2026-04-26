@@ -106,7 +106,7 @@ The following are the supported mappers when you publish data to destinations.
 | `xml`         | [xml](https://siddhi-io.github.io/siddhi-map-xml/api/latest/#sinkmapper)               |
 | `text`        | [text](https://siddhi-io.github.io/siddhi-map-text/api/latest/#sinkmapper)             |
 | `avro`        | [avro](https://siddhi-io.github.io/siddhi-map-avro/api/latest/#sinkmapper)             |
-| `binary`      | [binary](https://siddhi-io.github.io/siddhi-map-binary/api/latest/#binary-sink-mapper) |                                                                   |
+| `binary`      | [binary](https://siddhi-io.github.io/siddhi-map-binary/api/latest/#binary-sink-mapper) |
     
 ## Publishing data to messaging systems
 
@@ -147,7 +147,7 @@ To try out the example in the previous subtopic, follow the steps below:
         
 3. Prepare WSO2 Integrator: SI to publish data to a Kafka topic as follows:
 
-    1. Download and install the Kafka extension. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
+    1. Download and install the Kafka extension. For instructions, see [Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
     
     2. Open a new file and add the following Siddhi application to it.
 
@@ -188,7 +188,7 @@ To try out the example in the previous subtopic, follow the steps below:
         
 ### Supported messaging systems
 
-WSO2 Integrator: SI allows you to publish messages to the following messaging system via Siddhi extentions.
+WSO2 Integrator: SI allows you to publish messages to the following messaging systems via Siddhi extensions.
 
 | **Transport**    | **Supporting Siddhi Extension**                                                       |
 |------------------|---------------------------------------------------------------------------------------|

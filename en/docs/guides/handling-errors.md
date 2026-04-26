@@ -141,7 +141,7 @@ To try out storing errors in the store, follow the steps below:
               isAutoCommit: false
         ```
 
-2. Download the [productions.csv file]({{base_path}}/examples/resources/productions.csv) and save it in a location of your choice in your machine.
+2. Download the [productions.csv file]({{base_path}}/tutorials/resources/productions.csv) and save it in a location of your choice in your machine.
 
 3. [Create a Siddhi application](../get-started/first-siddhi-app/create-the-siddhi-application.md) as follows and deploy it in the WSO2 Integrator: SI server.
 
@@ -197,7 +197,7 @@ To try out storing errors in the store, follow the steps below:
 
     **Generating a sink error**
 
-    1. Be sure  that the file path you specified in the sink configuration is not actually available. For example, in this scenario, you can make sure that the `manager` sub-directory in the `<YOUR_HOME>/manager/managercopy.csv` path is not available.
+    1. Be sure that the file path you specified in the sink configuration is not actually available. For example, in this scenario, you can make sure that the `manager` sub-directory in the `<YOUR_HOME>/manager/managercopy.csv` path is not available.
     
     2. Now create a file event by entering a new row in the input file (in this scenario, `<YOUR_HOME>/productions.csv`) as follows.
     

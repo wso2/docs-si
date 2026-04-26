@@ -66,9 +66,9 @@ To try out the example given above, follow the steps below:
               PRIMARY KEY (ref));
             ```
         
-2. [Start and access WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
+2. [Install and start WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
-3. Install the `RDBMS - MySQL` extension in WSO2 Integrator: SI. For instructions to install an extension, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
+3. Install the `RDBMS - MySQL` extension in WSO2 Integrator: SI. For instructions to install an extension, see [Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
 
 4. In WSO2 Integrator: SI, open a new file and add the following Siddhi content to it.
 
@@ -107,7 +107,7 @@ To try out the example given above, follow the steps below:
     
 ### Publishing data on demand via store queries
 
-To understand how to publish data on demand, see [Correlating Data](correlating-data.md)
+To understand how to publish data on demand, see [Correlating Data](correlating-data.md).
 
 ### Supported databases
 
@@ -148,7 +148,7 @@ Here, any event directed to the `TemperatureLogStream` is written into the `<YOU
 
 To try out the above example by including the given output stream and the sink configuration in a complete Siddhi application, follow the steps below:
 
-1. [Start and access WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
+1. [Install and start WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
 2. Open a new file and copy the following Siddhi Application to it.
 
@@ -227,9 +227,9 @@ To try out the above example, follow the steps below:
     
     3. Create a bucket named `temperaturelog` in the Google Cloud Console.
     
-2. Install the `GCS` extension in WSO2 Integrator: SI. For instructions to install an extension, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
+2. Install the `GCS` extension in WSO2 Integrator: SI. For instructions to install an extension, see [Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
 
-3. [Start and access WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
+3. [Install and start WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
 4. Open a new file and copy the following Siddhi Application to it.
 
@@ -259,7 +259,7 @@ To try out the above example, follow the steps below:
     | **timestamp**   | `1603461542000` |
     | **temperature** | `27`            |       
     
-    This generates an output event that is updated in the `temperaturelog`bucket.
+    This generates an output event that is updated in the `temperaturelog` bucket.
     
 ### Supported cloud platforms
 

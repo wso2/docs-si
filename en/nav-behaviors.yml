@@ -18,8 +18,8 @@ auto_collapse:
     collapse_when_url_starts_with:
       # Collapse when visiting other main sections
       - guides/
+      - tutorials/
       - examples/
-      - samples/
       - setup/
       - admin/
       - develop/
@@ -44,8 +44,8 @@ auto_collapse:
     stay_expanded_when_url_starts_with:
       # Stay expanded only in own section
       - guides/
+      - tutorials/
       - examples/
-      - samples/
 
   # GROUP 2: Setup and Install - Collapsed everywhere except own pages
   - title: Setup and Install
@@ -53,8 +53,8 @@ auto_collapse:
       # Collapse when visiting other sections
       - get-started/
       - guides/
+      - tutorials/
       - examples/
-      - samples/
       - develop/
       - admin/
       - connectors/
@@ -70,8 +70,8 @@ auto_collapse:
       # Collapse when visiting other sections
       - get-started/
       - guides/
+      - tutorials/
       - examples/
-      - samples/
       - setup/
       - admin/
       - connectors/
@@ -86,8 +86,8 @@ auto_collapse:
       # Collapse when visiting other sections
       - get-started/
       - guides/
+      - tutorials/
       - examples/
-      - samples/
       - setup/
       - develop/
       - connectors/
@@ -102,8 +102,8 @@ auto_collapse:
       # Collapse when visiting other sections
       - get-started/
       - guides/
+      - tutorials/
       - examples/
-      - samples/
       - setup/
       - admin/
       - develop/
@@ -118,8 +118,8 @@ auto_collapse:
       # Collapse when visiting other sections
       - get-started/
       - guides/
+      - tutorials/
       - examples/
-      - samples/
       - setup/
       - admin/
       - develop/

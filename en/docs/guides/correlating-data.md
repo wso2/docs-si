@@ -164,7 +164,7 @@ To try out the Siddhi application given in the sample above, follow the steps be
 
 ### Find non-occurrence of events
 
-To understand how to detect the non occurrence of events, consider a scenario where the production manager of sa sweet factory needs to count the number of times a wastage occurred due to some of the items in a production batch not being sold within three days since it was produced and having to be scrapped as a result.  For this purpose, let's assume that the products are sold on a FIFO (First In First Out) basis.
+To understand how to detect the non-occurrence of events, consider a scenario where the production manager of a sweet factory needs to count the number of times a wastage occurred due to some of the items in a production batch not being sold within three days since it was produced and having to be scrapped as a result.  For this purpose, let's assume that the products are sold on a FIFO (First In First Out) basis.
 
 The above requirement can be addressed by the following Siddhi application.
 
@@ -220,7 +220,7 @@ To try out the Siddhi application given in the sample above, follow the steps be
     select e1.name as name 
     insert into WastageAlertStream;
     ```
-   For testing purposes, the above Siddhi application detects thye non occurrence of a matching event within three seconds instead of three days.
+   For testing purposes, the above Siddhi application detects the non-occurrence of a matching event within three seconds instead of three days.
    
 2. Simulate events for the `ProductionStream` stream of the `DetectWastageApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
 
@@ -320,7 +320,7 @@ from every e1 = ProductionStream , e2 = ProductionStream[ifThenElse(e2[last].amo
 select e1.amount as initialAmount, e2[last].amount as peakAmount, e3.amount as firstReducedAmount 
 insert into DecreasingProductionAlertStream;
 ```
-The above Siddhi application matches every event in the `ProductionStream` stream. It first checks whether the value for the `amount` attribute of the second event is greater than that of the first event. Then for every event, it checks whetherv the value for the `amount` attribute is greater or equal to that of the previous event (i.e., via `e2[last].temp`). If an event occurs with a value for the `amount` attribute that is less than that of the preceding event, an output event is generated in the `DecreasingProductionAlertStream`.
+The above Siddhi application matches every event in the `ProductionStream` stream. It first checks whether the value for the `amount` attribute of the second event is greater than that of the first event. Then for every event, it checks whether the value for the `amount` attribute is greater or equal to that of the previous event (i.e., via `e2[last].temp`). If an event occurs with a value for the `amount` attribute that is less than that of the preceding event, an output event is generated in the `DecreasingProductionAlertStream`.
 
 #### Try it out
 
@@ -343,7 +343,7 @@ To try out the Siddhi application given in the sample above, follow the steps be
     insert into DecreasingProductionAlertStream;
     ```
    
-2. Simulate events for the `ProductionStream` steeam of the `ObserveProductionTrendsApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications - Simulating Events](../develop/testing-a-Siddhi-Application.md).
+2. Simulate events for the `ProductionStream` stream of the `ObserveProductionTrendsApp` application as follows. For instructions to simulate events, see [Testing Siddhi Applications - Simulating Events](../develop/testing-a-Siddhi-Application.md).
 
     | **name**      | **amount** |
     |---------------|------------|

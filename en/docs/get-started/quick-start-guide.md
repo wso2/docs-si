@@ -37,7 +37,7 @@ Let's create a simple Siddhi application that reads data from a CSV file, perfor
 
 ![Scenario]({{base_path}}/images/qsg/quick-start.png)
 
-1. Download the `productions.csv` file from [here]({{base_path}}/examples/resources/productions.csv) and save it in a location of your choice.
+1. Download the `productions.csv` file from [here]({{base_path}}/tutorials/resources/productions.csv) and save it in a location of your choice.
 
     !!! info
         In this example, the file is located in the `<YOUR_HOME>` directory.
@@ -149,6 +149,6 @@ Once you try out this quick start guide, you can proceed to one of the following
 
 - Learn the basic functionality of the WSO2 Integrator: SI in less than 30 minutes by [Creating Your First Siddhi Application](first-siddhi-app/overview.md).
 
-- Try out [WSO2 Integrator: SI tutorials](../examples/tutorials-overview.md).
+- Try out [WSO2 Integrator: SI tutorials](../tutorials/tutorials-overview.md).
 
-- Learn how to run WSO2 Integrator: SI in containerized environments by trying [Running SI with Docker and Kubernetes](../examples/running-si-with-docker-and-kubernetes.md).
+- Learn how to run WSO2 Integrator: SI in containerized environments by trying [Running SI with Docker and Kubernetes](../tutorials/running-si-with-docker-and-kubernetes.md).

@@ -7,19 +7,19 @@
 
 For the purpose of monitoring ETL (Extract, Transform, Load) statistics WSO2 provides nine pre-configured dashboards. To view them in Grafana, follow the steps below:
  
- 1. Download the following dashboards (i.e., the JSON file with the dashboard configuration) from [here](https://github.com/wso2/streaming-integrator/tree/master/modules/distribution/carbon-home/resources/dashboards).
+ 1. Download the following dashboards (i.e., the JSON file with the dashboard configuration) from [here](https://github.com/wso2/product-integrator-si/tree/master/modules/distribution/carbon-home/resources/dashboards).
  
     |**Directory**        |**Dashboard**                                          |
     |---------------------|-------------------------------------------------------|
-    |`overview-statistics`|- [WSO2 Integrator: SI - Overall Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/overview-statistics/WSO2%20Streaming%20Integrator%20-%20Overall%20Statistics.json) <br/> - [WSO2 Integrator: SI - App Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/overview-statistics/WSO2%20Streaming%20Integrator%20-%20App%20Statistics.json)|
-    |`file-statistics`    |- [WSO2 Integrator: SI - File Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/file-statistics/WSO2%20Streaming%20Integrator%20-%20File%20Statistics.json) <br/> - [WSO2 Integrator: SI - File Source Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/file-statistics/WSO2%20Streaming%20Integrator%20-%20File%20Source%20Statistics.json) <br/> - [WSO2 Integrator: SI - File Sink Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/file-statistics/WSO2%20Streaming%20Integrator%20-%20File%20Sink%20Statistics.json)|
-    |`rdbms-statistics`   |- [WSO2 Streaming Integration - RDBMS Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/rdbms-statistics/WSO2%20Streaming%20Integration%20-%20RDBMS%20Statistics.json) <br/> - [WSO2 Streaming Integration - RDBMS Table Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/rdbms-statistics/WSO2%20Streaming%20Integration%20-%20RDBMS%20Table%20Statistics.json)|
-    |`cdc-statistics`     |- [WSO2 Integrator: SI - CDC Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/cdc-statistics/WSO2%20Streaming%20Integrator%20-%20CDC%20Statistics.json) <br/> - [WSO2 Integrator: SI - CDC Streaming Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/cdc-statistics/WSO2%20Streaming%20Integrator%20-%20CDC%20Streaming%20Statistics.json) <br/> - [WSO2 Integrator: SI - CDC Scheduled Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/cdc-statistics/WSO2%20Streaming%20Integrator%20-%20CDC%20Scheduled%20Statistics.json)|
-    |`kafka-statistics`     |- [WSO2 Integrator: SI - Kafka Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/kafka-statistics/WSO2%20Streaming%20Integrator%20-%20Kafka%20Statistics.json) <br/> - [WSO2 Integrator: SI - Kafka Source Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/kafka-statistics/WSO2%20Streaming%20Integrator%20-%20Kafka%20Source%20Statistics.json) <br/> - [WSO2 Integrator: SI - Kafka Sink Statistics.json](https://github.com/wso2/streaming-integrator/blob/master/modules/distribution/carbon-home/resources/dashboards/kafka-statistics/WSO2%20Streaming%20Integrator%20-%20Kafka%20Sink%20Statistics.json)|
+    |`overview-statistics`|- [WSO2 Integrator: SI - Overall Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/overview-statistics/WSO2%20Streaming%20Integrator%20-%20Overall%20Statistics.json) <br/> - [WSO2 Integrator: SI - App Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/overview-statistics/WSO2%20Streaming%20Integrator%20-%20App%20Statistics.json)|
+    |`file-statistics`    |- [WSO2 Integrator: SI - File Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/file-statistics/WSO2%20Streaming%20Integrator%20-%20File%20Statistics.json) <br/> - [WSO2 Integrator: SI - File Source Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/file-statistics/WSO2%20Streaming%20Integrator%20-%20File%20Source%20Statistics.json) <br/> - [WSO2 Integrator: SI - File Sink Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/file-statistics/WSO2%20Streaming%20Integrator%20-%20File%20Sink%20Statistics.json)|
+    |`rdbms-statistics`   |- [WSO2 Streaming Integration - RDBMS Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/rdbms-statistics/WSO2%20Streaming%20Integration%20-%20RDBMS%20Statistics.json) <br/> - [WSO2 Streaming Integration - RDBMS Table Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/rdbms-statistics/WSO2%20Streaming%20Integration%20-%20RDBMS%20Table%20Statistics.json)|
+    |`cdc-statistics`     |- [WSO2 Integrator: SI - CDC Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/cdc-statistics/WSO2%20Streaming%20Integrator%20-%20CDC%20Statistics.json) <br/> - [WSO2 Integrator: SI - CDC Streaming Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/cdc-statistics/WSO2%20Streaming%20Integrator%20-%20CDC%20Streaming%20Statistics.json) <br/> - [WSO2 Integrator: SI - CDC Scheduled Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/cdc-statistics/WSO2%20Streaming%20Integrator%20-%20CDC%20Scheduled%20Statistics.json)|
+    |`kafka-statistics`     |- [WSO2 Integrator: SI - Kafka Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/kafka-statistics/WSO2%20Streaming%20Integrator%20-%20Kafka%20Statistics.json) <br/> - [WSO2 Integrator: SI - Kafka Source Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/kafka-statistics/WSO2%20Streaming%20Integrator%20-%20Kafka%20Source%20Statistics.json) <br/> - [WSO2 Integrator: SI - Kafka Sink Statistics.json](https://github.com/wso2/product-integrator-si/blob/master/modules/distribution/carbon-home/resources/dashboards/kafka-statistics/WSO2%20Streaming%20Integrator%20-%20Kafka%20Sink%20Statistics.json)|
     
  2. Start and access Grafana. Then import the nine dashboards you downloaded in the previous step. For more information, see [Managing Grafana Dashboards - Importing Dashboards](managing-grafana-dashboards.md#importing-dashboards).
     
- 3. In the **Dashboards**/**Manage** tab, create four new folders named `overview-statistics`, `file-statistics`, `rdbms-statistics`, `cdc-statistics`, and `kafka-statistics` . Then organize the dashboards you imported in the new folders you created as shown in the image below. For instructions, see [Managing Grafana Dashboards - Organizing Dashboards in Folders](managing-grafana-dashboards.md#organizing-dashboards-in-folders).
+ 3. In the **Dashboards**/**Manage** tab, create five new folders named `overview-statistics`, `file-statistics`, `rdbms-statistics`, `cdc-statistics`, and `kafka-statistics`. Then organize the dashboards you imported in the new folders you created as shown in the image below. For instructions, see [Managing Grafana Dashboards - Organizing Dashboards in Folders](managing-grafana-dashboards.md#organizing-dashboards-in-folders).
  
     !!! info
         The following is a suggested method to organize your dashboards, and the following instructions are provided based on this structure.
@@ -33,7 +33,7 @@ To navigate through the Grafana dashboards you set up for monitoring WSO2 Integr
 
 1. To start and access the dashboards in Grafana, follow the steps below:
 
-    1. Start the Prometheus server by issung the following command from the `<PROMETHEUS_HOME>` directory.
+    1. Start the Prometheus server by issuing the following command from the `<PROMETHEUS_HOME>` directory.
     
         `./prometheus`
         
@@ -42,10 +42,17 @@ To navigate through the Grafana dashboards you set up for monitoring WSO2 Integr
         !!! info
             The procedure to start Grafana depends on your operating system and the installation process. e.g., If your operating system is macOS and you have installed Grafana via Homebrew, you start Grafana by issuing the `brew services start grafana` command.
             
-    3. Start the WSO2 Integrator: SI server by navigating to the `<SI_HOME>/bin`directory, and issuing the appropriate command out of the following based on your operating system.
-           
-        - For Linux/macOS: `./server.sh`
-        - For Windows: `server.bat`
+    3. Start the WSO2 Integrator: SI server by navigating to the `<SI_HOME>/bin` directory, and issuing the appropriate command based on your operating system.
+
+        === "On macOS/Linux"
+            ```bash
+            ./server.sh
+            ```
+
+        === "On Windows"
+            ```batch
+            server.bat
+            ```
 
     Access Grafana via `http://localhost:3000/`.
 
@@ -69,11 +76,11 @@ To navigate through the Grafana dashboards you set up for monitoring WSO2 Integr
     
     ![Application Statistics]({{base_path}}/images/managing-wso2-dashboards/siddhi-application-statistics.png)
     
-### Viewing CDC statistics**
+### Viewing CDC statistics
     
 CDC related statistics are displayed in the **Sources** section of the **WSO2 Integrator: SI App Statistics** dashboard. To view the detailed statistics for a specific table, click on that table.
 
-As a result, the **CDC Statistics** dashboard opens with change data statistice specific to that table.
+As a result, the **CDC Statistics** dashboard opens with change data statistics specific to that table.
 
 ![CDC Statistics Dashboard]({{base_path}}/images/managing-wso2-dashboards/cdc-statistics.png)
 
@@ -85,7 +92,7 @@ If you click on a table for which change data is captured in a scheduled manner 
 
 ![CDC Scheduled Statistics Dashboard]({{base_path}}/images/managing-wso2-dashboards/cdc-scheduled-statistics.png)
     
-### Viewing File statistics**
+### Viewing File statistics
     
 - When the content of a file is used as input data, the file is displayed in the **Sources** section as shown in the example below.
 
@@ -111,7 +118,7 @@ If you click on a table for which change data is captured in a scheduled manner 
  
  ![File Sink Statistics Dashboard]({{base_path}}/images/managing-wso2-dashboards/file-sink-statistics-dashboard.png) 
         
-### Viewing RDBMS statistics**
+### Viewing RDBMS statistics
     
 When the records of an RDBMS database is used as input data by the selected Siddhi application, the database is displayed in the **Sources** section. When any output generated by the selected Siddhi application is saved in a database, that database is displayed under **Destinations**.
 

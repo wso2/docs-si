@@ -171,6 +171,6 @@ Redeploy the application (see [Step 3: Deploy the Siddhi Application](deploy-sid
 !!! tip "What's Next?"
     - To package the `SweetFactoryApp` Siddhi application as a Docker artifact for containerized deployment, proceed to [Step 7: Export the Siddhi Application as a Docker Artifact](export-siddhi-application-as-docker.md).
     - To learn more about the key concepts of WSO2 Integrator: SI, see [Key Concepts](../../get-started/key-concepts.md).
-    - For more hands-on experience, try the [Tutorials](../../examples/tutorials-overview.md).
+    - For more hands-on experience, try the [Tutorials](../../tutorials/tutorials-overview.md).
     - For guidance on common Streaming Integration use cases, see [Use Cases](../../guides/use-cases.md).
-    - To run WSO2 Integrator: SI in containerized environments, see [Running SI with Docker and Kubernetes](../../examples/running-si-with-docker-and-kubernetes.md).
+    - To run WSO2 Integrator: SI in containerized environments, see [Running SI with Docker and Kubernetes](../../tutorials/running-si-with-docker-and-kubernetes.md).

@@ -176,7 +176,7 @@ insert into CleansedDataStream;
 
 To try out the above example, follow the steps below:
 
-1. [Start and access WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
+1. [Install and start WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
 2. Open a new file. Then add and save the following Siddhi application.
 
@@ -201,7 +201,7 @@ To try out the above example, follow the steps below:
 
     | **deviceID**                                        | **roomNo** | **temp** |
     |-----------------------------------------------------|------------|----------|
-    | Select the **Is Null** check box for this sttribute | `183`      | `30`     |
+    | Select the **Is Null** check box for this attribute | `183`      | `30`     |
     
     The output is logged as follows:
     

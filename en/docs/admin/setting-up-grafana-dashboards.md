@@ -50,9 +50,16 @@ In order to configure a Grafana dashboard, follow the steps below:
 2. **Start WSO2 Integrator: SI server**
 
     To start the Streaming runtime, navigate to the `<SI_HOME>/bin` directory and issue the appropriate command based on your operating system.
-    
-    - **For Windows**: `server.bat --run`<br/>
-    - **For Linux/macOS**: `./server.sh`
+
+    === "On macOS/Linux"
+        ```bash
+        ./server.sh
+        ```
+
+    === "On Windows"
+        ```batch
+        server.bat
+        ```
 
 3. **Start the Prometheus server**
 
@@ -73,17 +80,17 @@ In order to configure a Grafana dashboard, follow the steps below:
 4. **Start and configure the Grafana server**
 
     To start and configure the Grafana server, follow the procedure below:
-    
-    2. Start Grafana
-    
+
+    1. Start Grafana.
+
         !!! info
             The procedure to start Grafana depends on your operating system and the installation process. e.g., If your operating system is macOS and you have installed Grafana via Homebrew, you start Grafana by issuing the `brew services start grafana` command.
-            
-    3. Access Grafana via `http://localhost:3000/`.
-   
-    4. In the **Data Sources** section, click **Add your first data source**. In the **Add data source** page that appears, click **Select** for **Prometheus**.
-    
-    5. In the **Add data source** page -> **Settings** tab, update the configurations for Prometheus as follows.
+
+    2. Access Grafana via `http://localhost:3000/`.
+
+    3. In the **Data Sources** section, click **Add your first data source**. In the **Add data source** page that appears, click **Select** for **Prometheus**.
+
+    4. In the **Add data source** page -> **Settings** tab, update the configurations for Prometheus as follows.
     
         ![prometheus configuration]({{base_path}}/images/cdc-monitoring/prometheus-configurations.png)
     
@@ -98,7 +105,7 @@ In order to configure a Grafana dashboard, follow the steps below:
 
     WSO2 Integrator: SI offers pre-built dashboards for monitoring streaming data flows and server statistics. To load them, follow the procedure below:
     
-    1. Download the required JSON file (i.e., based on the statistics you need to view) from [here](https://github.com/wso2/streaming-integrator/tree/master/modules/distribution/carbon-home/resources/dashboards).
+    1. Download the required JSON file (i.e., based on the statistics you need to view) from [here](https://github.com/wso2/product-integrator-si/tree/master/modules/distribution/carbon-home/resources/dashboards).
     
     2. Start Grafana and access it via `http://localhost:3000/`.
     

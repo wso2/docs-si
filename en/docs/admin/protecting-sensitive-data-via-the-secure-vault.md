@@ -20,7 +20,7 @@ The WSO2 Integrator: SI offers the Cipher tool to encrypt sensitive data in depl
 
 ## Protecting sensitive data in Siddhi applications
 
-A parameter named ref is used to secure sensitive information in Siddhi applications that are deployed in the WSO2 Integrator: SI. For Siddhi applications that use storage technologies supported by [Carbon Data sources](configuring-datasources), it is also possible to use Carbon data sources instead of specifying the connection parameters directly on the Siddhi file.
+A parameter named ref is used to secure sensitive information in Siddhi applications that are deployed in the WSO2 Integrator: SI. For Siddhi applications that use storage technologies supported by [carbon datasources](../setup/configuring-data-sources.md), it is also possible to use carbon datasources instead of specifying the connection parameters directly on the Siddhi file.
 
 ### Using the ref parameter
 

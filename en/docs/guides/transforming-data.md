@@ -79,7 +79,7 @@ WSO2 Integrator: SI can publish messages in the default format or in a custom fo
 
     To understand this, consider a scenario where you receive production information in the JSON format, but you need to publish that information in a file in the XML format.
     
-    To do this, you can define your output [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and connect a [sink](https://siddhi.io/en/v5.1/docs/query-guide/#sink) to it with a [mapper](https://siddhi.io/en/v5.1/docs/query-guide/#sink-mapper) of the `xml` type. as shown below.
+    To do this, you can define your output [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and connect a [sink](https://siddhi.io/en/v5.1/docs/query-guide/#sink) to it with a [mapper](https://siddhi.io/en/v5.1/docs/query-guide/#sink-mapper) of the `xml` type, as shown below.
     
     ```siddhi
     @sink(type = 'file', 
@@ -198,7 +198,7 @@ Here, `js:eval("amount > average", 'bool') as exceedsAverage` is a custom functi
 
 To try out the transformations described above with some of the given examples, follow the steps below:
 
-1. [Start and access WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
+1. [Install and start WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
 2. Open a new file. Then add and save the following Siddhi application.
 
@@ -235,7 +235,7 @@ To try out the transformations described above with some of the given examples, 
    
    This Siddhi application does the following transformations:
    
-   - Derives the values for `name` and `amount` attributes representing the name of the product and the amount produced. This is derived from input events sent is a custom format where the two required values are provided under the `Sweet` and `count` attributes, and the `count` attribute is nested under another attribute named `batch`.
+   - Derives the values for `name` and `amount` attributes representing the name of the product and the amount produced. This is derived from input events sent in a custom format where the two required values are provided under the `Sweet` and `count` attributes, and the `count` attribute is nested under another attribute named `batch`.
    
    - Publishes the production statistics in a custom format. `name` and `amount` attributes are presented as `Name` and `Quantity`, and nested under `ProductionData` in the `Product` enclosing element. These events are published in the `<YOUR_HOME>/productions.json` file.
    

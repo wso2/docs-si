@@ -177,19 +177,19 @@ Now we have a `.jks` file. This keystore (`.jks` file) can be used to generate a
     You are asked to give the keystore password. Once the password is given, the command outputs the `newcertreq.csr` file to the `<SI_HOME>/resources/security` directory. This is the CSR that you must submit to a CA.
 
 
-2. You must provide this CSR file to the CA. For testing purposes, try the [90 days trial SSL certificate from Comodo](https://www.instantssl.com/).
+2. You must provide this CSR file to the CA. For testing purposes, you can use a trial SSL certificate from any reputable CA.
 
     !!!info
         It is preferable to have a wildcard certificate or multiple domain certificates if you wish to have multiple sub-domains like *gateway.sampledomain.org*, *publisher.sampledomain.org*, *identity.sampledomain.org*, etc., for the deployment. For such requirements you must modify the CSR request by adding subject alternative names. Most of the SSL providers give instructions to generate the CSR in such cases.
 
 3. After accepting the request, a signed certificate is provided along with several intermediate certificates (depending on the CA) as a bundle (.zip file).
 
-    !!!info "The following is a sample certificate by the CA (Comodo)
+    !!!info "The following is a sample certificate bundle from a CA"
 
         ```text
-        The Root certificate of the CA: AddTrustExternalCARoot.crt
-        Intermediate certificates:  COMODORSAAddTrustCA.crt , COMODORSADomainValidationSecureServerCA.crt
-        SSL Certificate signed by CA: test_sampleapp_org.crt
+        The Root certificate of the CA: <root-ca>.crt
+        Intermediate certificates: <intermediate-ca-1>.crt, <intermediate-ca-2>.crt
+        SSL Certificate signed by CA: <signed-cert>.crt
         ```
   
 **Step 3: Importing CA-signed certificates to keystore**
@@ -197,9 +197,9 @@ Now we have a `.jks` file. This keystore (`.jks` file) can be used to generate a
 1. Before importing the CA-signed certificate to the keystore, add the root CA certificate and the two intermediate certificates by executing the commands given below. Note that the sample certificates given above are used as examples.
 
     ```
-    keytool -import -v -trustcacerts -alias ExternalCARoot -file AddTrustExternalCARoot.crt -keystore newkeystore.jks -storepass mypassword
-    keytool -import -v -trustcacerts -alias TrustCA -file COMODORSAAddTrustCA.crt -keystore newkeystore.jks -storepass mypassword
-    keytool -import -v -trustcacerts -alias SecureServerCA -file COMODORSADomainValidationSecureServerCA.crt -keystore newkeystore.jks -storepass mypassword
+    keytool -import -v -trustcacerts -alias ExternalCARoot -file <root-ca>.crt -keystore newkeystore.jks -storepass mypassword
+    keytool -import -v -trustcacerts -alias TrustCA -file <intermediate-ca-1>.crt -keystore newkeystore.jks -storepass mypassword
+    keytool -import -v -trustcacerts -alias SecureServerCA -file <intermediate-ca-2>.crt -keystore newkeystore.jks -storepass mypassword
     ```
 
     !!!info
@@ -207,7 +207,7 @@ Now we have a `.jks` file. This keystore (`.jks` file) can be used to generate a
 
 2. After you add the root certificate and all other intermediate certificates, add the CA-signed SSL certificate to the keystore by executing the following command:
 
-    `keytool -import -v -alias <certalias> -file <test_sampleapp_org.crt> -keystore newkeystore.jks -keypass myppassword -storepass mykpassword`
+    `keytool -import -v -alias <certalias> -file <signed-cert>.crt -keystore newkeystore.jks -keypass myppassword -storepass mykpassword`
 
     !!!tip
         In this command, use the same alias that you used when you created the keystore.
@@ -216,7 +216,7 @@ Now you have a Java keystore including a CA-signed certificate that can be used 
 
 **Adding the public key to client-truststore.jks**
 
-In SSL handshake, the client needs to verify the certificate presented by the server. For this purpose, the client usually stores the certificates it trusts in a trust store. The WSO2 Integrator: SI is shipped with the trust store named `client-truststore.jks` that resides in the same directory as the keystore (i.e., `<SI_HOME>/resources/`). Therefore, you need to import the new public certificate into this trust store for front-end and backend communication of the WSO2 Integrator: SI to take place in the required manner over SSL.
+In SSL handshake, the client needs to verify the certificate presented by the server. For this purpose, the client usually stores the certificates it trusts in a trust store. The WSO2 Integrator: SI is shipped with the trust store named `client-truststore.jks` that resides in the same directory as the keystore (i.e., `<SI_HOME>/resources/security/`). Therefore, you need to import the new public certificate into this trust store for front-end and backend communication of the WSO2 Integrator: SI to take place in the required manner over SSL.
 
 !!!tip
     In this example, you are using the default `client-truststore.jks` file in the WSO2 Integrator: SI as the trust store.
@@ -242,8 +242,7 @@ Now, you have an SSL certificate stored in a Java keystore and a public key adde
 
 ## Configuring keystores
 
-Once you have created a new key store and updated the `<SI_HOME>/resources/security/client-truststore.jks` file, you must update the `<SI_HOME>/conf/<PROFILE/deployment.yaml` file to make that keystore work for the required functions. Keystores are used for multiple functions in the Streaming Integrator including securing the servlet transport, databridge communication, encrypting confidential information in configuration files etc.
-Once you have created a new key store and updated the `<SI_HOME>/resources/security/client-truststore.jks` file, you must update the `<SI_HOME>/conf/<PROFILE/deployment.yaml` file to make that keystore work for the required functions. Keystores are used for multiple functions in the WSO2 Integrator: SI including securing the servlet transport, databridge communication, encrypting confidential information in configuration files etc.
+Once you have created a new key store and updated the `<SI_HOME>/resources/security/client-truststore.jks` file, you must update the `<SI_HOME>/conf/server/deployment.yaml` file to make that keystore work for the required functions. Keystores are used for multiple functions in the WSO2 Integrator: SI including securing the servlet transport, databridge communication, encrypting confidential information in configuration files etc.
 
 !!!tip
     - The `wso2carbon.jks` keystore file that is shipped with the WSO2 Integrator: SI is used as the default keystore for all functions. However, in a production environment, it is recommended to create new keystores with keys and certificates because the WSO2 Integrator: SI is an open source integrator, and anyone who downloads it has access to the default keystore.

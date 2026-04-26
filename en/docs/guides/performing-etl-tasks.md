@@ -196,8 +196,8 @@ update or insert into StockRecords
 !!! tip "Hands-on tutorials"
     To work through the scenarios above end-to-end, see the following tutorials:
 
-    - [Performing Real-time ETL with Files](../examples/performing-real-time-etl-with-files.md) — demonstrates file-source ETL end-to-end.
-    - [Performing Real-time Change Data Capture with MySQL](../examples/performing-real-time-etl-with-mysql.md) — demonstrates CDC-source ETL end-to-end.
+    - [Performing Real-time ETL with Files](../tutorials/performing-real-time-etl-with-files.md) — demonstrates file-source ETL end-to-end.
+    - [Performing Real-time Change Data Capture with MySQL](../tutorials/performing-real-time-etl-with-mysql.md) — demonstrates CDC-source ETL end-to-end.
 
 ## Scalability
 
@@ -206,7 +206,7 @@ This can be observed in the previous examples where the `ManagingStocksApp` Sidd
 
 ![Extended ETL Flow]({{base_path}}/images/performing-etl-operations/extended-etl-flow.png)
 
-When you extended the ETL flow to perform stock updates, it involved adding more ETL tasks to the flow. You can also scale your ETL applications without adding more ETL tasks. This is done by adding only more sources to extract data for the existing tasks or adding more destinations for the existing tasks to load the output. For example, if the Sweet Factory starts purchasing another ingredient (e.g., honey), you can define another stream to consume from a new source (e.g., a new file named `HoneySupply.xml) as follows:
+When you extended the ETL flow to perform stock updates, it involved adding more ETL tasks to the flow. You can also scale your ETL applications without adding more ETL tasks. This is done by adding only more sources to extract data for the existing tasks or adding more destinations for the existing tasks to load the output. For example, if the Sweet Factory starts purchasing another ingredient (e.g., honey), you can define another stream to consume from a new source (e.g., a new file named `HoneySupply.xml`) as follows:
 
 ```sql
 @source(type='file', mode='LINE',
@@ -248,7 +248,7 @@ In real world business scenarios, many businesses carry out about thousands of o
     
 According to the latest performance statistics of the WSO2 Integrator: SI, it can process 29,000 transactions per second when performing ETL tasks. For more information about performance statistics, see the following:
     
-- [Performance Analysis Results - Performing ETL Tasks](../ref/performance-analysis-results.md/#performing-etl-tasks)
+- [Performance Analysis Results - Performing ETL Tasks](../ref/performance-analysis-results.md#performing-etl-tasks)
 - [Streaming ETL with WSO2 Integrator: SI article](https://wso2.com/articles/streaming-etl-with-wso2-streaming-integrator/)
 
 

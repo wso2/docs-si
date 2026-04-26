@@ -6,7 +6,7 @@ WSO2 Integrator: SI receives input data, processes it and presents an output as 
 
 As shown in the diagram above, WSO2 Integrator: SI first extracts/receives input data, processes them and then presents the output by publishing/loading/writing it. You can perform supporting activities such as error handling, performing queries via API and analyzing metrics.
 
-### Extracting/receiving data
+## Extracting/receiving data
 
 WSO2 Integrator: SI can extract static data from sources such as databases, files, and cloud storages, as well as receive data in transit from data publishers and messaging systems.
 
@@ -15,7 +15,7 @@ For more information, see the following guides:
 - [Extracting Data from Static Sources in Real Time](extracting-data-from-static-sources-in-real-time.md)
 - [Receiving Data in Transit](receiving-data-in-transit.md)
 
-### Stream processing
+## Stream processing
 
 The different types of stream processing activities that can be performed by WSO2 Integrator: SI are as follows:
 
@@ -32,7 +32,7 @@ The different types of stream processing activities that can be performed by WSO
 For more information about the above processing activities, see [Stream processing](processing-data.md).
 
 
-### Publishing/loading/writing data
+## Publishing/loading/writing data
 
 Once the received data is processed, the output can be stored in a database, written in a file and/or saved in a cloud storage to be saved in a static manner. Alternatively, it can be published to a destination via a messaging system or a data publisher.
 
@@ -42,7 +42,7 @@ For more information about how the output is published, see the following topics
 - [Publishing Data](publishing-data-to-event-stream-consumers.md)
 
 
-### Supporting tasks
+## Supporting tasks
 
 The following guides cover the supporting tasks that can be performed by WSO2 Integrator: SI when processing Streaming Data.
 

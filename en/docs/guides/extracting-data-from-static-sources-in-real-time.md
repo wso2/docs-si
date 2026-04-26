@@ -14,7 +14,7 @@ To understand how data is extracted from a database into a streaming flow, consi
 
 Change data capture involves extracting any change that takes place in a selected database (i.e., any insert, update or a deletion) in real-time.
 
-To capture change data via [WSO2 Integrator: SI](../develop/si-for-vscode-overview.md), define an input [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) with the appropriate schema to capture the information you require, and then connect a [source](https://siddhi.io/en/v5.1/docs/query-guide/#source) of the `cdc` type as shown in the example below.
+To capture change data via [the editor](../develop/si-for-vscode-overview.md), define an input [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) with the appropriate schema to capture the information you require, and then connect a [source](https://siddhi.io/en/v5.1/docs/query-guide/#source) of the `cdc` type as shown in the example below.
 
 ```
 @source(type = 'cdc', 
@@ -125,9 +125,9 @@ Let's try out the example where you want to view the online bookings saved in a 
           PRIMARY KEY (ref));
         ```
           
-    4. [Open WSO2 Integrator: SI](../develop/si-for-vscode-overview.md).
+    4. [Open the editor](../develop/si-for-vscode-overview.md).
     
-    5. Download the `cdc-mysql` Siddhi extension for WSO2 Integrator: SI. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md#installing-an-extension).
+    5. Download the `cdc-mysql` Siddhi extension for WSO2 Integrator: SI. For instructions, see [Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md#installing-an-extension).
     
     6. In the editor (with WSO2 Integrator: SI installed), open a new file. Copy and paste the following Siddhi application to it.
     
@@ -178,7 +178,7 @@ The [siddhi-io-cdc source](https://siddhi-io.github.io/siddhi-io-cdc/api/latest/
 
 ### Supported mappers
 
-Mappers determine the format in which the event is received. For information about transforming events by changing the format in which the data is received/published, see [Transforming Data](transforming-data.md#transforming-message-formats)).
+Mappers determine the format in which the event is received. For information about transforming events by changing the format in which the data is received/published, see [Transforming Data](transforming-data.md#transforming-message-formats).
 
 The mapper available for extracting data from databases is [Keyvalue](https://siddhi-io.github.io/siddhi-map-keyvalue/api/2.1.0/#sourcemapper).
 
@@ -197,7 +197,7 @@ To understand how you can perform these file processing activities via the WSO2 
 
 ### Extracting data from files
 
-WSO2 Integrator: SI extracts data from files via the [File Source](https://siddhi-io.github.io/siddhi-io-file/api/latest/#file-source). Once it extracts the data, it can publish it in a streaming manner so that other streaming applications that cannot read static data from files.
+WSO2 Integrator: SI extracts data from files via the [File Source](https://siddhi-io.github.io/siddhi-io-file/api/latest/#file-source). Once it extracts the data, it can publish it in a streaming manner so that other streaming applications that cannot read static data from files can consume it.
 
 ![Extracting data from files]({{base_path}}/images/extracting-data-from-static-sources/file-content-processing.png)
 
@@ -273,13 +273,13 @@ e.g., If you want to move the `productioninserts.csv` file in the previous examp
 	@map(type = 'csv'))
 define stream ProductionStream (name string, amount double);
 ```
-Here, you are  moving the `productioninserts.csv` file from the `<YOUR_HOME>` directory to the `<YOUR_HOME>/processedfiles` after it is processed. 
+Here, you are moving the `productioninserts.csv` file from the `<YOUR_HOME>` directory to the `<YOUR_HOME>/processedfiles` after it is processed. 
 
 Note that this extract also includes `tailing = "false"`. When tailing is enabled, the source reports any change made to the file immediately. Tailing is available only when the mode is set to `LINE` or `REGEX`, and it is enabled for these modes by default. Therefore, if you are using one of these modes and you want to set the `action.after.process` to `move` you need to disable tailing.
 
 #### Supporting Siddhi extension
 
-Reading content in files are supported via the [file Siddhi extension](https://siddhi-io.github.io/siddhi-io-file/api/latest/#source).
+Reading content in files is supported via the [file Siddhi extension](https://siddhi-io.github.io/siddhi-io-file/api/latest/#source).
 
 #### Supporting mappers
 

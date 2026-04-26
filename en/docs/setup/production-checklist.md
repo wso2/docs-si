@@ -13,8 +13,7 @@ Multiple users with various roles in your organization can require access to you
 SI is an open-source product. Therefore, anyone who downloads it has access to the default users and passwords, default keystore settings, etc. Therefore, you are required to update the configurations related to security in order to ensure that your data is secure when you run SI in a production environment. For more information, see the following topics:
 
 - WSO2 uses key stores to store cryptographic keys and certificates that are used for various purposes. For more information on how to configure and manage them, see [Working with Keystores](../admin/working-with-Keystores.md).
-- To protect sensitive data, see [Protecting Sensitive Data via the Secure Vault](https://ei.docs.wso2.com/en/latest/streaming-integrator/admin/protecting-sensitive-data-via-the-secure-vault/).
-- To understand how WSO2 Integrator: SI complies with GDPR(General Data Protection Regulations) and how you can comply with the same when you are using WSO2 Integrator: SI, see [General Data Protection Regulations](../admin/general-data-protection-regulations.md).
+- To protect sensitive data, see [Protecting Sensitive Data via the Secure Vault](../admin/protecting-sensitive-data-via-the-secure-vault.md).
 
 ## Opening the required ports
 
@@ -26,7 +25,7 @@ If you are integrating data stores in your Streaming Integration flows, you need
 
 ## Configuring Transports
 
-In order to use certain transports to receive and send data, you are required to configure them with WSO2 Integrator: SI. For more information, see [Supporting Different Transports](../admin/supporting-different-transports.md).
+To use transport extensions (Kafka, JMS, MQTT, RabbitMQ, etc.) for receiving or publishing events, install the relevant Siddhi extensions via the **Extension Installer** panel. For instructions, see [Downloading and Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
 
 ## Minimizing the impact of system failure
 
@@ -34,7 +33,7 @@ In order to minimize the loss of data that can result from a system failure, you
 
 ## Monitoring the WSO2 Integrator: SI
 
-To monitor the performance of your WSO2 Integrator: SI setup, configure SI to publish its statistics in Dashboards as described in [Configuring Grafana Dashboards](../admin/setting-up-grafana-dashboards.md).
+To monitor the performance of your WSO2 Integrator: SI setup, configure SI to publish its statistics in Dashboards as described in [Configuring Dashboards](../admin/setting-up-grafana-dashboards.md).
 
 
 

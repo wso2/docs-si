@@ -4,7 +4,7 @@ WSO2 Integrator: SI is powered by Siddhi. Siddhi supports an extension architect
 
 ## Purpose
 
-Streaming Integration use cases may require a wide range of functionalities. Extensions are supported because it is not possible to have all this functionality within the Siddhi core. If the functionality covered by the supported extensions have gaps when addressing the requirements of your use cases, you can [write a custom extension](writing-Custom-Siddhi-Extensions.md).
+Streaming Integration use cases may require a wide range of functionalities. Extensions are supported because it is not possible to have all this functionality within the Siddhi core. If the supported extensions don't cover your use case, you can [write a custom extension](writing-Custom-Siddhi-Extensions.md).
 
 All extensions have a namespace. This is used to identify the relevant extensions together, and to let you specifically call the extension.
 
@@ -25,7 +25,7 @@ The following parameters are configured when referring a script function.
 |`function name`|The name of the function referred.                       |
 |`parameter`    |The function input parameter for function execution.     |
 
-## Extension Types
+## Extension types
 
 Siddhi supports the following extension types:
 
@@ -84,7 +84,7 @@ Siddhi supports the following extension types:
     
     This is implemented by extending `io.siddhi.core.stream.output.sink.Sink`.
     
-    e.g., @sink(type='sink_type', static_option_key1='static_option_value1')
+    e.g., `@sink(type='sink_type', static_option_key1='static_option_value1')`
     
     To configure a stream to publish events via a sink, connect the sink configuration to a stream definition by adding the `@sink` annotation with the required parameter values. The sink syntax is as given above.
 
@@ -128,7 +128,7 @@ Siddhi supports the following extension types:
     
 ## Example
 
-A window extension created with `foo`as the namespace and `unique` as the function name can be referred in a Siddhi query as shown below.
+A window extension created with `foo` as the namespace and `unique` as the function name can be referred in a Siddhi query as shown below.
 
 ```sql
     from StockExchangeStream[price >= 20]#window.foo:unique(symbol)
@@ -136,11 +136,11 @@ A window extension created with `foo`as the namespace and `unique` as the functi
     insert into StockQuote
 ```
 
-## Available Extensions
+## Available extensions
 
 For the complete list of pre-written Siddhi extensions that are currently available, see [Siddhi Query Guide -  Extensions](https://siddhi.io/en/v5.0/docs/extensions/).
 
-## Further References
+## Further references
 
 - For instructions to download and install a Siddhi extension, see [Downloading and Installing Siddhi Extensions](downloading-and-Installing-Siddhi-Extensions.md).
-- If you want to install/uninstall one or more Siddhi extensions in WSO2 Integrator: SI, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
+- If you are building a custom extension and want it to install via the **Extension Installer** panel, see [Configuring Extension Dependencies](../develop/installing-siddhi-extensions.md).

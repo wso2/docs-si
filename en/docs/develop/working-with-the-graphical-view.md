@@ -1228,6 +1228,6 @@ demonstrated below.
 
 ![Connecting Siddhi components]({{base_path}}/images/working-with-the-design-view/Connect-Siddhi-Components.gif)
 
-## Saving and running Siddhi applications
+## Saving Siddhi applications
 
-To save a Siddhi application that you created in the Graphical View, you need to switch to the Source View. You also need to switch to the Source View to run a Siddhi application. For more information, see [WSO2 Integrator: SI](si-for-vscode-overview.md).
+To save a Siddhi application that you created in the Graphical View, you need to switch to the Source View. For more information, see [WSO2 Integrator: SI](si-for-vscode-overview.md).

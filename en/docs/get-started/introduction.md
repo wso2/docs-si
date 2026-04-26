@@ -11,7 +11,7 @@ SI can be effectively used for:
 - **Execute complex integrations based on streaming data**: SI has native support to work hand-in-hand with WSO2 Integrator: MI to trigger complex integration flows based on decisions derived via stateful stream processing logic.
 
 !!! info "Try it out!"
-    To try out each of the above use cases with SI, see [Tutorials](../examples/tutorials-overview.md)
+    To try out each of the above use cases with SI, see [Tutorials](../tutorials/tutorials-overview.md)
 
 ## Key Features
 
