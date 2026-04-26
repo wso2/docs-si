@@ -289,5 +289,5 @@ If the cluster is correctly configured, the following CLI logs can be viewed wit
         
 !!! info
     To start two SI Nodes in the same machine, `<SI_HOME>/conf/server/deployment.yaml` file -> `wso2.transport.http` namespace -> `listenerConfigurations` section must be updated
-    to listen to different ports. The `offset` property in the `<SI_HOME>/conf/server/deployment.yaml` -> `wso2.carbon section` section -> `ports` subsection should also
+    to listen to different ports. The `offset` property in the `<SI_HOME>/conf/server/deployment.yaml` -> `wso2.carbon` namespace -> `ports` subsection should also
     be changed in one SI instance to avoid conflicts when starting both servers.
