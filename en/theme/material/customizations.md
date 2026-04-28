@@ -18,7 +18,27 @@ partials/footer.html
 partials/header.html
 partials/tabs-item.html
 partials/nav.html
+partials/actions.html
+partials/content.html
+assets/css/actions.css
 ```
+
+### Per-page footer row: "Edit this page" link + "Last update" timestamp
+
+Below every article body (on pages that extend `main.html`), a small footer row renders the "Edit this page" link on the **left** and the "Last update: …" timestamp on the **right**, separated from the article body by a single horizontal rule. Layout matches the equivalent element on `wso2/docs-integrator`.
+
+`partials/actions.html` renders the link with the Material pencil icon. Link target is `page.edit_url` with `/edit/` (or `/blob/`) rewritten to `/tree/`, so it derives automatically from `repo_url` + `edit_uri` in `mkdocs.yml` rather than being hardcoded. As long as `edit_uri` points at GitHub, the link follows the file on rename/move and re-renders correctly on every build.
+
+`partials/content.html` is a local shadow of the upstream copy bundled with `mkdocs-material`. It differs in two ways:
+
+1. The top-of-content `{% include "partials/actions.html" %}` is removed (upstream renders it above the article — we don't want that).
+2. After `{{ page.content }}`, an `<hr>` is emitted, followed by a `<div class="md-content__footer">` flex row that wraps `{% include "partials/actions.html" %}` and `{% include "partials/source-file.html" %}`. CSS in `assets/css/actions.css` lays them out side-by-side (`margin-left: auto` on `.md-source-file` pushes the date to the right) and hides the `<hr>` that `source-file.html` itself emits, so the row doesn't get a stray divider through the middle.
+
+If the upstream `content.html` is updated in a future `mkdocs-material` version, re-sync this file and re-apply both changes.
+
+The "Last update" timestamp is rendered by Material's stock `partials/source-file.html` (no override needed) when the `git-revision-date-localized` plugin is active. The plugin is wired up in `mkdocs.yml` under `plugins:` and pinned in `requirements.txt` (`mkdocs-git-revision-date-localized-plugin`). `fallback_to_build_date: true` keeps the build green for files not yet committed.
+
+Styling lives in `assets/css/actions.css`, loaded globally via `extra_css` in `en/mkdocs.yml` so it lands in `<head>` alongside the other custom stylesheets. (`report-issues.css` still uses an in-body `<link>` from its partial — that's a pre-existing quirk we have not changed.)
 
 ## Search optimizations (note: the following are generated files)
 

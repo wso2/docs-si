@@ -1,0 +1,35 @@
+{#-
+  Local override of the upstream `partials/content.html`. Differences from
+  the upstream copy bundled with mkdocs-material:
+
+  1. The top-of-content `{% include "partials/actions.html" %}` is removed
+     (upstream renders it above the article body — we don't want that).
+  2. After `{{ page.content }}`, the "Edit this page" link and the
+     "Last update …" timestamp are wrapped in a single `.md-content__footer`
+     flex row so they sit side-by-side: edit link on the left, date on the
+     right. An `<hr>` is rendered before the row to separate it visually
+     from the article body. The `<hr>` that upstream's `source-file.html`
+     emits internally is suppressed via CSS in `assets/css/actions.css` so
+     the row doesn't get a stray divider through the middle.
+-#}
+{% if "material/tags" in config.plugins %}
+  {% include "partials/tags.html" %}
+{% endif %}
+{% if "\x3ch1" not in page.content %}
+  <h1>{{ page.title | d(config.site_name, true)}}</h1>
+{% endif %}
+{{ page.content }}
+{%- set _has_actions = page.edit_url -%}
+{%- set _has_source = page.meta and (
+  page.meta.git_revision_date_localized or
+  page.meta.revision_date
+) -%}
+{% if _has_actions or _has_source %}
+<hr>
+<div class="md-content__footer">
+  {% if _has_actions %}{% include "partials/actions.html" %}{% endif %}
+  {% if _has_source %}{% include "partials/source-file.html" %}{% endif %}
+</div>
+{% endif %}
+{% include "partials/feedback.html" %}
+{% include "partials/comments.html" %}

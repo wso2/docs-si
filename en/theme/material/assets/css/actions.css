@@ -1,0 +1,70 @@
+/*
+ * Copyright (c) 2025, WSO2 LLC. (https://www.wso2.com).
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+/* Per-page footer row: "Edit this page" (left) + "Last update …" (right) */
+
+.md-content__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.2rem;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+}
+
+/* Suppress the <hr> that upstream's source-file.html emits internally —
+   the content.html shadow renders one above the whole footer row. */
+.md-content__footer > hr {
+  display: none;
+}
+
+.md-content__footer .md-source-file {
+  margin-left: auto;
+}
+
+.md-content__action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: var(--md-default-fg-color--light);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.md-content__action-link:hover,
+.md-content__action-link:focus {
+  color: var(--md-typeset-a-color);
+  text-decoration: underline;
+}
+
+.md-content__action-link svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* Dark mode */
+[data-md-color-scheme="slate"] .md-content__action-link {
+  color: var(--md-default-fg-color--light);
+}
+
+[data-md-color-scheme="slate"] .md-content__action-link:hover,
+[data-md-color-scheme="slate"] .md-content__action-link:focus {
+  color: var(--md-typeset-a-color);
+}
