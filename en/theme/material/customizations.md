@@ -20,7 +20,9 @@ partials/tabs-item.html
 partials/nav.html
 partials/actions.html
 partials/content.html
+partials/source.html
 assets/css/actions.css
+assets/css/source.css
 ```
 
 ### Per-page footer row: "Edit this page" link + "Last update" timestamp
@@ -39,6 +41,10 @@ If the upstream `content.html` is updated in a future `mkdocs-material` version,
 The "Last update" timestamp is rendered by Material's stock `partials/source-file.html` (no override needed) when the `git-revision-date-localized` plugin is active. The plugin is wired up in `mkdocs.yml` under `plugins:` and pinned in `requirements.txt` (`mkdocs-git-revision-date-localized-plugin`). `fallback_to_build_date: true` keeps the build green for files not yet committed.
 
 Styling lives in `assets/css/actions.css`, loaded globally via `extra_css` in `en/mkdocs.yml` so it lands in `<head>` alongside the other custom stylesheets. (`report-issues.css` still uses an in-body `<link>` from its partial — that's a pre-existing quirk we have not changed.)
+
+### Header GitHub repo link
+
+`partials/source.html` renders an icon-only GitHub link in the header, pointing at `config.repo_url`. It is included from `partials/header.html` between the community and report-issues blocks. The icon is `fontawesome/brands/github.svg` (resolved at build time from the upstream `mkdocs-material` package's `.icons/`, same way Discord/LinkedIn/YouTube icons in `community.html` resolve). Styling is in `assets/css/source.css` and loaded globally via `extra_css` in `en/mkdocs.yml`. The link is automatically hidden if `repo_url` is unset.
 
 ## Search optimizations (note: the following are generated files)
 
