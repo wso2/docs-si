@@ -1,6 +1,6 @@
 # Enriching Data
 
-Enriching data involves integrated the data received into a streaming integration flow with data from other medium such as a data store, another data stream, or an external service to derive an expected result.
+Enriching data involves integrating the data received into a streaming integration flow with data from other media such as a data store, another data stream, or an external service to derive an expected result.
 
 ## Integrating data streams and static data
 
@@ -12,14 +12,14 @@ To address this, you can write a query as follows.
 
 ```
 from ProductionStream as p 
-join StocksTable as s 
+join StockTable as s 
 	on p.name == s.name 
 select p.name as name, sum(p.amount) + s.amount as amount 
 	group by p.name 
 insert into UpdateStockwithProductionStream;
 ```
 
-Here, the `ProductionStream` stream that has the production amounts for sweets after each production run is assigned the short name `p`. The `StocksTable` that has the current stock for each product before the latest production runs is given the short name `s`. This allows you to uniquely identify the attributes in each. The matching condition is `p.name == s.name `, which means that a match is identified when an event in the `ProductionStream` stream has the same value for the `name` attribute as a record in the `StockTable` table. 
+Here, the `ProductionStream` stream that has the production amounts for sweets after each production run is assigned the short name `p`. The `StockTable` that has the current stock for each product before the latest production runs is given the short name `s`. This allows you to uniquely identify the attributes in each. The matching condition is `p.name == s.name`, which means that a match is identified when an event in the `ProductionStream` stream has the same value for the `name` attribute as a record in the `StockTable` table. 
 `sum(p.amount)` calculates the total production per product. This total production amount for a product is then added to the stock amount of the product (i.e., `s.amount`). The resulting output is inserted into the `UpdateStockwithProductionStream` stream.
 
 ## Integrating multiple data streams
@@ -48,7 +48,7 @@ This involves enriching a data stream by incorporating information received from
 To understand this, consider that in order to value the stock, a Sweet Factory obtains the value of one unit of a product from an external application named `StockValuingApp`. When you submit the name of the product, it returns the unit value. To value the stock based on this information, you can create a Siddhi application as follows:
 
 ```
-@App:name("StockValuingApp")
+@App:name('StockValuingApp')
 
 @sink(type='http-request',publisher.url='http://localhost:5005/CheckProductValueEP',method='POST', headers="'Content-Type:application/x-www-form-urlencoded'",
 sink.id="unitvalueSink",
@@ -65,7 +65,7 @@ select *
 update or insert into ProductValueTable;
 ```
 
-In the above application, events in the `CheckUnitValueStream` stream are published to the `http://localhost:5005/CheckProductValueEP` URL via the connected `http-request` sink to invoke a service that returns the unit value for the name of the product sent. WSO2 Integrator: SI captures this response (i.e., unit value) in the `StoreUnitValueStream` stream via the `http-response` source connected to the stream. In orcder to allow WSO2 Integrator: SI to identify the response as the result of the request it previously sent, the same value is specified for the `sink.id` parameter in both the source configuration and the sink configuration.
+In the above application, events in the `CheckUnitValueStream` stream are published to the `http://localhost:5005/CheckProductValueEP` URL via the connected `http-request` sink to invoke a service that returns the unit value for the name of the product sent. WSO2 Integrator: SI captures this response (i.e., unit value) in the `StoreUnitValueStream` stream via the `http-response` source connected to the stream. In order to allow WSO2 Integrator: SI to identify the response as the result of the request it previously sent, the same value is specified for the `sink.id` parameter in both the source configuration and the sink configuration.
 To store the unit values obtained for further processing, all the events in the `StoreUnitValueStream` stream are inserted into a table named `ProductValueTable`.
 
 ## Enriching data with built-in extensions
@@ -114,7 +114,7 @@ To try out the examples given above, follow the steps below.
                 jdbcUrl: 'jdbc:mysql://localhost:3306/stock?useSSL=false'
                 username: root
                 password: root
-                driverClassName: com.mysql.jdbc.Driver
+                driverClassName: com.mysql.cj.jdbc.Driver
                 minIdle: 5
                 maxPoolSize: 50
                 idleTimeout: 60000
@@ -123,9 +123,9 @@ To try out the examples given above, follow the steps below.
                 isAutoCommit: false
         ```
     
-2. [Start and Access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+2. [Install and start WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
-3. Open a new file in WSO2 Integrator: SI Tooling. Then add and save the following Siddhi application.
+3. In WSO2 Integrator: SI, open a new file. Then add and save the following Siddhi application.
 
     ```
     @App:name('StockValuingApp')
@@ -157,7 +157,7 @@ To try out the examples given above, follow the steps below.
     	@map(type = 'text'))
     define stream StockValueStream (name string, value double);
     
-    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/stock?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.jdbc.Driver")
+    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/stock?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
     @primaryKey("name")
     define table StockTable (name string, amount double);
     
@@ -193,9 +193,9 @@ To try out the examples given above, follow the steps below.
    
    3. Sends requests with the product name to an external service with the `http://localhost:5005/CheckProductValueEP` endpoint and receives the unit value of the submitted product name as a response. This response is captured in the `GetUnitValueStream` stream.
    
-   4. Calculates the stock value by multiplying the latest stock with the unit value obtained from the external service. This is done by joining the `GetUnitValueStream` stream with the `LatestStockStream` stream. The result is then logges with the `Stock Value` prefix.
+   4. Calculates the stock value by multiplying the latest stock with the unit value obtained from the external service. This is done by joining the `GetUnitValueStream` stream with the `LatestStockStream` stream. The result is then logged with the `Stock Value` prefix.
    
-4. In WSO2 Integrator: SI Tooling, create a new Siddhi application as follows, save it, and then start it.
+4. In the editor (with WSO2 Integrator: SI installed), create a new Siddhi application as follows, save it, and then start it.
 
     ```
     @App:name('ReturnUnitValueApp')

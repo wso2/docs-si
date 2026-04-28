@@ -1,5 +1,8 @@
 # Deploying the WSO2 Integrator: SI as a Minimum HA Cluster in AWS ECS
 
+!!! warning "Last validated against 2020 versions"
+    This guide describes the AWS ECS setup as of 2020. AWS Console flows and screenshots may differ from the current console. The SI-specific configuration below (datasources, port mappings, container layout) is still applicable, but the steps that depend on the legacy `wso2/docker-ei` repository will need adjustment — the `streaming-integrator` Dockerfile is no longer maintained in that repository.
+
 ## Introduction
 
 This section explains how to run WSO2 Integrator: SI as a minimum HA (High Availability) cluster in AWS (Amazon Web Services) ECS(Elastic Container Service).
@@ -19,11 +22,11 @@ Once a node becomes the active node, it performs the following:
 - Starts the Siddhi applications in runtime and opens all the ports mentioned in the Siddhi applications.<br/>
 - Starts the binary and thrift transports.<br/>
 - Starts the REST endpoints.<br/>
-- Once a new member (i.e., passive node) joins the cluster, the active node checks the `WSO2_CLUSTER_DB` database for the host and port of ther other member's event syncing server. Once this information is retrieved, it sends the input events received by the cluster to that event syncing server.
+- Once a new member (i.e., passive node) joins the cluster, the active node checks the `WSO2_CLUSTER_DB` database for the host and port of the other member's event syncing server. Once this information is retrieved, it sends the input events received by the cluster to that event syncing server.
 
 ### Operating the nodes
 
-When the cluster is running with both the nodes, the active node sends each event received by the cluster to the passive node's event sync server with the event timestamp. It also persists the state (windows, sequences, patterns, aggregations, etc.,) in the database named `PERSISTENSE_DB`.
+When the cluster is running with both the nodes, the active node sends each event received by the cluster to the passive node's event sync server with the event timestamp. It also persists the state (windows, sequences, patterns, aggregations, etc.,) in the database named `PERSISTENCE_DB`.
 Each time the state is persisted, the active node sends a control message to the passive node.
 
 The passive node saves the events sent to its event sync server in a queue. When it receives the control message from the active node, it trims the queue to keep only the latest events that were not used by the active node to build the state of Siddhi applications at the time of persisting the state.
@@ -39,7 +42,7 @@ The following table explains the above steps.
 |**Step**|**Description**|
 |----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
 |1. Start Siddhi Application Runtime                          |This is done without opening any ports mentioned in Siddhi applications. This is because the Siddhi application statuses need to be restored to what they were before the node failure so that unprocessed events before the failure are not lost.|
-|2. Restore State                                             |This is done by retrieving the states persisted in the `PERSISTENSE_DB` database. |
+|2. Restore State                                             |This is done by retrieving the states persisted in the `PERSISTENCE_DB` database. |
 |3. Direct Events in Queue to Streams                         |The unprocessed events that are currently in the queue of the event sync server are directed into the relevant streams of the Siddhi applications.|
 |4. Open Ports, Binary & Thrift Transports,<br/> and REST Endpoints|Once the above steps are completed, the previously passive and now active node opens the ports, starts the thrift and binary transports, and opens the REST endpoints.|
 
@@ -47,7 +50,7 @@ The following table explains the above steps.
 
 !!! tip "Before you begin:"
     In order to deploy WSO2 Integrator: SI in AWS ECS, you need to complete the following requisites:<br/>
-     - [create an account in AWS](https://portal.aws.amazon.com).
+     - [Create an account in AWS](https://portal.aws.amazon.com).
      - [Download and install AWS CLI Version 2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).
      - Download and install Docker. For instructions, see [Docker Documentation](https://docs.docker.com/install/).
 
@@ -107,7 +110,7 @@ The following table explains the above steps.
 
         1. In the **Repositories** page, click **View push commands**.
 
-        2. Copy the command given under **Retrieve an authentication token and authenticate your Docker client to your registry.**. This command is similar to the following example.
+        2. Copy the command given under **Retrieve an authentication token and authenticate your Docker client to your registry**. This command is similar to the following example.
             `aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 627334729308.dkr.ecr.us-east-2.amazonaws.com/wso2`
 
         3. Issue the command you copied in the AWS CLI. The following message appears in the CLI.
@@ -116,7 +119,7 @@ The following table explains the above steps.
 
 3. Build Docker images with SI configurations as follows:
 
-    1. Edit the `<SI-Home>/conf/server/deployment.yaml` file as follows.
+    1. Edit the `<SI_HOME>/conf/server/deployment.yaml` file as follows.
 
         1. In the `state.persistence` section, update the following parameters.
 
@@ -141,42 +144,42 @@ The following table explains the above steps.
 
         2. In the `wso2.datasources:` section, add two data sources named `PERSISTENCE_DB` and `WSO2_CLUSTER_DB` as follows.
 
-            ```
-                - name: PERSISTENCE_DB
-                  description: The MySQL datasource used for persistence
-                  jndiConfig:
-                    name: jdbc/PERSISTENCE_DB
-                  definition:
-                    type: RDBMS
-                    configuration:
-                      jdbcUrl: 'jdbc:mysql://wso2db.cxtsxcdgcayr.ap-south-1.rds.amazonaws.com:3306/persistencedb?useSSL=false'
-                      username: root
-                      password: rootroot
-                      driverClassName: com.mysql.jdbc.Driver
-                      maxPoolSize: 50
-                      idleTimeout: 60000
-                      connectionTestQuery: SELECT 1
-                      validationTimeout: 30000
-                      isAutoCommit: false
+            ```yaml
+            - name: PERSISTENCE_DB
+              description: The MySQL datasource used for persistence
+              jndiConfig:
+                name: jdbc/PERSISTENCE_DB
+              definition:
+                type: RDBMS
+                configuration:
+                  jdbcUrl: 'jdbc:mysql://<RDS_ENDPOINT>:3306/persistencedb?useSSL=false'
+                  username: <DB_USERNAME>
+                  password: <DB_PASSWORD>
+                  driverClassName: com.mysql.cj.jdbc.Driver
+                  maxPoolSize: 50
+                  idleTimeout: 60000
+                  connectionTestQuery: SELECT 1
+                  validationTimeout: 30000
+                  isAutoCommit: false
             ```
 
-            ```
-                - name: WSO2_CLUSTER_DB
-                  description: The MySQL datasource used for persistence
-                  jndiConfig:
-                    name: jdbc/WSO2_CLUSTER_DB
-                  definition:
-                    type: RDBMS
-                    configuration:
-                      jdbcUrl: 'jdbc:mysql://wso2db.cxtsxcdgcayr.ap-south-1.rds.amazonaws.com:3306/clusterdb?useSSL=false'
-                      username: root
-                      password: rootroot
-                      driverClassName: com.mysql.jdbc.Driver
-                      maxPoolSize: 50
-                      idleTimeout: 60000
-                      connectionTestQuery: SELECT 1
-                      validationTimeout: 30000
-                      isAutoCommit: false
+            ```yaml
+            - name: WSO2_CLUSTER_DB
+              description: The MySQL datasource used for cluster coordination
+              jndiConfig:
+                name: jdbc/WSO2_CLUSTER_DB
+              definition:
+                type: RDBMS
+                configuration:
+                  jdbcUrl: 'jdbc:mysql://<RDS_ENDPOINT>:3306/clusterdb?useSSL=false'
+                  username: <DB_USERNAME>
+                  password: <DB_PASSWORD>
+                  driverClassName: com.mysql.cj.jdbc.Driver
+                  maxPoolSize: 50
+                  idleTimeout: 60000
+                  connectionTestQuery: SELECT 1
+                  validationTimeout: 30000
+                  isAutoCommit: false
             ```
 
         3. To enable clustering and update strategy configuration values, update the `cluster.config` section as follows:
@@ -216,21 +219,24 @@ The following table explains the above steps.
 
         `git clone https://github.com/wso2/docker-ei`
 
-    3. In the `docker-ei/alpine/streaming-integrator/docker-entrypoint.sh` file, enter the following code before the `# start WSO2 server` comment.
+        !!! warning
+            The `wso2/docker-ei` repository no longer ships a `streaming-integrator` Dockerfile under `dockerfiles/alpine/`. The path `docker-ei/dockerfiles/alpine/streaming-integrator/` referenced in the next steps does not exist on the current `master` branch. To follow this guide as-is, you would need to use an earlier commit of `docker-ei` that still included it, or build an SI Docker image from a different source.
+
+    3. In the `docker-ei/dockerfiles/alpine/streaming-integrator/docker-entrypoint.sh` file, enter the following code before the `# start WSO2 server` comment.
 
         !!! info
-            In this example, it is assumed that you are using `alpine`. You can also use `centos` or `ubuntu`.
+            In this example, it is assumed that you are using `alpine`. You can also use `ubuntu`.
 
-        ```
-        IP=$(ifconfig eth0 | grep "inet addr" | cut -d ':' -f 2 | cut -d ' ' -f 1)
+        ```bash
+        IP=$(hostname -i | awk '{print $1}')
         DEPLOYMENT_YAML=${WSO2_SERVER_HOME}/conf/server/deployment.yaml
         echo "$IP"
         sed -i "s/localhost/$IP/" "$DEPLOYMENT_YAML"
         ```
 
-        This gets the IP address of the host machine and replaces it in the HA configuration in the `<SI-Home>/conf/server/deployment.yaml` file.
+        This gets the IP address of the host machine and replaces it in the HA configuration in the `<SI_HOME>/conf/server/deployment.yaml` file.
 
-    4. Make a copy of the `<SI-Home>/conf/server/deployment.yaml` file you edited and paste it in `docker-ei/dockerfiles/alpine/streaming-integrator` directory.
+    4. Make a copy of the `<SI_HOME>/conf/server/deployment.yaml` file you edited and paste it in `docker-ei/dockerfiles/alpine/streaming-integrator` directory.
 
     5. In the `docker-ei/dockerfiles/alpine/streaming-integrator/deployment.yaml` file, under `wso2.carbon:`, change value for the `id` parameter to `wso2-si-1`.
 
@@ -238,7 +244,7 @@ The following table explains the above steps.
 
     6. To build the Docker image for node 1, navigate to the `docker-ei/dockerfiles/alpine/streaming-integrator` directory and issue the following command.
 
-        `docker build -t wso2si:1.0.0-alpine-ha1 .`
+        `docker build -t wso2si:<SI_VERSION>-alpine-ha1 .`
 
         Once the build is successfully executed, a message similar to the following appears in the CLI.
 
@@ -252,7 +258,7 @@ The following table explains the above steps.
 
     8. To build the Docker image for node 2, navigate to the `docker-ei/dockerfiles/alpine/streaming-integrator` directory and issue the following command.
 
-        `docker build -t wso2si:1.0.0-alpine-ha2 .`
+        `docker build -t wso2si:<SI_VERSION>-alpine-ha2 .`
 
         Once the build is successfully executed, a message similar to the following appears in the CLI.
 
@@ -260,9 +266,9 @@ The following table explains the above steps.
 
     9. To tag the built images, issue the following commands.
 
-        `docker tag wso2si:1.0.0-alpine-ha2 <AWS_ACCOUNT_NUMBER>.dkr.ecr.us-east-2.amazonaws.com/wso2:ha1`
+        `docker tag wso2si:<SI_VERSION>-alpine-ha1 <AWS_ACCOUNT_NUMBER>.dkr.ecr.us-east-2.amazonaws.com/wso2:ha1`
 
-        `docker tag wso2si:1.0.0-alpine-ha1 <AWS_ACCOUNT_NUMBER>.dkr.ecr.us-east-2.amazonaws.com/wso2:ha2`
+        `docker tag wso2si:<SI_VERSION>-alpine-ha2 <AWS_ACCOUNT_NUMBER>.dkr.ecr.us-east-2.amazonaws.com/wso2:ha2`
 
     10. To push the images, issue the following commands.
 
@@ -270,7 +276,7 @@ The following table explains the above steps.
 
         `docker push <AWS_ACCOUNT_NUMBER>.dkr.ecr.us-east-2.amazonaws.com/wso2:ha2`
 
-### STEP 2: Create RDS for persisting and clustering requirements
+### Step 2: Create RDS for persisting and clustering requirements
 
 To create a Amazon RDS (Relational Database Service) for the purpose of persisting data handled by the cluster, follow the procedure below:
 
@@ -359,8 +365,6 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
 
     3. In **Step 1: Select a VPC Configuration**, **VPC with a Single Public Subnet** is selected by default in the left pane. Click **Select** for it.
 
-        ![Select VPC Type]({{base_path}}/images/si-as-minimum-ha-cluster-in-aws-ecs/edit-inbound-rules.png)
-
     4. In **Step 2: VPC with a Single Public Subnet**, enter `si-ha-vpc` in the **VPC name** field. Then click **Create VPC**.
 
         ![Create VPC]({{base_path}}/images/si-as-minimum-ha-cluster-in-aws-ecs/create-vpc.png)
@@ -411,9 +415,7 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
         ![Create New Task Definition]({{base_path}}/images/si-as-minimum-ha-cluster-in-aws-ecs/create-task-definition.png)
         
     2. In the **Select launch type compatibility** page, click **FARGATE** and then click **Next step**.
-    
-        ![Select Launch Type]({{base_path}}/images/si-as-minimum-ha-cluster-in-aws-ecs/create-task-definition.png)
-        
+
     3. In **Step 2: Configure task and container definitions**, enter information in the **Create new Task Definition** wizard as follows:
     
         1. In the **Task Definition Name** field, enter `ha-node-1-task` as the name of the task definition.
@@ -422,9 +424,12 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
         
             |**Field**              |**Value**  |
             |-----------------------|-----------|
-            |**Task memory (GB)**   |`0.5GB`    |
-            |**Task CPU (vCPU)**    |`0.25vCPU` |
-            
+            |**Task memory (GB)**   |`4GB`      |
+            |**Task CPU (vCPU)**    |`2vCPU`    |
+
+            !!! info
+                Per the [Minimum HA Cluster prerequisites](deploying-si-as-minimum-ha-cluster.md), each SI node needs at least 4&nbsp;GB of memory and 4 CPU cores. Fargate's `2vCPU` is the practical minimum for SI; the task may be unstable below that.
+
         3. In the **Container Definitions** section, click **Add container**. Then enter information as follows:
         
             1. In the **Container name** field, enter `node-1-ha-container` as the name of the container.
@@ -466,9 +471,7 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
         ![Create New Task Definition]({{base_path}}/images/si-as-minimum-ha-cluster-in-aws-ecs/create-task-definition.png)
         
     2. In the **Select launch type compatibility** page, click **FARGATE** and then click **Next step**.
-    
-        ![Select Launch Type]({{base_path}}/images/si-as-minimum-ha-cluster-in-aws-ecs/create-task-definition.png)
-        
+
     3. In **Step 2: Configure task and container definitions**, enter information in the **Create new Task Definition** wizard as follows:
     
         1. In the **Task Definition Name** field, enter `ha-node-2-task` as the name of the task definition.
@@ -477,8 +480,8 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
         
             |**Field**              |**Value**  |
             |-----------------------|-----------|
-            |**Task memory (GB)**   |`0.5GB`    |
-            |**Task CPU (vCPU)**    |`0.25vCPU` |
+            |**Task memory (GB)**   |`4GB`      |
+            |**Task CPU (vCPU)**    |`2vCPU`    |
             
         3. In the **Container Definitions** section, click **Add container**. Then enter information as follows:
         
@@ -507,7 +510,7 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
            
             5. Click **Create** in the **Configure task and container definitions** page to create the task.
             
-5. Create a service for node 1 using the `ha-node1-task` task as follows:
+5. Create a service for node 1 using the `ha-node-1-task` task as follows:
 
     1. In Amazon ECS, click **Clusters** in the left navigator. Then click on your cluster.
 
@@ -523,7 +526,7 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
         |-------------------|-------------------|
         |**Launch Type**    |**FARGATE**        |
         |**Task Definition**|**ha-node-1-task** |
-        |**Service Name**   |`ha-node1-service` |
+        |**Service Name**   |`ha-node-1-service` |
         |**Number of tasks**|               `1` | 
         
         Then click **Next step**.
@@ -538,7 +541,7 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
         
         3. Click **Edit** to select the security group. 
         
-            When you click **Edit**, the **Configure security groups** dialog box opens. Here, select the **Select existing security group** option and then select the security group that you previously created and connected to your VPC. Then click **Save** to save he information you entered in this dialog box.
+            When you click **Edit**, the **Configure security groups** dialog box opens. Here, select the **Select existing security group** option and then select the security group that you previously created and connected to your VPC. Then click **Save** to save the information you entered in this dialog box.
             
             ![Select security groups]({{base_path}}/images/si-as-minimum-ha-cluster-in-aws-ecs/select-security-group.png)
             
@@ -546,11 +549,11 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
             
     4. Skip **Step 3: Set Auto Scaling (optional)** by clicking **Next step** in the page without making any changes. In **Step 4: Review**, check the information, and click **Create Service**. 
     
-        Once the service is successfully created, click **View Service** to view it. You can also access it by clicking **Clusters** in the left navigator, and then clicking **si-ha-cluster** -> **Services** tab -> **ha-node1-service**.
+        Once the service is successfully created, click **View Service** to view it. You can also access it by clicking **Clusters** in the left navigator, and then clicking **si-ha-cluster** -> **Services** tab -> **ha-node-1-service**.
         
     5. To view the running service and node logs, follow substeps below: 
     
-        1. Click **Clusters** in the left navigator. Then click **si-ha-cluster** -> **Services** tab -> **ha-node1-service** to view the `ha-node1-service` service you created.
+        1. Click **Clusters** in the left navigator. Then click **si-ha-cluster** -> **Services** tab -> **ha-node-1-service** to view the `ha-node-1-service` service you created.
         
         2. Click on the **Tasks** tab. The task is displayed as shown below.
         
@@ -560,12 +563,12 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
         
             ```
                 [2020-03-20 20:18:48,283]  INFO {org.wso2.carbon.streaming.integrator.core.ha.HAManager} - HA Deployment: Starting up as Active Node
-                [2020-03-20 20:18:52,261]  INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Integrator: SI started in 44.893 sec
+                [2020-03-20 20:18:52,261]  INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 44.893 sec
                 [2020-03-20 20:19:46,595]  INFO {org.wso2.carbon.streaming.integrator.core.persistence.PersistenceManager} - Siddhi apps persisted successfully
 
             ```           
     
-6. Create a service for node 2 using the `ha-node2-task` task by following the same procedure you followed in the previous step (i.e., step 5) to create a service for node 1. However, make sure that the task definition is `ha-node2-task`. The service name can be `ha-node2-service`.
+6. Create a service for node 2 using the `ha-node-2-task` task by following the same procedure you followed in the previous step (i.e., step 5) to create a service for node 1. However, make sure that the task definition is `ha-node-2-task`. The service name can be `ha-node-2-service`.
 
     ![Service for node 2]({{base_path}}/images/si-as-minimum-ha-cluster-in-aws-ecs/node2-service.png)
     
@@ -573,7 +576,7 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
     
     ```
         [2020-03-20 20:38:14,390]  INFO {org.wso2.carbon.streaming.integrator.core.ha.HAManager} - HA Deployment: Starting up as Passive Node
-        [2020-03-20 20:38:18,287]  INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Integrator: SI started in 46.604 sec
+        [2020-03-20 20:38:18,287]  INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in 46.604 sec
 
     ```
    
@@ -592,12 +595,3 @@ To create a Amazon RDS (Relational Database Service) for the purpose of persisti
    ```
     [2020-03-20 20:38:46,587]  INFO {org.wso2.carbon.streaming.integrator.core.persistence.PersistenceManager} - Siddhi apps persisted successfully
    ```
-
-
-   
-                    
-            
-    
-                    
-
-

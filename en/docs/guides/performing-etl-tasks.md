@@ -18,20 +18,20 @@ To maintain a database with purchase records, you can create an ETL application 
 @App:description('Maintains purchase records')
 
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/SugarSupply.csv',
+    file.uri='file:<YOUR_HOME>/SugarSupply.csv',
     tailing='true',
     @map(type='csv'))
 define stream SugarSupplyStream (transNo string, price double, amount double);
 
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/FlourSupply.csv',
+    file.uri='file:<YOUR_HOME>/FlourSupply.csv',
     tailing='true',
     @map(type='csv'))
 define stream FlourSupplyStream (transNo string, name string, price double, amount double);
 
 @primaryKey('transNo')
-@index ('name')
-@store (type='rdbms', datasource='RAW_MATERIAL_DB')
+@index('name')
+@store(type='rdbms', datasource='RAW_MATERIAL_DB')
 define table PurchaseRecords(transNo string, name string, price double, amount double);
 
 @info(name = 'CleaningSugarSupplyData')
@@ -66,33 +66,33 @@ Assume that the Head Office of the Sweet Factory also maintains a record of the 
 
 ![Integrating Heterogeneous Data Sources]({{base_path}}/images/performing-etl-operations/integrating-heterogeneous-data-sources.png)
 
-WSO2 Stream Processor needs to extract events from that file and the `PurchaseRecords` database table simultaneously to update the stock records. To do this, you can define two input streams and connect then to the relevant sources as follows:
+WSO2 Integrator: SI needs to extract events from that file and the `PurchaseRecords` database table simultaneously to update the stock records. To do this, you can define two input streams and connect them to the relevant sources as follows:
 
-```
-@source(type = 'cdc', url = 'jdbc:mysql://localhost:3306/PurchaseRecords', username = 'root', password = 'root', table.name = 'PurchaseRecords', operation = 'insert',
+```sql
+@source(type = 'cdc', url = 'jdbc:mysql://localhost:3306/RAW_MATERIAL_DB', username = 'root', password = 'root', table.name = 'PurchaseRecords', operation = 'insert',
     @map(type = 'keyvalue'))
 define stream PurchasesStream (name string, amount double);
 
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/MaterialDispatches.xml',
+    file.uri='file:<YOUR_HOME>/MaterialDispatches.xml',
     tailing='true',
     @map(type='xml'))
 define stream MaterialDispatchesStream (name string, amount double); 
 ```
 
-The `PurchasesStream` uses a [`cdc` source](https://siddhi-io.github.io/siddhi-io-cdc/api/2.0.8/#cdc-source) to **extract** all the insert records of the `PurchaseRecords` database table in real time. At the same time, the `MaterialDispatches` stream **extracts** all the material dispatches saved in the `MaterialDispatches.xml` file in realtime by tailing it. Here, you are receiving data via heterogeneous sources as well as in heterogeneous formats (i.e., in key value format from the database and in XML format fromn the file).
+The `PurchasesStream` uses a [`cdc` source](https://siddhi-io.github.io/siddhi-io-cdc/api/latest/#cdc-source) to **extract** all the insert records of the `PurchaseRecords` database table in real time. At the same time, the `MaterialDispatchesStream` stream **extracts** all the material dispatches saved in the `MaterialDispatches.xml` file in realtime by tailing it. Here, you are receiving data via heterogeneous sources as well as in heterogeneous formats (i.e., in key-value format from the database and in XML format from the file).
 
 To maintain stock records, you can define a table as follows:
 
-```
+```sql
 @primaryKey('name')
-@store (type='rdbms', datasource='STOCKS_DB')
+@store(type='rdbms', datasource='STOCKS_DB')
 define table StockRecords(name string, amount double);
 ```
 
 Assuming that the stock records are updated per minute, the amount by which the stocks need to be updated during a minute is a difference between the total purchases and the total dispatched that took place during that minute. You can calculate this difference by adding another query as follows:
 
-```
+```sql
 @info(name = 'CalculateStockUpdate')
 from PurchasesStream#window.timeBatch(1 min) as p 
 join MaterialDispatchesStream#window.timeBatch(1 min) as d 
@@ -106,7 +106,7 @@ Here, we are joining the `PurchaseStream` stream and the `MaterialDispatchesStre
 
 Now you can add the stock update to the `StockRecords` table as follows.
 
-```
+```sql
 @info(name = 'UpdateStock')
 from StockUpdatesStream#window.timeBatch(1 min) as s 
 join StockRecords#window.timeBatch(1 min) as r 
@@ -117,26 +117,26 @@ update or insert into StockRecords
     on StockRecords.name == name;
 ```
 
-The above query performs a join between the `StockUpdatesStream` stream and the `StockRecords` table,  and adds the stock update calculated to the existing amount in the `StockRecords` table. Then to **load** the final output, the query performs an `update or insert into` operation to the `Stock Records` table. This means, if the table already has a record with a same value for the `name` field as the latest output event generated in the `StockUpdatesStream` stream, the output event overwrites the record in the table. If no such matching record is found, the output event is inserted as a new record.
+The above query performs a join between the `StockUpdatesStream` stream and the `StockRecords` table,  and adds the stock update calculated to the existing amount in the `StockRecords` table. Then to **load** the final output, the query performs an `update or insert into` operation to the `StockRecords` table. This means, if the table already has a record with the same value for the `name` field as the latest output event generated in the `StockUpdatesStream` stream, the output event overwrites the record in the table. If no such matching record is found, the output event is inserted as a new record.
 
-The queries above updtes the ETL flow as shown in the diagram 
+The queries above update the ETL flow.
 
-Once you add all the new Siddhi queries and configurations introduced in this section to the original `ManagingStocksApp` Siddi application, it looks as follows:
+Once you add all the new Siddhi queries and configurations introduced in this section to the original `ManagingStocksApp` Siddhi application, it looks as follows:
 
-```
+```sql
 @App:name('ManagingStocksApp')
 
 
 @App:description('Maintains the latest stock amounts')
 
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/SugarSupply.csv',
+    file.uri='file:<YOUR_HOME>/SugarSupply.csv',
     tailing='true',
     @map(type='csv'))
 define stream SugarSupplyStream (transNo string, price double, amount double);
 
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/FlourSupply.csv',
+    file.uri='file:<YOUR_HOME>/FlourSupply.csv',
     tailing='true',
     @map(type='csv'))
 define stream FlourSupplyStream (transNo string, name string, price double, amount double);
@@ -146,19 +146,19 @@ define stream FlourSupplyStream (transNo string, name string, price double, amou
 define stream PurchasesStream (name string, amount double);
 
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/MaterialDispatches.csv',
+    file.uri='file:<YOUR_HOME>/MaterialDispatches.xml',
     tailing='true',
-    @map(type='csv'))
+    @map(type='xml'))
 define stream MaterialDispatchesStream (name string, amount double); 
 
 
 @primaryKey('transNo')
-@index ('name')
-@store (type='rdbms', datasource='RAW_MATERIAL_DB')
+@index('name')
+@store(type='rdbms', datasource='RAW_MATERIAL_DB')
 define table PurchaseRecords(transNo string, name string, price double, amount double);
 
 @primaryKey('name')
-@store (type='rdbms', datasource='STOCKS_DB')
+@store(type='rdbms', datasource='STOCKS_DB')
 define table StockRecords(name string, amount double);
 
 
@@ -193,18 +193,24 @@ update or insert into StockRecords
 
 ```
 
+!!! tip "Hands-on tutorials"
+    To work through the scenarios above end-to-end, see the following tutorials:
+
+    - [Performing Real-time ETL with Files](../tutorials/performing-real-time-etl-with-files.md) — demonstrates file-source ETL end-to-end.
+    - [Performing Real-time Change Data Capture with MySQL](../tutorials/performing-real-time-etl-with-mysql.md) — demonstrates CDC-source ETL end-to-end.
+
 ## Scalability
 
 When there are rapid changes and growths in business, it is necessary to scale ETL applications in an agile manner to support it. WSO2 Integrator: SI supports the need for scalability via the Siddhi logic. 
-This can be observed in the previous examples where the `ManagingStocksApp` Siddhi application which only captured purchase records in the [Performing ETL in real time section](#performing-ETL-in-real-time) and with only two files and one database table (`SugarSupply.csv` file, `FlourSupply.csv` file and `PurchaseRecords` database table) in the ETL flow was scaled to perform stock updates by incorporating another file and a database (i.e., `MaterialDispatches.csv` file and `StockRecords` database table) to the ETL flow.
+This can be observed in the previous examples where the `ManagingStocksApp` Siddhi application which only captured purchase records in the [Performing ETL in real time section](#performing-etl-in-real-time) and with only two files and one database table (`SugarSupply.csv` file, `FlourSupply.csv` file and `PurchaseRecords` database table) in the ETL flow was scaled to perform stock updates by incorporating another file and a database (i.e., `MaterialDispatches.xml` file and `StockRecords` database table) to the ETL flow.
 
 ![Extended ETL Flow]({{base_path}}/images/performing-etl-operations/extended-etl-flow.png)
 
-When you extended the ETL flow to perform stock updates, it involved adding more ETL tasks to the flow. You can also scale your ETL applications without adding more ETL tasks. This is done by adding only more sources to extract data for the existing tasks or adding more destinations for the existing tasks to load the output. For example, if the Sweet Factory starts purchasing another ingredient (e.g., honey), you can define another stream to consume from a new source (e.g., a new file named `HoneySupply.xml) as follows:
+When you extended the ETL flow to perform stock updates, it involved adding more ETL tasks to the flow. You can also scale your ETL applications without adding more ETL tasks. This is done by adding only more sources to extract data for the existing tasks or adding more destinations for the existing tasks to load the output. For example, if the Sweet Factory starts purchasing another ingredient (e.g., honey), you can define another stream to consume from a new source (e.g., a new file named `HoneySupply.xml`) as follows:
 
-```
+```sql
 @source(type='file', mode='LINE',
-    file.uri='file:/Users/foo/HoneySupply.xml',
+    file.uri='file:<YOUR_HOME>/HoneySupply.xml',
     tailing='true',
     @map(type='xml'))
 define stream HoneySupplyStream (transNo string, name string, price double, amount double);
@@ -212,9 +218,9 @@ define stream HoneySupplyStream (transNo string, name string, price double, amou
 
 Then you can update the existing `PurchaseRecords` table with information about the purchases of the new material as shown below.
 
-```
+```sql
 @info(name = 'RecordingHoneySupplyData')
-from FlourSupplyStream
+from HoneySupplyStream
 select *
 update or insert into PurchaseRecords
     on PurchaseRecords.transNo == transNo;
@@ -226,17 +232,15 @@ The following diagram depicts how the above changes scaled the ETL flow.
 !!! tip
     As you scale your ETL operations, you may have all the related queries in a single application or create multiple Siddhi applications that function as components of the same ETL flow.
        
-## Multiple platforms for ETL application design
+## Application design views
 
-WSO2 Integrator: SI provides the Source View, and Design View for application design. For more information, see [WSO2 Integrator: SI for VS Code Overview](../develop/si-for-vscode-overview.md)
-
-Out of these three views, the Wizard View is dedicated for designing ETL applications without writing many Siddhi queries. This platform mainly caters for application designers who prefer to use Siddhi constructs without writing code. Therefore, it guides you to write multiple simple Siddhi applications that contribute to the same ETL flow instead of heavy applications embodying multiple components of the ETL flow. A single Siddhi application designed using the ETL wizard can only incorporate one source and one destination to the ETL flow.
+WSO2 Integrator: SI provides a Source View and a Graphical View for designing Siddhi applications. For more information, see [WSO2 Integrator: SI](../develop/si-overview.md).
 
 ## Visualizing ETL Performance Statistics
 
-WSO2 Integrator: SI provides nine pre-configured dashboards to visualize the overall ETLS statistics for your WSO2 Integrator: SI deployment, as well as the ETL statistics per Siddhi application and per ETL-related Siddhi extension type (i.e., CDC statistics, file statistics and RDBMS statistics).
+WSO2 Integrator: SI provides nine pre-configured dashboards to visualize the overall ETL statistics for your WSO2 Integrator: SI deployment, as well as the ETL statistics per Siddhi application and per ETL-related Siddhi extension type (i.e., CDC statistics, file statistics, RDBMS statistics, and Kafka statistics).
 
-You can set up the pre-configured dashboards in Grafana. For instructions to set up these dashboards and visualize your ETL statistics, see [Monitoring ETL Statistics with Grafana](../admin/viewing-dashboards.md).
+You can set up the pre-configured dashboards in Grafana. For instructions to set up these dashboards and visualize your ETL statistics, see [Monitoring ETL Flows with Grafana](../admin/viewing-dashboards.md).
 
 ## Processing high volumes of data at high speed
 
@@ -244,7 +248,7 @@ In real world business scenarios, many businesses carry out about thousands of o
     
 According to the latest performance statistics of the WSO2 Integrator: SI, it can process 29,000 transactions per second when performing ETL tasks. For more information about performance statistics, see the following:
     
-- [Performance Analysis Results - Performing ETL Tasks](../ref/performance-analysis-results.md/#performing-etl-tasks)
+- [Performance Analysis Results - Performing ETL Tasks](../ref/performance-analysis-results.md#performing-etl-tasks)
 - [Streaming ETL with WSO2 Integrator: SI article](https://wso2.com/articles/streaming-etl-with-wso2-streaming-integrator/)
 
 

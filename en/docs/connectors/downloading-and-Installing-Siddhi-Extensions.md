@@ -1,174 +1,243 @@
 # Downloading and Installing Siddhi Extensions
 
-The Siddhi extensions supported for the WSO2 Integrator: SI are shipped with the product by
-default. If you need to download and install a different version of an
-extension, you can download it via the command line or manually as covered in the following sections.
+The Siddhi extensions supported for the WSO2 Integrator: SI are shipped with the product by default. If you need to install an additional extension or a different version of one, you can do so in two ways:
 
-## Downloading and installing Siddhi extensions via the command line
+- Via the **Extension Installer** panel in WSO2 Integrator (recommended for development).
+- Via the `extension-installer` script in the terminal (for production / headless setups).
 
-To manage Siddhi extensions via the command line, see the following topics.
+The installation status terminology is the same in both paths.
 
-### Identifying the Siddhi extensions to install/uninstall
+## Understanding installation status
 
-The following are some actions that you are required to perform in order to identify the Siddhi extensions you need to install. Navigate to the `<SI_HOME>/bin` directory in the CLI to issue these commands.
+Each Siddhi extension has one of the following installation statuses, reported by both the **Extension Installer** panel and the `extension-installer` CLI:
 
-- **Viewing the list of extensions that are currently installed**
+| **Installation Status** | **Description**                                                                                                                                                                                                                                                                                                                                                                                                                |
+|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **INSTALLED**           | The extension is completely installed. The installation includes the JAR of the extension itself as well as all its dependencies (if any).                                                                                                                                                                                                                                                                                    |
+| **NOT_INSTALLED**       | The extension has not been installed. The JAR of the extension itself has not been installed. Dependencies (if any) may already be installed due to shared dependencies.                                                                                                                                                                                                                                                      |
+| **PARTIALLY_INSTALLED** | The JAR of the extension itself has been installed, but one or more dependencies still need to be installed. When this status is displayed with an asterisk (`PARTIALLY_INSTALLED (*)`), there are one or more dependencies that need to be manually installed for the extension. To view the dependencies that need to be installed, check the installation status of that specific extension individually (see below).     |
+| **Restart Required**    | The installation or uninstallation of the extension is staged but not yet active. Reload WSO2 Integrator (or restart the SI server, for terminal installs) to complete the operation. This status appears only in the **Extension Installer** panel — the terminal flow prompts you to restart the SI server explicitly.                                                                                                      |
 
-    You can view the complete list of Siddhi extensions that are currently installed in your WSO2 Integrator: SI setup. All the extensions listed are completely installed with the dependencies.
-    
-    To perform this action, issue the appropriate command out of the following based on your operating system:
-    
-    - **For Windows**     : `extension-installer.bat list`
-    - **For Linux/MacOS** : `./extension-installer.sh list`
-    
+Status names appear in `UPPERCASE_WITH_UNDERSCORES` in the CLI and in Title Case in the **Extension Installer** panel.
+
+## Installing extensions via WSO2 Integrator: SI
+
+WSO2 Integrator includes an **Extension Installer** panel that lists all supported Siddhi extensions with their current installation status. You can install or uninstall extensions with a single click.
+
+### Opening the Extension Installer panel
+
+In WSO2 Integrator, open the command palette by pressing `Ctrl + Shift + P` (or `Cmd + Shift + P` on macOS), type `SI: Extension Installer`, and select the **SI: Extension Installer** option.
+
+![Command palette]({{base_path}}/images/qsg/command-palette-extension-installer.png)
+
+The **Extension Installer** panel opens.
+
+![Extension Installer panel]({{base_path}}/images/qsg/extension-installer-panel.png)
+
+To narrow down the list, enter all or part of an extension's name in the **Search** field at the top of the panel.
+
+### Installing an extension
+
+1. In the **Extension Installer** panel, locate the extension you want to install.
+
+    ![Not installed extension]({{base_path}}/images/installing-siddhi-extensions/a-not-installed-extension.png)
+
+2. Click **Install** for that extension, then confirm in the dialog box that appears.
+
+3. Reload WSO2 Integrator after the installation completes. The extension's status changes to **Installed**.
+
+    ![Installed status]({{base_path}}/images/installing-siddhi-extensions/installed-status.png)
+
+### Uninstalling an extension
+
+1. In the **Extension Installer** panel, locate the extension you want to uninstall.
+
+    ![Installed extension]({{base_path}}/images/installing-siddhi-extensions/an-installed-extension.png)
+
+2. Click **UnInstall** for that extension.
+
+3. If the extension you are uninstalling has shared dependencies with one or more other extensions, a warning appears.
+
+    ![Shared dependencies warning]({{base_path}}/images/installing-siddhi-extensions/shared-dependencies-exist-dialog-box.png)
+
+    The names of the other extensions are in bold, and the dependencies each shares with the extension you are uninstalling are listed under the extension name.
+
+    !!! note
+        If you click **Confirm**, the other extensions that use the shared dependencies lose some of their dependencies. If you need to continue using those extensions, reinstall them after uninstallation.
+
+    If there are no shared dependencies, click **UnInstall** in the confirmation dialog box.
+
+4. Reload WSO2 Integrator after the uninstallation completes.
+
+### Manually installable dependencies
+
+Some Siddhi extensions have dependencies that the **Extension Installer** cannot auto-download. These dependencies must be manually downloaded and installed before the extension is fully usable.
+
+When an extension has at least one such dependency, an information icon appears next to the extension's status in the **Extension Installer** panel:
+
+![Manually installable dependencies icon]({{base_path}}/images/installing-siddhi-extensions/manually-installable-dependencies-available.png)
+
+Click the icon to open a dialog box with details about each dependency.
+
+![Manually installable dependency instructions]({{base_path}}/images/installing-siddhi-extensions/manually-installable-instructions.png)
+
+For each dependency, the dialog box provides:
+
+- **Instructions** to download (and, where applicable, convert) the JAR of the dependency.
+- **Installation Location** where the downloaded JAR (or converted OSGi bundle) needs to be placed. Each location maps to one of the following directories:
+
+    | **Installation Location** | **Directory**                                                                                                                  |
+    |---------------------------|--------------------------------------------------------------------------------------------------------------------------------|
+    | **bundle in runtime**     | Place the OSGi bundle you downloaded or converted in either `<SI_HOME>/lib` or `<SI_HOME>/bundles`, based on the instructions. |
+    | **jar in runtime**        | Place the non-OSGi JAR you downloaded in `<SI_HOME>/jars`.                                                                     |
+    | **jar in samples**        | Place the non-OSGi JAR you downloaded in `<SI_HOME>/samples/sample-clients/lib`.                                               |
+
+If you are an extension developer and want to configure manually installable dependencies for a custom extension, see [Configuring Extension Dependencies](../develop/configuring-extension-dependencies.md).
+
+## Installing extensions via the terminal
+
+For production setups that don't use WSO2 Integrator, manage Siddhi extensions directly on the SI runtime via the `extension-installer` script. Navigate to `<SI_HOME>/bin` to issue these commands.
+
+### Identifying installation status
+
+- **Viewing the list of installed extensions** — view the complete list of Siddhi extensions currently installed in your WSO2 Integrator: SI setup. All listed extensions are completely installed (with their dependencies).
+
+    === "On macOS/Linux"
+        ```bash
+        ./extension-installer.sh list
+        ```
+    === "On Windows"
+        ```bash
+        extension-installer.bat list
+        ```
+
     The following is a sample response log for this command.
-    
+
     ![List of Installed Extensions]({{base_path}}/images/downloading-and-installing-siddhi-extensions/list-response.png)
-    
-    
-- **Viewing the installation status of all the supported Siddhi extensions**
 
-    You can view the complete list of Siddhi extensions supported for WSO2 Integrator: SI together with the current installation status for each extension.
-    
-    The installation status can be one of the following:
-    
-    |**Installation Status**|**Description**                                                    |
-    |-----------------------|-------------------------------------------------------------------|
-    |**INSTALLED**          |This indicates that the extension is completely installed. The installation includes the JAR of the extension itself as well as all its dependencies (if any).|
-    |**NOT_INSTALLED**      |This indicates that the extension has not been installed. The JAR of the extension itself has not been installed. Dependencies (if any) may be already installed due to shared dependencies.|
-    |**PARTIALLY_INSTALLED**|This indicates that the JAR of the extension itself has been installed, but one or more dependencies of the extension still need to be installed. When this status is displayed with an asterisk (i.e., `PARTIALLY_INSTALLED (*)`), it means that there are one or more dependencies that need to be manually installed for the extension.<br/><br/> If an extension has this status, you can view more information about the dependencies to be installed by checking the installation status of that specific extension individually.|
+- **Viewing the installation status of all supported extensions** — view the complete list of Siddhi extensions supported for WSO2 Integrator: SI together with the current installation status of each.
 
-    To perform this action, issue the appropriate command out of the following based on your operating system:
-    
-    - **For Windows**     : `extension-installer.bat list --all`
-    - **For Linux/MacOS** : `./extension-installer.sh list --all`
-    
-    The following is a sample response for this command.
-    
+    === "On macOS/Linux"
+        ```bash
+        ./extension-installer.sh list --all
+        ```
+    === "On Windows"
+        ```bash
+        extension-installer.bat list --all
+        ```
+
+    The following is a sample response.
+
     ![List of installed Siddhi extensions with status]({{base_path}}/images/downloading-and-installing-siddhi-extensions/list-and-status-response.png)
-        
-- **Checking the installation status of a specific Siddhi extension**
 
-    You can view the installation status of a specific extension individually together with details of dependencies that need to be manually downloaded (if any exist).
+- **Checking the installation status of a specific extension** — view the installation status of one extension together with details of any dependencies that need to be manually downloaded.
 
-    To perform this action, issue the appropriate command out of the following based on your operating system:
-    
-    - **For Windows**     : `extension-installer.bat list <EXTENSION_NAME>`
-    - **For Linux/MacOS** : `./extension-installer.sh list <EXTENSION_NAME>`   
-    
+    === "On macOS/Linux"
+        ```bash
+        ./extension-installer.sh list <EXTENSION_NAME>
+        ```
+    === "On Windows"
+        ```bash
+        extension-installer.bat list <EXTENSION_NAME>
+        ```
+
     !!! info
-        Here, the `<EXTENSION_NAME>` refers to the name of the extension. When you use the command line to view the list of extensions that are currently installed or to view the installation status of all the supported Siddhi extensions, the extension names are displayed in the `name` column.<br/><br/>e.g., The extension name of the gRPC extension is `grpc`.
-        
-    e.g., To view the installation status of the `cdc-oracle` extension (which is partially installed by default), issue the following command:
-    
-    - **For Windows**     : `extension-installer.bat list cdc-oracle`
-    - **For Linux/MacOS** : `./extension-installer.sh list cdc-oracle`
-    
-    The sample response is as follows.
-    
-    ![List status for specific exension]({{base_path}}/images/downloading-and-installing-siddhi-extensions/list-status-for-specific-extension.png)
-    
-### Installing Siddhi Extensions
+        `<EXTENSION_NAME>` is the value displayed in the `name` column when you list extensions or check their status. For example, the extension name of the gRPC extension is `grpc`.
+
+    For example, to view the installation status of the `cdc-oracle` extension (which is partially installed by default):
+
+    === "On macOS/Linux"
+        ```bash
+        ./extension-installer.sh list cdc-oracle
+        ```
+    === "On Windows"
+        ```bash
+        extension-installer.bat list cdc-oracle
+        ```
+
+    Sample response:
+
+    ![List status for specific extension]({{base_path}}/images/downloading-and-installing-siddhi-extensions/list-status-for-specific-extension.png)
+
+### Installing extensions
 
 #### Installing all extensions required for currently deployed Siddhi applications
 
-If the Siddhi applications deployed in your WSO2 Integrator: SI setup use Siddhi extensions that are not currently installed, you can automatically install all those extensions at once. To do this, issue the appropriate command out of the following based on your operating system.
+If the Siddhi applications deployed in your WSO2 Integrator: SI setup use Siddhi extensions that are not currently installed, you can install all those extensions at once:
 
-- **For Windows**     : `extension-installer.bat install`
-- **For Linux/MacOS** : `./extension-installer.sh install` 
+=== "On macOS/Linux"
+    ```bash
+    ./extension-installer.sh install
+    ```
+=== "On Windows"
+    ```bash
+    extension-installer.bat install
+    ```
 
-e.g., If a Siddhi application that is currently deployed in your WSO2 Integrator: SI setup uses the Amazon S3 extension, and if this extension is not already installed, you can issue the command given above. As a result, the following message appears in the terminal informing you of extensions that are used in Siddhi applications, but not installed. It also prompts you to specify whether you want to install them.
+For example, if a deployed Siddhi application uses the Amazon S3 extension and that extension is not yet installed, the command above prints a message listing the extensions used in your applications but not installed, and prompts you to confirm.
 
 ![Not-installed extensions in Siddhi applications]({{base_path}}/images/downloading-and-installing-siddhi-extensions/not-installed-but-used-extensions.png)
 
-If you enter `y` to specify that you want to proceed with the installation, the following message appears to inform you of the status of the installation and to prompt you to restart the WSO2 Integrator: SI server once the installation is complete.
+If you enter `y`, installation proceeds and the following message confirms the installation status and prompts you to restart the SI server.
 
 ![installed missing extension]({{base_path}}/images/downloading-and-installing-siddhi-extensions/installed-missing-extension-message.png)
 
-#### Installing a specific Siddhi extension
+#### Installing a specific extension
 
-If you want to install a specific Siddhi extension, issue the appropriate command out of the following based on your operating system.
+To install a specific Siddhi extension by name:
 
-- **For Windows**     : `extension-installer.bat install <EXTENSION_NAME>`
-- **For Linux/MacOS** : `./extension-installer.sh install <EXTENSION_NAME>` 
+=== "On macOS/Linux"
+    ```bash
+    ./extension-installer.sh install <EXTENSION_NAME>
+    ```
+=== "On Windows"
+    ```bash
+    extension-installer.bat install <EXTENSION_NAME>
+    ```
 
-!!! info
-    Here, the `<EXTENSION_NAME>` refers to the name of the extension. When you use the command line to view the list of extensions that are currently installed or to view the installation status of all the supported Siddhi extensions, the extension names are displayed in the `name` column.<br/><br/>e.g., The extension name of the gRPC extension is `grpc`.
-    
-e.g., To install the `grpc` Siddhi extension, issue the following command.
+For example, to install the `grpc` Siddhi extension:
 
-- **For Windows**     : `extension-installer.bat install grpc`
-- **For Linux/MacOS** : `./extension-installer.sh install grpc` 
+=== "On macOS/Linux"
+    ```bash
+    ./extension-installer.sh install grpc
+    ```
+=== "On Windows"
+    ```bash
+    extension-installer.bat install grpc
+    ```
 
-The following message appears to inform you of the status of the installation and to prompt you to restart the WSO2 Integrator: SI server once the installation is complete.
+The following message confirms the installation status and prompts you to restart the SI server.
 
 ![install extension log]({{base_path}}/images/downloading-and-installing-siddhi-extensions/install-extension-log.png)
 
-### Uninstalling Siddhi Extensions
+### Uninstalling extensions
 
-To uninstall a specific Siddhi application, issue the appropriate command out of the following based on your operating system.
+To uninstall a specific Siddhi extension:
 
-- **For Windows**     : `extension-installer.bat uninstall <EXTENSION_NAME>`
-- **For Linux/MacOS** : `./extension-installer.sh uninstall <EXTENSION_NAME>` 
+=== "On macOS/Linux"
+    ```bash
+    ./extension-installer.sh uninstall <EXTENSION_NAME>
+    ```
+=== "On Windows"
+    ```bash
+    extension-installer.bat uninstall <EXTENSION_NAME>
+    ```
 
-!!! info
-    Here, the `<EXTENSION_NAME>` refers to the name of the extension. When you use the command line to view the list of extensions that are currently installed or to view the installation status of all the supported Siddhi extensions, the extension names are displayed in the `name` column.<br/><br/>e.g., The extension name of the gRPC extension is `grpc`.
-     
-e.g., To un-install the `grpc` Siddhi extension, issue the following command.
+For example, to uninstall the `grpc` Siddhi extension:
 
-- **For Windows**     : `extension-installer.bat uninstall grpc`
-- **For Linux/MacOS** : `./extension-installer.sh uninstall grpc` 
+=== "On macOS/Linux"
+    ```bash
+    ./extension-installer.sh uninstall grpc
+    ```
+=== "On Windows"
+    ```bash
+    extension-installer.bat uninstall grpc
+    ```
 
-A message appears to inform you of any other extension that shares dependencies with the extension being uninstalled. The message also prompts you to confirm whether you want to proceed with the installation or not.
+A message lists any other extensions that share dependencies with the one being uninstalled, and prompts you to confirm.
 
 ![uninstall extension log]({{base_path}}/images/downloading-and-installing-siddhi-extensions/uninstall-extension-log.png)
 
-If you enter `y` and proceed with the un-installation, the following log appears to inform you of the progress of the un-installation and then prompt you to restart the WSO2 Integrator: SI server once the un-installation is complete.
+If you confirm, the uninstallation proceeds and the following log shows progress before prompting you to restart the SI server.
 
 ![uninstall extension]({{base_path}}/images/downloading-and-installing-siddhi-extensions/uninstall-extension.png)
-
-## Downloading and installing Siddhi extensions manually
-
-### Downloading Siddhi extensions
-
-To download Siddhi extensions manually from the store and install them, follow the steps below.
-
-To download the Siddhi extensions, follow the steps below
-
-1. Open the [Siddhi Extensions page](https://store.wso2.com/store/assets/analyticsextension/list).
-   The available Siddhi extensions are displayed as follows.  
-   ![Siddhi Extension Home Page]({{base_path}}/images/downloading-and-installing-siddhi-extensions/Siddhi_Extensions.png)
-
-2. Click on the required extension. In this example, let's click on the **IBM MQ** extension.  
-   ![Download Extension]({{base_path}}/images/downloading-and-installing-siddhi-extensions/Download_Extension.png)
-
-   In the dialog box that appears, enter your e-mail address and click **Submit**. The extension JAR is downloaded to 
-   the default location in your machine (based on your settings).
-
-3.  If you are not using the latest version of the WSO2 Integrator: SI, and you
-    want to select the version of the extension that matches your current product version, expand **Version Support** 
-    in the left navigator for the selected extension.
-
-    !!! tip 
-        Each extension has a separate **Version Support** navigator item for the WSO2 Integrator: SI, SP, CEP and DAS.
-    ![Version Support]({{base_path}}/images/downloading-and-installing-siddhi-extensions/Extension_Left_Navigator.png)
-
-4. If you need to download an older version of an extension, follow the substeps below.
-   1. Once you have clicked on the required extension, click on the **Older Versions** tab. Then click on the link 
-   displayed within the tab.  
-    ![Older Versions]({{base_path}}/images/downloading-and-installing-siddhi-extensions/Extensions_Older_Versions.png)
-
-    You are directed to the maven central page where all the available versions of the extension are listed.  
-    ![All available versions]({{base_path}}/images/downloading-and-installing-siddhi-extensions/Central Maven Repository.png)
-
-   2. Click on the relavent version. It directs you to the download page. To download the bundle, click on it.  
-    ![Download Bundle]({{base_path}}/images/downloading-and-installing-siddhi-extensions/Maven_Bundle.png)
-
-### Installing Siddhi extensions
-
-To install the Siddhi extension in your WSO2 Integrator: SI pack, place the extension JAR you downloaded in the 
-`<SI_HOME>/lib` directory.
-
-### Uninstalling Siddhi extensions
-
-To uninstall a Siddhi extension, delete the relevant extension JAR in the `<SI_HOME>/lib` directory.

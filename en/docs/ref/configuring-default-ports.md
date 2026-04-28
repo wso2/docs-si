@@ -1,14 +1,14 @@
 # Configuring Default Ports
 
 This page describes the default ports that are used for each runtime
-when the port offset is 0 .
+when the port offset is 0.
 
 
-## Common Ports
+## Common ports
 
 The following ports are common to all runtimes.
 
-|      |                                                                         |
+| Port | Description                                                             |
 |------|-------------------------------------------------------------------------|
 | 7611 | Thrift TCP port to receive events from clients.                         |
 | 7711 | Thrift SSL port for secure transport where the client is authenticated. |
@@ -18,7 +18,7 @@ The following ports are common to all runtimes.
 You can offset binary and thrift by configuring the offset parameter in the `<SI_HOME>/conf/server/deployment.yaml` file.
 The following is a sample configuration.
 
-```xml
+```yaml
   # Carbon Configuration Parameters
 wso2.carbon:
     # value to uniquely identify a server
@@ -33,66 +33,32 @@ wso2.carbon:
     offset: 1
 ```
 
-
-
-
 ## Server runtime
 
-|      |                       |
+| Port | Description                       |
+|------|-----------------------------------|
+| 9090 | HTTP netty transport              |
+| 9443 | HTTPS netty transport             |
+| 7070 | HTTP transport (Store Query API)  |
+| 7443 | HTTPS transport (Store Query API) |
+
+## Clustering ports
+
+Ports that are required for clustering deployment.
+
+### Minimum High Availability (HA) Deployment
+
+| Port | Description           |
 |------|-----------------------|
 | 9090 | HTTP netty transport  |
 | 9443 | HTTPS netty transport |
 
-
-## WSO2 Integrator: SI Tooling runtime
-
-|      |                       |
-|------|-----------------------|
-| 9390 | HTTP netty transport  |
-| 9743 | HTTPS netty transport |
-
-## Dashboard runtime
-
-|      |                       |
-|------|-----------------------|
-| 9290 | HTTP netty transport  |
-| 9643 | HTTPS netty transport |
-
-!!! tip
-    The following example shows how to overide the default netty port for the WSO2 Integrator: SI Tooling by updating the required parameters in the `<SI_HOME>/conf/server/deployment.yaml` file.
-
-    ``` xml
-        wso2.transport.http:
-         transportProperties:
-          listenerConfigurations:
-         -
-              id: "default"
-         port: 9390
-            -
-              id: "msf4j-https"
-         port: 9743
-    ```
-
-
-## Clustering Ports
-
-Ports that are required for clustering deployment:
-
-
-### Minimum High Availability (HA) Deployment:
-
-#### Server node:
-
-|      |                                                                                                                                                                                 |
-|------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 9090 | HTTP netty transport.                                                                                                                                                           |
-| 9090 | Specify the port of the node for the `advertisedPort` parameter in the `liveSync` section. The HTTP netty transport port is considered the default port. |
-| 9443 | HTTPS netty transport.                                                                                                                                                          |
+The HTTP netty transport port is also used as the default value for the `advertisedPort` parameter in the `liveSync` section.
 
 ### Multi Datacenter High Availability Deployment
 
-Other than the ports used in clustering setups (i.e., a Minimum HA Deployment or a scalable cluster), the following is required:
+In addition to the ports used in single-cluster setups (Minimum HA Deployment or a scalable cluster), the following Kafka port is required:
 
-|      |                                                                                                                                                                                                    |
-|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 9092 | Ports of the two separate instances of the broker deployed in each data center (e.g., `bootstrap.servers= 'host1:9092, host2:9092'. The default is `9092` where the external kafka servers start.) |
+| Port | Description                                                                                                                    |
+|------|--------------------------------------------------------------------------------------------------------------------------------|
+| 9092 | Default Kafka broker port. Each data center runs its own broker instance (e.g., `bootstrap.servers='host1:9092, host2:9092'`). |

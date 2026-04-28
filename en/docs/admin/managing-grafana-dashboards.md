@@ -6,7 +6,7 @@ WSO2 Integrator: SI uses Grafana to host and view its pre-configured dashboards 
 
 To import dashboards, follow the procedure below:
 
-1. Download the required JSON file (i.e., based on the statistics you need to view) from [here](https://github.com/wso2/streaming-integrator/tree/master/modules/distribution/carbon-home/resources/dashboards).
+1. Download the required JSON file (i.e., based on the statistics you need to view) from [here](https://github.com/wso2/product-integrator-si/tree/master/modules/distribution/carbon-home/resources/dashboards).
 
 2. Start Grafana and access it via `http://localhost:3000/`.
 
@@ -21,9 +21,9 @@ To import dashboards, follow the procedure below:
 ## Organizing dashboards in folders
 
 !!!tip "Before you begin:"
-    Download the related JSON file(s) of one or more dashboards from [here](https://github.com/wso2/streaming-integrator/tree/master/modules/distribution/carbon-home/resources/dashboards), and import them to Grafana. For instructions, see [Importing dashboards](#importing-dashboards).
+    Download the related JSON file(s) of one or more dashboards from [here](https://github.com/wso2/product-integrator-si/tree/master/modules/distribution/carbon-home/resources/dashboards), and import them to Grafana. For instructions, see [Importing dashboards](#importing-dashboards).
 
-The dashboards you import are saved in the **General** folder by default. If required, you can create a design a folder structure that matches your requirement and save the dashboards in the different folders of the structure based on your categorization of the dashboards.
+The dashboards you import are saved in the **General** folder by default. If required, you can design a folder structure that matches your requirement and save the dashboards in the different folders of the structure based on your categorization of the dashboards.
 
 **Creating new folders**
 
@@ -66,13 +66,13 @@ To move selected dashboards to a specific folder, follow the procedure below:
 ## Deleting dashboards
 
 !!!tip "Before you begin:"
-    Download the related JSON file(s) of one or more dashboards from [here](https://github.com/wso2/streaming-integrator/tree/master/modules/distribution/carbon-home/resources/dashboards), and import them to Grafana. For instructions, see [Importing dashboards](#importing-dashboards).
+    Download the related JSON file(s) of one or more dashboards from [here](https://github.com/wso2/product-integrator-si/tree/master/modules/distribution/carbon-home/resources/dashboards), and import them to Grafana. For instructions, see [Importing dashboards](#importing-dashboards).
 
 In the **Dashboards**/**Manage** tab, select the dashboard(s) you want to delete. Then click **Delete**.
 
 ![Move dashboards]({{base_path}}/images/managing-grafana-dashboard/delete-dashboard.png)
 
-In the message that appears to confirm whether you want to delete the dashboard, click *Delete*.
+In the message that appears to confirm whether you want to delete the dashboard, click **Delete**.
 
 ## Viewing dashboards
 
@@ -88,9 +88,7 @@ To view a dashboard, follow the procedure below:
 
     ![View Dashboard]({{base_path}}/images/managing-grafana-dashboard/view-dashboard.png)
 
-4. Once the dashboard opens, click on the bar shown below to expand it and specify the time range for which you want to view statistics.
-
-    ![Select Time Range]({{base_path}}/images/managing-grafana-dashboard/view-dashboard.png)
+4. Once the dashboard opens, click on the bar at the top to expand it and specify the time range for which you want to view statistics.
 
     Once you expand the time range bar, you can select the required time interval or specify a custom time interval.
 

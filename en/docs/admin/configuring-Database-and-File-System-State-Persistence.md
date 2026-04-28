@@ -6,7 +6,7 @@ either into a database system or into the file system.
 
 ### Prerequisites
 
-Before configuring RDBMS database persistence, the following prerequisites
+Before configuring database system persistence, the following prerequisites
 must be completed.
 
 -   One or more Siddhi Applications must be running in the SI
@@ -61,7 +61,7 @@ To configure periodic data persistence, update the
 </tr>
 <tr class="odd">
 <td><code>             config &gt; datasource            </code></td>
-<td>The datasource to be used in persisting the state. The provided datasource should be properly defined in the deployment.yaml. For detailed instructions of how to configure a datasource, see <a href="_Configuring_Datasources_">Configuring Datasources</a> .</td>
+<td>The datasource to be used in persisting the state. The provided datasource should be properly defined in the deployment.yaml. For detailed instructions of how to configure a datasource, see <a href="../setup/configuring-data-sources.md">Configuring Datasources</a>.</td>
 <td><pre><code>WSO2_PERSISTENCE_DB (Datasource with this name should be defined in wso2.datasources)</code></pre></td>
 </tr>
 <tr class="even">
@@ -74,11 +74,11 @@ To configure periodic data persistence, update the
 
 The following is a sample segment of the required configurations in the
 `         <SI_HOME>/conf/server/deployment.yaml        ` file to
-configure file system persistence.
+configure database system persistence.
 
 **Sample deployment.yaml segment**
 
-``` xml
+```yaml
     state.persistence:
       enabled: true
       intervalInMin: 1
@@ -145,7 +145,7 @@ configure file system persistence.
 
 **Sample deployment.yaml segment**
 
-``` java
+```yaml
     state.persistence:
       enabled: true
       intervalInMin: 1

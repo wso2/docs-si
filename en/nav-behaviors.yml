@@ -18,8 +18,8 @@ auto_collapse:
     collapse_when_url_starts_with:
       # Collapse when visiting other main sections
       - guides/
+      - tutorials/
       - examples/
-      - samples/
       - setup/
       - admin/
       - develop/
@@ -27,9 +27,6 @@ auto_collapse:
       - ref/
     stay_expanded_when_url_starts_with:
       # Stay expanded in own section
-      - overview/
-      - quick-start-guide/
-      - concepts/
       - get-started/
     stay_expanded_on_pages:
       - index.md
@@ -38,9 +35,6 @@ auto_collapse:
   - title: Learn
     collapse_when_url_starts_with:
       # Collapse when visiting other sections
-      - overview/
-      - quick-start-guide/
-      - concepts/
       - get-started/
       - setup/
       - admin/
@@ -50,20 +44,17 @@ auto_collapse:
     stay_expanded_when_url_starts_with:
       # Stay expanded only in own section
       - guides/
+      - tutorials/
       - examples/
-      - samples/
 
   # GROUP 2: Setup and Install - Collapsed everywhere except own pages
   - title: Setup and Install
     collapse_when_url_starts_with:
       # Collapse when visiting other sections
-      - overview/
-      - quick-start-guide/
-      - concepts/
       - get-started/
       - guides/
+      - tutorials/
       - examples/
-      - samples/
       - develop/
       - admin/
       - connectors/
@@ -77,13 +68,10 @@ auto_collapse:
   - title: Develop
     collapse_when_url_starts_with:
       # Collapse when visiting other sections
-      - overview/
-      - quick-start-guide/
-      - concepts/
       - get-started/
       - guides/
+      - tutorials/
       - examples/
-      - samples/
       - setup/
       - admin/
       - connectors/
@@ -96,13 +84,10 @@ auto_collapse:
   - title: Observability
     collapse_when_url_starts_with:
       # Collapse when visiting other sections
-      - overview/
-      - quick-start-guide/
-      - concepts/
       - get-started/
       - guides/
+      - tutorials/
       - examples/
-      - samples/
       - setup/
       - develop/
       - connectors/
@@ -115,13 +100,10 @@ auto_collapse:
   - title: Connectors
     collapse_when_url_starts_with:
       # Collapse when visiting other sections
-      - overview/
-      - quick-start-guide/
-      - concepts/
       - get-started/
       - guides/
+      - tutorials/
       - examples/
-      - samples/
       - setup/
       - admin/
       - develop/
@@ -134,13 +116,10 @@ auto_collapse:
   - title: References
     collapse_when_url_starts_with:
       # Collapse when visiting other sections
-      - overview/
-      - quick-start-guide/
-      - concepts/
       - get-started/
       - guides/
+      - tutorials/
       - examples/
-      - samples/
       - setup/
       - admin/
       - develop/

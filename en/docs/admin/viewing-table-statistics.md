@@ -1,7 +1,7 @@
-!!! note
-    **This page is still a work in progress!**
-    
 # Viewing Table Statistics
+
+!!! info "Documentation in progress"
+    For a summary of the metrics shown in this dashboard, see [Table Statistics in the Overall Statistics dashboard](viewing-overall-statistics.md#table-statistics).
 
 ![Table statistics dashboard]({{base_path}}/images/streaming-integrator-grafana-dashboard/table_statistics_dashboard.png)
 

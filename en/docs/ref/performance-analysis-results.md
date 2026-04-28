@@ -13,7 +13,7 @@ The recommended CPU and memory specifications for Docker containers are as follo
 
 - **Memory**: 8GB
 
-The recommended memory specifications SI server as follows. These are configured in the `<SI_Home>/wso2/server/bin/carbon.sh` file.
+The recommended memory specifications SI server as follows. These are configured in the `<SI_HOME>/wso2/server/bin/carbon.sh` file.
 
 - **Xms**: 2GB
 
@@ -191,7 +191,7 @@ define stream FileReaderStream (code string, serialNo string, amount double, fil
       jdbc.url="jdbc:mysql://localhost:3306/batchInformation?useSSL=false",
       username="root",
       password="root" ,
-      jdbc.driver.name="com.mysql.jdbc.Driver",
+      jdbc.driver.name="com.mysql.cj.jdbc.Driver",
       isAutoCommit = 'true')
 define table AccurateBatchTable(serialNo string, amount double, fileName string, status string, timestamp long);
 
@@ -554,7 +554,7 @@ The following Siddhi applications were used in this scenario:
 
 @App:description("Description of the plan")
 
-@store(type='rdbms' , jdbc.url='jdbc:mysql://172.31.18.173:3306/purchesOrder?useSSL=false',username='root',password='root',jdbc.driver.name='com.mysql.jdbc.Driver') 
+@store(type='rdbms' , jdbc.url='jdbc:mysql://172.31.18.173:3306/purchesOrder?useSSL=false',username='root',password='root',jdbc.driver.name='com.mysql.cj.jdbc.Driver') 
 define table  PurchesOrderTable (orderID string, numberOfItems int, totalValue double, paymentStatus string, deliveryAddress string );
 
 

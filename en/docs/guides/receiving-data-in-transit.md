@@ -14,7 +14,7 @@ Data publishers are transports from which SI can receive messages without subscr
 
 ![receiving data from a data publisher]({{base_path}}/images/receiving-data-in-transit/push-data-sources.png)
 
-To receive data from a data publisher, define an input [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and connect a [source] annotation of a type that receives data from a data publisher as shown in the example below.
+To receive data from a data publisher, define an input [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and connect a [source](https://siddhi.io/en/v5.1/docs/query-guide/#source) annotation of a type that receives data from a data publisher as shown in the example below.
 
 ```siddhi
 @source(type='http', 
@@ -101,8 +101,7 @@ The following are the supported transports to capture data in transit from data 
 | `TCP`         | [tcp](https://siddhi-io.github.io/siddhi-io-tcp/api/latest/#source)           |
 | `Email`       | [email](https://siddhi-io.github.io/siddhi-io-email/api/latest/#email-source) |
 | `grpc`        | [grpc](https://siddhi-io.github.io/siddhi-io-grpc/api/latest/#source)         |
-| `wso2event`   | [wso2event](https://wso2-extensions.github.io/siddhi-map-wso2event/api/5.0.2/) |
-| `Thrift`      |                                                                               |
+| `wso2event`   | [wso2event](https://wso2-extensions.github.io/siddhi-map-wso2event/api/latest/) |
 
 ### Supported mappers
 
@@ -124,15 +123,15 @@ This section explains how to receive input data from messaging systems where WSO
 
 ![receiving data from a messaging system]({{base_path}}/images/receiving-data-in-transit/pull-data-sources.png)
 
-To receive data from a messaging system, define an input [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and connect a [source] annotation of a type that receives data from a messaging system.
+To receive data from a messaging system, define an input [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and connect a [source](https://siddhi.io/en/v5.1/docs/query-guide/#source) annotation of a type that receives data from a messaging system.
 
-For example, consider a weather broadcasting application that publishes the temperature and humidity for each region is monitors in a separate Kafka topic. The local weather broadcasting firm of Houston wants to subscribe to receive weather broadcasts for Houston.
+For example, consider a weather broadcasting application that publishes the temperature and humidity for each region it monitors in a separate Kafka topic. The local weather broadcasting firm of Houston wants to subscribe to receive weather broadcasts for Houston.
 
-```
+```siddhi
 @source(type='kafka',
         topic.list='houston',
         threading.option='single.thread',
-        group.id="group1",
+        group.id='group1',
         bootstrap.servers='localhost:9092',
         @map(type='json'))
 define stream TemperatureHumidityStream (temperature int, humidity int);
@@ -144,7 +143,7 @@ The above Kafka source listens at bootstrap server `localhost:9092` for messages
 
 To try the above example, follow the steps below.
 
-1. Download the Kafka broker from [the Apache site](https://www.apache.org/dyn/closer.cgi?path=/kafka/2.3.0/kafka_2.12-2.3.0.tgz) and extract it.
+1. Download the Kafka broker from [the Apache site](https://archive.apache.org/dist/kafka/2.3.0/kafka_2.12-2.3.0.tgz) and extract it.
    This directory is referred to as `<KAFKA_HOME>` from here on.
    
 2. Start Kafka as follows:
@@ -161,13 +160,11 @@ To try the above example, follow the steps below.
     
         `bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic houston`
         
-3. Prepare WSO2 Integrator: SI Tooling to consume Kafka messages as follows:
+3. Prepare the editor (with WSO2 Integrator: SI installed) to consume Kafka messages as follows:
 
-    1. Download and install the Kafka extension via VSCode. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
-    
-    2. Open a new file and add the following Siddhi application to it.
+    1. Open a new file and add the following Siddhi application to it.
 
-        ```
+        ```siddhi
         @App:name('TemperatureReportingApp')
        
         @source(type = 'kafka', topic.list = "houston", threading.option = "single.thread", group.id = "group1", bootstrap.servers = "localhost:9092",
@@ -185,11 +182,11 @@ To try the above example, follow the steps below.
         insert into OutputStream;
         ```
        
-       This Siddhi application includes the Kafka source that subscribes to the `houston` kafka source and generates an event in the `TemperatureHumidityStream` stream for each message in the topic (as described in the example inj the previous section). `query1` query gets all these messages from the `TemperatureHumidityStream` stream and inserts them into the `OutputStream` stream so that they can be logged via the log sink connected to the latter.
+       This Siddhi application includes the Kafka source that subscribes to the `houston` Kafka topic and generates an event in the `TemperatureHumidityStream` stream for each message in the topic (as described in the example in the previous section). `query1` query gets all these messages from the `TemperatureHumidityStream` stream and inserts them into the `OutputStream` stream so that they can be logged via the log sink connected to the latter.
        
        Save the Siddhi application.
        
-    3. Start the `TemperatureReportingApp` Siddhi application that you created and saved.
+    2. Start the `TemperatureReportingApp` Siddhi application that you created and saved.
         
 4. To generate a message in the `houston` Kafka topic, follow the steps below:
 
@@ -201,11 +198,11 @@ To try the above example, follow the steps below.
     
         `{"event":{ "temperature":23, "humidity":99}}`
         
-        This pushes a message to the Kafka Server. Then, the Siddhi application you deployed in the WSO2 Integrator: SI consumes this message. As a result, the WSO2 Integrator: SI log displays the following:
+        This pushes a message to the Kafka Server. Then, the Siddhi application you deployed in the WSO2 Integrator: SI consumes this message.
         
-5. Check the logs of WSO2 Integrator: SI Tooling. The Kafka message you generated is logged as follows:
+5. Check the logs of the editor (with WSO2 Integrator: SI installed). The Kafka message you generated is logged as follows:
 
-    ```
+    ```text
     INFO {io.siddhi.core.stream.output.sink.LogSink} - Temperature Update : Event{timestamp=1603339705244, data=[23, 99], isExpired=false}
     ```
 
