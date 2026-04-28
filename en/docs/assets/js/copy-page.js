@@ -235,35 +235,12 @@
         };
 
         const handleViewMarkdown = () => {
-            let pathname = window.location.pathname;
             const origin = window.location.origin;
-            
-            // Strip trailing slash for consistent base
-            const base = pathname.replace(/\/$/, '');
-            
-            // Get path segments
-            const segments = base.split('/').filter(Boolean);
-            const last = segments[segments.length - 1];
-            
-            let mdPath;
-            // Root handling (adjusting for potential /docs-si/ subpath)
-            if (segments.length === 0 || (segments.length === 1 && last === 'docs-si')) {
-                mdPath = (base || '/') + '/index.md/';
-            } else {
-                // Check if the URL might already contain the filename (e.g., /overview/overview/)
-                const parent = segments[segments.length - 2];
-                if (last === parent) {
-                    // It's likely already at the file level
-                    mdPath = base + '.md/';
-                } else {
-                    // It's likely at the folder level (index)
-                    mdPath = base + '/' + last + '.md/';
-                }
-            }
-            
-            // Clean up double slashes if any
-            mdPath = mdPath.replace(/\/+/g, '/');
-            
+            const pathname = window.location.pathname.replace(/\/$/, '');
+
+            // Append .md to the current path
+            const mdPath = pathname + '.md/';
+
             window.location.href = origin + mdPath;
             setOpen(false);
         };
@@ -351,16 +328,11 @@
 
             if (window.location.href.startsWith(siteUrl)) {
                 let relPath = window.location.href.substring(siteUrl.length).replace(/\/$/, '');
-                const segments = relPath.split('/').filter(Boolean);
-                const last = segments[segments.length - 1];
-                const parent = segments[segments.length - 2];
 
-                if (segments.length === 0) {
+                if (relPath === '') {
                     relPath = 'index.md';
-                } else if (last === parent) {
-                    relPath = relPath + '.md';
                 } else {
-                    relPath = relPath + '/' + last + '.md';
+                    relPath = relPath + '.md';
                 }
                 rawUrl = repoRawUrl + relPath;
                 DEBUG && console.log('Derived raw URL:', rawUrl);
