@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SNMPSetRequestApp.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>
+## Purpose:
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to send snmp set request via SNMP in keyvalue using custom mapping.
+
+## Prerequisites:
+1. Save this sample.
+2. Install snmp agent on your network node.
+    * for linux can install snmpd / for windows it can be configured by &#x27;windows features&#x27;.
+    * configure snmp agent ex:- community string = public,
+3. If there is no syntax error, the following message is shown on the console:
+       * - SNMP-set-request-app successfully deployed.
+
+## Executing the Sample:
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages are shown on the console:
+    * SNMP-set-request-app - Started Successfully!
+
+## Testing the Sample:
+1. Click on &#x27;Event Simulator&#x27; (double arrows on left tab)
+2. Click &#x27;Single Simulation&#x27; (this will be already selected)
+3. Select SNMP-set-request-app as &#x27;Siddhi App Name&#x27;
+4. Select outputStream as &#x27;StreamName&#x27;
+5. Provide attribute values
+    - sysLocation : asia-branch-singapore
+6. Click on the start button (Arrow symbol) next to the newly created simulator
+
+## Viewing the Results:
+See the output on the terminal:
+INFO {io.siddhi.core.stream.output.sink.LogSink} - SNMP-set-request-app : logStream : Event{timestamp=1*********, data=[asia-branch-singapore], isExpired=false}
+
+## Notes:
+Make sure the port number is correct and user have write access to agent
+
+```sql
+@App:name(&quot;SNMPSetRequestApp&quot;)
+@App:description(&#x27;setting oids on agent&#x27;)
+
+
+@Sink(type=&#x27;snmp&#x27;,
+@map(type=&#x27;keyvalue&#x27;, @payload(&#x27;1.3.6.1.2.1.1.6.0&#x27; = &#x27;sysLocation&#x27;)),
+host = &#x27;127.0.0.1&#x27;,
+version = &#x27;v1&#x27;,
+community = &#x27;public&#x27;,
+agent.port = &#x27;2019&#x27;)
+define stream outputStream(sysLocation string);
+
+@sink(type=&#x27;log&#x27;)
+define stream logStream(sysLocation string);
+
+@info(name=&#x27;query_name&#x27;)
+from outputStream
+select sysLocation
+insert into logStream;
+```</body>
+</html>

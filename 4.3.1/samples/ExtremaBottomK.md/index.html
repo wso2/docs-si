@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ExtremaBottomK.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Counting the Frequency of Values with BottomK
+
+## Purpose:
+This application demonstrates how to use the `siddhi-execution-extrema` extension with the `bottomK` function.
+
+!!!info &quot;Before you begin:&quot;
+    Save the sample Siddhi application in WSO2 Integrator: SI Tooling.
+
+## Executing the Sample
+
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** =&gt; **Run**.
+
+![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
+
+If the Siddhi application starts successfully, the following message appears in the console.
+
+`ExtremaBottomK.siddhi - Started Successfully!`
+
+## Testing the Sample
+
+The `ExtremaBottomK` Siddhi application can be tested in three ways as follows.
+
+### Option 1: Publish events via CURL
+
+You can publish events in the `JSON` format to the HTTP endpoint via CURL commands. The CURL commands should be in the format of the example given below. The values for `name` and `amount` parameters can change.
+
+`curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;sugar\&quot;,\&quot;amount\&quot;: 20}}&quot;  http://localhost:8006/productionStream --header &quot;Content-Type:application/json&quot;`
+
+### Option2: Publish events with Postman
+
+1. Install the `Postman` application from Chrome web store.
+
+2. Launch the application.
+
+3. Make a `POST` request to the `http://localhost:8006/productionStream` endpoint. Set the `Content-Type` to `application/json` and set the request body in `JSON` format as follows.
+
+    ```
+        {
+           &quot;event&quot;:{
+              &quot;name&quot;:&quot;sugar&quot;,
+              &quot;amount&quot;:20
+           }
+        }
+    ```
+
+4. Send some more events in the same format, with different values for the `name` and `amount` parameters.
+
+### Option3: Publish events with http sample client
+
+Navigate to the `&lt;WSO2SIHome&gt;/samples/sample-clients/http-client` directory and run the following command.
+
+`ant -Dtype=json -DfilePath={WSO2SIHome}/samples/artifacts/ExtreamBottomK/ExtremaBottomKEvents.txt -DeventDefinition=&#x27;{&quot;event&quot;:{&quot;name&quot;:&quot;{0}&quot;,&quot;amount&quot;:{1}}}&#x27; -Durl=http://localhost:8006/productionStream`
+
+## Viewing the Results
+
+The output is logged in the WSO2 Integrator: SI Tooling console as follows.
+
+```
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ExtremaBottomK : outputStream : [Event{timestamp=1529498254202, data=[sugar, 20, sugar, 1, null, null, null, null], isExpired=false}, Event{timestamp=1529498254202, data=[cake, 10, cake, 1, sugar, 1, null, null], isExpired=false}]&lt;br/&gt;&lt;br/&gt;
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ExtremaBottomK : outputStream : [Event{timestamp=1529498262769, data=[cake, 10, cake, 1, sugar, 1, null, null], isExpired=false}, Event{timestamp=1529498262769, data=[toffee, 65, toffee, 1, cake, 1, sugar, 1], isExpired=false}]&lt;br/&gt;&lt;br/&gt;
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ExtremaBottomK : outputStream : [Event{timestamp=1529498270897, data=[toffee, 65, toffee, 1, cake, 1, sugar, 1], isExpired=false}, Event{timestamp=1529498270897, data=[cake, 74, toffee, 1, sugar, 1, cake, 2], isExpired=false}]&lt;br/&gt;&lt;br/&gt;
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ExtremaBottomK : outputStream : [Event{timestamp=1529498278304, data=[cake, 74, toffee, 1, sugar, 1, cake, 2], isExpired=false}, Event{timestamp=1529498278304, data=[toffee, 25, sugar, 1, toffee, 2, cake, 2], isExpired=false}]
+```
+
+???info &quot;Click here to view the sample Siddhi application.&quot;
+
+    ```sql
+    @App:name(&quot;ExtremaBottomK&quot;)
+    @App:Description(&#x27;Demonstrates how to use the siddhi-execution-extrema with bottomK function&#x27;)
+
+
+    @Source(type = &#x27;http&#x27;, receiver.url=&#x27;http://localhost:8006/productionStream&#x27;, basic.auth.enabled=&#x27;false&#x27;,
+        @map(type=&#x27;json&#x27;))
+    define stream inputStream (name string, amount long);
+
+    @sink(type=&#x27;log&#x27;)
+    define stream outputStream(name string, amount long, bottom1Element string, bottom1Frequency long, bottom2Element string, bottom2Frequency long, bottom3Element string, bottom3Frequency long);
+
+    from inputStream#extrema:bottomK(name, 3)
+    insert all events into outputStream;
+    ```</body>
+</html>

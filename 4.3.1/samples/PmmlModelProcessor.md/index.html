@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PmmlModelProcessor.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>
+## Purpose:
+This application demonstrates how to configure a pretrained PMML model to predict required raw materials from sweet production events and view the output on the console.
+
+## Prerequisites:
+1. Download siddhi-gpl-execution-pmml-x.x.x.jar from the following link and copy the jar to  {WSO2SIHome}/lib
+ http://maven.wso2.org/nexus/content/repositories/wso2gpl/org/wso2/extension/siddhi/gpl/execution/pmml/siddhi-gpl-execution-pmml/
+2. Save this sample.
+3. If there is no syntax error, the following message is shown on the console:
+    - Siddhi App PmmlModelProcessor successfully deployed.
+
+## Executing the Sample:
+1. Replace &lt;SweetProductionRatePrediction_model_path&gt; with the SweetProductionRatePrediction.pmml file&#x27;s absolute path - {WSO2SIHome}/samples/artifacts/PMMLModelProcessorSample/SweetProductionRatePrediction.pmml
+2. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+3. If the Siddhi application starts successfully, the following messages would be shown on the console.
+    * PmmlModelProcessor.siddhi - Started Successfully!
+
+## Notes:
+If you edit this application while it&#x27;s running, stop the application -&gt; Save -&gt; Start.
+    * Stop this Siddhi application (Click &#x27;Run&#x27; on menu bar -&gt; &#x27;Stop&#x27;)
+    * Start the application and check whether the specified events from the jms provider appear on the console.
+
+## Testing the Sample:
+Send events through one or more of the following methods.
+* You may send events to SweetProductionStream, via event simulator:
+    1. Open the event simulator by clicking on the second icon or pressing Ctrl+Shift+I.
+	2. In the Single Simulation tab of the panel, specify the values as follows:
+        * Siddhi App Name  : PmmlModelProcessor
+        * Stream Name     : SweetProductionStream
+    3. In the name and amount fields, enter &#x27;candy&#x27;, 20, 23 respectively and then click Send to send the event.
+    4. Send more events as desired.
+
+* Send events to the http endpoint defined by &#x27;publish.url&#x27; in the Sink configuration through the curl command:
+    1. Open a new terminal and issue the following command:
+        *  curl -X POST -d &#x27;{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PmmlModelProcessor&quot;,&quot;data&quot;: [&#x27;candy&#x27;, 20, 23]}&#x27; http://localhost:9390/simulation/single -H &#x27;content-type: text/plain&#x27;
+    2. If there is no error, the following messages are shown on the terminal:
+        *  {&quot;status&quot;:&quot;OK&quot;,&quot;message&quot;:&quot;Single Event simulation started successfully&quot;}
+
+* Publish events with Postman:
+    1. Install &#x27;Postman&#x27; application from Chrome web store.
+    2. Launch the application.
+    3. Make a &#x27;Post&#x27; request to the &#x27;http://localhost:9390/simulation/single&#x27; endpoint. Set the Content-Type to &#x27;text/plain&#x27; and set the request body in text as follows:
+	{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PmmlModelProcessor&quot;,&quot;data&quot;: [&#x27;candy&#x27;, 20, 23]}
+    4. Click &#x27;send&#x27;. If there is no error, the following messages are shown on the console:
+        *  &quot;status&quot;: &quot;OK&quot;,
+        *  &quot;message&quot;: &quot;Single Event simulation started successfully&quot;
+
+## Notes:
+* Accepted values for the &#x27;name&#x27; field should be either candy, caramel-bar, peanut-butter-cup or truffle for the specific pretrained PMML model.
+
+## Viewing the Results:
+See the prediction as output on the in the console.
+
+## Note:
+Stop this Siddhi application, once you are done with the execution.
+
+-- Please refer to https://docs.wso2.com/display/SP400/Quick+Start+Guide on getting started with SP editor.
+
+```sql
+@App:name(&quot;PmmlModelProcessor&quot;)
+@App:description(&#x27;Use a pretrained PMML model to predict required raw materials. View the output on the console.&#x27;)
+@Source(type = &#x27;tcp&#x27;, context=&#x27;SweetProductionStream&#x27;,
+@map(type=&#x27;binary&#x27;))
+define stream SweetProductionStream (name string, currentHourAmount  double, previousHourAmount double );
+
+@sink(type=&#x27;log&#x27;)
+define stream PredictionStream (name string, currentHourAmount double, previousHourAmount double, Predicted_nextHourAmount string);
+
+from SweetProductionStream#pmml:predict(&#x27;&lt;SweetProductionRatePrediction_model_path&gt;&#x27;)
+select *
+insert into PredictionStream;
+```</body>
+</html>

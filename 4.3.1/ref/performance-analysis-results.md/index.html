@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>performance-analysis-results.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Performance Analysis Results
+
+!!!notes
+    - These performance statistics were taken when the load average was below 3.8 in the 4 core instance.&lt;br/&gt;&lt;br/&gt;
+    - Most of the examples given below use log sinks to log statistics for performance monitoring purposes. However, note that log sinks incur a high system overhead and can lower performance by even more than 50%.
+
+    
+## Performance analysis results summary
+
+The recommended CPU and memory specifications for Docker containers are as follows:
+
+- **CPU**: 4 cores
+
+- **Memory**: 8GB
+
+The recommended memory specifications SI server as follows. These are configured in the `&lt;SI_Home&gt;/wso2/server/bin/carbon.sh` file.
+
+- **Xms**: 2GB
+
+- **Xmx**: 4GB
+
+The exact specifications used in the use cases listed in this section are summarised in the table below:
+
+| **Scenario**                                          | **CPU**   | **Memory** | **SI Memory Allocation** |**Input TPS** | **Input Message Size** | **Output TPS** |
+|-------------------------------------------------------|-----------|------------|--------------------------|---------------|------------------------|-----------------|
+| [Consuming events using Kafka source](#consuming-events-using-kafka-source)| 4 cores | 8GB| - **Xms**: 2g&lt;br/&gt;&lt;br/&gt; - **Xmx**: 4g | 180K | 60 bytes | Not Available |
+| [Consuming messages from an HTTP Source](#consuming-messages-from-an-http-source)| 4 cores | 8GB | - **Xms**: 2g&lt;br/&gt;&lt;br/&gt; - **Xmx**: 4g | 30K | 60 bytes | Not Available |
+| [Sending HTTP requests and consuming the responses](#sending-http-requests-and-consuming-the-responses) | 4 cores | 8GB | - **Xms**: 2g&lt;br/&gt;&lt;br/&gt; - **Xmx**: 4g | 29K | **Sent**: 60 bytes&lt;br/&gt;&lt;br/&gt;**Received**: 60 bytes | - **To HTTP Source**: 29K&lt;br/&gt;&lt;br/&gt; - **To HTTP Request Sink**: 29K |
+| [Performing ETL tasks](#performing-etl-tasks) | 4 cores | 16GB | - **Xms**: 2g&lt;br/&gt;&lt;br/&gt; - **Xmx**: 4g | 29K | **Read**: 100 bytes&lt;br/&gt;&lt;br/&gt;**Stored**: 200 bytes | **To Oracle Store**: 72K|
+| [Consuming messages from a Kafka source and publish to an HTTP endpoint](#consuming-messages-from-a-kafka-source-and-publish-to-an-http-endpoint) | 2 cores| **Docker Memory**: 3GB | - **Xms**: 256m&lt;br/&gt;&lt;br/&gt; - **Xmx**: 1g | 10K | **Consumed**: 400 bytes&lt;br/&gt;&lt;br/&gt;**Published**: 600 bytes | 10K |
+| [Consuming messages from a CSV file and publish to a MySQL table](#consuming-messages-from-a-csv-file-and-publish-to-a-mysql-table) | 4 cores| **Docker Memory**: 8GB | - **Xms**: 2g &lt;br/&gt;&lt;br/&gt; - **Xmx**: 4g | 9K | **Read**: 300 bytes&lt;br/&gt;&lt;br/&gt;**Published**: 300 bytes | 9K|
+| [Monitoring a database table in MySQL and publishing data to a Kafka topic](#monitoring-a-database-table-in-mysql-and-publishing-data-to-a-kafka-topic) | 4 cores | **Docker Memory**: 8GB | - **Xms**: 2g &lt;br/&gt;&lt;br/&gt; - **Xmx**: 4g | 13K | **Read**: 300 bytes&lt;br/&gt;&lt;br/&gt;**Published**: 300 bytes | 13K |
+| [Read XML file and mapping to a stream](#read-xml-file-and-mapping-to-a-stream) | 4 cores | **Docker Memory**: 8GB | - **Xms**: 2g &lt;br/&gt;&lt;br/&gt; - **Xmx**: 4g | 40K | **read**: 350 bytes | 40K |
+| [Reading an XML file and publishing to a Kafka topic](#reading-an-xml-file-and-publishing-to-a-kafka-topic) | 4 cores | **Docker Memory**: 8GB | - **Xms**: 2g &lt;br/&gt;&lt;br/&gt; - **Xmx**: 4g | 38K | **read**: 350 bytes&lt;br/&gt;&lt;br/&gt;**Published**: 350 bytes | 38K |
+
+## Consuming events using Kafka source
+
+### Specifications of EC2 Instances
+
+- Stream Processor : c5.xLarge
+- Kafka server     : c5.xLarge
+- Kafka publisher  : c5.xLarge
+
+### Siddhi Application
+
+```sql
+@App:name(&quot;HelloKafka&quot;)
+
+@App:description(&#x27;Consume events from a Kafka Topic and publish to a different Kafka Topic&#x27;)
+
+@source(type=&#x27;kafka&#x27;,
+    	topic.list=&#x27;kafka_topic&#x27;,
+    	partition.no.list=&#x27;0&#x27;,
+    	threading.option=&#x27;single.thread&#x27;,
+    	group.id=&quot;group&quot;,
+    	bootstrap.servers=&#x27;172.31.0.135:9092&#x27;,
+    	@map(type=&#x27;json&#x27;))
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;log&#x27;)
+define stream KafkaSourceThroughputStream(count long);
+
+from SweetProductionStream#window.timeBatch(5 sec)
+select count(*)/5 as count
+insert into KafkaSourceThroughputStream;
+```
+
+### Results
+
+Average Consuming TPS from Kafka: 180K
+
+
+## Consuming messages from an HTTP Source
+
+### Specifications of EC2 Instances
+
+- Stream Processor : c5.xLarge
+- JMeter           : c5.xLarge
+
+### Siddhi Application
+
+```sql
+@App:name(&quot;HttpSource&quot;)
+
+@App:description(&#x27;Consume events from http clients&#x27;)
+
+@source(type=&#x27;http&#x27;, worker.count=&#x27;20&#x27;, receiver.url=&#x27;http://172.31.2.99:8081/service&#x27;,
+@map(type=&#x27;json&#x27;))
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;log&#x27;)
+define stream HttpSourceThroughputStream(count long);
+
+from SweetProductionStream#window.timeBatch(5 sec)
+select count(*)/5 as count
+insert into HttpSourceThroughputStream;
+```
+
+### Results
+
+Average Consuming TPS from Http Source: 30K
+
+
+## Sending HTTP requests and consuming the responses
+
+### Specifications of EC2 Instances
+
+- Stream Processor : c5.xLarge
+- JMeter           : c5.xLarge
+- Web server       : c5.xLarge
+
+### Siddhi Application
+
+```sql
+@App:name(&quot;HttpRequestResponse&quot;)
+
+@App:description(&#x27;Consume events from an HTTP source, &#x27;)
+
+@source(type=&#x27;http&#x27;, worker.count=&#x27;20&#x27;, receiver.url=&#x27;http://172.31.2.99:8081/service&#x27;,
+@map(type=&#x27;json&#x27;))
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;http-request&#x27;, l, sink.id=&#x27;production-request&#x27;, publisher.url=&#x27;http://172.17.0.1:8688//netty_echo_server&#x27;, @map(type=&#x27;json&#x27;))
+define stream HttpRequestStream (batchNumber double, lowTotal double);
+
+@source(type=&#x27;http-response&#x27; , sink.id=&#x27;production-request&#x27;, http.status.code=&#x27;200&#x27;,
+@map(type=&#x27;json&#x27;))
+define stream HttpResponseStream(batchNumber double, lowTotal double);
+
+@sink(type=&#x27;log&#x27;)
+define stream FinalThroughputStream(count long);
+
+@sink(type=&#x27;log&#x27;)
+define stream InputThroughputStream(count long);
+
+from SweetProductionStream
+select 1D as batchNumber, 1200D as lowTotal
+insert into HttpRequestStream;
+
+from SweetProductionStream#window.timeBatch(5 sec)
+select count(*)/5 as count
+insert into InputThroughputStream;
+
+from HttpResponseStream#window.timeBatch(5 sec)
+select count(*)/5 as count
+insert into FinalThroughputStream;
+```
+
+### Results
+
+- Average Consuming TPS to HTTP Source          : 29K
+- Average Publishing TPS from HTTP request sink  : 29K
+- Average Consuming TPS from HTTP response source: 29K
+
+## Performing ETL tasks
+
+### Specifications of EC2 Instances
+
+- Stream Processor : m4.xlarge
+- JMeter           : m4.xlarge
+- Web server       : m4.xlarge
+
+
+### Siddhi Application
+
+This scenario was tested using two Siddhi applications that execute the process explained below.
+
+![ETL Process]({{base_path}}/images/performance-analysis-results/production-factory-etl.png)
+
+The two Siddhi applications are as follows:
+
+**ETLFIleRecordsCopier.siddhi**
+
+```
+@App:name(&#x27;ETLFileRecordsCopier&#x27;)
+@App:description(&#x27;This sample demonstrates on integrating a File in a particular location with a Database.&#x27;)
+
+@source(type=&#x27;file&#x27;, mode=&#x27;LINE&#x27;,
+    dir.uri=&#x27;file:/Users/wso2/demo/accurate-files&#x27;,
+    action.after.process=&#x27;MOVE&#x27;,
+    move.after.process=&#x27;file:/Users/wso2/demo/moved&#x27;,
+    tailing=&#x27;false&#x27;,
+    header.present=&#x27;true&#x27;,
+    @map(
+        type=&#x27;csv&#x27;,
+        delimiter=&#x27;|&#x27;,
+        @attributes(code = &#x27;0&#x27;, serialNo = &#x27;1&#x27;, amount = &#x27;2&#x27;, fileName = &#x27;trp:file.path&#x27;, eof = &#x27;trp:eof&#x27;)))
+define stream FileReaderStream (code string, serialNo string, amount double, fileName string, eof string); -- Reads from file
+
+@Store(type=&quot;rdbms&quot;,
+      jdbc.url=&quot;jdbc:mysql://localhost:3306/batchInformation?useSSL=false&quot;,
+      username=&quot;root&quot;,
+      password=&quot;root&quot; ,
+      jdbc.driver.name=&quot;com.mysql.jdbc.Driver&quot;,
+      isAutoCommit = &#x27;true&#x27;)
+define table AccurateBatchTable(serialNo string, amount double, fileName string, status string, timestamp long);
+
+@sink(type=&#x27;log&#x27;, prefix=&#x27;File to DB copying has Started: &#x27;)
+define stream FileReadingStartStream(fileName string);
+
+@sink(type=&#x27;log&#x27;, prefix=&#x27;File to DB copying has Finished: &#x27;)
+define stream FileReadingEndStream(fileName string);
+
+
+from FileReaderStream
+select serialNo, amount, fileName, &quot;test&quot; as status, eventTimestamp() as timestamp, count() as rowNumber, eof
+insert into DataStream;
+
+from DataStream
+select *
+insert into DataStreamPassthrough;
+
+-- Write to DB Passthrough
+from DataStreamPassthrough#window.externalTimeBatch(timestamp, 5 sec, timestamp, 10 sec)
+select serialNo, amount, fileName, status, timestamp, rowNumber, eof
+insert into TemporaryTablePassthroughStream;
+
+-- Log First Record
+from TemporaryTablePassthroughStream[rowNumber == 1]
+select fileName
+insert into FileReadingStartStream;
+
+-- Log Every 100000th Record
+from TemporaryTablePassthroughStream
+select fileName, rowNumber as rows
+insert into FileReadingInProgressStream;
+
+-- Log Last Record
+from TemporaryTablePassthroughStream[eof == &#x27;true&#x27;]
+select fileName
+insert into FileReadingEndStream;
+
+-- Write to DB
+from TemporaryTablePassthroughStream#window.batch()
+select serialNo, amount, fileName, status, timestamp
+insert into AccurateBatchTable;
+```
+
+**ETLFileAnalyzer.siddhi**
+
+```
+@App:name(&#x27;ETLFileAnalyzer&#x27;)
+@App:description(&#x27;This sample demonstrates on moving files to a specific location comparing its content with the header values.&#x27;)
+
+@source(type=&#x27;file&#x27;, mode=&#x27;REGEX&#x27;,
+    dir.uri=&#x27;file:/Users/wso2/demo/new&#x27;,
+    action.after.process=&#x27;MOVE&#x27;,
+    move.after.process=&#x27;file:/Users/wso2/demo/header-processed&#x27;,
+    tailing=&#x27;false&#x27;,
+    @map(
+        type=&#x27;text&#x27;,
+        fail.on.missing.attribute = &#x27;false&#x27;,
+        regex.A=&#x27;HDprod-[a-zA-z]*-[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-([0-9]+)&#x27;,
+        @attributes(
+            expectedRowCount = &#x27;A[1]&#x27;,
+            fileName = &#x27;trp:file.path&#x27;)))
+define stream HeaderReaderStream (fileName string, expectedRowCount long);
+
+@source(type=&#x27;file&#x27;, mode=&#x27;LINE&#x27;,
+    dir.uri=&#x27;file:/Users/wso2/demo/header-processed&#x27;,
+    tailing=&#x27;false&#x27;,
+    header.present=&#x27;true&#x27;,
+    @map(
+        type=&#x27;csv&#x27;,
+        delimiter=&#x27;|&#x27;,
+        @attributes(code = &#x27;0&#x27;, serialNo = &#x27;1&#x27;, amount = &#x27;2&#x27;, fileName = &#x27;trp:file.path&#x27;, eof = &#x27;trp:eof&#x27;)))
+define stream FileReaderStream (code string, serialNo string, amount double, fileName string, eof string);
+
+@sink(type=&#x27;log&#x27;, prefix=&#x27;Accurate Batch: &#x27;)
+define stream AccurateFileNotificationStream (fromPath string);
+
+@sink(type=&#x27;log&#x27;, prefix=&#x27;Inaccurate Batch: &#x27;)
+define stream InaccurateFileNotificationStream (fromPath string);
+
+@sink(type=&#x27;log&#x27;, prefix=&#x27;Batch checking started: &#x27;)
+define stream ExpectedRowCountsStream (fileName string, expectedRowCount long);
+
+define stream AnalyzingLogStream (fileName string, rowCount long);
+
+define table ExpectedRowCountsTable (fileName string, expectedRowCount long, existingRowCount long);
+
+@sink(type=&#x27;log&#x27;, prefix=&#x27;Batch checking finished: &#x27;)
+define stream ExistingRowCountsStream (fileName string, existingRowCount long);
+
+-- Expected Row Count reader. Moves file from &#x27;new&#x27; to &#x27;header-processed&#x27;
+from HeaderReaderStream[NOT(expectedRowCount is null) and NOT(fileName is null)]
+select *
+insert into ExpectedRowCountsStream;
+
+from ExpectedRowCountsStream
+select fileName, expectedRowCount, -1L as existingRowCount
+insert into ExpectedRowCountsTable;
+
+-- Existing Row Count calculator. Moves file from &#x27;header-processed&#x27; to &#x27;rows-counted&#x27;
+from FileReaderStream
+select *
+insert into FileDataStream;
+
+partition with (fileName of FileDataStream)
+begin
+    from FileDataStream
+    select fileName, count() as rowCount, eof
+    insert into #ThisFileRowCounts;
+    
+    from #ThisFileRowCounts
+    select fileName, rowCount
+    insert into AnalyzingLogStream;
+
+    from #ThisFileRowCounts[eof == &#x27;true&#x27;]
+    select fileName, rowCount as existingRowCount
+    insert into ExistingRowCountsStream;
+end;
+
+-- Existing vs. Expected Row Counts comparer
+from ExistingRowCountsStream as S inner join ExpectedRowCountsTable as T on str:replaceFirst(S.fileName, &#x27;header-processed&#x27;, &#x27;new&#x27;) == T.fileName
+select S.fileName as fromPath, T.expectedRowCount as expectedRowCount, S.existingRowCount as existingRowCount
+insert into FileInfoMatcherStream;
+
+from FileInfoMatcherStream
+select fromPath, existingRowCount
+update ExpectedRowCountsTable
+    set ExpectedRowCountsTable.existingRowCount = existingRowCount
+    on ExpectedRowCountsTable.fileName == fromPath;
+    
+-- Accurate file mover
+from FileInfoMatcherStream[expectedRowCount == existingRowCount]
+select fromPath
+insert into AccurateFileStream;
+
+from AccurateFileStream#file:move(fromPath, &#x27;/Users/wso2/demo/accurate-files/&#x27;)
+select fromPath
+insert into AccurateFileNotificationStream;
+
+-- Inaccurate batch file mover
+from FileInfoMatcherStream[expectedRowCount != existingRowCount]
+select fromPath
+insert into InaccurateFileStream;
+
+from InaccurateFileStream#file:move(fromPath, &#x27;/Users/wso2/demo/inaccurate-files/&#x27;)
+select fromPath
+insert into InaccurateFileNotificationStream;
+```
+For a detailed description of this scenario, see the [Streaming ETL with WSO2 Integrator: SI article](https://wso2.com/articles/streaming-etl-with-wso2-streaming-integrator/)
+
+### Results
+
+The performance statistics of this scenario are as follows:
+
+- Lines     : 6,140,031
+- Size      : 124MB
+- Database  : AWS RDS instance with oracle-ee 12.1.0.2.v15
+- Duration  : 1.422 minutes (85373ms)
+
+## Consuming messages from a Kafka source and publish to an HTTP endpoint
+
+### Specifications of EC2 Instances
+
+#### Docker resource allocation
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Memory&lt;/th&gt;
+&lt;td&gt; 3GB &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;CPU&lt;/th&gt;
+&lt;td&gt; 2 Cores&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Server memory allocation
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Xms&lt;/th&gt;
+&lt;td&gt; 256m &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Xmx&lt;/th&gt;
+&lt;td&gt; 1g &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### Siddhi applications
+
+The following Siddhi applications were used in this scenario:
+
+- To read messages from a Kafka topic, do a transformation and insert into an in-memory topic:
+
+    ```
+    @App:name(&#x27;kafka-consumer&#x27;)
+    
+    @App:description(&#x27;Reads messages from kafka topics and puts into in-memory-input topic&#x27;)
+    
+    @sink(type = &#x27;inMemory&#x27;, topic = &quot;in-memory-input&quot;,
+      @map(type = &#x27;passThrough&#x27;))
+    define stream ToInMemoryInput (kafkaConsumerInTS long, kafkaConsumerOutTS long, locations string, material string, createdDate string, sid string, headline string, body string, publishTS long, id string);
+    
+    @source(type = &#x27;kafka&#x27;, topic.list = &quot;test3&quot;, threading.option = &quot;single.thread&quot;, group.id = &quot;group1&quot;, 
+      bootstrap.servers = &quot;172.31.39.91:9092&quot;, optional.configuration = &quot;auto.offset.reset:latest&quot;,
+      @map(type = &#x27;json&#x27;, fail.on.missing.attribute = &quot;false&quot;, enclosing.element = &quot;$&quot;))
+    define stream FromKafkaMessage (locations string, material string, createdDate string, sid string, headline string, body string, publishTS string, id string, updatedDate string);
+    
+    @sink(type = &#x27;log&#x27;, prefix = &#x27;----------------------Kafka Consumer Throughput per second: &#x27;,
+      @map(type = &#x27;json&#x27;))
+    define stream LogSink (totalEventsPerSec long);
+    
+    @info(name = &#x27;Kafka Consumer Event Timestamp&#x27;)
+    from FromKafkaMessage
+    select eventTimestamp() as kafkaConsumerInTS, time:timestampInMilliseconds() as kafkaConsumerOutTS, locations, material, 
+    str:replaceFirst(createdDate, &#x27;Z&#x27;, &#x27;GMT&#x27;) as createdDate, 
+    sid, headline, body, time:timestampInMilliseconds(str:replaceFirst(ifThenElse(publishTS is null, updatedDate, publishTS), &#x27;Z&#x27;, &#x27;GMT&#x27;), &quot;yyyy-MM-dd&#x27;T&#x27;HH:mm:ss.SSSZ&quot;) as publishTS, ifThenElse( id is null, &#x27;null&#x27;, id) as id
+    insert into ToInMemoryInput;
+    
+    from FromKafkaMessage#window.timeBatch(1 sec)
+    select count() as totalEventsPerSec
+    insert into LogSink;
+    ```
+  
+- To filter dynamic headers from incoming data stream
+
+    ```
+    @App:name(&#x27;Intermediate-process&#x27;)
+    @App:description(&#x27;Filter dynamic headers from incoming data stream&#x27;)
+    
+    @sink(type = &quot;inMemory&quot;, topic = &quot;in-memory-output&quot;, @map(type = &quot;passThrough&quot;))
+    define stream ToInMemoryOutput (sid string, connectionId string, headers string, data string);
+    
+    @source(type = &#x27;inMemory&#x27;, topic = &quot;in-memory-input&quot;, @map(type = &#x27;passThrough&#x27;))
+    define stream FromInMemoryInput (kafkaConsumerInTS long, kafkaConsumerOutTS long, locations object, material 
+    object, createdDate string, sid string, headline string, body string, publishTS long, id string);
+    
+    
+    @info(name = &#x27;Filter Heards Messages&#x27;)
+    from FromInMemoryInput
+    select  sid, &quot;test_connectionId&quot; as connectionId, &quot;&#x27;connectionId:test_connectionId&#x27;,&#x27;appKey:workManWork&#x27;,&#x27;Content-type:application/json&#x27;&quot; as headers,
+     str:fillTemplate(&quot;&quot;&quot;
+        {
+            &quot;type&quot;: &quot;heards_sub_resp&quot;,
+            &quot;publishTS&quot;: {{publishTS}},
+            &quot;dynamicAppInTS&quot;: {{dynamicAppInTS}},
+            &quot;dynamicAppOutTS&quot;: {{dynamicAppOutTS}},
+            &quot;kafkaConsumerInTS&quot;: {{kafkaConsumerInTS}},
+            &quot;kafkaConsumerOutTS&quot;: {{kafkaConsumerOutTS}},
+            &quot;headline&quot;:&quot;{{headline}}&quot;,
+            &quot;body&quot;:&quot;{{body}}&quot;,
+            &quot;id&quot;: &quot;{{id}}&quot;,
+            &quot;material&quot;: {{material}},
+            &quot;locations&quot;: {{locations}},
+            &quot;createdDate&quot;: &quot;{{createdDate}}&quot;,
+            &quot;sid&quot;:&quot;{{sid}}&quot;,
+            &quot;correlationId&quot;:&quot;{{correlationId}}&quot; 
+        }&quot;&quot;&quot;, 
+        map:create(
+        &#x27;headline&#x27;, headline, 
+        &#x27;body&#x27;, body, 
+        &#x27;id&#x27;, id, 
+        &#x27;material&#x27;, json:getString(material, &#x27;$&#x27;), 
+        &#x27;locations&#x27;, json:getString(locations, &#x27;$&#x27;), 
+        &#x27;createdDate&#x27;, str:replaceFirst(createdDate, &#x27;GMT&#x27;, &#x27;Z&#x27;), 
+        &#x27;sid&#x27;, sid, 
+        &#x27;publishTS&#x27;, publishTS, 
+        &#x27;dynamicAppOutTS&#x27;, time:timestampInMilliseconds(), 
+        &#x27;dynamicAppInTS&#x27;, eventTimestamp(), 
+        &#x27;kafkaConsumerInTS&#x27;, kafkaConsumerInTS, 
+        &#x27;kafkaConsumerOutTS&#x27;, kafkaConsumerOutTS, 
+        &#x27;correlationId&#x27;, &#x27;Test123&#x27;)) as data
+    insert into ToInMemoryOutput;
+    ```
+- To read output messages from the in-memory-output topic and publish them to the HTTP client
+
+    ```
+    @App:name(&#x27;ws-publisher&#x27;)
+    @App:description(&#x27;Reads from in-memory-output topic and publishes messages to client&#x27;)
+    
+    @source(type = &#x27;inMemory&#x27;, topic = &quot;in-memory-output&quot;, @map(type = &#x27;passThrough&#x27;))
+    define stream fromInMemoryOutput (sid string, connectionId string, headers string, data string);
+    
+    @sink(type = &#x27;http&#x27;,
+      method = &quot;POST&quot;,
+      publisher.url = &quot;http://172.31.39.177:8280/services/TestProxy&quot;,
+      headers = &quot;{{headers}}&quot;,
+      on.error = &quot;LOG&quot;,
+      max.pool.active.connections=&quot;1000&quot;,
+      ssl.verification.disabled = &quot;true&quot;,
+      @map(type = &#x27;json&#x27;,
+        @payload(&quot;&quot;&quot;{&quot;data&quot;:{{data}} }&quot;&quot;&quot;)))
+        
+    define stream ToWsClient (data string, wsPublisherOutTS long, headers string, connectionId string, sid string);
+    
+    @sink(type = &#x27;log&#x27;, prefix = &#x27;----------------------WS Publisher Throughput per second: &#x27;,
+      @map(type = &#x27;json&#x27;))
+    define stream LogSink (totalEventsPerSec long);
+    
+    @info(name = &#x27;Add Filtered Message Timestamp&#x27;)
+    from fromInMemoryOutput
+    select json:toString(json:setElement(json:setElement(json:toObject(data), &#x27;$&#x27;, eventTimestamp(), &#x27;wsPublisherInTS&#x27;), &#x27;$&#x27;, time:timestampInMilliseconds(), &#x27;wsPublisherOutTS&#x27;)) as data, time:timestampInMilliseconds() as wsPublisherOutTS, headers, connectionId, sid
+    insert into ToWsClient;
+    
+    from ToWsClient#window.timeBatch(1 sec)
+    select count() as totalEventsPerSec
+    insert into LogSink;
+    ```
+
+### Results
+
+- Memory consumed: 1g
+
+- TPS: 10,000
+
+
+## Consuming messages from a CSV file and publish to a MySQL table
+
+### Specifications of EC2 Instances
+
+#### Docker resource allocation
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Memory&lt;/th&gt;
+&lt;td&gt; 8GB &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;CPU&lt;/th&gt;
+&lt;td&gt; 4 Cores&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Server memory allocation
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Xms&lt;/th&gt;
+&lt;td&gt; 2g &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Xmx&lt;/th&gt;
+&lt;td&gt; 4g &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### Siddhi application
+
+```
+@App:name(&quot;FileToRdbms&quot;)
+
+@App:description(&quot;Description of the plan&quot;)
+
+@store(type=&#x27;rdbms&#x27; , jdbc.url=&#x27;jdbc:mysql://172.31.18.173:3306/purchesOrder?useSSL=false&#x27;,username=&#x27;root&#x27;,password=&#x27;root&#x27;,jdbc.driver.name=&#x27;com.mysql.jdbc.Driver&#x27;) 
+define table  PurchesOrderTable (orderID string, numberOfItems int, totalValue double, paymentStatus string, deliveryAddress string );
+
+
+@source(type=&#x27;file&#x27;, mode=&#x27;line&#x27;,
+file.uri=&#x27;file:/home/ubuntu/csv/productTable.csv&#x27;,
+tailing=&#x27;false&#x27;,
+action.after.process=&#x27;MOVE&#x27;,
+move.after.process=&#x27;file:/home/ubuntu/csv/moved&#x27;,
+@map(type=&#x27;csv&#x27;, delimiter=&#x27;,&#x27;))
+define stream InventoryUpdate (orderID string, numberOfItems int, totalValue double, paymentStatus string, deliveryAddress string);
+
+@async(buffer.size=&#x27;4096&#x27;, workers=&#x27;2&#x27;, batch.size.max=&#x27;5000&#x27;) 
+define stream IntrimEventStream(orderID string, numberOfItems int, totalValue double, paymentStatus string, deliveryAddress string);
+
+
+from InventoryUpdate
+select *
+insert into IntrimEventStream;
+
+
+from IntrimEventStream
+select *
+insert into PurchesOrderTable;
+
+
+from InventoryUpdate#window.timeBatch(1 sec)
+select count() as throughput
+insert into OutputStream;
+
+from OutputStream#log(&#x27;TPS: &#x27;)
+insert into TempStream;
+```
+
+### Results
+
+- Memory consumed: 2.56g
+
+- TPS: 9,000
+
+## Monitoring a database table in MySQL and publishing data to a Kafka topic
+
+### Specifications of EC2 Instances
+
+#### Docker resource allocation
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Memory&lt;/th&gt;
+&lt;td&gt; 8GB &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;CPU&lt;/th&gt;
+&lt;td&gt; 4 Cores&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Server memory allocation
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Xms&lt;/th&gt;
+&lt;td&gt; 2g &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Xmx&lt;/th&gt;
+&lt;td&gt; 4g &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### Siddhi applications
+
+```
+@App:name(&quot;PurchaseOrderSiddhiApp&quot;)
+
+@App:description(&quot;Description of the plan&quot;)
+
+--@sink(type=&#x27;log&#x27;)
+@source(type = &#x27;cdc&#x27;, url = &quot;jdbc:mysql://172.31.18.173:3306/order?useSSL=false&quot;, username = &quot;root&quot;, password = &quot;root&quot;, table.name = &quot;PurchesOrders&quot;, operation = &quot;insert&quot;, 
+	@map(type = &#x27;keyvalue&#x27;, fail.on.missing.attribute = &quot;false&quot;))
+define stream PurchesOrderStream (orderID string, numberOfItems int, totalValue double, paymentStatus string, deliveryAddress string );
+
+@sink(type=&#x27;kafka&#x27;,
+      topic=&#x27;delivery_items_topic&#x27;,
+      bootstrap.servers=&#x27;172.31.3.169:9092&#x27;,
+      partition.no=&#x27;0&#x27;,
+      @map(type=&#x27;xml&#x27;))
+define stream kafkaPublisherStream(orderID string, numberOfItems int, totalPayable double, deliveryAddress string);
+
+@sink(type=&#x27;log&#x27;) 
+define stream kafkPubTps(pubCount long);
+
+@sink(type=&#x27;log&#x27;) 
+define stream publishTps(recCount long);
+
+
+from PurchesOrderStream[paymentStatus ==&#x27;cod&#x27; or paymentStatus==&#x27;paid&#x27;]
+select orderID, numberOfItems, ifThenElse(paymentStatus==&#x27;cod&#x27;, totalValue, 0.0) as totalPayable, deliveryAddress
+insert into kafkaPublisherStream;
+
+
+from PurchesOrderStream#window.timeBatch(1 sec)
+select count() as recCount
+insert into publishTps;
+
+
+from kafkaPublisherStream#window.timeBatch(1 sec)
+select count() as pubCount
+insert into kafkPubTps;
+```
+
+### Results
+
+- Memory Consumption: 1.5g
+
+- Time taken: 46 minutes
+
+- Data set size: 34,330,327
+
+## Read XML file and mapping to a stream
+
+### Specifications of EC2 Instances
+
+#### Docker resource allocation
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Memory&lt;/th&gt;
+&lt;td&gt; 8GB &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;CPU&lt;/th&gt;
+&lt;td&gt; 4 Cores&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Server memory allocation
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Xms&lt;/th&gt;
+&lt;td&gt; 2g &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Xmx&lt;/th&gt;
+&lt;td&gt; 4g &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### Siddhi applications
+
+```
+
+@App:name(&quot;NodesConvertor&quot;)
+
+
+@App:description(&quot;Description of the plan&quot;)
+
+@source(
+    type = &#x27;file&#x27;, 
+    file.uri = &quot;file:/home/ubuntu/csv/input.xml&quot;, 
+    mode = &quot;line&quot;,
+    tailing = &quot;false&quot;, 
+    action.after.process=&#x27;keep&#x27;,
+    @map(type=&#x27;xml&#x27;, 
+        enclosing.element=&quot;/osm/node&quot;,
+        enclosingElementAsEvent=&quot;true&quot;,
+        enable.streaming.xml.content=&quot;true&quot;,
+        fail.on.missing.attribute=&quot;false&quot;,
+        @attributes(id = &quot;/node/@id&quot;, lat = &quot;/node/@lat&quot;, lon = &quot;/node/@lon&quot;, version = &quot;/node/@version&quot;, timestamp = &quot;/node/@timestamp&quot;, changeset = &quot;/node/@changeset&quot;)))
+define stream FooStream (id string, lat string, lon string, version string, timestamp string, changeset string);
+
+
+@info(name = &#x27;totalQuery&#x27;)
+from FooStream#window.timeBatch(1 sec)
+select count() as throughput
+insert into OutputStream;
+
+from OutputStream#log(&#x27;TPS: &#x27;)
+insert into TempStream;
+```
+
+### Results
+
+- Memory consumption: 1.2g
+
+- TPS: 40,000
+
+## Reading an XML file and publishing to a Kafka topic
+
+### Specifications of EC2 Instances
+
+#### Docker resource allocation
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Memory&lt;/th&gt;
+&lt;td&gt; 8GB &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;CPU&lt;/th&gt;
+&lt;td&gt; 4 Cores&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Server memory allocation
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Xms&lt;/th&gt;
+&lt;td&gt; 2g &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Xmx&lt;/th&gt;
+&lt;td&gt; 4g &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### Siddhi applications
+
+```
+@App:name(&quot;NodesConvertor&quot;)
+@App:description(&quot;Description of the plan&quot;)
+
+@source(
+    type = &#x27;file&#x27;, 
+    file.uri = &quot;file:/home/ubuntu/csv/input.xml&quot;, 
+    mode = &quot;line&quot;,
+    tailing = &quot;false&quot;, 
+    action.after.process=&#x27;keep&#x27;,
+    @map(type=&#x27;xml&#x27;, 
+        enclosing.element=&quot;/osm/node&quot;,
+        enclosingElementAsEvent=&quot;true&quot;,
+        enable.streaming.xml.content=&quot;true&quot;,
+        fail.on.missing.attribute=&quot;false&quot;,
+        @attributes(id = &quot;/node/@id&quot;, lat = &quot;/node/@lat&quot;, lon = &quot;/node/@lon&quot;, version = &quot;/node/@version&quot;, timestamp = &quot;/node/@timestamp&quot;, changeset = &quot;/node/@changeset&quot;)))
+define stream FooStream (id string, lat string, lon string, version string, timestamp string, changeset string);
+
+@sink(type=&#x27;kafka&#x27;,
+      topic=&#x27;kafka_result_topic&#x27;,
+      bootstrap.servers=&#x27;172.31.3.169:9092&#x27;,
+      partition.no=&#x27;0&#x27;,
+      @map(type=&#x27;xml&#x27;))
+define stream kafkaStream(id string, lat string, lon string, version string, timestamp string, changeset string);
+
+
+@info(name = &#x27;totalQuery&#x27;)
+from FooStream#window.timeBatch(1 sec)
+select count() as throughput
+insert into OutputStream;
+
+from OutputStream#log(&#x27;TPS: &#x27;)
+insert into TempStream;
+
+from FooStream 
+select * 
+insert into kafkaStream;
+```
+
+### Results
+
+- Memory consumption: 1.7g
+
+- TPS: 38,000
+
+</body>
+</html>

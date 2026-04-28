@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PublishWebSocketInXmlFormat.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to send sweet production events via WebSocket transport in XML default format and log the events in `LowProductionAlertStream` to the output console.
+
+ If there is no syntax error, the following message is shown on the console:
+
+```bash
+Siddhi App PublishWebSocketInXmlFormat successfully deployed.
+```
+
+## Executing the sample
+
+1. Open a terminal and navigate to the `&lt;SI-Tooling-Home&gt;/samples/sample-clients/websocket-receiver` directory and run the `ant` command.
+	* If you use the default host &#x27;localhost&#x27; and port &#x27;8025&#x27; in your program use `ant` command without any arguments.
+	* However, if you use different host or port, run the `ant` command with appropriate arguments.
+	e.g., `ant -Dport=9025`
+2. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+3. If the Siddhi application starts successfully, the following messages are shown on the console:
+
+	```bash
+	PublishWebSocketInXmlFormat.siddhi - Started Successfully!
+	```
+
+4. Open the event simulator by clicking on the second icon or press Ctrl+Shift+I.
+5. In the Single Simulation tab of the panel, select values as follows:
+	* `Siddhi App Name`: PublishWebSocketInXmlFormat
+	* `Stream Name`: `SweetProductionStream`
+6. In the &#x27;name&#x27; and &#x27;amount&#x27; fields, enter &#x27;toffee&#x27; and &#x27;45.24&#x27; respectively, and then click Send to send the event.
+7. Send some more events.
+8. Check the output in the terminal of `&lt;SI-Tooling-Home&gt;/samples/sample-clients/websocket-receiver`. You will see output similar to the following:
+
+```bash
+WebSocketSample : logStream : Event{timestamp=1517982716368, data=[toffee, 45.25], isExpired=false}
+WebSocketSample : logStream : Event{timestamp=1517982792293, data=[coffee, 9.78], isExpired=false}
+WebSocketSample : logStream : Event{timestamp=1517982828856, data=[chocolate, 78.23], isExpired=false}
+```
+
+## Viewing the results
+
+See the output on the terminal.
+
+## Notes
+
+If the message `&#x27;LowProductionAlertStream&#x27; stream could not connect to &#x27;localhost:8025&#x27;`, it could be due to the port 8025 defined in the Siddhi application is already being used by a different program. To resolve this issue, do the following:
+1. Stop this Siddhi application (Click &#x27;Run&#x27; on menu bar -&gt; &#x27;Stop&#x27;).
+2. Change the port from 8025 to an unused port in this Siddhi application&#x27;s source configuration and in the websocket-receiver file.
+3. Start the application and check whether the expected output appears on the console.
+
+```sql
+@App:name(&quot;PublishWebSocketInXmlFormat&quot;)
+@App:description(&#x27;Send events via WebSocket transport using XML format&#x27;)
+
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;websocket&#x27;, url=&#x27;ws://localhost:8025/abc&#x27;,
+@map(type=&#x27;xml&#x27;))
+define stream LowProductionAlertStream (name string, amount double);
+
+@info(name=&#x27;query1&#x27;)
+from SweetProductionStream
+select *
+insert into LowProductionAlertStream;
+```
+</body>
+</html>

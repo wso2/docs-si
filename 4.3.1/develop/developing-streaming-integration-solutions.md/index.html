@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>developing-streaming-integration-solutions.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Developing WSO2 Integrator: SI Solutions
+
+This section provides an overview of the development flow in the WSO2 Integrator: SI.
+
+Developing a WSO2 Integrator: SI solution involves the following four steps.
+
+
+![WSO2 Integrator: SI Development Flow]({{base_path}}/images/developing-si-solutions/si-development-workflow.png)
+
+| **Step**                          | **Description**                                                                                                                   |
+|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| **Step 1: Installing SI Tooling** |This involves downloading and installing the Streaming Integration Tooling in which Siddhi applications are designed. For more information, see the following topics:&lt;br/&gt; - [Installing the WSO2 Integrator: SI in a Virtual Machine](../setup/installing-si-in-vm.md)&lt;br/&gt; - [Installing the WSO2 Integrator: SI in Docker](../setup//installing-si-using-docker.md)&lt;br/&gt; - [Installing the WSO2 Integrator: SI in Kubernetes](../setup/installing-si-using-kubernetes.md) |
+| **Step 2: Creating Siddhi Applications** | Siddhi applications can be designed in the WSO2 Integrator: SI Tooling via the source view or the design view. For detailed instructions, see [Creating Siddhi Applications](creating-a-Siddhi-Application.md). |
+| **Step 3: Testing Siddhi Applications** | Once a Siddhi application is created, you can test it before using it in a production environmenty by simulating events to it. For more information, see [Testing Siddhi Applications](testing-a-Siddhi-Application.md). |
+| **Step 4: Deploying Siddhi Applications** | Once your Siddhi application is created and verified via the testing functionality in the WSO2 Integrator: SI Tooling, you can deploy it in the WSO2 Integrator: SI server, or deploy it in a Docker/Kubernetes environment. For more information about, see the following topic:&lt;br/&gt; - [Exporting Siddhi Applications](exporting-Siddhi-Applications.md)|
+| **Step 5: Running Siddhi Applications** | This involves running the Siddhi application in the server where you deployed them. To try this out, you can follow the [WSO2 Integrator: SI Tutorials]({{base_path}}/examples/tutorials-overview). |</body>
+</html>

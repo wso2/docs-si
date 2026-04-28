@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>installing-si-in-vm.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Install SI
+
+Follow the steps given below to install the WSO2 Integrator: SI.
+
+## System requirements
+
+| Type   | Requirement                                                                                     |
+|--------|-------------------------------------------------------------------------------------------------|
+| CPU    | You require a minimum of one CPU with 2 cores. It is recommended to have a CPU with 4 cores.    |
+| Memory | ~ 4 GB minimum is recommended&lt;/br&gt; &lt;/br&gt;  ~ 2 GB heap size                                      |
+| Disk   | ~ 1 GB minimum (excluding space allocated for log files and databases.)                         |
+
+## Download and install
+
+Go to the WSO2 Integrator: SI [product page](https://wso2.com/streaming-integrator/), click **Download**, and then click Zip Archive to download the WSO2 Integrator: SI as a ZIP file.
+
+Extract the archive file to a dedicated directory for the Steaming Integrator, which will hereafter be referred to as `&lt;SI_HOME&gt;`.
+
+You must set your `JAVA_HOME` environment variable to point to the directory where the Java Development Kit (JDK) is installed on the computer.
+
+## Starting the SI server
+
+Follow the steps given below to start the server.
+
+1. Open a command prompt as explained below.
+2. Navigate to the `&lt;SI_HOME&gt;/bin` folder from your command line.
+3. Execute one of the commands given below.
+
+    - To start the server:
+
+        === &quot;On macOS/Linux&quot;
+            ```bash
+            sh server.sh
+            ```
+        === &quot;On Windows&quot;
+            ```bash
+            server.bat
+            ```
+
+    - To start the server in background mode:
+
+        === &quot;&quot;On macOS/Linux&quot;
+            ```bash 
+            sh server.sh start
+            ```
+        === &quot;On Windows&quot;
+            ```bash
+            server.bat --start
+            ```
+
+## Stopping the SI server
+
+- To stop the WSO2 Integrator: SI standalone application, go to the terminal and press &lt;i&gt;Ctrl+C&lt;/i&gt;.
+- To stop the WSO2 Integrator: MI in background mode:
+
+    === &quot;On macOS/Linux&quot;
+        ```bash
+        sh server.sh stop
+        ```
+    === &quot;On Windows&quot;
+        ```bash
+        server.bat --stop
+        ```
+
+!!! tip &quot;What&#x27;s Next?&quot;
+    Once you have successfully downloaded and installed WSO2 Integrator: SI, you can proceed to do any of the following:&lt;br/&gt;&lt;br/&gt;
+    - If you were previously using WSO2 Stream Processor and want to migrate to WSO2 Integrator: SI, follow the instructions in [Migrating from WSO2 Stream Processor](migrating-from-stream-processor.md).&lt;br/&gt;&lt;br/&gt;
+    - To deploy WSO2 Integrator: SI as a single-node deployment or a cluster (based on your requirements), see [Deploying WSO2 Integrator: SI](deployment-guide.md).&lt;br/&gt;&lt;br/&gt;
+    - To set up WSO2 Integrator: SI and make it ready to run in a production environment, see the [Production Checklist](production-checklist.md).&lt;br/&gt;&lt;br/&gt;
+    </body>
+</html>

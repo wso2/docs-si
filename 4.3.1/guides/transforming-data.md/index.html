@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>transforming-data.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Transforming Data
+
+The WSO2 Integrator: SI allows you to perform a wide range of transformations to the input data received. A main type of transformation supported is transforming a message from one format to another. In addition, you can perform a range of mathematical, regex, string, unit conversion, map, json, etc., transformations via [Siddhi Extensions](https://siddhi.io/en/v5.1/docs/extensions/). You can also write a custom script to perform an required transformation of data.
+
+## Transforming message formats
+
+WSO2 Integrator: SI can transform message formats when it consumes data as well as when it publishes data.
+
+### Transforming the message format when consuming data
+
+Data publishers, databases, files, and messaging systems send data to WSO2 Integrator: SI in different data formats. Therefore, WSO2 Integrator: SI has the capability to consume data in a range of formats. Once it receives the data in a specific format, it can convert it to a different format for processing purposes.
+
+The WSO2 Integrator: SI can consume events in the default format in which they are sent/extracted or make changes to it to match the event schema as defined via the input stream.
+
+- **Consuming messages in a default format**
+
+    Consuming messages via WSO2 Integrator: SI by configuring Siddhi sources is explained in [Extracting Data From Static Sources in Real Time](extracting-data-from-static-sources-in-real-time.md) and [Receiving Data in Trasit](receiving-data-in-transit.md).
+    
+    To receive data in a specific format, you need to annotate a mapper to the source configuration via the @map annotation. For more information, see [Siddhi Query Guide - Source Mapper](https://siddhi.io/en/v5.1/docs/query-guide/#source-mapper).
+    
+    To understand how to do this, consider factory where production bots publish the production amounts in a file. The the file contains rows in the CSV format. Therefore, WSO2 Integrator: SI needs to consume the records in that format. Therefore, the source and the mapper can be configured as shown below.
+    
+    ```
+    @source(type=&#x27;file&#x27;, mode=&#x27;LINE&#x27;,
+        file.uri=&#x27;file:/Users/foo/productions.csv&#x27;,
+        tailing=&#x27;true&#x27;,
+        @map(type=&#x27;csv&#x27;))
+    define stream SweetProductionStream (name string, amount double);
+    ```
+    Here, in the `@map` annotation, `csv` is specified as the mapping type.
+    
+- **Consuming messages in a custom format**
+
+    Custom mapping is performed when the schema of the event received needs to be updated to match the schema of the input stream.
+    
+    For this scenario, let&#x27;s consider an example where the production bots are publishing messages via an HTTP sender in the JSON format, and as shown in the following example.
+    
+    ```json    
+    {
+      &quot;sweet&quot;: &quot;Jaffa Cake&quot;,
+      &quot;batch&quot;: {
+        &quot;batch id&quot;: &quot;batch1&quot;,
+        &quot;count&quot;: 10
+      }
+    }
+    ```
+  
+    The event stream is as follows:
+    
+    `define stream SweetProductionStream (name string, amount double);`
+    
+    In the given JSON event, the value for the `name` attribute is received with the `sweet` label, and the value for the `amount` attribute is published with the `count` label that is nested under `batch`. 
+    
+    In this example, you can use custom mapping to derive the required data from the JSON event using JSON expressions.
+    
+    | **Stream Attribute Name** | **JSON Event Attribute Name** | **JSON Path Expression** |
+    |---------------------------|-------------------------------|--------------------------|
+    | `name`                    | `sweet`                       | `$.sweet`                |
+    | `amount`                  | `count`                       | `$.batch.count`          |
+    
+    Now you can include an attribute configuration within the mapping configuration based on the JSON path expressions you identified as shown below.
+    
+    ```
+    @source(type=&#x27;http&#x27;, 
+        receiver.url=&#x27;http://localhost:5005/SweetProductionEP&#x27;, 
+        @map(type = &#x27;json&#x27;, 
+            @attributes(name = &#x27;$.sweet&#x27;, amount = &#x27;$.batch.count&#x27;)))
+    define stream SweetProductionStream (name string, amount double);
+    ```
+    The attributes configuration is annotated via the `@attributes` annotation within the `@map` annotation.
+
+### Transforming the message format when publishing data
+
+The different destinations to which you need to publish data via WSO2 Integrator: SI accept data in different formats. Therefore, WSO2 Integrator: SI supports publishing in a range of formats.
+
+WSO2 Integrator: SI can publish messages in the default format or in a custom format. 
+
+- **Publishing messages in default format**
+
+    To understand this, consider a scenario where you receive production information in the JSON format, but you need to publish that information in a file in the XML format.
+    
+    To do this, you can define your output [stream](https://siddhi.io/en/v5.1/docs/query-guide/#stream) and connect a [sink](https://siddhi.io/en/v5.1/docs/query-guide/#sink) to it with a [mapper](https://siddhi.io/en/v5.1/docs/query-guide/#sink-mapper) of the `xml` type. as shown below.
+    
+    ```
+    @sink(type = &#x27;file&#x27;, 
+        file.uri = &quot;file:/Users/foo/productions.csv&quot;,
+        @map(type = &#x27;xml&#x27;))
+    define stream OutputStream (name string, amount double);
+    ```
+    Here, you have included the `@map` annotation within the `@sink` annotation and specified the mapping type as `xml` so that the WSO2 Integrator: SI can publish the output in XML format.
+    
+- **Publishing messages in custom format**
+
+    The schema of the event accepted by the destination to which you are sending your output can be different to the schema of your input event or the schema of the event at the time you were processing it. Therefore, WSO2 Integrator: SI allows you to perform custom mapings when you publish the output. The custom mapping needs to be annotated to the mapping configuration via the `@payload` annotation.
+    
+    To understand this, consider the example of a sweet factory that needs to send it&#x27;s production report to the factory manager. The output stream in which the output is generated after processing can be as follows:
+    
+    ```
+    define stream SweetProductionStream (name string, amount double);
+    ```
+    A sample JSON event that is published from the above schema without any custom mapping is as shown in the example below:
+    
+    ```json
+    {
+        &quot;event&quot;:{
+            &quot;name&quot;:gingerbread,
+            &quot;amount&quot;:100
+        }
+    }
+    ```
+  
+    However, the head office system expects to receive the event in the following format.
+    
+    ```json
+    {&quot;Product&quot;:{
+        &quot;ProductionData&quot;:{
+            &quot;Name&quot;:gingerbread,
+            &quot;Quantity&quot;:100
+          }
+      }
+    }
+    ```
+  
+    To achieve this, the sink connected to the output event stream needs to have a mapping configuration defined within it as shown below.
+    
+    ```
+    @sink(type=&#x27;inMemory&#x27;, 
+        topic=&#x27;{{production}}&#x27;, 
+        @map(type=&#x27;json&#x27;, 
+            enclosing.element=&#x27;$.Product&#x27;, 
+            validate.json=&#x27;true&#x27;, 
+            @payload( &quot;&quot;&quot;{&quot;ProductionData&quot;:{&quot;Name&quot;:&quot;{{name}}&quot;,&quot;Quantity&quot;:{{amount}}}}&quot;&quot;&quot;)))
+    define stream SweetProductionStream (name string, amount double);
+    ```
+  
+    In the above example, the mapping type the JSON. The `@payload` annotation encloses a JSON string that defines the custom mapping. The values for `name` and `amount` attributes in the stream are presented as `Name` and `Quantity` respectively. These are nested under `ProductionData` which is turn is enclosed in the `Product` enclosing element as per the required format.
+
+## Transforming with inline operators
+
+WSO2 Integrator: SI is shipped with inline operators that allow you to do certain transformations to streaming data without downloading additional Siddhi extensions from the Siddhi store.
+
+For example, assume that instead of the amount produced during the specific production run, you need to present the total amount produced for the given product with each production run as well as the average. For this, you can write a query as follows:
+
+```
+define stream SweetProductionStream (name string, amount double);
+
+@info(name = &#x27;Calculate Total and Average&#x27;)
+from SweetProductionStream 
+select name, amount, sum(amount) as total, avg(amount) as average 
+group by name
+insert into ProductionTotalsStream;
+```
+
+In this example, the input event that reports only the name of the product and the amount produced is transformed into an output event that reports the product name, amount produced, the total produced for the given product, and the average produced per production run for the given product. The `group by` clause ensures that the calculations are done per product name. The `sum()` and `avg()` inline operators calculate the total and the average recpectively.
+
+## Transforming with supported Siddhi extensions
+
+When you want to perform more advanced transformations that are not supported by the inline operators of the WSO2 Integrator: SI, you can use one or more of the Siddhi extensions from the [Siddhi Store](https://store.wso2.com/store/assets/analyticsextension/list).
+
+Some of these extensions are shipped with the WSO2 Integrator: SI by default. If you want to use a Siddhi extension that is not shipped by default, you need to download and install it following the instructions in [Downloading and Installing Siddhi Extensions]({{base_path}}/connectors/downloading-and-installing-siddhi-extensions.md).
+
+The following table describes the complete list of extensions that provide data transformation functionality.
+
+| **Extension** | **Description** |
+|----------------------------------|---------------------------------------------------------------------------|
+| [Siddhi-execution-math](https://siddhi-io.github.io/siddhi-execution-math/) | Transforms data by performing mathematical operations. |
+| [Siddhi-execution-unitconversion](https://siddhi-io.github.io/siddhi-execution-unitconversion/) | Performs unit conversions ranging from length, weight, volume, etc. |
+| [Siddhi-execution-string](https://siddhi-io.github.io/siddhi-execution-string/) | Performs string manipulations. |
+| [Siddhi-execution-time](https://siddhi-io.github.io/siddhi-execution-time/)| Performs time-based transformations such as converting time zones. |
+| [Siddhi-execution-map](https://siddhi-io.github.io/siddhi-execution-map/)| Converts events into maps and performs transformations such as concatenating and removing attributes. |
+| [Siddhi-execution-reorder](https://siddhi-io.github.io/siddhi-execution-reorder/) | Rearranges the order of the incoming event flow. |
+| [Siddhi-execution-json](https://siddhi-io.github.io/siddhi-execution-json/) | Performs manipulations to JSON strings. |
+| [Siddhi-execution-list](https://siddhi-io.github.io/siddhi-execution-list/api/latest/) | Performs manipulations to lists. |
+| [Siddhi-gpl-pmml](https://siddhi-io.github.io/siddhi-gpl-execution-pmml/api/latest/) | Processes the input stream attributes according to the defined PMML standard model and outputs the processed results together with the input stream attributes. |
+| [Siddhi-execution-regex](https://siddhi-io.github.io/siddhi-execution-regex/) | Finds the subsequence that matches the given regex pattern. |
+| [Siddhi-execution-geo](https://wso2-extensions.github.io/siddhi-execution-geo/api/5.0.1/) | Provides geo data related functionality such as such as geocode, reverse geocode and finding places based on IP. |
+| [Siddhi-execution-env](https://wso2-extensions.github.io/siddhi-execution-env/) |Allows you to read environment properties inside Siddhi stream definitions and use it in queries. |
+| [Siddhi-execution-streeamingml](https://siddhi-io.github.io/siddhi-execution-streamingml/) | Provides streaming machine learning (clustering, classification and regression) for event streams. |
+| [Siddhi-execution-tensorflow](https://siddhi-io.github.io/siddhi-execution-tensorflow/) | 
+| [Siddhi-execution-r](https://wso2-extensions.github.io/siddhi-gpl-execution-r/) | Processes events with R scripts. |
+
+## Writing a custom script to transform data
+
+To write a custom script to transform data, you can use the [siddhi-script-js](https://siddhi-io.github.io/siddhi-script-js/) Siddhi extension.
+
+For example, if the Sweet Factory wants to check whether the production amount reported in a production run is greater than the average production up to that production run, you can write a custom function shown in the following sample query.
+
+```
+from ProductionTotalsStream 
+select name, amount, total, average, js:eval(&quot;amount &gt; average&quot;, &#x27;bool&#x27;) as exceedsAverage
+group by name 
+insert into MonitorProductionTrendStream;
+```
+
+Here, `js:eval(&quot;amount &gt; average&quot;, &#x27;bool&#x27;) as exceedsAverage` is a custom function where an attribute named `exceedsAverage` returns the value `true` or `false` depending on whether the value for the `amount` attribute exceeds the value for the `average` attribute.
+
+## Try it out
+
+To try out the transformations described above with some of the given examples, follow the steps below:
+
+1. [Start and Access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+
+2. Open a new file. Then add and save the following Siddhi application.
+
+    ```
+    @App:name(&#x27;ProductionTotalsApp&#x27;)
+    @App:description(&#x27;Transform Production Statistics&#x27;)
+    
+    @source(type = &#x27;http&#x27;, receiver.url = &quot;http://localhost:5005/SweetProductionEP&quot;,
+        @map(type = &#x27;json&#x27;,
+            @attributes(amount = &quot;$.batch.count&quot;, name = &quot;$.sweet&quot;)))
+    define stream SweetProductionStream (name string, amount double);
+    
+    @sink(type = &#x27;file&#x27;, file.uri = &quot;file:/Users/foo/productions.json&quot;,
+        @map(type = &#x27;json&#x27;, validate.json = &quot;false&quot;, enclosing.element = &quot;$.Product&quot;,
+            @payload(&quot;&quot;&quot;{&quot;ProductionData&quot;:{&quot;Name&quot;:&quot;{{name}}&quot;,&quot;Quantity&quot;:&quot;{{amount}}&quot;,&quot;Total&quot;:{{total}},&quot;Average&quot;:{{average}}}}&quot;&quot;&quot;)))
+    define stream ProductionTotalsStream (name string, amount double, total double, average double);
+    
+    @sink(type = &#x27;log&#x27;, prefix = &quot;Exceeds Average&quot;,
+        @map(type = &#x27;text&#x27;))
+    define stream MonitorProductionTrendStream (name string, exceedsAverage bool);
+    
+    @info(name = &#x27;Calculate Total and Average&#x27;)
+    from SweetProductionStream 
+    select name, amount, sum(amount) as total, avg(amount) as average 
+        group by name 
+    insert into ProductionTotalsStream;
+    
+    @info(name = &#x27;Compare with Average&#x27;)
+    from ProductionTotalsStream 
+    select name, js:eval(&quot;(&#x27;amount&#x27; &gt; &#x27;average&#x27;)&quot;, &#x27;bool&#x27;) as exceedsAverage
+    group by name 
+    insert into MonitorProductionTrendStream;
+    ```
+   
+   This Siddhi application does the following transformations:
+   
+   - Derives the values for `name` and `amount` attributes representing the name of the product and the amount produced. This is derived from input events sent is a custom format where the two required values are provided under the `Sweet` and `count` attributes, and the `count` attribute is nested under another attribute named `batch`.
+   
+   - Publishes the production statistics in a custom format. `name` and `amount` attributes are presented as `Name` and `Quantity`, and nested under `ProductionData` in the `Product` enclosing element. These events are published in the `Users/foo/productions.json` file.
+   
+        !!! tip
+            You can save the `productions.json` file mentioned above in a different location of your choice if required.
+   
+   - Calculates the total production amount and the average production amount per sweet, and presents them as values for the `total` and `average` attributes in the output event published in the `productions.json` file.
+   
+   - Uses a custom script to check whether the amount produced of a sweet in the production run is greater than the average production for that sweets, and logs `true` or `false` in the terminal in the text format.
+   
+3. To simulate events for this Siddhi application, issue the following six CURL commands.
+
+    ```
+    curl -X POST \
+      http://localhost:5005/SweetProductionEP \
+      -H &#x27;content-type: application/json&#x27; \
+      -d &#x27;{
+      &quot;sweet&quot;: &quot;Jaffa Cake&quot;,
+      &quot;batch&quot;: {
+        &quot;batch id&quot;: &quot;batch1&quot;,
+        &quot;count&quot;: 10
+      }
+    }&#x27;
+    ``` 
+   
+    ```
+    curl -X POST \
+    http://localhost:5005/SweetProductionEP \
+    -H &#x27;content-type: application/json&#x27; \
+    -d &#x27;{
+    &quot;sweet&quot;: &quot;Gingerbread&quot;,
+    &quot;batch&quot;: {
+     &quot;batch id&quot;: &quot;batch1&quot;,
+     &quot;count&quot;: 65
+    }
+    }&#x27;
+    ``` 
+     
+    ```
+    curl -X POST \
+     http://localhost:5005/SweetProductionEP \
+     -H &#x27;content-type: application/json&#x27; \
+     -d &#x27;{
+     &quot;sweet&quot;: &quot;Jaffa Cake&quot;,
+     &quot;batch&quot;: {
+       &quot;batch id&quot;: &quot;batch1&quot;,
+       &quot;count&quot;: 15
+     }
+    }&#x27;
+    ``` 
+   
+    ```
+    curl -X POST \
+    http://localhost:5005/SweetProductionEP \
+    -H &#x27;content-type: application/json&#x27; \
+    -d &#x27;{
+    &quot;sweet&quot;: &quot;Gingerbread&quot;,
+    &quot;batch&quot;: {
+     &quot;batch id&quot;: &quot;batch1&quot;,
+     &quot;count&quot;: 55
+    }
+    }&#x27;
+    ``` 
+      
+    ```
+    curl -X POST \
+    http://localhost:5005/SweetProductionEP \
+    -H &#x27;content-type: application/json&#x27; \
+    -d &#x27;{
+    &quot;sweet&quot;: &quot;Jaffa Cake&quot;,
+    &quot;batch&quot;: {
+      &quot;batch id&quot;: &quot;batch1&quot;,
+      &quot;count&quot;: 25
+    }
+    }&#x27;
+    ``` 
+   
+    ```
+    curl -X POST \
+    http://localhost:5005/SweetProductionEP \
+    -H &#x27;content-type: application/json&#x27; \
+    -d &#x27;{
+    &quot;sweet&quot;: &quot;Gingerbread&quot;,
+    &quot;batch&quot;: {
+      &quot;batch id&quot;: &quot;batch1&quot;,
+      &quot;count&quot;: 45
+    }
+    }&#x27;
+    ``` 
+    
+4. Open the `Users/foo/productions.json` file. The following content is available in it.
+
+    ```json
+    {&quot;Product&quot;:{&quot;ProductionData&quot;:{&quot;Name&quot;:&quot;Jaffa Cake&quot;,&quot;Quantity&quot;:&quot;10.0&quot;,&quot;Total&quot;:10.0,&quot;Average&quot;:10.0}
+    {&quot;Product&quot;:{&quot;ProductionData&quot;:{&quot;Name&quot;:&quot;Gingerbread&quot;,&quot;Quantity&quot;:&quot;65.0&quot;,&quot;Total&quot;:65.0,&quot;Average&quot;:65.0}
+    {&quot;Product&quot;:{&quot;ProductionData&quot;:{&quot;Name&quot;:&quot;Jaffa Cake&quot;,&quot;Quantity&quot;:&quot;15.0&quot;,&quot;Total&quot;:25.0,&quot;Average&quot;:12.5}
+    {&quot;Product&quot;:{&quot;ProductionData&quot;:{&quot;Name&quot;:&quot;Gingerbread&quot;,&quot;Quantity&quot;:&quot;55.0&quot;,&quot;Total&quot;:120.0,&quot;Average&quot;:60.0}
+    {&quot;Product&quot;:{&quot;ProductionData&quot;:{&quot;Name&quot;:&quot;Jaffa Cake&quot;,&quot;Quantity&quot;:&quot;25.0&quot;,&quot;Total&quot;:50.0,&quot;Average&quot;:16.666666666666668}
+    {&quot;Product&quot;:{&quot;ProductionData&quot;:{&quot;Name&quot;:&quot;Gingerbread&quot;,&quot;Quantity&quot;:&quot;45.0&quot;,&quot;Total&quot;:165.0,&quot;Average&quot;:55.0}
+    ```
+
+5. Check the WSO2 Integrator: SI Tooling terminal. The following is logged in it.
+
+    ```text
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - Exceeds Average : name:&quot;Jaffa Cake&quot;,
+    exceedsAverage:false
+    ```
+   
+    ```text
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - Exceeds Average : name:&quot;Gingerbread&quot;,
+    exceedsAverage:false
+    ```
+   
+    ```text
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - Exceeds Average : name:&quot;Jaffa Cake&quot;,
+    exceedsAverage:true
+    ```
+   
+    ```text
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - Exceeds Average : name:&quot;Gingerbread&quot;,
+    exceedsAverage:false
+    ```
+   
+    ```text
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - Exceeds Average : name:&quot;Jaffa Cake&quot;,
+    exceedsAverage:true
+    ```
+   
+    ```text
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - Exceeds Average : name:&quot;Gingerbread&quot;,
+    exceedsAverage:false
+    ```</body>
+</html>

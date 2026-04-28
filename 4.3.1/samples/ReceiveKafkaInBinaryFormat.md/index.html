@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReceiveKafkaInBinaryFormat.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to receive events to the SweetProductionStream via Kafka transport in Binary Format and log the events in LowProductionAlertStream to the output console.
+
+## Prerequisites
+
+1. The following steps must be executed to enable SI to receive events via the Kafka transport. Since you need to shut down the server to execute these steps, get a copy of these instructions prior to proceeding.
+
+    1. Download the Kafka broker from [here](https://archive.apache.org/dist/kafka/0.10.0.0/kafka_2.11-0.10.0.0.tgz).
+    2. Convert and copy the Kafka client jars from the `{KafkaHome}/libs` directory to the `&lt;SI-Tooling-Home&gt;/libs` directory as follows.
+        1. Create a directory named `{Source}` in a preferred location in your machine and copy the following JARs to it from the `{KafkaHome}/libs` directory.
+            * kafka_2.11-0.10.0.0.jar
+            * kafka-clients-0.10.0.0.jar
+            * metrics-core-2.2.0.jar
+            * scala-library-2.11.8.jar
+            * zkclient-0.8.jar
+            * zookeeper-3.4.6.jar
+        2. Create another directory named `{Destination}` in a preferred location in your machine.
+        3. To convert all the Kafka jars you copied into the `{Source}` directory, issue the following command,
+            * For Windows:
+
+                ```bash
+                &lt;SI-Tooling-Home&gt;/bin/jartobundle.bat &lt;{Source} Directory Path&gt; &lt;{Destination} Directory Path&gt;
+                ```
+
+            * For Linux:
+
+                ```bash
+                sh &lt;SI-Tooling-Home&gt;/bin/jartobundle.sh &lt;{Source} Directory Path&gt; &lt;{Destination} Directory Path&gt;
+                ```
+
+        4. Add the OSGI converted kafka libs from `{Destination}` directory to `&lt;SI-Tooling-Home&gt;/lib`.
+        5. Add the original Kafka libs from `{Source}` to `&lt;SI-Tooling-Home&gt;/samples/sample-clients/lib`.
+        6. Navigate to `{KafkaHome}` and start zookeeper node using following command.
+
+            ```bash
+            sh bin/zookeeper-server-start.sh config/zookeeper.properties
+            ```
+
+        7. Navigate to `{KafkaHome}` and start Kafka server node using following command.
+
+            ```bash
+            sh bin/kafka-server-start.sh config/server.properties
+            ```
+
+2. Save this sample.
+
+## Executing the sample
+
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages would be shown on the console.
+        ```bash
+        * ReceiveKafkaInBinaryFormat.siddhi - Started Successfully!
+        ```
+
+## Notes
+
+If you edit this application while it&#x27;s running, stop the application -&gt; Save -&gt; Start.
+
+## Testing the sample
+
+Navigate to `&lt;SI-Tooling-Home&gt;/samples/sample-clients/kafka-producer` and run &quot;ant&quot; command as follows:
+
+```bash
+ant -DnoOfEventsToSend=5 -DtopicName=kafka_sample_topic -DisBinaryMessage=true
+```
+
+## Viewing the results
+
+Messages similar to the following would be shown on the console.
+
+```bash
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveKafkaInBinaryFormat : LowProductionAlertStream : Event{timestamp=1513282182570, data=[&quot;Cupcake&quot;, 1665.0], isExpired=false}
+```
+
+## Note
+
+* Stop this Siddhi application, once you are done with the execution.
+* Stop Kafka server and Zookeeper server individually by executing Ctrl+C.
+
+```sql
+@App:name(&quot;ReceiveKafkaInBinaryFormat&quot;)
+@App:description(&#x27;Receive events via Kafka transport in Binary format and view the output on the console&#x27;)
+
+
+@source(type=&#x27;kafka&#x27;,
+        topic.list=&#x27;kafka_sample_topic&#x27;,
+        partition.no.list=&#x27;0&#x27;,
+        threading.option=&#x27;single.thread&#x27;,
+        group.id=&#x27;group&#x27;,
+        is.binary.message=&#x27;true&#x27;,
+        bootstrap.servers=&#x27;localhost:9092&#x27;,
+ @map(type=&#x27;binary&#x27;))
+define stream SweetProductionStream(id string, amount double);
+
+@sink(type=&#x27;log&#x27;)
+define stream LowProductionAlertStream(id string, amount double);
+
+@info(name=&#x27;query1&#x27;)
+from SweetProductionStream
+select *
+insert into LowProductionAlertStream;
+```
+</body>
+</html>

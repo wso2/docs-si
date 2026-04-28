@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReceiveTCPInTextFormatWithCustomMapping.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>
+## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI to receive events to the SweetProductionStream via TCP transport in Text default format and log the events in LowProductionAlertStream to the  output  console.
+
+## Executing the sample
+
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages would be shown on the console.
+
+    * `Tcp Server started in 0.0.0.0:9892`
+    * `ReceiveTCPInTextFormatWithCustomMapping.siddhi - Started Successfully!`
+
+## Testing the sample
+
+Navigate to `&lt;SI-Tooling-Home&gt;/samples/sample-clients/tcp-client` and run `ant` command as follows:
+Run `ant` command in the terminal as follows:
+
+```bash
+ant -Dtype=text -DcustomMapping=true
+```
+
+If you want to publish custom number of events, you need to run `ant` command as follows.
+
+```bash
+ant -Dtype=text -DcustomMapping=true -DnoOfEventsToSend=5
+```
+
+## Notes
+
+If the message `Source Listener has created for url tcp://localhost:9892/SweetProductionStream` does not appear, it could be due to the port 9892, defined in the Siddhi application is already being used by a different program. To resolve this issue, please do the following.
+
+* Stop this Siddhi application (Click &#x27;Run&#x27; on menu bar -&gt; &#x27;Stop&#x27;).
+* Change the port 9892 to an unused port, in this Siddhi application&#x27;s source configuration.
+* Start the application and check whether the specified messages appear on the console.
+
+## Viewing the results
+
+See the output. Following messages would be shown on the console continuousely.
+
+```bash
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971370311, data=[&quot;Eclair&quot;, 132.0], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971371299, data=[&quot;Ice&quot;, 6733.0], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971372300, data=[&quot;Lollipop&quot;, 742.0], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971373300, data=[&quot;Marshmallow&quot;, 8781.0], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971374301, data=[&quot;Marshmallow&quot;, 5105.0], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971375301, data=[&quot;Froyo&quot;, 5531.0], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveTCPInTextFormatWithCustomMapping : LowProductionAlertStream : Event{timestamp=1512971376301, data=[&quot;Gingerbread&quot;, 2193.0], isExpired=false}
+```
+
+```sql
+@App:name(&quot;ReceiveTCPInTextFormatWithCustomMapping&quot;)
+@App:description(&#x27;Receive events via TCP transport in text format with custom mapping and view the output on the console.&#x27;)
+
+@Source(type = &#x27;tcp&#x27;, context=&#x27;SweetProductionStream&#x27;,
+@map(type=&#x27;text&#x27;, fail.on.unknown.attribute = &#x27;true&#x27;, regex.A=&#x27;((?&lt;=id:)(.*)(?=))&#x27;,regex.B=&#x27;([-0-9]+)&#x27;, @attributes(name =&#x27;A&#x27;,amount= &#x27;B&#x27;)))
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;log&#x27;)
+define stream LowProductionAlertStream (name string, amount double);
+
+-- passthrough data in the SweetProductionStream into LowProducitonAlertStream
+@info(name=&#x27;query1&#x27;)
+from SweetProductionStream
+select *
+insert into LowProductionAlertStream;
+```
+</body>
+</html>

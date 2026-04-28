@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>JoinWithStoredData.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>
+
+## Purpose:
+This application demonstrates how to perform join on streaming data with the data stored in RDBMS. The sample depicts a scenario, where a transaction by a credit card with which fraudulent activity has been previously done. The credit card numbers, which were noted for fraudulent activities are stored in an RDBMS table.
+
+## Prerequisites:
+1. Ensure that MySQL is installed on your machine
+2. Create a database named &#x27;fraudDB&#x27; in MySQL. This database is referred to with &#x27;jdbc:mysql://localhost:3306/fraudDB&#x27; url.
+3. Create a table named &#x27;FraudTable&#x27;: CREATE TABLE FraudTable (creditCardNo VARCHAR(20));
+4. Insert some values to the table : INSERT INTO FraudTable VALUES (&quot;143-90099-23433&quot;);
+5. In the store configuration of this application, replace &#x27;username&#x27; and &#x27;password&#x27; values with your MySQL credentials
+4. Save this sample
+
+## Executing the Sample:
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;
+2. If the Siddhi application starts successfully, the following messages would be shown on the console
+    * JoinWithStoredData.siddhi - Started Successfully!
+
+## Testing the Sample:
+1. Simulate single events. For this, click on &#x27;Event Simulator&#x27; (double arrows on left tab) -&gt; &#x27;Single Simulation&#x27; -&gt; Select &#x27;JoinWithStoredData&#x27; as &#x27;Siddhi App Name&#x27; -&gt; Select &#x27;TradeStream&#x27; as &#x27;Stream Name&#x27; -&gt; Provide attribute values -&gt; Send
+2. Send at-least one event with the single event simulator, where the creditCardNo matches a creditCardNo value in the data we previously inserted to the FraudTable. This would satisfy the &#x27;on&#x27; condition of our join query
+
+## Viewing the Results:
+See the output for suspicious trades on the console.
+
+
+```sql
+@App:name(&quot;JoinWithStoredData&quot;)
+
+@App:description(&#x27;Join streaming data with data stored in an RDBMS table&#x27;)
+
+
+
+@Store(type=&quot;rdbms&quot;,
+       jdbc.url=&quot;jdbc:mysql://localhost:3306/fraudDB&quot;,
+       username=&quot;root&quot;,
+       password=&quot;root&quot; ,
+       jdbc.driver.name=&quot;com.mysql.jdbc.Driver&quot;)
+@PrimaryKey(&quot;creditCardNo&quot;)
+define table FraudTable (creditCardNo string);
+
+define stream TradeStream(creditCardNo string, trader string, tradeInfo string);
+
+@sink(type=&#x27;log&#x27;)
+define stream SuspiciousTradeStream(creditCardNo string, suspiciousTrader string, suspiciousInfoTrade string);
+
+--Perform a join on credit card number, to capture transactions with credit cards that have previously been used for fraudulent activity
+@info(name=&#x27;query1&#x27;)
+from TradeStream as t join FraudTable as f
+    on t.creditCardNo == f.creditCardNo
+select t.creditCardNo, t.trader as suspiciousTrader, t.tradeInfo as suspiciousInfoTrade
+insert into SuspiciousTradeStream;
+```</body>
+</html>

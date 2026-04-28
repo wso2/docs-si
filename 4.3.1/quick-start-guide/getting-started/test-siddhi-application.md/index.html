@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>test-siddhi-application.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Step 4: Run the Siddhi Application
+
+In this step, let&#x27;s run the `SweetFactoryApp` Siddhi application that you created, tested and deployed.
+
+## Installing the required extensions
+
+In [Step 2: Create the Siddhi Application](create-the-siddhi-application.md), you installed the `cdc-mysql` Siddhi extension in WSO2 Integrator: SI Tooling to test the `SweetFacoryApp` Siddhi application. Now let&#x27;s install it in the WSO2 Integrator: SI server so that you can run the same Siddhi application there.
+
+1. Start the WSO2 Integrator: SI server by navigating to the `&lt;SI_HOME&gt;/bin` directory from the CLI, and issuing the appropriate command based on your operating system:&lt;/br&gt;
+   
+   - For Windows: `server.bat --run`&lt;/br&gt;
+   - For Linux/Mac OS:  `./server.sh`
+   
+2. To install the `cdc-mysql` extension, issue the following command from the `&lt;SI_HOME&gt;/bin` directory. 
+
+    - For Windows: `extension-installer.bat install cdc-mysql`&lt;/br&gt;
+    - For Linux/Mac OS:  `./extension-installer.sh install install cdc-mysql`
+    
+    Once the installation is complete, a message is logged to inform you that the extension is successfully installed.
+    
+3. Restart the WSO2 Integrator: SI server.
+
+## Generating an input event
+
+To generate an input event, insert a record in the `production` database table by issuing the following command in the MySQL console.
+
+`insert into SweetProductionTable values(&#x27;chocolate&#x27;,100.0);`
+
+Then open the `/Users/foo/productioninserts.csv` file. The following record should be displayed.
+
+![Updated File]({{base_path}}/images/quick-start-guide-101/updated-file.png)
+    
+!!! tip &quot;What&#x27;s Next?&quot;
+    Now you can try extending the `SweetFactoryApp` Siddhi application to perform more streaming integration activities. To try this, proceed to [Step 5: Update the Siddhi Application](update-the-siddhi-application.md).</body>
+</html>

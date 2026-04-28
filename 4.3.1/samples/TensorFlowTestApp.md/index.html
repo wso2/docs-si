@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TensorFlowTestApp.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>
+## Purpose:
+This application demonstrates how to import a pretrained Tensorflow model WSO2 Integrator: SI to perform a regression task.
+
+## Prerequisites:
+1. Replace `{SI_HOME}` with absolute path to the WSO2 Integrator: SI Tooling home directory.
+2. Save this sample.
+3. If there is no syntax error, the following message is shown on the console:
+	```
+	* Siddhi App TensorFlowTestApp successfully deployed.
+	```
+
+
+## Executing the Sample:
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages are shown on the console:
+	```
+	* TensorFlowTestApp.siddhi - Started Successfully!
+	```
+
+## Testing the Sample:
+Send events through one or more of the following methods.
+
+##### Send events to `ProductionInputStream`, via event simulator.
+1. Open the event simulator by clicking on the second icon or pressing Ctrl+Shift+I.
+2. In the Single Simulation tab of the panel, specify the values as follows:
+	* Siddhi App Name: TensorFlowTestApp
+	* Stream Name: InputStream
+3. In the x field, enter the following and then click Send to send the event.
+```
+x: &quot;double:[1,-2]&quot;
+```
+
+4. Send some more events.
+
+##### Send events to the simulator http endpoint through the curl command:
+1. Open a new terminal and issue the following command:
+	```bash
+	curl -X POST \
+		http://localhost:9390/simulation/single \
+		-H &#x27;content-type: text/plain&#x27; \
+		-d &#x27;{&quot;streamName&quot;: &quot;InputStream&quot;, &quot;siddhiAppName&quot;: &quot;TensorFlowTestApp&quot;,&quot;data&quot;: [&quot;double:[1,-2]&quot;]}&#x27;
+	```
+2. If there is no error, the following messages are shown on the terminal:
+	```json
+	{&quot;status&quot;:&quot;OK&quot;,&quot;message&quot;:&quot;Single Event simulation started successfully&quot;}
+	```
+
+##### Publish events with Postman:
+1. Install &#x27;Postman&#x27; application from Chrome web store.
+2. Launch the application.
+3. Make a &#x27;Post&#x27; request to the &#x27;http://localhost:9390/simulation/single&#x27; endpoint. Set the Content-Type to &#x27;text/plain&#x27; and set the request body in text as follows:
+	```json
+	{&quot;streamName&quot;: &quot;InputStream&quot;, &quot;siddhiAppName&quot;: &quot;TensorFlowTestApp&quot;,&quot;data&quot;: [&#x27;double:[1,-2]&#x27;]}
+	```
+4. Click &#x27;send&#x27;. If there is no error, the following messages are shown on the console:
+	```
+	&quot;status&quot;: &quot;OK&quot;,
+	&quot;message&quot;: &quot;Single Event simulation started successfully&quot;
+	```
+
+## Viewing the Results:
+See the output on the terminal.
+
+```sql
+@App:name(&quot;TensorFlowTestApp&quot;)
+
+
+define stream InputStream (x string);
+
+@sink(type=&#x27;log&#x27;)
+define stream OutputStream (outputPoint0 double, outputPoint1 double);
+
+@info(name = &#x27;query1&#x27;)
+from InputStream#tensorFlow:predict(&#x27;{SI_HOME}/samples/artifacts/TensorflowSample/Regression&#x27;, &#x27;inputPoint&#x27;, &#x27;outputPoint&#x27;, x)
+select outputPoint0, outputPoint1
+insert into OutputStream;
+```</body>
+</html>

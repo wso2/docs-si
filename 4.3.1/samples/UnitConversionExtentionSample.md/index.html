@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>UnitConversionExtentionSample.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>
+## Purpose:
+This sample demonstrates how to use unit conversion extension for converting units.
+
+## Prerequisites:
+* Save this sample. If there is no syntax error, the following messages would be shown on the console.&lt;br/&gt;&lt;br/&gt;
+
+	```
+	* Siddhi App UnitConversionExtensionSample successfully deployed.
+	```
+## Executing the Sample:
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages would be shown on the console. &lt;br/&gt;&lt;br/&gt;
+	```
+	* UnitConversionExtensionSample.siddhi - Started Successfully!
+	```
+
+## Testing the Sample:
+You can publish data event to the file, through event simulator
+
+1. Open event simulator by clicking on the second icon or press Ctrl+Shift+I.
+2. In the Single Simulation tab of the panel, select values as follows:
+    * Siddhi App Name: UnitConversionExtensionSample
+    * Stream name: SweetProductionStream
+
+3. Enter and send suitable values for the attributes of selected stream.
+
+## Viewing the Results:
+Messages similar to the following would be shown on the console.
+```
+INFO {io.siddhi.core.stream.output.sink.LogSink} - UnitConversionExtensionSample : WeightConvertedStream : Event{timestamp=1513588858315, data=[Chocolate, 1250.0], isExpired=false}
+```
+
+```sql
+@App:name(&quot;UnitConversionExtensionSample&quot;)
+@App:description(&#x27;Demonstrates how to use unit conversion extension for converting units.&#x27;)
+
+
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;log&#x27;)
+define stream WeightConvertedStream(name string, weightInGrams double);
+
+from SweetProductionStream
+select name, unitconversion:kgTog(amount) as  weightInGrams
+insert into WeightConvertedStream;
+```</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Store-solr.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>
+
+## Purpose:
+This application demonstrates how to perform CRUD operations using Siddhi queries in Solr stores. The sample depicts a scenario in a sweet production factory. The sweet production details such as name of the raw material, amount used for production can be stored using `insertSweetProductionStream`. The following streams can be used to search, delete, update or upsert(update or insert) the existing data in the store.
+
+* search - `searchSweetProductionStream`
+* insert - `insertSweetProductionStream`
+* delete - `deleteSweetProductionStream`
+* update - `updateSweetProductionStream`
+* update or insert - `updateOrInsertSweetProductionStream`
+* contains - `containsSweetProductionStream` (verifies whether all the attributes that enter in the stream exists in the store).
+
+
+## Prerequisites:
+1. Download the `solr-6.x.x.zip` distribution from https://archive.apache.org/dist/lucene/solr/.
+2. Start the Solr server in cloud mode using the command `{SOLR_HOME}/bin/solr -e cloud`. This will create a simple solr cloud in your local machine.
+When creating the cloud provide the suggested examples values for the each field. Give the collection name as `gettingstarted`. For the configuration provide `basic_configs`.
+
+## Executing the Sample:
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages would be shown on the console.
+    ```
+    * Store-solr.siddhi - Started Successfully!
+    ```
+
+## Testing the Sample:
+1. Simulate single events. For this, click on &#x27;Event Simulator&#x27; (double arrows on left tab) -&gt; &#x27;Single Simulation&#x27; -&gt; Select &#x27;Store-solr&#x27; as &#x27;Siddhi App Name&#x27; -&gt; Select &#x27;searchSweetProductionStream&#x27; as &#x27;Stream Name&#x27; -&gt; Provide attribute values -&gt; Send.
+2. Send at-least one event with the single event simulator, where the name matches a name value in the data we previously inserted to the SweetProductionTable. This would satisfy the &#x27;on&#x27; condition of our join query.
+3. Likewise the events can be sent to the other corresponding streams to add, delete, update, insert, search events.
+4. After a change in the store, using the search stream the developer can see whether the operation is successful.
+5. Primary Key constraint SweetProductionTable is disabled, since name cannot be used as a PrimaryKey in ProductionTable.
+Siddhi functions can be used to create a unique id for the received events which can then be used to apply Primary Key constraint on the data store records. (http://wso2.github.io/siddhi/documentation/siddhi-4.0/#function)
+
+## Viewing the Results:
+See the output for row materials on the console. Inserted, deleted, updated events can be checked by `searchSweetProductionStream`.
+
+```sql
+@App:name(&quot;Store-solr&quot;)
+@App:description(&#x27;Receive events via simulator and received data are persisted in store.&#x27;)
+
+
+define stream insertSweetProductionStream (name string, amount double);
+define stream deleteSweetProductionStream (name string);
+define stream searchSweetProductionStream (name string);
+define stream updateSweetProductionStream (name string, amount double);
+define stream updateOrInsertSweetProductionStream (name string, amount double);
+define stream containsSweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;log&#x27;)
+define stream logStream(name string, amount double);
+
+@Store(type=&#x27;solr&#x27;, collection=&#x27;SweetProductionTable&#x27;, zookeeper.url=&#x27;localhost:9983&#x27;, shards=&#x27;2&#x27;, replicas=&#x27;2&#x27;, schema=&#x27;name string stored,amount double stored&#x27;)
+--@PrimaryKey(&quot;name&quot;)
+@index(&quot;amount&quot;)
+define table SweetProductionTable (name string, amount double);
+
+/* Inserting events*/
+@info(name=&#x27;query1&#x27;)
+from insertSweetProductionStream
+insert into SweetProductionTable;
+
+/* Deleting events*/
+@info(name = &#x27;query2&#x27;)
+from deleteSweetProductionStream
+delete SweetProductionTable
+on SweetProductionTable.name == name ;
+
+/* Updating events*/
+@info(name = &#x27;query3&#x27;)
+from updateSweetProductionStream
+select name,amount
+update SweetProductionTable
+set SweetProductionTable.amount = amount
+on SweetProductionTable.name == name ;
+
+/* Updating or inserting events */
+@info(name = &#x27;query4&#x27;)
+from updateOrInsertSweetProductionStream
+select name,amount
+update or insert into SweetProductionTable
+set SweetProductionTable.amount = amount
+on SweetProductionTable.name == name;
+
+/* Siddhi In (Contains)*/
+@info(name = &#x27;query5&#x27;)
+from containsSweetProductionStream
+[(SweetProductionTable.name == name and SweetProductionTable.amount == amount) in SweetProductionTable]
+insert into logStream;
+
+@info(name=&#x27;query6&#x27;)
+from searchSweetProductionStream as s join SweetProductionTable as sp
+    on s.name == sp.name
+select sp.name, sp.amount
+insert into logStream;
+```</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>configuring-data-sources.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Configuring Data Sources
+
+In the WSO2 Integrator: SI, there are datasources specific to both the WSO2 Integrator: SI server and WSO2 Integrator: SI Tooling. The data sources of
+each runtime are defined in the `&lt;SI_HOME&gt;/conf/server/deployment.yaml` file.
+
+e.g., To configure a data source in the server runtime, the relevant configurations need to be added in the `&lt;SI_Home&gt;/conf/server/deployment.yaml` file.
+
+!!! note
+The embedded H2 databases shipped with your product are suitable for development and testing environments. However, for production environments, it is recommended to use an industry-standard RDBMS such as Oracle, PostgreSQL, MySQL, MS SQL, etc.
+
+To view a sample data source configuration for each database type supported, expand the following sections:
+
+!!!info
+    If the database driver is not an OSGI bundle, then it should be converted to OSGI (using jartobundle.sh) before placing it in the
+    `&lt;SI_HOME&gt;/lib` directory. For detailed instructions,see [Adding Third Party Non OSGi Libraries]({{base_path}}/admin/adding-third-party-non-osgi-libraries.md).
+
+    e.g., `sh WSO2_SI_HOME/bin/jartobundle.sh ojdbc6.jar WSO2_SI_HOME/lib/`
+
+    The database should be tuned to handle the total **maxPoolSize** (The maximum number of threads that should be reserved at any given time to handle events) that is defined in the `deployment.yaml` file.
+
+
+???info &quot;MySQL&quot;
+    ``` xml
+        wso2.datasources:
+         dataSources:
+         name: TEST_DB
+         description: The datasource used for test database
+         jndiConfig:
+         definition:
+           type: RDBMS
+           configuration:
+             jdbcUrl: jdbc:mysql://hostname:port/testdb
+             username: root
+             password: root
+             driverClassName: com.mysql.jdbc.Driver
+             minIdle: 5
+             maxPoolSize: 50
+             idleTimeout: 60000
+             connectionTestQuery: SELECT 1
+             validationTimeout: 30000
+             isAutoCommit: false
+    ```
+    
+    ** Parameter descriptions*
+    
+    | **Parameter**         | **Description**                                                           |
+    |-----------------------|---------------------------------------------------------------------------|
+    | `name`                | A unique name for the data source. |
+    | `description`         | A description of the data source. |
+    | `type`                | The database type to which the data source connects. |
+    | `jdbcUrl`             | The string used by the database driver to connect to the database. |
+    | `username`            | the username with which WSO2 Integrator: SI accesses the database.|
+    | `password`            | The password with which WSO2 Integrator: SI accesses the database. |
+    | `driverClassName`     | The name of the driver class that establishes the connection to the database. |
+    | `minIdle`             | The minimum number of active connections that can remain idle in the pool at a given time without extra connections being created. e.g., If you specify `2` as the value for this parameter, the system creates a new connection to the database only if the connection pool currently has only two or less active and idle connections. | 
+    | `maxPoolSize`         | The maximum number of total connections that are allowed to exist in the connection pool at a given time. |
+    | `idleTimeout`         | The maximum duration of time (in milliseconds) for which the system allows a connection to the database to be idle before closing it. |
+    | `connectionTestQuery` | The test query executed on the database to check the validity of the connection. |
+    | `validationTimeout`   | The maximum duration of time (in milliseconds) that is allowed between validation tests carried out for the database connection. |
+    | `isAutoCommit`        | If this parameter is set to `true`, each database query you perform during a single session is treated as a separate database transaction. As a result, the result of any query is visible to other database sessions soon after it is executed. If this parameter is set to `true`, the system considers the whole database session as a single transaction. Therefore, the reults of all the queries you execute within a single session are visible only after the session is over. |
+    
+???info &quot;POSTGRES&quot;
+    ``` xml
+    wso2.datasources:
+     dataSources:
+         description: The datasource used for test database
+         jndiConfig:
+         definition:
+           type: RDBMS
+          configuration:
+            jdbcUrl: jdbc:postgresql://hostname:port/testdb
+            username: root
+            password: root
+            driverClassName: org.postgresql.Driver
+            minIdle: 5
+            maxPoolSize: 50
+            idleTimeout: 60000
+            connectionTestQuery: SELECT 1
+            validationTimeout: 30000
+            isAutoCommit: false
+    ```
+    | **Parameter**         | **Description**                                                           |
+    |-----------------------|---------------------------------------------------------------------------|
+    | `name`                | A unique name for the data source. |
+    | `description`         | A description of the data source. |
+    | `type`                | The database type to which the data source connects. |
+    | `jdbcUrl`             | The string used by the database driver to connect to the database. |
+    | `username`            | the username with which WSO2 Integrator: SI accesses the database.|
+    | `password`            | The password with which WSO2 Integrator: SI accesses the database. |
+    | `driverClassName`     | The name of the driver class that establishes the connection to the database. |
+    | `minIdle`             | The minimum number of active connections that can remain idle in the pool at a given time without extra connections being created. e.g., If you specify `2` as the value for this parameter, the system creates a new connection to the database only if the connection pool currently has only two or less active and idle connections. | 
+    | `maxPoolSize`         | The maximum number of total connections that are allowed to exist in the connection pool at a given time. |
+    | `idleTimeout`         | The maximum duration of time (in milliseconds) for which the system allows a connection to the database to be idle before closing it. |
+    | `connectionTestQuery` | The test query executed on the database to check the validity of the connection. |
+    | `validationTimeout`   | The maximum duration of time (in milliseconds) that is allowed between validation tests carried out for the database connection. |
+    | `isAutoCommit`        | If this parameter is set to `true`, each database query you perform during a single session is treated as a separate database transaction. As a result, the result of any query is visible to other database sessions soon after it is executed. If this parameter is set to `true`, the system considers the whole database session as a single transaction. Therefore, the reults of all the queries you execute within a single session are visible only after the session is over. |
+    
+???info &quot;Oracle&quot;
+    There are two ways to configure this database type. If you have a System
+    Identifier (SID), use this (older) format:
+    
+    `jdbc:oracle:thin:@[HOST][:PORT]:SID`
+    
+    ``` xml
+    wso2.datasources:
+     dataSources:
+         description: The datasource used for test database
+         jndiConfig:
+         definition:
+           type: RDBMS
+           configuration:
+             jdbcUrl: jdbc:oracle:thin:@hostname:port:SID
+             username: testdb
+             password: root
+             driverClassName: oracle.jdbc.driver.OracleDriver
+             minIdle: 5
+             maxPoolSize: 50
+             idleTimeout: 60000
+             connectionTestQuery: SELECT 1
+             validationTimeout: 30000
+             isAutoCommit: false
+    ```
+    
+    If you have an Oracle service name, use this (newer) format:
+    
+    `jdbc:oracle:thin:@//[HOST][:PORT]/SERVICE`
+    
+    ``` xml
+    wso2.datasources:
+     dataSources:
+         description: The datasource used for test database
+         jndiConfig:
+         definition:
+           type: RDBMS
+           configuration:
+             jdbcUrl: jdbc:oracle:thin:@hostname:port/SERVICE
+             username: testdb
+             password: root
+             driverClassName: oracle.jdbc.driver.OracleDriver
+             minIdle: 5
+             maxPoolSize: 50
+             idleTimeout: 60000
+             connectionTestQuery: SELECT 1
+             validationTimeout: 30000
+             isAutoCommit: false
+    ```
+    
+    The Oracle driver need to be converted to OSGi (using `jartobundle.sh`) before put into `SI_HOME/lib` directory. For detailed
+    instructions, see [Adding Third Party Non OSGi Libraries]({{base_path}}/admin/adding-third-party-non-osgi-libraries.md).
+    
+    If you are using persisted aggregations, you can include the `connectionInitSql` parameter instead of `connectionTestQuery` as shown in the following sample configuration.
+    
+    ```
+    Sample datasource configuration -
+    
+     - name: TEST_DB
+       description: The datasource used for test database
+       jndiConfig:
+         name: jdbc/TEST_DB
+       definition:
+         type: RDBMS
+         configuration:
+           jdbcUrl: jdbc:oracle:thin:@localhost:1521/ORCLCDB.localdomain
+           username: &lt;username&gt;
+           password: &lt;password&gt;
+           driverClassName: oracle.jdbc.driver.OracleDriver
+           minIdle: 5
+           maxPoolSize: 50
+           idleTimeout: 60000
+           connectionInitSql: ALTER SESSION SET NLS_DATE_FORMAT=&#x27;RRRR/fmMM/fmDD&#x27;
+           validationTimeout: 30000
+           isAutoCommit: false  
+    ```
+    
+    | **Parameter**       | **Description**                                                           |
+    |---------------------|---------------------------------------------------------------------------|
+    | name                | A unique name for the data source. |
+    | description         | A description of the data source. |
+    | type                | The database type to which the data source connects. |
+    | jdbcUrl             | The string used by the database driver to connect to the database. |
+    | username            | the username with which WSO2 Integrator: SI accesses the database.|
+    | password            | The password with which WSO2 Integrator: SI accesses the database. |
+    | driverClassName     | The name of the driver class that establishes the connection to the database. |
+    | minIdle             | The minimum number of active connections that can remain idle in the pool at a given time without extra connections being created. e.g., If you specify `2` as the value for this parameter, the system creates a new connection to the database only if the connection pool currently has only two or less active and idle connections. | 
+    | maxPoolSize         | The maximum number of total connections that are allowed to exist in the connection pool at a given time. |
+    | idleTimeout         | The maximum duration of time (in milliseconds) for which the system allows a connection to the database to be idle before closing it. |
+    | connectionInitSql   | The test query executed on the database to check the validity of the connection. You can use this parameter instead of the `connectionTestQuery` parameter when you are using persisted aggregations. This is because when you use persisted aggregation with an Oracle database, the database connection session time format needs to be changed to `RRRR/fmMM/fmDD`. This is addressed when you use the `connectionInitSql` parameter. |
+    | connectionTestQuery | The test query executed on the database to check the validity of the connection. |
+    | validationTimeout   | The maximum duration of time (in milliseconds) that is allowed between validation tests carried out for the database connection. |
+    | isAutoCommit        | If this parameter is set to `true`, each database query you perform during a single session is treated as a separate database transaction. As a result, the result of any query is visible to other database sessions soon after it is executed. If this parameter is set to `true`, the system considers the whole database session as a single transaction. Therefore, the reults of all the queries you execute within a single session are visible only after the session is over. |      
+    
+???info &quot;MSSQL&quot;
+    ``` xml
+    wso2.datasources:
+     dataSources:
+         description: The datasource used for test database
+         jndiConfig:
+         definition:
+           type: RDBMS
+           configuration:
+             jdbcUrl: jdbc:sqlserver://hostname:port;databaseName=testdb
+             username: root
+             password: root
+             driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+             minIdle: 5
+             maxPoolSize: 50
+             idleTimeout: 60000
+             connectionTestQuery: SELECT 1
+             validationTimeout: 30000
+             isAutoCommit: false
+    ```
+    
+The following tables explain the default data sources configured in the WSO2 Integrator: SI components for different purposes, and how to change them.
+    
+### RDBMS data provider
+
+&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col style=&quot;width: 13%&quot; /&gt;
+        &lt;col style=&quot;width: 86%&quot; /&gt;
+    &lt;/colgroup&gt;
+    &lt;tbody&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Database Access Requirement
+                &lt;br /&gt;
+            &lt;/td&gt;
+            &lt;td&gt;The RDBMS provider publishes records from RDBMS tables into generated widgets. It can also be configured to purge records in tables. In order to carry out these actions, this provider requires access to read and delete records in user defined tables of the database. For more information about the RDBMS data provider, see &lt;a href=&quot;https://docs.wso2.com/display/SP440/Generating+Widgets&quot;&gt;Generating Widgets&lt;/a&gt;.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Required/Optional&lt;/td&gt;
+            &lt;td&gt;This is required if you select a datasource when generating the widget or use existing widgets that connect to the RDBMS data provider when you run the dashboard server for the WSO2 Integrator: SI.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Default Datasource Name&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;SAMPLE_DB&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Default Database&lt;/td&gt;
+            &lt;td&gt;The default &lt;code&gt;H2&lt;/code&gt; database location is &lt;code&gt; &amp;lt;DASHBOARD_HOME&amp;gt;/wso2/dashboard/database/SAMPLE_DB&lt;/code&gt;.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Tables&lt;/td&gt;
+            &lt;td&gt;The default database shipped with a sample table named &lt;code&gt;TRANSACTION_TABLE&lt;/code&gt; .&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Schemas and Queries&lt;/td&gt;
+            &lt;td&gt;
+                &lt;p&gt;The schema for the sample table is &lt;code&gt;TRANSACTIONS_TABLE (creditCardNo VARCHAR(50), country VARCHAR(50), transaction VARCHAR(50), amount INT)&lt;/code&gt;&lt;/p&gt;
+                &lt;p&gt;You can also view &lt;a href=&quot;https://github.com/wso2/carbon-analytics/blob/v2.0.250/components/org.wso2.carbon.data.provider/src/main/resources/queries.yaml&quot;&gt;default schemas and queries&lt;/a&gt; .&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Tested Database Types&lt;/td&gt;
+            &lt;td&gt;H2, MySQL, Postgres, Mssql, Oracle 11g&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+### Carbon coordination
+
+&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col style=&quot;width: 13%&quot; /&gt;
+        &lt;col style=&quot;width: 86%&quot; /&gt;
+    &lt;/colgroup&gt;
+    &lt;tbody&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Database Access Requirement&lt;/td&gt;
+            &lt;td&gt;Carbon coordination supports zookeeper and RDBMS based coordination. In RDBMS coordination, database access is required for updating the heartbeats of the nodes. In addition, database access is required to update the coordinator and the other members in the cluster. For more information, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/admin/configuring-Cluster-Coordination/&quot;&gt;Configuring Cluster Coordination&lt;/a&gt;.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Required/Optional&lt;/td&gt;
+            &lt;td&gt;This is required. However, you can also use Zookeeper coordination instead of RDBMS.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Default Datasource Name&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;WSO2_CARBON_DB&lt;/code&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tables&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;LEADER_STATUS_TABLE&lt;/code&gt;, &lt;code&gt;MEMBERSHIP_EVENT_TABLE&lt;/code&gt;, &lt;code&gt;REMOVED_MEMBERS_TABLE&lt;/code&gt;, &lt;code&gt;CLUSTER_NODE_STATUS_TABLE&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Schemas and Queries&lt;/td&gt;
+            &lt;td&gt;
+                &lt;p&gt;See &lt;a href=&quot;https://github.com/wso2/carbon-coordination/blob/v2.0.12/components/cluster-coordinator/org.wso2.carbon.cluster.coordinator/org.wso2.carbon.cluster.coordinator.rdbms/src/main/java/org/wso2/carbon/cluster/coordinator/rdbms/util/RDBMSConstants.java&quot;&gt;information about schemas and queries&lt;/a&gt;.&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tested Database Types&lt;/td&gt;
+            &lt;td&gt;MySQL, Postgres, Mssql, Oracle 11g&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+### WSO2 Integrator: SI core - persistence
+
+&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col style=&quot;width: 13%&quot; /&gt;
+        &lt;col style=&quot;width: 86%&quot; /&gt;
+    &lt;/colgroup&gt;
+    &lt;tbody&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Database Access Requirement&lt;/td&gt;
+            &lt;td&gt;This involves persisting the state of Siddhi Applications periodically in the database. State persistence is enabled by selecting the &lt;code&gt;org.wso2.carbon.stream.processor.core.persistence.DBPersistenceStore&lt;/code&gt; class in the &lt;code&gt;state.persistence&lt;/code&gt; section of the &lt;code&gt;&amp;lt;SI_Home&amp;gt;/conf/&amp;lt;server&amp;gt;/deployment.yaml&lt;/code&gt; file. For more information, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/admin/configuring-Database-and-File-System-State-Persistence/&quot;&gt;Configuring Database and File System State Persistence&lt;/a&gt;.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Required/Optional&lt;/td&gt;
+            &lt;td&gt;This is optional. WSO2 is configured to persist the state of Siddhi applications by default.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Default Datasource Name&lt;/td&gt;
+            &lt;td&gt;N/A. If state persistence is required, you need to configure the datasource in the &lt;code&gt;&amp;lt;SI_Home&amp;gt;/conf/&amp;lt;server&amp;gt;/deployment.yaml&lt;/code&gt; file under &lt;code&gt;state.persistence&lt;/code&gt; &amp;gt;&lt;code&gt;config&lt;/code&gt; &amp;gt; &lt;code&gt;datasource&lt;/code&gt; .&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tables&lt;/td&gt;
+            &lt;td&gt;N/A. If state persistence is required, you need to specify the table name to be used when persisting the state in the &lt;code&gt;&amp;lt;SI_Home&amp;gt;/conf/&amp;lt;server&amp;gt;/deployment.yaml&lt;/code&gt; file under &lt;code&gt;state.persistence&lt;/code&gt; &amp;gt; &lt;code&gt;config&lt;/code&gt; &amp;gt; &lt;code&gt;table&lt;/code&gt; .&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Schemas and Queries&lt;/td&gt;
+            &lt;td&gt;
+                &lt;p&gt;See &lt;a href=&quot;https://github.com/wso2/carbon-analytics/blob/master/components/org.wso2.carbon.streaming.integrator.core/src/main/resources/queries.yaml&quot;&gt;information about schemas and queries&lt;/a&gt;.&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tested Database Types&lt;/td&gt;
+            &lt;td&gt;H2, MySQL, Postgres, Mssql, Oracle 11g&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+### WSO2 Integrator: SI - Status Dashboard
+
+&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col style=&quot;width: 13%&quot; /&gt;
+        &lt;col style=&quot;width: 86%&quot; /&gt;
+    &lt;/colgroup&gt;
+    &lt;tbody&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Database Access Requirement&lt;/td&gt;
+            &lt;td&gt;To display information relating to the status of your WSO2 Integrator: SI deployment, the Status Dashboard needs to retrieve carbon metrics data, registered WSO2 Integrator: SI server details and authentication details within the cluster from the database. For more information, see &lt;a href=&quot;https://docs.wso2.com/display/SP440/Monitoring+Stream+Processor&quot;&gt;Monitoring Stream Processor&lt;/a&gt; .&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Required/Optional&lt;/td&gt;
+            &lt;td&gt;Required&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Default Datasource Name&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;WSO2_STATUS_DASHBOARD_DB&lt;/code&gt;, &lt;code&gt;WSO2_METRICS_DB&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tables&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;METRIC_COUNTER&lt;/code&gt;, &lt;code&gt;METRIC_GAUGE&lt;/code&gt;, &lt;code&gt;METRIC_HISTOGRAM&lt;/code&gt;, &lt;code&gt;METRIC_METER&lt;/code&gt;, &lt;code&gt;METRIC_TIMER&lt;/code&gt;, &lt;code&gt;WORKERS_CONFIGURATIONS&lt;/code&gt;, &lt;code&gt;WORKERS_DETAILS&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Schemas and Queries&lt;/td&gt;
+            &lt;td&gt;
+                &lt;p&gt;See &lt;a href=&quot;https://github.com/wso2/carbon-analytics/blob/v2.0.250/components/org.wso2.carbon.status.dashboard.core/src/main/resources/queries.yaml&quot;&gt;information about schemas and queries&lt;/a&gt;.
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tested Database Types&lt;/td&gt;
+            &lt;td&gt;H2, MySQL, Mssql, Oracle 11g ( Postgres is tested with Carbon-Metrics only)&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+### Siddhi RDBMS store
+
+&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col style=&quot;width: 13%&quot; /&gt;
+        &lt;col style=&quot;width: 86%&quot; /&gt;
+    &lt;/colgroup&gt;
+    &lt;tbody&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Database Access Requirement&lt;/td&gt;
+            &lt;td&gt;It gives the capability of creating the tables at the siddhi application runtime and access the existing tables if a user-defined carbon data source or JNDI property in a siddhi application. Documentation can be found in [Siddhi Extensions Documentation](https://siddhi-io.github.io/siddhi-store-rdbms/api/latest/).&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Required/Optional&lt;/td&gt;
+            &lt;td&gt;Optional&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Default Datasource Name&lt;/td&gt;
+            &lt;td&gt;No such default Datasource. User has to create the datasource in the Siddhi application&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tables&lt;/td&gt;
+            &lt;td&gt;No such default tables. User has to define the tables&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Schemas and Queries&lt;/td&gt;
+            &lt;td&gt;
+                &lt;p&gt;See &lt;a href=&quot;https://github.com/wso2-extensions/siddhi-store-rdbms/blob/v4.0.15/component/src/main/resources/rdbms-table-config.xml&quot;&gt;information about schemas and queries&lt;/a&gt;.&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tested Database Types&lt;/td&gt;
+            &lt;td&gt;H2, MySQL, Mssql, Oracle 11g, DB2, PostgreSQL&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+### Carbon Dashboards
+
+&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col style=&quot;width: 13%&quot; /&gt;
+        &lt;col style=&quot;width: 86%&quot; /&gt;
+    &lt;/colgroup&gt;
+    &lt;tbody&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Database Access Requirement&lt;/td&gt;
+            &lt;td&gt;Carbon Dashboard feature uses its datasource to persist the dashboard related information&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Required/Optional&lt;/td&gt;
+            &lt;td&gt;Optional&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Default Datasource Name&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;WSO2_DASHBOARD_DB&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tables&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;DASHBOARD_RESOURCES&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Schemas and Queries&lt;/td&gt;
+            &lt;td&gt;
+                &lt;p&gt;&lt;See &lt;a href=&quot;https://github.com/wso2/carbon-dashboards/tree/master/features/org.wso2.carbon.dashboards.api.feature/src/main/resources/sql&quot;&gt;information about schemas and queries&lt;/a&gt;.
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tested Database Types&lt;/td&gt;
+            &lt;td&gt;H2, MySQL, Postgres&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+### Business Rules
+
+&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col style=&quot;width: 13%&quot; /&gt;
+        &lt;col style=&quot;width: 86%&quot; /&gt;
+    &lt;/colgroup&gt;
+    &lt;tbody&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Database Access Requirement&lt;/td&gt;
+            &lt;td&gt;Business Rules feature uses database to persist the derived business rules&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Required/Optional&lt;/td&gt;
+            &lt;td&gt;Mandatory&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Default Datasource Name&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;BUSINESS_RULES_DB&lt;/code&gt;
+                &lt;br /&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tables&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;BUSINESS_RULES&lt;/code&gt;, &lt;code&gt;RULES_TEMPLATES&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Schemas and Queries&lt;/td&gt;
+            &lt;td&gt;
+                &lt;p&gt;See &lt;a href=&quot;https://github.com/wso2/carbon-analytics/blob/v2.0.250/components/org.wso2.carbon.business.rules.core/src/main/resources/queries.yaml&quot;&gt;information about schemas and queries&lt;/a&gt;.&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tested Database Types&lt;/td&gt;
+            &lt;td&gt;H2, MySQL, Oracle 11g&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+### IdP client
+
+&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col style=&quot;width: 13%&quot; /&gt;
+        &lt;col style=&quot;width: 86%&quot; /&gt;
+    &lt;/colgroup&gt;
+    &lt;tbody&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Database Access Requirement&lt;/td&gt;
+            &lt;td&gt;IdP client access the DB layer to persist the client id and the client secret of dynamic client registration&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Required/Optional&lt;/td&gt;
+            &lt;td&gt;Mandatory for external IdP client&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Default Datasource Name&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;DB_AUTH_DB&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tables&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;OAUTH_APPS&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Schemas and Queries&lt;/td&gt;
+            &lt;td&gt;
+                &lt;p&gt; See &lt;a href=&quot;https://github.com/wso2/carbon-analytics-common/blob/v6.0.52/components/authentication/org.wso2.carbon.analytics.idp.client/src/main/resources/queries.yaml&quot;&gt;information about schemas and queries&lt;/a&gt;.&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tested Database Types&lt;/td&gt;
+            &lt;td&gt;H2, MySQL, Oracle 11g&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+#### Permission  provider
+
+&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col style=&quot;width: 13%&quot; /&gt;
+        &lt;col style=&quot;width: 86%&quot; /&gt;
+    &lt;/colgroup&gt;
+    &lt;tbody&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Database Access Requirement&lt;/td&gt;
+            &lt;td&gt;Permission provider will access the DB to persist permissions and role - permission mappings.&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Required/Optional&lt;/td&gt;
+            &lt;td&gt;Mandatory, default is in H2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Default Datasource Name&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;PERMISSIONS_DB&lt;/code&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tables&lt;/td&gt;
+            &lt;td&gt;&lt;code&gt;PERMISSIONS, ROLE_PERMISSIONS&lt;/code&gt;
+                &lt;br /&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;odd&quot;&gt;
+            &lt;td&gt;Schemas and Queries&lt;/td&gt;
+            &lt;td&gt;
+                &lt;p&gt;See &lt;a href=&quot;https://github.com/wso2/carbon-analytics-common/blob/v6.0.52/components/permission-provider/org.wso2.carbon.analytics.permissions/src/main/resources/queries.yaml&quot;&gt;information about schemas and queries&lt;/a&gt;.&lt;/p&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr class=&quot;even&quot;&gt;
+            &lt;td&gt;Tested Database Types&lt;/td&gt;
+            &lt;td&gt;H2, MySQL, Mssql, Oracle 11g , Postgres
+                &lt;br /&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table</body>
+</html>

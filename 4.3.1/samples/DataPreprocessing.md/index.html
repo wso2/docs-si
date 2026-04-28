@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DataPreprocessing.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Pre-processing Data Received via TCP
+
+## Purpose
+
+This example demonstrates how to receive events via the TCP transport and carry out data pre-processing with numerous Siddhi extensions (e.g., string extension, time extension). In this sample, a composite ID is obtained using string concatenation and the time format of the incoming event is changed from `yyyy/MM/dd HH:mm:ss` to `dd-MM-yyyy HH:mm:ss`.
+
+For more information about Siddhi extensions, see [Siddhi Extensions](https://wso2.github.io/siddhi/extensions/).
+
+!!!info &quot;Before you begin:&quot;
+    Save the sample Siddhi application in WSO2 Integrator: SI Tooling.
+
+## Executing the sample
+
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI Tooling, and start it by clicking the **Start** button (shown below) or by clicking **Run** =&gt; **Run**.
+
+![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
+
+If the Siddhi application starts successfully, the following messages appear in the console.
+
+* `Tcp Server started in 0.0.0.0:9892`
+
+* `DataPreprocessing.siddhi - Started Successfully!`
+
+!!!note
+    If you want to edit the Siddhi application after you have started it, stop it first, make your edits, save it and then start it again.
+
+## Testing the sample
+
+To test this Siddhi application, download `https://github.com/wso2/product-streaming-integrator-tooling/tree/master/modules/samples/sample-clients/tcp-client` directory and run the `ant` command as follows.
+
+```bash
+ant -Dtype=json -DfilePath=&lt;SI-Tooling-Home&gt;/samples/artifacts/DataPreprocessing/data_preprocessing_events.txt -DeventDefinition=&#x27;{&quot;event&quot;:{&quot;id&quot;:&quot;{0}&quot;,&quot;value&quot;:{1},&quot;property&quot;:{2},&quot;plugId&quot;:{3},&quot;householdId&quot;:{4},&quot;houseId&quot;:{5},&quot;currentTime&quot;:&quot;{6}&quot;}}&#x27; -Durl=tcp://localhost:9892/SmartHomeStream
+```
+
+## Viewing the results
+
+Once the `DataProcessing` Siddhi application receives events from the TCP client, the following messages are displayed in the WSO2 Integrator: SI Tooling console:
+
+```bash
+INFO {io.siddhi.core.stream.output.sink.LogSink} - DataPreprocessing : ProcessedStream : Event{timestamp=1513621173211, data=[HouseholdID:1::UniqueID:0001, 12.12, 13-08-2001 23:49:33], isExpired=false}&lt;br/&gt;&lt;br/&gt;
+INFO {io.siddhi.core.stream.output.sink.LogSink} - DataPreprocessing : ProcessedStream : Event{timestamp=1513621174202, data=[HouseholdID:2::UniqueID:0002, 13.12, 13-08-2004 23:49:34], isExpired=false}&lt;br/&gt;&lt;br/&gt;
+INFO {io.siddhi.core.stream.output.sink.LogSink} - DataPreprocessing : ProcessedStream : Event{timestamp=1513621175208, data=[HouseholdID:3::UniqueID:0003, 13.12, 13-08-2006 23:49:35], isExpired=false}&lt;br/&gt;&lt;br/&gt;
+INFO {io.siddhi.core.stream.output.sink.LogSink} - DataPreprocessing : ProcessedStream : Event{timestamp=1513621176214, data=[HouseholdID:4::UniqueID:0004, 14.12, 13-08-2008 23:49:36], isExpired=false}&lt;br/&gt;&lt;br/&gt;
+```
+
+```sql
+@App:name(&quot;DataPreprocessing&quot;)
+
+@App:description(&#x27;Collect data via TCP transport and pre-process&#x27;)
+
+
+@Source(type = &#x27;tcp&#x27;,
+        context=&#x27;SmartHomeStream&#x27;,
+        @map(type=&#x27;json&#x27;))
+define stream SmartHomeStream (id string, value float, property bool, plugId int, householdId int, houseId int, currentTime string);
+
+@sink(type=&#x27;log&#x27;)
+define stream ProcessedStream (compositeID string, value float, formattedTime string);
+
+--Process smart home data by concatenating the IDs and formatting the time
+@info(name=&#x27;query1&#x27;)
+from SmartHomeStream
+select str:concat(&quot;HouseholdID:&quot;, convert(householdId, &quot;string&quot;), &quot;::&quot;, &quot;UniqueID:&quot;, id) as compositeID, value, str:concat(currentTime, &quot; &quot;, time:currentTime()) as formattedTime
+insert into ProcessedStream;
+```
+</body>
+</html>

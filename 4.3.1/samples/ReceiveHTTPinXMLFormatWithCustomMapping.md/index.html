@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReceiveHTTPinXMLFormatWithCustomMapping.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI to receive events to the `SweetProductionStream` via HTTP transport in XML custom format and log the  events in `LowProductionAlertStream` to the output console.
+
+## Executing the sample
+
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages would be shown on the console.
+
+	* `Source Listener has created for url http://localhost:8006/productionStream`
+	* `ReceiveHTTPInXMLFormatWithCustomMapping.siddhi - Started Successfully!`
+
+## Testing the sample
+
+##### Publish events with http sample client
+
+Navigate to `&lt;SI-Tooling-Home&gt;/samples/sample-clients/http-client` and run `ant` command as follows:
+
+```bash
+ant -Dtype=xml -DcustomMapping=true
+```
+
+If you want to publish custom number of events, you need to run &quot;ant&quot; command as follows:
+
+```bash
+ant -Dtype=xml -DcustomMapping=true -DnoOfEventsToSend=5
+```
+
+##### Publish events with curl command
+
+```bash
+curl -X POST -d &#x27;&lt;events&gt;&lt;item&gt;&lt;id&gt;sugar&lt;/id&gt;&lt;amount&gt;300&lt;/amount&gt;&lt;/item&gt;&lt;/events&gt;&#x27; http://localhost:8006/productionStream --header &quot;Content-Type:application/xml&quot;
+```
+
+##### Publish events with Postman
+
+1. Launch the &#x27;Postman&#x27; application.
+2. Make a &#x27;Post&#x27; request to &#x27;http://localhost:8006/productionStream&#x27; endpoint. Set the Content-Type to &#x27;application/xml&#x27; and set the request body in xml format as follows.
+
+```xml
+&lt;events&gt;
+	&lt;item&gt;
+		&lt;id&gt;sugar&lt;/id&gt;
+		&lt;amount&gt;200&lt;/amount&gt;
+	&lt;/item&gt;
+&lt;/events&gt;
+```
+
+## Notes
+
+If you edit this application while it&#x27;s running, stop the application -&gt; Save -&gt; Start.
+If the message `Source Listener has created for url http://localhost:8006/productionStream` does not appear,it could be due to the port 8006, defined in the Siddhi application is already being used by a different program. To resolve this issue, please do the following,
+
+* Stop this Siddhi application (Click &#x27;Run&#x27; on menu bar -&gt; &#x27;Stop&#x27;)
+* Change the port 8006 to an unused port, in this Siddhi application&#x27;s source configuration.
+* Start the application and check whether the specified messages appear on the console
+
+## Viewing the results
+
+See the output. Following message would be shown on the console.
+
+```bash
+ReceiveHTTPinXMLFormatWithCustomMapping : LowProducitonAlertStream : Event{timestamp=1511939868628, data=[sugar, 300.0], isExpired=false}
+```
+
+```sql
+@App:name(&quot;ReceiveHTTPinXMLFormatWithCustomMapping&quot;)
+
+@App:description(&#x27;Receive events via HTTP transport in XML format with custom mapping and view the output on the console.&#x27;)
+
+@Source(type = &#x27;http&#x27;, receiver.url=&#x27;http://localhost:8006/productionStream&#x27;, basic.auth.enabled=&#x27;false&#x27;,
+    @map(type=&#x27;xml&#x27;,@attributes( name = &quot;item/id&quot;, amount = &quot;item/amount&quot;)))
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;log&#x27;)
+define stream LowProductionAlertStream (name string, amount double);
+
+-- passthrough data in the SweetProductionStream into LowProducitonAlertStream
+@info(name=&#x27;query1&#x27;)
+from SweetProductionStream
+select *
+insert into LowProductionAlertStream;
+```
+</body>
+</html>

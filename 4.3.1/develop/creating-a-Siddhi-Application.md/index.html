@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>creating-a-Siddhi-Application.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Creating Siddhi Applications
+
+Siddhi applications are files that define the Siddhi logic to process
+the events sent to the WSO2 Integrator: SI. They are written in the [Siddhi Query
+Language](https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/)
+using the [WSO2 Integrator: SI for VS Code Overview](si-for-vscode-overview.md).
+
+A Siddhi file contains the following configurations:
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Configuration&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Stream&lt;/td&gt;
+&lt;td&gt;A logical series of events ordered in time with a uniquely identifiable name, and set of defined attributes with specific data types defining its schema.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Source&lt;/td&gt;
+&lt;td&gt;This consumes data from external sources (such as &lt;code&gt;             TCP            &lt;/code&gt; , &lt;code&gt;             Kafka            &lt;/code&gt; , &lt;code&gt;             HTTP            &lt;/code&gt; , etc) in the form of events, then converts each event (that can be in &lt;code&gt;             XML            &lt;/code&gt; , &lt;code&gt;             JSON            &lt;/code&gt; , &lt;code&gt;             binary            &lt;/code&gt; , etc. format) to a Siddhi event, and passes that to a stream for processing.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Sink&lt;/td&gt;
+&lt;td&gt;This takes events arriving at a stream, maps them to a predefined data format (such as &lt;code&gt;             XML            &lt;/code&gt; , &lt;code&gt;             JSON,            &lt;/code&gt; &lt;code&gt;             binary            &lt;/code&gt; , etc), and publishes them to external endpoints (such as &lt;code&gt;             E-mail            &lt;/code&gt; , &lt;code&gt;             TCP            &lt;/code&gt; , &lt;code&gt;             Kafka            &lt;/code&gt; , &lt;code&gt;             HTTP            &lt;/code&gt; , etc).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Executional Element&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;An executional element can be one of the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Stateless query: Queries that only consider currently incoming events when generating an output. e.g., filters&lt;/li&gt;
+&lt;li&gt;Stateful query: Queries that consider both currently incoming events as well as past events when generating an output. e.g., windows, sequences, patterns, etc.&lt;/li&gt;
+&lt;li&gt;Partitions: Collections of stream definitions and Siddhi queries separated from each other within a Siddhi application for the purpose of processing events in parallel and in isolation&lt;/li&gt;
+&lt;/ul&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+A Siddhi application can be created from the source view or the design
+view of the WSO2 Integrator: SI Tooling.
+
+### Creating a Siddhi application in the source view
+
+To create a Siddhi application via the source view of the WSO2 Integrator: SI Tooling, follow the steps below:
+
+1. Open a VSCode window and ensure that the WSO2 Integrator: SI for VS Code extension is installed. Open the command pallete and type `SI: Open SI Welcome` to open the welcome page.
+
+  ![Welcome Page]({{base_path}}/images/Creating-Siddhi-Applications/Welcome-Page.png)
+
+2. Click on **Create new Siddhi Application** to start defining a new Siddhi application. A new file opens as shown below.
+
+    ![New Siddhi File]({{base_path}}/images/Creating-Siddhi-Applications/New_Siddhi_File.png)
+
+3.  Add the following sample Siddhi application to the file.
+
+    ``` sql
+        @App:name(&quot;SweetProductionAnalysis&quot;)
+    
+        @Source(type = &#x27;tcp&#x27;, context=&#x27;SweetProductionData&#x27;, @map(type=&#x27;binary&#x27;))
+        define stream SweetProductionStream (name string, amount double);
+    
+        @sink(type=&#x27;log&#x27;, @map(type=&#x27;json&#x27;))
+        define stream ProductionAlertStream (name string, amount double);
+    
+        from SweetProductionStream
+        select *
+        insert into ProductionAlertStream;
+    ```
+
+    !!! info
+        Note the following in this Siddhi application
+        &lt;table&gt;
+           &lt;thead&gt;
+              &lt;tr class=&quot;header&quot;&gt;
+                 &lt;th&gt;Configuration&lt;/th&gt;
+                 &lt;th&gt;Description&lt;/th&gt;
+              &lt;/tr&gt;
+           &lt;/thead&gt;
+           &lt;tbody&gt;
+              &lt;tr class=&quot;odd&quot;&gt;
+                 &lt;td&gt;Stream&lt;/td&gt;
+                 &lt;td&gt;
+                    &lt;div class=&quot;content-wrapper&quot;&gt;
+                       &lt;p&gt;This stream contains two stream configurations:&lt;/p&gt;
+                       &lt;ul&gt;
+                          &lt;li&gt;
+                             &lt;p&gt;&lt;code&gt;                SweetProductionStream                  &lt;/code&gt;&lt;/p&gt;
+                             &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                                &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                                   &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                                      &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;define stream SweetProductionStream (name string, amount double);&lt;/code&gt;&lt;/pre&gt;
+                                   &lt;/div&gt;
+                                &lt;/div&gt;
+                             &lt;/div&gt;
+                             &lt;p&gt;This is the input stream that defines the schema based on which events are selected to be processed by the &lt;code&gt;                   SweetProductionAnalysis                  &lt;/code&gt; Siddhi application. Events received via the source in this application are directed to this stream.&lt;/p&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;
+                             &lt;p&gt;&lt;code&gt;                   ProductionAlertStream                                     &lt;/code&gt;&lt;/p&gt;
+                             &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                                &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                                   &lt;div class=&quot;sourceCode&quot; id=&quot;cb2&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                                      &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb2-1&quot;&gt;&lt;/a&gt;define stream ProductionAlertStream (name string, amount double);&lt;/code&gt;&lt;/pre&gt;
+                                   &lt;/div&gt;
+                                &lt;/div&gt;
+                             &lt;/div&gt;
+                             &lt;p&gt;This is the output stream from which the sink configured in this application takes events to be published as the output.&lt;/p&gt;
+                          &lt;/li&gt;
+                       &lt;/ul&gt;
+                    &lt;/div&gt;
+                 &lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr class=&quot;even&quot;&gt;
+                 &lt;td&gt;Source&lt;/td&gt;
+                 &lt;td&gt;
+                    &lt;div class=&quot;content-wrapper&quot;&gt;
+                       &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                          &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                             &lt;div class=&quot;sourceCode&quot; id=&quot;cb3&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                                &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb3-1&quot;&gt;&lt;/a&gt;@Source(type = &amp;#39;tcp&amp;#39;, context=&amp;#39;SweetProductionData&amp;#39;, @map(type=&amp;#39;binary&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
+                             &lt;/div&gt;
+                          &lt;/div&gt;
+                       &lt;/div&gt;
+                       &lt;p&gt;&lt;br /&gt;
+                          This source configuration has the following sections:
+                       &lt;/p&gt;
+                       &lt;ul&gt;
+                          &lt;li&gt;
+                             &lt;pre&gt;&lt;code&gt;@Source(type = ‘tcp’, context=&amp;#39;SweetProductionData&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+                             &lt;p&gt;This configuration defines &lt;code&gt;                   tcp                  &lt;/code&gt; as the transport via which events are received to be processed by the &lt;code&gt;                   SweetProductionAnalysis                  &lt;/code&gt; Siddhi application.&lt;/p&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;
+                             &lt;pre&gt;&lt;code&gt;@map(type=&amp;#39;binary&amp;#39;))
+                                      &lt;/code&gt;&lt;/pre&gt;
+                             &lt;p&gt;This configuration defines the input mapping. In this scenario, Binary Mapper is used which converts input events into binary events and feeds them into siddhi.&lt;/p&gt;
+                          &lt;/li&gt;
+                       &lt;/ul&gt;                      
+                           The source types and map types are available as Siddhi extensions, and you can find via the operator finder as follows:
+                       &lt;!-- &lt;ol&gt;
+                          &lt;li&gt;
+                             &lt;p&gt;Click the &lt;strong&gt;Operator Finder&lt;/strong&gt; icon to open the Operator Finder.&lt;/p&gt;
+                             &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/Creating-Siddhi-Applications/Operator_Finder.png&quot; /&gt;&lt;/p&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;
+                             &lt;p&gt;Move the cursor to the location in the Siddhi application where you want to add the source.&lt;br /&gt;
+                                &lt;img src=&quot;{{base_path}}/images/Creating-Siddhi-Applications/MoveCursor.png&quot; /&gt;
+                             &lt;/p&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;
+                             &lt;p&gt;Search for the required transport type. Once it appears in the search results, click the &lt;strong&gt;Add to Source&lt;/strong&gt; icon on it.&lt;br /&gt;
+                                &lt;img src=&quot;{{base_path}}/images/Creating-Siddhi-Applications/Search_And_Add_Extension.png&quot;/&gt;
+                             &lt;/p&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;
+                             &lt;p&gt;Similarly, search for the mapping type you want to include in the source configuration, and add it.&lt;/p&gt;
+                             &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/Creating-Siddhi-Applications/Search_And_Add_Map_Extension.png&quot;&gt;&lt;/p&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;
+                             &lt;p&gt;The source annotation is now displayed as follows. You can add the other properties as required, and save your changes.&lt;br /&gt;
+                                &lt;img src=&quot;{{base_path}}/images/Creating-Siddhi-Applications/Selected_Extensions.png&quot;&gt;
+                             &lt;/p&gt;
+                          &lt;/li&gt;
+                       &lt;/ol&gt; --&gt;
+                    &lt;/div&gt;
+                 &lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr class=&quot;odd&quot;&gt;
+                 &lt;td&gt;Sink&lt;/td&gt;
+                 &lt;td&gt;
+                    &lt;div class=&quot;content-wrapper&quot;&gt;
+                       &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                          &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                             &lt;div class=&quot;sourceCode&quot; id=&quot;cb6&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                                &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb6-1&quot;&gt;&lt;/a&gt;@sink(type=&amp;#39;log&amp;#39;, @map(type=&amp;#39;json&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
+                             &lt;/div&gt;
+                          &lt;/div&gt;
+                       &lt;/div&gt;
+                       &lt;p&gt;This sink configuration has the following sections:&lt;/p&gt;
+                       &lt;ul&gt;
+                          &lt;li&gt;
+                             &lt;pre&gt;&lt;code&gt;@sink(type=&amp;#39;log&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+                             &lt;p&gt;This configuration defines &lt;code&gt;                   log                  &lt;/code&gt; as the transport via which the processed events are published from the &lt;code&gt;                   ProductionAlertStream                  &lt;/code&gt; output stream. Log sink simply publishes events into the console.&lt;/p&gt;
+                          &lt;/li&gt;
+                          &lt;li&gt;
+                             &lt;pre&gt;&lt;code&gt;@map(type=&amp;#39;json&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
+                             &lt;p&gt;This configuration defines the output mapping. Events are published with the &lt;code&gt;                  json                 &lt;/code&gt; mapping type. Json mapper converts the events in the &lt;code&gt;                  ProductionAlertStream                 &lt;/code&gt; to the Json format.&lt;/p&gt;
+                          &lt;/li&gt;
+                       &lt;/ul&gt;
+                       You can select the sink type and the map type from the **Operator Finder**.
+                    &lt;/div&gt;
+                 &lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr class=&quot;even&quot;&gt;
+                 &lt;td&gt;Executional Elements&lt;/td&gt;
+                 &lt;td&gt;
+                    &lt;div class=&quot;content-wrapper&quot;&gt;
+                       &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                          &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                             &lt;div class=&quot;sourceCode&quot; id=&quot;cb9&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                                &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;from SweetProductionStream &lt;br/&gt;select * &lt;br/&gt;insert into ProductionAlertStream;&lt;/code&gt;&lt;/pre&gt;
+                             &lt;/div&gt;
+                          &lt;/div&gt;
+                       &lt;/div&gt;
+                       &lt;p&gt;This is where the logic of the siddhi app is defined. In this scenario, all the events received in the &lt;code&gt;                 SweetProductionStream                &lt;/code&gt; input stream are inserted into the &lt;code&gt;                 ProductionAlertStream                &lt;/code&gt; output stream.&lt;/p&gt;
+                    &lt;/div&gt;
+                 &lt;/td&gt;
+              &lt;/tr&gt;
+           &lt;/tbody&gt;
+        &lt;/table&gt;
+
+
+
+
+4. To save this Siddhi application, click **File**, and then click **Save**.
+
+6.  To see a graphical view of the event flow you defined in your Siddhi
+    application, go to the **Design View**.
+    
+    ![Switch to Design View]({{base_path}}/images/Creating-Siddhi-Applications/Design_View.png)
+    
+    The event flow is displayed as follows.  
+    
+    ![Siddhi Application in Design View]({{base_path}}/images/Creating-Siddhi-Applications/Siddhi_Application_Design_View.png)
+
+### Creating a Siddhi application in the design view
+
+To create a Siddhi application via the design view of the WSO2 Integrator: SI Tooling, follow the steps below:
+
+1.  Open a VSCode window and ensure that the WSO2 Integrator: SI for VS Code extension is installed. Open the command palette and type `SI: Open SI Welcome` to open the welcome page.
+
+    WSO2 Integrator: SI Tooling opens as shown below.
+    ![Welcome Page]({{base_path}}/images/Creating-Siddhi-Applications/Welcome-Page.png)
+
+2.  Click **Create New Siddhi Application** to start defining a new Siddhi application. A new file opens as shown below.
+
+    ![New Siddhi File]({{base_path}}/images/Creating-Siddhi-Applications/New_Siddhi_File.png)
+
+3.  To open the design view, click on the **Open Graphical View** button on the right side of the editor.
+
+4.  To define the input stream into which the events to be processed via
+    the Siddhi application should be received, drag and drop the stream
+    icon (shown below) into the grid.  
+    ![Stream Icon]({{base_path}}/images/Creating-Siddhi-Applications/Stream_Icon.png)
+
+    Once the stream component is added to the grid, move the cursor over
+    it, and then click on the settings icon as shown below.
+
+    ![Stream Settings]({{base_path}}/images/Creating-Siddhi-Applications/Stream_Settings.png)
+
+    As as result, the Stream Configuration form opens as follows.  
+    ![Stream Configuration form]({{base_path}}/images/Creating-Siddhi-Applications/Stream_Configuration_Form.png)
+
+    Fill this form as follows to define a stream named `SweetProductionStream` with two attributes named
+    `name` and `amount`:  
+      
+    1.  In the **Name** field, enter `SweetProductionStream`.
+    2.  In the **Attributes** table, enter two attributes as follows.
+        You can click **+Attribute** to add a new row in the table to
+        define a new attribute.
+
+        | Attribute Name                            | Attribute Type                            |
+        |-------------------------------------------|-------------------------------------------|
+        | `                 name                `   | `                 string                ` |
+        | `                 amount                ` | `                 double                ` |
+
+    3.  Click **Submit** to save the new stream definition. As a result,
+        the stream is displayed on the grid with the `SweetProductionStream` label as shown below.  
+        ![New stream added to the grid]({{base_path}}/images/Creating-Siddhi-Applications/Stream_Component.png)
+
+5.  To define the output stream to which the processed events need to be directed, drag and drop the
+    stream icon again. Place it after the `SweetProductionStream` stream. This stream
+    should be named `ProductionAlertStream` and have the following attributes.
+
+    | Attribute Name                                 | Attribute Type                        |
+    |------------------------------------------------|---------------------------------------|
+    | `               name              `            | `               string              ` |
+    | `               totalProduction              ` | `               long              `   |
+
+6.  To add the source from which events are received, drag and drop the
+    source icon (shown below) into the grid. The source is an input to
+    the **SweetProductionStream** input stream component. Therefore,
+    place this source component to the left of the input stream
+    component in the grid.&lt;br/&gt;
+    ![Source Icon]({{base_path}}/images/Creating-Siddhi-Applications/Source_Icon.png)
+
+    Once you add the source component, draw a line from it to the
+    **SweetProductionStream** input stream component by dragging the
+    cursor as demonstrated below.  
+    ![Connect source]({{base_path}}/images/Creating-Siddhi-Applications/Connect-Source-Component.gif)  
+    Click the settings icon on the source component you added to open
+    the **Source Configuration** form. Then enter information as
+    follows.  
+    ![Source Configuration form]({{base_path}}/images/Creating-Siddhi-Applications/Source_Configuration.png)
+    1.  In the **Source Type** field, select **tcp** .
+
+    2.  For this example, assume that events are received in the `binary` format. To indicate that
+        events are expected to be converted from this format, select
+        **binary** in the **Map Type** field.
+
+    3.  To indicate the context, select the **context** check box and
+        enter `SweetProductionData` in the field that appears below.
+    4.  Click **Submit.**
+
+7.  To add a query that defines the execution logic, drag and drop the
+    projection query icon (shown below) to the grid.  
+    ![Projection Query Icon]({{base_path}}/images/Creating-Siddhi-Applications/Projection_Query_Icon.png)  
+    The query uses the events in the `SweetProductionStream` input stream as inputs and directs the 
+    processed events (which are its output) to the `ProductionAlertStream` output stream. Therefore,
+    create two connections as demonstrated below.  
+    ![Connecting the projection query]({{base_path}}/images/Creating-Siddhi-Applications/Connect-Projection-Query.gif)
+8.  To define the execution logic, move the cursor over the query in the
+    grid, and click on the settings icon that appears. This opens the
+    **Query Configuration** form. Enter information in it as follows:  
+    ![Configuring the projection query]({{base_path}}/images/Creating-Siddhi-Applications/Projection-Query-Configuration.png)
+    1.  Enter a name for the query in the **Name** field. In this example, let&#x27;s enter `query` as the name.
+    2.  In order to specify how each user defined attribute in the input
+        stream is converted to generate the output events, select **User
+        Defined Attributes** in the **Select** field. As a result, the
+        **User Defined Attributes** table appears. The **As** column of
+        this table displays the attributes of the output stream. To
+        derive the value for each attribute, enter required
+        expressions/values in the `Expression` column as explained below.
+        1.  The value for `name` can be derived from the input stream without any further processing. Therefore, enter
+            `name` as the expression for the `name` attribute.
+        2.  To derive the value for the `totalProduction` attribute, the sum of the values for the `amount` attribute
+            of input events need to be calculated. Therefore, enter the expression as follows to apply the `sum()`
+            Siddhi function to the `amount` attribute.  
+            `sum(amount)`
+        3.  Leave the default values of the **Output** section unchanged.
+    3.  Click **Submit** to save the information.  
+          
+
+9.  To add a sink to publish the output events that are directed to the `ProductionAlertStream` output stream, drag and
+    drop the sink icon (shown below) into the grid.  
+    ![Sink icon]({{base_path}}/images/Creating-Siddhi-Applications/Sink_Icon.png) &lt;br/&gt;
+    Draw an arrow from the `ProductionAlertStream` output stream to the sink component to connect them.  
+      
+    Click the settings icon on the sink component you added to open the
+    **Sink Configuration** form. Then enter information as follows.  
+    ![Configuring the sink]({{base_path}}/images/Creating-Siddhi-Applications/Sink_Configuration.png)  
+    1.  In this example, let&#x27;s assume that output needs to be generated
+        as logs in the console. To indicate this, select `log` in the **Sink Type** field.
+
+    2.  In the **Map Type** field, select the format in which the output
+        must be generated. For this example, let&#x27;s select `json`.
+    3.  Click **Submit** to save the information.
+
+11. Click **Source View**. The siddhi application is displayed as follows.  
+    ![Source view]({{base_path}}/images/Creating-Siddhi-Applications/Siddhi_Application_Source_View.png)
+12. To save this Siddhi application, click **File**, and then click **Save**.
+</body>
+</html>

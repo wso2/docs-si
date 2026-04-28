@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>viewing-overall-statistics.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>!!! note
+    **This page is still a work in progress!**
+
+# Viewing Overall Statistics
+
+This dashboard displays the overall Siddhi statistics of the Siddhi applications currently deployed in your WSO2 Integrator: SI instance.
+
+There are nine other dashboards linked to the Siddhi overall statistics dashboard which represent the Siddhi components and their statistics. The Siddhi Grafana Dashboard represents the memory, latency and throughput statistics for the Siddhi components as follows.
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;No.&lt;/th&gt;
+&lt;th&gt;Element&lt;/th&gt;
+&lt;th&gt;Memory&lt;/th&gt;
+&lt;th&gt;Latency&lt;/th&gt;
+&lt;th&gt;Throughput&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;               01              &lt;/td&gt;
+&lt;td&gt;               Stream              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;               02              &lt;/td&gt;
+&lt;td&gt;               Query              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;               03              &lt;/td&gt;
+&lt;td&gt;               Source              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;               04              &lt;/td&gt;
+&lt;td&gt;               Sink              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;               05              &lt;/td&gt;
+&lt;td&gt;               Source Mapper              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;               06              &lt;/td&gt;
+&lt;td&gt;               Sink Mapper              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;               07              &lt;/td&gt;
+&lt;td&gt;               Table              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;               08              &lt;/td&gt;
+&lt;td&gt;               Window              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;               09              &lt;/td&gt;
+&lt;td&gt;               Aggregation              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;               10              &lt;/td&gt;
+&lt;td&gt;               Trigger              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;               11              &lt;/td&gt;
+&lt;td&gt;               On-Demand Query              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;td&gt;               ✔️              &lt;/td&gt;
+&lt;td&gt;               -              &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+ 
+The following information is displayed in this dashboard.
+ 
+## Servers Up/Down
+ 
+ ![Servers up/down]({{base_path}}/images/streaming-integrator-grafana-dashboard/active_servers_graph.png)
+ 
+ This indicates the number of active servers against time. When a new server is started, it is indicated by a vertical line. You can move the cursor over this vertical line to check the host and port at which the new active server is running.
+ 
+ This also provides a link to the **Siddhi Server Statistics** dashboard to [view server statistics](viewing-server-statistics.md).
+ 
+**Purpose**
+ 
+ This allows you to identify the following:
+ 
+ - The times at which a specific server started and stopped.
+ 
+ - The duration of time for which a specific server was active.
+ 
+ - The number of servers that were active at a specific time.
+ 
+!!! tip &quot;Recommended action&quot;
+    Check the throughput, system load average, memory usage, CPU usage etc., for the time periods during which a specific server/combination of servers was active in order to evaluate server performance.
+ 
+## Siddhi App Count
+ 
+ ![Siddhi app count]({{base_path}}/images/streaming-integrator-grafana-dashboard/siddhi_app_count.png)
+ 
+ This indicates the total number of Siddhi applications deployed in the currently active servers.
+ 
+**Purpose**
+
+This allows you to get an overall understanding of the level of activity carried out by the currently active servers.
+
+!!! tip &quot;Recommended action&quot;
+    If the Siddhi application count is relatively high, you can check the throughput for each Siddhi application to identify the Siddhi applications that you can remove from your WSO2 Integrator: SI deployment to reduce the system overhead. To do this, you can filter statistics for each individual Siddhi application in the following dashboards:&lt;br/&gt;&lt;br/&gt;
+    - [Siddhi Stream Statistics](viewing-stream-statistics.md)&lt;br/&gt;
+    - [Siddhi Source Statistics](viewing-source-statistics.md)&lt;br/&gt;
+    - [Siddhi Sink Statistics](viewing-sink-statistics.md)&lt;br/&gt;
+    - [Siddhi Query Statistics](viewing-query-statistics.md)&lt;br/&gt;
+    - [Siddhi Window Statistics](viewing-window-statistics.md)&lt;br/&gt;
+    - [Siddhi Trigger Statistics](viewing-trigger-statistics.md)&lt;br/&gt;
+    - [Siddhi Table Statistics](viewing-table-statistics.md)&lt;br/&gt;
+    - [Siddhi Aggregation Statistics](viewing-aggregation-statistics.md)&lt;br/&gt;
+    - [Siddhi On Demand Query Statistics](viewing-on-demand-query-statistics.md)
+ 
+## Server Statistics Summary Table
+ 
+ ![Server statistics summary]({{base_path}}/images/streaming-integrator-grafana-dashboard/server_statistics_summary.png)
+ 
+ This lists the currently active WSO2 Integrator: SI servers and displays the following for each server:
+  - The total events received by the server
+  - The system load average
+  - The total memory used by each server.
+ 
+**Purpose**
+
+To evaluate the performance of each server as follows:
+
+- By analysing the efficiency of the server by comparing its events received with the overhead it incurs in terms of the system load average and the memory used.
+- By comparing the events received, system load average and the memory usage of each server with that of other servers.
+
+!!! tip &quot;Recommended action&quot;
+    Once you analyze the performance of each server, you can make changes to your WSO2 Integrator: SI deployment to use server resources in a more optimum manner (e.g., by removing low performing servers, adding better performing servers, etc.)
+ 
+## Overall Throughput
+ 
+ ![Overall throughput]({{base_path}}/images/streaming-integrator-grafana-dashboard/overall_throughput_graph.png)
+ 
+ This shows the overall throughput of your current WSO2 Integrator: SI deployment. 
+ 
+**Purpose**
+
+To monitor the overall throughput and evaluate it against other statistics such as the system load average, memory used, the number of Siddhi applications deployed in the system etc.
+ 
+!!! tip &quot;Recommended action&quot;
+    Determine whether the overall throughput of your WSO2 Integrator: SI server is sufficient based on the system resources allocated, and identify ways in which you can improve it (e.g., reducing Siddhi elements that are deployed, but do not generate a sufficient throughput, making adjustments to the system resources allocated. etc.)
+ 
+## System Load Average
+ 
+ ![System load average]({{base_path}}/images/streaming-integrator-grafana-dashboard/system_load_average_graph.png)
+ 
+ This shows the average system load of your current WSO2 Integrator: SI deployment.
+ 
+**Purpose**
+
+To monitor the system load average and compare it with other statistics such as the overall throughput, memory used, the number of Siddhi applications deployed in the system etc. and take appropriate measures to reduce it if it is too high, and to optimize the system better if it is relatively low.
+ 
+!!! tip &quot;Recommended action&quot;
+    If the system load average is too high, you can take appropriate measures to reduce it (by adding more system resources or by identifying Siddhi applications/elements generating a low throughput that you can remove). If the system load average is too low, you can find ways to optimise it (e.g., reducing the system resources allocated, etc.)
+ 
+## CPU Usage
+ 
+ ![CPU usage]({{base_path}}/images/streaming-integrator-grafana-dashboard/cpu_usage_graph.png)
+ 
+  This shows the CPU usage of your current WSO2 Integrator: SI deployment.
+  
+**Purpose**
+
+To monitor the CPU usage of your current WSO2 Integrator: SI deployment and to identify scenarios where you may need to make changes to the CPU resource allocation.
+
+!!! tip &quot;Recommended action&quot;
+    If there is a spike in the CPU usage, you can identify whether you need to allocate more CPU resources to your deployment or redeploy some of the Siddhi elements with high throughputs to a different WSO2 Integrator: SI deployment. &lt;br/&gt;&lt;br/&gt; Similarly, if there is a fall in the CPU usage, you can determine whether some of the CPU resources can be removed from the WSO2 Integrator: SI deployment.
+ 
+## Memory Usage
+ 
+ ![Memory usage]({{base_path}}/images/streaming-integrator-grafana-dashboard/memory_usage_graph.png)
+ 
+ This shows the memory usage of your current WSO2 Integrator: SI deployment and to identify scenarios where you may need to make changes to the memory allocation.
+  
+**Purpose**
+
+To monitor the memory usage of your WSO2 Integrator: SI deployment and allocate more memory when needed.
+ 
+!!! tip &quot;Recommended action&quot;
+    If there is a spike in the memory usage, you can identify whether you need to allocate more memory resources to your deployment or redeploy some of the Siddhi elements with high throughputs to a different WSO2 Integrator: SI deployment. &lt;br/&gt;&lt;br/&gt; Similarly, if there is a fall in the memory usage, you can determine whether some of the memory resources can be removed from the WSO2 Integrator: SI deployment.
+ 
+## Thread Count
+
+![Thread Count]({{base_path}}/images/viewing-overall-statistics/thread-count.png)
+
+This shows the number of JVM (Java Virtual Machine) threads that are currently active.
+
+**Purpose**
+
+You can use these statistics to profile your JVM.
+
+## Threads Blocked
+
+![Threads Blocked]({{base_path}}/images/viewing-overall-statistics/blocked-threads.png)
+
+This shows the number of JVM threads that are currently blocked.
+
+**Purpose**
+
+You can use these statistics to profile your JVM.
+
+## Memory Heap Used
+
+![Memory Heap Used]({{base_path}}/images/viewing-overall-statistics/memory-heap-used.png)
+
+This shows the JVM memory heap that is currently consumed by your WSO2 Integrator: SI deployment.
+
+**Purpose**
+
+You can evaluate the performance of your WSO2 Integrator: SI servers based on the memory heap usage.
+
+
+## File Descriptors Open
+
+The number of JVM file descriptors that are currently open.
+
+![File Descriptors Open]({{base_path}}/images/viewing-overall-statistics/file-descriptors.png)
+
+## Stream Statistics
+
+![Stream Statistics]({{base_path}}/images/viewing-overall-statistics/stream-statistics.png)
+
+This indicates the following:
+
+- The complete list of streams in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
+
+- The throughput of each stream listed.
+
+- The total stream count.
+
+The **Stream Statistics** widget also provides a link to open the **Siddhi Stream Statistics** dashboard where you can [view stream statistics](viewing-stream-statistics.md).
+
+**Purpose**
+
+This allows you to monitor each stream in your WSO2 Integrator: SI deployment and identify the streams that generate a lot of activity.
+
+!!! tip &quot;Recommended action&quot;
+    Filter stream statistics for each Siddhi application to identify active Siddhi applications. You can also identify streams that are duplicated in different Siddhi applications and merge such Siddhi applications if possible to reduce system overhead.
+
+## Query Statistics
+
+![Query Statistics]({{base_path}}/images/viewing-overall-statistics/query-statistics.png)
+
+This indicates the following:
+
+- The complete list of queries in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
+
+- The latency of each query listed.
+
+- The total query count.
+
+The **Query Statistics** widget also provides a link to the **Siddhi Query Statistics** dashboard where you can [view query statistics](viewing-query-statistics.md).
+
+**Purpose**
+
+This allows you to monitor each query in your WSO2 Integrator: SI deployment and identify the main queries to be reviewed in order to reduce the overall latency.
+
+!!! tip &quot;Recommended action&quot;
+    Identify queries with high latency and review them to use the Siddhi logic in a more efficient manner. You can also identify queries that are duplicated in different Siddhi applications and merge such Siddhi applications if possible to reduce system overhead
+
+## Source and Source Mapper Statistics
+
+![Source and Source Mapper Statistics]({{base_path}}/images/viewing-overall-statistics/source-statistics.png)
+
+This indicates the following:
+
+- The complete list of sources in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
+
+- The throughput of each source listed.
+
+- The total source count in all the Siddhi applications you have selected to monitor.
+
+The **Source and Source Mapper Statistics** widget also provides a link to the **Siddhi Source Statistics** dashboard where you can [view source statistics](viewing-source-statistics.md).
+
+**Purpose**
+
+To monitor how each source contributes to the overall throughput of your Siddhi application deployment.
+
+!!! tip &quot;Recommended action&quot;
+    
+
+## Sink Statistics
+
+![Sink Statistics]({{base_path}}/images/viewing-overall-statistics/sink-statistics.png)
+
+This indicates the following:
+
+- The complete list of sinks in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
+
+- The throughput of each sink listed.
+
+- The total sink count in all the Siddhi applications you have selected to monitor.
+
+The **Sink Statistics** widget also provides a link to the **Siddhi Sink Statistics** dashboard where you can [view sink statistics](viewing-sink-statistics.md).
+
+**Purpose**
+
+To monitor the amount of data published by your WSO2 Integrator: SI deployment to different destinations, brokers, files, databases and cloud storages.
+
+!!! tip &quot;Recommended action&quot;
+
+## Table Statistics
+
+![Table Statistics]({{base_path}}/images/viewing-overall-statistics/table-statistics.png)
+
+This indicates the following:
+
+- The complete list of tables in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
+
+- The throughput of each table listed.
+
+- The total table count in all the Siddhi applications you have selected to monitor.
+
+The **Table Statistics** widget also provides a link to the **Siddhi Table Statistics** dashboard where you can [view table statistics](viewing-table-statistics.md).
+
+**Purpose**
+
+To monitor the tables defined in your WSO2 Integrator: SI deployment and assessing the extent to which each table is used.
+
+!!! tip &quot;Recommended action&quot;
+
+## Window Statistics
+
+![Window Statistics]({{base_path}}/images/viewing-overall-statistics/window-statistics.png)
+
+This indicates the following:
+
+- The complete list of windows in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
+
+- The throughput of each window listed.
+
+- The total window count in all the Siddhi applications you have selected to monitor.
+
+The **Window Statistics** widget also provides a link to the **Siddhi Window Statistics** dashboard where you can [view window statistics](viewing-window-statistics.md).
+
+**Purpose**
+
+To monitor the windows defined in your WSO2 Integrator: SI deployment and assessing the extent to which each window is used.
+
+!!! tip &quot;Recommended action&quot;
+
+## Aggregation Statistics
+
+![Aggregation Statistics]({{base_path}}/images/viewing-overall-statistics/aggregation-statistics.png)
+
+This indicates the following:
+
+- The complete list of aggregations in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
+
+- The throughput of each aggregation listed.
+
+- The total aggregation count in all the Siddhi applications you have selected to monitor.
+
+The **Aggregation Statistics** widget also provides a link to the **Siddhi Aggregation Statistics** dashboard where you can [view aggregation statistics](viewing-aggregation-statistics.md).
+
+**Purpose**
+
+To monitor the aggregations defined in your WSO2 Integrator: SI deployment and assessing the extent to which each aggregation is used.
+
+!!! tip &quot;Recommended action&quot;
+
+## Trigger Statistics
+
+![Trigger Statistics]({{base_path}}/images/viewing-overall-statistics/trigger-statistics.png)
+
+This indicates the following:
+
+- The complete list of triggers in all the Siddhi applications that you are monitoring in your WSO2 Integrator: SI deployment.
+
+- The throughput of each trigger listed.
+
+- The total trigger count in all the Siddhi applications you have selected to monitor.
+
+The **Trigger Statistics** widget also provides a link to the **Siddhi Trigger Statistics** dashboard where you can [view trigger statistics](viewing-trigger-statistics.md).
+
+**Purpose**
+
+To monitor the triggers defined in your WSO2 Integrator: SI deployment and assessing the extent to which each trigger is used.
+
+!!! tip &quot;Recommended action&quot;
+
+## On Demand Query Statistics
+
+![On Demand Query Statistics]({{base_path}}/images/viewing-overall-statistics/on-demand-query-statistics.png)
+
+This indicates the following:
+
+- The complete list of on demand queries you have carried out via REST API for the Siddhi applications you have selected to monitor.
+
+- The throughput of each on-demand query listed.
+
+- The total on-demand query count.
+
+The **On-Demand Query Statistics** widget also provides a link to the **Siddhi On-Demand Query Statistics** dashboard where you can [view on-demand query statistics](viewing-on-demand-query-statistics.md).
+
+**Purpose**
+
+!!! tip &quot;Recommended action&quot;
+</body>
+</html>

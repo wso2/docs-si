@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>running-si-with-docker-and-kubernetes.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Running the WSO2 Integrator: SI in Containerized Environments
+
+
+## Running the WSO2 Integrator: SI with Docker
+
+This section shows you how to run WSO2 Integrator: SI in Docker. This involves installing Docker, running the WSO2 Integrator: SI in Docker and then deploying and running a Siddhi application in the Docker environment.
+
+!!!tip &quot;Before you begin:&quot;
+    - The system requirements are as follows:&lt;br/&gt;
+        -   3 GHz Dual-core Xeon/Opteron (or latest)&lt;br/&gt;
+        -   8 GB RAM&lt;br/&gt;
+        -   10 GB free disk space&lt;br/&gt;
+    - Install Docker by following the instructions provided in [here](https://docs.docker.com/install/).&lt;br/&gt;
+    - Save the following Siddhi application as a `.siddhi` file in a preferred location in your machine.&lt;br/&gt;
+        ```
+        @App:name(&#x27;MySimpleApp&#x27;)
+        @App:description(&#x27;Receive events via HTTP transport and view the output on the console&#x27;)
+        @Source(type = &#x27;http&#x27;, receiver.url=&#x27;http://0.0.0.0:8006/productionStream&#x27;, basic.auth.enabled=&#x27;false&#x27;,
+           @map(type=&#x27;json&#x27;))
+        define stream SweetProductionStream (name string, amount double);
+        @sink(type=&#x27;log&#x27;)
+        define stream TransformedProductionStream (nameInUpperCase string, amount double);
+        -- Simple Siddhi query to transform the name to upper case.
+        from SweetProductionStream
+        select str:upper(name) as nameInUpperCase, amount
+        insert into TransformedProductionStream;
+        ```
+        &lt;br/&gt;
+        Note the following about this Siddhi application.&lt;br/&gt;
+        - The Siddhi application operates in Docker. Therefore, the HTTP source configured in it uses a receiver URL where the host number is `0.0.0.0`.&lt;br/&gt;
+        - The `8006` port of the receiver URL is the same HTTP port that you previously exposed via Docker.&lt;br/&gt;
+
+### Starting the WSO2 Integrator: SI in Docker
+
+In this scenario, you are downloading and installing the WSO2 Integrator: SI via Docker.
+
+WSO2 provides open source Docker images to run WSO2 Integrator: SI in Docker Hub. You can view these images [In Docker Hub - WSO2](https://hub.docker.com/u/wso2/).
+
+To run the WSO2 Integrator: SI in the  open source image that is available for it
+
+1. To pull the required WSO2 Integrator: SI distribution with updates from the Docker image, issue the following command.
+
+    `docker pull -it wso2/streaming-integrator:1.0.0`
+
+2. Expose the required ports via docker when running the docker container. In this scenario, you need to expose the following ports:
+
+    - The 9443 port where the WSO2 Integrator: SI server is run.
+
+    - The 8006 HTTP port from which Siddhi application you are deploying in this scenario receives messages.
+
+    To expose these ports, issue the following command.
+
+    `docker run -p 9443:9443 -p 8006:8006 wso2/streaming-integrator/1.0.0 -v &lt;local-absolute-siddhi-file-path&gt;/MySimpleApp.siddhi:/apps/MySimpleApp.siddhi siddhiio/siddhi-runner-alpine -Dapps=/apps/MySimpleApp.siddhi`
+
+    !!!info
+        In the above command, you are mounting the location where you have saved the `MySimpleApp.siddhi` file so that the WSO2 Integrator: SI can locate it and run it when it starts in Docker. Therefore, replace `&lt;local-absolute-siddhi-file-path&gt;` with the path in which you saved the Siddhi application in your machine.
+
+3. If you did not mount the location to the `MySimpleApp.siddhi` file when issuing the command to start the WSO2 Integrator: SI, you can deploy the Siddhi application via the WSO2 Integrator: SI tool.
+
+    ???info &quot;Click here for detailed instructions.&quot;
+        1. Start and access the WSO2 Integrator: SI Tooling. Open a new file and copy-paste the `MySimpleApp.siddhi` Siddhi application in the Source View.&lt;br/&gt;
+            Then save the Siddhi application.&lt;br/&gt;
+        2. To deploy the Siddhi application, click the **Deploy** menu option and then click **Deploy to Server**. The **Deploy Siddhi Apps to Server** dialog box opens as shown in the example below.&lt;br/&gt;
+            ![Deploy to Server dialog box]({{base_path}}/images/getting-si-run-with-mi/deploy-to-server-dialog-box.png)&lt;br/&gt;
+            1. In the **Add New Server** section, enter information as follows:&lt;br/&gt;
+                ![Add New Server]({{base_path}}/images/getting-si-run-with-mi/add-new-server.png)&lt;br/&gt;
+                Then click **Add**.&lt;br/&gt;
+            2. Select the check boxes for the **MySimpleApp** Siddhi application and the server you added as shown below.&lt;br/&gt;
+                ![Deploy Siddhi Apps to Server]({{base_path}}/images/getting-si-run-with-mi/select-siddhi-app-and-server.png)&lt;br/&gt;
+            3. Click **Deploy**.&lt;br/&gt;
+                When the Siddhi application is successfully deployed, the following message appears in the **Deploy Siddhi Apps to Server** dialog box.&lt;br/&gt;
+                ![Deployment Status]({{base_path}}/images/getting-si-run-with-mi/siddhi-application-deployment-status.png)&lt;br/&gt;
+                The following is logged in the console in which you started the WSO2 Integrator: SI in Docker.&lt;br/&gt;
+                ![Deployment Status]({{base_path}}/images/hello-world-with-docker/siddhi-app-deployed-in-docker-log.png)
+
+
+Now the WSO2 Integrator: SI has started in the Docker environment.
+
+
+### Creating and deploying the Siddhi application
+
+Let&#x27;s create a simple Siddhi application that receives an HTTP message, does a simple transformation to the message, and then logs it in the SI console.
+
+
+### Trying-out the Siddhi application
+
+To try out the `MySimpleApp` Siddhi application you deployed in Docker, issue the following CURL command.
+
+```
+curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;sugar\&quot;,\&quot;amount\&quot;: 20.5}}&quot;  http://0.0.0.0:8006/productionStream --header &quot;Content-Type:application/json&quot;
+```
+
+The following output appears in the console in which you started the WSO2 Integrator: SI in Docker.
+
+![HTTP Response]({{base_path}}/images/hello-world-with-docker/http-response.png)
+
+
+## Running the WSO2 Integrator: SI with Kubernetes
+
+In this section, you get to start and run the WSO2 Integrator: SI in a Kubernetes cluster in 5 minutes.
+
+!!!tip &quot;Before you begin:&quot;
+    - Create a Kubernetes cluster. In this quick start guide, you can do this via Minikube as follows.&lt;br/&gt;
+        1. Install Minikube  and start a cluster by following the [Minikube Documentation](https://minikube.sigs.k8s.io/docs/start/).&lt;br/&gt;
+        2. Enable ingress on Minikube by issuing the following command.&lt;br/&gt;
+            `minikube addons enable ingress`&lt;br/&gt;
+    - Make sure that you have admin privileges to install the [Siddhi operator](https://siddhi.io/en/v5.0/docs/siddhi-as-a-kubernetes-microservice/#!).
+
+
+### Installing the Siddhi Operator for the WSO2 Integrator: SI
+
+To install the Siddhi Operator, follow the procedure below:
+
+1. To install the Siddhi Kubernetes operator for WSO2 Integrator: SI issue the following commands:
+
+    `kubectl apply -f https://github.com/wso2/streaming-integrator/releases/download/v1.0.0-m1/00-prereqs.yaml`
+
+    `kubectl apply -f https://github.com/wso2/streaming-integrator/releases/download/v1.0.0-m1/01-siddhi-operator.yaml`
+
+
+2. To verify whether the Siddhi operator is successfully installed, issue the following command.
+
+    `kubectl get deployment`
+
+    If the installation is successful, the following deployments should be running in the Kubernetes cluster.
+
+    ![Siddhi Operator Installment]({{base_path}}/images/hello-world-with-kubernetes/verify-siddhi-operator-installation.png)
+
+
+### Deploying Siddhi applications in Kubernetes
+
+You can deploy multiple Siddhi applications in one or more selected containers via Kubernetes. In this example, let&#x27;s deploy just one Siddhi application in one container for the ease of understanding how to run the WSO2 Integrator: SI in a Kubernetes cluster.
+
+1. First, let&#x27;s design a simple Siddhi application that consumes events via HTTP to detect power surges. It filters events for a specific device type (i.e., dryers) and that also report a value greater than 600 for `power`.
+
+    ```sql
+        @App:name(&quot;PowerSurgeDetection&quot;)
+        @App:description(&quot;App consumes events from HTTP as a JSON message of { &#x27;deviceType&#x27;: &#x27;dryer&#x27;, &#x27;power&#x27;: 6000 } format and inserts the events into DevicePowerStream, and alerts the user if the power level is greater than or equal to 600W by printing a message in the log.&quot;)
+        /*
+            Input: deviceType string and powerConsuption int(Watt)
+            Output: Alert user from printing a log, if there is a power surge in the dryer. In other words, notify when power is greater than or equal to 600W.
+        */
+
+
+        @source(
+          type=&#x27;http&#x27;,
+          receiver.url=&#x27;${RECEIVER_URL}&#x27;,
+          basic.auth.enabled=&#x27;false&#x27;,
+          @map(type=&#x27;json&#x27;)
+        )
+
+        define stream DevicePowerStream(deviceType string, power int);
+
+        @sink(type=&#x27;log&#x27;, prefix=&#x27;LOGGER&#x27;)
+        define stream PowerSurgeAlertStream(deviceType string, power int);
+
+        @info(name=&#x27;surge-detector&#x27;)
+        from DevicePowerStream[deviceType == &#x27;dryer&#x27; and power &gt;= 600]
+        select deviceType, power
+        insert into PowerSurgeAlertStream;
+    ```
+
+2. The above Siddhi application needs to be deployed via a YAML file. Therefore, enter basic information for the YAML file and include the Siddhi application in a section named `spec` as shown below.
+
+    ```xml
+    apiVersion: siddhi.io/v1alpha2
+    kind: SiddhiProcess
+    metadata:
+      name: streaming-integrator
+    spec:
+      apps:
+        - script: |
+            @App:name(&quot;PowerSurgeDetection&quot;)
+            @App:description(&quot;App consumes events from HTTP as a JSON message of { &#x27;deviceType&#x27;: &#x27;dryer&#x27;, &#x27;power&#x27;: 6000 } format and inserts the events into DevicePowerStream, and alerts the user if the power level is greater than or equal to 600W by printing a message in the log.&quot;)
+            /*
+                Input: deviceType string and powerConsuption int(Watt)
+                Output: Alert user from printing a log, if there is a power surge in the dryer. In other words, notify when power is greater than or equal to 600W.
+            */
+
+            @source(
+              type=&#x27;http&#x27;,
+              receiver.url=&#x27;${RECEIVER_URL}&#x27;,
+              basic.auth.enabled=&#x27;false&#x27;,
+              @map(type=&#x27;json&#x27;)
+            )
+            define stream DevicePowerStream(deviceType string, power int);
+            @sink(type=&#x27;log&#x27;, prefix=&#x27;LOGGER&#x27;)
+            define stream PowerSurgeAlertStream(deviceType string, power int);
+            @info(name=&#x27;surge-detector&#x27;)
+            from DevicePowerStream[deviceType == &#x27;dryer&#x27; and power &gt;= 600]
+            select deviceType, power
+            insert into PowerSurgeAlertStream;
+    ```
+
+3. Add a section named `container&#x27; and and parameters with values to configure the container in which the Siddhi application is to be deployed.
+
+    ```
+    container:
+    env:
+      -
+        name: RECEIVER_URL
+        value: &quot;http://0.0.0.0:8080/checkPower&quot;
+      -
+        name: BASIC_AUTH_ENABLED
+        value: &quot;false&quot;
+    ```
+
+    Here, you are specifying that Siddhi applications running within the container should receive events to the `http://0.0.0.0:8080/checkPower` URL and basic authentication is not enabled for them.
+
+4. Add a `runner` section and add configurations related to authorization such as users and roles. For this example, you can configure this section as follows.
+
+    ```
+    runner: |
+    auth.configs:
+      type: &#x27;local&#x27;        # Type of the IdP client used
+      userManager:
+        adminRole: admin   # Admin role which is granted all permissions
+        userStore:         # User store
+          users:
+          -
+            user:
+              username: root
+              password: YWRtaW4=
+              roles: 1
+          roles:
+          -
+            role:
+              id: 1
+              displayName: root
+      restAPIAuthConfigs:
+        exclude:
+          - /simulation/*
+          - /stores/*
+    ```
+
+    ???info &quot;To view the complete file, click here.&quot;
+        ```
+        apiVersion: siddhi.io/v1alpha2
+        kind: SiddhiProcess
+        metadata:
+          name: streaming-integrator-app
+        spec:
+          apps:
+            - script: |
+                @App:name(&quot;PowerSurgeDetection&quot;)
+                @App:description(&quot;App consumes events from HTTP as a JSON message of { &#x27;deviceType&#x27;: &#x27;dryer&#x27;, &#x27;power&#x27;: 6000 } format and inserts the events into DevicePowerStream, and alerts the user if the power level is greater than or equal to 600W by printing a message in the log.&quot;)
+                /*
+                    Input: deviceType string and powerConsuption int(Watt)
+                    Output: Alert user from printing a log, if there is a power surge in the dryer. In other words, notify when power is greater than or equal to 600W.
+                */
+
+                @source(
+                  type=&#x27;http&#x27;,
+                  receiver.url=&#x27;${RECEIVER_URL}&#x27;,
+                  basic.auth.enabled=&#x27;false&#x27;,
+                  @map(type=&#x27;json&#x27;)
+                )
+                define stream DevicePowerStream(deviceType string, power int);
+                @sink(type=&#x27;log&#x27;, prefix=&#x27;LOGGER&#x27;)
+                define stream PowerSurgeAlertStream(deviceType string, power int);
+                @info(name=&#x27;surge-detector&#x27;)
+                from DevicePowerStream[deviceType == &#x27;dryer&#x27; and power &gt;= 600]
+                select deviceType, power
+                insert into PowerSurgeAlertStream;
+          container:
+            env:
+              -
+                name: RECEIVER_URL
+                value: &quot;http://0.0.0.0:8080/checkPower&quot;
+              -
+                name: BASIC_AUTH_ENABLED
+                value: &quot;false&quot;
+
+          runner: |
+            auth.configs:
+              type: &#x27;local&#x27;        # Type of the IdP client used
+              userManager:
+                adminRole: admin   # Admin role which is granted all permissions
+                userStore:         # User store
+                  users:
+                  -
+                    user:
+                      username: root
+                      password: YWRtaW4=
+                      roles: 1
+                  roles:
+                  -
+                    role:
+                      id: 1
+                      displayName: root
+              restAPIAuthConfigs:
+                exclude:
+                  - /simulation/*
+                  - /stores/*
+        ```
+
+5. Save the file as `siddhi-process.yaml` in a preferred location
+
+6. To apply the configurations in this YAML file to the Kubernetes cluster, issue the following command.
+
+    `kubectl apply -f &lt;PATH_to_siddhi-process.yaml&gt;`
+
+    !!!info
+        This file overrules the configurations in the `&lt;SI_HOME&gt;/conf/server/deployment.yaml` file.
+
+### Invoking the Siddhi application
+
+To invoke the `PowerSurgeDetection` Siddhi application that you deployed in the Kubernetes cluster, follow the steps below.
+
+1. First, get the external IP of minikube by issuing the following command.
+
+    `minikube ip`
+
+    Add the IP it returns to the `/etc/hosts` file in your machine.
+
+2. Issue the following CURL command to invoke the `PowerSurgeDetection` Siddhi application.
+
+    ```
+    curl -X POST \
+      http://siddhi/streaming-integrator-0/8080/checkPower \
+        -H &#x27;Accept: */*&#x27; \
+        -H &#x27;Content-Type: application/json&#x27; \
+        -H &#x27;Host: siddhi&#x27; \
+        -d &#x27;{
+            &quot;deviceType&quot;: &quot;dryer&quot;,
+            &quot;power&quot;: 600
+            }&#x27;
+    ```
+
+3. To monitor the associated logs for the above siddhi application, get a list of the available pods by issuing the following command.
+
+    `kubectl get pods&#x27;
+
+    This returns the list of pods as shown in the example below.
+
+    ```
+    NAME                                        READY    STATUS    RESTARTS    AGE
+    streaming-integrator-app-0-b4dcf85-npgj7     1/1     Running      0        165m
+    streaming-integrator-5f9fcb7679-n4zpj        1/1     Running      0        173m
+    ```
+
+4. To monitor the logs for the required pod, issue a command similar to the following. In this example, the pod to be monitored is `streaming-integrator-app-0-b4dcf85-npgj7`.
+
+    `streaming-integrator-app-0-b4dcf85-npgj7`</body>
+</html>

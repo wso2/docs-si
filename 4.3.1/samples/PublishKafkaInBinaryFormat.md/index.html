@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PublishKafkaInBinaryFormat.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to send sweet production events via Kafka transport in Binary format.
+
+## Prerequisites
+
+1. Setup Kafka.
+	* Kafka libs to be added and converted to OSGI from {KafkaHome}/libs are as follows.
+		* kafka_2.11-0.10.0.0.jar
+		* kafka-clients-0.10.0.0.jar
+		* metrics-core-2.2.0.jar
+		* scala-library-2.11.8.jar
+		* zkclient-0.8.jar
+		* zookeeper-3.4.6.jar
+	*  Add the OSGI converted kafka libs to `&lt;SI-Tooling-Home&gt;/lib`.
+	*  Add the kafka libs to `&lt;SI-Tooling-Home&gt;/samples/sample-clients/lib`.
+2. Save this sample.
+3. If there is no syntax error, the following messages would be shown on the console.
+	```
+	Siddhi App PublishKafkaInBinaryFormat successfully deployed.
+	```
+
+## Note
+
+To convert Kafka libs to OSGI,
+
+1. Create a folder (Eg: Kafka) and copy Kafka libs to be added from `{KafkaHome}/libs`.
+2. Create another folder(Eg: Kafka-osgi, This folder will have the libs that converted to OSGI).
+3. Navigate to `&lt;SI-Tooling-Home&gt;/bin` and issue the follwing command.
+
+	* For Linux:
+
+		```bash
+		./jartobundle.sh &lt;path/kafka&gt; &lt;path/kafka-osgi&gt;
+		```
+
+	* For Windows:
+
+		```bash
+		./jartobundle.bat &lt;path/kafka&gt; &lt;path/kafka-osgi&gt;
+		```
+
+4. If converted successfully then for each lib, following messages would be shown on the terminal.
+
+	```bash
+	- INFO: Created the OSGi bundle &lt;kafka-lib-name&gt;.jar for JAR file &lt;absolute_path&gt;/kafka/&lt;kafka-lib-name&gt;.jar
+	```
+
+5. You can find the osgi converted libs in kafka-osgi folder. You can copy that to `&lt;SI-Tooling-Home&gt;/lib`.
+
+## Executing the sample
+
+1. Navigate to `{KafkaHome}` and start zookeeper node using following command.
+
+	```bash
+	bin/zookeeper-server-start.sh config/zookeeper.properties
+	```
+
+2. Navigate to `{KafkaHome}` and start kafka server node using following command.
+
+	```bash
+	bin/kafka-server-start.sh config/server.properties
+
+	```
+3. Navigate to `&lt;SI-Tooling-Home&gt;/samples/sample-clients/kafka-consumer` and run `ant` command with following arguments.
+
+	```bash
+	ant -DisBinaryMessage=true -DtopicList=kafka_result_topic -Dtype=binary
+	```
+
+4. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+5. If the Siddhi application starts successfully, the following messages would be shown on the console.
+
+	```bash
+	- PublishKafkaInBinaryFormat.siddhi - Started Successfully!
+	- Kafka version : 0.10.0.0
+	- Kafka commitId : 23c69d62a0cabf06
+	- Kafka producer created.
+	```
+
+## Testing the sample
+
+##### Send events with kafka server, through event simulator
+
+1. To open event simulator by clicking on the second icon or press Ctrl+Shift+I.
+2. In the Single Simulation tab of the panel, select values as follows:
+	* `Siddhi App Name`: PublishKafkaInBinaryFormat
+	* `Stream Name`: `SweetProductionStream`
+3. In the batchNumber field and lowTotal fields, enter &#x27;1&#x27;, &#x27;85.5&#x27; respectively and then click Send to send the event.
+4. Send some more events.
+
+##### Publish events with curl command
+Open a new terminal and issue the following command.
+
+```bash
+curl -X POST -d &#x27;{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishKafkaInBinaryFormat&quot;, &quot;data&quot;: [1, 85.5]}&#x27; http://localhost:9390/simulation/single -H &#x27;content-type: text/plain&#x27;
+```
+
+##### Publish events with Postman
+
+1. Launch the &#x27;Postman&#x27; application.
+2. Make a `Post` request to &#x27;http://localhost:9390/simulation/single&#x27; endpoint. Set the Content-Type to &#x27;text/plain&#x27; and set the request body in json format as follows,
+
+	```json
+	{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishKafkaInBinaryFormat&quot;,&quot;data&quot;: [1, 85.5]}
+	```
+
+4. Click &#x27;send&#x27;. If there is no error, the following messages would be shown on the console.
+
+	```bash
+	&quot;status&quot;: &quot;OK&quot;,
+	&quot;message&quot;: &quot;Single Event simulation started successfully&quot;
+	```
+
+## Viewing the results
+
+It will print the results in binary format.
+
+## Notes
+
+If the message &quot;&#x27;Kafka&#x27; sink at `&#x27;LowProducitonAlertStream&#x27; has successfully connected to &#x27;http://localhost:9092&#x27;` does not appear, it could be due to the port 9092, defined in the Siddhi application is already being used by a different program. To resolve this issue, please do the following,
+
+* Stop this Siddhi application (Click &#x27;Run&#x27; on menu bar -&gt; &#x27;Stop&#x27;)
+* Change the port 9092 to an unused port, in this Siddhi application&#x27;s source configuration.
+* Start the application and check whether the specified messages appear on the console.
+
+```sql
+@App:name(&quot;PublishKafkaInBinaryFormat&quot;)
+@App:description(&#x27;Send events via Kafka transport using Binary format&#x27;)
+
+
+define stream SweetProductionStream (batchNumber long, lowTotal double);
+
+@sink(type=&#x27;kafka&#x27;,
+      topic=&#x27;kafka_result_topic&#x27;,
+      bootstrap.servers=&#x27;localhost:9092&#x27;,
+      is.binary.message=&#x27;true&#x27;,
+      @map(type=&#x27;binary&#x27;))
+define stream LowProductionAlertStream (batchNumber long, lowTotal double);
+
+@info(name=&#x27;EventsPassthroughQuery&#x27;)
+from SweetProductionStream
+select *
+insert into LowProductionAlertStream;
+```
+</body>
+</html>

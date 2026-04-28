@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>StreamingKMeansSample.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>
+## Purpose:
+This sample demonstrates how to use siddhi-execution-streamingml kmeans incremental function for clustering.
+
+## Prerequisites:
+Save this sample. If there is no syntax error, the following messages would be shown on the console.
+```
+* Siddhi App StreamingKMeansSample successfully deployed.
+```
+
+## Executing the Sample:
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages would be shown on the console.
+	```
+	* StreamingKMeansSample.siddhi - Started Successfully!
+	```
+
+## Testing the Sample:
+You can publish data event to the file, through event simulator.
+1. Open event simulator by clicking on the second icon or press Ctrl+Shift+I.
+2. In the Single Simulation tab of the panel, select values as follows:
+	* Siddhi App Name  : StreamingKMeansSample
+	* Stream Name     : SweetProductionStream
+3. Enter and send suitable values for the attributes of selected stream.
+
+## Viewing the Results:
+Messages similar to the following would be shown on the console.
+```
+INFO {io.siddhi.core.stream.output.sink.LogSink} - StreamingMLExtensionkmeans-incremental-sample : SweetStatePredictionStream : Event{timestamp=1513603080892, data=[12.5, 124.5, 12.5, 124.5], isExpired=false}
+```
+
+First two values of the data array represent the coordinates of the cluster that given product belongs to.
+```
+(eg: 12.5, 124.5)
+```
+
+```sql
+@App:name(&quot;StreamingKMeansSample&quot;)
+@App:Description(&#x27;Demonstrates how to use siddhi-execution-streamingml kmeans incremental function for clustering.&#x27;)
+
+
+define stream SweetProductionStream(temperature double, density double);
+
+@sink(type=&#x27;log&#x27;)
+define stream SweetStatePredictionStream(closestCentroidCoordinate1 double, closestCentroidCoordinate2 double, temperature double, density double);
+
+@info(name = &#x27;query1&#x27;)
+from SweetProductionStream#streamingml:kMeansIncremental(2, 0.2, temperature, density)
+select closestCentroidCoordinate1, closestCentroidCoordinate2, temperature, density
+insert into SweetStatePredictionStream;
+```</body>
+</html>

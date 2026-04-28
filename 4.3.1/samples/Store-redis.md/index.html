@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Store-redis.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>## Purpose:
+This application demonstrates how to perform CRUD operations using Siddhi queries in Redis stores. The sample depicts a scenario in a sweet production factory. The sweet production details such as name of the raw material, amount used for production can be stored using `insertSweetProductionStream`. The following streams can be used to search, delete, update or upsert(update or insert) the existing data in the store.
+
+* Search - `searchSweetProductionStream`
+* insert - `insertSweetProductionStream`
+* delete - `deleteSweetProductionStream`
+* update - `updateSweetProductionStream`
+* update or insert - `updateOrInsertSweetProductionStream`
+* contains - `containsSweetProductionStream` (verifies whether all the attributes that enter in the stream exists in the store).
+
+## Prerequisites:
+1. Download the Redis from https://redis.io/.
+2. Download redis java client &#x27;Jedis&#x27; jar (&gt;2.7.0) from https://mvnrepository.com/artifact/redis.clients/jedis and place in `&lt;SI_HOME&gt;/lib` folder.
+3. In `redis.conf`, provide the requirepass as root.
+4. Start redis by redis-server &lt;path-to-redis.conf&gt;.
+
+## Executing the Sample:
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages would be shown on the console.
+    ```
+    * Store-redis.siddhi - Started Successfully!
+    ```
+
+## Testing the Sample:
+1. Simulate single events. For this, click on &#x27;Event Simulator&#x27; (double arrows on left tab) -&gt; &#x27;Single Simulation&#x27; -&gt; Select &#x27;Store-redis&#x27; as &#x27;Siddhi App Name&#x27; -&gt; Select &#x27;searchSweetProductionStream&#x27; as &#x27;Stream Name&#x27; -&gt; Provide attribute values -&gt; Send.
+2. Send at-least one event with the single event simulator, where the name matches a name value in the data we previously inserted to the SweetProductionTable. This would satisfy the &#x27;on&#x27; condition of our join query.
+3. Likewise the events can be sent to the other corresponding streams to add, delete, update, insert, search events.
+4. After a change in the store, using the search stream the developer can see whether the operation is successful.
+5. Primary Key constraint SweetProductionTable is disabled, since name cannot be used as a PrimaryKey in ProductionTable.
+Siddhi functions can be used to create a unique id for the received events which can then be used to apply Primary Key constraint on the data store records. (http://wso2.github.io/siddhi/documentation/siddhi-4.0/#function)
+
+## Viewing the Results:
+See the output for row materials on the console. Inserted, deleted, updated events can be checked by searchSweetProductionStream.
+
+```sql
+@App:name(&quot;Store-redis&quot;)
+@App:description(&quot;Receive events via simulator and received data are persisted in store.&quot;)
+
+
+define stream insertSweetProductionStream (symbol string, price float, volume long);
+define stream deleteSweetProductionStream (symbol string, price float, volume long);
+define stream searchSweetProductionStream(symbol string);
+define stream updateOrInsertSweetProductionStream(symbol string, price float, volume long);
+define stream updateSweetProductionStream (symbol string, price float, volume long);
+define stream containsSweetProductionStream (symbol string, price float, volume long);
+
+@Store(type=&#x27;redis&#x27;, table.name=&#x27;SweetProductionTable&#x27;, host= &#x27;localhost&#x27;, port=&#x27;6379&#x27;, password=&quot;root&quot;)
+@primaryKey(&#x27;symbol&#x27;)
+@index(&#x27;price&#x27;)
+define table SweetProductionTable (symbol string, price float, volume long);
+
+@sink(type=&#x27;log&#x27;)
+define stream OutStream(symbol string, price float, volume long);
+
+@info(name=&#x27;query1&#x27;)
+from insertSweetProductionStream
+insert into SweetProductionTable;
+
+@info(name = &#x27;query2&#x27;)
+from updateSweetProductionStream
+update SweetProductionTable
+set SweetProductionTable.price = price
+on SweetProductionTable.symbol == symbol;
+
+@info(name = &#x27;query3&#x27;)
+from deleteSweetProductionStream
+delete SweetProductionTable
+on SweetProductionTable.symbol==symbol ;
+
+@info(name = &#x27;query4&#x27;)
+from updateOrInsertSweetProductionStream#window.timeBatch(1 sec)
+update or insert into SweetProductionTable
+on SweetProductionTable.symbol==symbol;
+
+@info(name = &#x27;query5&#x27;)
+from containsSweetProductionStream[ (symbol==SweetProductionTable.symbol) in SweetProductionTable]
+insert into OutStream;
+
+@info(name = &#x27;query6&#x27;)
+from searchSweetProductionStream#window.length(1) join SweetProductionTable on searchSweetProductionStream.symbol==SweetProductionTable.symbol
+select searchSweetProductionStream.symbol as symbol, SweetProductionTable.price as price,
+SweetProductionTable.volume as volume
+insert into OutStream;
+```</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>user-Management-via-the-IdP-Client-Interface.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># User Management via the IdP Client Interface
+
+In WSO2 Integrator: SI, user management is carried out through the
+Identity Provider Client (IdP Client) interface that can be switched as
+required for the user scenario. Furthermore, a custom IdP Client can be
+written to encompass the required user store connection and
+authentication.
+
+IdP clients can be switched by specifying te required IdP client in the
+`auth.configs:` section in the
+`&lt;SI_HOME&gt;/conf/server/deployment.yaml` file.
+
+``` java
+    auth.configs:
+      # Type of the IdP Client used for the user authentication
+      type: local
+```
+
+The active IdP client is `local` by default.
+
+Following are the IdP Clients available for WS)2 WSO2 Integrator: SI:
+
+- [Local IdP Client](#UserManagementviatheIdPClientInterface-LocalIdPClient)
+
+- [External IdP Client](#UserManagementviatheIdPClientInterface-ExternalIdPClient)
+
+## Local IdP Client
+
+The local IdP Client interacts with the file-based user store that is
+defined in the `&lt;SI_HOME&gt;/conf/server/deployment.yaml` file under the `auth.configs` namespace as follows:
+
+``` text
+    auth.configs:  
+      type: &#x27;local&#x27;
+      userManager:
+        adminRole: admin
+        userStore:
+          users:
+           - 
+             user:
+               username: admin
+               password: YWRtaW4=
+               roles: 1
+          roles:
+           -     
+             role:
+               id: 1
+               displayName: admin
+```
+
+The above user and role is added by default.
+
+### Parameters
+
+The parameters used in the above configurations are as follows:
+
+!!! note
+
+If new users/roles are added and the above default user and role are
+also needed, the following parameters must be added to the user store
+along with the added user/role.
+
+
+&lt;table style=&quot;width:100%;&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 24%&quot; /&gt;
+&lt;col style=&quot;width: 11%&quot; /&gt;
+&lt;col style=&quot;width: 63%&quot; /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Default Value&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              userManager &amp;gt; adminRole             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              admin             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;The name of the role that has administration privileges.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              userManager &amp;gt; userStore &amp;gt;             &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;              users &amp;gt; user &amp;gt; username             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              admin             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;The username of the user.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              userManager &amp;gt; userStore &amp;gt;             &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;              users &amp;gt; user &amp;gt; password             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              YWRtaW4=             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;The Base64(UTF-8) encrypted password of the user.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              userManager &amp;gt; userStore &amp;gt;             &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;              users &amp;gt; user &amp;gt; roles             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              1             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;A comma separated list of the IDs of the roles assigned to the user.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              userManager &amp;gt; userStore &amp;gt;             &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;              roles &amp;gt; role &amp;gt; id             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;1&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;The unique ID for the role.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;p&gt;userManager &amp;gt; userStore &amp;gt;&lt;/p&gt;
+&lt;p&gt;roles &amp;gt; role &amp;gt; admin&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;admin&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;The name of the role.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+Furthermore, Local IdP Client functionality can be controlled via the
+properties defined in the
+`         &lt;SP_HOME&gt;/conf/&lt;PROFILE&gt;/deployment.yam        ` l file under
+the `         auth.configs        ` namespace as shown below.
+
+``` java
+    auth.configs:
+      type: local
+      properties:
+        sessionTimeout: 3600
+        refreshSessionTimeout: 86400     
+```
+
+The following are the properties that can be configured for the local
+IdP provider:
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Property&lt;/th&gt;
+&lt;th&gt;Default Value&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;             properties &amp;gt; sessiontimeout            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             3600            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;div class=&quot;content-wrapper&quot;&gt;
+&lt;p&gt;The number of seconds for which the session is valid once the user logs in.&lt;/p&gt;
+!!! info
+&lt;p&gt;The value specified here needs to be greater than 60 seconds because the system checks the user credentials and keeps extending the session every minute until the session timeout is reached.&lt;/p&gt;
+
+&lt;/div&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;pre&gt;&lt;code&gt;properties &amp;gt; refreshSessionTimeout&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             86400            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The number of seconds for which the refresh token used to extend the session is valid.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+The complete default configuration of the `         local        ` IdP
+Client is as follows:
+
+``` java
+    auth.configs:  
+      type: &#x27;local&#x27;
+      properties:
+        sessionTimeout: 3600
+        refreshSessionTimeout: 86400
+      userManager:
+        adminRole: admin
+        userStore:
+          users:
+           - 
+             user:
+               username: admin
+               password: YWRtaW4=
+               roles: 1
+          roles:
+           -     
+             role:
+               id: 1
+               displayName: admin
+```
+
+  
+
+## External IdP Client
+
+External IdP Client authenticates users by interacting with an external
+identity provider via OAuth2 and SCIM2 protocols. The user store is
+maintained by the external identity provider. WSO2 SP authenticates by
+requesting an access token from the identity provider using the password
+grant type.
+
+!!! note
+
+The identity provider with which WSO2 SP interacts with to authenticate
+users must be started before the SP server.
+
+
+The auth manager must be configured under the
+`         auth.configs        ` namespace as shown below:
+
+``` java
+    auth.configs:
+      type: external
+      authManager:
+        adminRole: admin
+```
+
+The parameters used in the above configurations areas follows:
+
+| Parameter                                            | Default Value                      | Description                                              |
+|------------------------------------------------------|------------------------------------|----------------------------------------------------------|
+| `              userManager &gt; adminRole             ` | `              admin             ` | The name of the role that has administration privilages. |
+
+  
+
+Furthermore, external IdP client functionality can be controlled via the
+properties defined in the
+`         &lt;SP_HOME&gt;/conf/&lt;PROFILE&gt;/deployment.yaml        ` file under
+the `         auth.configs        ` namespace as shown below.
+
+``` java
+    auth.configs: 
+     type: external
+     properties:
+      kmDcrUrl: https://localhost:9443/identity/connect/register
+      kmTokenUrl: https://localhost:9443/oauth2
+      kmUsername: admin
+      kmPassword: admin
+      idpBaseUrl: https://localhost:9443/scim2
+      idpUsername: admin
+      idpPassword: admin
+      portalAppContext: portal
+      statusDashboardAppContext: monitoring
+      businessRulesAppContext : business-rules
+      databaseName: WSO2_OAUTH_APP_DB
+      cacheTimeout: 900
+      baseUrl: https://localhost:9643
+      grantType: password
+      
+```
+
+The following are the properties that can be configured for the external
+IdP provider:
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;&lt;div&gt;
+Property
+&lt;/div&gt;&lt;/th&gt;
+&lt;th&gt;&lt;div&gt;
+Default Value
+&lt;/div&gt;&lt;/th&gt;
+&lt;th&gt;&lt;div&gt;
+Description
+&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;kmDcrUrl&lt;/td&gt;
+&lt;td&gt;&lt;pre&gt;&lt;code&gt;https://localhost:9443/identity/connect/register&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;The Dynamic Client Registration (DCR) endpoint of the key manager in the IdP.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;             dcrAppOwner            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             kmUsername            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;br /&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;             kmTokenUrl            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;                             https://localhost:9443/oauth2                           &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;The token endpoint of the key manager in the IdP.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              kmUsername             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             admin            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The username for the key manager in the IdP.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              kmPassword             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             admin            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The password for the key manager in the IdP.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              idpBaseUrl             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;                             https://localhost:9443/scim2                           &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;The SCIM2 endpoint of the IdP.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              idpUsername             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             admin            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The username for the IdP.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              idpPassword             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             admin            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The password for the IdP.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              portalAppContext             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             portal            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The application context of the Dashboard Portal application in WSO2 SP.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;             statusDashboardAppContext            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             monitoring            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The application context of the Status Dashboard application in WSO2 SP.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              businessRulesAppContext             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             business-rules            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The application context of the Business Rules application in WSO2 SP.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;             databaseName            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              WSO2_OAUTH_APP_DB             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;The name of the wso2.datasource used to store the OAuth application credentials&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;             cacheTimeout            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             900            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The cache timeout for the validity period of the token in seconds.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              baseUrl             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;                             https://localhost:9643                           &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;The base URL to which the token should be redirected after the code returned&lt;/p&gt;
+&lt;p&gt;from the &lt;strong&gt;Authorization Code&lt;/strong&gt; grant type is used to get the token.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              grantType             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             password            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The grant type used in the OAuth application token request.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              spClientId/ portalClientId/             &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;              statusDashboardClientId/ businessRulesClientId             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;The client ID of the OAuth App. If no value is specified for this property, the DCR is called to register the application and persist the client ID in the data store.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              spClientId/ portalClientId/             &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;              statusDashboardClientId/ businessRulesClientId             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;The client secret of the OAuth application. If no value is specified for this property, the DCR is called to register the application and persist the client secret in the data store.&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;
+&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+### Writing custom IdP Client
+
+When writing a custom IdP client, the following two interfaces must be
+implemented:
+
+-   [IdPClientFactory](https://github.com/wso2/carbon-analytics-common/blob/master/components/authentication/org.wso2.carbon.analytics.idp.client/src/main/java/org/wso2/carbon/analytics/idp/client/core/spi/IdPClientFactory.java)
+    : This is a factory OSGi service that initialtes the custom IdP
+    client using the properties from
+    `          IdPClientConfiguration.         `
+-   [IdPClient](https://github.com/wso2/carbon-analytics-common/blob/master/components/authentication/org.wso2.carbon.analytics.idp.client/src/main/java/org/wso2/carbon/analytics/idp/client/core/api/IdPClient.java)
+    :  An interface with functions to provide user authentication and
+    retrieval by the other services.
+
+  
+</body>
+</html>

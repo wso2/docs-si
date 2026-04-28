@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AggregateDataIncrementally.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Aggregating Data Incrementally
+
+## Purpose
+
+This example demonstrates how to get running statistics using Siddhi. The sample Siddhi application aggregates the data relating to the raw material purchases of a sweet production factory.
+
+!!!info &quot;Before you begin:&quot;
+    1. Install MySQL.&lt;br/&gt;
+    2. Add the MySQL JDBC driver to your WSO2 Integrator: SI library as follows:&lt;br/&gt;
+        1. Download the JDBC driver from the [MySQL site](https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.45.tar.gz). &lt;br/&gt;
+        2. Extract the MySQL JDBC Driver zip file you downloaded. Then use the `jarbundle` tool in the `&lt;SI_HOME&gt;/bin` directory to convert the jars in it into OSGi bundles. To do this, issue one of the following commands:&lt;br/&gt;
+            - **For Windows**: `&lt;SI_HOME&gt;/bin/jartobundle.bat &lt;PATH_OF_DOWNLOADED_JAR&gt; &lt;PATH_OF_CONVERTED_JAR&gt;`&lt;br/&gt;
+            - **For Linux**: `&lt;SI_HOME&gt;/bin/jartobundle.sh &lt;PATH_OF_DOWNLOADED_JAR&gt; &lt;PATH_OF_CONVERTED_JAR`&lt;br/&gt;
+        3. Copy the converted bundles to the `&lt;SI_HOME&gt;/lib` directory.&lt;br/&gt;
+    3. Create a data store named `sweetFactoryDB` in MySQL with relevant access privileges.&lt;br/&gt;
+    4. Replace the values for the `jdbc.url`, `username`, and `password` parameters in the sample.&lt;br/&gt;
+        e.g., &lt;br/&gt;
+        - `jdbc.url` - `jdbc:mysql://localhost:3306/sweetFactoryDB`&lt;br/&gt;
+        - `username` - `root`&lt;br/&gt;
+        - `password` - `root`&lt;br/&gt;
+    5. In the WSO2 Integrator: SI Tooling, save the sample Siddhi application.&lt;br/&gt;
+
+
+
+## Executing the Sample
+
+
+To execute the sample Siddhi application, open it in WSO2 Integrator: SI Tooling and click the **Start** button (shown below) or click **Run** =&gt; **Run**.
+
+![Start button]({{base_path}}/images/amazon-s3-sink-sample/start.png)
+
+If the Siddhi application starts successfully, the following message appears in the console.
+
+`AggregateDataIncrementally.siddhi - Started Successfully!.`
+
+## Testing the Sample
+
+To test the sample Siddhi application, simulate single events for it via the WSO2 Integrator: SI Tooling as follows:
+
+1. To open the Event Simulator, click the **Event Simulator** icon.
+
+    ![Event Simulator Icon]({{base_path}}/images/Testing-Siddhi-Applications/Event_Simulation_Icon.png)
+
+    This opens the event simulation panel.
+
+2. To simulate events for the `RawMaterialStream` stream of the `AggregateDataIncrementally`  Siddhi application, enter information in the **Single Simulation** tab of the event simulation panel as follows.
+
+    | **Field**                   | **Value**                              |
+    |-----------------------------|----------------------------------------|
+    | **Siddhi App Name**         | `AggregateDataIncrementally`           |
+    | **StreamName**              | `RawMaterialStream`                    |
+
+    ![Select Siddhi Application and Stream]({{base_path}}/images/aggregate-data-incrementally-sample/aggregate-data-incrementally-event-simulation.png)
+
+    As a result, the attributes of the `RawMaterialStream` stream appear as marked in the image above.
+
+
+2. Send four events by entering values as shown below. Click **Send** after each event.
+
+    - Event 1
+
+        - **name**: `chocolate cake`
+
+        - **amount**: 100
+
+    - Event 2
+
+        - **name**: `chocolate cake`
+
+        - **amount**: 200
+
+    - Event 3
+
+        - **name**: `chocolate ice cream`
+
+        - **amount**: `50
+
+    - Event 4
+
+        - **name**: `chocolate ice cream`
+
+        - **amount**: `150`
+
+3. In the **StreamName** field, select **TriggerStream***. In the **triggerId** field, enter `1` as the trigger ID, and then click **Send**.
+
+
+
+## Viewing the Results:
+
+The input and the corresponding output is displayed in the console as follows.
+
+!!!info
+    The timestamp displayed is different because it is derived based on the time at which you send the events.
+
+```
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - AggregateDataIncrementally : RawMaterialStatStream : [Event{timestamp=1513612116450, data=[1537862400000, chocolate ice cream, 100.0], isExpired=false}, Event{timestamp=1513612116450, data=[chocolate cake, 150.0], isExpired=false}]
+    [INFO {io.siddhi.core.stream.output.sink.LogSink} - AggregateDataIncrementally : RawMaterialStatStream : [Event{timestamp=1513612116450, data=[1537862400000, chocolate ice cream, 100.0], isExpired=false}, Event{timestamp=1513612116450, data=[chocolate cake, 150.0], isExpired=false}]
+```
+
+
+???info &quot;Click here to view the sample Siddhi application.&quot;
+    ```sql
+    @App:name(&quot;AggregateDataIncrementally&quot;)
+    @App:description(&#x27;Aggregates values every second until year and gets statistics&#x27;)
+
+    define stream RawMaterialStream (name string, amount double);
+
+    @sink(type =&#x27;log&#x27;)
+    define stream RawMaterialStatStream (AGG_TIMESTAMP long, name string, avgAmount double);
+    @store( type=&quot;rdbms&quot;,
+            jdbc.url=&quot;jdbc:mysql://localhost:3306/sweetFactoryDB&quot;,
+            username=&quot;root&quot;,
+            password=&quot;root&quot;,
+            jdbc.driver.name=&quot;com.mysql.jdbc.Driver&quot;)
+
+    define aggregation stockAggregation
+
+    from RawMaterialStream
+    select name, avg(amount) as avgAmount, sum(amount) as totalAmount
+    group by name
+    aggregate every sec...year;
+    define stream TriggerStream (triggerId string);
+    @info(name = &#x27;query1&#x27;)
+    from TriggerStream as f join stockAggregation as s
+    within &quot;2016-06-06 12:00:00 +05:30&quot;, &quot;2020-06-06 12:00:00 +05:30&quot;
+    per &#x27;hours&#x27;
+    select AGG_TIMESTAMP, s.name, avgAmount
+    insert into RawMaterialStatStream;
+    ```
+</body>
+</html>

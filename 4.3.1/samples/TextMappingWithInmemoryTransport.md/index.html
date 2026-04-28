@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TextMappingWithInmemoryTransport.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>
+## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to receive events to the SweetProductionStream via TCP transport in binary format and check the custom text mapping and the default text mapping using inMemory transport and log the events in OutputStreams accordingly to the  output  console.
+
+## Executing the sample
+
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages would be shown on the console.
+
+    * `Tcp Server started in 0.0.0.0:9892`
+    * `TextMappingWithInmemoryTransport.siddhi - Started Successfully!`
+
+## Testing the sample
+
+In order to publish events with TCP client,
+
+1. Go to `&lt;SI-Tooling-Home&gt;/samples/sample-clients/tcp-client/` directory.
+2. Run ant commant as following.
+
+    ```bash
+    ant -Dtype=binary
+    ```
+
+If you want to publish custom number of events, you need to run &quot;ant&quot; command as follows.
+
+```bash
+ant -Dtype=binary -DnoOfEventsToSend=5
+```
+
+## Viewing the results
+
+```bash
+INFO {io.siddhi.core.stream.output.sink.LogSink} - Custom Mapper : Event{timestamp=1513599736271, data=[Jelly Bean, 9.0], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - Default Mapper : Event{timestamp=1513599737255, data=[Froyo, 1534.87], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - Custom Mapper : Event{timestamp=1513599737255, data=[Froyo, 1.0], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - Default Mapper : Event{timestamp=1513599738255, data=[Jelly Bean, 3030.71], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - Custom Mapper : Event{timestamp=1513599738256, data=[Jelly Bean, 3.0], isExpired=false}
+INFO {io.siddhi.core.stream.output.sink.LogSink} - Default Mapper : Event{timestamp=1513599739256, data=[Cupcake, 3212.83], isExpired=false}
+```
+
+## Notes
+
+If the message &quot;Tcp Server started in 0.0.0.0:9892&quot; does not appear, it could be due to the port 9892, defined in the Siddhi application is already being used by a different program. To resolve this issue, please do the following,
+
+* Stop this Siddhi application (Click &#x27;Run&#x27; on menu bar -&gt; &#x27;Stop&#x27;)
+* Change the port 9892 to an unused port, in this Siddhi application&#x27;s source configuration.
+* Start the application and check whether the specified messages appear on the console
+
+```sql
+@App:name(&quot;TextMappingWithInmemoryTransport&quot;)
+@App:description(&#x27;Use inmemory transport to custom text mapping and the default text mapping and view the output on the console.&#x27;)
+
+@source(type=&#x27;tcp&#x27;, context=&#x27;SweetProductionStream&#x27;, port=&#x27;9892&#x27;,
+@map(type=&#x27;binary&#x27;))
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;log&#x27;, prefix=&#x27;Default Mapper&#x27;)
+define stream DefaultOutputStream (name string, amount double);
+
+@sink(type=&#x27;log&#x27;, prefix=&#x27;Custom Mapper&#x27;)
+define stream CustomOutputStream (name string, amount double);
+
+-- Default text mapping.
+
+@sink(type=&#x27;inMemory&#x27;, topic=&#x27;home&#x27;, @map(type=&#x27;text&#x27;))
+define stream InMemoryDefaultSweetProductionInputData (name string, amount double);
+
+@source(type=&#x27;inMemory&#x27;, topic=&#x27;home&#x27;, @map(type=&#x27;text&#x27;))
+define stream UsageStream (name string, amount double);
+
+-- Custom text mapping.
+
+@sink(type=&#x27;inMemory&#x27;, topic=&#x27;home1&#x27;, @map(type=&#x27;text&#x27;,
+@payload(&quot;&quot;&quot;name:{{name}},
+amount:{{amount}}&quot;&quot;&quot;)))
+define stream InMemoryCustomSweetProductionInputData (name string, amount double);
+
+@source(type=&#x27;inMemory&#x27;, topic=&#x27;home1&#x27;, @map(type=&#x27;text&#x27; , regex.A=&#x27;((?&lt;=name:)(.*)(?=,))&#x27;,regex.B=&#x27;([-0-9]+)&#x27;,
+@attributes(name = &#x27;A&#x27;, amount = &#x27;B&#x27;)))
+define stream UsageStream2 (name string, amount double);
+
+from SweetProductionStream
+select *
+insert into InMemoryDefaultSweetProductionInputData;
+
+from UsageStream
+select *
+insert into DefaultOutputStream;
+
+from SweetProductionStream
+select *
+insert into InMemoryCustomSweetProductionInputData;
+
+from UsageStream2
+select *
+insert into CustomOutputStream;
+```
+</body>
+</html>

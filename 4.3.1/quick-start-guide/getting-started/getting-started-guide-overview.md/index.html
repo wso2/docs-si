@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>getting-started-guide-overview.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Streaming Integration Overview
+
+This section helps you to understand streaming integration and how to perform it with WSO2 Integrator: SI in less than 30 minutes
+
+First, let&#x27;s understand the concept of streaming integration. For this, let&#x27;s consider an example of a sweet factory where the system publishes the production details after each production run. The details published include the name of the sweet and the amount produced.
+
+
+![Streams]({{base_path}}/images/quick-start-guide-101/stream.png)
+
+Each production run that reports the name of the sweet and the amount is an **event**.
+
+Many such events form a **stream**.
+
+In Streaming typically involves handling data received/published via streams in high speed and high volume. In this example, there can be multiple factories in several locations that results in a few production runs being reported in a given second.
+
+WSO2 Integrator: SI allows data to be received from multiple sources such as files, databases, cloud-based applications, and streaming messaging systems (such as Kafka) in a streaming manner. It uses the [Siddhi Query Language](https://siddhi.io/en/v4.x/docs/query-guide/), to process this data, and then publishes the results in a streaming manner to multiples destinations such as files, databases, cloud-based applications, and streaming messaging systems in a streaming manner.
+
+**Streaming Integration** involves processing streaming data and incorporating them into integration flows so that action can be taken based on the output derived. In this example, you may want to filter production details relating to a specific sweet.
+
+To understand how Streaming Integration is performed via the WSO2 Integrator: SI, follow the sections below.
+
+[**Step 1: Download WSO2 Integrator: SI and Dependencies**](download-install-and-start-si.md)&lt;br/&gt;&lt;br/&gt;
+[**Step 2: Create the Siddhi Application**](create-the-siddhi-application.md)&lt;br/&gt;&lt;br/&gt;
+[**Step 3: Deploy the Siddhi Application**](deploy-siddhi-application.md)&lt;br/&gt;&lt;br/&gt;
+[**Step 4: Run the Siddhi Application**](test-siddhi-application.md)&lt;br/&gt;&lt;br/&gt;
+[**Step 5: Update the Siddhi Application**](update-the-siddhi-application.md)&lt;br/&gt;&lt;br/&gt;
+[**Step 6: Monitor Statistics**](monitor-statistics.md)&lt;br/&gt;&lt;br/&gt;
+</body>
+</html>

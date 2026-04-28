@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReceiveHl7InER7Format.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI Tooling to receive Hl7 events in ER7 format to the `hl7Stream` via MLLP protocol and log the events in er7Stream to the output console.
+
+## Prerequisites
+
+1. Install the [HAPI testpanel](https://hapifhir.github.io/hapi-hl7v2/hapi-testpanel/install.html).
+2. Save this sample. If there are no syntax errors, the following message will be shown on the console:
+    - `Siddhi App ReceiveHl7InER7Format successfully deployed.`
+
+## Executing the Sample
+
+1. Start the Siddhi application by clicking on `Run`.
+2. If the Siddhi application starts successfully, the following messages would be shown on the console.
+    - `Starting SimpleServer running on port 4000`
+    - `ReceiveHl7InER7Format.siddhi - Started Successfully!`
+
+## Testing the Sample
+
+1. In the HAPI testpanel create a sending connection with the port that is provided in the Siddhi app.
+2. Send the following message from the testpanel.
+`&#x27;MSH|^~\&amp;|sendingSystemA|senderFacilityA|receivingSystemB|receivingFacilityB|20080925161613||ADT^A01|589888ADT30502184808|P|2.3&#x27;` .
+
+## Viewing the Results
+
+See the output. Following message will be shown on the console if you publish events.
+
+`ReceiveHl7InER7Format : er7Stream : Event{timestamp=1552530948958, data=[MSH|^~\&amp;|||||20190211145413.131+0530||ADT^A01|10601|T|2.3 ], isExpired=false}`
+
+```sql
+@App:name(&#x27;ReceiveHl7InER7Format&#x27;)
+@App:description(&#x27;This receives the HL7 messages and sends the acknowledgement message to the client using the MLLP protocol and text mapping.&#x27;)
+
+@source(type = &#x27;hl7&#x27;, port = &#x27;4000&#x27;, hl7.encoding = &#x27;er7&#x27;, @map(type = &#x27;text&#x27;))
+define stream hl7stream(payload string);
+
+@sink(type=&#x27;log&#x27;)
+define stream er7Stream (payload string);
+
+@info(name=&#x27;query1&#x27;)
+from hl7stream
+select *
+insert into er7Stream;
+```
+</body>
+</html>

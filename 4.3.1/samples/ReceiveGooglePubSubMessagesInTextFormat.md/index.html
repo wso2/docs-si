@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReceiveGooglePubSubMessagesInTextFormat.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>
+## Purpose:
+This application demonstrates how to configure WSO2 Integrator: SI Tooling using googlepubsub source in Siddhi to consume events. Events which are in TEXT format are consumed from a googlepubsub topic.
+
+## Prerequisites:
+1. Create a Google Cloud Platform account.
+2. Sign in to Google Account and set up a GCP Console project and enable the API.
+3. Create a service account and download a private key as JSON.
+4. Place your json file in any system folder and provide the path for the credential.path.
+5. Save the sample.
+6. If there is no syntax error, the following message is shown on the console:
+	        * -Siddhi App ReceiveGooglePubSubMesssage successfully deployed.
+
+
+## Executing the Sample:
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;
+2. If the Siddhi application starts successfully, the following messages would be shown on the console,
+* ReceiveGooglePubSubMesssage.siddhi - Started Successfully!
+
+## Testing the Sample:
+1. Receive events through the following,
+You may listen to the events coming to a topic after the subscription is made.
+
+
+## Viewing the Results:
+See the output on the terminal:  
+INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveEvent : BarStream : Event{timestamp=1552548124599, data=[message:&quot;Hello&quot;], isExpired=false} (Encoded)
+
+## Notes:
+	Make sure the the credential file is correct and user have write access to make api calls.
+Stop this Siddhi application
+
+```sql
+@App:name(&quot;ReceiveGooglePubSubMesssage&quot;)
+
+@App:description(&#x27;Consume messages from a googlepubsub Topic.&#x27;)
+
+
+@App:name(&quot;ReceiveEvent&quot;)
+@App:description(&quot;Listen for messages received for a topic in Google Pub Sub Server.&quot;)
+
+
+@source(type =&#x27;googlepubsub&#x27;, 
+                project.id = &#x27;sp-path-1547649404768&#x27;, 
+                topic.id = &#x27;topic75&#x27;,
+                credential.path = &#x27;/../sp.json&#x27;,
+                subscription.id = &#x27;sub75&#x27;, 
+                @map(type = &#x27;text&#x27;))
+
+define stream FooStream (message string); 
+                
+@sink(type=&#x27;log&#x27;)
+define stream BarStream(message string);
+
+@info(name=&#x27;EventsPassthroughQuery&#x27;)
+    from FooStream 
+    select message 
+    insert into BarStream;
+```</body>
+</html>
