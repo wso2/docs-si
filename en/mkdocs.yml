@@ -21,7 +21,7 @@ site_author: WSO2
 site_url: https://si.docs.wso2.com/
 
 # Repository information
-repo_name: wso2/docs-streaming-integrator
+repo_name: wso2/docs-si
 repo_url: https://github.com/wso2/docs-si
 edit_uri: https://github.com/wso2/docs-si/edit/main/en/docs/
 dev_addr: localhost:8000
@@ -331,6 +331,9 @@ plugins:
         - wip/*
   - redirects:
       redirect_maps:
+  - git-revision-date-localized:
+      type: date
+      fallback_to_build_date: true
 
 # Extra configuration
 extra_css:
@@ -338,6 +341,7 @@ extra_css:
     - assets/css/theme.css
     - assets/css/copy-page.css
     - assets/lib/json-formatter/json-formatter.css
+    - assets/css/actions.css
 extra_javascript:
     - assets/lib/json-formatter/json-formatter.umd.js
     - assets/lib/highlightjs/highlight.min.js

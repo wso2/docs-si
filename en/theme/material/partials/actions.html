@@ -1,0 +1,32 @@
+<!--
+ * Copyright (c) 2025, WSO2 LLC. (https://www.wso2.com).
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+-->
+
+{% if page.edit_url %}
+  {%- set _href = page.edit_url | replace('/edit/', '/tree/') | replace('/blob/', '/tree/') -%}
+  <div class="md-content__actions md-typeset">
+    <a class="md-content__action-link"
+       href="{{ _href }}"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="Edit this page on GitHub">
+      {%- set icon = config.theme.icon.edit or "material/file-edit-outline" -%}
+      {% include ".icons/" ~ icon ~ ".svg" %}
+      <span>Edit this page</span>
+    </a>
+  </div>
+{% endif %}
