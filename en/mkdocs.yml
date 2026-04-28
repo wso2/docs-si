@@ -342,6 +342,7 @@ extra_css:
     - assets/css/copy-page.css
     - assets/lib/json-formatter/json-formatter.css
     - assets/css/actions.css
+    - assets/css/source.css
 extra_javascript:
     - assets/lib/json-formatter/json-formatter.umd.js
     - assets/lib/highlightjs/highlight.min.js
