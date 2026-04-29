@@ -1,6 +1,6 @@
 # Upgrading from WSO2 Integrator: SI 4.2.0 to 4.3.x
 
-This page explains how to upgrade an existing WSO2 Integrator: SI 4.2.0 deployment to 4.3.x. The upgrade is largely a drop-in replacement: Siddhi applications, the `deployment.yaml` schema, and the `bin/` startup scripts are unchanged. The main changes are tooling (the legacy SI Tooling editor is replaced by a VS Code extension), an expanded JDK support range, and the new Integration Control Plane (ICP) management feature.
+This page explains how to upgrade an existing WSO2 Integrator: SI 4.2.0 deployment to 4.3.x. The upgrade is largely a drop-in replacement: Siddhi applications, the `deployment.yaml` schema, and the `bin/` startup scripts are unchanged. The main changes are tooling (the legacy SI Tooling editor is replaced by a VS Code extension), an expanded JDK support range, and new Integration Control Plane (ICP) support for SI.
 
 ## Before you begin
 
@@ -23,7 +23,10 @@ This page explains how to upgrade an existing WSO2 Integrator: SI 4.2.0 deployme
 ## Step 1: Deploy the Siddhi applications
 
 1. Copy every file from `<SI_4.2.0_HOME>/wso2/server/deployment/siddhi-files/` into `<SI_4.3.x_HOME>/wso2/server/deployment/siddhi-files/`.
-2. Copy any custom files mounted under `<SI_4.2.0_HOME>/resources/` (for example, custom JKS files, datasource drivers, or extension JARs in `lib/` or `samples/sample-clients/lib/`) to the matching path in `<SI_4.3.x_HOME>/`.
+2. Copy any other custom files you've added to `<SI_4.2.0_HOME>` to the same paths under `<SI_4.3.x_HOME>`. Common locations include:
+    - `resources/` — custom JKS files and resources referenced from `conf/`.
+    - `lib/` — JDBC drivers and other JARs you've dropped in.
+    - `samples/sample-clients/lib/` — client-side dependencies, if used.
 
 Siddhi application syntax is unchanged. No edits are required.
 
@@ -36,7 +39,7 @@ The `deployment.yaml` schema is unchanged between 4.2.0 and 4.3.1. You can copy 
 
 ## Step 3: Install the SI for VS Code extension
 
-The legacy SI Tooling web editor is removed in 4.3.x. Use the VS Code extension instead.
+From 4.3.1 onward, the legacy SI Tooling web editor is no longer shipped. Use the VS Code extension instead. (4.3.0 users can continue using SI Tooling 4.3.0 if they prefer, but the VS Code extension is the supported tooling going forward.)
 
 1. Install [Visual Studio Code](https://code.visualstudio.com/download).
 2. From the Marketplace, install the **WSO2 Integrator: SI** extension (`WSO2.streaming-integrator`).
@@ -100,4 +103,4 @@ The 4.3.1 images published on Docker Hub at `wso2/wso2si` include `4.3.1-ubuntu`
 
 ## Optional: Enable the Integration Control Plane
 
-The Integration Control Plane (ICP) is a new monitoring and management surface introduced in 4.3.x. It runs as a separate server that connects to one or more SI instances. Enabling ICP is optional and not required for the version upgrade itself. See [Monitoring SI Artifacts and Logs]({{base_path}}/admin/working-with-integration-control-plane/).
+ICP support for SI is new in 4.3.x. ICP runs as a separate server that connects to one or more SI instances and provides monitoring and limited management for deployed Siddhi applications. Enabling ICP is optional and not required for the version upgrade itself. See [Monitoring SI Artifacts and Logs]({{base_path}}/admin/working-with-integration-control-plane/).
