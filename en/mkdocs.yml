@@ -237,6 +237,7 @@ nav:
         - 'Installing in Docker': 'setup/installing-si-using-docker.md'
         - 'Installing in Kubernetes': 'setup/installing-si-using-kubernetes.md'
     - 'Migrate':
+      - 'Upgrading from 4.2.0 to 4.3.x': 'setup/upgrading-from-4.2.0-to-4.3.x.md'
       - 'Upgrading WSO2 Enterprise Integrator': 'setup/upgrading-wso2-ei.md'
     - 'Deploy':
       - 'Single Deployment': 'setup/deploying-si-as-a-single-deployment.md'
