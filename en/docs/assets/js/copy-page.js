@@ -238,8 +238,8 @@
             const origin = window.location.origin;
             const pathname = window.location.pathname.replace(/\/$/, '');
 
-            // Append .md to the current path
-            const mdPath = pathname + '.md/';
+            // Append .md to the current path, handling the root path as index.md
+            const mdPath = (pathname === '' ? '/index' : pathname) + '.md/';
 
             window.location.href = origin + mdPath;
             setOpen(false);
