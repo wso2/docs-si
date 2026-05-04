@@ -1481,8 +1481,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#whats-new-in-this-release" class="md-nav__link">
-    What's new in this release?
+  <a href="#whats-new" class="md-nav__link">
+    What's new
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deprecations" class="md-nav__link">
+    Deprecations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes-for-custom-extension-authors" class="md-nav__link">
+    Notes for custom extension authors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-from-a-previous-version" class="md-nav__link">
+    Upgrading from a previous version
   </a>
   
 </li>
@@ -9506,6 +9527,8 @@
     
       
     
+      
+    
   
 
   <!-- Render toggle to expand nested items -->
@@ -9544,6 +9567,48 @@
     </label>
     <ul class="md-nav__list" data-md-scrollfix>
       <!-- Render nested item list -->
+      
+      
+      
+
+<!-- Determine class according to state -->
+
+
+
+
+
+
+<!-- Set nav icon -->
+
+
+
+
+<!-- Set nav chip -->
+
+
+
+
+<!-- Create new map with expanded_nav titles -->
+
+
+<!-- Hide navigation if configured  -->
+
+
+<!-- Main navigation item with nested items -->
+
+<li class="md-nav__item ">
+  <a href="../../setup/upgrading-from-4.2.0-to-4.3.x/" class="md-nav__link">
+    <span>
+      
+      Upgrading from 4.2.0 to 4.3.x
+      
+    </span>
+    
+  </a>
+</li>
+
+
+      
       
       
       
@@ -13475,8 +13540,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#whats-new-in-this-release" class="md-nav__link">
-    What's new in this release?
+  <a href="#whats-new" class="md-nav__link">
+    What's new
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deprecations" class="md-nav__link">
+    Deprecations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes-for-custom-extension-authors" class="md-nav__link">
+    Notes for custom extension authors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrading-from-a-previous-version" class="md-nav__link">
+    Upgrading from a previous version
   </a>
   
 </li>
@@ -13521,16 +13607,55 @@
 
 
 <h1 id="about-this-release">About this Release<a class="headerlink" href="#about-this-release" title="Permanent link">&para;</a></h1>
-<h2 id="whats-new-in-this-release">What's new in this release?<a class="headerlink" href="#whats-new-in-this-release" title="Permanent link">&para;</a></h2>
+<p>WSO2 Integrator: SI 4.3.x is a feature and dependency upgrade over 4.2.0. The Siddhi runtime, <code>deployment.yaml</code> schema, and operational scripts in <code>bin/</code> are unchanged in behavior, so existing 4.2.0 Siddhi applications and configurations carry forward without modification.</p>
+<h2 id="whats-new">What's new<a class="headerlink" href="#whats-new" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><strong>New WSO2 Integrator: SI VSCode extension</strong></p>
-<p>This allows users to develop integrations with Siddhi applications with the VSCode. The new VSCode extension replaces the existing WSO2 Integrator: SI Tooling editor. </p>
+<p><strong>WSO2 Integrator: SI for VS Code extension.</strong> A new Visual Studio Code extension provides the development environment for designing, developing, debugging, and testing Siddhi applications. Install it from the Marketplace as <code>WSO2.streaming-integrator</code>. See <a href="https://wso2.github.io/docs-si/develop/install-si-for-vscode/">Install WSO2 Integrator: SI for VS Code</a> and the <a href="https://wso2.github.io/docs-si/develop/si-for-vscode-overview/">overview</a>.</p>
+</li>
+<li>
+<p><strong>Integration Control Plane (ICP) support for SI.</strong> A new feature, <code>org.wso2.carbon.si.management.icp.feature</code>, lets the Integration Control Plane monitor SI instances and surface deployed Siddhi applications, runtime status, and limited management actions. ICP runs as a separate server and is optional. See <a href="https://wso2.github.io/docs-si/admin/working-with-integration-control-plane/">Monitoring SI Artifacts and Logs</a>.</p>
+</li>
+<li>
+<p><strong>JDK 17 support.</strong> The supported JDK range now spans 1.8 through 17. Existing JDK 11 deployments continue to work.</p>
+</li>
+<li>
+<p><strong>Updated runtime dependencies.</strong> Siddhi 5.1.31, Carbon Kernel 5.3.2, Carbon Analytics 3.0.76, Jackson 2.16.0, Guava 32.1.3, log4j 2.22.1 (via Siddhi), and refreshed Siddhi I/O and execution extensions. These bumps are transparent for standard deployments.</p>
 </li>
 </ul>
+<h2 id="deprecations">Deprecations<a class="headerlink" href="#deprecations" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>WSO2 Integrator: SI Tooling editor.</strong> The legacy web-based SI Tooling editor is no longer shipped. Use the VS Code extension for all development work. Existing <code>.siddhi</code> files open unchanged in the new extension.</li>
+</ul>
+<h2 id="notes-for-custom-extension-authors">Notes for custom extension authors<a class="headerlink" href="#notes-for-custom-extension-authors" title="Permanent link">&para;</a></h2>
+<p>Two third-party libraries were repackaged as WSO2 orbit artifacts. If you maintain custom Siddhi extensions that depend on either directly, repoint the group IDs in your <code>pom.xml</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Library</th>
+<th>Old coordinates</th>
+<th>New coordinates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>jayway JsonPath</td>
+<td><code>com.jayway.jsonpath:json-path:2.2.0</code></td>
+<td><code>org.wso2.orbit.com.jayway.jsonpath:json-path:2.9.0.wso2v1</code></td>
+</tr>
+<tr>
+<td>Apache Mime4j Core</td>
+<td><code>org.apache.james:apache-mime4j-core:0.7.2</code></td>
+<td><code>org.wso2.orbit.org.apache.james:apache-mime4j-core:0.8.10.wso2v1</code></td>
+</tr>
+</tbody>
+</table>
+<p>If your custom extensions don't depend on these libraries directly, no action is required.</p>
+<h2 id="upgrading-from-a-previous-version">Upgrading from a previous version<a class="headerlink" href="#upgrading-from-a-previous-version" title="Permanent link">&para;</a></h2>
+<p>For upgrading from 4.2.0, see <a href="https://wso2.github.io/docs-si/setup/upgrading-from-4.2.0-to-4.3.x/">Upgrading from WSO2 Integrator: SI 4.2.0 to 4.3.x</a>.</p>
 <h2 id="download-the-latest-release">Download the latest release<a class="headerlink" href="#download-the-latest-release" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Get the latest version of WSO2 Integrator: SI 4.3.1: <a href="https://wso2.com/streaming-integrator/">Download Here</a></li>
+<li>Get the latest version of WSO2 Integrator: SI 4.3.1: <a href="https://wso2.com/streaming-integrator/">Download here</a>.</li>
 </ul>
 
 
