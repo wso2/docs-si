@@ -243,6 +243,7 @@ nav:
     - 'Migrate':
       #- 'Migrating from WSO2 SP': 'setup/migrating-from-stream-processor.md'
       #- 'Upgrading from Streaming Integrator 1.0.0': 'setup/upgrading-from-previous-version.md'
+      - 'Upgrading from 4.2.0 to 4.3.x': 'setup/upgrading-from-4.2.0-to-4.3.x.md'
       - 'Upgrading WSO2 Enterprise Integrator': 'setup/upgrading-wso2-ei.md'
     - 'Deploy':
       - 'Single Deployment': 'setup/deploying-si-as-a-single-deployment.md'
