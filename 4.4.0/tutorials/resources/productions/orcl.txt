@@ -1,0 +1,11 @@
+{
+   "portfolio":{
+      "stock":{
+         "volume":200,
+         "company":{
+            "symbol":"orcl"
+         },
+         "price":95
+      }
+   }
+}
