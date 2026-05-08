@@ -107,11 +107,6 @@ request.onload = function() {
                   dropdown.insertBefore(liElem, dropdown.firstChild);
               }
           });
-
-          var showAllLink = document.getElementById('show-all-versions-link');
-          if (showAllLink) {
-              showAllLink.setAttribute('href', docSetUrl + 'versions');
-          }
       }
 
       /*
