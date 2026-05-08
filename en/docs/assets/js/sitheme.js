@@ -60,7 +60,13 @@ request.open('GET', versionsUrl, true);
 request.onload = function() {
   if (request.status >= 200 && request.status < 400) {
 
-      var data = JSON.parse(request.responseText);
+      var data;
+      try {
+          data = JSON.parse(request.responseText);
+      } catch (e) {
+          console.error('Failed to parse versions.json:', e);
+          return;
+      }
       var dropdown = document.getElementById('version-select-dropdown');
       var checkVersionsPage = document.getElementById('current-version-stable');
 
@@ -102,7 +108,10 @@ request.onload = function() {
                   }
                   url = url.replace(/\/$/, '') + searchAndHash;
 
-                  liElem.innerHTML = '<a href="' + url + '">' + key + '</a>';
+                  var aElem = document.createElement('a');
+                  aElem.setAttribute('href', url);
+                  aElem.textContent = key;
+                  liElem.appendChild(aElem);
 
                   dropdown.insertBefore(liElem, dropdown.firstChild);
               }
@@ -118,7 +127,7 @@ request.onload = function() {
        * Appending versions to the version tables in versions page
        */
       if (checkVersionsPage) {
-          var previousVersions = [];
+          var previousVersionsTbody = document.getElementById('previous-versions');
 
           Object.keys(data.all).forEach(function(key) {
               if ((key !== data.current) && (key !== data['pre-release'])) {
@@ -136,24 +145,45 @@ request.onload = function() {
                       notes = (docSetUrl + key + '/' + notes).replace(/([^:]\/)\/+/g, '$1');
                   }
 
-                  previousVersions.push('<tr>' +
-                      '<th>' + key + '</th>' +
-                      '<td><a href="' + doc + '" target="' + target + '">Documentation</a></td>' +
-                      '<td><a href="' + (notes || '#') + '" target="' + target + '">Release Notes</a></td>' +
-                      '</tr>');
+                  if (previousVersionsTbody) {
+                      var tr = document.createElement('tr');
+                      var th = document.createElement('th');
+                      th.textContent = key;
+                      var tdDoc = document.createElement('td');
+                      var aDoc = document.createElement('a');
+                      aDoc.setAttribute('href', doc);
+                      aDoc.setAttribute('target', target);
+                      aDoc.textContent = 'Documentation';
+                      tdDoc.appendChild(aDoc);
+                      var tdNotes = document.createElement('td');
+                      var aNotes = document.createElement('a');
+                      aNotes.setAttribute('href', notes || '#');
+                      aNotes.setAttribute('target', target);
+                      aNotes.textContent = 'Release Notes';
+                      tdNotes.appendChild(aNotes);
+                      tr.appendChild(th);
+                      tr.appendChild(tdDoc);
+                      tr.appendChild(tdNotes);
+                      previousVersionsTbody.appendChild(tr);
+                  }
               }
           });
 
-          document.getElementById('previous-versions').innerHTML = previousVersions.join(' ');
+          var currentVersionNum = document.getElementById('current-version-number');
+          if (currentVersionNum) {
+              currentVersionNum.textContent = data.current;
+          }
 
-          document.getElementById('current-version-number').innerHTML = data.current;
-          var docDocLink = docSetUrl + data.current;
-          var docNotesLink = data.all[data.current].notes
-              ? docSetUrl + data.all[data.current].notes
-              : docDocLink;
-
-          document.getElementById('current-version-documentation-link').setAttribute('href', docDocLink);
-          document.getElementById('current-version-release-notes-link').setAttribute('href', docNotesLink);
+          if (data.current && data.all[data.current]) {
+              var docDocLink = docSetUrl + data.current;
+              var docNotesLink = data.all[data.current].notes
+                  ? docSetUrl + data.all[data.current].notes
+                  : docDocLink;
+              var docLinkEl = document.getElementById('current-version-documentation-link');
+              var notesLinkEl = document.getElementById('current-version-release-notes-link');
+              if (docLinkEl) docLinkEl.setAttribute('href', docDocLink);
+              if (notesLinkEl) notesLinkEl.setAttribute('href', docNotesLink);
+          }
       }
 
   } else {
