@@ -26,5 +26,3 @@ replay_pid*
 # MkDocs build output
 en/site/
 
-# Local versions.json for dev testing (populated via: git show versions:en/docs/assets/versions.json > en/docs/assets/versions.json)
-en/docs/assets/versions.json
