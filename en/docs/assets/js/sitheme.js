@@ -43,17 +43,16 @@ document.addEventListener('click', function (e) {
 var pageHeader = document.getElementById('page-header');
 var docSetLang = pageHeader ? pageHeader.getAttribute('data-lang') : '';
 
-(window.location.pathname.split('/')[1] !== docSetLang) ?
-    docSetLang = '' :
-    docSetLang = docSetLang + '/';
+if (docSetLang) {
+    docSetLang = (window.location.pathname.split('/')[1] === docSetLang)
+        ? docSetLang + '/'
+        : '';
+}
 
 var docSetUrl = window.location.origin + '/' + docSetLang;
 var request = new XMLHttpRequest();
 
-var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-var versionsUrl = isLocal
-    ? '/assets/versions.json'
-    : 'https://raw.githubusercontent.com/wso2/docs-si/versions/en/docs/assets/versions.json';
+var versionsUrl = 'https://raw.githubusercontent.com/wso2/docs-si/versions/en/docs/assets/versions.json';
 
 request.open('GET', versionsUrl, true);
 
@@ -74,6 +73,9 @@ request.onload = function() {
        * Appending versions to the version selector dropdown
        */
       if (dropdown) {
+          while (dropdown.children.length > 1) {
+              dropdown.removeChild(dropdown.firstChild);
+          }
           data.list.sort(function(a, b) {
               var aParts = a.split('.');
               var bParts = b.split('.');
