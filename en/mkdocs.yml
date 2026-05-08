@@ -377,6 +377,7 @@ extra_javascript:
   - assets/lib/highlightjs/highlight.min.js
   - assets/lib/json-formatter/json-formatter.umd.js
   - assets/js/mitheme.js
+  - assets/js/sitheme.js
   # - assets/lib/backtotop/js/util.js
   # - assets/lib/backtotop/js/main.js
 extra:
@@ -389,6 +390,6 @@ extra:
       link: https://twitter.com/wso2
     - type: linkedin
       link: https://www.linkedin.com/company/wso2
-  # site_version: Uncomment to specify a version
+  site_version: 4.3.0
   # base_path: http://localhost:8000/
   base_path: https://wso2.github.io/docs-si
