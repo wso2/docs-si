@@ -364,6 +364,7 @@ extra_javascript:
     - assets/lib/highlightjs/highlight.min.js
     - assets/js/theme.js
     - assets/js/copy-page.js
+    - assets/js/sitheme.js
 extra:
     product_name: "WSO2 Integrator: SI"
     home_page_cards:
@@ -499,6 +500,6 @@ extra:
           link: https://www.youtube.com/user/WSO2TechFlicks
         - icon: fontawesome/brands/x-twitter
           link: https://twitter.com/intent/follow?screen_name=wso2
-    # site_version: Uncomment to specify a version
+    site_version: 4.3.1
     #base_path: http://localhost:8000/
     base_path: https://wso2.github.io/docs-si
