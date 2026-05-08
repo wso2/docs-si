@@ -22,7 +22,7 @@
 {% elif "navigation.tabs" not in features %}
 {% set class = class ~ " md-header--shadow" %}
 {% endif %}
-<header class="{{ class }}" data-md-component="header" id="page-header">
+<header class="{{ class }}" data-md-component="header" id="page-header" data-lang="{{ config.theme.language }}">
   <nav class="md-header__inner md-grid" aria-label="{{ lang.t('header') }}">
     <a href="{{ config.extra.homepage | d(nav.homepage.url, true) | url }}" title="{{ config.site_name | e }}"
       class="md-header__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
@@ -46,6 +46,20 @@
             {% endif %}
           </span>
         </div>
+      </div>
+    </div>
+    <div class="md-flex__ellipsis md-header__version-select">
+      <div class="mb-tabs__dropdown version-select">
+        <a class="md-tabs__link md-tabs__dropdown-link" href="#!" data-target="version-select-dropdown">
+          {{ config.extra.site_version }}
+          <i class="fa-solid fa-angle-down"></i>
+        </a>
+        <ul id="version-select-dropdown" class="mb-tabs__dropdown-content" tabindex="0">
+          <!-- Versions will be added here dynamically -->
+          <li class="md-tabs__item mb-tabs__dropdown">
+            <a href="#" id="show-all-versions-link">Show all</a>
+          </li>
+        </ul>
       </div>
     </div>
     {% if "material/search" in config.plugins and not page.is_homepage %}
