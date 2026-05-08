@@ -50,7 +50,12 @@ var docSetLang = pageHeader ? pageHeader.getAttribute('data-lang') : '';
 var docSetUrl = window.location.origin + '/' + docSetLang;
 var request = new XMLHttpRequest();
 
-request.open('GET', 'https://raw.githubusercontent.com/wso2/docs-si/versions/en/docs/assets/versions.json', true);
+var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+var versionsUrl = isLocal
+    ? '/assets/versions.json'
+    : 'https://raw.githubusercontent.com/wso2/docs-si/versions/en/docs/assets/versions.json';
+
+request.open('GET', versionsUrl, true);
 
 request.onload = function() {
   if (request.status >= 200 && request.status < 400) {
