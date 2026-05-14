@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>configuring-extension-dependencies.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Configuring Extension Dependencies
+
+This page is for extension developers building custom Siddhi extensions and wiring them into the **Extension Installer** panel. For instructions on installing and uninstalling existing Siddhi extensions, see [Downloading and Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
+
+Configurations of Siddhi extensions are loaded from the `&lt;SI_HOME&gt;/wso2/server/resources/extensionsInstaller/extensionDependencies.json` configuration file.
+
+When you are working with [custom extensions](../connectors/writing-Custom-Siddhi-Extensions.md), and if you want a custom extension to be installable from the **Extension Installer** panel, you need to add the configuration of the extension to this configuration file.
+
+The configuration of an extension is a JSON object that looks as follows:
+
+```json
+    &quot;&lt;extension_name&gt;&quot;: {
+      &quot;extension&quot;: {...},
+      &quot;dependencies&quot;: [
+        {...},
+        {...}
+      ]
+    }
+```
+
+`&lt;extension_name&gt;` which is the key of this JSON object, is the uniquely identifiable name of the extension. The extension is described under [`extension`](#extension).
+
+#### `extension`
+
+This _object_ contains information about the extension, denoted by the following properties.
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Property&lt;/th&gt;
+    &lt;th&gt;Description&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;name&lt;/code&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      The uniquely identifiable name of the extension.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;displayName&lt;/code&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      The displayable name of the extension.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;version&lt;/code&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      The version of the extension.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+The following is an example of the `extension` object, taken from the configuration of the `jms` extension.
+
+```json
+  &quot;jms&quot;: {
+
+    &quot;extension&quot;: {
+      &quot;name&quot;: &quot;jms&quot;,
+      &quot;displayName&quot;: &quot;JMS&quot;,
+      &quot;version&quot;: &quot;2.0.2&quot;
+    },
+
+    &quot;dependencies&quot;: [...]
+  }
+```
+
+
+#### `dependencies`
+
+This is an _array_. Each member of this _array_ is an _object_ that denotes information of a dependency of the extension via the following properties.
+
+!!! info
+        The jar of the Siddhi extension itself should be added as a dependency too. e.g., In the configuration of the `jms` extension, you can see that `siddhi-io-jms` has been listed as a dependency under `dependencies`.
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      Property
+    &lt;/th&gt;
+    &lt;th&gt;
+      Description
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;name&lt;/code&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      The uniquely identifiable name of the dependency. If this dependency denotes the jar of the Siddhi extension itself, it starts with &lt;code&gt;siddhi-&lt;/code&gt;.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;version&lt;/code&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      The version of the dependency.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;code&gt;download&lt;/code&gt;&lt;/td&gt;
+    &lt;td&gt;
+      &lt;p&gt;This denotes download information of the dependency via the following properties.&lt;/p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;code&gt;autoDownloadable&lt;/code&gt;: This specifies whether the dependency is auto downloadable via the &lt;code&gt;true&lt;/code&gt; and &lt;code&gt;false&lt;/code&gt; values. If the value is &lt;code&gt;false&lt;/code&gt;, the property is manually installable (see &lt;a href=&quot;../connectors/downloading-and-Installing-Siddhi-Extensions.md#manually-installable-dependencies&quot;&gt;Manually installable dependencies&lt;/a&gt;).&lt;/li&gt;
+        &lt;li&gt;&lt;code&gt;url&lt;/code&gt;: &lt;strong&gt;If the dependency is auto downloadable&lt;/strong&gt;, this specifies the URL via which the JAR of the dependency is downloaded.&lt;/li&gt;
+        &lt;li&gt;&lt;code&gt;instructions&lt;/code&gt;: &lt;strong&gt;If the dependency is only manually installable&lt;/strong&gt;, this property provides instructions to download (and if applicable, convert) the JAR of the dependency.&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;usages&lt;/code&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;p&gt;This is an &lt;i&gt;array&lt;/i&gt;. Each member of this &lt;i&gt;array&lt;/i&gt; is an &lt;i&gt;object&lt;/i&gt; that denotes a directory where the jar of the dependency needs to be placed. Each such directory (location) is denoted by the following properties:&lt;/p&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;code&gt;type&lt;/code&gt;: The type of the JAR. Possible values are as follows:&lt;br/&gt;&lt;li style=&quot;margin-left:2em&quot;&gt;&lt;code&gt;BUNDLE&lt;/code&gt;: This means that the dependency JAR is an OSGi bundle.&lt;/li&gt;&lt;li style=&quot;margin-left:2em&quot;&gt;&lt;code&gt;JAR&lt;/code&gt;: This means that the dependency JAR is not converted to an OSGi bundle.&lt;/li&gt;&lt;/li&gt;&lt;br/&gt;
+        &lt;li&gt;&lt;code&gt;usedBy&lt;/code&gt;: This indicates whether the JAR is used in runtime or in samples. For more information, see the explanation of &lt;b&gt;installation locations&lt;/b&gt; under &lt;a href=&quot;../connectors/downloading-and-Installing-Siddhi-Extensions.md#manually-installable-dependencies&quot;&gt;Manually installable dependencies&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;lookupRegex&lt;/code&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      The regex pattern for the file name of the JAR. This is useful for to looking up and detecting whether the JAR is available in the locations mentioned under &lt;code&gt;usages&lt;/code&gt;.
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+The following examples, taken from the configuration of the `jms` extension, show the members of the `dependencies` array.
+
+**Example 1: Auto downloadable dependency**
+
+This denotes the `hawtbuf` dependency of the `jms` extension, which is auto downloadable from the URL specified in `download.url`.
+
+```json
+  &quot;jms&quot;: {
+    &quot;extension&quot;: {...},
+
+    &quot;dependencies&quot;: [
+
+      {
+        &quot;name&quot;: &quot;hawtbuf&quot;,
+        &quot;version&quot;: &quot;1.9&quot;,
+        &quot;download&quot;: {
+          &quot;autoDownloadable&quot;: true,
+          &quot;url&quot;: &quot;https://repo1.maven.org/maven2/org/fusesource/hawtbuf/hawtbuf/1.9/hawtbuf-1.9.jar&quot;
+        },
+        &quot;usages&quot;: [
+          {
+            &quot;type&quot;: &quot;BUNDLE&quot;,
+            &quot;usedBy&quot;: &quot;RUNTIME&quot;
+          },
+          {
+            &quot;type&quot;: &quot;JAR&quot;,
+            &quot;usedBy&quot;: &quot;SAMPLES&quot;
+          }
+        ],
+        &quot;lookupRegex&quot;: &quot;hawtbuf([_-])1.9.jar&quot;
+      },
+
+      ...
+    ]
+  }
+```
+
+**Example 2: Manually installable dependency**
+
+This denotes the `activemq-client` dependency of the `jms` extension. This dependency needs to be manually downloaded, and the conversions should be done based on the given `download.instructions`.
+
+```json
+  &quot;jms&quot;: {
+    &quot;extension&quot;: {...},
+
+    &quot;dependencies&quot;: [
+      ...,
+
+      {
+        &quot;name&quot;: &quot;activemq-client&quot;,
+        &quot;version&quot;: &quot;5.9.0&quot;,
+        &quot;download&quot;: {
+          &quot;autoDownloadable&quot;: false,
+          &quot;instructions&quot;: &quot;Download the jar from &#x27;https://repo1.maven.org/maven2/org/apache/activemq/activemq-client/5.9.0/activemq-client-5.9.0.jar&#x27; and convert ...&quot;
+        },
+        &quot;usages&quot;: [
+          {
+            &quot;type&quot;: &quot;BUNDLE&quot;,
+            &quot;usedBy&quot;: &quot;RUNTIME&quot;
+          }
+        ],
+        &quot;lookupRegex&quot;: &quot;activemq([_-])client([_-])5.9.0(.*).jar&quot;
+      }
+    ]
+  }
+```
+</body>
+</html>

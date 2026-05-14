@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>deploying-si-as-a-single-deployment.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Single Node Deployment
+
+You can deploy the WSO2 Integrator: SI as a single node deployment to achieve most of the use cases that commonly arise
+in the streaming integration world. The other deployment options, namely [Minimum High Availability (HA) Deployment](deploying-si-as-minimum-ha-cluster.md) and
+[Scalable High Availability (HA) Deployment](deploying-si-as-a-scalable-cluster.md) are mainly introduced to handle high availability, scalability, and resiliency.
+
+!!! tip &quot;System Requirements&quot;
+    For system requirements, see [Installing WSO2 Integrator: SI](installing-si-in-vm.md).
+
+## Resilient deployment
+
+Resiliency guarantees the ability to withstand or recover from any system failure and carry out the process without 
+losing any data. WSO2 Integrator: SI has the capability to achieve the above via a broker that can replay data from a
+certain checkpoint. Kafka is one such broker that you can configure with WSO2 Integrator: SI to achieve this. The only additional configuration that you need to do in WSO2 Integrator: SI is state persistence. For detailed
+instructions, see [Configuring Database and File System State Persistence](../admin/configuring-Database-and-File-System-State-Persistence.md).
+
+![overview]({{base_path}}/images/singleNodeDeployment.jpg)
+
+If the single WSO2 Integrator: SI node fails to receive incoming events and if you have configured state persistence, the single node is able to retrieve the latest snapshot from the database and request the broker to send the events that it was unable to process due to the failure.
+
+
+The only disadvantage of this approach is that you need to ensure that there is a reliable mechanism to restart the server once it fails.
+</body>
+</html>

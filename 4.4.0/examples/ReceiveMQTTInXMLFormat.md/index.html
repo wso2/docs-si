@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReceiveMQTTInXMLFormat.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Receiving XML events via MQTT
+
+## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI to receive events to the SweetProductionStream via MQTT transport in XML format and log the events in LowProductionAlertStream to the output console.
+
+## Prerequisites
+
+1. Save this sample. `Siddhi App ReceiveMQTTInXMLFormat successfully deployed` message would be shown in the console.
+2. Before running this MQTT sample, set up `mosquitto` server which supports MQTT. This can be done by the following commands:
+
+    ```bash
+    sudo apt-get update
+    sudo apt-get install mosquitto
+    ```
+
+3. Install `mosquitto` client packages by executing following command.
+
+    ```bash
+    sudo apt-get install mosquitto-clients
+    ```
+
+4. After the set up ,start the `mosquitto` server by running the following command.
+
+    ```bash
+    sudo service mosquitto start
+    ```
+
+## Executing the Sample
+
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;, the following messages would be shown on the console.
+
+    ```bash
+    ReceiveMQTTInXMLFormat.siddhi - Started Successfully!
+    ```
+
+## Testing the Sample
+
+### Option 1: Publish events with the command line publisher
+
+Open a terminal and publish events using following command. (The values for name and amount attributes can be changed as desired).
+
+```bash
+mosquitto_pub -t &#x27;mqtt_topic_input&#x27; -m &#x27;&lt;events&gt;&lt;event&gt;&lt;name&gt;sugar&lt;/name&gt;&lt;amount&gt;300.0&lt;/amount&gt;&lt;/event&gt;&lt;/events&gt;&#x27;
+```
+
+### Option 2: Publish events with mqtt sample client
+
+1. Open a terminal and navigate to `&lt;SI_HOME&gt;/samples/sample-clients/mqtt-client`.
+2. Run the following command in the terminal:
+
+    ```bash
+    ant
+    ```
+
+    If you want to publish custom number of events, you need to run `ant` command as follows.
+
+    ```bash
+    ant -DnoOfEventsToSend=5
+    ```
+
+## Viewing the Results
+
+See the output. Following message would be shown on the console.
+
+```bash
+ReceiveHTTPInXMLFormatWithDefaultMapping : LowProducitonAlertStream : Event{timestamp=1511938781887, data=[sugar, 300.0], isExpired=false}
+```
+
+## Note
+
+1. Stop this Siddhi application.
+2. Stop the `mosquitto` server using following command once you are done with the execution.
+
+    ```bash
+    sudo service mosquitto stop
+    ```
+
+```sql
+@App:name(&quot;ReceiveMQTTInXMLFormat&quot;)
+@App:description(&#x27;Receive events via MQTT transport in XML format and view the output on the console.&#x27;)
+
+@source(type=&#x27;mqtt&#x27;, url= &#x27;tcp://localhost:1883&#x27;,topic=&#x27;mqtt_topic_input&#x27;, @map(type=&#x27;xml&#x27;))
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;log&#x27;)
+define stream LowProductionAlertStream (name string, amount double);
+
+-- passthrough data in the SweetProductionStream into LowProducitonAlertStream
+@info(name=&#x27;query1&#x27;)
+from SweetProductionStream
+select *
+insert into LowProductionAlertStream;
+```
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>upgrading-from-4.3.x-to-4.4.0.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Upgrading from WSO2 Integrator: SI 4.2.0 or 4.3.x to 4.4.0
+
+This page explains how to upgrade an existing WSO2 Integrator: SI 4.2.0 or 4.3.x deployment to 4.4.0. The upgrade is largely a drop-in replacement: Siddhi applications, the `deployment.yaml` schema, and the `bin/` startup scripts are unchanged. The main changes are a development tooling switch and updated extension versions, including a major Debezium version bump in the CDC extension.
+
+## Before you begin
+
+- Download WSO2 Integrator: SI 4.4.0 from the [product page](https://wso2.com/streaming-integrator/).
+- Back up the `&lt;OLD_SI_HOME&gt;` directory, including any custom files in `wso2/server/deployment/siddhi-files/`, `conf/server/`, `lib/`, and `resources/`.
+- Confirm your runtime JDK. SI 4.4.0 supports JDK 1.8, 11, 17, 21, and 25.
+
+## What&#x27;s new and what changes
+
+| Area | 4.3.x | 4.4.0 | Action required |
+|---|---|---|---|
+| Development tooling | **WSO2 Integrator: SI** VS Code extension | WSO2 Integrator (standalone IDE) or **WSO2 Integrator** VS Code extension | Install WSO2 Integrator or the new VS Code extension. The **WSO2 Integrator: SI** extension is no longer recommended. See [Step 4](#step-4-update-development-tooling). |
+| CDC extension (`siddhi-io-cdc`) | Debezium 1.x | Debezium 2.x, Security Fixes | Reinstall the extension via the extension installer. See [Step 3](#step-3-start-the-server-and-install-required-extensions). |
+| File extension (`siddhi-io-file`) | Previous version | Security Fixes | Reinstall the extension (handled automatically in Step 3). |
+| gRPC extension (`siddhi-io-grpc`) | Previous version | Security Fixes | Reinstall the extension (handled automatically in Step 3). |
+| Kafka extension (`siddhi-io-kafka`) | Previous version | Security Fixes | Reinstall the extension (handled automatically in Step 3). |
+| Security fixes | — | Dependency CVEs patched | None. |
+| `deployment.yaml` schema | — | Unchanged | Bring your file across as-is (see [Step 2](#step-2-bring-across-deploymentyaml)). |
+| Siddhi application syntax | — | Unchanged | No edits required. |
+
+!!! info &quot;Upgrading from 4.2.0?&quot;
+    If you are upgrading from 4.2.0, two additional steps apply: custom extension dependency coordinates changed in 4.3.x and must be updated. See [Step 5](#step-5-update-custom-extensions-for-users-upgrading-from-420). The SI Tooling web editor (shipped with 4.2.0) was also removed in 4.3.x; follow [Step 4](#step-4-update-development-tooling) to install the new tooling.
+
+## Step 1: Deploy the Siddhi applications
+
+1. Copy every file from `&lt;OLD_SI_HOME&gt;/wso2/server/deployment/siddhi-files/` into `&lt;SI_4.4.0_HOME&gt;/wso2/server/deployment/siddhi-files/`.
+
+2. Copy any other custom files you&#x27;ve added to `&lt;OLD_SI_HOME&gt;` to the same paths under `&lt;SI_4.4.0_HOME&gt;`. Common locations include:
+    - `resources/` — custom JKS files and resources referenced from `conf/`.
+    - `lib/` — JDBC drivers and other JARs you&#x27;ve dropped in.
+    - `samples/sample-clients/lib/` — client-side dependencies, if used.
+
+Siddhi application syntax is unchanged between 4.2.0, 4.3.x, and 4.4.0. No edits are required.
+
+## Step 2: Bring across `deployment.yaml`
+
+The `deployment.yaml` schema is unchanged from 4.2.0 through 4.4.0. You can copy your existing `conf/server/deployment.yaml` directly to `&lt;SI_4.4.0_HOME&gt;/conf/server/deployment.yaml`.
+
+!!! note
+    If you have customized other config files in `conf/server/` (for example, `log4j2.xml` or `master-keys.yaml`), copy those across as well. Compare each file against the 4.4.0 default to confirm no new keys are required for features you intend to enable.
+
+## Step 3: Start the server and install required extensions
+
+Because 4.4.0 is a new SI pack, all extensions must be reinstalled.
+
+1. Navigate to `&lt;SI_4.4.0_HOME&gt;/bin/` and run:
+
+    - **Linux/macOS:** `./server.sh`
+    - **Windows:** `server.bat`
+
+2. Install your extensions using either WSO2 Integrator or the `extension-installer` script:
+
+    - **Via WSO2 Integrator:** Open the **Extension Installer** panel and install each required extension.
+    - **Via script:** Run the following from `&lt;SI_4.4.0_HOME&gt;/bin/`:
+
+        - **Linux/macOS:** `./extension-installer.sh install`
+        - **Windows:** `extension-installer.bat install`
+
+    Restart the server after the installation completes.
+
+3. **CDC extension note:** The `siddhi-io-cdc` extension now uses Debezium 2.x. The extension installer handles the upgrade transparently — reinstall as you would any other extension.
+
+## Step 4: Update development tooling
+
+The **WSO2 Integrator: SI** VS Code extension (`WSO2.streaming-integrator`) is no longer recommended. Use one of the following instead:
+
+**Option A — WSO2 Integrator (standalone IDE)**
+
+1. Download and install WSO2 Integrator from the [WSO2 website](https://wso2.com/integrator/).
+2. Open your existing `.siddhi` files directly. No changes to file format are required.
+
+**Option B — WSO2 Integrator VS Code extension**
+
+1. In VS Code, install the **WSO2 Integrator** extension from the Marketplace.
+2. Disable or uninstall the old **WSO2 Integrator: SI** extension to avoid conflicts.
+3. Open your existing `.siddhi` files. No changes to file format are required.
+
+For an overview of the WSO2 Integrator editor experience and features, see [WSO2 Integrator: SI Overview]({{base_path}}/develop/si-overview/).
+
+!!! info &quot;Upgrading from 4.2.0?&quot;
+    If you used the legacy SI Tooling web editor (shipped with 4.2.0), you do not have a VS Code extension to uninstall. Install either Option A or Option B above.
+
+## Step 5: Update custom extensions (for users upgrading from 4.2.0)
+
+!!! info
+    Skip this step if you are upgrading from 4.3.x. This step only applies to users upgrading directly from 4.2.0.
+
+Two third-party libraries were repackaged as WSO2 orbit artifacts in 4.3.x. If you maintain custom Siddhi extensions that depend on either directly, repoint the group IDs:
+
+| Library | 4.2.0 coordinates | 4.4.0 coordinates |
+|---|---|---|
+| jayway JsonPath | `com.jayway.jsonpath:json-path:2.2.0` | `org.wso2.orbit.com.jayway.jsonpath:json-path:2.9.0.wso2v1` |
+| Apache Mime4j Core | `org.apache.james:apache-mime4j-core:0.7.2` | `org.wso2.orbit.org.apache.james:apache-mime4j-core:0.8.10.wso2v1` |
+
+If your custom extensions don&#x27;t depend on these libraries directly, no action is required.
+
+## Step 6: Test the migration
+
+1. Start the 4.4.0 server and confirm there are no extension load errors in the log.
+2. Simulate events for each migrated Siddhi application and verify the output. See [Testing a Siddhi Application]({{base_path}}/develop/testing-a-Siddhi-Application/).
+3. If you use the CDC extension, confirm that your CDC sources are receiving events correctly.
+4. If you use external state persistence (RDBMS or file system), confirm that the new server picks up the existing state. See [Configuring State Persistence]({{base_path}}/admin/configuring-Database-and-File-System-State-Persistence/).
+
+## Helm-based deployments
+
+If you deploy SI on Kubernetes using the [`wso2/helm-si`](https://github.com/wso2/helm-si) chart, update the image tag and build version in your values file:
+
+```yaml
+wso2:
+  deployment:
+    image:
+      tag: &quot;4.4.0-ubuntu&quot;
+    BuildVersion: &quot;4.4.0&quot;
+```
+
+Apply the change with `helm upgrade &lt;release&gt; . -f &lt;your-values.yaml&gt;`.
+
+All other values from your previous chart values file carry over. The 4.4.0 images published on Docker Hub at `wso2/wso2si` include `4.4.0-ubuntu`, `4.4.0-rocky`, and `4.4.0-alpine` variants. If your subscription pulls from the WSO2 private registry, confirm the equivalent tag is available there.
+</body>
+</html>

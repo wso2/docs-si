@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>business-Rules-APIs.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Business Rules APIs
+
+## Listing the available business rule instances
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Returns the list of business rule instances that are currently available.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/business-rules/instances&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;GET&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response Format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+``` java
+curl -X GET &quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/business-rules/instances&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X GET &quot;https://localhost:9743/business-rules/instances&quot; -u admin:admin -k
+```
+
+### Sample output
+
+``` java
+[ &quot;Found Business Rules&quot;, &quot;Loaded available business rules&quot;, [ [ { &quot;ruleTemplateUUID&quot;: &quot;identifying-continuous-production-decrease&quot;, &quot;properties&quot;: { &quot;timeInterval&quot;: &quot;6&quot;, &quot;timeRangeInput&quot;: &quot;5&quot;, &quot;email&quot;: &quot;example@email.com&quot;, &quot;validateTimeRange&quot;: &quot;function validateTimeRange(number) {\n\tif (!isNaN(number) &amp;&amp; (number &gt; 0)) {\n\t\treturn number;\n\t} else {\n\t\tthrow &#x27;A positive number expected for time range&#x27;;\n\t}\n}&quot;, &quot;getUsername&quot;: &quot;function getUsername(email) {\n\tif (email.match(/\\S+@\\S+/g)) {\n\t\tif (email.match(/\\S+@\\S+/g)[0] === email) {\n\t\t\treturn email.split(&#x27;@&#x27;)[0];\n\t\t}\n\t\tthrow &#x27;Invalid email address provided&#x27;;\n\t}\n\tthrow &#x27;Invalid email address provided&#x27;;\n}&quot;, &quot;timeRange&quot;: &quot;5&quot;, &quot;username&quot;: &quot;example&quot; }, &quot;uuid&quot;: &quot;samplesiddhiapp&quot;, &quot;name&quot;: &quot;SampleSiddhiApp&quot;, &quot;templateGroupUUID&quot;: &quot;3432442&quot;, &quot;type&quot;: &quot;template&quot; }, 1 ] ], 0 ]
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt;.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Delete business rule with given UUID
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Deletes the business rule with the given UUID. &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/business-rules/instances/{businessRuleInstanceID}?force-delete=false&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;DELETE&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response Format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Parameter Description
+
+| Parameter                | Description                                                                      |
+|--------------------------|----------------------------------------------------------------------------------|
+|`{businessRuleInstanceID}`| The UUID (Uniquely Identifiable ID) of the business rules instance to be deleted.|                                                                                     |
+
+### curl command syntax
+
+``` java
+curl -X DELETE &quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/business-rules/instances/business-rule-1?force-delete=false&quot; -H &quot;accept: application/json&quot; -u admin:admin
+```
+
+### Sample curl command
+
+``` java
+curl -X DELETE &quot;https://localhost:9743/business-rules/instances/business-rule-1?force-delete=false&quot; -H &quot;accept: application/json&quot; -u admin:admin
+```
+
+### Sample output
+
+``` java
+[ &quot;Deletion Successful&quot;, &quot;Successfully deleted the business rule&quot;, 6 ]
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Fetch template group with the given UUID
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Returns the template group that has the given UUID.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/business-rules/template-groups/{templateGroupID}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;GET&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Request/Response Format&lt;/td&gt;
+&lt;td&gt;application/json
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Authentication&lt;/td&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Username&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Password&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Runtime&lt;/td&gt;
+&lt;td&gt;tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Parameter description
+
+| Parameter           | Description                                   |
+|---------------------|-----------------------------------------------|
+| `{templateGroupID}` | The UUID of the template group to be fetched. |
+
+### curl command syntax
+
+``` java
+curl -X GET &quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/business-rules/template-groups/{templateGroupID}&quot; -u admin:admin -k
+```  
+
+### Sample curl command
+
+``` java
+curl -X GET &quot;https://localhost:9743/business-rules/template-groups/sweet-factory&quot; -u admin:admin -k
+```
+
+### Sample output
+
+``` java
+[ &quot;Found Template Group&quot;, &quot;Loaded template group with uuid &#x27;3432442&#x27;&quot;, { &quot;uuid&quot;: &quot;3432442&quot;, &quot;name&quot;: &quot;Sweet Factory&quot;, &quot;description&quot;: &quot;Configure Sweet Factory Rules&quot;, &quot;ruleTemplates&quot;: [ { &quot;uuid&quot;: &quot;identifying-continuous-production-decrease&quot;, &quot;name&quot;: &quot;Identify Continuous Production Decrease&quot;, &quot;type&quot;: &quot;template&quot;, &quot;instanceCount&quot;: &quot;many&quot;, &quot;script&quot;: &quot;var timeRange = validateTimeRange(${timeRangeInput});\nvar username = getUsername(&#x27;${email}&#x27;);\n\n// Validates the input provided for time range\nfunction validateTimeRange(number) {\n\tif (!isNaN(number) &amp;&amp; (number &gt; 0)) {\n\t\treturn number;\n\t} else {\n\t\tthrow &#x27;A positive number expected for time range&#x27;;\n\t}\n}\n\n// Gets the username from provided email\nfunction getUsername(email) {\n\tif (email.match(/\\S+@\\S+/g)) {\n\t\tif (email.match(/\\S+@\\S+/g)[0] === email) {\n\t\t\treturn email.split(&#x27;@&#x27;)[0];\n\t\t}\n\t\tthrow &#x27;Invalid email address provided&#x27;;\n\t}\n\tthrow &#x27;Invalid email address provided&#x27;;\n}&quot;, &quot;description&quot;: &quot;Alert factory managers if rate of production continuously decreases for `X` time period&quot;, &quot;templates&quot;: [ { &quot;type&quot;: &quot;siddhiApp&quot;, &quot;content&quot;: &quot;@App:name(&#x27;SweetFactory-TrendAnalysis&#x27;)\n\n@source(type=&#x27;http&#x27;, @map(type=&#x27;json&#x27;))\ndefine stream SweetProductionStream (name string, amount double, factoryId int);\n\n@sink(type=&#x27;log&#x27;, @map(type=&#x27;text&#x27;, @payload(\&quot;\&quot;\&quot;\nHi ${username},\nProduction at Factory {{factoryId}} has gone\nfrom {{initalamout}} to {{finalAmount}} in ${timeInterval} seconds!\&quot;\&quot;\&quot;)))\ndefine stream ContinousProdReductionStream (factoryId int, initaltime long, finalTime long, initalamout double, finalAmount double);\n\nfrom 
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Fetch rule templates of the template group with given UUID
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Returns the rule templates of the template group with the given UUID.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/business-rules/template-groups/{templateGroupID}/templates&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;GET&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Request/Response Format&lt;/td&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Authentication&lt;/td&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Username&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Password&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Runtime&lt;/td&gt;
+&lt;td&gt;Tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Parameter description
+
+| Parameter           | Description                                                                    |
+|---------------------|--------------------------------------------------------------------------------|
+| `{templateGroupID}` | The UUID of the template group of which the rule templates need to be fetched. |
+
+### curl command syntax
+
+``` java
+curl -X GET &quot;https://localhost:9643/business-rules/template-groups/{templateGroupID}/templates&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X GET &quot;https://localhost:9743/business-rules/template-groups/sweet-factory/templates&quot; -u admin:admin -k
+```
+
+### Sample output
+
+``` json
+[ &quot;Found Rule Templates&quot;, &quot;Loaded available rule templates for template group with uuid &#x27;3432442&#x27;&quot;, [ { &quot;uuid&quot;: &quot;identifying-continuous-production-decrease&quot;, &quot;name&quot;: &quot;Identify Continuous Production Decrease&quot;, &quot;type&quot;: &quot;template&quot;, &quot;instanceCount&quot;: &quot;many&quot;, &quot;script&quot;: &quot;var timeRange = validateTimeRange(${timeRangeInput});\nvar username = getUsername(&#x27;${email}&#x27;);\n\n// Validates the input provided for time range\nfunction validateTimeRange(number) {\n\tif (!isNaN(number) &amp;&amp; (number &gt; 0)) {\n\t\treturn number;\n\t} else {\n\t\tthrow &#x27;A positive number expected for time range&#x27;;\n\t}\n}\n\n// Gets the username from provided email\nfunction getUsername(email) {\n\tif (email.match(/\\S+@\\S+/g)) {\n\t\tif (email.match(/\\S+@\\S+/g)[0] === email) {\n\t\t\treturn email.split(&#x27;@&#x27;)[0];\n\t\t}\n\t\tthrow &#x27;Invalid email address provided&#x27;;\n\t}\n\tthrow &#x27;Invalid email address provided&#x27;;\n}&quot;, &quot;description&quot;: &quot;Alert factory managers if rate of production continuously decreases for `X` time period&quot;, &quot;templates&quot;: [ { &quot;type&quot;: &quot;siddhiApp&quot;, &quot;content&quot;: &quot;@App:name(&#x27;SweetFactory-TrendAnalysis&#x27;)\n\n@source(type=&#x27;http&#x27;, @map(type=&#x27;json&#x27;))\ndefine stream SweetProductionStream (name string, amount double, factoryId int);\n\n@sink(type=&#x27;log&#x27;, @map(type=&#x27;text&#x27;, @payload(\&quot;\&quot;\&quot;\nHi ${username},\nProduction at Factory {{factoryId}} has gone\nfrom {{initalamout}} to {{finalA}};&quot;}]}]]
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Fetch rule template of specific UUID available under a template group with specific UUID
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Returns the rule template with the specified UUID that is defined under the template group with the specified UUID.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/business-rules/template-groups/{templateGroupID}/templates/{ruleTemplateID}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;GET&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response Format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;Tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Parameter description
+
+| Parameter          | Description                                                                                  |
+|--------------------|----------------------------------------------------------------------------------------------|
+| `{templateGroupID}`| The UUID of the template group from which the specified rule template needs to be retrieved. |
+| `{ruleTemplateID}` | The UUID of the rule template that needs to be retrieved from the specified template group.  |
+
+### curl command syntax
+
+``` java
+curl -X GET &quot;https://localhost:9743/business-rules/template-groups/{templateGroupID}/templates/{ruleTemplateID}&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X GET &quot;https://localhost:9643/business-rules/template-groups/sweet-factory/templates/identifying-continuous-production-decrease&quot; -u admin:admin -k
+```
+
+### Sample output
+
+``` java
+[ &quot;Found Rule Template&quot;, &quot;Loaded rule template with uuid &#x27;identifying-continuous-production-decrease&#x27;&quot;, { &quot;uuid&quot;: &quot;identifying-continuous-production-decrease&quot;, &quot;name&quot;: &quot;Identify Continuous Production Decrease&quot;, &quot;type&quot;: &quot;template&quot;, &quot;instanceCount&quot;: &quot;many&quot;, &quot;script&quot;: &quot;var timeRange = validateTimeRange(${timeRangeInput});\nvar username = getUsername(&#x27;${email}&#x27;);\n\n// Validates the input provided for time range\nfunction validateTimeRange(number) {\n\tif (!isNaN(number) &amp;&amp; (number &gt; 0)) {\n\t\treturn number;\n\t} else {\n\t\tthrow &#x27;A positive number expected for time range&#x27;;\n\t}\n}\n\n// Gets the username from provided email\nfunction getUsername(email) {\n\tif (email.match(/\\S+@\\S+/g)) {\n\t\tif (email.match(/\\S+@\\S+/g)[0] === email) {\n\t\t\treturn email.split(&#x27;@&#x27;)[0];\n\t\t}\n\t\tthrow &#x27;Invalid email address provided&#x27;;\n\t}\n\tthrow &#x27;Invalid email address provided&#x27;;\n}&quot;, &quot;description&quot;: &quot;Alert factory managers if rate of production continuously decreases for `X` time period&quot;, &quot;templates&quot;: [ { &quot;type&quot;: &quot;siddhiApp&quot;, &quot;content&quot;: &quot;@App:name(&#x27;SweetFactory-TrendAnalysis&#x27;)\n\n@source(type=&#x27;http&#x27;, @map(type=&#x27;json&#x27;))\ndefine stream SweetProductionStream (name string, amount double, factoryId int);\n\n@sink(type=&#x27;log&#x27;, @map(type=&#x27;text&#x27;, @payload(\&quot;\&quot;\&quot;\nHi ${username},\nProduction at Factory {{factoryId}} has gone\nfrom {{initalamout}} to {{finalAmount}} in ${timeInterval} seconds!\&quot;\&quot;\&quot;)))\ndefine stream ContinousProdReductionStream (factoryId int, initaltime long, finalTime long, initalamout do
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Fetch available template groups
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Description&lt;/td&gt;
+&lt;th&gt;Returns all the template groups that are currently available in the SI setup.&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/business-rules/template-groups&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;GET&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response Format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;Tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+``` java
+curl -X GET &quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/business-rules/template-groups&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X GET &quot;https://localhost:9743/business-rules/template-groups&quot; -u admin:admin -k
+```
+
+### Sample output
+
+``` java
+[ &quot;Found Template Groups&quot;, &quot;Loaded available template groups&quot;, [ { &quot;uuid&quot;: &quot;stock-exchange&quot;, &quot;name&quot;: &quot;Stock Exchange&quot;, &quot;description&quot;: &quot;Domain for stock exchange analytics&quot;, &quot;ruleTemplates&quot;: [ { &quot;uuid&quot;: &quot;stock-exchange-input&quot;, &quot;name&quot;: &quot;Stock Exchange Input&quot;, &quot;type&quot;: &quot;input&quot;, &quot;instanceCount&quot;: &quot;many&quot;, &quot;script&quot;: &quot;&quot;, &quot;description&quot;: &quot;configured http source to receive stock exchange updates&quot;, &quot;templates&quot;: [ { &quot;type&quot;: &quot;siddhiApp&quot;, &quot;content&quot;: &quot;@App:name(&#x27;appName1&#x27;)\n@Source(type = &#x27;http&#x27;, receiver.url=&#x27;${receiverUrl}&#x27;,  basic.auth.enabled=&#x27;false&#x27;,\n@map(type=&#x27;text&#x27;))\ndefine stream StockInputStream(symbol string, price float, volume long, name string);&quot;, &quot;exposedStreamDefinition&quot;: &quot;define stream StockInputStream(symbol string, price float, volume long, name string);&quot; } ], &quot;properties&quot;: { &quot;receiverUrl&quot;: { &quot;fieldName&quot;: &quot;Receiver URL&quot;, &quot;description&quot;: &quot;Enter the URL of the http receiver for text messages. One URL can only be used once&quot;, &quot;defaultValue&quot;: &quot;https://localhost:8005/stockInputStream&quot; } } }, { &quot;uuid&quot;: &quot;stock-exchange-output&quot;, &quot;name&quot;: &quot;Stock Exchange Output&quot;, &quot;type&quot;: &quot;output&quot;, &quot;instanceCount&quot;: &quot;many&quot;, &quot;script&quot;: &quot;&quot;, &quot;description&quot;: &quot;configured output to log the filtered stock exchange data&quot;, &quot;templates&quot;: [ { &quot;type&quot;: &quot;siddhiApp&quot;, &quot;content&quot;: &quot;@App:name(&#x27;appName2&#x27;)\n\ndefine stream StockOutputStream(companyName string, companySymbol string, sellingPrice float);\
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt;.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Fetch business rule instance with given UUID
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Description&lt;/td&gt;
+&lt;th&gt;Returns the business rule instance with the given UUID.&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/business-rules/instances/{businessRuleInstanceID}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;GET&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response Format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;Tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+#### Parameter description
+
+| Parameter                  | Description                                            |
+|----------------------------|--------------------------------------------------------|
+| `{businessRuleInstanceID}` | The UUID of the business rules instance to be fetched. |
+
+### curl command syntax
+
+``` java
+curl -X GET &quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/business-rules/instances/{businessRuleInstanceID}&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X GET &quot;https://localhost:9743/business-rules/instances/business-rule-1&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample output
+
+``` java
+[ &quot;Found Business Rule&quot;, &quot;Loaded business rule with uuid &#x27;sample&#x27;&quot;, { &quot;ruleTemplateUUID&quot;: &quot;identifying-continuous-production-decrease&quot;, &quot;properties&quot;: { &quot;timeInterval&quot;: &quot;6&quot;, &quot;timeRangeInput&quot;: &quot;5&quot;, &quot;email&quot;: &quot;example@email.com&quot;, &quot;validateTimeRange&quot;: &quot;function validateTimeRange(number) {\n\tif (!isNaN(number) &amp;&amp; (number &gt; 0)) {\n\t\treturn number;\n\t} else {\n\t\tthrow &#x27;A positive number expected for time range&#x27;;\n\t}\n}&quot;, &quot;getUsername&quot;: &quot;function getUsername(email) {\n\tif (email.match(/\\S+@\\S+/g)) {\n\t\tif (email.match(/\\S+@\\S+/g)[0] === email) {\n\t\t\treturn email.split(&#x27;@&#x27;)[0];\n\t\t}\n\t\tthrow &#x27;Invalid email address provided&#x27;;\n\t}\n\tthrow &#x27;Invalid email address provided&#x27;;\n}&quot;, &quot;timeRange&quot;: &quot;5&quot;, &quot;username&quot;: &quot;example&quot; }, &quot;uuid&quot;: &quot;sample&quot;, &quot;name&quot;: &quot;Sample&quot;, &quot;templateGroupUUID&quot;: &quot;3432442&quot;, &quot;type&quot;: &quot;template&quot; } ]
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt;.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+## Create and save a business rule
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Creates and saves a business rule.&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/business-rules/instances?deploy={deploymentStatus}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;POST&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response Format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;Tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Parameter description
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;{deploymentStatus}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;br /&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+``` java
+
+```
+
+### Sample curl command
+
+``` java
+curl -X POST &quot;https://localhost:9743/business-rules/instances?deploy=true&quot; -H &quot;accept: application/json&quot; -H &quot;content-type: multipart/form-data&quot; -F &#x27;businessRule={&quot;name&quot;:&quot;Business Rule 5&quot;,&quot;uuid&quot;:&quot;business-rule-5&quot;,&quot;type&quot;:&quot;template&quot;,&quot;templateGroupUUID&quot;:&quot;sweet-factory&quot;,&quot;ruleTemplateUUID&quot;:&quot;identifying-continuous-production-decrease&quot;,&quot;properties&quot;:{&quot;timeInterval&quot;:&quot;6&quot;,&quot;timeRangeInput&quot;:&quot;5&quot;,&quot;email&quot;:&quot;example@email.com&quot;}}&#x27; -u admin:admin -k
+```
+
+### Sample output
+
+``` java
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Update business rules instance with given UUID
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Updates the business rules instance with the given UUID. &lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/business-rules/instances/{businessRuleInstanceID}?deploy={deploymentStatus}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;PUT&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response Format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;admin&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;Tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+#### Parameter description
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;{businessRuleInstanceID}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The UUID of the business rules instance to be updated.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;{deploymentStatus}&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;br /&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+ 
+### Sample curl command
+
+``` java
+curl -X PUT &quot;https://localhost:9743/business-rules/instances/business-rule-5?deploy=true&quot; -H &quot;accept: application/json&quot; -H &quot;content-type: application/json&quot; -d &#x27;{&quot;name&quot;:&quot;Business Rule 5&quot;,&quot;uuid&quot;:&quot;business-rule-5&quot;,&quot;type&quot;:&quot;template&quot;,&quot;templateGroupUUID&quot;:&quot;sweet-factory&quot;,&quot;ruleTemplateUUID&quot;:&quot;identifying-continuous-production-decrease&quot;,&quot;properties&quot;:{&quot;timeInterval&quot;:&quot;9&quot;,&quot;timeRangeInput&quot;:&quot;8&quot;,&quot;email&quot;:&quot;newexample@email.com&quot;}}&#x27; -u admin:admin -k
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt;.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</body>
+</html>

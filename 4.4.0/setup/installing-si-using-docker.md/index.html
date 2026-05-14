@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>installing-si-using-docker.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Installing WSO2 Integrator: SI Using Docker
+
+!!!tip &quot;Before you begin:&quot;
+    - The system requirements are as follows:
+        -   3 GHz Dual-core Xeon/Opteron (or latest)
+        -   8 GB RAM
+        -   10 GB free disk space
+
+    - Install Docker by following the instructions provided in [here](https://docs.docker.com/install/).
+
+
+WSO2 provides open source Docker images to run WSO2 Integrator: SI. You can view these on [Docker Hub - WSO2](https://hub.docker.com/u/wso2/).
+
+## Downloading and installing WSO2 Integrator: SI
+
+To pull the required WSO2 Integrator: SI distribution with updates from the Docker image, issue the following command.
+
+```
+docker pull wso2/streaming-integrator
+```
+
+## Running WSO2 Integrator: SI
+
+To run WSO2 Integrator: SI, issue the following command.
+
+```
+docker run -it wso2/streaming-integrator
+```
+
+!!! tip
+    To expose the required ports via docker when running the docker container, issue the following command.
+    
+    ```bash
+        docker run -it \
+        -p 9443:9443   \
+        -p 9090:9090   \
+        -p 7070:7070   \
+        -p 7443:7443   \
+        -p 9712:9712   \
+        -p 7711:7711   \
+        -p 7611:7611   \
+        wso2/streaming-integrator
+    ```
+
+   For more details about the ports in WSO2 Integrator: SI, see [Configuring Default Ports](../ref/configuring-default-ports.md).</body>
+</html>

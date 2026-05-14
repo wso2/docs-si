@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>defining-Data-Tables.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Defining Data Tables
+
+This section explains how to configure data tables to store the events you need to persist to carry out time series aggregation.
+
+The data handled by WSO2 Stream Processor are stored in the following two types of tables:
+
+-   **In-memory tables** : If no  store-backed tables are defined, data
+    is stored in in-memory tables by default.
+
+-   **Store-backed tables** : These are tables that are defined by you
+    in an external database. For a list of database types supported and
+    instructions to define table for different database types, see
+    [Defining Tables for External Data
+    Stores](_Defining_Tables_for_Physical_Stores_) .
+
+      
+
+### Adding primary and index keys
+
+Both in-memory tables and tables backed by external databases support
+primary and index keys. These are defined to allow stored information to
+be searched and retrieved in an effective and efficient manner.
+
+#### Adding primary keys
+
+Attribute(s) within the event stream for which the event table is
+created can be specified as the primary key for the table. The purpose
+of primary key is to ensure that the value for a selected attribute is
+unique for each entry in the table. This prevents the duplication of
+entries saved in the table.
+
+Primary keys are configured via the `         @PrimaryKey        `
+annotation. Only one @PrimaryKey annotation is allowed per event table.
+
+When several attributes are given within Primary key annotation (e.g
+@PrimaryKey( &#x27;key1&#x27;, &#x27;key2&#x27;)), those attributes would act as a composite
+primary key.
+
+##### Syntax
+
+``` sql
+    @PrimaryKey(&#x27;&lt;attribute_1&gt;&#x27;)
+    define table &lt;event_table&gt; (&lt;attribute_1&gt; &lt;attribute_type&gt;, &lt;attribute_2&gt; &lt;attribute_type&gt;, &lt;attribute_3&gt; &lt;attribute_type&gt;);
+```
+
+##### Example
+
+``` sql
+    @PrimaryKey(&#x27;symbol&#x27;)
+    define table StockTable (symbol string, price float, volume long);
+```
+
+The above configuration ensures that each entry saved in the
+`         StockTable        ` event table should have a unique value for
+the `         symbol        ` attribute because this attribute is
+defined as the primary key.
+
+#### Adding indexes
+
+An attribute within the event stream for which the event table is
+created can be specified as the primary key for the table. This allows
+the entries stored within the table to be indexed by that attribute.
+
+Indexes are configured via the `         @Index        ` annotation.
+
+An event table can have multiple attributes defined as index attributes.
+However, only one `         @Index        ` annotation can be added per
+event table.
+
+##### Syntax
+
+To index by a single attribute:
+
+``` sql
+    @Index(&#x27;&lt;attribute_1&gt;&#x27;)
+    define table &lt;event_table&gt; (&lt;attribute_1&gt; &lt;attribute_type&gt;, &lt;attribute_2&gt; &lt;attribute_type&gt;, &lt;attribute_3&gt; &lt;attribute_type&gt;);
+```
+
+To index by multiple attributes:
+
+``` sql
+    @Index(&#x27;&lt;attribute_1&gt;&#x27;&#x27;&lt;attribute_2&gt;&#x27;)
+    define table &lt;event_table&gt; (&lt;attribute_1&gt; &lt;attribute_type&gt;, &lt;attribute_2&gt; &lt;attribute_type&gt;, &lt;attribute_3&gt; &lt;attribute_type&gt;);
+```
+
+##### Example
+
+``` sql
+    @Index(&#x27;symbol&#x27;)
+    define table StockTable (symbol string, price float, volume long);
+```
+
+The above configuration ensures that the entries stored in the
+`         StockTable        ` event table are indexed by the
+`         symbol        ` attribute.
+
+### Defining Tables for Physical Stores
+  
+</body>
+</html>

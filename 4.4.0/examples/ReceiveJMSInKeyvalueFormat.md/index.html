@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReceiveJMSInKeyvalueFormat.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Receiving Key Value Events via JMS
+
+## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI to receive events to the `SweetProductionStream` via Jms transport in Keyvalue and log the events in `LowProductionAlertStream` to the output console.
+
+## Prerequisites
+
+1. Setup ActiveMQ
+	* Download [activemq-client-5.x.x.jar](https://repo1.maven.org/maven2/org/apache/activemq/activemq-client/5.9.0/activemq-client-5.9.0.jar).
+	* Download [apache-activemq-5.x.x-bin.zip](http://archive.apache.org/dist/activemq/apache-activemq/5.9.0/apache-activemq-5.9.0-bin.zip)
+	* ActiveMQ `activemq-client-5.x.x.jar` should be added to `&lt;SI_HOME&gt;/lib` after being converted to OSGI (See Note: To convert ActiveMQ lib to OSGI).
+	* Unzip the `apache-activemq-5.x.x-bin.zip` and copy the following ActiveMQ libs in `apache-activemq-5.x.x/lib` to `&lt;SI_HOME&gt;/samples/sample-clients/lib` and `&lt;SI_HOME&gt;/lib`.
+		- hawtbuf-1.9.jar
+		- geronimo-j2ee-management_1.1_spec-1.0.1.jar
+		- geronimo-jms_1.1_spec-1.1.1.jar
+2. Save this sample.
+3. If there is no syntax error, the following message is shown on the console:
+
+	```bash
+	Siddhi App ReceiveJMSInKeyvalueFormat successfully deployed.
+	```
+
+## Note
+
+To convert ActiveMQ lib to OSGI,
+
+1. Navigate to &lt;SI_HOME&gt;/bin and run the following command:
+	- For Linux/macOS:
+
+	```bash
+	./icf-provider.sh org.apache.activemq.jndi.ActiveMQInitialContextFactory &lt;Downloaded Jar Path&gt;/activemq-client-5.x.x.jar &lt;Output Jar Path&gt;
+	```
+
+	- For Windows:
+
+	```bash
+	./icf-provider.bat org.apache.activemq.jndi.ActiveMQInitialContextFactory &lt;Downloaded Jar Path&gt;\activemq-client-5.x.x.jar &lt;Output Jar Path&gt;
+	```
+
+	* Provide privileges if necessary using `chmod +x icf-provider.(sh|bat)`.
+	* Also, this will register the `InitialContextFactory` implementation according to the OSGi JNDI spec.
+2. If converted successfully then it will create `activemq-client-5.x.x` directory in the `&lt;Output Jar Path&gt;` with OSGi converted and original jars:
+	- `activemq-client-5.x.x.jar` (Original Jar)
+	- `activemq-client-5.x.x_1.0.0.jar` (OSGi converted Jar)
+
+	Also, following messages would be shown on the terminal
+
+	```bash
+	- INFO: Executing &#x27;jar uf &lt;absolute_path&gt;/activemq-client-5.x.x/activemq-client-5.x.x.jar -C &lt;absolute_path&gt;/activemq-client-5.x.x /internal/CustomBundleActivator.class&#x27;
+	[timestamp] org.wso2.carbon.tools.spi.ICFProviderTool addBundleActivatorHeader
+	- INFO: Running jar to bundle conversion [timestamp] org.wso2.carbon.tools.converter.utils.BundleGeneratorUtils convertFromJarToBundle
+	- INFO: Created the OSGi bundle activemq_client_5.x.x_1.0.0.jar for JAR file &lt;absolute_path&gt;/activemq-client-5.x.x/activemq-client-5.x.x.jar
+	```
+
+3. You can find the osgi converted libs in `activemq-client-5.x.x` folder. You can copy `activemq-client-5.x.x/activemq-client-5.x.x_1.0.0.jar` to `&lt;SI_HOME&gt;/lib` and `activemq-client-5.x.x/activemq-client-5.x.x.jar` to `&lt;SI_HOME&gt;/samples/sample-clients/lib`.
+
+## Executing the sample
+
+1. Navigate to `{apache-activemq-5.x.x}` unzipped directory and start ActiveMQ server node using `bin/activemq start`.
+2. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+3. If the Siddhi application starts successfully, the following messages are shown on the console:
+
+	```bash
+	ReceiveJMSInKeyvalueFormat.siddhi - Started Successfully!
+	```
+
+## Testing the sample
+
+Navigate to `&lt;SI_HOME&gt;/samples/sample-clients/jms-producer` and run the following command.
+
+```bash
+ant -Dtype=&#x27;keyvalue&#x27;
+```
+
+## Viewing the results
+
+Messages similar to the following would be shown on the editor console.
+
+```bash
+- INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveJMSInKeyvalueFormat : OutputStream : Event{timestamp=1513617090756, data=[Cream Sandwich, 790.7842348407036], isExpired=false}
+```
+
+```sql
+@App:name(&#x27;ReceiveJMSInKeyvalueFormat&#x27;)
+@App:description(&#x27;Receive events via JMS provider in Keyvalue format with default mapping and view the output on the console.&#x27;)
+
+@source(type=&#x27;jms&#x27;,
+        factory.initial=&#x27;org.apache.activemq.jndi.ActiveMQInitialContextFactory&#x27;,
+        provider.url=&#x27;tcp://localhost:61616&#x27;,
+        destination=&#x27;jms_result_topic&#x27;,
+        connection.factory.type=&#x27;topic&#x27;,
+        connection.factory.jndi.name=&#x27;TopicConnectionFactory&#x27;,
+        @map(type=&#x27;keyvalue&#x27;))
+define stream SweetProductionStream(name string, amount double);
+
+@sink(type=&#x27;log&#x27;)
+define stream LowProductionAlertStream(name string, amount double);
+
+@info(name=&#x27;EventsPassthroughQuery&#x27;)
+from SweetProductionStream
+select *
+insert into LowProductionAlertStream;
+```
+</body>
+</html>

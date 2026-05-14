@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>configuring-default-ports.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Configuring Default Ports
+
+This page describes the default ports that are used for each runtime
+when the port offset is 0.
+
+
+## Common ports
+
+The following ports are common to all runtimes.
+
+| Port | Description                                                             |
+|------|-------------------------------------------------------------------------|
+| 7611 | Thrift TCP port to receive events from clients.                         |
+| 7711 | Thrift SSL port for secure transport where the client is authenticated. |
+| 9611 | Binary TCP port to receive events from clients.                         |
+| 9711 | Binary SSL port for secure transport where the client is authenticated. |
+
+You can offset binary and thrift by configuring the offset parameter in the `&lt;SI_HOME&gt;/conf/server/deployment.yaml` file.
+The following is a sample configuration.
+
+```yaml
+  # Carbon Configuration Parameters
+wso2.carbon:
+    # value to uniquely identify a server
+  id: wso2-si
+    # server name
+  name: WSO2 Integrator: SI
+    # server type
+  type: wso2-si
+    # ports used by this server
+  ports:
+      # port offset
+    offset: 1
+```
+
+## Server runtime
+
+| Port | Description                       |
+|------|-----------------------------------|
+| 9090 | HTTP netty transport              |
+| 9443 | HTTPS netty transport             |
+| 7070 | HTTP transport (Store Query API)  |
+| 7443 | HTTPS transport (Store Query API) |
+
+## Clustering ports
+
+Ports that are required for clustering deployment.
+
+### Minimum High Availability (HA) Deployment
+
+| Port | Description           |
+|------|-----------------------|
+| 9090 | HTTP netty transport  |
+| 9443 | HTTPS netty transport |
+
+The HTTP netty transport port is also used as the default value for the `advertisedPort` parameter in the `liveSync` section.
+
+### Multi Datacenter High Availability Deployment
+
+In addition to the ports used in single-cluster setups (Minimum HA Deployment or a scalable cluster), the following Kafka port is required:
+
+| Port | Description                                                                                                                    |
+|------|--------------------------------------------------------------------------------------------------------------------------------|
+| 9092 | Default Kafka broker port. Each data center runs its own broker instance (e.g., `bootstrap.servers=&#x27;host1:9092, host2:9092&#x27;`). |
+</body>
+</html>

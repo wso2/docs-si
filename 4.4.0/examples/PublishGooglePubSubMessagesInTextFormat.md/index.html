@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PublishGooglePubSubMessagesInTextFormat.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Publishing Events to a Google Pub/Sub Topic
+
+
+
+## Purpose
+This application demonstrates how to configure WSO2 Integrator: SI using googlepubsub sink in Siddhi to publish events. Events which are in TEXT format are published to a googlepubsub topic.
+
+## Prerequisites
+1. Create a Google Cloud Platform account.
+2. Sign in to Google Account and set up a GCP Console project and enable the API.
+3. Create a service account and download a private key as JSON.
+4. Place your json file in any system property.
+5. Save the sample.
+6. If there is no syntax error, the following message is shown on the console:
+    - Siddhi App PublishGooglePubSubMessagesInTextFormat successfully deployed.
+
+
+## Executing the Sample
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;. If the Siddhi application starts successfully, the following messages are shown on the console:
+	- PublishGooglePubSubMessagesInTextFormat.siddhi - Started Successfully!
+
+## Testing the Sample
+1. Send events through one or more of the following methods.
+    * You may send events to googlepubsub sink, via event simulator
+        1. Open the event simulator by clicking on the second icon or pressing Ctrl+Shift+I.
+        2. In the Single Simulation tab of the panel, specify the values as follows:
+            * Siddhi App Name  : PublishGooglePubSubMessagesInTextFormat
+            * Stream Name      : FooStream
+        3. In the message field, enter the following and then click Send to send the event.
+            * message: Hello
+        4. Send some more events.
+
+## Viewing the Results
+* See the output on the terminal:&lt;br/&gt;
+[2019-03-14_12-50-21_966] INFO {io.siddhi.core.stream.output.sink.LogSink} - SendEvent : BarStream : Event{timestamp=1552548021825, data=[Hello], isExpired=false}
+
+## Notes
+Make sure the credential file is correct and user have write access to make api calls.&lt;br/&gt;
+Stop this Siddhi application.
+
+```sql
+@App:name(&quot;PublishGooglePubSubMessagesInTextFormat&quot;)
+
+@App:description(&#x27;Send events to a Google Pub/Sub Topic&#x27;)
+
+
+
+@sink(type=&#x27;googlepubsub&#x27;, 
+      topic.id = &#x27;topic75&#x27;,
+      credential.path = &#x27;/../sp.json&#x27;,
+      project.id = &#x27;sp-path-1547649404768&#x27;,
+      @map(type=&#x27;text&#x27;))
+define stream FooStream (message string);
+
+@sink(type = &#x27;log&#x27;)
+define stream BarStream(message string);
+
+@info(name = &#x27;query1&#x27;)
+from FooStream
+select message 
+insert into BarStream;
+```</body>
+</html>

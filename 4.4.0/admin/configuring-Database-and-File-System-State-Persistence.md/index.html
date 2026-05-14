@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>configuring-Database-and-File-System-State-Persistence.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Configuring Database and File System State Persistence
+
+This section explains how to prevent the loss of data that can result
+from a system failure by persisting the state of SI periodically
+either into a database system or into the file system.
+
+### Prerequisites
+
+Before configuring database system persistence, the following prerequisites
+must be completed.
+
+-   One or more Siddhi Applications must be running in the SI
+    server.
+-   A working RDBMS instance that can be used for data persistence must
+    exist.
+-   The requirements of the datasource must be already defined.
+
+-   Database persistence involves updating the databases connected to
+    WSO2 Integrator: SI with the latest information relating to the
+    events that are being processed by SI at a given time.
+
+### Configuring database system persistence
+
+The supported databases are H2, MySQL, Postgres, MSSQL and Oracle. The
+relevant jdbc driver jar should be downloaded and added to the
+`&lt;SI_HOME&gt;/lib` directory to prior to using database
+system persistence.
+
+To configure periodic data persistence, update the
+`&lt;SI_HOME&gt;/conf/server/deployment.yaml` file under
+`state.persistence` as follows:
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Purpose&lt;/th&gt;
+&lt;th&gt;Required Value&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;enabled&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;This enables data persistence.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             true            &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;intervalInMin&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The time interval in minutes that defines the interval in which state of Siddhi applications should be persisted&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;revisionsToKeep&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The number of revisions to keep in the system. When a new persist takes place, the old revisions are removed.&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;persistenceStore&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The persistence store .&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;org.wso2.carbon.streaming.integrator.core.persistence.DBPersistenceStore&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;             config &amp;gt; datasource            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The datasource to be used in persisting the state. The provided datasource should be properly defined in the deployment.yaml. For detailed instructions of how to configure a datasource, see &lt;a href=&quot;../setup/configuring-data-sources.md&quot;&gt;Configuring Datasources&lt;/a&gt;.&lt;/td&gt;
+&lt;td&gt;&lt;pre&gt;&lt;code&gt;WSO2_PERSISTENCE_DB (Datasource with this name should be defined in wso2.datasources)&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;             config &amp;gt; table            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The table that should be created and used for the persisting of the state.&lt;/td&gt;
+&lt;td&gt;&lt;pre&gt;&lt;code&gt;PERSISTENCE_TABLE&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+The following is a sample segment of the required configurations in the
+`         &lt;SI_HOME&gt;/conf/server/deployment.yaml        ` file to
+configure database system persistence.
+
+**Sample deployment.yaml segment**
+
+```yaml
+    state.persistence:
+      enabled: true
+      intervalInMin: 1
+      revisionsToKeep: 3
+      persistenceStore: org.wso2.carbon.streaming.integrator.core.persistence.DBPersistenceStore
+      config:
+        datasource: &lt;DATASOURCE NAME&gt;   # A datasource with this name should be defined in wso2.datasources namespace
+        table: &lt;TABLE NAME&gt;
+```
+
+  
+
+### Configuring file system persistence
+
+This section explains how to persist the states of Siddhi applications
+during a required time interval in the file system in order to maintain
+back-ups. To configure state persistence, update the
+`&lt;SI_HOME&gt;/conf/server/deployment.yaml` file under
+`state.persistence` as follows:
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Purpose&lt;/th&gt;
+&lt;th&gt;Required Value&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;             enabled            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;This enables data persistence.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             true            &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;             intervalInMin            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The time interval in minutes that defines the interval in which state of Siddhi applications should be persisted&lt;br /&gt;
+&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             1            &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;             revisionsToKeep            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The number of revisions to keep in the system. When a new persist takes place, the old revisions are removed.&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             3            &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;             persistenceStore                         &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The persistence store.&lt;/td&gt;
+&lt;td&gt;&lt;pre&gt;&lt;code&gt;org.wso2.carbon.streaming.integrator.core.persistence.FileSystemPersistenceStore&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;config &amp;gt; location&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;A fully qualified folder location to where the revision files should be persisted.&lt;/td&gt;
+&lt;td&gt;&lt;pre&gt;&lt;code&gt;siddhi-app-persistence&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+The following is a sample segment of the required configurations in the
+`&lt;SI_HOME&gt;/conf/server/deployment.yaml` file to
+configure file system persistence.
+
+**Sample deployment.yaml segment**
+
+```yaml
+    state.persistence:
+      enabled: true
+      intervalInMin: 1
+      revisionsToKeep: 2
+      persistenceStore: org.wso2.carbon.streaming.integrator.core.persistence.FileSystemPersistenceStore
+      config:
+        location: siddhi-app-persistence
+```
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>handling-requests-with-errors.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Error Handling with Data Streams
+
+## Introduction
+
+In this tutorial, let&#x27;s learn how you can handle streaming data that has errors (e.g., events that do not have values for certain attributes). WSO2 Integrator: SI allows you to log such events, direct them to a separate stream or store them in a data store. If these errors occur at the time of publishing (e.g., due to a connection error), SI also provides the option to wait and then resume to publish once the connection is stable again. For detailed information about different ways to handle errors, see the [Handling Errors guide](../guides/handling-errors.md).
+
+In this scenario, you are handling erroneous events by directing them to a MySQL store.
+
+!!! Tip &quot;Before you begin:&quot;
+    In order to save streaming data with errors in a MySQL store, complete the following prerequisites.&lt;br/&gt;    
+    Start the SI server by navigating to the `&lt;SI_HOME&gt;/bin` directory and issuing the appropriate command based on your operating system:
+
+    === &quot;On macOS/Linux&quot;
+        ```bash
+        sh server.sh
+        ```
+
+    === &quot;On Windows&quot;
+        ```batch
+        server.bat
+        ```
+
+    The following log appears in the WSO2 Integrator: SI console once you have successfully started the server:
+
+    ```
+    INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Streaming Integrator started in N.NNN sec
+    ```
+    - You need to have access to a MySQL instance.&lt;br/&gt;
+    
+## Tutorial steps
+      
+### Step 1: Create the data store
+
+Let&#x27;s create the MySQL data store in which the events with errors can be saved. To do this, follow the steps below:
+
+1. Download the latest MySQL JDBC driver (Connector/J) from [the MySQL site](https://dev.mysql.com/downloads/connector/j/).
+
+2. Unzip the archive.&lt;br/&gt;
+
+3. Copy the Connector/J JAR to the `&lt;SI_HOME&gt;/lib` directory.&lt;br/&gt;
+
+4. Open the MySQL client as follows:
+
+    `mysql -u &lt;USERNAME&gt; -p`
+    
+5. Create a new database named `siddhierrorstoredb` by issuing the following command in the MySQL console.
+
+    ``mysql&gt; create database siddhierrorstoredb;``
+    
+6. To switch to the new database, issue the following command.
+
+    `mysql&gt; use siddhierrorstoredb;`
+
+### Step 2: Enable the error store
+
+To enable the error store, open the `&lt;SI_HOME&gt;/conf/server/deployment.yaml` file. Locate the `error.store:` block (it ships disabled by default) and update it as follows:
+
+```
+error.store:
+  enabled: true
+  bufferSize: 1024
+  dropWhenBufferFull: true
+  errorStore: org.wso2.carbon.streaming.integrator.core.siddhi.error.handler.DBErrorStore
+  config:
+    datasource: SIDDHI_ERROR_STORE_DB
+    table: SIDDHI_ERROR_STORE_TABLE
+```
+
+This configuration refers to a data source named `SIDDHI_ERROR_STORE_DB`. Define this data source as follows under `Data sources` in the same `&lt;SI_HOME&gt;/conf/server/deployment.yaml` file:
+
+```
+- name: SIDDHI_ERROR_STORE_DB
+  description: The datasource used for Siddhi error handling feature
+  jndiConfig:
+    name: jdbc/SiddhiErrorStoreDB
+  definition:
+    type: RDBMS
+    configuration:
+      jdbcUrl: &#x27;jdbc:mysql://localhost:3306/siddhierrorstoredb?useSSL=false&#x27;
+      username: root
+      password: password
+      driverClassName: com.mysql.cj.jdbc.Driver
+      minIdle: 5
+      maxPoolSize: 50
+      idleTimeout: 60000
+      connectionTestQuery: SELECT 1
+      validationTimeout: 30000
+      isAutoCommit: false
+```
+
+### Step 3: Create and deploy the Siddhi application
+
+To create and deploy a Siddhi application, follow the steps below:
+
+1. Open the editor with **WSO2 Integrator: SI** installed.
+
+2. Copy paste the following three Siddhi applications to three separate new files and save.
+    ```
+        @App:name(&quot;MappingErrorTest&quot;)
+        
+        @OnError(action=&#x27;STORE&#x27;)
+        @source(type = &#x27;http&#x27;,
+                 receiver.url=&#x27;http://localhost:8006/productionStream&#x27;,
+                 basic.auth.enabled=&#x27;false&#x27;,
+        	 @map(type=&#x27;json&#x27;, @attributes(name=&#x27;name&#x27;, amount=&#x27;amount&#x27;)))
+        define stream ProductionStream(name string, amount double);
+        
+        @sink(type=&#x27;log&#x27;, prefix=&#x27;Successful mapping: &#x27;)
+        define stream LogStream(name string, amount double);
+        
+        from ProductionStream
+        select *
+        insert into LogStream;
+    ```
+    ```
+       @App:name(&quot;SinkTransportErrorTest&quot;)
+       
+       @sink(type = &#x27;http&#x27;, on.error=&#x27;STORE&#x27;, blocking.io=&#x27;true&#x27;, 
+             publisher.url = &quot;http://localhost:8090/unavailableEndpoint&quot;, 
+             method = &quot;POST&quot;, @map(type = &#x27;json&#x27;))
+       define stream TestPublisherStream (name string, amount double);
+       
+       @source(type = &#x27;http&#x27;, receiver.url=&#x27;http://localhost:8007/testUnavailableEP&#x27;, 
+               basic.auth.enabled=&#x27;false&#x27;, 
+               @map(type=&#x27;json&#x27;, enclosing.element=&#x27;$.event&#x27;, 
+                   @attributes(name=&#x27;name&#x27;, amount=&#x27;amount&#x27;)))
+       define stream TestInput(name string, amount double);
+       
+       from TestInput#log(&#x27;Sending to unavailableEndpoint: &#x27;)
+       select name, amount
+       insert into TestPublisherStream;
+    ```
+    ```
+       @App:name(&quot;ReceiveAndCount&quot;)
+       
+       @App:description(&#x27;Receive events via HTTP transport and view the output on the console&#x27;)
+       
+       @source(type = &#x27;http&#x27;,
+               receiver.url=&#x27;http://localhost:8090/unavailableEndpoint&#x27;,
+               basic.auth.enabled=&#x27;false&#x27;,
+               @map(type=&#x27;json&#x27;))
+       define stream SweetProductionStream (name string, amount double);
+       
+       @sink(type=&#x27;log&#x27;)
+       define stream TotalCountStream (totalCount long);
+       
+       -- Count the incoming events
+       @info(name=&#x27;query1&#x27;)
+       from SweetProductionStream
+       select count() as totalCount
+       insert into TotalCountStream;
+    ```
+
+3. Deploy the `MappingErrorTest.siddhi` and `SinkTransportErrorTest.siddhi` applications by POSTing each Siddhi source to the SI server&#x27;s REST API:
+
+    !!!warning &quot;Security notice&quot;
+        The `curl` examples throughout this tutorial use the default `admin:admin` credentials that ship with a fresh WSO2 Integrator: SI install. In production, replace these credentials with secure values (ideally via shell environment variables, e.g. `-u &quot;$SI_USER:$SI_PASS&quot;`) to avoid leaking secrets through shell history and process lists.
+
+    ```
+    curl -sk -u admin:admin -X POST -H &quot;Content-Type: text/plain&quot; \
+      --data-binary @MappingErrorTest.siddhi \
+      &quot;https://localhost:9443/siddhi-apps&quot;
+
+    curl -sk -u admin:admin -X POST -H &quot;Content-Type: text/plain&quot; \
+      --data-binary @SinkTransportErrorTest.siddhi \
+      &quot;https://localhost:9443/siddhi-apps&quot;
+    ```
+
+    Each request returns HTTP 201. The application is fully active once the following log appears in the WSO2 Integrator: SI console for each Siddhi app:
+
+    ```
+    INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App &lt;name&gt; deployed successfully
+    ```
+
+    !!! Tip
+        To check the port of your SI server, open the `&lt;SI_HOME&gt;/conf/server/deployment.yaml` file and search for `wso2.transport.http` → `Listener Configurations`. The port is under the listener whose ID is `msf4j-https` (default `9443`).
+
+
+### Step 4: Verify the error store REST API is reachable
+
+WSO2 Integrator: SI exposes an error store REST API that lets you view, replay, and discard captured error entries. The API is served by the SI server on its HTTPS admin port (default `9443`) under the base path `/error-handler/`. You will use this API in the next steps.
+
+To verify the API is reachable, issue the following command:
+
+```
+curl -sk -u admin:admin &quot;https://localhost:9443/error-handler/error-entries?siddhiApp=MappingErrorTest&quot;
+```
+
+The response is a JSON array of error entries captured for the specified Siddhi application. Since no errors have been captured yet, the response is an empty array:
+
+```
+[]
+```
+
+!!! Tip
+    - The `-k` flag accepts the self-signed certificate that the SI server ships with by default.
+    - `-u admin:admin` authenticates with the default admin credentials. Change these if you have reconfigured your server.
+    - To check the port of your SI server, open `&lt;SI_HOME&gt;/conf/server/deployment.yaml` and search for `wso2.transport.http` → `Listener Configurations`. The port is under the listener whose ID is `msf4j-https`.
+        
+### Step 5: Test the event mapping failing scenario
+
+#### Step 5.1: Publish an event with a mapping error in MappingErrorTest Siddhi application
+
+Send an event to the `ProductionStream` stream of the `MappingErrorTest` Siddhi application by issuing the following CURL command.
+
+```
+curl --location --request POST &#x27;http://localhost:8006/productionStream&#x27; \
+--header &#x27;Content-Type: application/json&#x27; \
+--data-raw &#x27;{
+                &quot;foo&quot;: &quot;Cake&quot;,
+                &quot;amount&quot;: 20.12
+            }&#x27;
+```
+The event causes an error referred to as `MappingFailedException`. This is because the `ProductionStream` expects an event in the following format which is specified via a custom mapping.
+```
+{
+    &quot;name&quot;: &quot;Cake&quot;,
+    &quot;amount&quot;: 20.12
+}
+```
+
+#### Step 5.2: Inspect and resolve the error via the error store REST API
+
+To inspect the captured error and resolve it, follow the procedure below.
+
+1. List the errors captured for the `MappingErrorTest` Siddhi application:
+
+    ```
+    curl -sk -u admin:admin &quot;https://localhost:9443/error-handler/error-entries?siddhiApp=MappingErrorTest&quot;
+    ```
+
+    The response is a JSON array containing the mapping error entry you just simulated. Note the `id` field — you will reference it in the next step.
+
+    ```
+    [
+        {
+            &quot;id&quot;: 1,
+            &quot;timestamp&quot;: 1595574091411,
+            &quot;siddhiAppName&quot;: &quot;MappingErrorTest&quot;,
+            &quot;streamName&quot;: &quot;ProductionStream&quot;,
+            &quot;cause&quot;: &quot;No results for path: $[&#x27;name&#x27;]&quot;,
+            &quot;errorOccurrence&quot;: &quot;BEFORE_SOURCE_MAPPING&quot;,
+            &quot;eventType&quot;: &quot;PAYLOAD_STRING&quot;,
+            &quot;errorType&quot;: &quot;MAPPING&quot;
+        }
+    ]
+    ```
+
+    !!! Tip
+        Append `?descriptive=true` to the URL to include `eventAsBytes` (binary payload) and `stackTrace` in each entry.
+
+2. To view full details of the entry, issue the following command (replace `1` with the actual `id`):
+
+    ```
+    curl -sk -u admin:admin &quot;https://localhost:9443/error-handler/error-entries/1&quot;
+    ```
+
+    The single-entry endpoint returns a wrapper object in the following shape:
+
+    ```
+    {
+        &quot;errorEntry&quot;: { ... same ErrorEntry fields, plus eventAsBytes and stackTrace ... },
+        &quot;modifiablePayloadString&quot;: &quot;{\&quot;foo\&quot;:\&quot;Cake\&quot;,\&quot;amount\&quot;:20.12}&quot;,
+        &quot;isPayloadModifiable&quot;: true
+    }
+    ```
+
+    Keep this response body — you will need its exact shape (wrapper and all) to replay an entry in Step 6.3.
+
+3. The incoming event was malformed — the fix is on the sender side, so the entry cannot be replayed as-is. Discard the erroneous entry:
+
+    ```
+    curl -sk -u admin:admin -X DELETE &quot;https://localhost:9443/error-handler/error-entries/1&quot;
+    ```
+
+    The server responds with HTTP 200 and an empty JSON body `{}` when the entry is discarded.
+
+4. Send the event again, this time using the correct `name` attribute:
+
+    ```
+    curl --location --request POST &#x27;http://localhost:8006/productionStream&#x27; \
+    --header &#x27;Content-Type: application/json&#x27; \
+    --data-raw &#x27;{
+                    &quot;name&quot;: &quot;Cake&quot;,
+                    &quot;amount&quot;: 20.12
+                }&#x27;
+    ```
+
+    The event maps successfully, and the following is logged in the WSO2 Integrator: SI console:
+
+    ```
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - Successful mapping:  : Event{timestamp=1595574091411, data=[Cake, 20.12], isExpired=false}
+    ```
+   
+### Step 6: Test the event failing scenario at sink level
+
+#### Step 6.1: Trigger an event flow that publishes an event to the SinkTransportErrorTest Siddhi application
+
+Send an HTTP event to the `TestInput` stream of the `SinkTransportErrorTest` Siddhi application by issuing the following CURL command.
+
+```
+curl --location --request POST &#x27;http://localhost:8007/testUnavailableEP&#x27; --header &#x27;Content-Type: application/json&#x27; --data-raw &#x27; { &quot;event&quot;: { &quot;name&quot;: &quot;Cake2&quot;, &quot;amount&quot;: 20.222 } }&#x27;
+```
+
+The following is logged in the WSO2 Integrator: SI Server console
+```
+INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - SinkTransportErrorTest: Sending to unavailableEndpoint: , StreamEvent{ timestamp=1597853565942, beforeWindowData=null, onAfterWindowData=null, outputData=[Cake2, 20.222], type=CURRENT, next=null}
+```
+However, because the `http://localhost:8090/unavailableEndpoint` that the `SinkTransportErrorTest` sink publishes to is unavailable, the event is dropped at the sink level and then stored in the error store.
+
+#### Step 6.2: Start service via the ReceiveAndCount Siddhi application
+
+In this step, let&#x27;s start the service at `http://localhost:8090/unavailableEndpoint` via the `ReceiveAndCount` Siddhi application by deploying it to the SI server:
+
+```
+curl -sk -u admin:admin -X POST -H &quot;Content-Type: text/plain&quot; \
+  --data-binary @ReceiveAndCount.siddhi \
+  &quot;https://localhost:9443/siddhi-apps&quot;
+```
+
+The following log is displayed in the WSO2 Integrator: SI console.
+
+```
+INFO {org.wso2.carbon.streaming.integrator.core.internal.StreamProcessorService} - Siddhi App ReceiveAndCount deployed successfully
+```
+#### Step 6.3: Inspect and replay the error via the error store REST API
+
+To inspect the captured error and replay it now that the downstream service is available, follow the procedure below.
+
+1. List the errors captured for the `SinkTransportErrorTest` Siddhi application:
+
+    ```
+    curl -sk -u admin:admin &quot;https://localhost:9443/error-handler/error-entries?siddhiApp=SinkTransportErrorTest&quot;
+    ```
+
+    The response is a JSON array containing the error entry that was stored when the sink could not reach `http://localhost:8090/unavailableEndpoint`. Note the `id` of the entry — you need it for the replay.
+
+2. Fetch the full details of the entry — you will need the exact response body (wrapper and all) for the replay in the next step. Save it to a file:
+
+    ```
+    ID=1
+    curl -sk -u admin:admin &quot;https://localhost:9443/error-handler/error-entries/$ID&quot; &gt; entry.json
+    ```
+
+    Replace `1` with the actual `id` from the previous response. The single-entry endpoint returns a wrapper object with `errorEntry`, `modifiablePayloadString`, and `isPayloadModifiable` fields (same shape described in Step 5.2).
+
+3. Replay the stored entry by POSTing a JSON array that contains the wrapper object you just fetched. Wrap the saved response in `[ ... ]` and POST it to the `/error-handler` endpoint:
+
+    ```
+    printf &#x27;[%s]&#x27; &quot;$(cat entry.json)&quot; &gt; replay.json
+
+    curl -sk -u admin:admin -X POST \
+      -H &quot;Content-Type: application/json&quot; \
+      --data-binary @replay.json \
+      &quot;https://localhost:9443/error-handler&quot;
+    ```
+
+    The server responds with HTTP 200 and an empty JSON body `{}`. The `ReceiveAndCount` Siddhi application you deployed in Step 6.2 receives the replayed event, and the following is logged for the WSO2 Integrator: SI server:
+
+    ```
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - ReceiveAndCount : TotalCountStream : Event{timestamp=1597857170244, data=[1], isExpired=false}    
+    ```</body>
+</html>

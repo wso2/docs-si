@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
+    const DEBUG = false;
+
     /**
      * Icon SVG definitions matching the React component.
      */
@@ -147,17 +149,8 @@
 
         // Cleanup routine if needed (though this script runs once per page load)
 
-        const getFullMarkdownUrl = () => {
-            return markdownUrl;
-        };
-
         const getHtmlUrl = () => {
             return window.location.href;
-        };
-
-        const getPromptWithMarkdown = () => {
-            const fullUrl = getFullMarkdownUrl();
-            return `Could you read this document about WSO2 Streaming Integrator ${fullUrl} so I can ask questions about it?`;
         };
 
         const getPromptWithHtml = () => {
@@ -168,47 +161,116 @@
         // Handlers
         const handleCopyPage = async () => {
             try {
-                const response = await fetch(markdownUrl);
-                if (!response.ok) throw new Error('Failed to fetch');
-                const markdown = await response.text();
-                await navigator.clipboard.writeText(markdown);
+                DEBUG && console.log('Attempting to copy from URL:', markdownUrl);
 
-                // Feedback
+                if (!markdownUrl) {
+                    throw new Error('Markdown URL is not set');
+                }
+
+                const response = await fetch(markdownUrl);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch markdown: ${response.status} ${response.statusText}`);
+                }
+
+                const markdown = await response.text();
+
+                if (!markdown || markdown.trim().length === 0) {
+                    throw new Error('Markdown content is empty');
+                }
+
+                DEBUG && console.log('Markdown content length:', markdown.length);
+
+                // Try modern Clipboard API first
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(markdown);
+                } else {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = markdown;
+                    textArea.style.position = 'fixed';
+                    textArea.style.opacity = '0';
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    const success = document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    if (!success) {
+                        throw new Error('Fallback copy method failed');
+                    }
+                }
+
+                DEBUG && console.log('Successfully copied to clipboard');
+
+                // Feedback - Show success message in menu
+                const copyItem = menu.querySelector('.cp-copy');
+                const titleElement = copyItem.querySelector('.copy-page-item-title');
+                const originalText = titleElement.textContent;
+                titleElement.textContent = 'Copied!';
+
+                // Also update button title
                 const originalTitle = button.getAttribute('title');
                 button.setAttribute('title', 'Copied!');
 
                 setTimeout(() => {
                     button.setAttribute('title', originalTitle);
+                    titleElement.textContent = originalText;
                 }, 2000);
             } catch (err) {
-                console.error('Failed to copy:', err);
+                const errorMsg = `Copy failed: ${err.message}`;
+                console.error(errorMsg, err);
+
+                // Show error alert to user
+                alert('Failed to copy to clipboard: ' + err.message + '\n\nPlease check the browser console for more details.');
+
+                // Show error feedback on button
+                const originalTitle = button.getAttribute('title');
+                button.setAttribute('title', 'Copy failed - check console');
+                button.style.opacity = '0.5';
+
+                setTimeout(() => {
+                    button.setAttribute('title', originalTitle);
+                    button.style.opacity = '1';
+                }, 3000);
             }
             setOpen(false);
         };
 
         const handleViewMarkdown = () => {
-            window.open(markdownUrl, '_blank', 'noopener,noreferrer');
+            const origin = window.location.origin;
+            const pathname = window.location.pathname.replace(/\/$/, '');
+
+            // Append .md to the current path, handling the root path as index.md
+            const mdPath = (pathname === '' ? '/index' : pathname) + '.md/';
+
+            window.location.href = origin + mdPath;
             setOpen(false);
         };
 
         const handleOpenInChatGPT = () => {
             // Uses HTML URL
-            // Note: ChatGPT URL with ?q= may not pre-populate; external AI site URLs are fragile
             window.open(`https://chat.openai.com/?q=${encodeURIComponent(getPromptWithHtml())}`, '_blank', 'noopener,noreferrer');
             setOpen(false);
         };
 
         const handleOpenInClaude = () => {
-            // Note: Claude.ai no longer accepts ?q= query parameters for pre-populating prompts
-            // Opens Claude's new chat page; users must manually paste the prompt
-            // Uses Markdown URL (available via copy functionality)
-            window.open('https://claude.ai/new', '_blank', 'noopener,noreferrer');
+            // Copy prompt to clipboard and open Claude
+            const prompt = getPromptWithHtml();
+            navigator.clipboard.writeText(prompt).then(() => {
+                window.open('https://claude.ai/new', '_blank', 'noopener,noreferrer');
+                DEBUG && console.log('Prompt copied to clipboard. Paste it in Claude.ai');
+            }).catch((err) => {
+                console.error('Clipboard copy failed:', err);
+                // If clipboard fails, just open Claude
+                window.open('https://claude.ai/new', '_blank', 'noopener,noreferrer');
+            });
             setOpen(false);
         };
 
         const handleOpenInPerplexity = () => {
-            // Uses Markdown URL with proper /search endpoint
-            window.open(`https://www.perplexity.ai/search?q=${encodeURIComponent(getPromptWithMarkdown())}`, '_blank', 'noopener,noreferrer');
+            // Use deployed site URL (simpler, matches ChatGPT approach)
+            const fullUrl = getHtmlUrl();
+            const prompt = `Could you read this document about WSO2 Streaming Integrator ${fullUrl} so I can ask questions about it?`;
+            DEBUG && console.log('Opening Perplexity with URL:', fullUrl);
+            window.open(`https://www.perplexity.ai/search?q=${encodeURIComponent(prompt)}`, '_blank', 'noopener,noreferrer');
             setOpen(false);
         };
 
@@ -235,24 +297,47 @@
         let rawUrl;
         let insertionPoint = null;
 
+        DEBUG && console.log('Initializing copy-page button...');
+        DEBUG && console.log('Edit button found:', !!editButton);
+        DEBUG && console.log('View button found:', !!viewButton);
+        DEBUG && console.log('Current URL:', window.location.href);
+
         // 1. Determine URL
         if (editButton) {
+            DEBUG && console.log('Using Edit button href:', editButton.href);
             rawUrl = editButton.href
-                .replace('github.com', 'raw.githubusercontent.com')
-                .replace('/edit/', '/')
-                .replace('/blob/', '/');
+                .replace(/github\.com/g, 'raw.githubusercontent.com')
+                .replace(/\/edit\//g, '/')
+                .replace(/\/blob\//g, '/');
+            DEBUG && console.log('Converted to raw URL:', rawUrl);
         } else if (viewButton) {
+            DEBUG && console.log('Using View button href:', viewButton.href);
             rawUrl = viewButton.href
-                .replace('github.com', 'raw.githubusercontent.com')
-                .replace('/blob/', '/') // View might be blob, we want raw
-                .replace('/raw/', '/'); // If already raw, check structure
+                .replace(/github\.com/g, 'raw.githubusercontent.com')
+                .replace(/\/blob\//g, '/') // View might be blob, we want raw
+                .replace(/\/raw\//g, '/'); // If already raw, check structure
+            DEBUG && console.log('Converted to raw URL:', rawUrl);
         } else {
-            // Fallback for homepage
-            const homePageSearch = document.querySelector('.md-home-search-container');
-            if (homePageSearch) {
-                rawUrl = 'https://raw.githubusercontent.com/wso2/docs-si/main/en/docs/index.md';
-                // Try to find ANY button to append next to
-                insertionPoint = document.querySelector('.md-content__button');
+            // No easy way to get raw URL without edit/view buttons
+            // We will attempt to derive it from the current URL if possible
+            DEBUG && console.log('No edit/view buttons found, deriving URL...');
+            
+            // Read siteUrl and repoRawUrl from meta tags or fallback to hardcoded
+            const siteUrl = document.querySelector('meta[name="site-url"]')?.content || 'https://si.docs.wso2.com/en/latest/';
+            const repoRawUrl = document.querySelector('meta[name="repo-raw-url"]')?.content || 'https://raw.githubusercontent.com/wso2/docs-si/main/en/docs/';
+
+            if (window.location.href.startsWith(siteUrl)) {
+                let relPath = window.location.href.substring(siteUrl.length).replace(/\/$/, '');
+
+                if (relPath === '') {
+                    relPath = 'index.md';
+                } else {
+                    relPath = relPath + '.md';
+                }
+                rawUrl = repoRawUrl + relPath;
+                DEBUG && console.log('Derived raw URL:', rawUrl);
+            } else {
+                console.warn('Current URL does not match site URL configuration. Derivation failed.');
             }
         }
 
@@ -268,6 +353,7 @@
         }
 
         if (rawUrl) {
+            DEBUG && console.log('Creating copy button with rawUrl:', rawUrl);
             const btn = createCopyPageButton(rawUrl);
 
             if (insertionPoint) {
@@ -290,7 +376,7 @@
     }
 
     // Observer for instant loading
-    const observer = new MutationObserver((mutations) => {
+    const observer = new MutationObserver(() => {
         if (document.querySelector('.md-content') && !document.querySelector('.copy-page-container')) {
             init();
         }

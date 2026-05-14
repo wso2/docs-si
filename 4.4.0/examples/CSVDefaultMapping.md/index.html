@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CSVDefaultMapping.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Publishing and Receiving CSV Events via Files
+
+## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI to Publish and receive data events processed within Siddhi to files in CSV default format.
+
+## Prerequisites
+
+* Edit the uri `&lt;SI_HOME&gt;/samples/artifacts/CSVMappingWithFile/new/example.csv` by replacing `&lt;SI_HOME&gt;` with the absolute path of your SI installation.
+
+* You can also change the path for `file.uri` in the sink, if you want to publish your event file to a different location.
+
+* Save this sample. If there is no syntax error, the following messages would be shown on the console:
+    - `CSVDefaultMapping.siddhi successfully deployed.`
+
+## Executing &amp; testing the Sample
+
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages are shown on the console:
+    * `CSVDefaultMapping.siddhi - Started Successfully!`
+
+## Viewing the results
+
+* Source takes input from the `&lt;SI_HOME&gt;/samples/artifacts/CSVMappingWithFile/new/example.csv` then produce the event. example.csv has data in below format.&lt;br/&gt;
+
+    `1,WSO2,23.5`&lt;br/&gt;
+    `2,IBM,2.5`&lt;br/&gt;
+
+* Sink takes input from source output and produces the output to outputOfCustom.csv in CSV custom format.outputOfCustom.csv&#x27;s data appear in below format.&lt;br/&gt;
+
+    `1,WSO2,100.0`&lt;br/&gt;
+    `2,IBM,2.5`&lt;br/&gt;
+
+```sql
+@App:name(&quot;CSVDefaultMapping&quot;)
+@App:description(&#x27;Publish and receive data events processed within Siddhi to files in CSV default format.&#x27;)
+
+@source(type=&#x27;file&#x27;,
+dir.uri=&#x27;file://&lt;SI_HOME&gt;/samples/artifacts/CSVMappingWithFile/new&#x27;,
+action.after.process=&#x27;NONE&#x27;,
+@map(type=&#x27;csv&#x27;))
+define stream InputStream (id int, name string, amount double);
+
+@sink(type=&#x27;file&#x27;, file.uri=&#x27;/&lt;SI_HOME&gt;/samples/artifacts/CSVMappingWithFile/new/outputOfDefault.csv&#x27; , @map(type=&#x27;csv&#x27;))
+define stream OutputStream (id int, name string, amount double);
+
+from InputStream
+select *
+insert into OutputStream;
+```
+</body>
+</html>

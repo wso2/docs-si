@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>manage-stored-data-via-rest-api.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Manage Stored Data via Rest API
+
+## Introduction 
+
+The Siddhi Store Query API is the REST API exposed by the WSO2 Integrator: SI (SI) in order to perform actions on the stored data. 
+
+Stored data includes,
+- Siddhi Stores
+- Siddhi Aggregations
+- Siddhi Windows,
+    that you have defined in Siddhi applications. 
+
+You can perform actions such as,
+- inserting
+- searching
+- updating
+- deleting on those stored data, using the Rest API. 
+
+For a comprehensive reference on the Siddhi query API, see [Streaming Integration REST API Guide](https://ei.docs.wso2.com/en/next/streaming-integrator/ref/si-rest-api-guide/).
+
+This tutorial demonstrates how you can use the Siddhi Store Query API to perform a few essential operations in SI, using simple examples.
+
+## Preparing the server
+
+!!!tip&quot;Before you begin:&quot;
+    - You need to have access to a MySQL instance.&lt;br/&gt;
+    - Save the MySQL JDBC driver in the `&lt;SI_HOME&gt;/lib` directory as follows:
+      1. Download the latest MySQL JDBC driver (Connector/J) from [the MySQL site](https://dev.mysql.com/downloads/connector/j/).
+      2. Unzip the archive.
+      3. Copy the Connector/J JAR to the `&lt;SI_HOME&gt;/lib` directory.
+      4. Start the SI server.
+
+1. Let&#x27;s create a new database in the MySQL server which you are to use throughout this tutorial. To do this, execute the following query.
+    ```
+    CREATE SCHEMA production;
+    ```
+
+2. Create a new user by executing the following SQL query.
+    ```
+    CREATE USER &#x27;wso2si&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;wso2&#x27;;
+    GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO &#x27;wso2si&#x27;@&#x27;localhost&#x27;;
+    ```
+
+3. Switch to the `production` database and create a new table, by executing the following queries:
+    ```
+    use production;
+    ```
+
+    ```
+    CREATE TABLE SweetProductionTable (name VARCHAR(20),amount double(10,2));
+    ```
+    
+## Managing Siddhi Store Data
+
+#### Preparing an RDBMS Store
+
+First let&#x27;s create a Siddhi application with an RDBMS Store so that we can try out certain operations on it. 
+
+1. Open a text file and copy-paste following application to it.
+
+    ```
+    @App:name(&quot;SweetProduction-Store&quot;)
+
+    @App:description(&#x27;Receive events via HTTP and persist the received data in the store.&#x27;)
+
+    @source(type = &#x27;http&#x27;, receiver.url=&#x27;http://localhost:8006/productionStream&#x27;, basic.auth.enabled=&#x27;false&#x27;,
+        @map(type=&#x27;json&#x27;))
+    define stream insertSweetProductionStream (name string, amount double);
+
+    @Store(type=&quot;rdbms&quot;,
+           jdbc.url=&quot;jdbc:mysql://localhost:3306/production?useSSL=false&quot;,
+           username=&quot;wso2si&quot;,
+           password=&quot;wso2&quot; ,
+           jdbc.driver.name=&quot;com.mysql.cj.jdbc.Driver&quot;)
+    define table SweetProductionTable (name string, amount double);
+
+    from insertSweetProductionStream
+    update or insert into SweetProductionTable
+    on SweetProductionTable.name == name;
+    ```
+
+    Here the `jdbc.url` parameter has the value `jdbc:mysql://localhost:3306/production?useSSL=false`. Change it to point to your MySQL server. Similarly change `username` and `password` parameters as well.
+
+2. Save this file as `SweetProduction-Store.siddhi` in the `&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files` directory.
+
+### Inserting records
+
+To insert a record into the `SweetProductionTable`, execute following `CURL` command:
+```
+curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Store&quot;, &quot;query&quot; : &quot;select \&quot;Almond cookie\&quot; as name, 100.0 as amount insert into SweetProductionTable;&quot; }&#x27; -k
+```
+On successful execution of the command, you will get following response on the terminal:
+```
+{&quot;records&quot;:[]}
+```
+            
+Let&#x27;s insert a few more records by executing following `CURL` command:
+```
+curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Store&quot;, &quot;query&quot; : &quot;select \&quot;Baked alaska\&quot; as name, 20.0 as amount insert into SweetProductionTable;&quot; }&#x27; -k
+```
+```
+curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Store&quot;, &quot;query&quot; : &quot;select \&quot;Cup cake\&quot; as name, 30.0 as amount insert into SweetProductionTable;&quot; }&#x27; -k
+```   
+```
+curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Store&quot;, &quot;query&quot; : &quot;select \&quot;Doughnut\&quot; as name, 500.0 as amount insert into SweetProductionTable;&quot; }&#x27; -k
+```   
+
+    !!!info
+        Above `CURL` commands, insert the following records into the `SweetProductionTable` table. In the next section, we will retrieve these record from the table.
+            +---------------+--------+
+            | name          | amount |
+            +---------------+--------+
+            | Almond cookie | 100.00 |
+            +---------------+--------+
+            | Baked alaska  |  20.00 |
+            +---------------+--------+
+            | Cup cake      |  30.00 |
+            +---------------+--------+
+            | Doughnut      | 500.00 |
+            +---------------+--------+                             
+
+### Searching records
+
+To obtain all of the records from the `SweetProductionTable`, execute following `CURL` command:
+
+```
+curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Store&quot;, &quot;query&quot; : &quot;from SweetProductionTable select name, amount; &quot; }&#x27; -k
+```
+On successful execution of the command, you will get following response on the terminal:
+```
+{&quot;records&quot;:[[&quot;Almond cookie&quot;,100.0],[&quot;Baked alaska&quot;,20.0],[&quot;Cup cake&quot;,30.0],[&quot;Doughnut&quot;,500.0]]}
+```
+
+Now let&#x27;s obtain all of the records which has `amount` greater than `25` and order those by `amount`. 
+```
+curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Store&quot;, &quot;query&quot; : &quot;from SweetProductionTable on amount &gt; 25 select name, amount order by amount; &quot; }&#x27; -k
+```
+On successful execution of the command, you will get following response on the terminal:
+```
+{&quot;records&quot;:[[&quot;Cup cake&quot;,30.0],[&quot;Almond cookie&quot;,100.0],[&quot;Doughnut&quot;,500.0]]}
+```
+
+To get the top two records from above ouput, let&#x27;s use the `limit` condition on the Store Query:
+```
+curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Store&quot;, &quot;query&quot; : &quot;from SweetProductionTable on amount &gt; 25 select name, amount order by amount limit 2; &quot; }&#x27; -k
+```
+On successful execution of the command, you will get following response on the terminal:
+```
+{&quot;records&quot;:[[&quot;Cup cake&quot;,30.0],[&quot;Almond cookie&quot;,100.0]]}
+```
+
+    !!! info
+        For more information on search queries, refer [Store APIs: Streaming Integration REST API Guide](https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/si-rest-api-guide/#store-apis).
+
+### Updating records 
+
+Now let&#x27;s update the following record in the `SweetProductionTable`. We will set the `name` to `Almond Cookie` and `amount` to `150.0`.
+```
+            +---------------+--------+
+            | name          | amount |
+            +---------------+--------+
+            | Almond cookie | 100.00 |
+            +---------------+--------+
+```
+In order to update above record, execute following `CURL` command:
+```
+curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Store&quot;, &quot;query&quot; : &quot;select \&quot;Almond Cookie\&quot; as name, 150.0 as amount update or insert into SweetProductionTable  set SweetProductionTable.name = name, SweetProductionTable.amount = amount  on SweetProductionTable.name == \&quot;Almond cookie\&quot;;&quot;}&#x27; -k
+```
+On successful execution of the command, you will get following response on the terminal:
+```
+{&quot;records&quot;:[]}
+```
+    !!! tip
+        To verify whether the update is successful, you can execute following `CURL` command:
+        ```
+        curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Store&quot;, &quot;query&quot; : &quot;from SweetProductionTable select name, amount; &quot; }&#x27; -k
+        ```
+        On successful execution of the command, you will get following response on the terminal:
+        ```
+        {&quot;records&quot;:[[&quot;Almond Cookie&quot;,150.0],[&quot;Baked alaska&quot;,20.0],[&quot;Cup cake&quot;,30.0],[&quot;Doughnut&quot;,500.0]]}
+        ```
+        Notice that the `[&quot;Almond cookie&quot;,100.0]` has being changed to `[&quot;Almond Cookie&quot;,150.0]` 
+
+### Deleting records
+    
+Let&#x27;s delete the entry `[&quot;Almond Cookie&quot;,150.0]` from the `SweetProductionTable` by executing following `CURL` command:
+```
+curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Store&quot;, &quot;query&quot; : &quot;select 150.0 as amount delete SweetProductionTable on SweetProductionTable.amount == amount;&quot; }&#x27; -k
+```
+On successful execution of the command, you will get following response on the terminal:
+```
+{&quot;records&quot;:[]}
+```
+    !!! tip
+        To verify whether the delete is successful, you can execute following `CURL` command:
+        ```
+        curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Store&quot;, &quot;query&quot; : &quot;from SweetProductionTable select name, amount; &quot; }&#x27; -k
+        ```
+        On successful execution of the command, you will get following response on the terminal:
+        ```
+        {&quot;records&quot;:[[&quot;Baked alaska&quot;,20.0],[&quot;Cup cake&quot;,30.0],[&quot;Doughnut&quot;,500.0]]}
+        ```
+        Notice that the `[&quot;Almond Cookie&quot;,150.0]` record has being deleted. 
+    
+    
+## Managing Data in a Siddhi Aggregation
+
+First let&#x27;s create a Siddhi application with an Aggregation, so that we can try out search operations on it later. 
+
+1. Open a text file and copy-paste following application to it.
+
+    ```
+    @App:name(&quot;AggregateDataIncrementally&quot;)
+    
+    @App:description(&#x27;Aggregates values every second until year and gets statistics&#x27;)
+    
+    @source(type = &#x27;http&#x27;, receiver.url=&#x27;http://localhost:8006/rawMaterialStream&#x27;, basic.auth.enabled=&#x27;false&#x27;,
+        @map(type=&#x27;json&#x27;))
+    define stream RawMaterialStream (name string, amount double);
+    
+    @store( type=&quot;rdbms&quot;,
+            jdbc.url=&quot;jdbc:mysql://localhost:3306/production?useSSL=false&quot;,
+            username=&quot;wso2si&quot;,
+            password=&quot;wso2&quot; ,
+            jdbc.driver.name=&quot;com.mysql.cj.jdbc.Driver&quot;)
+    define aggregation RawMaterialAggregation
+    from RawMaterialStream
+    select name, avg(amount) as avgAmount, sum(amount) as totalAmount
+    group by name
+    aggregate every sec...year;
+    ```
+
+    Here the `jdbc.url` parameter has the value `jdbc:mysql://localhost:3306/production?useSSL=false`. Change it to point to your MySQL server. Similarly change `username` and `password` parameters as well.
+
+2. Save this file as `AggregateDataIncrementally.siddhi` in the `&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files` directory.
+
+3. Let&#x27;s insert a few records into the `RawMaterialStream` so that those data will be summarized and you can query for the summary later.
+
+    !!! info
+        Unlike RDBMS Stores, you cannot insert records into a Aggregation table straight away. In order to put records, you need to insert data into the event stream which is associated to the Aggregation. In this example, the `RawMaterialAggregation` aggregation table is associated to the event stream &#x27;RawMaterialStream`. Therefore, in order to insert into the aggregation table, you need to insert into the &#x27;RawMaterialStream`.  
+ 
+    Execute following `CURL` command on a terminal: 
+    ```
+    curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Almond cookie\&quot;,\&quot;amount\&quot;: 20.5}}&quot;  http://localhost:8006/rawMaterialStream --header &quot;Content-Type:application/json&quot;
+    ```
+    ```
+    curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Almond cookie\&quot;,\&quot;amount\&quot;: 100.0}}&quot;  http://localhost:8006/rawMaterialStream --header &quot;Content-Type:application/json&quot;
+    ```
+    ```
+    curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Almond cookie\&quot;,\&quot;amount\&quot;: 30.0}}&quot;  http://localhost:8006/rawMaterialStream --header &quot;Content-Type:application/json&quot;
+    ```
+
+4. Now let&#x27;s use the Store Query API, in order to find out the average and total amount of `Almond cookie` productions. 
+
+    Issue following `CURL` command on the terminal:
+    ```
+    curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;AggregateDataIncrementally&quot;, &quot;query&quot; : &quot;from RawMaterialAggregation on name==\&quot;Almond cookie\&quot; within \&quot;2019-**-** **:**:** +05:30\&quot; per \&quot;hours\&quot; select AGG_TIMESTAMP, name, avgAmount, totalAmount&quot; }&#x27; -k
+    ```
+    !!! info
+        Above, you have executed following Store Query:
+        ```
+        from RawMaterialAggregation on name==&quot;Almond cookie&quot; 
+        within &quot;2019-**-** **:**:** +05:30&quot; 
+        per &quot;hours&quot; 
+        select AGG_TIMESTAMP, name, avgAmount, totalAmount&quot; 
+        ```
+        This query retrieves the average and total `Almond cookie` productions happened within the year `2019`. The average and total is calculated for every hour.   
+
+5. You will get following response:
+    ```
+    {&quot;records&quot;:[[1571234400000,&quot;Almond cookie&quot;,50.166666666666664,150.5]]}
+    ```
+    !!! info
+        The value `1571234400000` indicates the Unix timestamp for which the result set belong. In this example, the result set belongs to `October 16, 2019 7:30:00 PM GMT+05:30`. 
+        `50.166666666666664` is the average amount of `Almond cookie` productions happened within the hour, while `150.5` is the total amount of `Almond cookie` productions happened within the hour.  
+    
+## Managing Data in a Siddhi Window
+
+Let&#x27;s create a Siddhi application with a Window and then query the status of the Window, using a Store query. 
+
+1. Open a text file and copy-paste following application to it.
+
+    ```
+    @App:name(&quot;SweetProduction-Window&quot;)
+
+    @source(type = &#x27;http&#x27;, receiver.url=&#x27;http://localhost:8008/productionStream&#x27;, basic.auth.enabled=&#x27;false&#x27;,
+        @map(type=&#x27;json&#x27;))
+    define stream SweetProductionStream (name string, amount double);
+
+    define window LastFourProductions (name string, amount double) lengthBatch(4);
+
+    @sink(type=&#x27;log&#x27;)
+    define stream LogStream (name string, sumAmount double);
+
+    @info(name = &#x27;query1&#x27;)
+    from SweetProductionStream
+    select name, amount
+    insert into LastFourProductions;
+
+    @info(name = &#x27;query2&#x27;)
+    from LastFourProductions
+    select name,sum(amount) as sumAmount
+    insert into LogStream;
+    ```
+    
+!!!info
+    The above Siddhi application calculates the sum of last four productions (in batches). The last four productions are retained in the `LastFourProductions` window which is a `lengthBatch` window of size four. `query1` inserts all of the incoming sweet productions into the `LastFourProductions` window. `query2` calculates the sum of the batch of four productions, within the window. 
+    
+2. Save this file as `SweetProduction-Window.siddhi` in the `&lt;SI_HOME&gt;/wso2/server/deployment/siddhi-files` directory.
+
+3. Let&#x27;s insert four events into `SweetProductionStream`. Execute following `CURL` commands on the terminal:
+    ```
+    curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Almond cookie\&quot;,\&quot;amount\&quot;: 100.0}}&quot;  http://localhost:8008/productionStream --header &quot;Content-Type:application/json&quot;
+    ```
+    ```
+    curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Baked alaska\&quot;,\&quot;amount\&quot;: 20.0}}&quot;  http://localhost:8008/productionStream --header &quot;Content-Type:application/json&quot;
+    ```
+    ```
+    curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Cup cake\&quot;,\&quot;amount\&quot;: 300.0}}&quot;  http://localhost:8008/productionStream --header &quot;Content-Type:application/json&quot;
+    ```
+    ```
+    curl -X POST -d &quot;{\&quot;event\&quot;: {\&quot;name\&quot;:\&quot;Doughnut\&quot;,\&quot;amount\&quot;: 500.0}}&quot;  http://localhost:8008/productionStream --header &quot;Content-Type:application/json&quot;
+    ```
+    Once you send the fourth event, a batch of four productions completes; hence the following log appears on the SI console. The log prints the sum of amounts of the four productions.
+    ```
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - SweetProduction-Window : LogStream : Event{timestamp=1571675148391, data=[Doughnut, 920.0], isExpired=false}
+    ```
+    
+4. Now, using the Store Query API, you will be querying the contents in the `LastFourProductions` window. 
+
+    Let&#x27;s select all events in the window by executing following `CURL` command:
+    ```
+    curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Window&quot;, &quot;query&quot; : &quot;from LastFourProductions select *&quot; }&#x27; -k
+    ``` 
+    On successful execution of the command, you get following response on the terminal. The output shows the last four sweet productions. 
+    ```
+    {&quot;records&quot;:[[&quot;Almond cookie&quot;,100.0],[&quot;Baked alaska&quot;,20.0],[&quot;Cup cake&quot;,300.0],[&quot;Doughnut&quot;,500.0]]}
+    ```     
+   
+5. Next, using the Store Query API, you will be querying for the maximum production amount, among the four productions that are in the `LastFourProductions` window.
+
+    Execute following `CURL` command on the terminal:
+    ```
+    curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;SweetProduction-Window&quot;, &quot;query&quot; : &quot;from LastFourProductions select max(amount) as maxAmount&quot; }&#x27; -k
+    ```
+    On successful execution of the command, you get following response on the terminal. The output shows the maximum amount of the four sweet productions. 
+    ```
+    {&quot;records&quot;:[[500.0]]}
+    ```   
+</body>
+</html>
