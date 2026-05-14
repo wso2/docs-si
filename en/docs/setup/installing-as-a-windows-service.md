@@ -3,7 +3,7 @@
 !!! note
     **Before you begin:**
 
-    -   See [our compatibility matrix]({{base_path}}/install-and-setup/ProductCompatibility) to find out if this version of the product is fully tested on your OS.
+    -   See [our compatibility matrix](../ref/environment-compatibility.md) to find out if this version of the product is fully tested on your OS.
 
 ### Prerequisites
 
@@ -19,7 +19,7 @@ The configuration file used for wrapping Java Applications by YAJSW is `wrapper.
 
 !!! info
     
-    If you want to set additional properties from an external registry at runtime, store sensitive information like usernames and passwords for connecting to the registry in a properties file and secure it with [secure vault]({{base_path}}/administer/product-security/General/logins-and-passwords/admin-carbon-secure-vault-implementation).
+    If you want to set additional properties from an external registry at runtime, store sensitive information like usernames and passwords for connecting to the registry in a properties file and secure it with [secure vault](../admin/protecting-sensitive-data-via-the-secure-vault.md).
 
 ### Minimal wrapper.conf configuration
 
@@ -155,7 +155,7 @@ You will now verify that YAJSW is configured correctly for running the WSO2 API 
     runConsole.bat
     ```
 
-If the configurations are set properly for YAJSW, you will see console output similar to the following and can now access the WSO2 management console from your web browser via <https://localhost:9443/carbon>.
+If the configurations are set properly for YAJSW, you will see console output similar to the following and can now access the WSO2 management console from your web browser via `https://localhost:9443/carbon`.
 
 
 ### Working with the WSO2CARBON service

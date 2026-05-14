@@ -25,7 +25,7 @@ To try out the above example, follow the steps below:
 1. Open a new file and copy the following Siddhi Application to it.
 
     ```
-    @App:name("PublishStockUpdatesApp")  
+    @App:name('PublishStockUpdatesApp')  
    
     define stream InputStream (symbol string, price float, volume long);
     
@@ -61,13 +61,13 @@ To try out the above example, follow the steps below:
     insert into OutputStream;
     ```
    
-    This Siddhi application listens for events in the `http://localhost:5005/stocks` endpoint and logs them in the WSO2 Integrator: SI Tooling console.
+    This Siddhi application listens for events in the `http://localhost:5005/stocks` endpoint and logs them in the WSO2 Integrator: SI console.
     
-4. Start both the Siddhi applications. To do this, open each siddhi application and click the **Play** icon.
+3. Start both the Siddhi applications. To do this, open each Siddhi application and click the **Play** icon.
 
     ![Play]({{base_path}}/images/extracting-data-from-static-sources/play.png)
     
-5. Simulate an event with the following values for the `InputStream` stream of the `PublishStockUpdatesApp` Siddhi application. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
+4. Simulate an event with the following values for the `InputStream` stream of the `PublishStockUpdatesApp` Siddhi application. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md). This step requires WSO2 Integrator: SI.
 
     | **Attribute** | **Value** |
     |---------------|-----------|
@@ -75,7 +75,7 @@ To try out the above example, follow the steps below:
     | **price**     | `100`     |
     | **volume**    | `20`      |
     
-    As a result, the `ListenToStockUpdates` Siddhi applications prints the following log in the WSO2 Integrator: SI Tooling Console.
+    As a result, the `ListenToStockUpdatesApp` Siddhi application prints the following log in the WSO2 Integrator: SI console.
     
     ```
     [2020-10-28_10-59-20_463] INFO {io.siddhi.core.stream.output.sink.LogSink} - Stock Updates : Event{timestamp=1603862960462, data=[ABC, 100.0, 20], isExpired=false} 
@@ -92,8 +92,7 @@ WSO2 Integrator: SI supports the following transport types to send messages to d
 | `email`       | [email](https://siddhi-io.github.io/siddhi-io-email/api/latest/#sink) |
 | `grpc`        | [grpc](https://siddhi-io.github.io/siddhi-io-grpc/api/latest/#sink)   |
 | `wso2event`   | [wso2event](https://wso2-extensions.github.io/siddhi-map-wso2event/api/5.0.2/) |
-| `websocket`   | [websocket](https://siddhi-io.github.io/siddhi-io-websocket/)         |
-| `Thrift`      |                                                                       |
+| `websocket`   | [websocket](https://siddhi-io.github.io/siddhi-io-websocket/api/latest/#sink)         |
 
 ### Supported mappers
 
@@ -107,7 +106,7 @@ The following are the supported mappers when you publish data to destinations.
 | `xml`         | [xml](https://siddhi-io.github.io/siddhi-map-xml/api/latest/#sinkmapper)               |
 | `text`        | [text](https://siddhi-io.github.io/siddhi-map-text/api/latest/#sinkmapper)             |
 | `avro`        | [avro](https://siddhi-io.github.io/siddhi-map-avro/api/latest/#sinkmapper)             |
-| `binary`      | [binary](https://siddhi-io.github.io/siddhi-map-binary/api/latest/#binary-sink-mapper) |                                                                   |
+| `binary`      | [binary](https://siddhi-io.github.io/siddhi-map-binary/api/latest/#binary-sink-mapper) |
     
 ## Publishing data to messaging systems
 
@@ -129,7 +128,7 @@ The above sink configuration of the `kafka` type publishes all the events in the
 
 To try out the example in the previous subtopic, follow the steps below:
 
-1. Download the Kafka broker from [the Apache site](https://www.apache.org/dyn/closer.cgi?path=/kafka/2.3.0/kafka_2.12-2.3.0.tgz) and extract it.
+1. Download the Kafka broker from [the Apache site](https://archive.apache.org/dist/kafka/2.3.0/kafka_2.12-2.3.0.tgz) and extract it.
    This directory is referred to as `<KAFKA_HOME>` from here on.
    
 2. Start Kafka as follows:
@@ -148,7 +147,7 @@ To try out the example in the previous subtopic, follow the steps below:
         
 3. Prepare WSO2 Integrator: SI to publish data to a Kafka topic as follows:
 
-    1. Download and install the Kafka extension via VSCode. For instructions, see [Installing Siddhi Extensions](../develop/installing-siddhi-extensions.md).
+    1. Download and install the Kafka extension. For instructions, see [Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
     
     2. Open a new file and add the following Siddhi application to it.
 
@@ -169,15 +168,15 @@ To try out the example in the previous subtopic, follow the steps below:
        
        The above Siddhi application includes the sink configuration from the previous example. The Siddhi query takes all the input events in the `TemperatureStream` stream and inserts them into the `PublishTemperatureStream` stream so that they can be published to the `temperature` Kafka topic via the connected source.
        
-    4. Start the Siddhi application by clicking the **Play** icon in the top panel for it.
+    3. Start the Siddhi application by clicking the **Play** icon in the top panel for it.
     
         ![Play]({{base_path}}/images/extracting-data-from-static-sources/play.png)
         
-    5. Simulate an event for the `TemperatureStream` stream of the `TemperaturePublishingApp` Siddhi application. In this example, let's enter `30` as the value for the `temperature` attribute.
+    4. Simulate an event for the `TemperatureStream` stream of the `TemperaturePublishingApp` Siddhi application. In this example, let's enter `30` as the value for the `temperature` attribute.
 
-        For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
+        For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md). This step requires the editor with WSO2 Integrator: SI installed.
         
-    6. To retrieve the events published to the Kafka topic, issue the following command from `<KAFKA_HOME>`
+    5. To retrieve the events published to the Kafka topic, issue the following command from `<KAFKA_HOME>`
     
         ```
         bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic temperature --from-beginning
@@ -189,7 +188,7 @@ To try out the example in the previous subtopic, follow the steps below:
         
 ### Supported messaging systems
 
-WSO2 Integrator: SI allows you to publish messages to the following messaging system via Siddhi extentions.
+WSO2 Integrator: SI allows you to publish messages to the following messaging systems via Siddhi extensions.
 
 | **Transport**    | **Supporting Siddhi Extension**                                                       |
 |------------------|---------------------------------------------------------------------------------------|
@@ -205,7 +204,7 @@ WSO2 Integrator: SI allows you to publish messages to the following messaging sy
 
 Mappers determine the format in which the event is published. For information about transforming events by changing the format in which the data is published, see [Transforming Data](transforming-data.md#transforming-the-message-format-when-publishing-data).
 
-The following are the supported mappers when you publish data to destinations.
+The following are the supported mappers when you publish data to messaging systems.
 
 | **Transport** | **Supporting Siddhi Extension**                                                        |
 |---------------|----------------------------------------------------------------------------------------|

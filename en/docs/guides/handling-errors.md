@@ -15,7 +15,7 @@ This section explains the different types of errors that can occur and how they 
 
 This involves storing the events with errors in the error store and then replaying them. 
 
-To do this, you need to enable the error store in the `<SI-Home>/conf/server/deployment.yaml` file by adding the following configuration.
+To do this, you need to enable the error store in the `<SI_HOME>/conf/server/deployment.yaml` file by adding the following configuration.
 
 ```
 error.store:
@@ -30,10 +30,10 @@ error.store:
 - `bufferSize` denotes the size of the ring buffer that is used in the disruptor when publishing events to the error store. This has to be a power of two. If not, it throws an exception during initialization. The default buffer size is `1024`.
 - If the `dropWhenBufferFull` is set to `true`, the event is dropped when the capacity of the ring buffer is insufficient.
 
-Once the error store is enabled, you need to add a configuration for the data source you are connecting to the error store (in the above example `ERROR_STORE_DB`) in the `<SI-Home>/conf/server/deployment.yaml` file. Then you can create the database in which you want to store the events with errors and link to it from the data source.
+Once the error store is enabled, you need to add a configuration for the data source you are connecting to the error store (in the above example `ERROR_STORE_DB`) in the `<SI_HOME>/conf/server/deployment.yaml` file. Then you can create the database in which you want to store the events with errors and link to it from the data source.
 
 !!! note
-    If you are configuring an Oracle datasource where the Oracle server version is less than 12 ,then you need to create corresponding table (e.g., `ERROR_STORE_TABLE`) with the following syntax before starting the server.
+    If you are configuring an Oracle datasource where the Oracle server version is less than 12, then you need to create corresponding table (e.g., `ERROR_STORE_TABLE`) with the following syntax before starting the server.
         ```
         CREATE TABLE ERROR_STORE_TABLE (id NUMBER(10) NOT NULL, timestamp LONG, siddhiAppName VARCHAR(100), 
         streamName VARCHAR(100), event BLOB, cause VARCHAR(1000), stackTrace BLOB, originalPayload BLOB, 
@@ -58,7 +58,7 @@ This can be used with the following:
 
     ![Store Stream Errors]({{base_path}}/images/handling-errors/store-stream-error.png)
 
-    This on-error action can be specified for a  stream via the `@OnError()` annotation. 
+    This on-error action can be specified for a stream via the `@OnError()` annotation. 
 
     The Siddhi query uses the `cast("abc", "double")` which intentionally generates an error for testing purposes. 
 
@@ -70,7 +70,7 @@ This can be used with the following:
     insert into StreamB;
     ```
   
-  If you do not specify the on-error action for a stream  via the `@OnError()` annotation, the event is logged and dropped.
+  If you do not specify the on-error action for a stream via the `@OnError()` annotation, the event is logged and dropped.
     
 - Sinks
 
@@ -87,11 +87,11 @@ This can be used with the following:
 
 - Source mappers
 
-   If the `error.store` is enabled in the `<SI-Home>/conf/server/deployment.yaml` file, mapping errors are automatically added to the error store.
+   If the `error.store` is enabled in the `<SI_HOME>/conf/server/deployment.yaml` file, mapping errors are automatically added to the error store.
    
 ### Try it out
 
-To understand how you can store erroneous events in a real world scenario, consider a sweet factory where production statistics are written into a file. The same file content needs to be copied into another file for the factory manager. In order to make sure that none of the production records is missed in the manager's copy, the factory foreman needs the erroneous events saved in the error store so that he can check the errors, correct than and then replay them.
+To understand how you can store erroneous events in a real world scenario, consider a sweet factory where production statistics are written into a file. The same file content needs to be copied into another file for the factory manager. In order to make sure that none of the production records is missed in the manager's copy, the factory foreman needs the erroneous events saved in the error store so that he can check the errors, correct them and then replay them.
 
 To try out storing errors in the store, follow the steps below:
 
@@ -107,7 +107,7 @@ To try out storing errors in the store, follow the steps below:
     
         `mysql> use siddhierrorstoredb;`
         
-    4. To enable the error store, open the `<SI-Home>/conf/server/deployment.yaml` file and add a configuration as follows:
+    4. To enable the error store, open the `<SI_HOME>/conf/server/deployment.yaml` file and add a configuration as follows:
     
         ```
         error.store:
@@ -119,7 +119,7 @@ To try out storing errors in the store, follow the steps below:
             datasource: SIDDHI_ERROR_STORE_DB
             table: SIDDHI_ERROR_STORE_TABLE
         ```
-    5. The above configuration refers to a data source named `SIDDHI_ERROR_STORE_DB`. Define this data source as follows under `Data sources` in the `<SI-Home>/conf/server/deployment.yaml` file.
+    5. The above configuration refers to a data source named `SIDDHI_ERROR_STORE_DB`. Define this data source as follows under `Data sources` in the `<SI_HOME>/conf/server/deployment.yaml` file.
     
         ```
         - name: SIDDHI_ERROR_STORE_DB
@@ -132,7 +132,7 @@ To try out storing errors in the store, follow the steps below:
               jdbcUrl: 'jdbc:mysql://localhost:3306/siddhierrorstoredb?useSSL=false'
               username: root
               password: root
-              driverClassName: com.mysql.jdbc.Driver
+              driverClassName: com.mysql.cj.jdbc.Driver
               minIdle: 5
               maxPoolSize: 50
               idleTimeout: 60000
@@ -141,23 +141,23 @@ To try out storing errors in the store, follow the steps below:
               isAutoCommit: false
         ```
 
-2. Download the [productions.csv file](https://github.com/wso2/docs-ei/blob/master/en/streaming-integrator/docs/examples/resources/productions.csv) and save it in a location of your choice in your machine.
+2. Download the [productions.csv file]({{base_path}}/tutorials/resources/productions.csv) and save it in a location of your choice in your machine.
 
-3. [Create a Siddhi application](../develop/creating-a-Siddhi-Application.md) as follows and deploy it in the WSO2 Integrator: SI server.
+3. [Create a Siddhi application](../get-started/first-siddhi-app/create-the-siddhi-application.md) as follows and deploy it in the WSO2 Integrator: SI server.
 
-    ```
+    ```siddhi
     @App:name("CopyingProductionStatsApp")
     
     @source(type='file', mode='LINE',
-       file.uri='file:/Users/foo/productions.csv',
+       file.uri='file:<YOUR_HOME>/productions.csv',
        tailing='true',
        @map(type='csv'))
-    @onError(action='STORE') 
+    @OnError(action='STORE') 
     define stream ProductionStream (name string,amount double);
     
     @sink(type='file',
         on.error='STORE',
-        file.uri = "/Users/foo/manager/managercopy.csv",
+        file.uri = "<YOUR_HOME>/manager/managercopy.csv",
         @map(type='csv'))
     define stream CopyProductionStream (name string,amount double);
     
@@ -166,11 +166,11 @@ To try out storing errors in the store, follow the steps below:
     insert into CopyProductionStream;
     ```   
    
-   The above Siddhi application simply copied content from one file to another. Any mapping errors generated when you run it can be stored in the error store you configured.
+   The above Siddhi application simply copies content from one file to another. Any mapping errors generated when you run it can be stored in the error store you configured.
    
-4. Start the MySQL server. If the WSO2 Integrator: SI server and WSO2 Integrator: SI Tooling are not already started, start them too.
+4. Start the MySQL server. If the WSO2 Integrator: SI server and WSO2 Integrator: SI are not already started, start them too.
 
-5. Access and open the WSO2 Integrator: SI Tooling.
+5. Open WSO2 Integrator: SI.
 
 6. To open the Error Store Explorer, click **Tools** and then click **Error Store Explorer**.
 
@@ -180,7 +180,7 @@ To try out storing errors in the store, follow the steps below:
 
 7. Click **Connect to Server**. Then enter information as follows:
 
-    To check the port of the WSO2 Integrator: SI Server, Open <SI-Home>/conf/server/deployment.yaml file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.
+    To check the port of the WSO2 Integrator: SI Server, Open `<SI_HOME>/conf/server/deployment.yaml` file. Under Listener Configurations of wso2.transport.http, locate the listener configuration with msf4j-https as the ID and specify its port as shown in the extract below.
    
     ![Server Configuration]({{base_path}}/images/quick-start-guide-101/connect-error-store.png)
     
@@ -197,19 +197,19 @@ To try out storing errors in the store, follow the steps below:
 
     **Generating a sink error**
 
-    1. Be sure  that the file path you specified in the sink configuration is not actually available. For example, in this scenario, you can make sure that the `manager` sub-directory in the `/Users/foo/manager/managercopy.csv` path is not available.
+    1. Be sure that the file path you specified in the sink configuration is not actually available. For example, in this scenario, you can make sure that the `manager` sub-directory in the `<YOUR_HOME>/manager/managercopy.csv` path is not available.
     
-    2. Now create a file event by entering a new row in the input file (in this scenario, `/Users/foo/productions.csv`) as follows.
+    2. Now create a file event by entering a new row in the input file (in this scenario, `<YOUR_HOME>/productions.csv`) as follows.
     
-        `Crossaints,90.0`
+        `Croissants,90.0`
         
-    3. Access WSO2 Integrator: SI Tooling and click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the sink error as follows.
+    3. In WSO2 Integrator: SI, click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the sink error as follows.
     
         ![Sink Error]({{base_path}}/images/handling-errors/sink-error.png)
     
     4. To correct the error and replay it, follow the procedure below:
     
-        1. Correct the file path. For example, in this scenario, you can add a directory named `manager` in the `Users/foo` directory so that the `/Users/foo/manager/` is a path that actually exists, enabling WSO2 Integrator: SI to generate the `managercopy.csv` in it.
+        1. Correct the file path. For example, in this scenario, you can add a directory named `manager` in the `<YOUR_HOME>` directory so that the `<YOUR_HOME>/manager/` is a path that actually exists, enabling WSO2 Integrator: SI to generate the `managercopy.csv` in it.
         
         2. In the **Error Store Explorer** dialog box, click **Replay** for the event.
         
@@ -217,13 +217,13 @@ To try out storing errors in the store, follow the steps below:
     
     **Generating a mapping error**
     
-    1. Open the input file (in this scenario, `/Users/foo/productions.csv`) and enter a new row in it in the wrong format as shown below.
+    1. Open the input file (in this scenario, `<YOUR_HOME>/productions.csv`) and enter a new row in it in the wrong format as shown below.
     
         `Fudge,Gateaux,80.0`
         
         The above entry is erroneous because it has two string values instead of one.
         
-    2. Access WSO2 Integrator: SI Tooling and click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the mapping error as follows.
+    2. In WSO2 Integrator: SI, click **Tools** -> **Error Store Explorer**. Then in the **Siddhi App** section, select **CopyingProductionStatsApp** Siddhi application from the drop down list. The error store displays the mapping error as follows.
     
         ![Mapping Error]({{base_path}}/images/handling-errors/mapping-error.png)
         
@@ -252,7 +252,7 @@ This involves logging the event with details of the error and then dropping it. 
     @OnError(action='LOG')
     define stream StreamA (symbol string, volume long);
     ```
-    If you do not specify the on-error action for a stream  via the `@OnError()` annotation, the event is logged and dropped.
+    If you do not specify the on-error action for a stream via the `@OnError()` annotation, the event is logged and dropped.
     
 - Sinks
 
@@ -265,31 +265,31 @@ This involves logging the event with details of the error and then dropping it. 
           method = "POST", @map(type = 'json'))
     define stream TestPublisherStream (symbol string, volume long);
     ```
-   If you do not specify the on-error action for a stream  via the `on.error` parameter, the event is logged and dropped.
+   If you do not specify the on-error action for a sink via the `on.error` parameter, the event is logged and dropped.
    
 - Source mappers 
 
-    Logging is the default on-error action for source mappers when the error store is not enabled in the `<SI-Home>/conf/server/deployment.yaml` file.
+    Logging is the default on-error action for source mappers when the error store is not enabled in the `<SI_HOME>/conf/server/deployment.yaml` file.
     
 ### Try it out
 
 To try out logging events with errors, consider the same example previously used where production statistics is copied from one file to another.
 
-1. In WSO2 Integrator: SI Tooling, open the `CopyingProductionStatsApp`  Siddhi application that you created in the [Storing events with errors section](#storing-events-with-errors) and update it as follows.
+1. In WSO2 Integrator: SI, open the `CopyingProductionStatsApp`  Siddhi application that you created in the [Storing events with errors section](#storing-and-replaying-events-with-errors) and update it as follows.
 
-    ```
+    ```siddhi
     @App:name("CopyingProductionStatsApp")
     
     @source(type='file', mode='LINE',
-       file.uri='file:/Users/foo/productions.csv',
+       file.uri='file:<YOUR_HOME>/productions.csv',
        tailing='true',
        @map(type='csv'))
-    @onError(action='LOG') 
+    @OnError(action='LOG') 
     define stream ProductionStream (name string,amount double);
     
     @sink(type='file',
         on.error='LOG',
-        file.uri = "/Users/foo/manager/managercopy.csv",
+        file.uri = "<YOUR_HOME>/manager/managercopy.csv",
         @map(type='csv'))
     define stream CopyProductionStream (name string,amount double);
     
@@ -299,19 +299,19 @@ To try out logging events with errors, consider the same example previously used
     ```
    Here, the on error action is changed to `LOG` for both the stream and the sink.
    
-2. To generate a sink error, give an incorrect destination path for your output file. For example, in this scenario, be sure that the `manager` directory does not exist in the `/Users/foo/manager/managercopy.csv` path. 
+2. To generate a sink error, give an incorrect destination path for your output file. For example, in this scenario, be sure that the `manager` directory does not exist in the `<YOUR_HOME>/manager/managercopy.csv` path. 
 
-    Then generate an input event by adding the foillowing row in the `Users/foo/productions.csv` input file.
+    Then generate an input event by adding the following row in the `<YOUR_HOME>/productions.csv` input file.
     
-    `Crossaints,90.0`
+    `Croissants,90.0`
     
     As a result, the following is logged in the WSO2 Integrator: SI terminal.
     
     ```text
-    ERROR {io.siddhi.core.stream.output.sink.Sink} - Error on 'CopyingProductionStatsApp'. Dropping event at Sink 'file' at 'CopyProductionStream' as its still trying to reconnect!, events dropped 'Fudge,100.0
+    ERROR {io.siddhi.core.stream.output.sink.Sink} - Error on 'CopyingProductionStatsApp'. Dropping event at Sink 'file' at 'CopyProductionStream' as its still trying to reconnect!, events dropped 'Croissants,90.0'
     ```
     
-3. To generate a mapping error, open the input file (in this scenario, `/Users/foo/productions.csv`) and enter a new row in it in the wrong format as shown below.
+3. To generate a mapping error, open the input file (in this scenario, `<YOUR_HOME>/productions.csv`) and enter a new row in it in the wrong format as shown below.
 
     `Fudge,Gateaux,80.0`
     
@@ -329,7 +329,7 @@ This can be used with the following:
 
     ![Stream Stream Errors]({{base_path}}/images/handling-errors/stream-stream-error.png)
 
-    This on-error action can be specified for a  stream via the `@OnError()` annotation. 
+    This on-error action can be specified for a stream via the `@OnError()` annotation. 
     
     In the following example, the Siddhi query uses the `cast("abc", "double")` function that intentionally generates an error for testing purposes.
 
@@ -345,11 +345,11 @@ This can be used with the following:
     select symbol, amount, _error
     insert into tempStream;
     ```
-    If you do not specify the on-error action for a stream  via the `@OnError()` annotation, the event is logged and dropped.
+    If you do not specify the on-error action for a stream via the `@OnError()` annotation, the event is logged and dropped.
     
 - Sinks
 
-    ![Stream Sink Errors]({{base_path}}/images/handling-errors/log-sink-error.png)
+    ![Stream Sink Errors]({{base_path}}/images/handling-errors/stream-sink-error.png)
 
     You can specify this on-error action by including the `on-error` parameter within the sink configuration as shown below.
 
@@ -373,21 +373,21 @@ This can be used with the following:
 
 To try out streaming events with errors, follow the procedure below.
 
-1. In WSO2 Integrator: SI Tooling, open the `CopyingProductionStatsApp`  Siddhi application that you created in the [Storing events with errors section](#storing-events-with-errors) and update it as follows. Then deploy it in the WSO2 Integrator: SI server.
+1. In WSO2 Integrator: SI, open the `CopyingProductionStatsApp`  Siddhi application that you created in the [Storing events with errors section](#storing-and-replaying-events-with-errors) and update it as follows. Then deploy it in the WSO2 Integrator: SI server.
 
-    ```
+    ```siddhi
     @App:name("CopyingProductionStatsApp")
     
     @source(type='file', mode='LINE',
-       file.uri='file:/Users/foo/productions.csv',
+       file.uri='file:<YOUR_HOME>/productions.csv',
        tailing='true',
        @map(type='csv'))
-    @onError(action='STREAM') 
+    @OnError(action='STREAM') 
     define stream ProductionStream (name string,amount string);
     
     @sink(type='file',
         on.error='STREAM',
-        file.uri = "/Users/foo/managercopy.csv",
+        file.uri = "<YOUR_HOME>/managercopy.csv",
         @map(type='csv'))
     define stream CopyProductionStream (name string,amount double);
     
@@ -401,18 +401,18 @@ To try out streaming events with errors, follow the procedure below.
     select name, amount, _error
     insert into ErrorStream;
     ```
-   Here, the on error action is changed to `STREAM` for both the stream and the sink. Any stream errors that occur for the `ProductionStream` are directed to an error stream named `!ProductionStream`. The events with errors that are sent to the `!ProductionStream` stream have the two attributes of the `ProductionStream` input stream, and in addition, an attribute named `_error` to capture the details of the error. A log is connected to it with the prefix `Error Occurred`
+   Here, the on error action is changed to `STREAM` for both the stream and the sink. Any stream errors that occur for the `ProductionStream` are directed to an error stream named `!ProductionStream`. The events with errors that are sent to the `!ProductionStream` stream have the two attributes of the `ProductionStream` input stream, and in addition, an attribute named `_error` to capture the details of the error. A log is connected to it with the prefix `Error Occured`.
    
    The `ProductionStream` stream receives events with two string values each. The `FilterEvents` query casts value for the `amount` attribute as a value of the `double` type and filters events where the value for this field is greater than `100`. This results in an error when events are sent to this Siddhi application. 
    
-2. To generate an error, add the following row with two string values in the `Users/foo/productions.csv` input file.
+2. To generate an error, add the following row with two string values in the `<YOUR_HOME>/productions.csv` input file.
     
-    `Crossaints,abc`
+    `Croissants,abc`
     
     As a result, the following is logged in the WSO2 Integrator: SI terminal.
     
     ```text
-    INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - CopyingProductionStatsApp: Error Occured, StreamEvent{ timestamp=1604408058031, beforeWindowData=null, onAfterWindowData=null, outputData=[Crossaints, abc, java.lang.ClassCastException: class java.lang.String cannot be cast to class java.lang.Double (java.lang.String and java.lang.Double are in module java.base of loader 'bootstrap')], type=CURRENT, next=null} 
+    INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - CopyingProductionStatsApp: Error Occured, StreamEvent{ timestamp=1604408058031, beforeWindowData=null, onAfterWindowData=null, outputData=[Croissants, abc, java.lang.ClassCastException: class java.lang.String cannot be cast to class java.lang.Double (java.lang.String and java.lang.Double are in module java.base of loader 'bootstrap')], type=CURRENT, next=null} 
     ```   
 
 ## Waiting 

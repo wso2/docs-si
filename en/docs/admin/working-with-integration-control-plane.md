@@ -52,13 +52,13 @@ Follow the steps given below to configure and use the WSO2 Integration Control P
 
 Download the binary distribution of the product, and then follow the instructions to start the WSO2 Integrator: SI and the ICP server.
 
-- [Install the WSO2 Integrator: SI]({{base_path}}/setup/installing-si-in-vm).
+- [Install the WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 - [Install the Integration Control Plane](https://mi.docs.wso2.com/en/latest/install-and-setup/install/installing-integration-control-plane/).
 
 !!! note
 
-    Make sure get the latest update the of the WSO2 Integrator: SI 4.3.0 or higher.
-    After updating check the JAR file `org.wso2.carbon.si.management.icp_<version>.jar` located in the `<SI_HOME>/wso2/lib/plugins/` directory is version 3.0.75 or above. If an earlier version is present, follow the steps below:
+    Make sure to get the latest update of WSO2 Integrator: SI 4.3.0 or higher.
+    After updating, check that the JAR file `org.wso2.carbon.si.management.icp_<version>.jar` in the `<SI_HOME>/wso2/lib/plugins/` directory is version 3.0.75 or above. If an earlier version is present, follow the steps below:
 
     1. Download the required version from this [link](https://mvnrepository.com/artifact/org.wso2.carbon.analytics/org.wso2.carbon.si.management.icp).
     2. Place the downloaded JAR file in the `<SI_HOME>/wso2/lib/plugins/` directory.
@@ -70,7 +70,7 @@ Download the binary distribution of the product, and then follow the instruction
 
 Follow the steps given below to configure the SI servers to publish data to the ICP server.
 
-1. To connect the SI servers with the ICP server, add the following configuration to the `deployment.yaml` file (stored in the `<SI_HOME>conf/server/` folder) of each server instance. You can make the `nodeID` here unique. Also enable the metrics under the `wso2.metrics` section in the `deployment.yaml` file.
+1. To connect the SI servers with the ICP server, add the following configuration to the `deployment.yaml` file (stored in the `<SI_HOME>/conf/server/` folder) of each server instance. You can make the `nodeID` here unique. Also enable the metrics under the `wso2.metrics` section in the `deployment.yaml` file.
 
     - ICP configuration for SI node.
     ```yaml
@@ -129,12 +129,12 @@ Follow the steps given below to configure the SI servers to publish data to the 
                 nodeID
             </th>
             <td>
-                <b>Optional</b> A unique ID that can be set for each node to identify a node in an multi instance environment.
+                <b>Optional</b>. A unique ID that can be set for each node to identify a node in a multi-instance environment.
             </td>
         </tr>
     </table> 
 
-3.  Regardless of the user who logs in, the ICP server uses the user configured in its `deployment.toml` to fetch the data to the ICP server. Then the ICP server renders these data in the UI according to logged-in user. Hence, configure the super admin user credentials in the user store as mentioned below in the `deployment.toml` file (stored in the `<ICP_HOME>/conf/` folder).
+2.  Regardless of the user who logs in, the ICP server uses the user configured in its `deployment.toml` to fetch the data to the ICP server. Then the ICP server renders these data in the UI according to logged-in user. Hence, configure the super admin user credentials in the user store as mentioned below in the `deployment.toml` file (stored in the `<ICP_HOME>/conf/` folder).
 
     ```toml
     [si_service_account]
@@ -149,7 +149,7 @@ Follow the steps given below.
 1. Open a terminal and navigate to the `<ICP_HOME>/bin` folder.
 2. Execute one of the commands given below.
 
-    === "On MacOS/Linux"
+    === "On macOS/Linux"
         ```bash
         ./dashboard.sh
         ```
@@ -165,7 +165,7 @@ Follow the steps given below.
 1. Open a terminal and navigate to the `<SI_HOME>/bin` folder.
 2. Execute one of the commands given below.
 
-    === "On MacOS/Linux"
+    === "On macOS/Linux"
         ```bash 
         ./server.sh
         ```
@@ -181,7 +181,7 @@ Once you have [set up and started the ICP server](#using-the-integration-control
 !!! Note "Before you begin"
     Be sure to have at least one WSO2 Integrator: SI server connected to the ICP server before attempting to sign in to it. This can be verified by checking the presence of the following log.
     ```
-    New node <node_id> in group : <group_id> is registered. Inserting heartbeat information
+    New node <node_id> in group: <group_id> is registered. Inserting heartbeat information
     ```
   
 1. Copy the following ICP server URL to your browser:
@@ -200,8 +200,8 @@ Once you have [set up and started the ICP server](#using-the-integration-control
                 Username
             </th>
             <td>
-                The user name to sign in.</br></br>
-                <b>Note</b>: This should be a valid username that is saved in the WSO2 Integrator: SI server's user store. By default, the 'admin' user name is configured in the default user store.</br></br>
+                The user name to sign in.<br/><br/>
+                <b>Note</b>: This should be a valid username that is saved in the WSO2 Integrator: SI server's user store. By default, the 'admin' user name is configured in the default user store.<br/><br/>
             </td>
         </tr>
         <tr>

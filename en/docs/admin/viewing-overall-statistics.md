@@ -1,6 +1,3 @@
-!!! note
-    **This page is still a work in progress!**
-
 # Viewing Overall Statistics
 
 This dashboard displays the overall Siddhi statistics of the Siddhi applications currently deployed in your WSO2 Integrator: SI instance.
@@ -311,9 +308,6 @@ The **Source and Source Mapper Statistics** widget also provides a link to the *
 
 To monitor how each source contributes to the overall throughput of your Siddhi application deployment.
 
-!!! tip "Recommended action"
-    
-
 ## Sink Statistics
 
 ![Sink Statistics]({{base_path}}/images/viewing-overall-statistics/sink-statistics.png)
@@ -331,8 +325,6 @@ The **Sink Statistics** widget also provides a link to the **Siddhi Sink Statist
 **Purpose**
 
 To monitor the amount of data published by your WSO2 Integrator: SI deployment to different destinations, brokers, files, databases and cloud storages.
-
-!!! tip "Recommended action"
 
 ## Table Statistics
 
@@ -352,8 +344,6 @@ The **Table Statistics** widget also provides a link to the **Siddhi Table Stati
 
 To monitor the tables defined in your WSO2 Integrator: SI deployment and assessing the extent to which each table is used.
 
-!!! tip "Recommended action"
-
 ## Window Statistics
 
 ![Window Statistics]({{base_path}}/images/viewing-overall-statistics/window-statistics.png)
@@ -371,8 +361,6 @@ The **Window Statistics** widget also provides a link to the **Siddhi Window Sta
 **Purpose**
 
 To monitor the windows defined in your WSO2 Integrator: SI deployment and assessing the extent to which each window is used.
-
-!!! tip "Recommended action"
 
 ## Aggregation Statistics
 
@@ -392,8 +380,6 @@ The **Aggregation Statistics** widget also provides a link to the **Siddhi Aggre
 
 To monitor the aggregations defined in your WSO2 Integrator: SI deployment and assessing the extent to which each aggregation is used.
 
-!!! tip "Recommended action"
-
 ## Trigger Statistics
 
 ![Trigger Statistics]({{base_path}}/images/viewing-overall-statistics/trigger-statistics.png)
@@ -412,8 +398,6 @@ The **Trigger Statistics** widget also provides a link to the **Siddhi Trigger S
 
 To monitor the triggers defined in your WSO2 Integrator: SI deployment and assessing the extent to which each trigger is used.
 
-!!! tip "Recommended action"
-
 ## On Demand Query Statistics
 
 ![On Demand Query Statistics]({{base_path}}/images/viewing-overall-statistics/on-demand-query-statistics.png)
@@ -430,4 +414,4 @@ The **On-Demand Query Statistics** widget also provides a link to the **Siddhi O
 
 **Purpose**
 
-!!! tip "Recommended action"
+To monitor on-demand queries executed via the REST API and identify query patterns by frequency and throughput.

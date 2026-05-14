@@ -1,7 +1,7 @@
-!!! note
-    **This page is still a work in progress!**
-    
 # Viewing Stream Statistics
+
+!!! info "Documentation in progress"
+    For a summary of the metrics shown in this dashboard, see [Stream Statistics in the Overall Statistics dashboard](viewing-overall-statistics.md#stream-statistics).
 
 ![Stream statistics dashboard]({{base_path}}/images/streaming-integrator-grafana-dashboard/stream_statistics_dashboard.png)
 

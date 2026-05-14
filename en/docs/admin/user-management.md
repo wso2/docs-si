@@ -68,7 +68,7 @@ password, fist name, last name, e-mail etc. It can be either file based
 or a database maintained within WSO2 Integrator: SI or externally to it. User stores used
 in WSO2 Integrator: SI differs based on the interface(IdP Client) used to interact with
 the user store. By default, a file based user store maintained in the
-`<SI_HOME>>/conf/server/deployment.yaml` file interfaced through
+`<SI_HOME>/conf/server/deployment.yaml` file interfaced through
 'Local' IdP Client is enabled.
 
 
@@ -80,7 +80,7 @@ required for the user scenario. Furthermore, a custom IdP Client can be
 written to encompass the required user store connection and
 authentication.
 
-IdP clients can be switched by specifying te required IdP client in the
+IdP clients can be switched by specifying the required IdP client in the
 `auth.configs:` section in the
 `<SI_HOME>/conf/server/deployment.yaml` file.
 
@@ -94,8 +94,8 @@ The active IdP client is `local` by default.
 
 Following are the IdP Clients available for WSO2 Integrator: SI:
 
-- [Local IdP Client](#UserManagementviatheIdPClientInterface-LocalIdPClient)
-- [External IdP Client](#UserManagementviatheIdPClientInterface-ExternalIdPClient)
+- [Local IdP Client](#local-idp-client)
+- [External IdP Client](#external-idp-client)
 
 ### Local IdP Client
 
@@ -129,10 +129,9 @@ The above user and role is added by default.
 The parameters used in the above configurations are as follows:
 
 !!! note
-
-If new users/roles are added and the above default user and role are
-also needed, the following parameters must be added to the user store
-along with the added user/role.
+    If new users/roles are added and the above default user and role are
+    also needed, the following parameters must be added to the user store
+    along with the added user/role.
 
 
 <table style="width:100%;">
@@ -215,12 +214,11 @@ IdP provider:
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>             properties &gt; sessiontimeout            </code></td>
+<td><code>             properties &gt; sessionTimeout            </code></td>
 <td><code>             3600            </code></td>
 <td><div class="content-wrapper">
 <p>The number of seconds for which the session is valid once the user logs in.</p>
-!!! info
-<p>The value specified here needs to be greater than 60 seconds because the system checks the user credentials and keeps extending the session every minute until the session timeout is reached.</p>
+<p><em>Note: The value specified here needs to be greater than 60 seconds because the system checks the user credentials and keeps extending the session every minute until the session timeout is reached.</em></p>
 
 </div></td>
 </tr>
@@ -270,9 +268,8 @@ requesting an access token from the identity provider using the password
 grant type.
 
 !!! note
-
-The identity provider with which WSO2 Integrator: SI interacts with to authenticate
-users must be started before the WSO2 Integrator: SI server.
+    The identity provider with which WSO2 Integrator: SI interacts with to authenticate
+    users must be started before the WSO2 Integrator: SI server.
 
 
 The auth manager must be configured under the
@@ -289,7 +286,7 @@ The parameters used in the above configurations areas follows:
 
 | Parameter                 | Default Value | Description                                              |
 |---------------------------|---------------|----------------------------------------------------------|
-| `userManager > adminRole` | `admin`       | The name of the role that has administration privilages. |
+| `authManager > adminRole` | `admin`       | The name of the role that has administration privileges. |
 
 
 
@@ -309,9 +306,6 @@ the `auth.configs` namespace as shown below.
       idpBaseUrl: https://localhost:9443/scim2
       idpUsername: admin
       idpPassword: admin
-      portalAppContext: portal
-      statusDashboardAppContext: monitoring
-      businessRulesAppContext : business-rules
       databaseName: WSO2_OAUTH_APP_DB
       cacheTimeout: 900
       baseUrl: https://localhost:9643
@@ -378,21 +372,6 @@ Description
 <td><code>             admin            </code></td>
 <td>The password for the IdP.</td>
 </tr>
-<tr class="odd">
-<td><p><code>              portalAppContext             </code></p></td>
-<td><code>             portal            </code></td>
-<td>The application context of the Dashboard Portal application in WSO2 Integrator: SI.</td>
-</tr>
-<tr class="even">
-<td><code>             statusDashboardAppContext            </code></td>
-<td><code>             monitoring            </code></td>
-<td>The application context of the Status Dashboard application in WSO2 Integrator: SI.</td>
-</tr>
-<tr class="odd">
-<td><p><code>              businessRulesAppContext             </code></p></td>
-<td><code>             business-rules            </code></td>
-<td>The application context of the Business Rules application in WSO2 WSO2 Integrator: SI.</td>
-</tr>
 <tr class="even">
 <td><code>             databaseName            </code></td>
 <td><p><code>              WSO2_OAUTH_APP_DB             </code></p></td>
@@ -415,18 +394,14 @@ Description
 <td>The grant type used in the OAuth application token request.</td>
 </tr>
 <tr class="even">
-<td><p><code>              spClientId/ portalClientId/             </code></p>
-<p><code>              statusDashboardClientId/ businessRulesClientId             </code></p></td>
+<td><code>             spClientId            </code></td>
 <td>N/A</td>
 <td><p>The client ID of the OAuth App. If no value is specified for this property, the DCR is called to register the application and persist the client ID in the data store.</p></td>
 </tr>
 <tr class="odd">
-<td><p><code>              spClientId/ portalClientId/             </code></p>
-<p><code>              statusDashboardClientId/ businessRulesClientId             </code></p></td>
+<td><code>             spClientSecret            </code></td>
 <td>N/A</td>
-<td><p>The client secret of the OAuth application. If no value is specified for this property, the DCR is called to register the application and persist the client secret in the data store.</p>
-<p><br />
-</p></td>
+<td><p>The client secret of the OAuth application. If no value is specified for this property, the DCR is called to register the application and persist the client secret in the data store.</p></td>
 </tr>
 </tbody>
 </table>
@@ -439,7 +414,7 @@ When writing a custom IdP client, the following two interfaces must be
 implemented:
 
 -   [IdPClientFactory](https://github.com/wso2/carbon-analytics-common/blob/master/components/authentication/org.wso2.carbon.analytics.idp.client/src/main/java/org/wso2/carbon/analytics/idp/client/core/spi/IdPClientFactory.java)
-    : This is a factory OSGi service that initialtes the custom IdP
+    : This is a factory OSGi service that initiates the custom IdP
     client using the properties from
     `          IdPClientConfiguration.         `
 -   [IdPClient](https://github.com/wso2/carbon-analytics-common/blob/master/components/authentication/org.wso2.carbon.analytics.idp.client/src/main/java/org/wso2/carbon/analytics/idp/client/core/api/IdPClient.java)

@@ -19,7 +19,7 @@ To understand this, consider a scenario where the production statistics generate
 
 define stream ProductionStream (name string, amount double, timestamp long);
 
-@store(type='rdbms', jdbc.url="jdbc:mysql://localhost:3306/Production", username="root", password="root" , jdbc.driver.name="com.mysql.jdbc.Driver")
+@store(type='rdbms', jdbc.url="jdbc:mysql://localhost:3306/Production", username="root", password="root" , jdbc.driver.name="com.mysql.cj.jdbc.Driver")
 define aggregation ProductionAggregation
 from ProductionStream
 select name, amount, sum(amount) as total, avg(amount) as average 
@@ -30,7 +30,7 @@ Observe the following in the above Siddhi application:
 
 - The stream
 
-    In addition to the `name` and `amount` attributes to capture the name of the product and the amount produced, the stream has an attribute named `timestamp` to capture the time at which the production run takes place. he aggregations are executed based on this time. This attribute's value could either be a long value (reflecting the Unix timestamp in milliseconds), or a string value adhering to one of the following formats:
+    In addition to the `name` and `amount` attributes to capture the name of the product and the amount produced, the stream has an attribute named `timestamp` to capture the time at which the production run takes place. The aggregations are executed based on this time. This attribute's value could either be a long value (reflecting the Unix timestamp in milliseconds), or a string value adhering to one of the following formats:
     
     - `<YYYY>-<MM>-<dd> <HH>:<mm>:<ss> <Z>`: This format can be used if the timezone needs to be specified explicitly. Here the ISO 8601 UTC offset must be provided. e.g., +05:30 reflects the India Time Zone. If time is not in GMT, this value must be provided.
     
@@ -48,7 +48,7 @@ Observe the following in the above Siddhi application:
 
 ### Retrieving previously calculated aggregations for selected time granularities
 
-To retrieve the aggregates stored via the Siddhi application in the previous section, you need to create a new stream for data retrieval and join it with the aggregation that you previously created. In this example, let's assume that you need to production statistics for the period 12th October 2020 to 16th October 2020.
+To retrieve the aggregates stored via the Siddhi application in the previous section, you need to create a new stream for data retrieval and join it with the aggregation that you previously created. In this example, let's assume that you need to retrieve production statistics for the period 12th October 2020 to 16th October 2020.
 
 For this, you can update the `ProductionAggregatesApp` Siddhi application that you previously created as follows:
 
@@ -73,7 +73,7 @@ For this, you can update the `ProductionAggregatesApp` Siddhi application that y
     
     - The join
     
-        The above query joins the `ProductionsSummaryRetyrievalStream` stream and the `ProductionAggregation` aggregation. The `ProductionsSummaryRetyrievalStream` stream is assigned `b` as the short name, and the aggregation is assigned `a`. Therefore, `a.name == b.name` specifies that a matching event is identified when the value for the `name` attribute is the same. 
+        The above query joins the `ProductionSummaryRetrievalStream` stream and the `ProductionAggregation` aggregation. The `ProductionSummaryRetrievalStream` stream is assigned `b` as the short name, and the aggregation is assigned `a`. Therefore, `a.name == b.name` specifies that a matching event is identified when the value for the `name` attribute is the same. 
 
         For more information about how to perform joins, see [Enriching Data](#enriching-data).
         
@@ -113,7 +113,7 @@ To try out the example given above, follow the procedure below:
             jdbcUrl: 'jdbc:mysql://localhost:3306/production?useSSL=false'
             username: root
             password: root
-            driverClassName: com.mysql.jdbc.Driver
+            driverClassName: com.mysql.cj.jdbc.Driver
             minIdle: 5
             maxPoolSize: 50
             idleTimeout: 60000
@@ -122,9 +122,9 @@ To try out the example given above, follow the procedure below:
             isAutoCommit: false
     ```
     
-2. [Start and Access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+2. [Install and start WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
-3. Open a new file in WSO2 Integrator: SI Tooling. Then add and save the following Siddhi application.
+3. In WSO2 Integrator: SI, open a new file. Then add and save the following Siddhi application.
 
     ```
     @App:name('ProductionAggregatesApp')
@@ -139,7 +139,7 @@ To try out the example given above, follow the procedure below:
     define stream ProductionSummaryStream (name string, total double, average double);
     
     
-    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/production?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.jdbc.Driver")
+    @store(type = 'rdbms', jdbc.url = "jdbc:mysql://localhost:3306/production?useSSL=false", username = "root", password = "root", jdbc.driver.name = "com.mysql.cj.jdbc.Driver")
     define aggregation ProductionAggregation
     from ProductionStream
     select name, amount, sum(amount) as total, avg(amount) as average
@@ -170,9 +170,9 @@ To try out the example given above, follow the procedure below:
     The above events are stored in the `production` database that you previously defined.
     
     
-5. To retrieve the information you stored, simulate an event for the `ProductionSummaryRetrievalStream` stream with `brownie` as the value for `name'. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
+5. To retrieve the information you stored, simulate an event for the `ProductionSummaryRetrievalStream` stream with `brownie` as the value for `name`. For instructions to simulate events, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md).
 
-    The WSO2 Integrator: SI Tooling terminal displays the following logs.
+    The editor (with WSO2 Integrator: SI installed) terminal displays the following logs.
     
     ![Aggregate Logs]({{base_path}}/images/processing-data/aggregate-logs.png)
     
@@ -183,12 +183,12 @@ The following table describes the complete list of extensions that provide aggre
 | **Extension** | **Description** |
 |----------------------------------|---------------------------------------------------------------------------|
 | [Siddhi-execution-math](https://siddhi-io.github.io/siddhi-execution-math/) | Transforms data by performing mathematical operations. |
-| [Siddhi-execution-streeamingml](https://siddhi-io.github.io/siddhi-execution-streamingml/) | Provides streaming machine learning (clustering, classification and regression) for event streams. |
+| [Siddhi-execution-streamingml](https://siddhi-io.github.io/siddhi-execution-streamingml/) | Provides streaming machine learning (clustering, classification and regression) for event streams. |
 
 
 ## Performing short term summarizations
 
-This section explains how to apply Siddhi logic to process a subset of events received to a stream based on time or the number of events. This is achieved via [Siddi Windows](https://siddhi.io/en/v5.1/docs/query-guide/#window).
+This section explains how to apply Siddhi logic to process a subset of events received to a stream based on time or the number of events. This is achieved via [Siddhi Windows](https://siddhi.io/en/v5.1/docs/query-guide/#window).
 The window can apply to a batch of events or in a sliding manner. 
 
 The following are a few examples of how short time summarizations can be performed based on time or the number of events.
@@ -243,11 +243,11 @@ The following are a few examples of how short time summarizations can be perform
 
 - **Performing a length-based summarization to a batch of events** 
 
-    This involves selecting a batch of events based on the number of events specified in a sliding manner as illustrated via an example in the diagram below.
+    This involves selecting a batch of events based on the number of events specified in a tumbling manner as illustrated via an example in the diagram below.
     
     ![Length Batch Window]({{base_path}}/images/processing-data/length-batch-window.png)
     
-    For example, consider that the factory foreman of a sweet factory wants to calculate the production total and average per product for every three events in a sliding manner. To address this, you can write a query as follows.
+    For example, consider that the factory foreman of a sweet factory wants to calculate the production total and average per product for every three events in a tumbling manner. To address this, you can write a query as follows.
 
     ```
     from ProductionStream#window.lengthBatch(3)
@@ -255,13 +255,13 @@ The following are a few examples of how short time summarizations can be perform
     group by name
     insert into LengthBatchOutputStream;
     ```
-    Here, `#window.lengthBatch(3)` represents a sliding length window of 3 events. Based on this, the total for the last three events is calculated and presented as `lastBatchTotal`, and the average for the last three events is calculated and presented as `lastBatchAvg`.
+    Here, `#window.lengthBatch(3)` represents a tumbling length window of 3 events. Based on this, the total for the last three events is calculated and presented as `lastBatchTotal`, and the average for the last three events is calculated and presented as `lastBatchAvg`.
     
 ### Try it out
 
 To try out the four sample queries given above, follow the steps below:
 
-1. [Start and Access WSO2 Integrator: SI Tooling](../develop/streaming-integrator-studio-overview.md/#starting-streaming-integrator-tooling).
+1. [Install and start WSO2 Integrator: SI](../setup/installing-si-in-vm.md).
 
 2. Open a new file. Then add and save the following Siddhi application.
 

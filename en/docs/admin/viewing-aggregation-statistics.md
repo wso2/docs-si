@@ -1,7 +1,7 @@
-!!! note
-    **This page is still a work in progress!**
-    
 # Viewing Aggregation Statistics
+
+!!! info "Documentation in progress"
+    For a summary of the metrics shown in this dashboard, see [Aggregation Statistics in the Overall Statistics dashboard](viewing-overall-statistics.md#aggregation-statistics).
 
 The information displayed in this dashboard is as follows.
 

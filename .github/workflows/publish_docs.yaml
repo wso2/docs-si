@@ -8,7 +8,7 @@ on:
     branches:
       - main
       - 4.3.0
-      - 4.4.0
+      - 4.3.1
   workflow_dispatch:
 
 jobs:
@@ -36,8 +36,8 @@ jobs:
           git config --global user.name "ballerina-bot"
           cd en/
           if [ "$BRANCH_NAME" = "main" ]; then
-            echo "Deploying latest version from main branch"
-            mike deploy 4.3.1 latest -t "4.3.1" --push
+            echo "Deploying latest version (4.4.0) from main branch"
+            mike deploy 4.4.0 latest -t "4.4.0" --update-aliases --push
             mike set-default --push latest
           elif [ "$BRANCH_NAME" = "4.3.0" ]; then
             echo "Deploying 4.3.0 version from 4.3.0 branch"

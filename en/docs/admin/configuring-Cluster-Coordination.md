@@ -2,11 +2,10 @@
 
 Multiple SI nodes can be configured to work together by configuring
 a cluster coordination strategy that is used in various deployments such
-as the <a target="_blank" href="minimum-ha-deployment">Minimum High Available(HA) Deployment</a>
-and <a target="_blank" href="scalable-ha-deployment">Scalable High Available(HA) Deployment</a>
+as the [Minimum High Availability (HA) Deployment](../setup/deploying-si-as-minimum-ha-cluster.md)
+and [Scalable High Availability (HA) Deployment](../setup/deploying-si-as-a-scalable-cluster.md)
 . At present, cluster coordination is supported via an RDBMS instance
-using and RDBMS coordination strategy. Support for cluster coordination
-via a Zookeeper instance will be supported in the near future.
+using an RDBMS coordination strategy.
 
 At any given time, there is a leader in an SI cluster that is
 arbitrarily selected among the members of the cluster. The RDBMS
@@ -39,7 +38,7 @@ should be configured for **all the nodes** as follows:
 | `             enabled            `                               | Set this value to `             true            ` to enable cluster coordination for the node.                                                                                                                                                                                       | `             true/false            `                                                          |
 | `             groupId            `                               | The group ID is used to identify the cluster to which the node belongs. Nodes that belong to the same cluster must be configured with the same group ID.                                                                                                                             | `             group-1            `                                                             |
 | `             coordinationStrategyClass            `             | The clustering class to be used.                                                                                                                                                                                                                                                     | `             org.wso2.carbon.cluster.coordinator.rdbms.RDBMSCoordinationStrategy            ` |
-| `             strategyConfig > datasource            `           | The shared datasource to be used in the cluster. The datasource specified must be properly configured in the `             deployment.yaml            ` file. For detailed instructions to configure a datasource, see [Configuring Datasources](_Configuring_Datasources_) .        | `             WSO2_CARBON_DB            `                                                      |
+| `             strategyConfig > datasource            `           | The shared datasource to be used in the cluster. The datasource specified must be properly configured in the `             deployment.yaml            ` file. For detailed instructions to configure a datasource, see [Configuring Datasources](../setup/configuring-data-sources.md).        | `             WSO2_CARBON_DB            `                                                      |
 | `             strategyConfig > heartbeatInterval            `    | This value defines the time interval in milliseconds between heartbeat pulses sent by nodes to indicate that they are still alive within the cluster.                                                                                                                                | `             1000            `                                                                |
 | `             strategyConfig > heartbeatMaxRetry            `    | The number of times the heartbeat pulse can be unavailable until a node is identified as unresponsive. If a node fails to send its heartbeat pulse to the leader of the cluster after a number of retries equal to the number specified here, that node is removed from the cluster. | `             2            `                                                                   |
 | `             strategyConfig > eventPollingInterval            ` | The time interval in millseconds at which a node listens to identify the changes happening within the cluster. The changes may include a new node joining the cluster, a node being removed from the cluster and the coordinator changed event.                                      | `             1000            `                                                                |
@@ -51,7 +50,7 @@ coordination in the deployment.yaml
 
 **Sample deployment.yaml segment**
 
-``` java
+```yaml
     cluster.config:
       enabled: true
       groupId:  <GROUP ID>

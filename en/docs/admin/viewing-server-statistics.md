@@ -1,6 +1,3 @@
-!!! note
-    **This page is still a work in progress!**
-    
 # Viewing Server Statistics
 
 Siddhi Server Statistics Dashboard represents a detailed view of the active server instances. It also includes the JVM metrics related to the active servers.
@@ -27,8 +24,6 @@ The information displayed is as follows.
 ## Siddhi App Count
 
 ![Siddhi app count]({{base_path}}/images/streaming-integrator-grafana-dashboard/siddhi_app_count.png)
-
- This indicates the number of active servers against time. When a new server is started, it is indicated by a vertical line. You can move the cursor over this vertical line to check the host and port at which the new active server is running.
 
  This indicates the total number of Siddhi applications deployed in the currently active servers.
  

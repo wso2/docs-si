@@ -1,4 +1,4 @@
-# Active-Active Deployment
+# Active-Active Cluster
 
 The recommended deployment for WSO2 Integrator: SI (SI) is the Minimum HA Deployment. However, that deployment pattern involves using only two nodes and it is
 not scalable beyond that. If you want to configure SI as a scalable deployment, you can use the Active-Active deployment pattern. This section provides an
@@ -19,7 +19,7 @@ Distributed aggregations partially process aggregations in different nodes. This
 scaling, etc.). In order to do this all the aggregations must have a physical database and must be linked to the same database.
 
 Partitioning aggregations can be enabled at aggregation level and also at a global level. To enable it at the global level, add the following section with the
-`@PartitionById` annotation set to `true` in the `<SI-Home>/conf/server/deployment.yaml` file.
+`@PartitionById` annotation set to `true` in the `<SI_HOME>/conf/server/deployment.yaml` file.
 
 ```
     siddhi:
@@ -32,11 +32,11 @@ If you want to enable for a specific aggregation then the `@PartitionById` annot
 
 e.g.,
 To understand how an active-active cluster processes aggregations when aggregations are partitioned and assigned to different nodes, consider the following Siddhi query.
- To learn more about Siddhi queries, see [Siddhi Query Guide](https://siddhi.io/en/v4.x/docs/query-guide/).
+ To learn more about Siddhi queries, see [Siddhi Query Guide](https://siddhi.io/en/v5.1/docs/query-guide/).
 
 ```
-define stream TradeStream (symbol string, price double, quantity long, ;timestamp long);
-@store(type='rdbms',jdbc.url="jdbc:mysql://localhost:3306/TestDB", username="root", password="root" , jdbc.driver.name="com.mysql.jdbc.Driver")
+define stream TradeStream (symbol string, price double, quantity long, timestamp long);
+@store(type='rdbms',jdbc.url="jdbc:mysql://localhost:3306/TestDB", username="root", password="root" , jdbc.driver.name="com.mysql.cj.jdbc.Driver")
 @PartitionById(enable='true')
 define aggregation TradeAggregation
 from TradeStream
@@ -47,7 +47,7 @@ aggregate by timestamp every sec ... year
 
 This query captures the information relating to a trade. Each transaction represents an event, and the information captured includes the symbol of the product,
 the price at which it is sold, the quantity sold during the transaction, and the timestamp of the transaction. Each node stores this information in the `TEST_DB`
-data store defined in the `<SI_WORKER_HOME>/conf/server/deployment.yaml` file.
+data store, which is defined under `wso2.datasources` in the `<SI_HOME>/conf/server/deployment.yaml` file. For instructions on how to define a datasource, see [Configuring Data Sources](configuring-data-sources.md).
 
 Now let's assume that the following input events were generated for the two nodes during a specific hour.
 
@@ -71,7 +71,7 @@ You can find the steps to enable aggregation partitioning within the next subsec
 
 ## Configuring an active-active cluster
 
-To configure the WSO2 Integrator: SI nodes and deploy them as an active-active cluster, edit the `<SI-Home>/conf/server/deployment.yaml` file as follows:
+To configure the WSO2 Integrator: SI nodes and deploy them as an active-active cluster, edit the `<SI_HOME>/conf/server/deployment.yaml` file as follows:
 
 !!! tip "Before you begin:"
     - Download two binary packs of the WSO2 Integrator: SI.
@@ -114,12 +114,12 @@ To configure the WSO2 Integrator: SI nodes and deploy them as an active-active c
 
     !!! tip
         - To maintain data consistency, do not change the shard IDs after the first configuration. <br/>
-        - When you enable the aggregation partitioning feature, a new column ID named `SHARD_ID` is introduced to the aggregation tables. Therefore, you need to do one of the following options after enabling this feature to avoid errors occuring due to the differences in the table schema.<br/>
+        - When you enable the aggregation partitioning feature, a new column ID named `SHARD_ID` is introduced to the aggregation tables. Therefore, you need to do one of the following options after enabling this feature to avoid errors occurring due to the differences in the table schema.<br/>
             - Delete all the aggregation tables for `SECONDS`, `MINUTES`, `HOURS`, `DAYS`, `MONTHS`, `YEARS`. <br/>
-            - Edit the aggregation tables by adding a new column named SHARD_ID, and add that to the existing primary key list of the table.
+            - Edit the aggregation tables by adding a new column named `SHARD_ID`, and add that to the existing primary key list of the table.
 
-3. Configure a database, and then update the default configuration for the `TEST_DB` data source with parameter values suitable for your requirements.
+3. Configure a database, and then update the default configuration for the `TEST_DB` data source with parameter values suitable for your requirements. For instructions, see [Configuring Data Sources](configuring-data-sources.md).
 
 !!! warning
-    As explained in above the events are processed in multiple active nodes. Eventhough this is usually a stateful operation, you can overcome the node-dependent calculations via distributed aggregation. This allows SI to execute scripts that depend on incremental distributed aggregation.<br/><br/>
-    However, an active-active deployment can affect alerts because alerts also depend on some in-memory stateful operations such as windows. Due to this, alerts can be generated based on the events received by specific node. Thus the alerts are node-dependent, and you need to disable them to run scripts with distributed incremental aggregation.
+    As explained above, the events are processed in multiple active nodes. Even though this is usually a stateful operation, you can overcome the node-dependent calculations via distributed aggregation. This allows SI to execute scripts that depend on incremental distributed aggregation.<br/><br/>
+    However, an active-active deployment can affect alerts because alerts also depend on some in-memory stateful operations such as windows. Due to this, alerts can be generated based on the events received by a specific node. Thus the alerts are node-dependent, and you need to disable them to run scripts with distributed incremental aggregation.

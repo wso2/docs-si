@@ -10,7 +10,7 @@ SI is tested with the following operating systems:
 |--------------------|-----------|
 |Windows             | 7<br/>10  |
 |Ubuntu              |16.04<br/>17.04<br/>18.04|
-|MacOS High Sierra   | |
+|macOS High Sierra   | |
 
 ## Tested JDKs
 
