@@ -1,6 +1,6 @@
 # About this Release
 
-## What's new in this release?
+WSO2 Integrator: SI 4.3.x is a feature and dependency upgrade over 4.2.0. The Siddhi runtime, `deployment.yaml` schema, and operational scripts in `bin/` are unchanged in behavior, so existing 4.2.0 Siddhi applications and configurations carry forward without modification.
 
 - **New WSO2 Integrator release with bundled integrators**
 
