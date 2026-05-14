@@ -491,4 +491,4 @@ extra:
           link: https://twitter.com/intent/follow?screen_name=wso2
     site_version: 4.4.0
     #base_path: http://localhost:8000/
-    base_path: https://wso2.github.io/docs-si
+    base_path: https://si.docs.wso2.com/4.4.0
