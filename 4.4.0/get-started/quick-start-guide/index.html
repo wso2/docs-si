@@ -12919,18 +12919,18 @@
 </li>
 <li>
 <p>Open WSO2 Integrator. The home page opens with a <strong>Configure</strong> button in the top right corner.</p>
-<p><img alt="WSO2 Integrator home" src="https://wso2.github.io/docs-si/images/qsg/wso2-integrator-home.png" /></p>
+<p><img alt="WSO2 Integrator home" src="https://si.docs.wso2.com/4.4.0/images/qsg/wso2-integrator-home.png" /></p>
 </li>
 <li>
 <p>Click <strong>Configure</strong>. The <strong>Configurations</strong> panel opens.</p>
 </li>
 <li>
 <p>Under <strong>Select your Integration Profile</strong>, choose <strong>WSO2 Integrator: SI</strong>.</p>
-<p><img alt="Select SI profile" src="https://wso2.github.io/docs-si/images/qsg/profile-selector.png" /></p>
+<p><img alt="Select SI profile" src="https://si.docs.wso2.com/4.4.0/images/qsg/profile-selector.png" /></p>
 </li>
 <li>
 <p>WSO2 Integrator opens the SI setup page. If Java 21 or the SI runtime is not detected, you are prompted to install them. Click <strong>Download Java &amp; SI</strong> to install both automatically.</p>
-<p><img alt="Download Java and SI runtime" src="https://wso2.github.io/docs-si/images/qsg/runtime-setup.png" /></p>
+<p><img alt="Download Java and SI runtime" src="https://si.docs.wso2.com/4.4.0/images/qsg/runtime-setup.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you already have Java 21 or the SI runtime installed, expand <strong>Advanced Options</strong> to point WSO2 Integrator at your existing <code>JAVA_HOME</code> and SI installation directory. The SI installation directory is referred to as <code>&lt;SI_HOME&gt;</code> from here on.</p>
@@ -12941,10 +12941,10 @@
 <p>Download the Kafka broker from <a href="https://archive.apache.org/dist/kafka/2.5.0/kafka_2.12-2.5.0.tgz">the Apache site</a> and extract it. This directory is referred to as <code>&lt;KAFKA_HOME&gt;</code> from here on.</p>
 <h2 id="step-3-create-a-simple-siddhi-application">Step 3: Create a simple Siddhi application<a class="headerlink" href="#step-3-create-a-simple-siddhi-application" title="Permanent link">&para;</a></h2>
 <p>Let's create a simple Siddhi application that reads data from a CSV file, performs a simple transformation on the data, and then publishes the results to a Kafka topic so that multiple subscriber applications can have access to that data.</p>
-<p><img alt="Scenario" src="https://wso2.github.io/docs-si/images/qsg/quick-start.png" /></p>
+<p><img alt="Scenario" src="https://si.docs.wso2.com/4.4.0/images/qsg/quick-start.png" /></p>
 <ol>
 <li>
-<p>Download the <code>productions.csv</code> file from <a href="https://wso2.github.io/docs-si/tutorials/resources/productions.csv">here</a> and save it in a location of your choice.</p>
+<p>Download the <code>productions.csv</code> file from <a href="https://si.docs.wso2.com/4.4.0/tutorials/resources/productions.csv">here</a> and save it in a location of your choice.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>In this example, the file is located in the <code>&lt;YOUR_HOME&gt;</code> directory.</p>
@@ -12979,7 +12979,7 @@
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can also build this application visually in the <strong>Graphical Design View</strong> of WSO2 Integrator: SI by dragging and dropping flow constructs.</p>
-<p><img alt="Graphical Design View" src="https://wso2.github.io/docs-si/images/qsg/graphical-design-view.png" /></p>
+<p><img alt="Graphical Design View" src="https://si.docs.wso2.com/4.4.0/images/qsg/graphical-design-view.png" /></p>
 </div>
 </li>
 </ol>
@@ -12988,11 +12988,11 @@
 <ol>
 <li>
 <p>In WSO2 Integrator, open the command palette by pressing <code>Ctrl + Shift + P</code> (or <code>Cmd + Shift + P</code> on macOS), type <code>SI: Extension Installer</code>, and select the <strong>SI: Extension Installer</strong> option.</p>
-<p><img alt="Command palette" src="https://wso2.github.io/docs-si/images/qsg/command-palette-extension-installer.png" /></p>
+<p><img alt="Command palette" src="https://si.docs.wso2.com/4.4.0/images/qsg/command-palette-extension-installer.png" /></p>
 </li>
 <li>
 <p>The <strong>Extension Installer</strong> panel opens. Scroll to <strong>Kafka</strong> and click <strong>Install</strong>.</p>
-<p><img alt="Extension Installer panel" src="https://wso2.github.io/docs-si/images/qsg/extension-installer-panel.png" /></p>
+<p><img alt="Extension Installer panel" src="https://si.docs.wso2.com/4.4.0/images/qsg/extension-installer-panel.png" /></p>
 </li>
 <li>
 <p>Reload WSO2 Integrator after the installation completes so that the new extension is picked up.</p>

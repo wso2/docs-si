@@ -12825,7 +12825,7 @@ in the streaming integration world. The other deployment options, namely <a href
 losing any data. WSO2 Integrator: SI has the capability to achieve the above via a broker that can replay data from a
 certain checkpoint. Kafka is one such broker that you can configure with WSO2 Integrator: SI to achieve this. The only additional configuration that you need to do in WSO2 Integrator: SI is state persistence. For detailed
 instructions, see <a href="../../admin/configuring-Database-and-File-System-State-Persistence/">Configuring Database and File System State Persistence</a>.</p>
-<p><img alt="overview" src="https://wso2.github.io/docs-si/images/singleNodeDeployment.jpg" /></p>
+<p><img alt="overview" src="https://si.docs.wso2.com/4.4.0/images/singleNodeDeployment.jpg" /></p>
 <p>If the single WSO2 Integrator: SI node fails to receive incoming events and if you have configured state persistence, the single node is able to retrieve the latest snapshot from the database and request the broker to send the events that it was unable to process due to the failure.</p>
 <p>The only disadvantage of this approach is that you need to ensure that there is a reliable mechanism to restart the server once it fails.</p>
 <hr>

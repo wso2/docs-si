@@ -12907,7 +12907,7 @@
 </li>
 <li>
 <p>Create a new project. A new <code>.siddhi</code> file opens for you to work in.</p>
-<p><img alt="New Siddhi File" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/New_Siddhi_File.png" /></p>
+<p><img alt="New Siddhi File" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/New_Siddhi_File.png" /></p>
 </li>
 <li>
 <p>To switch to the Graphical View, click the <strong>Open Graphical View</strong> button in the editor toolbar.</p>
@@ -12915,11 +12915,11 @@
 </ol>
 <h2 id="define-the-input-stream">Define the input stream<a class="headerlink" href="#define-the-input-stream" title="Permanent link">&para;</a></h2>
 <p>To define the stream into which the events to be processed by the Siddhi application should be received, drag and drop the stream icon (shown below) onto the grid.</p>
-<p><img alt="Stream Icon" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Stream_Icon.png" /></p>
+<p><img alt="Stream Icon" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Stream_Icon.png" /></p>
 <p>Once the stream component is added to the grid, move the cursor over it and click the settings icon as shown below.</p>
-<p><img alt="Stream Settings" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Stream_Settings.png" /></p>
+<p><img alt="Stream Settings" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Stream_Settings.png" /></p>
 <p>The <strong>Stream Configuration</strong> form opens.</p>
-<p><img alt="Stream Configuration form" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Stream_Configuration_Form.png" /></p>
+<p><img alt="Stream Configuration form" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Stream_Configuration_Form.png" /></p>
 <p>Fill the form as follows to define a stream named <code>SweetProductionStream</code> with two attributes named <code>name</code> and <code>amount</code>:</p>
 <ol>
 <li>In the <strong>Name</strong> field, enter <code>SweetProductionStream</code>.</li>
@@ -12946,7 +12946,7 @@
 </li>
 <li>
 <p>Click <strong>Submit</strong> to save the new stream definition. The stream is displayed on the grid with the <code>SweetProductionStream</code> label.</p>
-<p><img alt="New stream added to the grid" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Stream_Component.png" /></p>
+<p><img alt="New stream added to the grid" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Stream_Component.png" /></p>
 </li>
 </ol>
 <h2 id="define-the-output-stream">Define the output stream<a class="headerlink" href="#define-the-output-stream" title="Permanent link">&para;</a></h2>
@@ -12977,11 +12977,11 @@
 </ul>
 <h2 id="add-the-source">Add the source<a class="headerlink" href="#add-the-source" title="Permanent link">&para;</a></h2>
 <p>To add the source from which events are received, drag and drop the source icon (shown below) onto the grid. The source is an input to the <code>SweetProductionStream</code> input stream component, so place this source component to the left of the input stream component.</p>
-<p><img alt="Source Icon" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Source_Icon.png" /></p>
+<p><img alt="Source Icon" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Source_Icon.png" /></p>
 <p>Once you add the source component, draw a line from it to the <code>SweetProductionStream</code> input stream component by dragging the cursor as demonstrated below.</p>
-<p><img alt="Connect source" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Connect-Source-Component.gif" /></p>
+<p><img alt="Connect source" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Connect-Source-Component.gif" /></p>
 <p>Click the settings icon on the source component to open the <strong>Source Configuration</strong> form. Then enter information as follows:</p>
-<p><img alt="Source Configuration form" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Source_Configuration.png" /></p>
+<p><img alt="Source Configuration form" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Source_Configuration.png" /></p>
 <ol>
 <li>In the <strong>Source Type</strong> field, select <strong>tcp</strong>.</li>
 <li>In this example, events are received in the <code>binary</code> format. To indicate that events are expected to be converted from this format, select <strong>binary</strong> in the <strong>Map Type</strong> field.</li>
@@ -12990,11 +12990,11 @@
 </ol>
 <h2 id="add-the-projection-query">Add the projection query<a class="headerlink" href="#add-the-projection-query" title="Permanent link">&para;</a></h2>
 <p>To add a query that defines the execution logic, drag and drop the projection query icon (shown below) onto the grid.</p>
-<p><img alt="Projection Query Icon" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Projection_Query_Icon.png" /></p>
+<p><img alt="Projection Query Icon" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Projection_Query_Icon.png" /></p>
 <p>The query uses the events in the <code>SweetProductionStream</code> input stream as inputs and directs the processed events to the <code>ProductionAlertStream</code> output stream. Create two connections as demonstrated below.</p>
-<p><img alt="Connecting the projection query" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Connect-Projection-Query.gif" /></p>
+<p><img alt="Connecting the projection query" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Connect-Projection-Query.gif" /></p>
 <p>To define the execution logic, move the cursor over the query in the grid, click the settings icon, and configure as follows:</p>
-<p><img alt="Configuring the projection query" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Projection-Query-Configuration.png" /></p>
+<p><img alt="Configuring the projection query" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Projection-Query-Configuration.png" /></p>
 <ol>
 <li>Enter a name for the query in the <strong>Name</strong> field. Use <code>query</code>.</li>
 <li>To specify how each input stream attribute is converted to generate the output events, select <strong>User Defined Attributes</strong> in the <strong>Select</strong> field. The <strong>User Defined Attributes</strong> table appears, with the <strong>As</strong> column listing the output stream attributes. Enter expressions in the <code>Expression</code> column:<ol>
@@ -13007,10 +13007,10 @@
 </ol>
 <h2 id="add-the-sink">Add the sink<a class="headerlink" href="#add-the-sink" title="Permanent link">&para;</a></h2>
 <p>To add a sink that publishes the output events directed to the <code>ProductionAlertStream</code> output stream, drag and drop the sink icon (shown below) onto the grid.</p>
-<p><img alt="Sink icon" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Sink_Icon.png" /></p>
+<p><img alt="Sink icon" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Sink_Icon.png" /></p>
 <p>Draw an arrow from the <code>ProductionAlertStream</code> output stream to the sink component to connect them.</p>
 <p>Click the settings icon on the sink component to open the <strong>Sink Configuration</strong> form. Then:</p>
-<p><img alt="Configuring the sink" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Sink_Configuration.png" /></p>
+<p><img alt="Configuring the sink" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Sink_Configuration.png" /></p>
 <ol>
 <li>To publish output as logs in the console, select <code>log</code> in the <strong>Sink Type</strong> field.</li>
 <li>In the <strong>Map Type</strong> field, select the format. For this example, select <code>json</code>.</li>
@@ -13018,7 +13018,7 @@
 </ol>
 <h2 id="save-the-siddhi-application">Save the Siddhi application<a class="headerlink" href="#save-the-siddhi-application" title="Permanent link">&para;</a></h2>
 <p>Click <strong>Show Source</strong> to switch back to the Source View. The Siddhi application is displayed as follows.</p>
-<p><img alt="Source view" src="https://wso2.github.io/docs-si/images/Creating-Siddhi-Applications/Siddhi_Application_Source_View.png" /></p>
+<p><img alt="Source view" src="https://si.docs.wso2.com/4.4.0/images/Creating-Siddhi-Applications/Siddhi_Application_Source_View.png" /></p>
 <p>To save this Siddhi application, click <strong>File → Save</strong>.</p>
 <div class="admonition tip">
 <p class="admonition-title">What's Next?</p>
