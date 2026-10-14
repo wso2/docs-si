@@ -1,12 +1,12 @@
 {
-    "current": "4.4.0",
+    "current": "4.4.x",
     "list": [
         "4.3.1",
         "4.3.0",
-        "4.4.0"
+        "4.4.x"
     ],
     "all": {
-        "4.4.0": {
+        "4.4.x": {
             "doc": "latest",
             "notes": "latest/get-started/about-this-release"
         },
