@@ -12,7 +12,7 @@ This page explains how to upgrade an existing WSO2 Integrator: SI 4.2.0, 4.3.x o
 
 | Area | 4.3.x | 4.4.0 | 4.4.1 | Action required |
 |---|---|---|---|---|
-| JDK | — | JDK 21 recommended | JDK 17, 21 and 25, with JDK 25 recommended | Point `JAVA_HOME` at JDK 17 or later. See [Step 1](#step-1-set-up-the-jdk). |
+| JDK | — | JDK 21 recommended | JDK 17, 21 and 25, with JDK 25 recommended | Point `JAVA_HOME` at JDK 17, 21 or 25. See [Step 1](#step-1-set-up-the-jdk). |
 | Development tooling | **WSO2 Integrator: SI** VS Code extension | WSO2 Integrator (standalone IDE) or **WSO2 Integrator** VS Code extension | Same as 4.4.0, with SI 4.4.1 and JDK 17 to 25 available during setup | Install WSO2 Integrator or the new VS Code extension. The **WSO2 Integrator: SI** extension is no longer recommended. See [Step 5](#step-5-update-development-tooling). |
 | CDC extension (`siddhi-io-cdc`) | Debezium 1.x | Debezium 2.x, security fixes | Bug and security fixes | Reinstall the extension via the extension installer. See [Step 4](#step-4-start-the-server-and-install-required-extensions). |
 | Other extensions (File, gRPC, HTTP, Kafka, MongoDB, WebSocket and others) | Previous version | Security fixes | Bug and security fixes | Reinstall the extensions (handled in Step 4). |
@@ -142,6 +142,6 @@ wso2:
 
 Replace `<VERSION>` with the SI version you are upgrading to, for example `4.4.1`.
 
-Apply the change with `helm upgrade <release> . -f <your-values.yaml>`.
+Apply the change with `helm upgrade <release> . -n <namespace> -f <your-values.yaml>`.
 
 All other values from your previous chart values file carry over. The images published on Docker Hub at `wso2/wso2si` include `<VERSION>-ubuntu`, `<VERSION>-rocky` and `<VERSION>-alpine` variants. See the [`wso2/wso2si` tags on Docker Hub](https://hub.docker.com/r/wso2/wso2si/tags) for the available versions. If your subscription pulls from the WSO2 private registry, confirm the equivalent tag is available there.

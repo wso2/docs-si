@@ -115,6 +115,9 @@ Deploy Siddhi applications to the SI pod through the [Siddhi Application Managem
     {"type":"success","message":"Siddhi App saved succesfully and will be deployed in next deployment cycle"}
     ```
 
+!!! warning
+    `admin:admin` are the chart's default credentials, and are only suitable for local testing. Before you use the deployment for anything else, set a different administrator username and password with `wso2.config.admin.username` and `wso2.config.admin.password` in your values file. The password is Base64-encoded. For example, run `echo -n '<password>' | base64` and use the output as the value.
+
 !!! note
     A Siddhi application deployed through the API is saved inside the pod, so it is lost if the pod is recreated. Deploy your Siddhi applications again after the pod restarts, or keep them on shared storage. The chart can mount the Siddhi applications directory from a shared persistent volume on AWS, Azure or Google Cloud when you set `provider` and `wso2.deployment.mountSiddhiApps`. For the values your cloud provider needs, see [`CONFIG.md`](https://github.com/wso2/helm-si/blob/main/CONFIG.md).
 

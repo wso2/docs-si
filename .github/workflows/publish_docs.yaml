@@ -46,9 +46,6 @@ jobs:
           elif [ "$BRANCH_NAME" = "4.3.0" ]; then
             echo "Deploying 4.3.0 version from 4.3.0 branch"
             mike deploy 4.3.0 -t "4.3.0 and older" --push
-          elif [ "$BRANCH_NAME" = "4.4.0" ]; then
-            echo "Deploying 4.4.0 version from 4.4.0 branch"
-            mike deploy 4.4.0 -t "4.4.0" --push
           else
             echo "Unknown branch: $BRANCH_NAME"
             exit 1

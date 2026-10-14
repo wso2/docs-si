@@ -16,7 +16,7 @@ WSO2 provides open source Docker images to run WSO2 Integrator: SI. You can view
 To pull the required WSO2 Integrator: SI distribution with updates from the Docker image, issue the following command.
 
 ```
-docker pull wso2/wso2si
+docker pull wso2/wso2si:4.4.1
 ```
 
 ## Running WSO2 Integrator: SI
@@ -24,7 +24,7 @@ docker pull wso2/wso2si
 To run WSO2 Integrator: SI, issue the following command.
 
 ```
-docker run -it wso2/wso2si
+docker run -it wso2/wso2si:4.4.1
 ```
 
 !!! tip
@@ -39,7 +39,7 @@ docker run -it wso2/wso2si
         -p 9712:9712   \
         -p 7711:7711   \
         -p 7611:7611   \
-        wso2/wso2si
+        wso2/wso2si:4.4.1
     ```
 
    For more details about the ports in WSO2 Integrator: SI, see [Configuring Default Ports](../ref/configuring-default-ports.md).

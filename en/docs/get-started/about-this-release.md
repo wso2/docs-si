@@ -12,7 +12,7 @@ WSO2 Integrator: SI 4.4.1 is a patch release on top of 4.4.0. It adds support fo
 
 - **Tooling**
 
-    WSO2 Integrator comes with Java 25 and sets up SI 4.4.1. In the WSO2 Integrator VS Code extension, you can select any JDK from 17 to 25. Siddhi applications that use the gRPC extension run from the editor again.
+    WSO2 Integrator comes with Java 25 and sets up SI 4.4.1. In the WSO2 Integrator VS Code extension, you can select JDK 17, 21 or 25. Siddhi applications that use the gRPC extension run from the editor again.
 
 - **Extension fixes**
 
