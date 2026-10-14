@@ -3,8 +3,7 @@
 First, you are required to set up WSO2 Integrator: SI and the other software needed for the scenario you are trying out. To do this, follow the topics below.
 
 !!! tip "Before you begin:"
-    - Install [Oracle Java SE Development Kit (JDK) version 21](https://www.oracle.com/java/technologies/downloads/).<br/>
-    - [Set the Java home](https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/) environment variable.<br/>
+    WSO2 Integrator comes with Java 25, so you do not need to install Java to follow this guide. If you use the WSO2 Integrator VS Code extension or run SI outside WSO2 Integrator, install [Java SE Development Kit (JDK) version 25](https://www.oracle.com/java/technologies/downloads/) (JDK 17 and 21 are also supported) and [set the Java home](https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/) environment variable.
 
 ## Setting up WSO2 Integrator: SI
 
@@ -12,7 +11,7 @@ First, you are required to set up WSO2 Integrator: SI and the other software nee
 
 2. Run the installer and open WSO2 Integrator. From the home page, click **Configure** in the top right corner, and under **Select your Integration Profile**, choose **WSO2 Integrator: SI**.
 
-3. WSO2 Integrator opens the SI setup page. If Java 21 or the SI runtime is not detected, click **Download Java & SI** to install both automatically. If you already have Java 21 or the SI runtime installed, expand **Advanced Options** to point WSO2 Integrator at your existing `JAVA_HOME` and SI installation directory.
+3. WSO2 Integrator opens the SI setup page. WSO2 Integrator comes with Java 25, so Java is already set up. If the SI runtime is not detected, click **Download WSO2 Integrator: SI** to install it. If you already have the SI runtime installed, expand **Advanced Options** and click **Select SI Path** to point WSO2 Integrator at your existing SI installation directory.
 
     !!! note
         After installation, WSO2 Integrator places the SI runtime in `~/.wso2-si/streaming-integrator/wso2si-<VERSION>/` (a hidden folder in your home directory). This is referred to as `<SI_HOME>` throughout the rest of this guide. For more on managing the SI runtime directly, see [Install SI in a VM](../../setup/installing-si-in-vm.md).

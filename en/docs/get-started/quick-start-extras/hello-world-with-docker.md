@@ -23,7 +23,7 @@ To run the WSO2 Integrator: SI in the  open source image that is available for i
 
 1. To pull the required WSO2 Integrator: SI distribution with updates from the Docker image, issue the following command.
 
-    `docker run -it wso2/streaming-integrator`
+    `docker run -it wso2/wso2si`
 
 2. Expose the required ports via docker when running the docker container. In this scenario, you need to expose the following ports:
     - The 9443 port where the WSO2 Integrator: SI server is run.
@@ -31,7 +31,7 @@ To run the WSO2 Integrator: SI in the  open source image that is available for i
 
     To expose these ports, issue the following command.
 
-    `docker run -p 9443:9443 -p 8006:8006 wso2/streaming-integrator`
+    `docker run -p 9443:9443 -p 8006:8006 wso2/wso2si`
 
 
 ## Creating and deploying the Siddhi application

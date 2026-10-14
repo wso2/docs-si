@@ -1,211 +1,182 @@
 # Installing WSO2 Integrator: SI Using Kubernetes
 
-WSO2 Integrator: SI can be deployed natively on Kubernetes via the Siddhi Kubernetes Operator.
+You can deploy WSO2 Integrator: SI on Kubernetes using the WSO2 Helm chart in the [`wso2/helm-si`](https://github.com/wso2/helm-si) repository. The chart runs SI as a StatefulSet using the `wso2/wso2si` Docker image, and creates the Service, Ingress and configuration that SI needs.
 
-The WSO2 Integrator: SI can be configured in the `<SI_HOME>/wso2/server/resources/docker-export/siddhi-process.yaml` file and passed to the CRD(Custom Resource Definition)for deployment.
-Siddhi logic can be directly written in the `<SI_HOME>/wso2/server/resources/docker-export/siddhi-process.yaml` file or passed as `.siddhi` files via config maps.
-
-To install WSO2 Integrator: SI via Kubernetes, follow the steps below:
+!!! note
+    The Siddhi Kubernetes operator is not supported with WSO2 Integrator: SI 4.4.x. Its resource definitions use Kubernetes APIs that were removed in Kubernetes 1.22, and it cannot run the current `wso2/wso2si` images. Use the Helm chart instead.
 
 !!! tip "Before you begin:"
-    Start a Kubernetes cluster. The Kubernetes version must be v1.10.11 or later. To start the cluster, you can use Minikube, GKE(Google Kubernetes Engine) Cluster, Docker for Mac, or any other Kubernetes cluster.<br/><br/>
-     **Minikube**<br/><br/>
-        You can install Minikube from the [Kubernetes/Minikube](https://github.com/kubernetes/minikube#installation)<br/><br/>
-        Siddhi operator automatically creates NGINX ingress. Therefore, for it to work, you can do one of the following: <br/><br/>
-        - Enable ingress on Minikube by issuing the following command.<br/><br/>
-            `minikube addons enable ingress`<br/><br/>
-        - Disable automatic ingress creation by the Siddhi operator. For instructions, see [Siddhi Kubernetes Microservice Documentation - Deploy Siddhi Applications without Ingress creation](https://siddhi.io/en/v5.0/docs/siddhi-as-a-kubernetes-microservice/#deploy-siddhi-apps-without-ingress-creation).<br/><br/>
-     **GKE Cluster**<br/><br/>
-        To install Siddhi operator, you have to give cluster admin permission to your account. In order to do this, issue the following command. You need to replace `your-address@email.com` with your account email address<br/><br/>
-        `kubectl create clusterrolebinding user-cluster-admin-binding --clusterrole=cluster-admin --user=your-address@email.com`<br/><br/>
-     **Docker for Mac**<br/><br/>
-        Siddhi operator automatically creates NGINX ingress. Therefore, for it to work, you can do one of the following: <br/><br/>
-        - Enable NGINX ingress. For instructions, see [NGINX Ingress Controller documentation](https://kubernetes.github.io/ingress-nginx/deploy/#docker-for-mac).<br/><br/>
-        - Disable automatic ingress creation by the Siddhi operator. For instructions, see [Siddhi Kubernetes Microservice Documentation - Deploy Siddhi Applications without Ingress creation](https://siddhi.io/en/v5.0/docs/siddhi-as-a-kubernetes-microservice/#deploy-siddhi-apps-without-ingress-creation).<br/><br/>
-    You are also required to have admin privileges to install the Siddhi operator.
-        
+    - Start a Kubernetes cluster. For local testing, you can use a local cluster such as [Rancher Desktop](https://rancherdesktop.io/).
+    - Install [kubectl](https://kubernetes.io/docs/tasks/tools/) and configure it to connect to your cluster.
+    - Install [Helm](https://helm.sh/docs/intro/install/).
+    - Install [Git](https://git-scm.com/downloads).
 
-## Install Siddhi Operator for WSO2 Integrator: SI
+## Step 1: Get the Helm chart
 
-To install the Siddhi Kubernetes operator for WSO2 Integrator: SI, issue the following commands.
+Clone the `wso2/helm-si` repository and go to its root directory, which contains the chart.
 
-```
-kubectl apply -f https://github.com/siddhi-io/siddhi-operator/releases/download/v0.2.2/00-prereqs.yaml
-kubectl apply -f https://github.com/siddhi-io/siddhi-operator/releases/download/v0.2.2/01-siddhi-operator.yaml
+```bash
+git clone https://github.com/wso2/helm-si.git
+cd helm-si
 ```
 
-You can verify the installation by making sure the following deployments are running in your Kubernetes cluster.
-```
-$ kubectl get deployment
+The chart is configured through the `values.yaml` file. For the full list of values, see [`CONFIG.md`](https://github.com/wso2/helm-si/blob/main/CONFIG.md).
 
-NAME                 DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-streaming-integrator   1         1         1            1           1m
-siddhi-parser          1         1         1            1           1m
-```
+## Step 2: Install WSO2 Integrator: SI
 
-## Deploy WSO2 Integrator: SI
+Install the chart as a release named `si` in a namespace named `si`.
 
-The Siddhi application that contains the streaming integration logic can be deployed in Kubernetes via the Siddhi operator.
-
-To understand how this is done, let's create a very simple Siddhi stream processing application that consumes events via HTTP, filters the input events where the value for `deviceType` is `dryer` and the value for `power` is greater than `600`, and then logs the output in the console. This can be created by configuring the `<SI_HOME>/wso2/server/resources/docker-export/siddhi-process.yaml` file as given below.
-
-```yaml
-apiVersion: siddhi.io/v1alpha2
-kind: SiddhiProcess
-metadata:
-  name: streaming-integrator
-spec:
-  apps:
-    - script: |
-        @App:name("PowerSurgeDetection")
-        @App:description("App consumes events from HTTP as a JSON message of { 'deviceType': 'dryer', 'power': 6000 } format and inserts the events into DevicePowerStream, and alerts the user if the power level is greater than or equal to 600W by printing a message in the log.")
-        /*
-            Input: deviceType string and powerConsuption int(Watt)
-            Output: Alert user from printing a log, if there is a power surge in the dryer. In other words, notify when power is greater than or equal to 600W.
-        */
-
-        @source(
-          type='http',
-          receiver.url='${RECEIVER_URL}',
-          basic.auth.enabled='false',
-          @map(type='json')
-        )
-        define stream DevicePowerStream(deviceType string, power int);
-        @sink(type='log', prefix='LOGGER')
-        define stream PowerSurgeAlertStream(deviceType string, power int);
-        @info(name='surge-detector')
-        from DevicePowerStream[deviceType == 'dryer' and power >= 600]
-        select deviceType, power
-        insert into PowerSurgeAlertStream;
-  container:
-    env:
-      -
-        name: RECEIVER_URL
-        value: "http://0.0.0.0:8080/checkPower"
-      -
-        name: BASIC_AUTH_ENABLED
-        value: "false"
+```bash
+helm install si . -n si --create-namespace
 ```
 
-To change the default configurations in WSO2 Integrator: SI that are defined in the `<SI_HOME>/conf/server/deployment.yaml` file, you need to add the required configurations with the required overriding values in the `SiddhiProcess.yaml` file under a section named `runner` as shown in the example below.
+By default, the chart pulls the `wso2/wso2si` image from Docker Hub.
 
-```yaml
-apiVersion: siddhi.io/v1alpha2
-kind: SiddhiProcess
-metadata:
-  name: streaming-integrator-app
-spec:
-  apps:
-    - script: |
-        @App:name("PowerSurgeDetection")
-        @App:description("App consumes events from HTTP as a JSON message of { 'deviceType': 'dryer', 'power': 6000 } format and inserts the events into DevicePowerStream, and alerts the user if the power level is greater than or equal to 600W by printing a message in the log.")
-        /*
-            Input: deviceType string and powerConsuption int(Watt)
-            Output: Alert user from printing a log, if there is a power surge in the dryer. In other words, notify when power is greater than or equal to 600W.
-        */
+!!! info
+    The chart enables AppArmor for the SI container by default. If your cluster nodes do not support AppArmor, as on some local clusters such as Rancher Desktop, the pod stays in the `Blocked` state with the message `Cannot enforce AppArmor: AppArmor is not enabled on the host`. In that case, disable AppArmor and recreate the pod:
 
-        @source(
-          type='http',
-          receiver.url='${RECEIVER_URL}',
-          basic.auth.enabled='false',
-          @map(type='json')
-        )
-        define stream DevicePowerStream(deviceType string, power int);
-        @sink(type='log', prefix='LOGGER')
-        define stream PowerSurgeAlertStream(deviceType string, power int);
-        @info(name='surge-detector')
-        from DevicePowerStream[deviceType == 'dryer' and power >= 600]
-        select deviceType, power
-        insert into PowerSurgeAlertStream;
-  container:
-    env:
-      -
-        name: RECEIVER_URL
-        value: "http://0.0.0.0:8080/checkPower"
-      -
-        name: BASIC_AUTH_ENABLED
-        value: "false"
-
-  runner: |
-    auth.configs:
-      type: 'local'        # Type of the IdP client used
-      userManager:
-        adminRole: admin   # Admin role which is granted all permissions
-        userStore:         # User store
-          users:
-          -
-            user:
-              username: root
-              password: YWRtaW4=
-              roles: 1
-          roles:
-          -
-            role:
-              id: 1
-              displayName: root
-      restAPIAuthConfigs:
-        exclude:
-          - /simulation/*
-          - /stores/*
-```
-
-Here, you have included a configuration for `auth.configs` to override the default values that are applicable to the WSO2 Integrator: SI (i.e., values configured under `auth.configs` in the `<SI_HOME>/conf/server/deployment.yaml` file).
-
-To apply the configurations in the `siddhi-process.yaml` to your Kubernetes cluster, save the file in a preferred location and then issue the following command.
-
-```
-kubectl apply -f <PATH_to_siddhi-process.yaml>
-```
-
-### Invoke Siddhi Applications
-
-To invoke Siddhi Applications, follow the steps below:
-
-1. To obtain the external IP of the Ingress load balancer, issue the following command.
-    
-    `kubectl get ingress`
-    
-    This generates a response similar to the following:
-    
-    ```
-    NAME      HOSTS     ADDRESS     PORTS     AGE
-    siddhi    siddhi    10.0.2.15    80       14d
-    ```
-     
-2. Add the host (i.e., `siddhi`) and the related external IP (i.e., `ADDRESS`) in the `/etc/hosts` file in your machine.
-
-    !!! info
-        For Minikube, you have to use Minikube IP as the external IP. Therefore, issue the `minikube ip` command to get the IP of the Minikube cluster.
-
-3. To send events to the `PowerSurgeDetection` deployed in Kubernetes, issue the following CURL command.
-
-    ```
-    curl -X POST \
-      http://siddhi/streaming-integrator-0/8080/checkPower \
-        -H 'Accept: */*' \
-        -H 'Content-Type: application/json' \
-        -H 'Host: siddhi' \
-        -d '{
-            "deviceType": "dryer",
-            "power": 600
-            }'
-    ```   
-    
-4. To monitor the associated logs for the above Siddhi application, list down the available pods by executing the following command.
-    
-    `kubectl get pods`
-    
-    The pods are listed as shown in the following sample response.
-    
-    ```
-    NAME                                        READY    STATUS    RESTARTS    AGE
-    streaming-integrator-app-0-b4dcf85-npgj7     1/1     Running      0        165m
-    streaming-integrator-5f9fcb7679-n4zpj        1/1     Running      0        173m
+    ```bash
+    helm upgrade si . -n si --set wso2.deployment.securityContext.apparmor=false
+    kubectl delete pod cloud-si-0 -n si
     ```
 
-5. Issue the following command in order to monitor the logs of the relevant pod. In this example, let's assume that you need to monitor the logs for the `streaming-integrator-app-0-b4dcf85-npgj7` pod.
+    The pod has to be deleted because Kubernetes does not replace a pod that never started. When you later install or upgrade the chart with your own values file, set `wso2.deployment.securityContext.apparmor` to `false` in that file too.
 
-    `kubectl logs -f streaming-integrator-app-0-b4dcf85-npgj7`
+!!! info
+    If you have a WSO2 subscription, you can use the updated images from the WSO2 private registry instead. Set `wso2.deployment.image.containerRegistry`, `wso2.deployment.image.repository`, `wso2.deployment.image.tag` and `wso2.deployment.imagePullSecrets` in your values file. For more information, see [How to use Docker images to receive updates](https://updates.docs.wso2.com/en/latest/updates/how-to-use-docker-images-to-receive-updates/).
 
-!!! info 
-    For more details about the Siddhi Operator, see [Siddhi as a Kubernetes Microservice](https://siddhi.io/en/v5.0/docs/siddhi-as-a-kubernetes-microservice/#!).
+## Step 3: Verify the deployment
+
+1. Check that the SI pod is running.
+
+    ```bash
+    kubectl get pods -n si
+    ```
+
+    The pod is named `cloud-si-0`. It becomes ready (`1/1`) about a minute after it starts, once the readiness probe begins checking it.
+
+    ```
+    NAME         READY   STATUS    RESTARTS   AGE
+    cloud-si-0   1/1     Running   0          90s
+    ```
+
+2. Check the SI log.
+
+    ```bash
+    kubectl logs -n si cloud-si-0
+    ```
+
+    The log contains a line similar to the following when SI has started.
+
+    ```
+    INFO {org.wso2.carbon.kernel.internal.CarbonStartupHandler} - WSO2 Integrator: SI started in 5.336 sec
+    ```
+
+## Step 4: Deploy a Siddhi application
+
+Deploy Siddhi applications to the SI pod through the [Siddhi Application Management APIs](../ref/siddhi-Application-Management-APIs.md).
+
+1. Save the following Siddhi application as `PowerSurgeDetection.siddhi`. It receives device power readings over HTTP on port `8080`, and logs an alert when a dryer uses 600W or more.
+
+    ```sql
+    @App:name("PowerSurgeDetection")
+    @App:description("Consumes device power readings over HTTP and logs an alert when a dryer uses 600W or more.")
+
+    @source(type='http', receiver.url='http://0.0.0.0:8080/checkPower', basic.auth.enabled='false', @map(type='json'))
+    define stream DevicePowerStream(deviceType string, power int);
+
+    @sink(type='log', prefix='LOGGER')
+    define stream PowerSurgeAlertStream(deviceType string, power int);
+
+    @info(name='surge-detector')
+    from DevicePowerStream[deviceType == 'dryer' and power >= 600]
+    select deviceType, power
+    insert into PowerSurgeAlertStream;
+    ```
+
+2. In a separate terminal, forward the SI HTTPS port to your machine.
+
+    ```bash
+    kubectl port-forward -n si pod/cloud-si-0 9443:9443
+    ```
+
+3. Deploy the Siddhi application.
+
+    ```bash
+    curl -k -X POST "https://localhost:9443/siddhi-apps" \
+      -u admin:admin \
+      -H "Content-Type: text/plain" \
+      --data-binary @PowerSurgeDetection.siddhi
+    ```
+
+    The response is similar to the following.
+
+    ```
+    {"type":"success","message":"Siddhi App saved succesfully and will be deployed in next deployment cycle"}
+    ```
+
+!!! note
+    A Siddhi application deployed through the API is saved inside the pod, so it is lost if the pod is recreated. Deploy your Siddhi applications again after the pod restarts, or keep them on shared storage. The chart can mount the Siddhi applications directory from a shared persistent volume on AWS, Azure or Google Cloud when you set `provider` and `wso2.deployment.mountSiddhiApps`. For the values your cloud provider needs, see [`CONFIG.md`](https://github.com/wso2/helm-si/blob/main/CONFIG.md).
+
+## Step 5: Try out the Siddhi application
+
+1. In a separate terminal, forward the port of the Siddhi application's HTTP source to your machine.
+
+    ```bash
+    kubectl port-forward -n si pod/cloud-si-0 8080:8080
+    ```
+
+2. Send an event to the Siddhi application.
+
+    ```bash
+    curl -X POST "http://localhost:8080/checkPower" \
+      -H "Content-Type: application/json" \
+      -d '{"event": {"deviceType": "dryer", "power": 600}}'
+    ```
+
+3. Check the SI log.
+
+    ```bash
+    kubectl logs -n si cloud-si-0 | grep LOGGER
+    ```
+
+    A log entry similar to the following appears for each matching event.
+
+    ```
+    INFO {io.siddhi.core.stream.output.sink.LogSink} - LOGGER : Event{timestamp=1791907920071, data=[dryer, 600], isExpired=false}
+    ```
+
+!!! info
+    The chart does not create a Service for the ports that your Siddhi applications listen on. To receive events from outside the cluster, create a Service, and an Ingress or load balancer if required, for those ports.
+
+## Access SI from outside the cluster
+
+The chart creates an Ingress that routes the Siddhi Application Management APIs (`/siddhi-apps`) to SI, using the hostname in `wso2.deployment.hostname` (`si.wso2.com` by default). The Ingress is configured for the [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/deploy/), so install it in your cluster to use the Ingress.
+
+SI serves these APIs over HTTPS, so the Ingress connects to SI over HTTPS (`wso2.ingress.backendProtocol` is `HTTPS`). If you change it to `AUTO_HTTP`, NGINX connects to SI over plain HTTP and the requests fail with `502 Bad Gateway`.
+
+To disable the Ingress, set `wso2.ingress.enabled` to `false`. For the other routing options of the chart, see [`CONFIG.md`](https://github.com/wso2/helm-si/blob/main/CONFIG.md).
+
+## Configure SI
+
+The chart generates the SI `deployment.yaml` file from the template in its `confs/deployment.yaml` file, filled in with the values in the `wso2.config` section of `values.yaml`. Settings that are not exposed as values are fixed in that template. To change the configuration, create your own values file with the values you want to override, and pass it when you install or upgrade the chart.
+
+```bash
+helm install si . -n si --create-namespace -f my-values.yaml
+```
+
+For all the values you can set, see [`CONFIG.md`](https://github.com/wso2/helm-si/blob/main/CONFIG.md).
+
+## Upgrade or uninstall
+
+To apply changes to your values, or to move to a newer version of the chart, run:
+
+```bash
+helm upgrade si . -n si -f my-values.yaml
+```
+
+To remove SI from the cluster, run:
+
+```bash
+helm uninstall si -n si
+```

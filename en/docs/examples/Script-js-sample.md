@@ -6,6 +6,9 @@ This sample demonstrates how javascript functions can be used in Siddhi Applicat
 ## Prerequisites
 1. Save this sample.
 
+!!! note
+    On JDK 15 and later, JavaScript functions require WSO2 Integrator: SI 4.4.1 or later. From 4.4.1, the `siddhi-script-js` extension runs on standalone Nashorn, because the JDK no longer includes a JavaScript engine.
+
 ## Executing the Sample
 1. Start the Siddhi application by clicking on 'Run'.
 2. If the Siddhi application starts successfully, the following messages would be shown on the console.

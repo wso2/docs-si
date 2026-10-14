@@ -1,6 +1,39 @@
 # About this Release
 
-WSO2 Integrator: SI 4.3.x is a feature and dependency upgrade over 4.2.0. The Siddhi runtime, `deployment.yaml` schema, and operational scripts in `bin/` are unchanged in behavior, so existing 4.2.0 Siddhi applications and configurations carry forward without modification.
+This documentation covers the WSO2 Integrator: SI 4.4.x release line: 4.4.0 and the 4.4.1 patch release. Siddhi applications and the `deployment.yaml` schema are unchanged across 4.4.x, so they carry over between these releases without changes. To move to 4.4.x, see [Upgrading to 4.4.x](../setup/upgrading-to-4.4.x.md).
+
+## What's new in 4.4.1
+
+WSO2 Integrator: SI 4.4.1 is a patch release on top of 4.4.0. It adds support for JDK 25, fixes bugs in the runtime, the extensions and the tooling, and resolves known vulnerabilities in the pack and in the libraries bundled with its extensions.
+
+- **JDK 17 to 25 support, with JDK 25 recommended**
+
+    SI 4.4.1 runs on JDK 17, 21 and 25. The `spi-provider`, `install-jars` and `jni-provider` tools no longer reject JDKs later than 17, and `carbon.sh --debug` works on JDK 22 and later. JavaScript functions work on JDK 15 and later, and persisted aggregations recover correctly on JDK 17, 21 and 25. See [Environment Compatibility](../ref/environment-compatibility.md).
+
+- **Tooling**
+
+    WSO2 Integrator comes with Java 25 and sets up SI 4.4.1. In the WSO2 Integrator VS Code extension, you can select any JDK from 17 to 25. Siddhi applications that use the gRPC extension run from the editor again.
+
+- **Extension fixes**
+
+    - **Kafka:** source options set in `deployment.yaml` are no longer overwritten by the values in the Siddhi application. See [Configuring System Parameters for Siddhi Extensions](../connectors/configuring-System-Parameters-for-Siddhi-Extensions.md).
+    - **CDC:** the CDC and Kafka extensions can be used together, and undeploying a listening-mode CDC application no longer logs a shutdown error.
+    - **MongoDB:** the store extension uses MongoDB Java driver 5.11.1, so it can be installed alongside the CDC extension.
+    - **gRPC:** applications with a `grpc` or `grpc-service` source on the default service no longer fail to deploy when state persistence is enabled.
+    - **WebSocket:** the client source and sink reconnect after a lost or failed connection instead of dropping events.
+    - **File:** SMB support and `dir.uri` polling are fixed, `file:search` applies each event's `include.by.regexp`, and FTP `MOVE` and `COPY` after processing no longer fail intermittently.
+    - **RabbitMQ:** shutdowns initiated by the application, such as an undeployment, are no longer logged as errors or retried.
+    - **Siddhi core:** the scheduler threads used by cron triggers stop once no cron job is left.
+
+- **Security fixes**
+
+    - The Kubernetes artifacts shipped with the pack and exported by the editor no longer give the Siddhi operator wildcard access to namespace resources, including Secrets.
+    - An authenticated arbitrary file read through the ICP management API `/logs` endpoint is fixed.
+    - Libraries bundled with the pack and its extensions are updated to resolve known vulnerabilities, including commons-beanutils, libthrift, org.json, log4j, Jackson, BouncyCastle, commons-vfs2, snappy-java, Avro and commons-lang3.
+
+For the full list of changes, see the [WSO2 Integrator: SI 4.4.1 release notes](https://github.com/wso2/product-integrator-si/releases/tag/v4.4.1).
+
+## What's new in 4.4.0
 
 - **New WSO2 Integrator release with bundled integrators**
 
@@ -8,7 +41,16 @@ WSO2 Integrator: SI 4.3.x is a feature and dependency upgrade over 4.2.0. The Si
 
     To access SI, simply switch profiles to **WSO2 Integrator: SI** in the **Configure** panel.
 
+- **CDC extension on Debezium 2.x**
+
+    The `siddhi-io-cdc` extension moves from Debezium 1.x to Debezium 2.x.
+
+- **Security fixes**
+
+    Publicly disclosed CVEs identified against the 4.3.x line are remediated, across both first-party components and third-party dependencies.
+
+For the full list of changes, see the [WSO2 Integrator: SI 4.4.0 release notes](https://github.com/wso2/product-integrator-si/releases/tag/v4.4.0).
+
 ## Download the latest release
 
 - Get the latest version of WSO2 Integrator: [Download here](https://wso2.com/products/downloads/?product=wso2integrator)
-

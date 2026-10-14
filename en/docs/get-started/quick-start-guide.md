@@ -20,12 +20,15 @@ In this guide, you will set up WSO2 Integrator: SI, download Kafka, and try out 
 
     ![Select SI profile]({{base_path}}/images/qsg/profile-selector.png)
 
-5. WSO2 Integrator opens the SI setup page. If Java 21 or the SI runtime is not detected, you are prompted to install them. Click **Download Java & SI** to install both automatically.
+5. WSO2 Integrator opens the SI setup page. WSO2 Integrator comes with Java 25, so Java is already set up. If the SI runtime is not detected, click **Download WSO2 Integrator: SI** to install it.
 
-    ![Download Java and SI runtime]({{base_path}}/images/qsg/runtime-setup.png)
+    ![Download SI runtime]({{base_path}}/images/qsg/runtime-setup.png)
 
     !!! tip
-        If you already have Java 21 or the SI runtime installed, expand **Advanced Options** to point WSO2 Integrator at your existing `JAVA_HOME` and SI installation directory. The SI installation directory is referred to as `<SI_HOME>` from here on.
+        If you already have the SI runtime installed, expand **Advanced Options** and click **Select SI Path** to point WSO2 Integrator at your existing SI installation directory. The SI installation directory is referred to as `<SI_HOME>` from here on.
+
+    !!! note
+        If you use the WSO2 Integrator VS Code extension instead, the setup page also checks for Java. Install JDK 25 (JDK 17 and 21 are also supported), or let the setup page download it for you.
 
 ## Step 2: Download Kafka
 
