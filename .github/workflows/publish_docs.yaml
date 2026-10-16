@@ -36,15 +36,16 @@ jobs:
           git config --global user.name "ballerina-bot"
           cd en/
           if [ "$BRANCH_NAME" = "main" ]; then
-            echo "Deploying latest version (4.4.0) from main branch"
-            mike deploy 4.4.0 latest -t "4.4.0" --update-aliases --push
+            echo "Deploying latest version (4.4.x) from main branch"
+            if mike list --json | python -c 'import sys, json; sys.exit(0 if any(v["version"] == "4.4.0" for v in json.load(sys.stdin)) else 1)'; then
+              echo "Removing the standalone 4.4.0 version so that it can become an alias of 4.4.x"
+              mike delete 4.4.0 --push
+            fi
+            mike deploy 4.4.x latest 4.4.0 -t "4.4.x" --update-aliases --push
             mike set-default --push latest
           elif [ "$BRANCH_NAME" = "4.3.0" ]; then
             echo "Deploying 4.3.0 version from 4.3.0 branch"
             mike deploy 4.3.0 -t "4.3.0 and older" --push
-          elif [ "$BRANCH_NAME" = "4.4.0" ]; then
-            echo "Deploying 4.4.0 version from 4.4.0 branch"
-            mike deploy 4.4.0 -t "4.4.0" --push
           else
             echo "Unknown branch: $BRANCH_NAME"
             exit 1

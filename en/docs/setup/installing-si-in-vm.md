@@ -24,9 +24,12 @@ WSO2 Integrator bundles all WSO2 integrators in a single application; you access
 
     ![Select SI profile]({{base_path}}/images/qsg/profile-selector.png)
 
-4. WSO2 Integrator opens the SI setup page. If Java 21 or the SI runtime is not detected, click **Download Java & SI** to install both automatically. If you already have Java 21 or the SI runtime installed, expand **Advanced Options** to point WSO2 Integrator at your existing `JAVA_HOME` and SI installation directory.
+4. WSO2 Integrator opens the SI setup page. WSO2 Integrator comes with Java 25, so Java is already set up. If the SI runtime is not detected, click **Download WSO2 Integrator: SI** to install it. If you already have the SI runtime installed, expand **Advanced Options** and click **Select SI Path** to point WSO2 Integrator at your existing SI installation directory.
 
-    ![Download Java and SI runtime]({{base_path}}/images/qsg/runtime-setup.png)
+    ![Download SI runtime]({{base_path}}/images/qsg/runtime-setup.png)
+
+    !!! note
+        If you use the WSO2 Integrator VS Code extension instead, the setup page also checks for Java. Install JDK 25 (JDK 17 and 21 are also supported), or let the setup page download it for you.
 
 ## Locate SI_HOME
 
@@ -39,16 +42,18 @@ This directory is referred to as `<SI_HOME>` throughout this documentation. Beca
 
 ## Set JAVA_HOME
 
-Set your `JAVA_HOME` environment variable to point to your JDK 21 installation directory.
+WSO2 Integrator: SI 4.4.1 supports JDK 17, 21 and 25. JDK 25 is recommended.
+
+Set your `JAVA_HOME` environment variable to point to your JDK installation directory.
 
 === "On macOS/Linux"
     ```bash
-    export JAVA_HOME=/path/to/your/jdk-21
+    export JAVA_HOME=/path/to/your/jdk-25
     ```
     To make the change persistent, add the line to your shell profile (e.g., `~/.zshrc` or `~/.bashrc`).
 === "On Windows"
     ```bash
-    setx JAVA_HOME "C:\path\to\your\jdk-21"
+    setx JAVA_HOME "C:\path\to\your\jdk-25"
     ```
     Open a new command prompt for the change to take effect.
 

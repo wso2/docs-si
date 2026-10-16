@@ -29,11 +29,11 @@ Developing a WSO2 Integrator: SI solution involves the following five steps.
 
 The **Environment Setup** view helps you configure the prerequisites for developing Siddhi applications: Java Development Kit (JDK) and the WSO2 Integrator: SI runtime.
 
-<a href="{{base_path}}/images/si-for-vscode/environment-setup.png"><img src="{{base_path}}/images/si-for-vscode/environment-setup.png" alt="Environment Setup" width="80%"></a>
+<a href="{{base_path}}/images/qsg/runtime-setup.png"><img src="{{base_path}}/images/qsg/runtime-setup.png" alt="Environment Setup" width="80%"></a>
 
 WSO2 Integrator automatically detects your system configuration after you open a Siddhi application and provides:
 
-- **Java runtime status** — verification and automatic download of compatible JDK versions.
+- **Java runtime status** — verification and automatic download of compatible JDK versions. WSO2 Integrator comes with Java 25, so Java is already set up. In the WSO2 Integrator VS Code extension, use JDK 25, which is the recommended version for SI 4.4.1. If no JDK is found, the extension downloads JDK 25 for you. JDK 17 and 21 are also supported.
 - **SI runtime status** — detection and setup of the WSO2 Integrator: SI runtime.
 - **Quick setup buttons** — one-click installation for missing components.
 
