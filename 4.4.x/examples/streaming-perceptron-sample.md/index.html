@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>streaming-perceptron-sample.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Making Predictions via a Streaming Perceptron Model
+
+
+## Purpose
+This application demonstrates how to configure WSO2 Integrator: SI to perform binary classification using a streaming Perceptron.
+
+## Prerequisites
+1. Save this sample.
+2. If there is no syntax error, the following message is shown on the console.
+	```
+	* Siddhi App streaming-perceptron-sample successfully deployed.
+	```
+
+## Executing the Sample
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages are shown on the console.
+	```
+	* streaming-perceptron-sample.siddhi - Started Successfully!
+	```
+
+## Testing the Sample
+
+**Note: The Streaming Perceptron for streaming machine learning needs to be trained prior to perform prediction.**
+
+#### Training phase
+Send events through one or more of the following methods.
+
+### Send events to ProductionTrainStream, via event simulator.
+1. Open the event simulator by clicking on the second icon or pressing Ctrl+Shift+I.
+2. In the Single Simulation tab of the panel, specify the values as follows:
+	* Siddhi App Name: streaming-perceptron-sample
+	* Stream Name: ProductionTrainStream
+3. In the name and amount fields, enter the following and then click Send to send the event.
+	```
+	density: 50.4
+	temperature: 30.03
+	```
+
+4. Send some more events.
+
+### Send events to the simulator http endpoint through the curl command:
+1. Open a new terminal and issue the following command:
+```bash
+curl -X POST -d &#x27;{&quot;streamName&quot;: &quot;ProductionTrainStream&quot;, &quot;siddhiAppName&quot;: &quot;streaming-perceptron-sample&quot;,&quot;data&quot;: [50.4, 30.03, true]}&#x27; http://localhost:9390/simulation/single -H &#x27;content-type: text/plain&#x27;
+```
+2. If there is no error, the following messages are shown on the terminal:
+```json
+{&quot;status&quot;:&quot;OK&quot;,&quot;message&quot;:&quot;Single Event simulation started successfully&quot;}
+```
+
+### Publish events with Postman:
+1. Install Postman from &lt;https://www.postman.com/downloads/&gt;.
+2. Launch the application.
+3. Make a &#x27;Post&#x27; request to the &#x27;http://localhost:9390/simulation/single&#x27; endpoint. Set the Content-Type to &#x27;text/plain&#x27; and set the request body in text as follows:
+	```json
+	{&quot;streamName&quot;: &quot;ProductionTrainStream&quot;, &quot;siddhiAppName&quot;: &quot;streaming-perceptron-sample&quot;,&quot;data&quot;: [50.4, 30.03, true]}
+	```
+4. Click &#x27;send&#x27;. If there is no error, the following messages are shown on the console:
+	```
+	&quot;status&quot;: &quot;OK&quot;,
+	&quot;message&quot;: &quot;Single Event simulation started successfully&quot;
+	```
+
+#### Testing phase
+Send events through one or more of the following methods.
+
+### Send events to ProductionInputStream, via event simulator
+1. Open the event simulator by clicking on the second icon or pressing Ctrl+Shift+I.
+2. In the Single Simulation tab of the panel, specify the values as follows:
+	* Siddhi App Name: streaming-perceptron-sample
+	* Stream Name: ProductionInputStream
+3. In the name and amount fields, enter the following and then click Send to send the event.
+	```
+	density: 30.4
+	temperature: 20.5
+	```
+4. Send some more events.
+
+### Send events to the simulator http endpoint through the curl command:
+1. Open a new terminal and issue the following command:
+	```bash
+	curl -X POST -d &#x27;{&quot;streamName&quot;: &quot;ProductionInputStream&quot;, &quot;siddhiAppName&quot;: &quot;streaming-perceptron-sample&quot;,&quot;data&quot;: [30.4, 20.5]}&#x27; http://localhost:9390/simulation/single -H &#x27;content-type: text/plain&#x27;
+	```
+2. If there is no error, the following messages are shown on the terminal:
+	```json
+	{&quot;status&quot;:&quot;OK&quot;,&quot;message&quot;:&quot;Single Event simulation started successfully&quot;}
+	```
+
+### Publish events with Postman:
+1. Install Postman from &lt;https://www.postman.com/downloads/&gt;.
+2. Launch the application.
+3. Make a &#x27;Post&#x27; request to the &#x27;http://localhost:9390/simulation/single&#x27; endpoint. Set the Content-Type to &#x27;text/plain&#x27; and set the request body in text as follows:
+	```json
+	{&quot;streamName&quot;: &quot;ProductionInputStream&quot;, &quot;siddhiAppName&quot;: &quot;streaming-perceptron-sample&quot;,&quot;data&quot;: [30.4, 20.5]}
+	```
+4. Click &#x27;send&#x27;. If there is no error, the following messages are shown on the console:
+	```
+	&quot;status&quot;: &quot;OK&quot;,
+	&quot;message&quot;: &quot;Single Event simulation started successfully&quot;
+	```
+
+## Viewing the Results
+See the output on the terminal:
+```
+INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - streaming-perceptron-sample: LOGGER, StreamEvent{ timestamp=1513596699142, beforeWindowData=null, onAfterWindowData=null, outputData=[34.0, 12.0, false, 0.0], type=CURRENT, next=null}
+```
+
+```sql
+@App:name(&quot;streaming-perceptron-sample&quot;)
+@App:description(&#x27;Train a streaming Perceptron model to predict whether an item passes quality check.&#x27;)
+
+
+define stream ProductionTrainStream (density double, temperature double, qualityCheck_pass bool );
+
+define stream ProductionInputStream (density double, temperature double);
+
+@sink(type=&#x27;log&#x27;)
+define stream PredictedQCStream (density double, temperature double, prediction bool, confidenceLevel double);
+
+@info(name = &#x27;query-train&#x27;)
+from ProductionTrainStream#streamingml:updatePerceptronClassifier(&#x27;QCmodel&#x27;, qualityCheck_pass, 0.1, density, temperature)
+select *
+insert into trainOutputStream;
+
+@info(name = &#x27;query-predict&#x27;)
+from ProductionInputStream#streamingml:perceptronClassifier(&#x27;QCmodel&#x27;, 0.0, 0.5, density, temperature)
+select *
+insert into PredictedQCStream;
+```</body>
+</html>

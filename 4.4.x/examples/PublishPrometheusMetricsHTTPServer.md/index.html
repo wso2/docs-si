@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PublishPrometheusMetricsHTTPServer.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Publishing Consumed Events to Prometheus Metrics and Exposing them via HTTP
+
+
+## Purpose
+This application demonstrates how to use siddhi-io-prometheus for publishing events through http server.
+
+## Prerequisites
+1. The following steps must be executed to enable WSO2 SP to publish events to Prometheus
+    1. Download Prometheus server &#x27;prometheus-2.5.0&#x27; from here : https://prometheus.io/download/#prometheus
+	   And extract the file in a preferred location.
+	2. Open the prometheus.yml file from {prometheus} directory and add the following text under &quot;scrape_configs:&quot;
+		&quot; - job_name: &#x27;server&#x27;
+		    honor_labels: true
+		    static_configs:
+		    - targets: [&#x27;localhost:9080&#x27;]&quot;
+        * you can replace values for &#x27;localhost:9080&#x27; in targets according to your preferred host and port.
+	      In that case, the &#x27;server.url&#x27; option must be included in the Sink definition with the same host and port values.
+
+    3. Download and copy the prometheus client jars to the &lt;SI_HOME&gt;/lib directory as follows.
+        1. Download the following jars from https://mvnrepository.com/artifact/io.prometheus and copy them to &lt;SI_HOME&gt;/lib directory.
+            * simpleclient_pushgateway-0.5.0.jar
+            * simpleclient_common-0.5.0.jar
+            * simpleclient-0.5.0.jar
+		    * simpleclient_httpserver-0.5.0.jar
+	4. Navigate to {prometheus} and start prometheus server using &#x27; ./prometheus --config.file=&quot;prometheus.yml&quot; &#x27; command
+2. Start the editor WSO2 SP by giving this command in the terminal : sh editor.sh
+3. Save this sample
+
+## Executing the Sample
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;
+2. If the Siddhi application starts successfully, the following messages would be shown on the console,
+    * PublishPrometheusMetricsHTTPServer.siddhi - Started Successfully!
+	* SweetProductionStream has successfully connected at http://localhost:9080
+
+## Testing the Sample
+* Send events through the event simulator:
+    1. Open the event simulator by clicking on the second icon or pressing Ctrl+Shift+I.
+	2. In the Single Simulation tab of the panel, specify the values as follows:
+        * Siddhi App Name  : PublishPrometheusMetricsHTTPServer
+        * Stream Name     : SweetProductionStream
+    3. In the name and amount fields, enter &#x27;toffees&#x27; and &#x27;55.4&#x27; respectively and then click Send to send the event.
+    4. Send some more events as follows,
+		    [&#x27;gingerbread&#x27;, 72.3],
+	 	    [&#x27;toffees&#x27;, 32.4],
+		    [&#x27;lollipop&#x27;, 23.8].
+
+## Viewing the Results
+1. See the output events through one or more of the following methods:
+	* Open the url &quot;http://localhost:9080/metrics&quot; in your browser. The folllowing output will be displayed,
+	    - &quot;# HELP SweetProductionStream help for counter SweetProductionStream&quot;
+        - &quot;# TYPE SweetProductionStream counter&quot;
+        - &quot;SweetProductionStream{Name=&quot;gingerbread&quot;,} 72.3&quot;
+        - &quot;SweetProductionStream{Name=&quot;lollipop&quot;,} 23.8&quot;
+        - &quot;SweetProductionStream{Name=&quot;toffees&quot;,} 87.8&quot;&quot;
+
+2. Send http request to the endpoint &quot;http://localhost:9090&quot; to the running prometheus server using the curl command:
+    1. Open a new terminal and issue the following command:
+        * curl -X GET http://localhost:9090/
+    2. If there is no error, the result will be shown on the terminal in JSON Format similar to the following :
+```
+{&quot;status&quot;:&quot;success&quot;,
+&quot;data&quot;:{
+&quot;resultType&quot;:&quot;vector&quot;,
+&quot;result&quot;:[
+{   &quot;metric&quot;:{&quot;Name&quot;:&quot;gingerbread&quot;,
+&quot;__name__&quot;:&quot;SweetProductionStream&quot;,
+&quot;instance&quot;:&quot;localhost:9080&quot;,
+&quot;job&quot;:&quot;server&quot;},
+&quot;value&quot;:[1*********.***,&quot;72.3&quot;]
+},
+{   &quot;metric&quot;:{&quot;Name&quot;:&quot;lollipop&quot;,
+&quot;__name__&quot;:&quot;SweetProductionStream&quot;,
+&quot;instance&quot;:&quot;localhost:9080&quot;,
+&quot;job&quot;:&quot;server&quot;},
+&quot;value&quot;:[1*********.***,&quot;23.8&quot;]
+},
+{   &quot;metric&quot;:{&quot;Name&quot;:&quot;toffees&quot;,
+&quot;__name__&quot;:&quot;SweetProductionStream&quot;,
+&quot;instance&quot;:&quot;localhost:9080&quot;,
+&quot;job&quot;:&quot;server&quot;},
+&quot;value&quot;:[1*********.***,&quot;87.8&quot;]
+}
+]}
+}
+```
+
+```sql
+@App:name(&quot;PublishPrometheusMetricsHTTPServer&quot;)
+
+@App:description(&#x27;Publish consumed events to Prometheus metrics and expose them via http server.&#x27;)
+
+
+define stream FooStream(Name string, amount double);
+
+@sink(type=&#x27;log&#x27;, priority=&#x27;WARN&#x27;, prefix =&#x27;received sweet products&#x27;)
+define stream LogStream(Name string, amount double);
+
+@sink(type=&#x27;prometheus&#x27; , job=&#x27;SweetProduction&#x27;, publish.mode=&#x27;server&#x27;, metric.type=&#x27;counter&#x27;, value.attribute = &quot;amount&quot;, @map(type=&#x27;keyvalue&#x27;))
+define stream SweetProductionStream(Name string, amount double);
+
+@info(name=&#x27;Add-events&#x27;)
+from FooStream
+select *
+insert into SweetProductionStream;
+
+@info(name=&#x27;Log-events&#x27;)
+from FooStream
+select *
+insert into LogStream;
+```</body>
+</html>

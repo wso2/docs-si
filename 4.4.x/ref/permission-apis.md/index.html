@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>permission-apis.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>!!! note
+    **This page is still a work in progress!**
+    
+# Permission APIs
+
+## Adding a permission string
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Adds a new permission string.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/permissions&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+```java
+curl -X POST https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/permissions/ -H &#x27;content-type: application/json&#x27; -d &#x27; { &quot;appName&quot;:&quot;&lt;SIDDHI_APPLICATION_NAME&gt;&quot;, &quot;permissionString&quot;:&quot;&lt;PERMISSION_STRING&gt;&quot;}&#x27; -k
+```
+
+### Sample curl command
+
+```java
+curl -X POST https://localhost:9443/permissions/ -H &#x27;content-type: application/json&#x27; -d &#x27; { &quot;appName&quot;:&quot;MON&quot;, &quot;permissionString&quot;:&quot;MON.manager&quot;}&#x27; -k
+```
+
+### Sample output
+
+Returns the permission ID for the particular permission string
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Getting a permission ID for a permission string
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Returns the permission ID for a given permission string.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/permissions/app/{appName}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+| Parameter | Description                                       |
+|-----------|---------------------------------------------------|
+|`{appName}`|                                                   |
+
+### curl command syntax
+
+```java
+curl -X GET https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/permissions/app/{appName}
+```
+
+### Sample curl command
+
+```java
+curl -X GET https://localhost:9443/permissions/app/MON
+```
+
+### Sample output
+
+```java
+[{&quot;permissionID&quot;: &quot;f0c74633-2f07-3896-841a-154afb0c29da&quot;,&quot;permissionString&quot;: &quot;MON.consumer&quot;}]
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Checking whether a specific user role is granted a specific permission
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Checks whether the specified user role is granted a specific permission.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/permissions/auth/{permissionID}/{roleName}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+| Parameter      | Description                                                                                                  |
+|----------------|--------------------------------------------------------------------------------------------------------------|
+|`{permissionID}`|The ID of a specific permission. The API checks whether this permission is granted to the specified user role.|
+|`{roleName}`    |The ID of a specific user role. The API checks whether this user role is granted the specified permission ID. |
+
+### curl command syntax
+
+```java
+curl --location --request GET &#x27;https://&lt;host&gt;:port/permissions/auth/&lt;permission-string-id&gt;/&lt;user&gt;&#x27;
+```
+
+### Sample curl command
+
+```java
+curl --location --request GET &#x27;https://localhost:9443/permissions/auth/f0c74633-2f07-3896-841a-154afb0c29da/admin&#x27;
+```
+
+### Sample output
+
+```java
+{ &quot;code&quot;: 4, &quot;type&quot;: &quot;ok&quot;, &quot;message&quot;: &quot;Checking permission for app:f0c74633-2f07-3896-841a-154afb0c29da role: admin successful&quot; }
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Deleting a permission string
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Deletes the specified permission string.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/permissions/{permissionID}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+| Parameter      | Description                                  |
+|----------------|----------------------------------------------|
+|`{permissionID}`|The ID of the permission string to be deleted.|
+
+### curl command syntax
+
+```java
+curl -X DELETE https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/permissions/{permissionID}
+```
+
+### Sample curl command
+
+```java
+curl -X DELETE https://localhost:9443/permissions/e9687c6f-b5b2-3216-b3bd-82e7a8e14367
+```
+
+### Sample output
+
+```
+{ 
+  &quot;code&quot;: 4, 
+  &quot;type&quot;: &quot;ok&quot;, 
+  &quot;message&quot;: &quot;Deleted permission with ID: f0c74633-2f07-3896-841a-154afb0c29da&quot; 
+}
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Listing roles with a specific permission
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Lists the user roles that are currently granted the specified user role.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/permissions/{permissionsID}/roles&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+| Parameter      | Description                                                        |
+|----------------|--------------------------------------------------------------------|
+|`{permissionID}`|The ID of the permission for which the user roles need to be listed.|
+
+### curl command syntax
+
+```java
+curl -X GET https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/permissions/{permissionID}/roles
+```
+
+### Sample curl command
+
+```java
+curl -X GET https://localhost:9443/permissions/8dc31fec-8364-3082-9f88-c7ca7d979873/roles
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Revoking a specific permission for all roles
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Revokes the specified permission for all the user roles.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/permissions/revoke/{permissionID}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+| Parameter      | Description                                                         |
+|----------------|---------------------------------------------------------------------|
+|`{permissionID}`|The ID of the permission that needs to be revoked for all user roles.|
+
+### curl command syntax
+
+```java
+curl -X POST https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/permissions/revoke/{permissionID}
+```
+
+### Sample curl command
+
+```java
+curl -X POST https://localhost:9443/permissions/revoke/8dc31fec-8364-3082-9f88-c7ca7d979873
+```
+
+### Sample output
+
+```java
+{ 
+  &quot;code&quot;: 4, 
+  &quot;type&quot;: &quot;ok&quot;, 
+  &quot;message&quot;: &quot;Permission revoke for permissionID e9687c6f-b5b2-3216-b3bd-82e7a8e14367 success.&quot; 
+}
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Revoking a specific permission for a specific role
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Grants or revokes a permission for the specified user role. The permission is passed as an array in the body of the request.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/permissions/roles/{roleID}?action=revoke/grant&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+| Parameter | Description                                                                                              |
+|-----------|----------------------------------------------------------------------------------------------------------|
+|`{roleID}` |The ID of the user role for which the permission given in the request body needs to be granted or revoked.|
+
+### curl command syntax
+
+```java
+curl -X POST &#x27;https://&lt;host&gt;:&lt;port&gt;/permissions/roles/&lt;user&gt;?action=revoke&#x27; -H &#x27;content-type: application/json&#x27; -d &#x27; { &quot;appName&quot;:&quot;&lt;Siddhi-app-name&gt;&quot;, &quot;permissionString&quot;:&quot;&lt;permission-string&gt;&quot;}&#x27; -k
+```
+
+### Sample curl command
+
+```java
+curl -X POST &#x27;https://localhost:9444/permissions/roles/admin?action=revoke&#x27; -H &#x27;content-type: application/json&#x27; -d &#x27; { &quot;appName&quot;:&quot;MON&quot;, &quot;permissionString&quot;:&quot;MON.consumer&quot;}&#x27; -k
+```
+
+### Sample output
+
+```yaml
+{
+  &quot;code&quot;:4,
+  &quot;type&quot;:&quot;ok&quot;,
+  &quot;message&quot;:&quot;Action, revoke for permission, Permission[appName\u003dMON, permissionString\u003dMON.consumer] successful.&quot;
+}
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</body>
+</html>

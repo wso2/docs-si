@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HttpRequestResponseSample.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Publishing HTTP Requests, Receiving Responses, and Processing Them
+
+
+## Purpose
+This application demonstrates how to configure WSO2 Integrator: SI to send sweet production events via HTTP transport in JSON default format, Receive response from the http server and process the response using siddhi.
+
+## Prerequisites
+* Save this sample. If there is no syntax error, the following message is shown on the console:
+    - Siddhi App HttpRequestResponseSample successfully deployed.
+
+## Executing the Sample
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages are shown on the console:
+* HttpRequestResponseSample.siddhi - Started Successfully!
+* &#x27;Http&#x27; sink at &#x27;LowProductionAlertStream&#x27; stream successfully connected to &#x27;localhost:8080/abc&#x27;.
+
+## Testing the Sample
+1. Open a terminal and navigate to &lt;SI_HOME&gt;/samples/sample-clients/http-server and run &quot;ant&quot; command without any arguments.
+2. Send events using one or more of the following methods.
+    * Send events with http server through the event simulator:
+        1. Open the event simulator by clicking on the second icon or pressing Ctrl+Shift+I.
+	    2. In the Single Simulation tab of the panel, specify the values as follows:
+            * Siddhi App Name  : HttpRequestResponseSample
+            * Stream Name     : SweetProductionStream
+        3. In the name and amount fields, enter &#x27;toffees&#x27; and &#x27;75.6&#x27; respectively and then click Send to send the event.
+        4. Send more events as desired.
+
+    * Send events to the HTTP endpoint defined by &#x27;publish.url&#x27; in the Sink configuration using the curl command:
+        1. Open a new terminal and issue the following command:
+            * curl -X POST -d &#x27;{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;HttpRequestResponseSample&quot;,&quot;data&quot;: [&quot;toffees&quot;, 75.6]}&#x27; http://localhost:9390/simulation/single -H &#x27;content-type: text/plain&#x27;
+        2. If there is no error, the following messages are shown on the terminal:
+            *  {&quot;status&quot;:&quot;OK&quot;,&quot;message&quot;:&quot;Single Event simulation started successfully&quot;}
+
+    * Publish events with Postman:
+        1. Install Postman from &lt;https://www.postman.com/downloads/&gt;.
+        2. Launch the application.
+        3. Make a &#x27;Post&#x27; request to the &#x27;http://localhost:9390/simulation/single&#x27; endpoint. Set the Content-Type to &#x27;text/plain&#x27; and set the request body in text as follows:
+	{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;HttpRequestResponseSample&quot;,&quot;data&quot;: [&quot;toffees&quot;, 75.6]}
+        4. Click &#x27;send&#x27;. If there is no error, the following messages are shown on the console:
+            *  &quot;status&quot;: &quot;OK&quot;,
+            *  &quot;message&quot;: &quot;Single Event simulation started successfully&quot;
+3. When publishing the events,
+http-request sink will send the request to the http server and the server will echo the received request as the response with a 200 http status code.
+Then,
+- That successful response will be received by the defined http-response source which has the relevant http status code.
+- Received response will be converted to a siddhi event using json default mapping and pushed to the ResponseStream.
+
+## Viewing the Results
+The received responses will be logged in the terminal/editor console as following.
+
+* INFO {io.siddhi.core.stream.output.sink.LogSink} - RequestResponse : responseStream : Event{timestamp=1555358941592, data=[toffees, 75.6], isExpired=false}
+
+## Notes
+If the message &quot;LowProductionAlertStream&#x27; stream could not connect to &#x27;localhost:8080&quot;, it could be due to port 8080
+defined in the Siddhi application is already being used by a different program. To resolve this issue, do the following:
+1. Stop this Siddhi application (Click &#x27;Run&#x27; on menu bar -&gt; &#x27;Stop&#x27;).
+2. Change the port from 8080 to an unused port in this Siddhi application&#x27;s source configuration and in the http-server file.
+3. Start the application and check whether the expected output appears on the console.
+
+```sql
+@App:name(&quot;HttpRequestResponseSample&quot;)
+@App:description(&quot;Publish http requests, receive their responses and process them&quot;)
+
+
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;http-request&#x27;, sink.id=&#x27;production-request&#x27;, publisher.url=&#x27;http://localhost:8080/abc&#x27;,
+@map(type=&#x27;json&#x27;))
+define stream LowProductionAlertStream (name string, amount double);
+
+@sink(type=&#x27;log&#x27;)
+@source(type=&#x27;http-response&#x27; , sink.id=&#x27;production-request&#x27;, http.status.code=&#x27;200&#x27;,
+@map(type=&#x27;json&#x27;))
+define stream ResponseStream(name string, amount double);
+
+@info(name=&#x27;query1&#x27;)
+from SweetProductionStream
+select *
+insert into LowProductionAlertStream;
+```</body>
+</html>

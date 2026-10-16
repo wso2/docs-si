@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PublishHttpInJsonFormat.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Publishing JSON Events via HTTP
+
+## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI to send sweet production events via HTTP transport in JSON default format and log the events in LowProductionAlertStream to the output console.
+
+## Prerequisites
+
+* Save this sample. If there is no syntax error, the following message is shown on the console:
+    - Siddhi App PublishHttpInJsonFormat successfully deployed.
+
+## Executing the sample
+
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages are shown on the console:
+    * `PublishHttpInJsonFormat.siddhi - Started Successfully!`
+    * `&#x27;Http&#x27; sink at &#x27;LowProductionAlertStream&#x27; stream successfully connected to &#x27;localhost:8080/abc&#x27;.`
+
+## Testing the sample
+
+1. Open a terminal and navigate to `&lt;SI_HOME&gt;/samples/sample-clients/http-server` and run the `ant` command without any arguments.
+2. Send events through one or more of the following methods:
+    * **Send events with http server through the event simulator**
+        1. Open the event simulator by clicking on the second icon or pressing Ctrl+Shift+I.
+	    2. In the Single Simulation tab of the panel, specify the values as follows:
+            * `Siddhi App Name`  : `PublishHttpInJsonFormat`
+            * `Stream Name`     : `SweetProductionStream`
+        3. In the `name` and `amount` fields, enter &#x27;toffees&#x27; and &#x27;75.6&#x27; respectively and then click Send to send the event.
+        4. Send some more events as desired.
+
+    * **Send events to the HTTP endpoint defined by &#x27;publish.url&#x27; in the Sink configuration using the curl command**
+        1. Open a new terminal and issue the following command:
+            * `curl -X POST -d &#x27;{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishHttpInJsonFormat&quot;,&quot;data&quot;: [&quot;toffees&quot;, 75.6]}&#x27; http://localhost:9390/simulation/single -H &#x27;content-type: text/plain&#x27;`
+        2. If there is no error, the following messages are shown on the terminal:
+            *  `{&quot;status&quot;:&quot;OK&quot;,&quot;message&quot;:&quot;Single Event simulation started successfully&quot;}`
+
+    * **Publish events with Postman**
+        1. Launch the &#x27;Postman&#x27; application.
+        2. Make a `Post` request to the `http://localhost:9390/simulation/single` endpoint. Set the `Content-Type` to `text/plain` and set the request body in text as follows:
+            `{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishHttpInJsonFormat&quot;,&quot;data&quot;: [&quot;toffees&quot;, 75.6]}`
+        4. Click &#x27;Send&#x27;. If there is no error, the following messages are shown on the console:
+            *  `&quot;status&quot;: &quot;OK&quot;,`
+            *  `&quot;message&quot;: &quot;Single Event simulation started successfully&quot;`
+
+## Viewing the results
+
+* See the output on the terminal:
+
+```bash
+[java] [org.wso2.si.http.server.HttpServerListener] : Event Name Arrived: {&quot;event&quot;:{&quot;name&quot;:&quot;toffees&quot;,&quot;amount&quot;:75.6}}
+[java] [org.wso2.si.http.server.HttpServerMain] : Received Events: {&quot;event&quot;:{&quot;name&quot;:&quot;toffees&quot;,&quot;amount&quot;:75.6}} ,
+[java] [org.wso2.si.http.server.HttpServerMain] : Received Event Headers key set: [Http_method, Content-type, Content-length]
+[java] [org.wso2.si.http.server.HttpServerMain] : Received Event Headers value set: [[POST], [application/json], [42]]
+```
+
+## Notes
+
+If you get the message &quot;LowProductionAlertStream&#x27; stream could not connect to &#x27;localhost:8080&quot;, it could be due to the port 8080
+defined in the Siddhi application is already being used by a different program. To resolve this issue, do the following:
+
+1. Stop this Siddhi application (Click &#x27;Run&#x27; on menu bar -&gt; &#x27;Stop&#x27;).
+2. Change the port from 8080 to an unused port in this Siddhi application&#x27;s source configuration and in the http-server file.
+3. Start the application and check whether the expected output appears on the console.
+
+
+```sql
+@App:name(&quot;PublishHttpInJsonFormat&quot;)
+
+@App:description(&#x27;Send events via HTTP transport using JSON format&#x27;)
+
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;http&#x27;, publisher.url=&#x27;http://localhost:8080/abc&#x27;,
+@map(type=&#x27;json&#x27;))
+define stream LowProductionAlertStream (name string, amount double);
+
+@info(name=&#x27;query1&#x27;) 
+from SweetProductionStream
+select *
+insert into LowProductionAlertStream;
+```
+</body>
+</html>

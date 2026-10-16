@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>IBMMessageQueue.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Consuming Messages from IBM Message Queues
+
+
+
+## Purpose
+This application demonstrates how to consume events from IBM Message Queue and publish messages in to a IBM Queue
+## Prerequisites
+1. Ensure that there is a running IBM MQ instance.
+2. Create a queue manager named ESBQManager, Queue named  Queue1 and channel named Channel1
+3. Download com.ibm.mq.allclient_9.0.5.0_1.0.0.jar and javax.jms-api-2.0.1.jar and copy to &lt;SI_HOME&gt;/lib directory.
+
+## Executing the Sample
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;
+2. If the Siddhi application starts successfully, the following messages would be shown on the console
+    * IBMMessageQueueSample.siddhi - Started Successfully!
+
+## Testing the Sample
+1. Simulate single events. For this, click on &#x27;Event Simulator&#x27; (double arrows on left tab) -&gt; &#x27;Single Simulation&#x27; -&gt; Select &#x27;IBMMessageQueueSample&#x27; as &#x27;Siddhi App Name&#x27; -&gt; Select &#x27;SweetProductionSinkStream&#x27; as &#x27;Stream Name&#x27; -&gt; Provide attribute values -&gt; Send
+
+## Viewing the Results
+See the output on the console.
+
+
+```sql
+@App:name(&quot;IBMMessageQueueSample&quot;)
+
+@App:description(&#x27;Consume event from IBM Message Queue&#x27;)
+
+
+
+
+@source(type=&#x27;ibmmq&#x27;,
+        destination.name=&#x27;Queue1&#x27;,
+        host=&#x27;192.168.56.3&#x27;,
+        port=&#x27;1414&#x27;,
+        channel=&#x27;Channel1&#x27;,
+        queue.manager = &#x27;ESBQManager&#x27;,
+        username = &#x27;mqm&#x27;,
+        password = &#x27;1920&#x27;,
+        @map(type=&#x27;xml&#x27;))
+define stream SweetProductionSourceStream(name string);
+
+@sink(type=&#x27;ibmmq&#x27;,
+      destination.name=&#x27;Queue1&#x27;,
+      host=&#x27;192.168.56.3&#x27;,
+      port=&#x27;1414&#x27;,
+      channel=&#x27;Channel1&#x27;,
+      queue.manager = &#x27;ESBQManager&#x27;,
+      username = &#x27;mqm&#x27;,
+      password = &#x27;1920&#x27;,
+      @map(type=&#x27;xml&#x27;))
+define stream SweetProductionSinkStream(name string);
+
+@sink(type=&#x27;log&#x27;)
+define stream logStream(name string);
+
+from SweetProductionSourceStream
+select *
+insert into logStream;
+```</body>
+</html>

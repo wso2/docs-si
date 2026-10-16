@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PublishEmailInXmlFormat.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Publishing Emails in XML Format
+
+
+## Purpose
+This application demonstrates how to use siddhi-io-email for publishing events to files.
+
+## Prerequisites
+1. Replace the Sink configuration values for following options.
+    - username: senders username (Ex:- &#x27;example123&#x27;)
+    - address: senders address (Ex:- &#x27;example123@wso2.com&#x27;)
+    - password: senders password
+    - to: receivers address (Ex:- &#x27;example987@wso2.com&#x27;)
+    - subject: subject of the email
+2. You need to enable access to &quot;less secure apps&quot; in the sender&#x27;s gmail account via &quot;https://myaccount.google.com/lesssecureapps&quot; link
+3. Save this sample
+
+## Executing the Sample
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;
+2. If the Siddhi application starts successfully, the following messages would be shown on the console
+    * PublishEmailInXmlFormat.siddhi - Started Successfully!.
+
+## Testing the Sample
+1. Click on &#x27;Event Simulator&#x27; (double arrows on left tab)
+2. Click &#x27;Single Simulation&#x27; (this will be already selected)
+3. Select PublishEmailInXmlFormat as &#x27;Siddhi App Name&#x27;
+4. Select SweetProductionStream as &#x27;StreamName&#x27;
+5. Provide attribute values
+    - name: chocolate cake
+    - amount: 10.10
+6. Click on the start button (Arrow symbol) next to the newly created simulator
+
+## Viewing the Results
+Check the receiver gmail inbox (The gmail referred to in &#x27;to&#x27; Sink configuration) to see the alert as follows.
+
+    Subject: &lt;subject of the email&gt;
+    Content: &lt;events&gt;&lt;event&gt;&lt;name&gt;chocolate cake&lt;/name&gt;&lt;hourlyTotal&gt;10.1&lt;/hourlyTotal&gt;&lt;currentHour&gt;0.0&lt;/currentHour&gt;&lt;/event&gt;&lt;/events&gt;
+
+## Note: 
+current hour depends on the system&#x27;s timestamp&lt;br/&gt;
+
+```sql
+@App:name(&quot;PublishEmailInXmlFormat&quot;)
+
+
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;email&#x27;, @map(type=&#x27;xml&#x27;) ,
+                    username =&#x27;&lt;senders email user name&gt;&#x27;,
+                    address =&#x27;&lt;senders email address&gt;&#x27;,
+                    password= &#x27;&lt;senders email password&gt;&#x27;,
+                    subject=&#x27;Test Siddhi-io-email-{{name}}&#x27;, 
+                    to=&#x27;&lt;receivers email address&gt;&#x27;,
+                    port = &#x27;465&#x27;,
+                    host = &#x27;smtp.gmail.com&#x27;,
+                    ssl.enable = &#x27;true&#x27;,
+                    auth = &#x27;true&#x27;)                
+define stream LowProductionAlertStream(name string, hourlyTotal double, currentHour  double);
+
+@sink(type=&#x27;log&#x27;)
+define stream EmailLogStream(name string, hourlyTotal double, currentHour  double);
+
+from SweetProductionStream#window.time(1 min)
+select name, sum(amount) as hourlyTotal,
+convert(time:extract(&#x27;HOUR&#x27;, time:currentTimestamp(), &#x27;yyyy-MM-dd hh:mm:ss&#x27;), &#x27;double&#x27;) as currentHour
+insert into LowProductionAlertStream;
+
+from LowProductionAlertStream
+insert into EmailLogStream;
+```</body>
+</html>

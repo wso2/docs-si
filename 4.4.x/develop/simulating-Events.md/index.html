@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>simulating-Events.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Simulating Events
+
+Simulating events involves simulating predefined event streams. These
+event stream definitions have stream attributes. You can use event
+simulator to create events by assigning values to the defined stream
+attributes and send them as events. This is useful for debugging and
+monitoring the event receivers and publishers, execution plans and event
+formatters.
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Function&lt;/th&gt;
+&lt;th&gt;REST API&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Saving a simulation configuration&lt;/td&gt;
+&lt;td&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Single Event Simulation&lt;/strong&gt; : &lt;code&gt;               POST               http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/simulation/single              &lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multiple Event Simulation:&lt;/strong&gt; &lt;code&gt;               POST               http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/simulation/feed              &lt;/code&gt;&lt;br /&gt;
+&lt;/li&gt;
+&lt;/ul&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Editing a simulation configuration&lt;/td&gt;
+&lt;td&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Single Event Simulation&lt;/strong&gt; : &lt;code&gt;               PUT               http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/simulation/single              &lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multiple Event Simulation:&lt;/strong&gt; &lt;code&gt;               PUT               http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/simulation/feed              &lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Deleting a simulation configuration&lt;/td&gt;
+&lt;td&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Single Event Simulation&lt;/strong&gt; : &lt;code&gt;               DELETE               http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/simulation/single              &lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multiple Event Simulation:&lt;/strong&gt; &lt;code&gt;               DELETE http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/simulation/feed              &lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Retrieving a simulation configuration&lt;/td&gt;
+&lt;td&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Single Event Simulation&lt;/strong&gt; : &lt;code&gt;               GET               http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/simulation/single              &lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multiple Event Simulation:&lt;/strong&gt; &lt;code&gt;               GET http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/simulation/feed              &lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Uploading a CSV file&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;                           POST http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/simulation/feed             &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Editing and uploaded CSV file&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;                           PUT -F &#x27;file=@/{path to csv file}&#x27; http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/simulation/files/{fileName}?fileName={fileName}             &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Deleting an uploaded CSV file&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             DELETE http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/simulation/files/{fileName}            &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Pausing an event simulation&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             POST             http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/             simulation/feed/{simulationName}/?action=pause            &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Resuming an event simulation&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             POST             http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/             simulation/feed/{simulationName}/?action=resume            &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Stopping an event simulation&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             DELETE http://&amp;lt;SP_HOST&amp;gt;:&amp;lt;API_PORT&amp;gt;/simulation/feed/{simulationName}            &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+The following sections cover how events can be simulated.
+
+-   [Saving a simulation
+    configuration](#SimulatingEvents-Savingasimulationconfiguration)
+-   [Editing a simulation
+    configuration](#SimulatingEvents-Editingasimulationconfiguration)
+-   [Deleting a simulation
+    configuration](#SimulatingEvents-Deletingasimulationconfiguration)
+-   [Retrieving a simulation
+    configuration](#SimulatingEvents-Retrievingasimulationconfiguration)
+-   [Uploading a CSV file](#SimulatingEvents-UploadingaCSVfile)
+-   [Editing an uploaded CSV
+    file](#SimulatingEvents-EditinganuploadedCSVfile)
+-   [Deleting an uploaded CSV
+    file](#SimulatingEvents-DeletinganuploadedCSVfile)
+-   [Pausing an event
+    simulation](#SimulatingEvents-Pausinganeventsimulation)
+-   [Resuming an event
+    simulation](#SimulatingEvents-Resuminganeventsimulation)
+-   [Stopping an event
+    simulation](#SimulatingEvents-Stoppinganeventsimulation)
+
+### Saving a simulation configuration
+
+To simulate events for WSO2 SP, you should first save the event
+simulator configuration in the
+`         &lt;SP_HOME&gt;/deployment/simulator/simulationConfigs        `
+directory by sending a POST request to a REST API as described below.
+
+#### REST API
+
+The REST API to be called depends on the type of event simulation you
+are carrying out as shown in the table below.
+
+| Event Simulation Type        | REST API                                                                                                           |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| Simulating a single event    | `             POST             http://&lt;SP_HOST&gt;:&lt;API_PORT&gt;/simulation/single            `                          |
+| Simulating a multiple events | `             POST             http://             &lt;SP_HOST&gt;:&lt;API_PORT&gt;             /simulation/feed/            ` |
+
+#### Sample cURL command
+
+``` java
+    curl -X POST \
+      http://localhost:9390/simulation/feed/ \
+      -H &#x27;content-type: text/plain&#x27; \
+      -d &#x27;{
+      &quot;properties&quot;: {
+        &quot;simulationName&quot;: &quot;simulationPrimitive&quot;,
+        &quot;startTimestamp&quot;: &quot;&quot;,
+        &quot;endTimestamp&quot;: &quot;&quot;,
+        &quot;noOfEvents&quot;: &quot;&quot;,
+        &quot;description&quot;: &quot;&quot;,
+        &quot;timeInterval&quot;: &quot;1000&quot;
+      },
+      &quot;sources&quot;: [
+        {
+          &quot;siddhiAppName&quot;: &quot;TestExecutionPlan&quot;,
+          &quot;streamName&quot;: &quot;FooStream&quot;,
+          &quot;timestampInterval&quot;: &quot;1000&quot;,
+          &quot;simulationType&quot;: &quot;RANDOM_DATA_SIMULATION&quot;,
+          &quot;attributeConfiguration&quot;: [
+            {
+              &quot;type&quot;: &quot;PRIMITIVE_BASED&quot;,
+              &quot;primitiveType&quot;: &quot;STRING&quot;,
+              &quot;length&quot;: &quot;5&quot;
+            },
+            {
+              &quot;type&quot;: &quot;PRIMITIVE_BASED&quot;,
+              &quot;primitiveType&quot;: &quot;INT&quot;,
+              &quot;min&quot;: &quot;0&quot;,
+              &quot;max&quot;: &quot;999&quot;
+            }
+          ]
+        }
+      ]
+    }&#x27;
+```
+
+  
+
+#### Sample output
+
+    {
+      &quot;status&quot;: &quot;CREATED&quot;,
+      &quot;message&quot;: &quot;Successfully uploaded simulation configuration &#x27;simulationPrimitive&#x27;&quot;
+    }
+
+#### REST API response
+
+-   200 if the simulation configuration is successfully saved.
+-   409 if a simulation configuration with the specified name already
+    exists.
+-   400 if the configuration provided is not in a valid JSON format.
+
+For descriptions of the HTTP status codes, see [HTTP Status
+Codes](https://docs.wso2.com/display/DAS310/HTTP+Status+Codes) .
+
+### Editing a simulation configuration
+
+To edit a simulation configuration that is already saved, a PUT request
+should be sent to a REST API as explained below.
+
+#### REST API
+
+The REST API to be called depends on the type of event simulation you
+are carrying out as shown in the table below.
+
+| Event Simulation Type        | REST API                                                                                                                        |
+|------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| Simulating a single event    | `             PUT             http://&lt;SP_HOST&gt;:&lt;API_PORT&gt;/simulation/single            `                                        |
+| Simulating a multiple events | `             PUT             http://&lt;SP_HOST&gt;:                           &lt;API_PORT&gt;             ` /simulation/feed/{feed name} |
+
+#### Sample cURL command
+
+``` java
+    curl -X PUT \
+      http://localhost:9390/simulation/feed/simulationPrimitive \
+      -H &#x27;content-type: text/plain&#x27; \
+      -d &#x27;{
+      &quot;properties&quot;: {
+        &quot;simulationName&quot;: &quot;updatedSimulationPrimitive&quot;,
+        &quot;startTimestamp&quot;: &quot;&quot;,
+        &quot;endTimestamp&quot;: &quot;&quot;,
+        &quot;noOfEvents&quot;: &quot;10&quot;,
+        &quot;description&quot;: &quot;Updating the simulation configuration&quot;,
+        &quot;timeInterval&quot;: &quot;1000&quot;
+      },
+      &quot;sources&quot;: [
+        {
+          &quot;siddhiAppName&quot;: &quot;TestExecutionPlan&quot;,
+          &quot;streamName&quot;: &quot;FooStream&quot;,
+          &quot;timestampInterval&quot;: &quot;1000&quot;,
+          &quot;simulationType&quot;: &quot;RANDOM_DATA_SIMULATION&quot;,
+          &quot;attributeConfiguration&quot;: [
+            {
+              &quot;type&quot;: &quot;PRIMITIVE_BASED&quot;,
+              &quot;primitiveType&quot;: &quot;STRING&quot;,
+              &quot;length&quot;: &quot;5&quot;
+            },
+            {
+              &quot;type&quot;: &quot;PRIMITIVE_BASED&quot;,
+              &quot;primitiveType&quot;: &quot;INT&quot;,
+              &quot;min&quot;: &quot;0&quot;,
+              &quot;max&quot;: &quot;999&quot;
+            }
+          ]
+        }
+      ]
+    
+    }&#x27;
+```
+
+#### Sample output
+
+    {
+      &quot;status&quot;: &quot;OK&quot;,
+      &quot;message&quot;: &quot;Successfully updated simulation configuration &#x27;simulationPrimitive&#x27;.&quot;
+    }
+
+#### REST API response
+
+-   200 if the simulation configuration is successfully updated.
+-   404 if the file specified does not exist in the
+    `          &lt;SP_HOME&gt;/wso2/editor/deployment/simulation-configs         `
+    directory.
+-   400 if the file specified is not a CSV file, or if the file does not
+    exist in the path specified.
+-   403 if the size of the file specified exceeds the maximum size
+    allowed.
+
+For descriptions of the HTTP status codes, see [HTTP Status
+Codes](https://docs.wso2.com/display/DAS310/HTTP+Status+Codes) .
+
+### Deleting a simulation configuration
+
+To delete an event simulation file that is already saved in the
+`         &lt;SP_HOME&gt;/wso2/editor/deployment/simulation-configs        `
+directory, a DELETE request should be sent to a REST API as explained
+below.
+
+#### REST API
+
+The REST API to be called depends on the type of event simulation you
+are carrying out as shown in the table below.
+
+| Event Simulation Type        | REST API                                                                                                                                               |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Simulating a single event    | `             DELETE             http://&lt;SP_HOST&gt;:&lt;API_PORT&gt;/simulation/single            `                                                            |
+| Simulating a multiple events | `             DELETE             http://                           &lt;SP_HOST&gt;             ` : `              &lt;API_PORT&gt;             ` /simulation/feed/ |
+
+#### Sample cURL command
+
+``` java
+    curl -X DELETE &#x27;http://localhost:9390/simulation/feed/simulationPrimitive&#x27;
+```
+
+#### Sample output
+
+    {
+      &quot;status&quot;: &quot;OK&quot;,
+      &quot;message&quot;: &quot;Successfully deleted simulation configuration &#x27;simulationPrimitive&#x27;&quot;
+    }
+
+#### REST API response
+
+-   200 if the simulation configuration is successfully deleted.
+-   404 if the file specified does not exist in the
+    `          &lt;SP_HOME&gt;/wso2/editor/deployment/simulation-configs         `
+    directory.
+
+For descriptions of the HTTP status codes, see [HTTP Status
+Codes](https://docs.wso2.com/display/DAS310/HTTP+Status+Codes) .
+
+### Retrieving a simulation configuration
+
+To view a simulation configuration saved in the
+`         &lt;SP_HOME&gt;/wso2/editor/deployment/simulation-configs        `
+directory via the CLI, a GET request should be sent to a REST API as
+explained below.
+
+#### REST API
+
+The REST API to be called depends on the type of event simulation you
+are carrying out as shown in the table below.
+
+| Event Simulation Type        | REST API                                                                                                             |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| Simulating a single event    | `             GET             http://&lt;SP_HOST&gt;:&lt;API_PORT&gt;/simulation/single            `                             |
+| Simulating a multiple events | `             GET             http://                           &lt;SP_HOST&gt;:&lt;API_PORT&gt;             ` /simulation/feed/ |
+
+#### Sample cURL command
+
+``` java
+    curl -X GET &#x27;http://localhost:9390/simulation/feed/simulationPrimitive&#x27;
+```
+
+#### Sample output
+
+    {
+      &quot;status&quot;: &quot;OK&quot;,
+      &quot;message&quot;: &quot;{\&quot;Simulation configuration\&quot;:{\&quot;sources\&quot;:[{\&quot;timestampInterval\&quot;:\&quot;1000\&quot;,\&quot;simulationType\&quot;:\&quot;RANDOM_DATA_SIMULATION\&quot;,\&quot;attributeConfiguration\&quot;:[{\&quot;length\&quot;:\&quot;5\&quot;,\&quot;type\&quot;:\&quot;PRIMITIVE_BASED\&quot;,\&quot;primitiveType\&quot;:\&quot;STRING\&quot;},{\&quot;min\&quot;:\&quot;0\&quot;,\&quot;max\&quot;:\&quot;999\&quot;,\&quot;type\&quot;:\&quot;PRIMITIVE_BASED\&quot;,\&quot;primitiveType\&quot;:\&quot;INT\&quot;}],\&quot;streamName\&quot;:\&quot;FooStream\&quot;,\&quot;siddhiAppName\&quot;:\&quot;TestExecutionPlan\&quot;}],\&quot;properties\&quot;:{\&quot;simulationName\&quot;:\&quot;simulationPrimitive\&quot;,\&quot;description\&quot;:\&quot;Updating the simulation configuration\&quot;,\&quot;timeInterval\&quot;:\&quot;1000\&quot;,\&quot;endTimestamp\&quot;:\&quot;\&quot;,\&quot;startTimestamp\&quot;:\&quot;\&quot;,\&quot;noOfEvents\&quot;:\&quot;10\&quot;}}}&quot;
+    }
+
+#### REST API Response
+
+-   200 if the simulation configuration is successfully retrieved.
+-   404 if the file specified does not exist in the
+    `          &lt;SP_HOME&gt;/wso2/editor/deployment/simulation-configs         `
+    directory.
+
+For descriptions of the HTTP status codes, see [HTTP Status
+Codes](https://docs.wso2.com/display/DAS310/HTTP+Status+Codes) .
+
+### Uploading a CSV file
+
+To simulate events from a CSV file, the required CSV file needs to exist
+in the \&lt;SP\_HOME\&gt;/wso2/editor/deployment/csv-files directory.
+
+#### REST API
+
+A POST request should be sent to the following API.
+
+`         POST http://&lt;SP_HOST&gt;:&lt;API_PORT&gt;/simulation/feed        `
+
+#### Sample cURL command
+
+``` java
+    curl -X POST \
+      http://localhost:9390/simulation/feed/ \
+      -H &#x27;content-type: text/plain&#x27; \
+      -d &#x27;{
+      &quot;properties&quot;: {
+        &quot;simulationName&quot;: &quot;FeedSimulationTest&quot;,
+        &quot;startTimestamp&quot;: &quot;&quot;,
+        &quot;endTimestamp&quot;: &quot;&quot;,
+        &quot;noOfEvents&quot;: &quot;&quot;,
+        &quot;description&quot;: &quot;&quot;,
+        &quot;timeInterval&quot;: &quot;1000&quot;
+      },
+      &quot;sources&quot;: [
+        {
+          &quot;siddhiAppName&quot;: &quot;TestExecutionPlan&quot;,
+          &quot;streamName&quot;: &quot;FooStream&quot;,
+          &quot;timestampInterval&quot;: &quot;1000&quot;,
+          &quot;simulationType&quot;: &quot;CSV_SIMULATION&quot;,
+          &quot;fileName&quot;: &quot;myEvents.csv&quot;,
+          &quot;delimiter&quot;: &quot;,&quot;,
+          &quot;isOrdered&quot;: true,
+          &quot;indices&quot;: &quot;0,1&quot;
+        }
+      ]
+    }&#x27;
+```
+
+#### Sample output
+
+    {
+      &quot;status&quot;: &quot;CREATED&quot;,
+      &quot;message&quot;: &quot;Successfully uploaded simulation configuration &#x27;FeedSimulationTest&#x27;&quot;
+    }
+
+#### REST API response
+
+-   200 if the CSV file is successfully uploaded.
+-   409 if a CSV file with the file name specified already exists in the
+    \&lt;SP\_HOME\&gt;/wso2/editor/deployment/csv-files directory.
+-   400 if the specified file is not a CSV file or if the specified file
+    path is not valid.
+-   403 if the size of the file specified exceeds the maximum file size
+    allowed.
+
+For descriptions of the HTTP status codes, see [HTTP Status
+Codes](https://docs.wso2.com/display/DAS310/HTTP+Status+Codes) .
+
+### Editing an uploaded CSV file
+
+This section explains how to edit a CSV file that is already uploaded to
+the `         &lt;SP_HOME&gt;/wso2/editor/deployment/csv-files        `
+directory.
+
+#### REST API
+
+A PUT request should be sent to the following API.
+
+`         PUT -F &#x27;file=@/{path to csv file}&#x27; http://&lt;SP_HOST&gt;:&lt;API_PORT&gt;/simulation/files/{fileName}?fileName={fileName}        `
+
+#### Sample cURL command
+
+``` java
+    curl -X PUT -F &#x27;file=@/home/nadeeka/Desktop/editedMyEvents.csv&#x27; http://localhost:9390/simulation/files/myEvents.csv?fileName=myEvents.csv
+```
+
+#### Sample output
+
+    {
+      &quot;status&quot;: &quot;OK&quot;,
+      &quot;message&quot;: &quot;Successfully updated CSV file &#x27;myEvents.csv&#x27; with file &#x27; editedMyEvents.csv&#x27;.&quot;
+    }
+
+#### REST API response
+
+-   200 if the CSV file is successfully updated.
+-   404 if the specified CSV file does not exist in the
+    `          &lt;SP_HOME&gt;/deployment/simulator/csvFiles         `
+    directory.
+
+For descriptions of the HTTP status codes, see [HTTP Status
+Codes](https://docs.wso2.com/display/DAS310/HTTP+Status+Codes) .
+
+### Deleting an uploaded CSV file
+
+This section explains how to delete a CSV file that is already uploaded
+to the `         &lt;SP_HOME&gt;/wso2/editor/deployment/csv-files        `
+directory.
+
+#### REST API
+
+A DELETE request should be sent to the following API.
+
+`         DELETE http://&lt;SP_HOST&gt;:&lt;API_PORT&gt;/simulation/files/{fileName}        `
+
+#### Sample cURL command
+
+``` java
+    curl -X DELETE http://localhost:9390/simulation/files/myEvents.csv
+```
+
+#### Sample output
+
+    {
+      &quot;status&quot;: &quot;OK&quot;,
+      &quot;message&quot;: &quot;Successfully deleted file &#x27;myEvents.csv&#x27;&quot;
+    }
+
+#### REST API response
+
+-   200 if the CSV file is successfully deleted.
+-   404 if the specified CSV file does not exist in the
+    `          &lt;SP_HOME&gt;/wso2/editor/deployment/csv-files         `
+    directory.
+
+### Pausing an event simulation
+
+This section explains how to pause an event simulation that has already
+started.
+
+#### REST API
+
+A POST request should be sent to the following API.
+
+`         POST http://&lt;SP_HOST&gt;:&lt;API_PORT&gt;/simulation/feed/{simulationName}/?action=pause        `
+
+#### Sample cURL command
+
+``` java
+    curl -X POST http://localhost:9390/simulation/feed/simulationPrimitive/?action=pause
+```
+
+#### Sample output
+
+    {
+      &quot;status&quot;: &quot;OK&quot;,
+      &quot;message&quot;: &quot;Successfully paused event simulation &#x27;simulationPrimitive&#x27;.&quot;
+    }
+
+#### REST API response
+
+-   200 if the event simulation is successfully paused.
+-   409 if the event simulation is already paused.
+
+### Resuming an event simulation
+
+This section explains how to resume an event simulation that has already
+paused.
+
+#### REST API
+
+A POST request should be sent to the following API
+
+`         POST http://&lt;SP_HOST&gt;:&lt;API_PORT&gt;/simulation/feed/{                   simulationName         `
+}/?action=resume
+
+#### Sample cURL command
+
+``` java
+    curl -X POST http://localhost:9390/simulation/feed/simulationPrimitive/?action=resume
+```
+
+#### Sample output
+
+    {
+      &quot;status&quot;: &quot;OK&quot;,
+      &quot;message&quot;: &quot;Successfully resumed event simulation &#x27;simulationPrimitive&#x27;.&quot;
+    }
+
+#### REST API response
+
+-   200 if the event simulation is successfully resumed.
+
+### Stopping an event simulation
+
+This section explains how to stop an event simulation.
+
+#### REST API
+
+A POST request should be sent to the following API
+
+`         POST http://&lt;SP_HOST&gt;:&lt;API_PORT&gt;/simulation/feed/{                   simulationName         `
+}/?action=stop
+
+#### Sample cURL command
+
+``` java
+    curl -X POST http://localhost:9390/simulation/feed/simulationPrimitive/?action=stop
+```
+
+#### Sample output
+
+    {
+      &quot;status&quot;: &quot;OK&quot;,
+      &quot;message&quot;: &quot;Successfully stopped event simulation &#x27;simulationPrimitive&#x27;.&quot;
+    }
+
+#### REST API response
+
+-   200 if the event simulation is successfully stoped.
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>worker-Runtime---REST-APIs-Permission-Model.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Worker Runtime - REST APIs Permission Model
+
+There are two sets of REST APIs available in worker runtime. Stream
+Processor APIs and Event Simulator APIs have following permission model.
+You need to have appropriate permission to invoke these APIS.
+
+## Stream Processor  APIs
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Method&lt;/th&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;th&gt;Required Permission&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/siddhi-apps&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;td&gt;/siddhi-apps&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;td&gt;/siddhi-apps/{appName}&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;/siddhi-apps&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage or siddhiApp.view&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;/siddhi-apps/{appName}&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage or siddhiApp.view&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;/siddhi-apps/{appName}/status&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage or siddhiApp.view&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/siddhi-apps/{appName}/backup&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;/siddhi-apps/{appName}/restore&lt;/p&gt;
+&lt;p&gt;/siddhi-apps/{appName}/restore?version=&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;/statistics&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage or siddhiApp.view&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;td&gt;/statistics&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;/system-details&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage or siddhiApp.view&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;/siddhi-apps/statistics&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage or siddhiApp.view&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;td&gt;/siddhi-apps/{appName}/statistics&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;td&gt;/siddhi-apps/statistics&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - siddhiApp.manage&lt;/p&gt;
+&lt;p&gt;AppName - SAPP&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+## Event Simulator APIs
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Method&lt;/th&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;th&gt;Required Permission&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/simulation/single&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/simulation/feed&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;/simulation/feed&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage or simulator.view&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;td&gt;/simulation/feed/{simulationName}&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;/simulation/feed/{simulationName}&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage or simulator.view&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;td&gt;/simulation/feed/{simulationName}&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/simulation/feed/{simulationName}?action=run&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/simulation/feed/{simulationName}?action=pause&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/simulation/feed/{simulationName}?action=resume&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/simulation/feed/{simulationName}?action=stop&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/simulation/feed/{simulationName}?action=resume&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;/simulation/feed/{simulationName}/status&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage or simulator.view&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/simulation/files&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;/simulation/files&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage or simulator.view&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;td&gt;/simulation/files/{fileName}&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;td&gt;/simulation/files/{fileName}&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/simulation/ connectToDatabase&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/simulation/ connectToDatabase / retrieveTableNames&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;/simulation/ connectToDatabase/{tableName}/ retrieveColumnNames&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;PermissionString - simulator.manage&lt;/p&gt;
+&lt;p&gt;AppName - SIM&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+```
+    simulator
+```
+</body>
+</html>

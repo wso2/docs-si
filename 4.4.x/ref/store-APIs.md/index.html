@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>store-APIs.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Store APIs
+
+## Query records in Siddhi store
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Queries records in the Siddhi store. For more information, see [Integrating Stores - Managing Stored Data via REST API](../Guides/storage-Integration.md#performing-crud-operations-via-rest-api).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/stores/query&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+``` java
+curl -X POST https://localhost:9443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;AggregationTest&quot;, &quot;query&quot; : &quot;from stockAggregation select *&quot; }&#x27; -k
+```
+
+### Sample curl command
+
+``` java
+curl -X POST https://localhost:7443/stores/query -H &quot;content-type: application/json&quot; -u &quot;admin:admin&quot; -d &#x27;{&quot;appName&quot; : &quot;ApiRequestSummary&quot;, &quot;query&quot; : &quot;from API_REQUEST_SUMMARY within 1586249325000L, 1586335725000L per \&quot;days\&quot; select userId, apiPublisher, sum(totalRequestCount) as net_total_requests group by userId, apiPublisher order by net_total_requests DESC;&quot; }&#x27; -k
+```
+
+### Sample output
+
+``` java
+{&quot;records&quot;:[[&quot;admin&quot;,&quot;admin&quot;,66]]}
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+</body>
+</html>

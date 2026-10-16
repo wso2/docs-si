@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>environment-compatibility.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Environment Compatibility
+
+This section describes the environment compatibilities of WSO2 Integrator: SI.
+
+## Tested Operating Systems
+
+WSO2 Integrator: SI 4.4.1 is tested on the following operating systems.
+
+|**Operating System**|**Versions**|
+|--------------------|-----------|
+|macOS               |26.6       |
+|Windows             |11         |
+
+## Supported JDKs
+
+WSO2 Integrator: SI 4.4.1 supports the following JDKs.
+
+|**JDK**             |**Version**|
+|--------------------|-----------|
+|OpenJDK (Eclipse Temurin)|17&lt;br/&gt;21&lt;br/&gt;25 (recommended)|
+
+!!! note
+    JDK 25 support was added in WSO2 Integrator: SI 4.4.1. On 4.4.0, JDK 21 is recommended, but JavaScript functions and the recovery of persisted aggregations do not work on JDK 17 and later, and the `spi-provider`, `install-jars` and `jni-provider` tools do not run on JDKs later than 17. To use JDK 25, upgrade to 4.4.1. See [Upgrading to 4.4.x](../setup/upgrading-to-4.4.x.md).
+
+## Tested DBMSs (Database Management Systems)
+
+WSO2 Integrator: SI 4.4.1 is tested with the following DBMSs.
+
+|**DBMS**            |**Version**|
+|--------------------|-----------|
+|H2 (embedded)       |2.2.224    |
+|MySQL               |8.0.32     |
+|PostgreSQL          |16         |
+|Oracle Database Free|23         |
+|MongoDB             |8.0        |
+|Redis               |7          |
+</body>
+</html>

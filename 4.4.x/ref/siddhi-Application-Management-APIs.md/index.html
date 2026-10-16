@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>siddhi-Application-Management-APIs.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Siddhi Application Management APIs
+
+## Creating a Siddhi application
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Creates a new Siddhi Application.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/siddhi-apps&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;strong&gt;Request&lt;/strong&gt; : text/plain&lt;br /&gt;
+&lt;strong&gt;Response&lt;/strong&gt; : application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+``` java
+curl -X POST &quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/siddhi-apps&quot; -H &quot;accept: application/json&quot; -H &quot;Content-Type: text/plain&quot; -d @{appName} -u &lt;SI_USERNAME&gt;:&lt;SI_PASSWORD&gt; -k
+```
+
+### Sample curl command
+
+``` java
+curl -X POST &quot;https://localhost:9443/siddhi-apps&quot; -H &quot;accept: application/json&quot; -H &quot;Content-Type: text/plain&quot; -d @TestSiddhiApp.siddhi -u admin:admin -k
+```
+
+### Sample output
+
+The response for the sample curl command given above can be one of the
+following.
+
+-   If API request is valid and there is no existing Siddhi application
+    with the given name, a response similar to the following is
+    generated with response code 201. This response contains a location
+    header with the path of the newly created file from product root
+    home.
+
+    ``` java
+    {
+      &quot;type&quot;:&quot;success&quot;,
+      &quot;message&quot;:&quot;Siddhi App saved succesfully and will be deployed in next deployment cycle&quot;
+    }
+    ```
+
+-   If the API request is valid, but a Siddhi application with the given
+    name already exists,  a response similar to the following is
+    generated with response code 409.
+
+    ``` java
+    {
+      &quot;type&quot;: &quot;conflict&quot;,
+      &quot;message&quot;: &quot;There is a Siddhi App already exists with same name&quot; 
+    }
+    ```
+
+-   If the API request is invalid due to invalid content in the Siddhi
+    queries you have included in the request body,  a response similar
+    to the following is generated is generated with response code 400.
+
+    ``` java
+    {
+      &quot;code&quot;: 800101,
+      &quot;type&quot;: &quot;validation error&quot;,
+      &quot;message&quot;: &quot;You have an error in your SiddhiQL at line 8:8, missing INTO at &#x27;BarStream&#x27;&quot; 
+    }
+    ```
+
+-   If the API request is valid, but an exception occurred during file
+    processing or saving, the following response is generated with
+    response code 500.
+
+    ``` java
+    {
+      &quot;code&quot;: 800102,
+      &quot;type&quot;: &quot;file processing error&quot;,
+      &quot;message&quot;: &lt;error-message&gt;
+    }
+    ```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 201, 409, 400, and 500.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Updating a Siddhi Application
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Updates a Siddhi Application.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/siddhi-apps&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;strong&gt;Request&lt;/strong&gt; : text/plain&lt;br /&gt;
+&lt;strong&gt;Response&lt;/strong&gt; : application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+``` java
+curl -X PUT &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/siddhi-apps&quot; -H &quot;accept: application/json&quot; -H &quot;Content-Type: text/plain&quot; -d @{appName}.siddhi -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X PUT &quot;https://localhost:9443/siddhi-apps&quot; -H &quot;accept: application/json&quot; -H &quot;Content-Type: text/plain&quot; -d @TestSiddhiApp.siddhi -u admin:admin -k
+```
+
+### Sample output
+
+-   If the API request is valid and the specified Siddhi application is successfully updated, the following response is returned with response code 200.
+
+    ```
+    {
+      &quot;type&quot;:&quot;success&quot;,
+      &quot;message&quot;:&quot;Siddhi App updated succesfully and will be deployed in next deployment cycle&quot;}
+    ```
+
+-   If the API request is invalid due to invalid content in the Siddhi
+    query, a response similar to the following is returned with response
+    code 400.
+
+    ``` java
+    {
+      &quot;code&quot;: 800101,
+      &quot;type&quot;: &quot;validation error&quot;,
+      &quot;message&quot;: &quot;You have an error in your SiddhiQL at line 8:8, missing INTO at &#x27;BarStream&#x27;&quot; 
+    }
+    ```
+
+-   If the API request is valid, but an exception occurred when saving or
+    processing files, a response similar to the following is returned
+    with response code 500.
+
+    ``` java
+    {
+      &quot;code&quot;: 800102,
+      &quot;type&quot;: &quot;file processing error&quot;,
+      &quot;message&quot;: &lt;error-message&gt;
+    }
+    ```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200, 201, 400, and 500.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+## Deleting a Siddhi application
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Delets an existing Siddhi application.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/siddhi-apps/{appName}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+  
+#### Parameter Description
+
+| Parameter | Description                                       |
+|-----------|---------------------------------------------------|
+|`{appName}`| The name of the Siddhi application to be deleted. |
+
+### curl command syntax
+
+``` java
+curl -X DELETE &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/siddhi-apps/{app-name}&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X DELETE &quot;https://localhost:9443/siddhi-apps/TestSiddhiApp&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample output
+
+The response for the sample curl command given above can be one of the
+following:
+
+-   If the API request is valid and a Siddhi application with the given
+    name exists, an empty response is received with response
+    code 200.
+
+    ``` java
+    http://localhost:9090/siddhi-apps/TestExecutionPlan1
+    ```
+
+-   If the API request is valid, but a Siddhi application with the given
+    name is not deployed, the following response is received with
+    response code 404.
+
+    ``` java
+    {
+      &quot;type&quot;: &quot;not found&quot;,
+      &quot;message&quot;: &quot;There is no Siddhi App exist with provided name : TestExecutionPlan1&quot; 
+    }
+    ```
+
+-   If the API request is valid, but an exception occurred when deleting
+    the given Siddhi application, the following response is received
+    with response code 500.
+
+    ``` java
+    {
+      &quot;code&quot;: 800102,
+      &quot;type&quot;: &quot;file processing error&quot;,
+      &quot;message&quot;: &lt;error-message&gt;
+    }
+    ```
+
+-   If the API request is valid, but there are restricted characters in
+    the given Siddhi application name, the following response is
+    received with response code 400.
+
+    ``` java
+    {
+      &quot;code&quot;: 800101,
+      &quot;type&quot;: &quot;validation error&quot;,
+      &quot;message&quot;: &quot;File name contains restricted path elements . : ../../siddhiApp2&#x27;&quot; 
+    }
+    ```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200, 404, 500 or 400.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Listing all active Siddhi applications
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Lists all the currently active Siddhi applications.&lt;/p&gt;
+&lt;p&gt;If the &lt;code&gt;isActive=true&lt;/code&gt; parameter is set, all the active Siddhi Applications are listed. If not, all the inactive Siddhi applications are listed.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/siddhi-apps&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;strong&gt;Request content type&lt;/strong&gt; : any&lt;br /&gt;
+&lt;strong&gt;Response content type&lt;/strong&gt; : &lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+``` java
+curl -X GET &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/siddhi-apps&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X GET &quot;https://localhost:9443/siddhi-apps?isActive=true&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample output
+
+Possible responses are as follows:
+
+- If the API request is valid and there are Siddhi applications deployed in your WSO2 Integrator: SI setup, a response similar to the following is returned with response code 200.
+
+    ``` java
+    [&quot;TestExecutionPlan3&quot;, &quot;TestExecutionPlan4&quot;]
+    ```
+
+- If the API request is valid, there are Siddhi applications deployed in your WSO2 Integrator: SI setup, and a query parameter is defined in the request, a response similar to the following is returned with response code 200. This response only contains Siddhi applications that are active.&lt;br/&gt;&lt;br/&gt;
+
+    !!! info
+        If these conditions are met, but the `isActive` parameter is set to `false`, the response contains only inactive Siddhi applications.
+    
+    ``` java
+    [&quot;TestExecutionPlan3&quot;]
+    ```
+
+- If the API request is valid, but there are no Siddhi applications deployed in your WSO2 Integrator: SI setup, the following response is returned.
+
+    ``` java
+    []
+    ```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Retrieving a specific Siddhi application
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Retrieves the given Siddhi application.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/siddhi-apps/{appName}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+#### Parameter Description
+
+| Parameter   | Description                                         |
+|-------------|-----------------------------------------------------|
+| `{appName}` | The name of the Siddhi application to be retrieved. |
+
+  
+
+### curl command syntax
+
+``` java
+curl -X GET &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/siddhi-apps/{app-name}&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X GET &quot;https://localhost:9443/siddhi-apps/SiddhiTestApp&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample output
+
+- If the API request is valid and a Siddhi application of the given name exists, a response similar to the following is returned with response code 200.
+
+    ``` java
+    {
+      &quot;content&quot;: &quot;\n@Plan:name(&#x27;TestExecutionPlan&#x27;)\ndefine stream FooStream (symbol string, price float, volume long);\n\n@source(type=&#x27;inMemory&#x27;, topic=&#x27;symbol&#x27;, @map(type=&#x27;passThrough&#x27;))Define stream BarStream (symbol string, price float, volume long);\n\nfrom FooStream\nselect symbol, price, volume\ninsert into BarStream;&quot; 
+    }
+    ```
+
+- If the API request is valid, but a Siddhi application of the given name is not deployed, a response similar to the following is returned with response code 404.
+
+    ``` java
+    {
+      &quot;type&quot;: &quot;not found&quot;,
+      &quot;message&quot;: &quot;There is no Siddhi App exist with provided name : TestExecutionPlan1&quot; 
+    }
+    ```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Fetching the status of a Siddhi Application
+
+### Overview
+
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 33%&quot; /&gt;
+&lt;col style=&quot;width: 66%&quot; /&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;This fetches the status of the specified Siddhi application.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/siddhi-apps/{appName}/status&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/runtime&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Parameter Description
+
+|Parameter   | Description                                                                 |
+|------------|-----------------------------------------------------------------------------|
+|`{appName}` | The name of the Siddhi application of which the status needs to be fetched. |
+
+### curl command syntax
+
+``` java
+curl -X GET &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/siddhi-apps/{app-file-name}/status&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X GET &quot;https://localhost:9443/siddhi-apps/TestSiddhiApp/status&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample output
+
+- If the Siddhi application is active, the following is returned with response code 200.
+
+    ``` java
+    {&quot;status&quot;:&quot;active&quot;} 
+    ```
+
+- If the Siddhi application is inactive, the following is returned with response code 200.
+
+    ``` java
+    {&quot;status&quot;:&quot;inactive&quot;} 
+    ```
+
+- If the Siddhi application does not exist, but the REST API call is valid, the following is returned with the response code 404.
+
+    ``` java
+    {
+      &quot;type&quot;: &quot;not found&quot;,
+      &quot;message&quot;: &quot;There is no Siddhi App exist with provided name : TestExecutionPlan1&quot; 
+    }
+    ```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Taking a snapshot of a Siddhi Application
+
+### Overview
+
+&lt;table&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 33%&quot; /&gt;
+&lt;col style=&quot;width: 66%&quot; /&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;This takes a snapshot of the specific Siddhi application.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/siddhi-apps/{appName}/backup &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/runtime&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+ 
+
+#### Parameter Description
+
+| Parameter | Description                                                               |
+|-----------|---------------------------------------------------------------------------|
+|`{appName}`| The name of the Siddhi application of which a snapshot needs to be taken. |
+
+  
+### curl command syntax
+
+``` java
+curl -X POST &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/siddhi-apps/{appName}/backup&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X POST &quot;https://localhost:9443/siddhi-apps/TestSiddhiApp/backup&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample output
+
+The output can be one of the following:
+
+- If the API request is valid and a Siddhi application exists with the given name, an output similar to the following (i.e., with the snapshot revision number) is returned with response code 201.
+
+    ``` java
+    {&quot;revision&quot;: &quot;89489242494242&quot;} 
+    ```
+
+- If the API request is valid, but no Siddhi application with the given name is deployed, an output similar to the following is returned with response code 404.
+
+    ``` java
+    {
+      &quot;type&quot;: &quot;not found&quot;,
+      &quot;message&quot;: &quot;There is no Siddhi App exist with provided name : TestExecutionPlan1&quot; 
+    }
+    ```
+
+- If the API request is valid, but an exception has occurred when backing up the state at Siddhi level, an output similar to the following is returned with response code 500.
+
+    ``` java
+            {
+              &quot;code&quot;: 800102,
+              &quot;type&quot;: &quot;file processing error&quot;,
+              &quot;message&quot;: &lt;error-message&gt;
+            }
+    ```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;201, 404, or 500.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Restoring a Siddhi Application via a snapshot
+
+!!! info
+    In order to call this API, you need to have already taken a snapshot of the Siddhi application to be restored. For more information about the API via which the snapshot is taken, see [Taking a snapshot of a Siddhi application](#SiddhiApplicationManagementAPIs-Snapshot).
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;&lt;p&gt;Description&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;This restores a Siddhi application using a previously taken snapshot of the same Siddhi Application.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;&lt;p&gt;API Context&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;To restore without considering the version&lt;/strong&gt; : &lt;code&gt;/siddhi-apps/{appName}/restore&lt;/code&gt;&lt;/li&gt;&lt;br/&gt;
+&lt;li&gt;&lt;strong&gt;To restore a specific version&lt;/strong&gt; : &lt;code&gt;/siddhi-apps/{appName}/restore?version=&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;&lt;p&gt;HTTP Method&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;&lt;p&gt;Request/Response format&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;&lt;p&gt;Runtime&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Parameter Description
+
+| Parameter | Description                                                               |
+|-----------|---------------------------------------------------------------------------|
+|`{appName}`| The name of the Siddhi application that needs to be restored.             |
+
+  
+
+### curl command syntax
+
+``` java
+curl -X POST &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/siddhi-apps/{appName}/restore&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X POST &quot;https://localhost:9443/siddhi-apps/TestSiddhiApp/restore?revision=1514981290838_TestSiddhiApp&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample output
+
+The above sample curl command can generate either one of the following responses:
+
+- If the API request is valid, a Siddhi application with the given name exists, and no revision information is passed as a query parameter, the following response is returned with response code 200.
+
+    ``` java
+    {
+      &quot;type&quot;: &quot;success&quot;,
+      &quot;message&quot;: &quot;State restored to last revision for Siddhi App :TestExecutionPlan&quot; 
+    }
+    ```
+
+- If the API request is valid, a Siddhi application with the given name exists, and revision information is passed as a query parameter, the following response is returned with response code 200. In this scenario, the Siddhi snapshot is created in the file system.
+
+    ``` java
+    {
+      &quot;type&quot;: &quot;success&quot;,
+      &quot;message&quot;: &quot;State restored to revision 1234563 for Siddhi App :TestExecutionPlan&quot; 
+    }
+    ```
+
+- If the API request is valid, but no Siddhi application is deployed with the given name, the following response is returned with response code 404.
+
+    ``` java
+    {
+      &quot;type&quot;: &quot;not found&quot;,
+      &quot;message&quot;: &quot;There is no Siddhi App exist with provided name : TestExecutionPlan1&quot; 
+    }
+    ```
+
+- If the API request is valid, but an exception occurred when restoring the state at Siddhi level, the following response is returned with response code 500.
+
+    ``` java
+    {
+      &quot;code&quot;: 800102,
+      &quot;type&quot;: &quot;file processing error&quot;,
+      &quot;message&quot;: &lt;error-message&gt;
+    }
+    ```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200, 404 or 500.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Returning real-time statistics of a WSO2 Integrator: SI node
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Returns the real-time statistics of a WSO2 Integrator: SI node.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;&lt;p&gt;API Context&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/statistics&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;&lt;p&gt;Runtime&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+### curl command syntax
+
+``` java
+curl -X GET &quot;https://&lt;HOST_NAME&gt;&gt;:&lt;PORT&gt;/statistics&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X GET &quot;https://localhost:9443/statistics&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample output
+
+```
+{
+  &quot;workerMetrics&quot;: {
+    &quot;processCPU&quot;: 0.0,
+    &quot;systemCPU&quot;: 0.0,
+    &quot;loadAverage&quot;: 0.0,
+    &quot;memoryUsage&quot;: 0.0
+  },
+  &quot;runningStatus&quot;: &quot;Reachable&quot;,
+  &quot;isStatsEnabled&quot;: false,
+  &quot;clusterID&quot;: &quot;Single Node Deployments&quot;,
+  &quot;lastSyncTime&quot;: &quot;n/a&quot;,
+  &quot;lastSnapshotTime&quot;: &quot;Thu, 01 Jan 1970 05:30:00 IST&quot;,
+  &quot;isInSync&quot;: false,
+  &quot;message&quot;: &quot;Metrics are disabled.&quot;
+}
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Enabling/disabling node statistics
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Enables/disables the real-time statistics of a WSO2 Integrator: SI node.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;&lt;p&gt;API Context&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/statistics&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;&lt;p&gt;Runtime&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+``` java
+curl -X PUT &quot;https://&lt;HOST_NAME&gt;:&lt;PORT/statistics&quot; -H &quot;accept: application/json&quot; -H &quot;Content-Type: application/json&quot; -d &quot;{\&quot;statsEnable\&quot;:\&quot;true\&quot;}&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X PUT &quot;https://localhost:9443/statistics&quot; -H &quot;accept: application/json&quot; -H &quot;Content-Type: application/json&quot; -d &quot;{\&quot;statsEnable\&quot;:\&quot;true\&quot;}&quot; -u admin:admin -k
+```
+
+### Sample output
+
+- If the statistics are successfully enabled, the following response is returned.
+
+    ```
+      {
+        &quot;code&quot;:4,
+        &quot;type&quot;:&quot;ok&quot;,
+        &quot;message&quot;:&quot;Successfully enabled the metrics.&quot;
+      }  
+    ```
+- If the statistics are already enabled, the following response is returned.
+
+    ```
+      {
+        &quot;code&quot;:4,
+        &quot;type&quot;:&quot;ok&quot;,
+        &quot;message&quot;:&quot;Metrics are enabled already.&quot;
+      }
+    ```
+
+- If the statistics are successfully disabled, the following response is returned.
+
+    ```
+      {
+        &quot;code&quot;:4,
+        &quot;type&quot;:&quot;ok&quot;,
+        &quot;message&quot;:&quot;Successfully disabled the metrics.&quot;
+      }
+    ```
+  
+- If the statistics are already disabled, the following response is returned.
+
+    ```
+      {
+        &quot;code&quot;:4,
+        &quot;type&quot;:&quot;ok&quot;,
+        &quot;message&quot;:&quot;Metrics are disabled already.&quot;
+      }
+    ```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Returning general details of a WSO2 Integrator: SI node
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Returns general details of a WSO2 Integrator: SI node.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/system-details&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;&lt;p&gt;Runtime&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+``` java
+curl -X GET &quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/system-details&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X GET &quot;https://localhost:9443/system-details&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample output
+
+```
+{
+  &quot;carbonId&quot;: &quot;wso2-si&quot;,
+  &quot;javaRuntimeName&quot;: &quot;Java(TM) SE Runtime Environment&quot;,
+  &quot;javaVMVersion&quot;: &quot;25.152-b16&quot;,
+  &quot;javaVMVendor&quot;: &quot;Oracle Corporation&quot;,
+  &quot;javaHome&quot;: &quot;/Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/jre&quot;,
+  &quot;javaVersion&quot;: &quot;1.8.0_152&quot;,
+  &quot;osName&quot;: &quot;Mac OS X&quot;,
+  &quot;osVersion&quot;: &quot;10.14.5&quot;,
+  &quot;userHome&quot;: &quot;/Users/wso2user&quot;,
+  &quot;userTimezone&quot;: &quot;Asia/Colombo&quot;,
+  &quot;userName&quot;: &quot;wso2user&quot;,
+  &quot;userCountry&quot;: &quot;LK&quot;,
+  &quot;repoLocation&quot;: &quot;/Users/wso2user/wso2si/deployment&quot;,
+  &quot;serverStartTime&quot;: &quot;Thu, 06 Aug 2020 15:45:51 IST&quot;
+}
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Returning detailed statistics of all Siddhi applications
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Returns the detailed statistics of all the Siddhi applications currently deployed in the WSO2 Integrator: SI setup.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/siddhi-apps/statistics &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;&lt;p&gt;Runtime&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+``` java
+curl -X GET &quot;https://&lt;HOST_NAME&gt;&gt;:&lt;PORT&gt;/siddhi-apps/statistics&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X GET &quot;https://localhost:9443/siddhi-apps/statistics&quot; -H &quot;accept: application/json&quot; -u admin:admin -k
+```
+
+### Sample output
+
+- If Siddhi applications exist, a response similar to the following is returned with details of each Siddhi application. This response is returned with the 200 code.
+
+    ```
+      [
+        {
+          &quot;appName&quot;: &quot;TestExecutionPlan1&quot;,
+          &quot;status&quot;: &quot;active&quot;,
+          &quot;age&quot;: 89981329,
+          &quot;isStatEnabled&quot;: &quot;DETAIL&quot;,
+          &quot;siddhiStatEnabledLevel&quot;: { &quot;name&quot;: &quot;DETAIL&quot;, &quot;intLevel&quot;: 500 }
+        },
+        {
+          &quot;appName&quot;: &quot;TestExecutionPlan2&quot;,
+          &quot;status&quot;: &quot;active&quot;,
+          &quot;age&quot;: 89981639,
+          &quot;isStatEnabled&quot;: &quot;DETAIL&quot;,
+          &quot;siddhiStatEnabledLevel&quot;: { &quot;name&quot;: &quot;DETAIL&quot;, &quot;intLevel&quot;: 500 }
+        },
+        {
+          &quot;appName&quot;: &quot;TestExecutionPlan3&quot;,
+          &quot;status&quot;: &quot;active&quot;,
+          &quot;age&quot;: 87053026,
+          &quot;isStatEnabled&quot;: &quot;DETAIL&quot;,
+          &quot;siddhiStatEnabledLevel&quot;: { &quot;name&quot;: &quot;DETAIL&quot;, &quot;intLevel&quot;: 500 }
+        }
+      ]
+    ```
+
+- If Siddhi applications do not exist, the following response is returned with the 404 response code.
+
+    ```
+      {
+        &quot;type&quot;:&quot;not-found&quot;,
+        &quot;message&quot;:&quot;There are no any Siddhi App exist.&quot;
+      }
+    ```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Enabling/disabling the statistics of a specific Siddhi application
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Enables/disables statistics for a specified Siddhi application.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/siddhi-apps/{appName}/statistics&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;&lt;p&gt;Runtime&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Parameter Description
+
+| Parameter | Description                                                                              |
+|-----------|------------------------------------------------------------------------------------------|
+| `appName` | The name of the Siddhi application for which the statistics need to be enabled/disabled. |
+
+  
+### curl command syntax
+
+``` java
+curl -X PUT &quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/siddhi-apps/{appName}/statistics&quot; -H &quot;accept: application/json&quot; -H &quot;Content-Type: application/json&quot; -d &quot;{\&quot;statsEnable\&quot;: \&quot;true\&quot;}&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X PUT &quot;https://localhost:9443/siddhi-apps/TestSiddhiApp/statistics&quot; -H &quot;accept: application/json&quot; -H &quot;Content-Type: application/json&quot; -d &quot;{\&quot;statsEnable\&quot;: \&quot;true\&quot;}&quot; -u admin:admin -k
+```
+
+### Sample output
+
+- If statistics are successfully enabled, the following response is returned.
+
+    ```
+      {
+        &quot;type&quot;:&quot;success&quot;,
+        &quot;message&quot;:&quot;Sucessfully updated Aiddhi App : TestSiddhiApp&quot;
+      }
+    ```
+  
+- If statistics are already enabled, the following response is returned.
+
+    ```
+      {&quot;type&quot;:&quot;success&quot;,&quot;message&quot;:&quot;Stats level is already set to :class StatsEnable {\n    enabledStatLevel: DETAIL\n} for siddhi appTestSiddhiApp&quot;}   
+    ```
+
+- If statistics are successfully disabled, the following response is returned.
+
+    ```
+      {
+        &quot;type&quot;:&quot;success&quot;,
+        &quot;message&quot;:&quot;Sucessfully updated Aiddhi App : TestSiddhiApp&quot;
+      }
+    ```
+  
+- If statistics are already disabled, the following response is returned.
+
+    ```
+      {&quot;type&quot;:&quot;success&quot;,&quot;message&quot;:&quot;Stats level is already set to :class StatsEnable {\n    enabledStatLevel: OFF\n} for siddhi appTestSiddhiApp&quot;}
+    ```
+  
+- If no Siddhi application of the specified name exists, the following response is returned with the 404 code.
+
+    ```
+      {
+        &quot;type&quot;:&quot;not-found&quot;,
+        &quot;message&quot;:&quot;There is no Siddhi App exist with provided name : TestSiddhiApp&quot;
+      }
+    ```
+    
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Enabling/disabling the statistics of all Siddhi applications
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Enables/disables statistics for all the Siddhi applications.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/siddhi-apps/statistics &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;application/json&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;&lt;p&gt;Runtime&lt;/p&gt;&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+                                                           
+
+### curl command syntax
+
+``` java
+curl -X PUT &quot;https://&lt;HOST_NAME&gt;:&lt;PORT&gt;/siddhi-apps/statistics&quot; -H &quot;accept: application/json&quot; -H &quot;Content-Type: application/json&quot; -d &quot;{\&quot;statsEnable\&quot;: \&quot;true\&quot;}&quot; -u admin:admin -k
+```
+
+### Sample curl command
+
+``` java
+curl -X PUT &quot;https://localhost:9443/siddhi-apps/statistics&quot; -H &quot;accept: application/json&quot; -H &quot;Content-Type: application/json&quot; -d &quot;{\&quot;statsEnable\&quot;: \&quot;true\&quot;}&quot; -u admin:admin -k
+```
+
+### Sample output
+
+```
+{
+  &quot;type&quot;:&quot;success&quot;,
+  &quot;message&quot;:&quot;All siddhi apps Sucessfully updated.&quot;
+}
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</body>
+</html>

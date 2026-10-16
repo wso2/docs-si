@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>event-simulation-apis.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>!!! note
+    **This page is still a work in progress!**
+    
+# Event Simulation APIs
+
+## Sending a single event for simulation
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Sends a single event for simulation.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/single&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;strong&gt;Request&lt;/strong&gt;: &lt;code&gt;text/plain&lt;/code&gt;&lt;br /&gt;
+&lt;strong&gt;Response&lt;/strong&gt;: &lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+```java
+
+```
+
+### Sample curl command
+
+```java
+curl -X POST &quot;http://localhost:9390/simulation/single&quot; -H &quot;accept: application/json&quot; -H &quot;content-type: text/plain&quot; -d &quot;{ \&quot;streamName\&quot;: \&quot;FooStream\&quot;, \&quot;siddhiAppName\&quot;: \&quot;TestSiddhiApp\&quot;, \&quot;timestamp\&quot;: \&quot;1500319950004\&quot;, \&quot;data\&quot;: [ \&quot;foo\&quot;, \&quot;bar\&quot;, \&quot;12345\&quot; ]}&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Uploading a feed simulation configuration
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Uploads a feed simulation configuration.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/feed&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;strong&gt;Request&lt;/strong&gt;: &lt;code&gt;text/plain&lt;/code&gt;&lt;br /&gt;
+&lt;strong&gt;Response&lt;/strong&gt;: &lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+```java
+
+```
+
+### Sample curl command
+
+```java
+curl -X POST &quot;http://localhost:9390/simulation/feed&quot; -H &quot;accept: application/json&quot; -H &quot;content-type: text/plain&quot; -d &quot;{\&quot;properties\&quot;:{\&quot;simulationName\&quot;:\&quot;TestFeedSimulation\&quot;,\&quot;startTimestamp\&quot;:\&quot;1500319950003\&quot;,\&quot;endTimestamp\&quot;:\&quot;1500319950009\&quot;,\&quot;noOfEvents\&quot;:\&quot;100\&quot;,\&quot;description\&quot;:\&quot;Test feed simulator\&quot;,\&quot;timeInterval\&quot;:\&quot;1000\&quot;},\&quot;sources\&quot;:[{\&quot;siddhiAppName\&quot;:\&quot;TestSiddhiApp\&quot;,\&quot;streamName\&quot;:\&quot;FooStream\&quot;,\&quot;timestampInterval\&quot;:\&quot;1000\&quot;,\&quot;simulationType\&quot;:\&quot;CSV_SIMULATION\&quot;,\&quot;fileName\&quot;:\&quot;foostream.csv\&quot;,\&quot;delimiter\&quot;:\&quot;,\&quot;,\&quot;isOrdered\&quot;:true,\&quot;indices\&quot;:\&quot;0,1,2\&quot;}]}&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200, 403, 404, and 409.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Retrieving all feed simulation configurations
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Retrieves all feed simulation configurations.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/feed&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+```java
+
+```
+
+### Sample curl command
+
+```java
+curl -X GET &quot;http://localhost:9390/simulation/feed&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Updating a feed simulation configuration
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Updates a feed simulation configuration.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/feed/{simulationName}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;strong&gt;Request&lt;/strong&gt;: &lt;code&gt;text/plain&lt;/code&gt;&lt;br /&gt;
+&lt;strong&gt;Response&lt;/strong&gt;: &lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+**Parameter description**
+
+| **Parameter**    | **Description**                                                    |
+|------------------|--------------------------------------------------------------------|
+|`{simulationName}`| The name of the simulation configuration that needs to be updated. |
+
+### curl command syntax
+
+```java
+
+```
+
+### Sample curl command
+
+```java
+curl -X PUT &quot;http://localhost:9390/simulation/feed/TestFeedSimulation&quot; -H &quot;accept: application/json&quot; -H &quot;content-type: text/plain&quot; -d &quot;{\&quot;properties\&quot;:{\&quot;simulationName\&quot;:\&quot;TestFeedSimulation\&quot;,\&quot;startTimestamp\&quot;:\&quot;\&quot;,\&quot;endTimestamp\&quot;:\&quot;\&quot;,\&quot;noOfEvents\&quot;:\&quot;100\&quot;,\&quot;description\&quot;:\&quot;Test feed simulator\&quot;,\&quot;timeInterval\&quot;:\&quot;1000\&quot;},\&quot;sources\&quot;:[{\&quot;siddhiAppName\&quot;:\&quot;TestSiddhiApp\&quot;,\&quot;streamName\&quot;:\&quot;BarStream\&quot;,\&quot;timestampInterval\&quot;:\&quot;1000\&quot;,\&quot;simulationType\&quot;:\&quot;CSV_SIMULATION\&quot;,\&quot;fileName\&quot;:\&quot;foostream.csv\&quot;,\&quot;delimiter\&quot;:\&quot;,\&quot;,\&quot;isOrdered\&quot;:true,\&quot;indices\&quot;:\&quot;0,1,2\&quot;}]}&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Retrieving a specific feed simulation configuration
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Retrieves a specific feed simulation configuration.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/feed/{simulationName}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+**Parameter Description**
+
+| Parameter        | Description                                                               |
+|------------------|---------------------------------------------------------------------------|
+|`{simulationName}`| The name of the feed simulation configuration that needs to be retrieved. |
+
+### curl command syntax
+
+```java
+
+```
+
+### Sample curl command
+
+```java
+curl -X GET &quot;http://localhost:9390/simulation/feed/TestFeedSimulation&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Deleting a feed simulation configuration
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Deletes a feed simulation configuration.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/feed/{simulationName}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+**Parameter Description**
+
+| Parameter        | Description                                                               |
+|------------------|---------------------------------------------------------------------------|
+|`{simulationName}`| The name of the simulation configuration that needs to be deleted.        |
+
+### curl command syntax
+
+```java
+
+```
+
+### Sample curl command
+
+```java
+curl -X DELETE &quot;http://localhost:9390/simulation/feed/TestFeedSimulation&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Running a feed simulation configuration
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Runs a feed simulation configuration.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/feed/{simulationName}?action=run&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+**Parameter Description**
+
+| Parameter        | Description                                                               |
+|------------------|---------------------------------------------------------------------------|
+|`{simulationName}`| The name of the simulation configuration that needs to be run.            |
+
+### curl command syntax
+
+```java
+
+```
+
+### Sample curl command
+
+```java
+curl -X POST &quot;http://localhost:9390/simulation/feed/TestFeedSimulation/?action=run&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200, 403, 404, and 409.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Pausing a feed simulation
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Pauses a currently active feed simulation.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/feed/{simulationName}?action=pause&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+**Parameter Description**
+
+| Parameter        | Description                                                               |
+|------------------|---------------------------------------------------------------------------|
+|`{simulationName}`| The name of the simulation configuration that needs to be paused.         |
+
+### curl command syntax
+
+```java
+curl -X POST &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/simulation/feed/&lt;FEED_NAME&gt;/?action=pause&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample curl command
+
+```java
+curl -X POST &quot;http://localhost:9390/simulation/feed/TestFeedSimulation/?action=pause&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200, 403, 404, and 409.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Resuming a feed simulation
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Resumes a paused feed simulation.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/feed/{simulationName}?action=resume&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+**Parameter Description**
+
+| Parameter        | Description                                                               |
+|------------------|---------------------------------------------------------------------------|
+|`{simulationName}`| The name of the simulation configuration that needs to be resumed.        |
+
+### curl command syntax
+
+```java
+curl -X POST &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/simulation/feed/&lt;SIMULATION_NAME&gt;/?action=resume&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample curl command
+```java
+curl -X POST &quot;http://localhost:9390/simulation/feed/TestFeedSimulation/?action=resume&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200, 403, 404, and 409.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Stopping a feed simulation
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Stops a currently active feed simulation.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/feed/{simulationName}?action=stop&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+**Parameter Description**
+
+| Parameter        | Description                                                               |
+|------------------|---------------------------------------------------------------------------|
+|`{simulationName}`| The name of the simulation configuration that needs to be stopped.        |
+
+### curl command syntax
+
+```java
+curl -X POST &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/simulation/feed/&lt;SIMULATION_NAME&gt;/?action=stop&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample curl command
+
+```java
+curl -X POST &quot;http://localhost:9390/simulation/feed/TestFeedSimulation/?action=stop&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200, 404, and 409.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Retrieving a simulation configuration status by name
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Retrieves the status of a given simulation configuration.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/feed/{simulationName}/status&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+**Parameter Description**
+
+| Parameter        | Description                                                                      |
+|------------------|----------------------------------------------------------------------------------|
+|`{simulationName}`| The name of the simulation configuration of which the status needs to be checked.|
+
+### curl command syntax
+
+```java
+curl -X GET &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/simulation/feed/&lt;SIMULATION_NAME&gt;/status&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample curl command
+
+```java
+curl -X GET &quot;http://localhost:9390/simulation/feed/TestFeedSimulation/status&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Uploading a CSV file
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Uploads a CSV file for feed simulation.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/files&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+```java
+
+```
+
+### Sample curl command
+
+```java
+
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Fetching CSV file names
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Fetches the names of CSV files that are currently uploaded in the system.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/files&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+```java
+curl -X GET &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/simulation/files&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample curl command
+
+```java
+curl -X GET &quot;http://localhost:9390/simulation/files&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample output
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Updating a CSV file
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Updates a CSV file that is already uploaded in the system.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/files/{fileName}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+**Parameter Description**
+
+| Parameter  | Description                                       |
+|------------|---------------------------------------------------|
+|`{fileName}`| The name of the CSV file that needs to be updated.|
+
+### curl command syntax
+
+```java
+
+```
+
+### Sample curl command
+
+```java
+curl -X PUT -F &#x27;file=@foostream.csv&#x27; http://localhost:9390/simulation/files/foostream.csv?fileName=foostream.csv
+```
+
+### Sample output
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Deleting a CSV file
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Deletes the specified CSV file.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;/simulation/files/{fileName}&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+**Parameter Description**
+
+| Parameter  | Description                                       |
+|------------|---------------------------------------------------|
+|`{fileName}`| The name of the CSV file that needs to be deleted.|
+
+### curl command syntax
+
+```java
+curl -X DELETE &quot;http://&lt;HOST_NAME&gt;:&lt;PORT&gt;/simulation/files/&lt;FILE_NAME&gt;.csv&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample curl command
+
+```java
+curl -X DELETE &quot;http://localhost:9390/simulation/files/CSVTestFile.csv&quot; -H &quot;accept: application/json&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Testing a database connection
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Tests a database connection.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;/simulation/connectToDatabase&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+```java
+
+```
+
+### Sample curl command
+
+```java
+curl -X POST &quot;http://localhost:9090/simulation/connectToDatabase&quot; -H &quot;accept: application/json&quot; -H &quot;content-type: application/json&quot; -d &quot;{ \&quot;dataSourceLocation\&quot;: \&quot;jdbc:mysql://localhost:3306/DatabaseFeedSimulation\&quot;, \&quot;driver\&quot;: \&quot;com.mysql.cj.jdbc.Driver\&quot;, \&quot;username\&quot;: \&quot;root\&quot;, \&quot;password\&quot;: \&quot;password\&quot;}&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Retrieving database tables
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Retrieves database tables.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;/simulation/connectToDatabase/retrieveTableNames&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### curl command syntax
+
+```java
+
+```
+
+### Sample curl command
+
+```java
+curl -X POST &quot;http://localhost:9090/simulation/connectToDatabase/retrieveTableNames&quot; -H &quot;accept: application/json&quot; -H &quot;content-type: application/json&quot; -d &quot;{ \&quot;dataSourceLocation\&quot;: \&quot;jdbc:mysql://localhost:3306/DatabaseFeedSimulation\&quot;, \&quot;driver\&quot;: \&quot;com.mysql.cj.jdbc.Driver\&quot;, \&quot;username\&quot;: \&quot;root\&quot;, \&quot;password\&quot;: \&quot;password\&quot;}&quot;
+```
+
+### Sample output
+
+```java
+
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Retrieving database table columns
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;td&gt;Retrieves database table columns.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;API Context&lt;/th&gt;
+&lt;td&gt;/simulation/connectToDatabase/{tableName}/retrieveColumnNames&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Method&lt;/th&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Request/Response format&lt;/th&gt;
+&lt;td&gt;&lt;code&gt;application/json&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Authentication&lt;/th&gt;
+&lt;td&gt;Basic&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Username&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;Password&lt;/th&gt;
+&lt;td&gt;admin&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;th&gt;Runtime&lt;/th&gt;
+&lt;td&gt;server/tooling&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+**Parameter Description**
+
+| Parameter   | Description                                                              |
+|-------------|--------------------------------------------------------------------------|
+|`{tableName}`| The name of the database table of which the columns need to be retrieved.|
+
+### curl command syntax
+
+```java
+
+```
+
+### Sample curl command
+
+```java
+curl -X POST &quot;http://localhost:9090/simulation/connectToDatabase/DataTable/retrieveColumnNames&quot; -H &quot;accept: application/json&quot; -H &quot;content-type: application/json&quot; -d &quot;{ \&quot;dataSourceLocation\&quot;: \&quot;jdbc:mysql://localhost:3306/DatabaseFeedSimulation\&quot;, \&quot;driver\&quot;: \&quot;com.mysql.cj.jdbc.Driver\&quot;, \&quot;username\&quot;: \&quot;root\&quot;, \&quot;password\&quot;: \&quot;password\&quot;}&quot;
+```
+
+### Sample output
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;th&gt;HTTP Status Code&lt;/th&gt;
+&lt;td&gt;&lt;p&gt;Possible codes are 200 and 404.&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;https://ei.docs.wso2.com/en/latest/streaming-integrator/ref/hTTP-Status-Codes/&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CSVCustomMapping.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Receiving and Publishing Events in Custom CSV Format
+
+## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI to publish and receive data events processed within Siddhi to files in CSV custom format.
+
+!!!info &quot;Before you begin:&quot;
+    1. Edit the sample Siddhi application as follows:&lt;br/&gt;
+        - In the source configuration, update the value for the `dir.uri` parameter by replacing `&lt;SI_HOME&gt;` with the absolute path of your SI installation.&lt;br/&gt;
+        - In the sink configuration, update the value for the `file.uri` parameter by replacing `&lt;SI_HOME&gt;` with the absolute path of your SI installation. If required, you can provide a different path to publish the output to a location of your choice.&lt;br/&gt;
+    2. Save the sample Siddhi application in WSO2 Integrator: SI.
+
+## Executing and testing the Sample
+
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI, and start it by clicking the **Start** button or by clicking **Run** &gt; **Run**.
+
+If the Siddhi application starts successfully, the following message appears in the console.
+
+`CSVCustomMapping.siddhi - Started Successfully!`
+
+## Viewing the results
+
+* The source gets the input from the `&lt;SI_HOME&gt;/samples/artifacts/CSVMappingWithFile/new/example.csv` file and produces the event. This file has data in below format.
+
+    `1,WSO2,23.5`&lt;br/&gt;
+    `2,IBM,2.5`&lt;br/&gt;
+
+* The sink gets the input from the source output and publishes the output in the `outputOfCustom.csv` file. The data is published in this file in the following format.
+
+    `WSO2,1,100.0`&lt;br/&gt;
+    `IBM,2,2.5`&lt;br/&gt;
+
+```sql
+@App:name(&quot;CSVCustomMapping&quot;)
+@App:description(&#x27;Publish and receive data events processed within Siddhi to files in CSV custom format.&#x27;)
+
+@source(type=&#x27;file&#x27;,
+dir.uri=&#x27;file://&lt;SI_HOME&gt;/samples/artifacts/CSVMappingWithFile/new&#x27;,
+action.after.process=&#x27;NONE&#x27;,
+@map(type=&#x27;csv&#x27;, @attributes(id=&#x27;0&#x27;, name=&#x27;1&#x27;, amount=&#x27;2&#x27;)))
+define stream IntputStream (name string, id int,  amount double);
+
+@sink(type=&#x27;file&#x27;, file.uri=&#x27;/&lt;SI_HOME&gt;/samples/artifacts/CSVMappingWithFile/new/outputOfCustom.csv&#x27; , @map(type=&#x27;csv&#x27;,@payload(id=&#x27;1&#x27;, name=&#x27;0&#x27;, amount=&#x27;2&#x27;)))
+define stream OutputStream (name string, id int, amount double);
+
+from IntputStream
+select *
+insert into OutputStream;
+```
+</body>
+</html>

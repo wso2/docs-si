@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReceiveEventsFromFile.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Receiving Events via File
+
+## Purpose
+
+This application demonstrates how to use `siddhi-io-file` for receiving file-based events.
+
+## Prerequisites
+
+- Install the `file` Siddhi extension. For instructions, see [Downloading and Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
+- Two directories that the Siddhi application can read from and write to. This example uses `&lt;YOUR_HOME&gt;/file-samples/new` (source) and `&lt;YOUR_HOME&gt;/file-samples/consumed` (destination).
+
+## Try it out
+
+1. Create the source and destination directories:
+
+    ```bash
+    mkdir -p &lt;YOUR_HOME&gt;/file-samples/new
+    mkdir -p &lt;YOUR_HOME&gt;/file-samples/consumed
+    ```
+
+2. Edit the Siddhi application below by replacing `&lt;YOUR_HOME&gt;` with the absolute path of the parent directory you chose, and save it.
+
+3. Start the Siddhi application by clicking **Run**. The following message appears in the console:
+
+    ```bash
+    ReceiveEventsFromFile.siddhi - Started Successfully!
+    ```
+
+4. Drop one or more JSON event files into `&lt;YOUR_HOME&gt;/file-samples/new`. Each file should contain a JSON event matching the `SweetProductionStream` schema, for example:
+
+    ```json
+    {&quot;event&quot;:{&quot;name&quot;:&quot;apache&quot;,&quot;amount&quot;:80.0}}
+    ```
+
+5. The application reads each file, processes it, and moves it to `&lt;YOUR_HOME&gt;/file-samples/consumed`. Processed events are logged in the console:
+
+    ```bash
+    INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - ReceiveEventsFromFile: event, StreamEvent{ timestamp=1513847875990, beforeWindowData=null, onAfterWindowData=null, outputData=[apache, 80.0, 2.0], type=CURRENT, next=null}
+    INFO {io.siddhi.core.query.processor.stream.LogStreamProcessor} - ReceiveEventsFromFile: event, StreamEvent{ timestamp=1513847876004, beforeWindowData=null, onAfterWindowData=null, outputData=[cloudbees, 134.4, 2.0], type=CURRENT, next=null}
+    ```
+
+    !!! tip &quot;Re-running the example&quot;
+        If you want to re-process the same files, move them back from the `consumed` directory to the `new` directory before re-running.
+
+## Siddhi application
+
+```sql
+@App:name(&#x27;ReceiveEventsFromFile&#x27;)
+
+@source(type=&#x27;file&#x27;, mode=&#x27;text.full&#x27;,
+dir.uri=&#x27;file:&lt;YOUR_HOME&gt;/file-samples/new&#x27;,
+action.after.process=&#x27;move&#x27;,
+tailing=&#x27;false&#x27;,
+move.after.process=&#x27;file:&lt;YOUR_HOME&gt;/file-samples/consumed&#x27;,
+@map(type=&#x27;json&#x27;))
+define stream SweetProductionStream (name string, amount double);
+
+from SweetProductionStream#window.time(1 min)
+select name, sum(amount) as hourlyTotal, convert(time:extract(&#x27;HOUR&#x27;, time:currentTimestamp(), &#x27;yyyy-MM-dd hh:mm:ss&#x27;), &#x27;double&#x27;) as currentHour
+insert into LowProductionAlertStream;
+
+from LowProductionAlertStream#log(&#x27;event&#x27;)
+insert into LogStream;
+```
+</body>
+</html>

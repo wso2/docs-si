@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CDCWithListeningMode.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Capturing MySQL Inserts via CDC
+
+## Purpose
+
+This sample demonstrates how to capture change data from MySQL using Siddhi. The change events that can be captured include `INSERT`, `UPDATE`, and `DELETE`.
+
+!!!info &quot;Before you begin:&quot;
+    1. Ensure that MySQL is installed on your computer.&lt;br/&gt;
+    2. Add the MySQL JDBC driver to the `&lt;SI_HOME&gt;/lib` directory as follows:&lt;br/&gt;
+        1. Download the latest MySQL JDBC driver (Connector/J) from the [MySQL website](https://dev.mysql.com/downloads/connector/j/).&lt;br/&gt;
+        2. Unzip the archive.&lt;br/&gt;
+        3. Copy the Connector/J JAR and place it in the `&lt;SI_HOME&gt;/lib` directory.&lt;br/&gt;
+    3. Configure MySQL to [enable binary logging](https://debezium.io/docs/connectors/mysql/#enabling-the-binlog).&lt;br/&gt;&lt;br/&gt;
+            If you are using MySQL 8.0, use the following query to check the binlog status:&lt;br/&gt;
+            ```bash
+            SELECT variable_value as &quot;BINARY LOGGING STATUS (log-bin) ::&quot;
+            FROM performance_schema.global_variables WHERE variable_name=&#x27;log_bin&#x27;;
+            ```
+    4. Enable state persistence in siddhi applications. To do this, open the `&lt;SI_HOME&gt;/conf/server/deployment.yaml` file and set the `state.persistence enabled=true` property.&lt;br/&gt;
+    5. Create a database named `production` by issuing the following command.&lt;br/&gt;
+        `CREATE DATABASE production;`&lt;br/&gt;
+    6. Create a user named `wso2sp` with `wso2` as the password, and with `SELECT`, `RELOAD`, `SHOW DATABASES`, `REPLICATION SLAVE`, `REPLICATION CLIENT` privileges. To do this, issue the following command.&lt;br/&gt;
+        `CREATE USER &#x27;wso2sp&#x27;@&#x27;localhost&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;wso2&#x27;;`&lt;br/&gt;
+        `GRANT SELECT, RELOAD, SHOW DATABASES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO &#x27;wso2sp&#x27;@&#x27;localhost&#x27;;`&lt;br/&gt;
+    7. Change the database by issuing the following command.&lt;br/&gt;
+        `use production;`&lt;br/&gt;
+    8. Create a table named `SweetProductionTable`.&lt;br/&gt;
+        `CREATE TABLE SweetProductionTable (name VARCHAR(20),amount double(10,2));`&lt;br/&gt;
+    9. Save the sample Siddhi application in WSO2 Integrator: SI.
+
+## Executing the sample
+
+To execute the sample open the saved Siddhi application in WSO2 Integrator: SI, and start it by clicking the **Start** button or by clicking **Run** &gt; **Run**.
+
+If the Siddhi application starts successfully, the following message appears in the console.
+
+`CDCWithListeningMode.siddhi -  Started Successfully!`
+
+!!!note
+    If you want to edit the Siddhi application after you have started it, stop it first, make your edits, save it and then start it again.
+
+## Testing the sample
+
+To test the sample Siddhi application, insert a record to the `SweetProductionTable` table you created by issuing the following command:
+
+`INSERT into SweetProductionTable values(&#x27;chocolate&#x27;,100.0);`
+
+## Viewing the results
+
+This insert is logged in the WSO2 Integrator: SI console as follows.
+
+![Insert Log]({{base_path}}/images/cdc-with-listening-mode-sample/insert-log.png)
+
+!!!info
+    Optionally, you can use this sample to also capture `update` and `delete` operations.&lt;br/&gt;
+
+    - delete operation events include `before_name` and `before amount` keys.&lt;br/&gt;
+    - update operation events include the `before_name`, `name`, `before_amount`, `amount` keys.
+
+```sql
+@App:name(&#x27;CDCWithListeningMode&#x27;)
+@App:description(&#x27;Capture MySQL Inserts using cdc source listening mode.&#x27;)
+
+
+@source(type = &#x27;cdc&#x27;, url = &#x27;jdbc:mysql://localhost:3306/production&#x27;, username = &#x27;wso2sp&#x27;, password = &#x27;wso2&#x27;, table.name = &#x27;SweetProductionTable&#x27;, operation = &#x27;insert&#x27;,
+    @map(type = &#x27;keyvalue&#x27;))
+define stream insertSweetProductionStream (name string, amount double);
+
+@sink(type = &#x27;log&#x27;)
+define stream logStream (name string, amount double);
+
+@info(name = &#x27;query&#x27;)
+from insertSweetProductionStream
+select name, amount
+insert into logStream;
+```
+</body>
+</html>

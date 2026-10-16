@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PublishHl7InXmlFormat.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Publishing XML messages via HL7
+
+## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI to send Hl7 events in XML format via MLLP protocol and log the events in `hl7Stream` and the acknowledgment message to the output console.
+
+## Prerequisites
+
+1. Install the [HAPI testpanel](https://hapifhir.github.io/hapi-hl7v2/hapi-testpanel/install.html)
+2. Save this sample. If there is no syntax error, the following message is shown on the console:
+    - `Siddhi App PublishHl7InXmlFormat successfully deployed.`
+
+## Executing the Sample
+
+1. In the HAPI testpanel create a receiving connection with the port that is provided in the Siddhi app.
+2. Start the listener.
+3. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+4. If the Siddhi application starts successfully, the following messages are shown on the console:
+    - `PublishHl7InXmlFormat.siddhi - Started Successfully!`
+    - `&#x27;Hl7&#x27; sink at &#x27;hl7Stream&#x27; stream successfully connected to &#x27;localhost:4000&#x27;.`
+
+## Testing the Sample
+
+1. Open the event simulator by clicking the second icon or pressing Ctrl+Shift+I.
+2. In the Single Simulation tab of the panel, specify the values as follows:
+    - `Siddhi App Name`   :   `PublishHl7InXmlFormat`
+    - `Stream Name`   :   `xmlStream`
+3. Use the following data for the fields and click `Send`.
+
+    | Field       | Value              |
+    |------------|---------------------|
+    | MSH1       | `|`                 |
+    | MSH2       | `^~\&amp;amp;`          |
+    | MSH3HD1    | `sendingSystemA`    |
+    | MSH4HD1    | `senderFacilityA`   |
+    | MSH5HD1    | `receivingSystemB`  |
+    | MSH6HD1    | `receivingFacilityB`|
+    | MSH7       | `20080925161613`    |
+    | MSH8       | ` `                 |
+    | CM_MSG1    | `ADT`               |
+    | CM_MSG2    | `A01`               |
+    | MSH10      | `S123456789`        |
+    | MSH11      | `P`                 |
+    | MSH12      | `2.3`               |
+
+4. Send more events as desired.
+
+```sql
+@App:name(&#x27;PublishHl7InXmlFormat&#x27;)
+@App:description(&#x27;This publishes the HL7 messages in XML format, receives and logs the acknowledgement message in the console using MLLP protocol and custom xml mapping.&#x27;)
+
+define stream xmlStream(MSH1 string, MSH2 string, MSH3HD1 string, MSH4HD1 string, MSH5HD1 string, MSH6HD1 string, MSH7 string, MSH8 string, CM_MSG1 string, CM_MSG2 string,MSH10 string,MSH11 string, MSH12 string);
+
+@sink(type = &#x27;hl7&#x27;, uri = &#x27;localhost:4000&#x27;, hl7.encoding = &#x27;xml&#x27;, @map(type = &#x27;xml&#x27;, enclosing.element=&quot;&lt;ADT_A01  xmlns=&#x27;urn:hl7-org:v2xml&#x27;&gt;&quot;, @payload(&#x27;&lt;MSH&gt;&lt;MSH.1&gt;{{MSH1}}&lt;/MSH.1&gt;&lt;MSH.2&gt;{{MSH2}}&lt;/MSH.2&gt;&lt;MSH.3&gt;&lt;HD.1&gt;{{MSH3HD1}}&lt;/HD.1&gt;&lt;/MSH.3&gt;&lt;MSH.4&gt;&lt;HD.1&gt;{{MSH4HD1}}&lt;/HD.1&gt;&lt;/MSH.4&gt;&lt;MSH.5&gt;&lt;HD.1&gt;{{MSH5HD1}}&lt;/HD.1&gt;&lt;/MSH.5&gt;&lt;MSH.6&gt;&lt;HD.1&gt;{{MSH6HD1}}&lt;/HD.1&gt;&lt;/MSH.6&gt;&lt;MSH.7&gt;{{MSH7}}&lt;/MSH.7&gt;&lt;MSH.8&gt;{{MSH8}}&lt;/MSH.8&gt;&lt;MSH.9&gt;&lt;CM_MSG.1&gt;{{CM_MSG1}}&lt;/CM_MSG.1&gt;&lt;CM_MSG.2&gt;{{CM_MSG2}}&lt;/CM_MSG.2&gt;&lt;/MSH.9&gt;&lt;MSH.10&gt;{{MSH10}}&lt;/MSH.10&gt;&lt;MSH.11&gt;{{MSH11}}&lt;/MSH.11&gt;&lt;MSH.12&gt;{{MSH12}}&lt;/MSH.12&gt;&lt;/MSH&gt;&#x27;)))
+define stream hl7Stream(MSH1 string, MSH2 string, MSH3HD1 string, MSH4HD1 string, MSH5HD1 string, MSH6HD1 string, MSH7 string, MSH8 string, CM_MSG1 string, CM_MSG2 string,MSH10 string,MSH11 string, MSH12 string);
+
+@info(name=&#x27;query1&#x27;)
+from xmlStream
+select *
+insert into hl7Stream;
+```
+</body>
+</html>

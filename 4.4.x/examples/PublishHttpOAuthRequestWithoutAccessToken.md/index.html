@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PublishHttpOAuthRequestWithoutAccessToken.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Publishing HTTP Events to an OAuth-protected Endpoint without an Access Token
+
+## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI to send HTTP events to an OAuth-protected endpoint without an access token.
+
+## Prerequisites
+
+1. Replace the Sink configuration values for the following options.
+    - `publisher.url` : Publisher URL (Ex:- &#x27;https://localhost:8005/abc&#x27;)
+    - `consumer.key`  : Consumer key for the http request (Ex:- &#x27;abcdef&#x27;)
+    - `consumer.secret`: Consumer secret for the http request (Ex:- &#x27;abcdef&#x27;)
+    - `token.url`     : URL of the token end point (Ex:- &#x27;https://localhost:8005/token&#x27;)
+    - `method`        : Method type (Eg:- `POST`)
+
+    Optional (You can fill this if it is different from default values)
+
+    - `header` (Authorization header): Access token for the http request.
+    By default, it automatically retrieved using the access token with the `password`,`client-credential`, or the `refresh-token` grant type. Here the grant type depends on the user input.
+    - `https.truststore.file`: API trust store path (Ex:- `&lt;some-path&gt;/client-truststore.jks`).
+    By default, it is obtained from the product pack (Ex:- `${carbon.home}/resources/security/client-truststore.jks`)
+    - `https.truststore.password`:  API trust store password (Ex:- `wso2carbon`).
+    By default, it is set as `wso2carbon`.
+
+2. Save this sample. If there is no syntax error, the following message is shown on the console:
+    * `Siddhi App PublishHttpOAuthRequestWithoutAccessToken successfully deployed.`
+
+## Executing the Sample
+
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages are shown on the console:
+    - `PublishHttpOAuthRequestWithoutAccessToken.siddhi - Started Successfully!`
+    - `&#x27;Http&#x27; sink at &#x27;LowProductionAlertStream&#x27; stream successfully connected to &#x27;https://localhost:8005/abc&#x27;.`
+
+## Testing the Sample
+
+Send events through one or more of the following methods:
+
+### Send events with the HTTP server through the event simulator
+
+1. Open the event simulator by clicking the second icon or pressing Ctrl+Shift+I.
+2. In the Single Simulation tab of the panel, specify the values as follows:
+    - `Siddhi App Name`  : `PublishHttpOAuthRequestWithoutAccessToken`
+    - `Stream Name`     : `SweetProductionStream`
+3. In the `name` and `amount` fields, enter &#x27;toffees&#x27; and &#x27;75.6&#x27; respectively and then click `Send` to send the event.
+4. Send some more events as desired.
+
+### Send events to the HTTP endpoint defined by &#x27;publish.url&#x27; in the Sink configuration using the curl command
+
+1. Open a new terminal and issue the following command:
+
+    ```bash
+    curl -X POST -d &#x27;{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishHttpOAuthRequestWithoutAccessToken&quot;,&quot;data&quot;: [&quot;toffees&quot;, 75.6]}&#x27; http://localhost:9390/simulation/single -H &#x27;content-type: text/plain&#x27;
+    ```
+
+2. If there is no error, the following messages are shown on the terminal:
+    - `{&quot;status&quot;:&quot;OK&quot;,&quot;message&quot;:&quot;Single Event simulation started successfully&quot;}`
+
+### Publish events with Postman
+
+1. Launch the application.
+2. Make a `Post` request to the `http://localhost:9390/simulation/single` endpoint. Set the Content-Type to `text/plain` and set the request body in text as follows:
+`{&quot;streamName&quot;: &quot;SweetProductionStream&quot;, &quot;siddhiAppName&quot;: &quot;PublishHttpOAuthRequestWithoutAccessToken&quot;,&quot;data&quot;: [&quot;toffees&quot;, 75.6]}`
+3. Click `Send`. If there is no error, the following messages are shown on the console:
+    - `&quot;status&quot;: &quot;OK&quot;`
+    - `&quot;message&quot;: &quot;Single Event simulation started successfully&quot;`
+
+## Viewing the Results
+
+See the output on the terminal:
+
+```bash
+Siddhi App test successfully deployed.
+INFO {org.wso2.extension.siddhi.io.http.sink.HttpSink} - Request sent successfully to https://localhost:8005/abc
+[java] [org.wso2.si.http.server.HttpServerListener] : Event Name Arrived: {&quot;event&quot;:{&quot;name&quot;:&quot;toffees&quot;,&quot;amount&quot;:75.6}}
+[java] [org.wso2.si.http.server.HttpServerMain] : Received Event Names:{&quot;event&quot;:{&quot;name&quot;:&quot;toffees&quot;,&quot;amount&quot;:75.6}} ,
+[java] [org.wso2.si.http.server.HttpServerMain] : Received Event Headers key set:[Http_method, Content-type, Content-length]
+[java] [org.wso2.si.http.server.HttpServerMain] : Received Event Headers value set:[[POST], [application/json], [42]]
+```
+
+## Notes
+
+If you get the message `Error when pushing events to Siddhi debugger engine`, it could be due to time out problem, do the following:
+
+1. Stop this Siddhi application (Click &#x27;Run&#x27; on the menu bar -&gt; &#x27;Stop&#x27;).
+2. Start the application and check whether the expected output appears on the console.
+
+If you get the status code `400`, it could be due to passing invalid parameter problem, do the following:
+
+1. Stop this Siddhi application (Click &#x27;Run&#x27; on the menu bar -&gt; &#x27;Stop&#x27;).
+2. Recheck all the parameter you are passing and change the correct parameter
+3. Start the application and check whether the expected output appears on the console.
+
+If you get the status code `500`, it could be due to Internal server error problem, do the following:
+
+1. Stop this Siddhi application (Click &#x27;Run&#x27; on the menu bar -&gt; &#x27;Stop&#x27;).
+2. Start the application again and check whether the expected output appears on the console.
+
+```sql
+@App:name(&quot;PublishHttpOAuthRequestWithoutAccessToken&quot;)
+@App:description(&quot;Send a HTTP events to an OAuth-protected endpoint without access token&quot;)
+
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;http&#x27;,method=&quot;xxxxxx&quot;, publisher.url=&#x27;https://localhost:8005/abc&#x27;, headers=&quot;&#x27;Content-Type: xxxxx&#x27;&quot;,
+consumer.key=&quot;xxxxxxxxxx&quot;, consumer.secret=&quot;xxxxxxxxxxx&quot;, token.url=&#x27;https://localhost:8005/token&#x27;,
+@map(type=&#x27;json&#x27;), @payload( &quot;{&#x27;name&#x27;: {{name}}, &#x27;amount&#x27;: {{amount}}}&quot;))
+define stream LowProductionAlertStream ( name string, amount double);
+
+@info(name=&#x27;query1&#x27;)
+from SweetProductionStream
+select *
+insert into LowProductionAlertStream;
+```
+</body>
+</html>

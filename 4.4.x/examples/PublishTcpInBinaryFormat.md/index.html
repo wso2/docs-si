@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PublishTcpInBinaryFormat.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Publishing Binary Events via TCP
+
+## Purpose
+
+This application demonstrates how to configure WSO2 Integrator: SI to send sweet production events via TCP transport in binary format, and view the output in your TCP server&#x27;s console.
+
+## Prerequisites
+
+- Install the `tcp` Siddhi extension. For instructions, see [Downloading and Installing Siddhi Extensions](../connectors/downloading-and-Installing-Siddhi-Extensions.md).
+- A TCP server capable of accepting connections in the `siddhi-io-tcp` wire format and decoding events. For the framing details, see the [siddhi-io-tcp documentation](https://siddhi-io.github.io/siddhi-io-tcp/api/latest/).
+
+## Try it out
+
+1. Start your TCP server, listening on port `9892` and accepting events for context `LowProductionAlertStream`.
+
+2. Start the Siddhi application by clicking **Run**. The following messages appear in the console:
+
+    * `PublishTcpInBinaryFormat.siddhi - Started Successfully!`
+    * `&#x27;tcp&#x27; sink at &#x27;LowProductionAlertStream&#x27; stream successfully connected to &#x27;localhost:9892&#x27;.`
+
+    !!! tip &quot;Connection error?&quot;
+        If you see `&#x27;LowProductionAlertStream&#x27; stream could not connect to &#x27;localhost:9892&#x27;`, your TCP server may not be running, or the port may be in use by another program. Verify your TCP server is listening on `9892`, or change the port in both the sink configuration and your server.
+
+3. Send events using the Event Simulator. For instructions, see [Testing Siddhi Applications](../develop/testing-a-Siddhi-Application.md). Use the following values:
+
+    | **Field**          | **Value**              |
+    |--------------------|------------------------|
+    | **Siddhi App Name**| `PublishTcpInBinaryFormat` |
+    | **Stream Name**    | `SweetProductionStream` |
+    | **name**           | `toffee`                |
+    | **amount**         | `45.24`                 |
+
+    Send a few more events with different values.
+
+4. Your TCP server receives the binary-encoded events. Sample output (formatting depends on your server implementation):
+
+    ```bash
+    Event{timestamp=1512446413468, data=[toffee, 45.25], isExpired=false}
+    Event{timestamp=1512446425113, data=[coffee, 9.78], isExpired=false}
+    Event{timestamp=1512446442300, data=[chocolate, 78.23], isExpired=false}
+    ```
+
+## Siddhi application
+
+```sql
+@App:name(&quot;PublishTcpInBinaryFormat&quot;)
+@App:description(&#x27;Send events via TCP transport using binary format&#x27;)
+
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;tcp&#x27;, url=&#x27;tcp://localhost:9892/LowProductionAlertStream&#x27;,
+    @map(type=&#x27;binary&#x27;))
+define stream LowProductionAlertStream (name string, amount double);
+
+from SweetProductionStream
+select *
+insert into LowProductionAlertStream;
+```
+</body>
+</html>

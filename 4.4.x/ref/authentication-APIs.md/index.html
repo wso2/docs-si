@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>authentication-APIs.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body>!!! note
+    **This page is still a work in progress!**
+
+# Authentication APIs
+
+-   [Log in to a dashboard
+    application](#AuthenticationAPIs-Logintoadashboardapplication)
+-   [Log out of the dashboard
+    application](#AuthenticationAPIs-Logoutofthedashboardapplication)
+-   [Redirect URL for login using authorization grant
+    type](#AuthenticationAPIs-RedirectURLforloginusingauthorizationgranttype)
+
+## Log in to a dashboard application
+
+### Overview
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Overview&lt;/td&gt;
+&lt;td&gt;Logs in to the apps in dashboard runtime such as portal, monitoring or business-rules app.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;API Context&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             /login/{appName}            &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;HTTP Method&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;             POST            &lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Request/Response Format&lt;/td&gt;
+&lt;td&gt;&lt;pre&gt;&lt;code&gt;application/x-www-form-urlencoded&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Runtime&lt;/td&gt;
+&lt;td&gt;Dashboard&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+#### Parameter description
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Type&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Possible Values&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;             appName            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Path param&lt;/td&gt;
+&lt;td&gt;The application to which you need to log in.&lt;/td&gt;
+&lt;td&gt;portal/monitoring/business-rules&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;username&lt;/td&gt;
+&lt;td&gt;Body param&lt;/td&gt;
+&lt;td&gt;Username for the login&lt;/td&gt;
+&lt;td&gt;&lt;br /&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;password&lt;/td&gt;
+&lt;td&gt;Body param&lt;/td&gt;
+&lt;td&gt;Password for the login&lt;/td&gt;
+&lt;td&gt;&lt;br /&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;grantType&lt;/td&gt;
+&lt;td&gt;Body param&lt;/td&gt;
+&lt;td&gt;Grant type used for the login&lt;/td&gt;
+&lt;td&gt;password/
+&lt;pre&gt;&lt;code&gt;          refresh_token
+        &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;          
+
+        &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;          authorization_code
+        &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;pre&gt;&lt;code&gt;rememberMe&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td&gt;Body param&lt;/td&gt;
+&lt;td&gt;Whether remember me function enabled&lt;/td&gt;
+&lt;td&gt;false/true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+### curl command syntax
+
+``` java
+    curl -X POST &quot;https://analytics.wso2.com/login/{appName}&quot; -H &quot;accept: application/json&quot; -H &quot;Content-Type: application/x-www-form-urlencoded&quot; -d &quot;username={username}&amp;password={password}&amp;grantType={grantTypr}&amp;rememberMe={rememberMe}&quot;
+```
+
+  
+
+### Sample curl command
+
+``` java
+    curl -X POST &quot;https://localhost:9643/login/portal&quot; 
+    -H &quot;Content-Type: application/x-www-form-urlencoded&quot; -d &quot;username=admin&amp;password=admin&amp;grantType=password&quot;
+```
+
+### Sample output
+
+``` java
+    {&quot;authUser&quot;:&quot;admin&quot;,&quot;pID&quot;:&quot;71368eff-cc71-44ef&quot;,&quot;lID&quot;:&quot;a60c1098-3de0-42fb&quot;,&quot;validityPeriod&quot;:3600}
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;HTTP Status Code&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;_HTTP_Status_Codes_&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+## Log out of the dashboard application
+
+### Overview
+
+|                         |                                              |
+|-------------------------|----------------------------------------------|
+| Overview                | Logs out of the dashboard application.       |
+| API Context             | `             /logout/{appName}            ` |
+| HTTP Method             | `             POST            `              |
+| Request/Response Format | `             application/json            `  |
+| Runtime                 | Dashboard                                    |
+
+  
+
+### curl command syntax
+
+``` java
+    curl -X POST &quot;https://analytics.wso2.com/logout/{appName}&quot; -H &quot;accept: application/json&quot; -H &quot;Authorzation: Bearer {access token}&quot;
+```
+
+###  Sample curl command
+
+``` java
+    curl -X POST &quot;https://analytics.wso2.com/logout/portal&quot; -H &quot;accept: application/json&quot; -H &quot;Authorzation: Bearer 123456&quot;
+```
+
+### Sample output
+
+``` java
+    N/A
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;HTTP Status Code&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;_HTTP_Status_Codes_&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+## Redirect URL for login using authorization grant type
+
+### Overview
+
+|                         |                                                               |
+|-------------------------|---------------------------------------------------------------|
+| Overview                | Redirects URL by the IS in authorization grant type - OAuth2. |
+| API Context             | `             /login/callback/{appName}            `          |
+| HTTP Method             | `             GET            `                                |
+| Request/Response Format | JSON                                                          |
+| Runtime                 | Dashbaord                                                     |
+
+#### Parameter description
+
+| Parameter                            | Description                                              |
+|--------------------------------------|----------------------------------------------------------|
+| `             {appName}            ` | The application of which the URL needs to be redirected. |
+
+  
+
+### curl command syntax
+
+``` java
+```
+
+  
+
+### Sample curl command
+
+``` java
+    curl -X GET &quot;https://localhost:9643/login/callback/portal&quot;
+```
+
+### Sample output
+
+``` java
+```
+
+### Response
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;HTTP Status Code&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;200 or 404&lt;/p&gt;
+&lt;p&gt;For descriptions of the HTTP status codes, see &lt;a href=&quot;_HTTP_Status_Codes_&quot;&gt;HTTP Status Codes&lt;/a&gt; .&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</body>
+</html>

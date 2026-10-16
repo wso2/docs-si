@@ -1,0 +1,11 @@
+{
+   "portfolio":{
+      "stock":{
+         "volume":150,
+         "company":{
+            "symbol":"ibm"
+         },
+         "price":88
+      }
+   }
+}

@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>working-with-the-graphical-view.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Working with the Graphical View
+
+This section provides an overview of the Graphical View of WSO2 Integrator: SI.
+
+## Accessing the Graphical View
+
+To open the Graphical View of WSO2 Integrator: SI, follow the steps below:
+
+1. Open WSO2 Integrator: SI in a directory with Siddhi files, and click on a Siddhi file.
+2. Click on the **Open Graphical View** button to open the Graphical View.
+3. Click **Graphical View** to open the Graphical View.  
+    ![Graphical View button]({{base_path}}/images/working-with-the-design-view/Open_Design_View.png)
+   
+   The Graphical View opens as shown in the example below. It consists of a grid to which you can drag and drop the Siddhi components represented by icons displayed in the left panel to design a Siddhi application. 
+    ![Graphical View]({{base_path}}/images/working-with-the-design-view/Design-View.png)
+
+## Adding Siddhi components
+
+To add a Siddhi component to the Siddhi application that you are creating/editing in the Graphical View, click on the 
+relevant icon in the left pane, and then drag and drop it to the grid as demonstrated in the example below.
+
+![Dragging and dropping Siddhi components]({{base_path}}/images/working-with-the-design-view/Drag-And-Drop-Siddhi-Component.gif)
+
+Once you add a Siddhi component, you can configure it as required. To
+configure a Siddhi component, click the settings icon on the component.
+This opens a form with parameters related to the relevant component.
+
+![Configure Siddhi component settings]({{base_path}}/images/working-with-the-design-view/Configure-Siddhi-Component-In-Design-View.png)
+
+The following is the complete list of Siddhi components that you can add
+to the grid of the Graphical View when you create a Siddhi application.
+
+### Stream
+
+&lt;table&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Stream_Icon.png&quot; /&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;A stream represents a logical series of events ordered in time. For a detailed description of streams, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#stream&quot;&gt;Siddhi Query Guide - Stream&lt;/a&gt;.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;To configure the stream, click the settings icon on the stream component you added to the grid. Then enter values as follows:&lt;/p&gt;
+               &lt;p&gt;&lt;strong&gt;Stream Name&lt;/strong&gt; &lt;strong&gt;:&lt;/strong&gt; A unique name for the stream. This should be specified in title caps, and without spaces (e.g., &lt;code&gt;ProductionDataStream&lt;/code&gt; ).&lt;/p&gt;
+               &lt;p&gt;&lt;strong&gt;Attributes&lt;/strong&gt; : Attributes of streams are specified as name and type pairs in the &lt;strong&gt;Attributes&lt;/strong&gt; table.&lt;/p&gt;
+               &lt;p&gt;If you want to generate the the stream from a file or a database, click &lt;strong&gt;Generate Stream&lt;/strong&gt;. However, note that you need to create the relevant file or set up the database and the tables beforehand.&lt;/p&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Generate-Stream.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The &lt;strong&gt;Generate Stream&lt;/strong&gt; form opens as follows&lt;/p&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/generate-stream-form.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;To generate the stream from a file:
+                &lt;ol&gt;
+                &lt;li&gt;In the &lt;strong&gt;Generate Stream&lt;/strong&gt; form, select &lt;strong&gt;From File&lt;/strong&gt;.&lt;/li&gt;
+                &lt;li&gt;&lt;p&gt;Then click &lt;strong&gt;Choose File&lt;/strong&gt; and browse for the file from which you want to generate the stream. &lt;br/&gt; the supported file types are &lt;code&gt;CSV&lt;/code&gt;, &lt;code&gt;JSON&lt;/code&gt;, and &lt;code&gt;XML&lt;/code&gt;. If you select a file that is not of one of these types, the &lt;strong&gt;Select File Type&lt;/strong&gt; field is enabled as shown in the example below.&lt;/p&gt;
+                    &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/select-file-type.png&quot;/&gt;&lt;/p&gt;
+                    &lt;p&gt;You are required to select the appropriate file type in this field in order to proceed to generate the stream from the selected file.&lt;/p&gt;
+                    &lt;p&gt;The rest of the fields that appear in the dialog box differ based on the file type as explained below. If required, change the default values that appear in them as required&lt;/p&gt;
+                    &lt;ul&gt;
+                        &lt;li style=&quot;margin-left:2em&quot;&gt;If the file type is &lt;strong&gt;CSV&lt;/strong&gt;:&lt;/li&gt;
+                        &lt;ul&gt;
+                            &lt;li style=&quot;margin-left:2em&quot;&gt;&lt;strong&gt;Stream Name&lt;/strong&gt;: A name for the stream that you are generating.&lt;/li&gt;
+                            &lt;li style=&quot;margin-left:2em&quot;&gt;&lt;strong&gt;Delimiter&lt;/strong&gt;: A blank space, comma, or any other character/symbol that indicates the beginning or the end of a character string, word, or a data item.&lt;/li&gt;
+                            &lt;li style=&quot;margin-left:2em&quot;&gt;&lt;strong&gt;Is Header Exists&lt;/strong&gt;: If this is set to &lt;strong&gt;true&lt;/strong&gt;, a header exists for the purpose of identifying the attribute names and the data types of the data values in the file.&lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;li style=&quot;margin-left:2em&quot;&gt;If the file type is &lt;strong&gt;JSON&lt;/strong&gt;:&lt;/li&gt;
+                        &lt;ul&gt;
+                            &lt;li style=&quot;margin-left:2em&quot;&gt;&lt;strong&gt;Stream Name&lt;/strong&gt;: A name for the stream that you are generating.&lt;/li&gt;
+                            &lt;li style=&quot;margin-left:2em&quot;&gt;&lt;strong&gt;Enclosing Element&lt;/strong&gt;: The symbol/element used to enclose the JSON object.&lt;/li&gt;
+                        &lt;/ul&gt;
+                        &lt;li style=&quot;margin-left:2em&quot;&gt;If the file type is &lt;strong&gt;XML&lt;/strong&gt;:&lt;/li&gt;
+                        &lt;ul&gt;
+                            &lt;li style=&quot;margin-left:2em&quot;&gt;&lt;strong&gt;Stream Name&lt;/strong&gt;: A name for the stream that you are generating.&lt;/li&gt;
+                            &lt;li style=&quot;margin-left:2em&quot;&gt;&lt;strong&gt;Namespace&lt;/strong&gt;: This is an optional field to enter an XML namespace.&lt;/li&gt;
+                            &lt;li style=&quot;margin-left:2em&quot;&gt;&lt;strong&gt;Enclosing Element&lt;/strong&gt;: The symbol/element used to enclose the XML object.&lt;/li&gt;
+                        &lt;/ul&gt;
+                    &lt;/ul&gt;
+                &lt;/li&gt;
+                &lt;li&gt;Click &lt;strong&gt;Generate&lt;/strong&gt;. The &lt;strong&gt;Stream Configuration&lt;/strong&gt; form is populated with the values in the file you selected.&lt;/li&gt;
+                &lt;/ol&gt;
+               &lt;/p&gt;
+               &lt;p&gt;To generate the stream from a database:
+                &lt;ol&gt;
+                    &lt;li&gt;In the &lt;strong&gt;Generate Stream&lt;/strong&gt; form, select &lt;strong&gt;From Database&lt;/strong&gt;.&lt;/li&gt;
+                    &lt;li&gt;If you want to provide the data source definition inline, select &lt;strong&gt;Inline Configuration&lt;/strong&gt;. If not, select &lt;strong&gt;Provide Datasource&lt;/strong&gt; to select a data source that is already defined externally.&lt;/li&gt;
+                    &lt;li&gt; Enter details relating to the data source as follows.&lt;/li&gt;
+                        &lt;ul&gt;
+                            &lt;li&gt;If you are defining the data source configuration inline, enter information as follows:&lt;/li&gt;
+                            &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/generate-stream-with-inline-datasource-configuration.png&quot;/&gt;&lt;/p&gt;
+                                &lt;ul&gt;
+                                    &lt;li&gt;&lt;strong&gt;Stream Name&lt;/strong&gt;: A name for the stream that you are generating.&lt;/li&gt;
+                                    &lt;li&gt;&lt;strong&gt;Database URL&lt;/strong&gt;: The URL via which you can connect to the database.&lt;/li&gt;
+                                    &lt;li&gt;&lt;strong&gt;Username&lt;/strong&gt;: The username via which you access the database.&lt;/li&gt;
+                                    &lt;li&gt;&lt;strong&gt;Password&lt;/strong&gt;: The password via which you access the database.&lt;/li&gt;
+                                    &lt;li&gt;&lt;strong&gt;Table Name&lt;/strong&gt;: The name of the database table from which you are generating the stream. To make the available tables appear in this field as a list so that you can select one, enter the relevant information in the previous fields and click &lt;strong&gt;Retrieve Tables&lt;/strong&gt;.&lt;/li&gt;
+                                &lt;/ul&gt;
+                            &lt;li&gt;If the data source you are using is already defined externally, enter information as follows:&lt;/li&gt;
+                            &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/generate-stream-with-externally-defined-datasource.png&quot;/&gt;&lt;/p&gt;
+                                &lt;ul&gt;
+                                    &lt;li&gt;&lt;strong&gt;Stream Name&lt;/strong&gt;: A name for the stream that you are generating.&lt;/li&gt;
+                                    &lt;li&gt;&lt;strong&gt;Datasource Name&lt;/strong&gt;: The name of the data source from which you are generating the stream.&lt;/li&gt;
+                                    &lt;li&gt;&lt;strong&gt;Table Name&lt;/strong&gt;: The name of the database table from which you are generating the stream. To make the available tables appear in this field as a list so that you can select one, enter the relevant data source in the &lt;strong&gt;Datasource Name&lt;/strong&gt; field and click &lt;strong&gt;Retrieve Tables&lt;/strong&gt;.&lt;/li&gt;
+                                &lt;/ul&gt;
+                    &lt;li&gt;Click &lt;strong&gt;Generate&lt;/strong&gt; to generate the stream.&lt;/li&gt;
+                &lt;/ol&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Stream_Configuration.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The details entered in the above &lt;strong&gt;&lt;/strong&gt; form creates a stream configuration as follows:&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;define stream SweetProductionStream (amount double, name string);&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Sources&lt;/li&gt;
+               &lt;li&gt;Projection queries&lt;/li&gt;
+               &lt;li&gt;Filter queries&lt;/li&gt;
+               &lt;li&gt;Window queries&lt;/li&gt;
+               &lt;li&gt;Join queries&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Sinks&lt;/li&gt;
+               &lt;li&gt;Projection queries&lt;/li&gt;
+               &lt;li&gt;Filter queries&lt;/li&gt;
+               &lt;li&gt;Window queries&lt;/li&gt;
+               &lt;li&gt;Join queries&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+### Source
+
+&lt;table&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Source_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;A source receives events in the specified transport and in the specified format. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#source&quot;&gt;Siddhi Query Guide - Source&lt;/a&gt;.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;To configure the source, click the settings icon on the source component you added to the grid. This opens a form where you can enter the following information:&lt;br /&gt;&lt;/p&gt;
+                   To access the form in which you can configure a source, you must first connect the source as the source (input) object to a stream component.
+               &lt;ul&gt;
+                  &lt;li&gt;&lt;strong&gt;Source Type&lt;/strong&gt; : This specifies the transport type via which the events are received. The value should be entered in lower case (e.g., &lt;code&gt;tcp&lt;/code&gt; ). The other parameters displayed for the source depends on the source type selected.&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;Map Type&lt;/strong&gt; : This specifies the format in which you want to receive the events (e.g., &lt;code&gt;xml&lt;/code&gt; ). The other parameters displayed for the map depends on the map type selected. If you want to add more configurations to the mapping, click &lt;strong&gt;Customized Options&lt;/strong&gt; and set the required properties and key value pairs.&lt;br /&gt;&lt;/li&gt;
+                  &lt;li&gt;
+                     &lt;p&gt;&lt;strong&gt;Map Attribute as Key/Value Pairs&lt;/strong&gt; : If this check box is selected, you can define custom mapping by entering key value pairs. You can add as many key value pairs as required under this check box.&lt;/p&gt;
+                  &lt;/li&gt;
+               &lt;/ul&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Source-Configuration.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The details entered in the above &lt;strong&gt;&lt;/strong&gt; form creates a source configuration as follows:&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: java; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: java; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode java&quot;&gt;&lt;code class=&quot;sourceCode java&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;@source(type = &amp;#39;tcp&amp;#39;, &lt;a href=&quot;#cb1-2&quot;&gt;&lt;/a&gt;    @map(type = &amp;#39;json&amp;#39;,
+&lt;a href=&quot;#cb1-3&quot;&gt;&lt;/a&gt;        @attributes(name =&amp;quot;$.sweet&amp;quot;, amount = &amp;quot;$.batch.count&amp;quot;)))&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;No connection can start from another Siddhi component and link to a source because a source is the point from which events selected into the event flow of the Siddhi application start.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;
+            &lt;p&gt;Streams&lt;/p&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+  
+
+### Sink
+
+&lt;table&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Sink_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;A sink publishes events via the specified transport and in the specified format. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#sink&quot;&gt;Siddhi Query Guide - Sink&lt;/a&gt;.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;To configure the sink, click the settings icon on the sink component you added to the grid.&lt;br /&gt;&lt;/p&gt;
+               &lt;p&gt;To access the form in which you can configure a sink, you must first connect the sink as the target object to a stream component.&lt;/p&gt;
+               &lt;ul&gt;
+                  &lt;li&gt;&lt;strong&gt;Sink Type&lt;/strong&gt; : This specifies the transport via which the sink publishes processed events. The value should be entered in lower case (e.g., &lt;code&gt;log&lt;/code&gt; ).&lt;br /&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;Map Type&lt;/strong&gt; : This specifies the format in which you want to publish the events (e.g., &lt;code&gt;passThrough&lt;/code&gt; ). The other parameters displayed for the map depends on the map type selected. If you want to add more configurations to the mapping, click &lt;strong&gt;Customized Options&lt;/strong&gt; and set the required properties and key value pairs.&lt;/li&gt;
+                  &lt;li&gt;
+                     &lt;p&gt;&lt;strong&gt;Map Attribute as Key/Value Pairs&lt;/strong&gt; : If this check box is selected, you can define custom mapping by entering key value pairs. You can add as many key value pairs as required under this check box.&lt;br /&gt;&lt;/p&gt;
+                  &lt;/li&gt;
+               &lt;/ul&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Sink_Configuration_Form.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The details entered in the above &lt;strong&gt;&lt;/strong&gt; form creates a sink configuration as follows:&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;@sink(type = &amp;#39;log&amp;#39;, prefix = &amp;quot;Sweet Totals:&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;Streams&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;
+            &lt;p&gt;N/A&lt;/p&gt;
+            &lt;p&gt;A sink cannot be followed by another Siddhi component because it represents the last stage of the event flow where the results of the processing carried out by the Siddhi application are communicated via the required interface.&lt;/p&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+### Table
+
+&lt;table&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Table_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;A table is a stored version of an stream or a table of events. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#table&quot;&gt;Siddhi Query Guide - Table&lt;/a&gt;.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;p&gt;To configure the table, click the settings icon on the table component you added to the grid.&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Name&lt;/strong&gt; &lt;strong&gt;:&lt;/strong&gt; This field specifies unique name for the table. This should be specified in title caps, and without spaces (e.g., &lt;code&gt;              ProductionDataTable             &lt;/code&gt; ).&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Attributes&lt;/strong&gt; : Attributes of tables are specified as name and type pairs in the &lt;strong&gt;Attributes&lt;/strong&gt; table. To add a new attribute, click &lt;strong&gt;+Attribute&lt;/strong&gt;.&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Store Type&lt;/strong&gt; : This specifies the specific database type in which you want to stopre data or whether the data is to be stored in-memory. Once the store type is selected, select an option to indicate whether the datastore needs to be defined inline, whether you want to use a datasource defined in the &lt;code&gt;              &amp;lt;SP_HOME&amp;gt;/conf/worker/deployment.yaml             &lt;/code&gt; file, or connected to a JNDI resource. For more information, see &lt;a href=&quot;https://docs.wso2.com/display/SP440/Defining+Tables+for+Physical+Stores&quot;&gt;Defining Tables for Physical Stores&lt;/a&gt;. The other parameters configured under &lt;strong&gt;Store Type&lt;/strong&gt; depend on the store type you select.&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Annotations&lt;/strong&gt; : This section allows you to specify the table attributes you want to use as the primary key and indexes via the &lt;code&gt;              @primarykey             &lt;/code&gt; and &lt;code&gt;              @index             &lt;/code&gt; annotations. For more information, see &lt;a href=&quot;https://docs.wso2.com/display/SP440/Defining+Data+Tables&quot;&gt;Defining Data Tables&lt;/a&gt;. If you want to add any other custom annotations to your table definition, click &lt;strong&gt;+Annotation&lt;/strong&gt; to define them.&lt;/p&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Table_Configuration_Form.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The details entered in the above &lt;strong&gt;&lt;/strong&gt; form creates a table definition as follows:&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;@store(type = &amp;#39;rdbms&amp;#39;, datasource = &amp;quot;SweetProductionDB&amp;quot;)
+&lt;a href=&quot;#cb1-2&quot;&gt;&lt;/a&gt;define table ShipmentDetails (name string, supplier string, amount double);&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Projection queries&lt;/li&gt;
+               &lt;li&gt;Window queries&lt;/li&gt;
+               &lt;li&gt;Filter queries&lt;/li&gt;
+               &lt;li&gt;Join queries&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Projection queries&lt;/li&gt;
+               &lt;li&gt;Window queries&lt;/li&gt;
+               &lt;li&gt;Filter queries&lt;/li&gt;
+               &lt;li&gt;Join queries&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+### Window
+
+&lt;table&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Window_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;This icon represents a window definition that can be shared across multiple queries. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#defined-window&quot;&gt;Siddhi Query Guide - (Defined) Window&lt;/a&gt;.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;p&gt;To configure the window, click the settings icon on the window component you added to the grid, and update the following information.&lt;/p&gt;
+            &lt;ul&gt;
+               &lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt; : This field specifies a unique name for the window. &lt;code&gt;               PascalCase              &lt;/code&gt; is used for window names as a convention.&lt;/li&gt;
+               &lt;li&gt;&lt;strong&gt;Attributes&lt;/strong&gt; : Attributes of windows are specified as name and type pairs in the &lt;strong&gt;Attributes&lt;/strong&gt; table.&lt;/li&gt;
+               &lt;li&gt;&lt;strong&gt;Window Type&lt;/strong&gt; : This specifies the function of the window (i.e., the window type such as &lt;code&gt;               time              &lt;/code&gt; , &lt;code&gt;               length              &lt;/code&gt; , &lt;code&gt;               frequent              &lt;/code&gt; etc.). The window types supported include &lt;a href=&quot;https://siddhi-io.github.io/siddhi/api/latest/#time-window&quot;&gt;time&lt;/a&gt; , &lt;a href=&quot;https://siddhi-io.github.io/siddhi/api/latest/#timebatch-window&quot;&gt;timeBatch&lt;/a&gt; , &lt;a href=&quot;https://siddhi-io.github.io/siddhi/api/latest/#timelength-window&quot;&gt;timeLength&lt;/a&gt; , &lt;a href=&quot;https://siddhi-io.github.io/siddhi/api/latest/#length-window&quot;&gt;length&lt;/a&gt; , &lt;a href=&quot;https://siddhi-io.github.io/siddhi/api/latest/#lengthbatch-window&quot;&gt;lengthBatch&lt;/a&gt; , &lt;a href=&quot;https://siddhi-io.github.io/siddhi/api/latest/#sort-window&quot;&gt;sort&lt;/a&gt; , &lt;a href=&quot;https://siddhi-io.github.io/siddhi/api/latest/#frequent-window&quot;&gt;frequent&lt;/a&gt; , &lt;a href=&quot;https://siddhi-io.github.io/siddhi/api/latest/#lossyfrequent-window&quot;&gt;lossyFrequent&lt;/a&gt; , &lt;a href=&quot;https://siddhi-io.github.io/siddhi/api/latest/#cron-window&quot;&gt;cron&lt;/a&gt; , &lt;a href=&quot;https://siddhi-io.github.io/siddhi/api/latest/#externaltime-window&quot;&gt;externalTime&lt;/a&gt; , &lt;a href=&quot;https://siddhi-io.github.io/siddhi/api/latest/#externaltimebatch-window&quot;&gt;externalTimeBatch&lt;/a&gt;.&lt;/li&gt;
+               &lt;li&gt;&lt;strong&gt;Parameters&lt;/strong&gt; : This section allows you to define one or more parameters for the window definition based on the window type you entered in the &lt;strong&gt;Window Type&lt;/strong&gt; field.&lt;/li&gt;
+               &lt;li&gt;&lt;strong&gt;Annotations&lt;/strong&gt; : If you want to add any other custom annotations to your window definition, click &lt;strong&gt;+Annotation&lt;/strong&gt; to define them.&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Window_Configuration_Form.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The details entered in the above form creates a window definition as follows:&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;define window FiveMinTempWindow (roomNo int, temp double) time(5 min) output all events;&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Projection queries&lt;/li&gt;
+               &lt;li&gt;Window queries&lt;/li&gt;
+               &lt;li&gt;Filter queries&lt;/li&gt;
+               &lt;li&gt;Join queries&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Projection queries&lt;/li&gt;
+               &lt;li&gt;Window queries&lt;/li&gt;
+               &lt;li&gt;Filter queries&lt;/li&gt;
+               &lt;li&gt;Join queries&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+### Trigger
+
+&lt;table&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Trigger_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;A trigger allows you to generate events periodically. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#trigger&quot;&gt;Siddhi Query Guide - Trigger&lt;/a&gt;.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+      &lt;td&gt;Form&lt;/td&gt;
+      &lt;td&gt;
+        &lt;div class=&quot;content-wrapper&quot;&gt;
+            &lt;p&gt;To configure the trigger, click the settings icon on the trigger component you added to the grid, and update the following information.&lt;/p&gt;
+             &lt;ul&gt;
+                &lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt; &lt;strong&gt;:&lt;/strong&gt; A unique name for the trigger&lt;/li&gt;
+                &lt;li&gt;&lt;strong&gt;Trigger Criteria&lt;/strong&gt; : This specifies the criteria based on which the trigger is activated. Possible values are as follows:
+                    &lt;ul&gt;
+                        &lt;li&gt;&lt;strong&gt;start&lt;/strong&gt; : Select this to trigger events when the WSO2 Integrator: SI server has started.&lt;/li&gt;
+                        &lt;li&gt;&lt;strong&gt;every&lt;/strong&gt; : Select this to specify a time interval at which events should be triggered.&lt;/li&gt;
+                        &lt;li&gt;&lt;strong&gt;cron-expression&lt;/strong&gt; : Select this to enter a cron expression based on which the events can be triggered. For more information about cron expressions, see the &lt;a href=&quot;http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html&quot;&gt;quartz-scheduler&lt;/a&gt;.&lt;/li&gt;
+                    &lt;/ul&gt;
+               &lt;/li&gt;
+              &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+               &lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Trigger_Configuration_Form.png&quot;/&gt;
+               &lt;p&gt;The details entered in the above form creates a trigger definition as follows:&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;define trigger FiveMinTriggerStream at every 5;&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+               &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;N/A&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Projection queries&lt;/li&gt;
+               &lt;li&gt;Window queries&lt;/li&gt;
+               &lt;li&gt;Filter queries&lt;/li&gt;
+               &lt;li&gt;Join queries&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+### Aggregation
+
+&lt;table&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Aggregation_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;Incremental aggregation allows you to obtain aggregates in an incremental manner for a specified set of time periods. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#incremental-aggregation&quot;&gt;Siddhi Query Guide - Incremental Aggregation&lt;/a&gt;.&lt;/p&gt;
+               &lt;p&gt; Before you add an aggregation, make sure that you have already added the stream with the events to which the aggregation is applied is already defined.&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;To configure the aggregation, click the settings icon on the aggregation component you added to the grid, and update the following information.&lt;/p&gt;
+               &lt;ul&gt;
+                  &lt;li&gt;&lt;strong&gt;Aggregation Meta Information&lt;/strong&gt; : In this section, define a unique name for the aggregation in the &lt;strong&gt;Name&lt;/strong&gt; field, and specify the stream from which the input information is taken to perform the aggregations. You can also select the optional annotations you want to use in the aggregation definition by selecting the relevant check boxes. For more information about configuring the annotations once you select them, see &lt;a href=&quot;https://docs.wso2.com/display/SP440/Incremental+Analysis#IncrementalAnalysis-annotation&quot;&gt;Incremental Analysis&lt;/a&gt;.&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;Projection&lt;/strong&gt; : This section specifies the attributes to be included in the aggregation query. In the &lt;strong&gt;Select&lt;/strong&gt; field, you can select &lt;strong&gt;All&lt;/strong&gt; attributes to perform the aggregation for all the attributes of the stream specified under &lt;strong&gt;Input&lt;/strong&gt; , or select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; to select specific attributes. If you select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; , you can add attributes to be selected to be inserted into the output stream. Here, you can enter the names of specific attributes in the input stream, or enter expressions to convert input stream attribute values as required to generate output events. You can also specify the attribute(s) by which you want to group the output.&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;Aggregation Criteria&lt;/strong&gt; : Here, you can specify the time values based on which the aggregates are calculated.&lt;/li&gt;
+               &lt;/ul&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Aggregation_Configuration_Form.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The details entered in the above form creates an aggregation definition as follows:&lt;br /&gt;&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;define aggregation TradeAggregation
+&lt;a href=&quot;#cb1-2&quot;&gt;&lt;/a&gt;from TradeStream
+&lt;a href=&quot;#cb1-3&quot;&gt;&lt;/a&gt;select symbol, avg(price) as avgPrice, sum(price) as total
+&lt;a href=&quot;#cb1-4&quot;&gt;&lt;/a&gt;    group by symbol
+&lt;a href=&quot;#cb1-5&quot;&gt;&lt;/a&gt;    aggregateby timestamp every seconds...years;&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;N/A&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;Join queries&lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+### Function
+
+&lt;table&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Function_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;The function icon represents &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#script&quot;&gt;Script in Siddhi Query Language&lt;/a&gt;. It allows you to write functions in other programming languages and execute them within Siddhi queries. A function component in a Siddhi application is not connected to ther Siddhi components in the design UI. However, the configuration of one or more Query components can include a reference to it.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;p&gt;To configure the function, click the settings icon on the function component you added to the grid, and update the following information.&lt;/p&gt;
+            &lt;ul&gt;
+               &lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt; : A unique name for the function.&lt;/li&gt;
+               &lt;li&gt;&lt;strong&gt;Script Type&lt;/strong&gt; : The language in which the function is written.&lt;/li&gt;
+               &lt;li&gt;&lt;strong&gt;Return Value&lt;/strong&gt; : The data format of the value that is generated as the output via the function.&lt;br /&gt;&lt;/li&gt;
+               &lt;li&gt;&lt;strong&gt;Script Body&lt;/strong&gt; : This is a free text field to write the function in the specified script type.&lt;br /&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Function_Configuration_Form.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The details entered in the above form creates a function definition as follows:&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;define function concatFN[JAVASCRIPT] return string {
+&lt;a href=&quot;#cb1-2&quot;&gt;&lt;/a&gt;    var str1 = ata[0];
+&lt;a href=&quot;#cb1-3&quot;&gt;&lt;/a&gt;    var str2 = data[1];
+&lt;a href=&quot;#cb1-4&quot;&gt;&lt;/a&gt;    var str3= data[2];
+&lt;a href=&quot;#cb1-5&quot;&gt;&lt;/a&gt;    var responce = str1 + str2 + str3;
+&lt;a href=&quot;#cb1-6&quot;&gt;&lt;/a&gt;    return responce;
+&lt;a href=&quot;#cb1-7&quot;&gt;&lt;/a&gt;};&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+### Projection Query
+
+&lt;table&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Projection_Query_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;Before you add a projection query:&lt;/p&gt;
+               &lt;p&gt;You need to add and configure the following:&lt;/p&gt;
+               &lt;ul&gt;
+                  &lt;li&gt;The input stream with the events to be processed by the query.&lt;/li&gt;
+                  &lt;li&gt;The output stream to which the events processed by the query are directed.&lt;/li&gt;
+               &lt;/ul&gt;
+               &lt;p&gt;This icon represents a query to project the events in an input stream to an output stream. This invoves selectng the attributes to be included in the output, renaming attributes, introducing constant values, and using mathematical and/or logical expressions. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#query-projection&quot;&gt;Siddhi Query Guide - Query Projection&lt;/a&gt;.&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the projection query, click the settings icon on the projection query component you added to the grid, and update the following information.&lt;/p&gt;
+               &lt;ul&gt;
+                  &lt;li&gt;&lt;strong&gt;Query Meta Information&lt;/strong&gt; : This section specifies the stream to be considered as the input stream with the events to which the query needs to be applied. The input stream connected to the query as the source is automatically displayed.&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;Projection&lt;/strong&gt; : This section specifies the attributes to be included in the output. In the &lt;strong&gt;Select&lt;/strong&gt; field, you can select &lt;strong&gt;All Attributes&lt;/strong&gt; to select all the attributes of the events, or select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; to select specific attributes from the input stream. If you select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; , you can add attributes to be selected to be inserted into the output stream. Here, you can enter the names of specific attributes in the input stream, or enter expressions to convert input stream attribute values as required to generate output events. You can also specify the attribute(s) by which you want to group the output.&lt;/li&gt;
+                  &lt;li&gt;
+                     &lt;strong&gt;Output&lt;/strong&gt; : This section specifies the action to be performed on the output event. The fields to be configured in this section are as follows:
+                     &lt;ul&gt;
+                        &lt;li&gt;&lt;strong&gt;Operation&lt;/strong&gt; : This field specifies the operation to be performed on the generated output event (e.g., &lt;code&gt;                  Insert                 &lt;/code&gt; to insert events to a selected stream/table/window).&lt;/li&gt;
+                        &lt;li&gt;&lt;strong&gt;Into&lt;/strong&gt; : This field specifies the stream/table/window in which the operation specified need to be performed.&lt;/li&gt;
+                        &lt;li&gt;&lt;strong&gt;Event Type&lt;/strong&gt; This field specifies whether the operation needs to be performed for all output events, only current events or for only expired events.|&lt;/li&gt;
+                     &lt;/ul&gt;
+                  &lt;/li&gt;
+               &lt;/ul&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Projection_QueryConfiguration_Form.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The details entered in the above form creates a query as follows:&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;from TradeStream
+&lt;a href=&quot;#cb1-2&quot;&gt;&lt;/a&gt;select symbol, avg(price) as averagePrice, sum(volume) a total
+&lt;a href=&quot;#cb1-3&quot;&gt;&lt;/a&gt;insert all events into OutputStream;&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Streams&lt;/li&gt;
+               &lt;li&gt;Tables&lt;/li&gt;
+               &lt;li&gt;Triggers&lt;/li&gt;
+               &lt;li&gt;Windows&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Streams&lt;/li&gt;
+               &lt;li&gt;Tables&lt;/li&gt;
+               &lt;li&gt;Windows&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+### Filter Query
+
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Icon&lt;/td&gt;
+&lt;td&gt;&lt;div class=&quot;content-wrapper&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Filter_Query_Icon.png&quot;/&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Description&lt;/td&gt;
+&lt;td&gt;&lt;div class=&quot;content-wrapper&quot;&gt;
+&lt;p&gt;Before you add a filter query:&lt;/p&gt;
+&lt;p&gt;You need to add and configure the following:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The input stream with the events to be processed by the query.&lt;/li&gt;
+&lt;li&gt;The output stream to which the events processed by the query are directed.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A filter query filters information in an input stream based on a given condition. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#filter&quot;&gt;Siddhi Query Guide - Filters&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Form&lt;/td&gt;
+&lt;td&gt;&lt;div class=&quot;content-wrapper&quot;&gt;
+&lt;p&gt;Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the filter query, click the settings icon on the filter query component you added to the grid, and update the following information.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;By default, the &lt;strong&gt;Stream Handler&lt;/strong&gt; check box is selected, and a stream handler of the &lt;code&gt;filter&lt;/code&gt; type is available under it to indicate that the query is a filter. Expand this stream handler, and enter the condition based on which the information needs to be filtered.&lt;/p&gt;
+&lt;p&gt;A Siddhi application can have multiple stream handlers. To add another stream handler, click the &lt;strong&gt;+ Stream Handler&lt;/strong&gt;. Multiple functions, filters and windows can be defined within the same form as stream handlers.&lt;/p&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Projection&lt;/strong&gt; : This section specifies the attributes to be included in the output. In the &lt;strong&gt;Select&lt;/strong&gt; field, you can select &lt;strong&gt;All Attributes&lt;/strong&gt; to select all the attributes of the events, or select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; to select specific attributes from the input stream. If you select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; , you can add attributes to be selected to be inserted into the output stream. Here, you can enter the names of specific attributes in the input stream, or enter expressions to convert input stream attribute values as required to generate output events. You can also specify the attribute(s) by which you want to group the output.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Output&lt;/strong&gt; : This section specifies the action to be performed on the output event. The fields to be configured in this section are as follows:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Operation&lt;/strong&gt; : This field specifies the operation to be performed on the generated output event (e.g., &lt;code&gt;Insert&lt;/code&gt; to insert events to a selected stream/table/window).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Into&lt;/strong&gt; : This field specifies the stream/table/window in which the operation specified need to be performed.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Event Type&lt;/strong&gt; This field specifies whether the operation needs to be performed for all output events, only current events or for only expired events.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Example&lt;/td&gt;
+&lt;td&gt;&lt;div class=&quot;content-wrapper&quot;&gt;
+&lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Filter_Query_Configuration_Form.png&quot;/&gt;&lt;/p&gt;
+&lt;p&gt;The details entered in the above form creates a query with a filter as follows:&lt;/p&gt;
+&lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+&lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+&lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;&lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;from TradeStream[sum(amount)&amp;gt; 10000]
+&lt;a href=&quot;#cb1-2&quot;&gt;&lt;/a&gt;select symbol, avg(price) as averagePrice, sum(amount) as total
+&lt;a href=&quot;#cb1-3&quot;&gt;&lt;/a&gt;insert all events into OutputStream;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;Source&lt;/td&gt;
+&lt;td&gt;&lt;ul&gt;
+&lt;li&gt;Streams&lt;/li&gt;
+&lt;li&gt;Tables&lt;/li&gt;
+&lt;li&gt;Triggers&lt;/li&gt;
+&lt;li&gt;Windows&lt;/li&gt;
+&lt;/ul&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;Target&lt;/td&gt;
+&lt;td&gt;&lt;ul&gt;
+&lt;li&gt;Streams&lt;/li&gt;
+&lt;li&gt;Tables&lt;/li&gt;
+&lt;li&gt;Windows&lt;/li&gt;
+&lt;/ul&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+### Window Query
+
+&lt;table&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Window_Query_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;Before you add a window query:&lt;/p&gt;
+               &lt;p&gt;You need to add and configure the following:&lt;/p&gt;
+               &lt;ul&gt;
+                  &lt;li&gt;The input stream with the events to be processed by the query.&lt;/li&gt;
+                  &lt;li&gt;The output stream to which the events processed by the query are directed.&lt;/li&gt;
+               &lt;/ul&gt;
+               &lt;p&gt;Window queries include a window to select a subset of events to be processed based on a specific criterion. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#defined-window&quot;&gt;Siddhi Query Guide - (Defined) Window&lt;/a&gt;.&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the window query, click the settings icon on the window query component you added to the grid, and update the following information.&lt;/p&gt;
+               &lt;ul&gt;
+                  &lt;li&gt;
+                     &lt;p&gt;By default, the &lt;strong&gt;Stream Handler&lt;/strong&gt; check box is selected, and a stream handler of the &lt;code&gt;window&lt;/code&gt; type is available under it to indicate that the query is a filter. Expand this stream handler, and enter details to determine the window including the window type and the basis on which the subset of events considered by the window is determined (i.e., based on the window type selected).&lt;/p&gt;
+                     &lt;p&gt;A Siddhi application can have multiple stream handlers. To add another stream handler, click the &lt;strong&gt;+ Stream Handler&lt;/strong&gt;. Multiple functions, filters and windows can be defined within the same form as stream handlers.&lt;/p&gt;
+                     &lt;/p&gt;
+                  &lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;Projection&lt;/strong&gt; : This section specifies the attributes to be included in the output. In the &lt;strong&gt;Select&lt;/strong&gt; field, you can select &lt;strong&gt;All Attributes&lt;/strong&gt; to select all the attributes of the events, or select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; to select specific attributes from the input stream. If you select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; , you can add attributes to be selected to be inserted into the output stream. Here, you can enter the names of specific attributes in the input stream, or enter expressions to convert input stream attribute values as required to generate output events. You can also specify the attribute(s) by which you want to group the output.&lt;/li&gt;
+                  &lt;li&gt;
+                     &lt;strong&gt;Output&lt;/strong&gt; : This section specifies the action to be performed on the output event. The fields to be configured in this section are as follows:
+                     &lt;ul&gt;
+                        &lt;li&gt;&lt;strong&gt;Operation&lt;/strong&gt; : This field specifies the operation to be performed on the generated output event (e.g., &lt;code&gt;Insert&lt;/code&gt; to insert events to a selected stream/table/window).&lt;/li&gt;
+                        &lt;li&gt;&lt;strong&gt;Into&lt;/strong&gt; : This field specifies the stream/table/window in which the operation specified need to be performed.&lt;/li&gt;
+                        &lt;li&gt;&lt;strong&gt;Event Type&lt;/strong&gt; This field specifies whether the operation needs to be performed for all output events, only current events or for only expired events.&lt;/li&gt;
+                     &lt;/ul&gt;
+                  &lt;/li&gt;
+               &lt;/ul&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Filter_Query_Configuration_Form.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The details entered in the above &lt;strong&gt;Query Configuration&lt;/strong&gt; form creates a query with a window as follows:&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;from TradeStream#window.time(1 month)
+&lt;a href=&quot;#cb1-2&quot;&gt;&lt;/a&gt;select symbol, avg(price) as averagePrice, sum(amount) as total
+&lt;a href=&quot;#cb1-3&quot;&gt;&lt;/a&gt;insert all events into OutputStream;&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;A window query can have only one source at a given time.&lt;/p&gt;
+               &lt;ul&gt;
+                  &lt;li&gt;Streams&lt;/li&gt;
+                  &lt;li&gt;Tables&lt;/li&gt;
+                  &lt;li&gt;Triggers&lt;/li&gt;
+                  &lt;li&gt;Windows&lt;/li&gt;
+               &lt;/ul&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Streams&lt;/li&gt;
+               &lt;li&gt;Tables&lt;/li&gt;
+               &lt;li&gt;Windows&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+### Join Query
+
+&lt;table&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Join_Query_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;A join query derives a combined result from two streams in real-time based on a specified condition. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#join-stream&quot;&gt;Siddhi Query Guide - Join&lt;/a&gt;.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;Once you connect two Siddhi components to the join query as sources and another Siddhi component as the target, you can configure the join query. To configure the join query, click the settings icon on the join query component you added to the grid and update the following information.&lt;/p&gt;
+               &lt;ul&gt;
+                  &lt;li&gt;&lt;strong&gt;Query Meta Information&lt;/strong&gt; : In this section, enter a unique name for the query and any annotations that you want to include in the query. The &lt;code&gt;                @dist               &lt;/code&gt; annotation is supported by default to use the query in a fully distributed deployment if required (for more information, see &lt;a href=&quot;https://docs.wso2.com/display/SP440/Converting+to+a+Distributed+Streaming+Application&quot;&gt;Converting to a Distributed Streaming Application&lt;/a&gt; ). You can also add customized annotations.&lt;br /&gt;&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;Input&lt;/strong&gt; : Here, you can specify the input sources, the references, the join type, join condition, and stream handlers for the left source and right source of the join. For a detailed explanation of the join concept, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#join-stream&quot;&gt;Siddhi Query Guide - Joins&lt;/a&gt;.&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;Projection&lt;/strong&gt; : This section specifies the attributes to be included in the output. In the &lt;strong&gt;Select&lt;/strong&gt; field, you can select &lt;strong&gt;All Attributes&lt;/strong&gt; to select all the attributes of the events, or select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; to select specific attributes from the input stream. If you select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; , you can add attributes to be selected to be inserted into the output stream. Here, you can enter the names of specific attributes in the input stream, or enter expressions to convert input stream attribute values as required to generate output events. You can also specify the attribute(s) by which you want to group the output.&lt;/li&gt;
+                  &lt;li&gt;
+                     &lt;strong&gt;Output&lt;/strong&gt; : This section specifies the action to be performed on the output event. The fields to be configured in this section are as follows:
+                     &lt;ul&gt;
+                        &lt;li&gt;&lt;strong&gt;Operation&lt;/strong&gt; : This field specifies the operation to be performed on the generated output event (e.g., &lt;code&gt;                  Insert                 &lt;/code&gt; to insert events to a selected stream/table/window).&lt;/li&gt;
+                        &lt;li&gt;&lt;strong&gt;Into&lt;/strong&gt; : This field specifies the stream/table/window in which the operation specified need to be performed.&lt;/li&gt;
+                        &lt;li&gt;&lt;strong&gt;Event Type&lt;/strong&gt; This field specifies whether the operation needs to be performed for all output events, only current events or for only expired events.&lt;/li&gt;
+                     &lt;/ul&gt;
+                  &lt;/li&gt;
+               &lt;/ul&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;A join query is configured as follows:&lt;/p&gt;
+               &lt;p&gt;&lt;strong&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Join_Query_Configuration_Form.png&quot; /&gt;&lt;br /&gt;
+                  &lt;/strong&gt; The above configurations result in creating the following join query.
+               &lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;from TempStream[temp &amp;gt; 30.0]#window.time(1 min) as T
+&lt;a href=&quot;#cb1-2&quot;&gt;&lt;/a&gt;  join RegulatorStream[isOn == false]#window.length(1) as R
+&lt;a href=&quot;#cb1-3&quot;&gt;&lt;/a&gt;  on T.roomNo == R.roomNo
+&lt;a href=&quot;#cb1-4&quot;&gt;&lt;/a&gt;select T.roomNo, R.deviceID, &amp;#39;start&amp;#39; as action
+&lt;a href=&quot;#cb1-5&quot;&gt;&lt;/a&gt;insert into RegulatorActionStream;&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               A join query must always be connected to two sources, and at least one of them must be a defined stream/trigger/window.
+               &lt;ul&gt;
+                  &lt;li&gt;Streams&lt;/li&gt;
+                  &lt;li&gt;Tables&lt;/li&gt;
+                  &lt;li&gt;Aggregations&lt;/li&gt;
+                  &lt;li&gt;Windows&lt;/li&gt;
+               &lt;/ul&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               A join query must always be connected to a single target.
+               &lt;ul&gt;
+                  &lt;li&gt;Streams&lt;/li&gt;
+                  &lt;li&gt;Tables&lt;/li&gt;
+                  &lt;li&gt;Windows&lt;/li&gt;
+               &lt;/ul&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+### Pattern Query
+
+&lt;table style=&quot;width:100%;&quot;&gt;
+   &lt;colgroup&gt;
+      &lt;col style=&quot;width: 7%&quot; /&gt;
+      &lt;col style=&quot;width: 92%&quot; /&gt;
+   &lt;/colgroup&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Pattern_Query_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;Before you add a pattern query:&lt;/p&gt;
+               &lt;p&gt;You need to add and configure the following:&lt;/p&gt;
+               &lt;ul&gt;
+                  &lt;li&gt;The input stream with the events to be processed by the query.&lt;/li&gt;
+                  &lt;li&gt;The output stream to which the events processed by the query are directed.&lt;/li&gt;
+               &lt;/ul&gt;
+               &lt;p&gt;A pattern query detects patterns in events that arrive overtime. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#pattern&quot;&gt;Siddhi Query Guide - Patterns&lt;/a&gt;.&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the pattern query, click the settings icon on the pattern query component you added to the grid and update the following information.&lt;br /&gt;&lt;/p&gt;
+               &lt;ul&gt;
+                  &lt;li&gt;&lt;strong&gt;Query Meta Information&lt;/strong&gt; : In this section, enter a unique name for the query and any annotations that you want to include in the query. The &lt;code&gt;                @dist               &lt;/code&gt; annotation is supported by default to use the query in a fully distributed deployment if required (for more information, see &lt;a href=&quot;https://docs.wso2.com/display/SP440/Converting+to+a+Distributed+Streaming+Application&quot;&gt;Converting to a Distributed Streaming Application&lt;/a&gt; ). You can also add customized annotations.&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;Input&lt;/strong&gt; : This section defines the conditions based on which patterns are identified. This involves specifying a unique ID and the input stream considered for each condition. Multiple conditions can be added. Each condition is configured in a separate tab within this section. For more information about the Pattern concept, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#pattern&quot;&gt;Siddhi Query Guide - Patterns&lt;/a&gt;.&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;Projection&lt;/strong&gt; : This section specifies the attributes to be included in the output. In the &lt;strong&gt;Select&lt;/strong&gt; field, you can select &lt;strong&gt;All Attributes&lt;/strong&gt; to select all the attributes of the events, or select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; to select specific attributes from the input stream. If you select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; , you can add attributes to be selected to be inserted into the output stream. Here, you can enter the names of specific attributes in the input stream, or enter expressions to convert input stream attribute values as required to generate output events. You can also specify the attribute(s) by which you want to group the output.&lt;/li&gt;
+                  &lt;li&gt;
+                     &lt;strong&gt;Output&lt;/strong&gt; : This section specifies the action to be performed on the output event. The fields to be configured in this section are as follows:
+                     &lt;ul&gt;
+                        &lt;li&gt;&lt;strong&gt;Operation&lt;/strong&gt; : This field specifies the operation to be performed on the generated output event (e.g., &lt;code&gt;                  Insert                 &lt;/code&gt; to insert events to a selected stream/table/window).&lt;/li&gt;
+                        &lt;li&gt;&lt;strong&gt;Into&lt;/strong&gt; : This field specifies the stream/table/window in which the operation specified need to be performed.&lt;/li&gt;
+                        &lt;li&gt;&lt;strong&gt;Event Type&lt;/strong&gt; This field specifies whether the operation needs to be performed for all output events, only current events or for only expired events.&lt;/li&gt;
+                     &lt;/ul&gt;
+                  &lt;/li&gt;
+               &lt;/ul&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Pattern_Query_Configuration.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The above configuration results in creating the following query.&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;from every (e1=MaterialSupplyStream) -&amp;gt; not MaterialConsumptionStream[name == e1.name and amount == e1.amount]
+&lt;a href=&quot;#cb1-2&quot;&gt;&lt;/a&gt;    for 15 sec
+&lt;a href=&quot;#cb1-3&quot;&gt;&lt;/a&gt;select e1.name, e1.amount
+&lt;a href=&quot;#cb1-4&quot;&gt;&lt;/a&gt;insert into ProductionDelayAlertStream;&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Streams&lt;/li&gt;
+               &lt;li&gt;Tables&lt;/li&gt;
+               &lt;li&gt;Triggers&lt;/li&gt;
+               &lt;li&gt;Windows&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Streams&lt;/li&gt;
+               &lt;li&gt;Tables&lt;/li&gt;
+               &lt;li&gt;Windows&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+### Sequence Query
+
+&lt;table style=&quot;width:100%;&quot;&gt;
+   &lt;colgroup&gt;
+      &lt;col style=&quot;width: 7%&quot; /&gt;
+      &lt;col style=&quot;width: 92%&quot; /&gt;
+   &lt;/colgroup&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Sequence_Query_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;Before you add a sequence query:&lt;/p&gt;
+               &lt;p&gt;You need to add and configure the following:&lt;/p&gt;
+               &lt;ul&gt;
+                  &lt;li&gt;The input stream with the events to be processed by the query.&lt;/li&gt;
+                  &lt;li&gt;The output stream to which the events processed by the query are directed.&lt;/li&gt;
+               &lt;/ul&gt;
+               &lt;p&gt;A sequence query detects sequences in event occurrences over time. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#sequence&quot;&gt;Siddhi Query Guide - Sequence&lt;/a&gt;.&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;Once you connect the query to an input stream (source) and an output stream (target), you can configure it. To configure the sequence query, click the settings icon on the sequence query component you added to the grid and update the following information.&lt;/p&gt;
+               &lt;ul&gt;
+                  &lt;li&gt;&lt;strong&gt;Query Meta Information&lt;/strong&gt; : In this section, enter a unique name for the query and any annotations that you want to include in the query. The &lt;code&gt;                @dist               &lt;/code&gt; annotation is supported by default to use the query in a fully distributed deployment if required (for more information, see &lt;a href=&quot;https://docs.wso2.com/display/SP440/Converting+to+a+Distributed+Streaming+Application&quot;&gt;Converting to a Distributed Streaming Application&lt;/a&gt; ). You can also add customized annotations.&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;Input&lt;/strong&gt; : This section defines the conditions based on which sequences are identified. This involves specifying a unique ID and the input stream considered for each condition. Multiple conditions can be added. Each condition is configured in a separate tab within this section. For more information about the Sequence concept, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#sequence&quot;&gt;Siddhi Query Guide - Sequences&lt;/a&gt;.&lt;/li&gt;
+                  &lt;li&gt;&lt;strong&gt;Projection&lt;/strong&gt; : This section specifies the attributes to be included in the output. In the &lt;strong&gt;Select&lt;/strong&gt; field, you can select &lt;strong&gt;All Attributes&lt;/strong&gt; to select all the attributes of the events, or select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; to select specific attributes from the input stream. If you select &lt;strong&gt;User Defined Attributes&lt;/strong&gt; , you can add attributes to be selected to be inserted into the output stream. Here, you can enter the names of specific attributes in the input stream, or enter expressions to convert input stream attribute values as required to generate output events. You can also specify the attribute(s) by which you want to group the output.&lt;/li&gt;
+                  &lt;li&gt;
+                     &lt;strong&gt;Output&lt;/strong&gt; : This section specifies the action to be performed on the output event. The fields to be configured in this section are as follows:
+                     &lt;ul&gt;
+                        &lt;li&gt;&lt;strong&gt;Operation&lt;/strong&gt; : This field specifies the operation to be performed on the generated output event (e.g., &lt;code&gt;                  Insert                 &lt;/code&gt; to insert events to a selected stream/table/window).&lt;/li&gt;
+                        &lt;li&gt;&lt;strong&gt;Into&lt;/strong&gt; : This field specifies the stream/table/window in which the operation specified need to be performed.&lt;/li&gt;
+                        &lt;li&gt;&lt;strong&gt;Event Type&lt;/strong&gt; This field specifies whether the operation needs to be performed for all output events, only current events or for only expired events.&lt;/li&gt;
+                     &lt;/ul&gt;
+                  &lt;/li&gt;
+               &lt;/ul&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Sequence_Query_Configuration.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The above configuration results in creating the following query.&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;from every e1=SweetProductionStream,
+&lt;a href=&quot;#cb1-2&quot;&gt;&lt;/a&gt;e2=SweetProductionStream[e1.amount &amp;gt; amount and (timestamp - e1.timestamp) &amp;lt; 10 * 6000]*,
+&lt;a href=&quot;#cb1-3&quot;&gt;&lt;/a&gt;e3=SweetProductionStream[timestamp - e1.timestam &amp;gt; &lt;10 * 60000 and e1.amount &amp;gt; amount]
+&lt;a href=&quot;#cb1-4&quot;&gt;&lt;/a&gt;select e1.name, e1.amount as initialAmount, e2.amount as finalAmount, e2.timestamp
+&lt;a href=&quot;#cb1-5&quot;&gt;&lt;/a&gt;insert into DecreasingTrendAlertStream;&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Streams&lt;/li&gt;
+               &lt;li&gt;Tables&lt;/li&gt;
+               &lt;li&gt;Triggers&lt;/li&gt;
+               &lt;li&gt;Windows&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;
+            &lt;ul&gt;
+               &lt;li&gt;Streams&lt;/li&gt;
+               &lt;li&gt;Tables&lt;/li&gt;
+               &lt;li&gt;Windows&lt;/li&gt;
+            &lt;/ul&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+### Partitions
+
+&lt;table style=&quot;width:100%;&quot;&gt;
+   &lt;colgroup&gt;
+      &lt;col style=&quot;width: 7%&quot; /&gt;
+      &lt;col style=&quot;width: 92%&quot; /&gt;
+   &lt;/colgroup&gt;
+   &lt;tbody&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Icon&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Partition_Query_Icon.png&quot;/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Description&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;Before you add a partition:&lt;/p&gt;
+               &lt;p&gt;You need to add the stream to be partitioned.&lt;/p&gt;
+               &lt;p&gt;Partitions divide streams and queries into isolated groups in order to process them in parallel and in isolation. For more information, see &lt;a href=&quot;https://siddhi-io.github.io/siddhi/documentation/siddhi-4.x/query-guide-4.x/#partition&quot;&gt;Siddhi Query Guide - Partition&lt;/a&gt;.&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Form&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;Once the stream to be partitioned is connected as a source to the partition, you can configure the partition. In order to do so, move the cursor over the partition and click the settings icon on the partition component. This opens the &lt;strong&gt;Partition Configuration&lt;/strong&gt; form. In this form, you can enter expressions to convert the attributes of the stream that is selected to be partitioned.&lt;/p&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Example&lt;/td&gt;
+         &lt;td&gt;
+            &lt;div class=&quot;content-wrapper&quot;&gt;
+               &lt;p&gt;&lt;img src=&quot;{{base_path}}/images/working-with-the-design-view/Partition_Configuration.png&quot;/&gt;&lt;/p&gt;
+               &lt;p&gt;The above configuration creates the following partition query.&lt;/p&gt;
+               &lt;div class=&quot;code panel pdl&quot; style=&quot;border-width: 1px;&quot;&gt;
+                  &lt;div class=&quot;codeContent panelContent pdl&quot;&gt;
+                     &lt;div class=&quot;sourceCode&quot; id=&quot;cb1&quot; data-syntaxhighlighter-params=&quot;brush: sql; gutter: false; theme: Confluence&quot; data-theme=&quot;Confluence&quot; style=&quot;brush: sql; gutter: false; theme: Confluence&quot;&gt;
+                        &lt;pre class=&quot;sourceCode sql&quot;&gt;&lt;code class=&quot;sourceCode sql&quot;&gt;&lt;a href=&quot;#cb1-1&quot;&gt;&lt;/a&gt;&lt;partition with ( roomNo &amp;gt;= 1030 as &amp;#39;serverRoom&amp;#39; o
+&lt;a href=&quot;#cb1-2&quot;&gt;&lt;/a&gt;                 roomNo &amp;lt; &lt;1030 and roomNo &amp;gt;= 330 as &amp;#39;officeRoom&amp;#39; or
+&lt;a href=&quot;#cb1-3&quot;&gt;&lt;/a&gt;                 roomNo &amp;lt; 330 as &amp;#39;lobby&amp;#39; of TempStream)
+&lt;a href=&quot;#cb1-4&quot;&gt;&lt;/a&gt;begin
+&lt;a href=&quot;#cb1-5&quot;&gt;&lt;/a&gt;    from TempStream#window.time(10 min)
+&lt;a href=&quot;#cb1-6&quot;&gt;&lt;/a&gt;    select roomNo, deviceID, avg(temp) as avgTemp
+&lt;a href=&quot;#cb1-7&quot;&gt;&lt;/a&gt;    insert into AreaTempStream
+&lt;a href=&quot;#cb1-8&quot;&gt;&lt;/a&gt;end&lt;/code&gt;&lt;/pre&gt;
+                     &lt;/div&gt;
+                  &lt;/div&gt;
+               &lt;/div&gt;
+            &lt;/div&gt;
+         &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;odd&quot;&gt;
+         &lt;td&gt;Source&lt;/td&gt;
+         &lt;td&gt;Streams&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr class=&quot;even&quot;&gt;
+         &lt;td&gt;Target&lt;/td&gt;
+         &lt;td&gt;N/A&lt;/td&gt;
+      &lt;/tr&gt;
+   &lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+## Connecting Siddhi components
+
+In order to define how the Siddhi components in a Siddhi application
+interact with each other to process events, you need to define
+connections between Siddhi components. A connection is defined by
+drawing an arrow from one component to another by dragging the cursor as
+demonstrated below.
+
+![Connecting Siddhi components]({{base_path}}/images/working-with-the-design-view/Connect-Siddhi-Components.gif)
+
+## Saving Siddhi applications
+
+To save a Siddhi application that you created in the Graphical View, you need to switch to the Source View. For more information, see [WSO2 Integrator: SI](si-overview.md).
+</body>
+</html>

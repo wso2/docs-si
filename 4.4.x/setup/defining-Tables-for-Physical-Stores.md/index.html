@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>defining-Tables-for-Physical-Stores.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Defining Tables for Physical Stores
+
+This section explains how to define data tables to store data handled by
+WSO2 Stream Processor in physical databases. T he @store annotation
+syntax for defining these tables differ based on the database type as
+well as where the properties are defined.
+
+The store properties(such as URL, username and password) can be defined
+in the following ways:
+
+-   **Inline definition** : The data store can be defined within the
+    Siddhi application as shown in the example below:
+
+    ``` sql
+        @Store(type=&#x27;hbase&#x27;, hbase.zookeeper.quorum=&#x27;localhost&#x27;)
+        @primaryKey(&#x27;name&#x27;)
+        define table SweetProductionTable (name string, amount double);
+    ```
+
+        !!! info
+    
+        This method is not recommended in a production environment because
+        is less secure compared to the other methods.
+    
+
+-   **As references in the deployment file** : In order to do this, the
+    store configuration needs to be defined for the relevant deployment
+    environment in the
+    `           &lt;SP_HOME&gt;/conf/&lt;PROFILE&gt;/deployment.yaml          ` file
+    as a ref (i.e., in a separate section siddhi: and subsection refs:)
+    as shown in the example below.  
+
+        !!! info
+    
+        The database connection is started when a Siddhi application is
+        deployed, and disconnected when the Siddhi application is
+        undeployed. Therefore, this metho is not recommended if the same
+        database is used across multiple Siddhi applications.
+    
+
+    ``` xml
+        siddhi:   
+          refs:
+            -
+               ref:
+                 name: &#x27;store1&#x27;
+                 type: &#x27;rdbms&#x27;
+                 properties:
+                   jdbc.url: &#x27;jdbc:h2:./repository/database/ANALYTICS_EVENT_STORE&#x27;
+                   username: &#x27;root&#x27;
+                   password: ${sec:store1.password}
+                   field.length=&#x27;currentTime:100&#x27;
+                   jdbc.driver.name: &#x27;org.h2.Driver&#x27;
+    ```
+
+      
+    Then you need to refer to that store via the
+    `           @store          ` annotation as in the Siddhi
+    application as shown in the example below.
+
+    ``` sql
+            @Store(ref=&#x27;store1&#x27;)
+            @PrimaryKey(&#x27;id&#x27;)
+            @Index(&#x27;houseId&#x27;)
+            define table SmartHomeTable (id string, value float, property bool, plugId int, householdId int, houseId int, currentTime string);
+    ```
+
+-   **Using WSO2 data sources configuration** : Once a data source
+    defined in the wso2.datasources section of the file,
+    `           &lt;SP_HOME&gt;/conf/&lt;PROFILE&gt;/deployment.yaml,          ` the
+    same connection can be used across different Siddhi applications.
+    This is done by specifying the data source to which you need to
+    connect via the `           @store          ` annotation in the
+    following format.
+
+    ``` xml
+            @Store(type=&#x27;&lt;DATABASE_TYPE&gt;&#x27;, datasource=’&lt;carbon.datasource.name&gt;’)
+    ```
+
+        !!! info
+    
+        The database connection pool is initialized at server startup, and
+        destroyed at server shut down.
+    
+
+      
+
+    This is further illustrated by the following example.
+
+    ``` sql
+        @Store(type=&#x27;rdbms&#x27;, datasource=’SweetFactoryDB’)@PrimaryKey(&quot;symbol&quot;)
+        define table FooTable (symbol string, price float, volume long);
+    ```
+
+    For more information about definig datasources, see [Configuring
+    Datasources](_Configuring_Datasources_) .
+
+The following database types are currently supported for WSO2 SP.
+
+!!! tip
+
+Before you begin:
+
+In order to create and use an event table to store data, the following
+should be completed:
+
+-   The required database (MySql, MongoDB, Oracle Database, etc) should
+    be downloaded and installed.
+-   A database instance should be started.
+-   The user IDs used to perform the required table operations should be
+    granted the relevant privileges.
+-   The relevant JDBC Driver must be downloaded and the jar must be put
+    in the `          &lt;SP_HOME&gt;/lib         ` directory.
+
+
+-   [RDBMS](#DefiningTablesforPhysicalStores-RDBMS)
+-   [Apache HBase](#DefiningTablesforPhysicalStores-ApacheHBase)
+-   [Apache Solr](#DefiningTablesforPhysicalStores-ApacheSolr)
+-   [MongoDB](#DefiningTablesforPhysicalStores-MongoDB)
+
+  
+
+## RDBMS
+
+The RDBMS database types that are currently supported are as follows:
+
+-   H2
+-   MySQL
+-   Oracle database
+-   My SQL Server
+-   PostgreSQL
+-   IBM DB2
+
+#### Query syntax
+
+The following is the syntax for an RDBMS event table configuration:
+
+``` sql
+    @store(type=&quot;rdbms&quot;, jdbc.url=&quot;&lt;jdbc.url&gt;&quot;, username=&quot;&lt;username&gt;&quot;, password=&quot;&lt;password&gt;&quot;,pool.properties=&quot;&lt;prop1&gt;:&lt;val1&gt;,&lt;prop2&gt;:&lt;val2&gt;&quot;)
+    @PrimaryKey(&quot;col1&quot;)
+    @IndexBy(&quot;col3&quot;)
+    define table &lt;table_name&gt;(col1 datatype1, col2 datatype2, col3 datatype3);
+```
+
+##### Parameters
+
+The following parameters are configured in the definition of an RDBMS
+event table.
+
+| Parameter                                                                | Description                                                                                                                                                                                                                                     | Required/Optional |
+|--------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
+| **`              jdbc.url             `**                                | The JDBC URL via which the RDBMS data store is accessed.                                                                                                                                                                                        | Required          |
+| **`              username             `**                                | The username to be used to access the RDBMS data store.                                                                                                                                                                                         | Required          |
+| **`              password             `**                                | The password to be used to access the RDBMS data store.                                                                                                                                                                                         | Required          |
+| **`              pool.properties             `**                         | Any pool parameters for the database connection must be specified as key value pairs.                                                                                                                                                           | Required          |
+| **`              jndi.resource             `**                           | The name of the JNDI resource through which the connection is attempted. If this is found, the pool properties described above are not taken into account.                                                                                      | Optional          |
+| **`                             table.name                           `** | The name of the RDBMS table created.                                                                                                                                                                                                            | Optional          |
+| **`              field.length             `**                            | The number of characters that the values for fields of the `             STRING            ` type in the table definition must contain. If this is not specified, the default number of characters specific to the database type is considered. | Optional          |
+
+In addition to the above parameters, you can add the
+`         @primary        ` and `         @index        ` annotations in
+the RDBMS table configuration.
+
+-   `                     @primary                   ` : This specifies
+    a list of comma-separated values to be treated as unique fields in
+    the table. Each record in the table must have a unique combination
+    of values for the fields specified here.
+-   `                     @index                   ` : This specifies
+    the fields that must be indexed at the database level. You can
+    specify multiple values as a come-separated list.
+
+#### Example
+
+The following is an example of an RDBMS table definition:
+
+``` sql
+    @Store(type=&quot;rdbms&quot;, jdbc.url=&quot;jdbc:h2:repository/database/ANALYTICS_EVENT_STORE&quot;, username=&quot;root&quot;, password=&quot;root&quot;,field.length=&quot;symbol:254&quot;)
+    @PrimaryKey(&quot;symbol&quot;)
+    define table FooTable (symbol string, price float, volume long);
+```
+
+## Apache HBase
+
+#### Query syntax
+
+The query syntax to define an HBase table is as follows.
+
+``` sql
+    @Store(type=&quot;hbase&quot;, any.hbase.property=&quot;&lt;STRING&gt;&quot;, table.name=&quot;&lt;STRING&gt;&quot;, column.family.name=&quot;&lt;STRING&gt;&quot;)
+    @PrimaryKey(&quot;PRIMARY_KEY&quot;)
+    @Index(&quot;INDEX&quot;)
+```
+
+##### Parameters
+
+The following parameters are configured in the definition of an HBase
+event table:
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required/Optional&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;                             table.name                           &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;The name with which the table should be persisted in the store. If no table name is specified, the table in the store is assigned the same name as the corresponding Siddhi table.&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;Optional&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;                           column.family.name                         &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The name of the HBase column family from which data must be stored/referred to.&lt;/td&gt;
+&lt;td&gt;Required&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;any.hbase.property&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Any property that can be specified for HBase connectivity in hbase-site.xml is also accepted by the HBase Store implementation. The most frequently used properties are...&lt;/p&gt;
+&lt;p&gt;hbase.zookeeper.quorum - The hostname of the server in which the zookeeper node is run.&lt;/p&gt;
+&lt;p&gt;hbase.zookeeper.property.clientPort - The port of the zookeeper node.&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;Required&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+In addition, the following annotations are used in the HBase definition.
+
+-   `                     @primary                   ` : This specifies
+    a list of comma-separated values to be treated as unique fields in
+    the table. Each record in the table must have a unique combination
+    of values for the fields specified here. Primary keys allow you to
+    fetch records in a table by providing a unique reference for each
+    record. Therefore, if you do not include one or more primary keys in
+    the table definition, it is not possible to perform table operations
+    such as searching, updating, deleting and joining. For more
+    information about table operations, see [Managing Stored Data via
+    Streams](_Managing_Stored_Data_via_Streams_) and [Managing Stored
+    Data via REST APIs](_Managing_Stored_Data_via_REST_APIs_) .
+-   `                     @index                   ` : This specifies
+    the fields that must be indexed at the database level. You can
+    specify multiple values as a comma separated list.
+
+#### Example
+
+``` sql
+    @Store(type=”hbase”, table.name=”SomeTestTable”, column.family.name=”SomeCF”, hbase.zookeeper.quorum=”localhost”, hbase.zookeeper.property.clientPort=”2181”)
+    @PrimaryKey(symbol)
+    define table FooTable (symbol string, price float, volume long);
+```
+
+## Apache Solr
+
+#### Query syntax
+
+The query syntax to define an SOLR table is as follows.
+
+``` sql
+    @PrimaryKey(&quot;id&quot;)
+    @store(type=“solr”, url=&lt;solr-cloud-zookeeper-url&gt;, collection=&lt;solr-collection-name&gt;, base.config=&lt;config-name&gt;, shards=&lt;no-of-shards&gt;, replicas=&lt;no-of-replicas&gt;, schema=&lt;schema-definition&gt;, commit.async=true|false)
+    define table Footable (time long, date string);
+```
+
+##### Parameters
+
+The following parameters are configured in an SOLR table definition.
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&quot;header&quot;&gt;
+&lt;th&gt;Parameter&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;th&gt;Required/Optional&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;             collection            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The name of the solr collection/table.&lt;/td&gt;
+&lt;td&gt;Required&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;             url            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The URL of the zookeeper master of SOLR cloud.&lt;/td&gt;
+&lt;td&gt;Required&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;p&gt;&lt;code&gt;              base.config             &lt;/code&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;The default configuration that should be used for the SOLR schema.&lt;/td&gt;
+&lt;td&gt;Optional&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;             shards            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The number of shards.&lt;/td&gt;
+&lt;td&gt;Optional&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;             replica            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The number of replica.&lt;/td&gt;
+&lt;td&gt;Optional&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;even&quot;&gt;
+&lt;td&gt;&lt;code&gt;             schema            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;The SOLR schema definition.&lt;/td&gt;
+&lt;td&gt;Optional&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&quot;odd&quot;&gt;
+&lt;td&gt;&lt;code&gt;             commit.async            &lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;If this is set to &lt;code&gt;              true             &lt;/code&gt; , the results all the operations carried out for the table (described below) are applied at a specified time interval. If this is set to &lt;code&gt;              false             &lt;/code&gt; , the results of the operations are applied soon after they are performed with the vent arrival.&lt;/p&gt;
+&lt;p&gt;e.g., If this is set to &lt;code&gt;              false             &lt;/code&gt; , an event selected to be inserted into the table is inserted as soon as it arrives to the event stream.&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;N/A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+
+#### Example
+
+This query defines an SOLR table named `         FooTable        ` in
+which a schema that consists of the two attributes
+`         time        ` (of `         long        ` type) and date (of
+the `         string        ` type) is maintained. The values for both
+attributes are stored.
+
+``` sql
+&quot;shards=&#x27;2&#x27;, replicas=&#x27;2&#x27;, schema=&#x27;time long stored, date string stored&#x27;, commit.async=&#x27;true&#x27;) &quot; +
+&quot;define table Footable(time long, date string);
+```
+    
+    ## MongoDB
+    
+    #### Query syntax
+    
+    The following is the query syntax to define a MongoDB event table.
+    
+``` sql
+@Store(type=&quot;mongodb&quot;, mongodb.uri=&quot;&lt;MONGODB CONNECTION URI&gt;&quot;)
+@PrimaryKey(&quot;ATTRIBUTE_NAME&quot;)
+@IndexBy(&quot;&lt;ATTRIBUTE_NAME&gt; &lt;SORTING ORDER&gt; &lt;INDEX OPTIONS&gt;&quot;)
+define table &lt;TABLE_NME&gt; (&lt;ATTRIBUTE1_NAME&gt; &lt;ATTRIBUTE1_TYPE&gt;, &lt;ATTRIBUTE2_NAME&gt; &lt;ATTRIBUTE2_TYPE&gt;, &lt;ATTRIBUTE3_NAME&gt; &lt;ATTRIBUTE3_TYPE&gt;, ...);
+```
+    
+    The `         mongodb.uri        ` parameter specifies the URI via which
+    MongoDB user store is accessed.
+    
+    In addition, the following annotations are used in the MongoDB
+    definition.
+    
+    -   `                     @primary                   ` : This specifies
+        a list of comma-separated values to be treated as unique fields in
+        the table. Each record in the table must have a unique combination
+        of values for the fields specified here.
+    -   `                     @index                   ` : This specifies
+        the fields that must be indexed at the database level. You can
+        specify multiple values as a comma separated list.
+    
+    #### Example
+    
+    The following query defines a MongoDB table named
+    `         FooTable        ` with the `         symbol        ` ,
+    `         price        ` , and `         volume        ` attributes. The
+    `         symbol        ` attribute is considered the primary key and it
+    is also indexed.
+    
+``` sql
+@Store(type=&quot;mongodb&quot;, mongodb.uri=&quot;mongodb://admin:admin@localhost:27017/Foo?ssl=true&quot;)
+@PrimaryKey(&quot;symbol&quot;)
+@IndexBy(&quot;symbol 1 {background:true}&quot;)
+define table FooTable (symbol string, price float, volume long);
+```
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReceiveEmailInXmlFormat.md</title>
+<style>
+  body {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 1.5rem;
+    margin: 0;
+    color: #24292f;
+    background: #ffffff;
+  }
+</style>
+</head>
+<body># Receiving XML Events via Email
+
+
+## Purpose
+This application demonstrates how to use `siddhi-io-email` for receiving events from emails.
+
+## Prerequisites
+
+1. Add relevant `siddhi-io-email` and `siddhi-map-xml` jars to the `{WSO2Home}/lib` folder if not exist.
+
+2. Make sure you have provide less secure access to the sender&#x27;s email account.
+eg: For gmail this can be done by visiting https://myaccount.google.com/lesssecureapps.
+
+3. Edit the siddhi app by providing following details.
+    * `receiver_email_username`
+    * `receiver_email_password`
+
+4. Give the subject of the email to &lt;subject_of_mail&gt;. For further information search.terms refer https://wso2-extensions.github.io/siddhi-io-email/api/1.0.9/.
+
+5. Save this sample.
+
+## Executing the Sample
+1. Start the Siddhi application by clicking on &#x27;Run&#x27;.
+2. If the Siddhi application starts successfully, the following messages would be shown on the console.
+    ```
+    ReceiveEmailInXmlFormat.siddhi - Started Successfully!
+    ```
+3. Send an email with the body in following format to receiver&#x27;s email address.
+    ```xml
+    &lt;events&gt;
+        &lt;event&gt;
+            &lt;name&gt;WSO2&lt;/name&gt;
+            &lt;amount&gt;34.56&lt;/amount&gt;
+        &lt;/event&gt;
+    &lt;/events&gt;
+    ```
+4. The message should be logged in the console.
+
+```sql
+@App:name(&quot;ReceiveEmailInXmlFormat&quot;)
+
+
+@source(type=&#x27;email&#x27;, @map(type=&#x27;xml&#x27;),
+username=&#x27;&lt;receiver_username&gt;&#x27;,
+password=&#x27;&lt;receiver_email_password&gt;&#x27;,
+store = &#x27;imap&#x27; ,
+host = &#x27;imap.gmail.com&#x27;,
+folder = &#x27;INBOX&#x27;,
+ssl.enable = &#x27;true&#x27; ,
+polling.interval = &#x27;30&#x27; ,
+search.term = &#x27;subject:&lt;subject_of_mail&gt;&#x27; ,
+content.type = &#x27;text/plain&#x27;)
+define stream SweetProductionStream (name string, amount double);
+
+@sink(type=&#x27;log&#x27;)
+define stream LowProductionAlertStream (name string, hourlyTotal double, currentHour double);
+
+from SweetProductionStream
+select name, sum(amount) as hourlyTotal,
+convert(time:extract(&#x27;HOUR&#x27;, time:currentTimestamp(), &#x27;yyyy-MM-dd hh:mm:ss&#x27;), &#x27;double&#x27;) as currentHour
+insert into LowProductionAlertStream;
+```</body>
+</html>
